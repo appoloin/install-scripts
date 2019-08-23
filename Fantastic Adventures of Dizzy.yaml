@@ -49,5 +49,3 @@ script:
           
           exit'
         file: $GAMEDIR/fantastic_dizzy_dosbox.conf
-
-
