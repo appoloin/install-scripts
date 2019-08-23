@@ -1,0 +1,5 @@
+name: Commander Keen 1
+game_slug: commander-keen-1
+version: Installer
+slug: commander-keen-1-installer
+runner: dosbox

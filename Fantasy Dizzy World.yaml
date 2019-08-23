@@ -1,0 +1,38 @@
+name: Fantasy World Dizzy
+game_slug: fantasy-world-dizzy
+version: Installer
+slug: fantasy-world-dizzy-installer
+runner: dosbox
+
+
+script:
+  files:
+    - game: N/A:Select the file FANTASY.EXE 
+  game:
+    main_file: $GAMEDIR/fantasy_world_dizzy_dosbox.conf
+  installer:
+    - execute:
+        args: $GAMEDIR/HDD
+        file: mkdir
+
+    - execute:
+        args: $GAMEDIR/HDD/fwdizzy
+        file: mkdir
+
+    - copy:
+        dst: $GAMEDIR/HDD/fwdizzy
+        src: $game
+
+    - write_file:
+        content: '[autoexec]
+
+          mount C "$GAMEDIR/HDD" -t dir
+
+          C:
+
+          cd fwdizzy
+          
+          FANTASY.EXE
+          
+          exit'
+        file: $GAMEDIR/fantasy_world_dizzy_dosbox.conf
