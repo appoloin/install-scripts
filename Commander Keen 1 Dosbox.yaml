@@ -2,23 +2,17 @@ name: Commander Keen 1
 game_slug: commander-keen-1
 version: Installer
 slug: commander-keen-1-installer
-runner: linux
+runner: dosbox
 
 
 script:
   files:
     - game: N/A:Select the file Keen1.exe
-    - engine: https://lutris.net/files/games/commander-keen/commander-genius-1.9.6.0-beta-x86_64.tar.gz
   game:
-    exe: CGeniusExe
-    args: dir=games/keen1
+    main_file: $GAMEDIR/commander_keen.conf
   installer:
-    - extract:
-        dst: $GAMEDIR
-        file: engine
-
     - execute:
-        args: $GAMEDIR/games $GAMEDIR/games/keen1
+        args: $GAMEDIR/HDD $GAMEDIR/HDD/keen1
         file: mkdir
 
     - write_file:
@@ -36,5 +30,23 @@ script:
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
-        args: $game $GAMEDIR/games/keen1
+        args: $game $GAMEDIR/HDD/keen1
         file: $CACHE/bulkcopy.sh
+
+    - write_file:
+        content: '[cpu]
+
+          cputype=386_slow
+
+        [autoexec]
+
+          mount C "$GAMEDIR/HDD" -t dir
+
+          C:
+
+          cd keen1
+          
+          keen1.EXE
+          
+          exit'
+        file: $GAMEDIR/commander_keen.conf
