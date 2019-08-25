@@ -1,0 +1,88 @@
+name: Commander Keen 3
+game_slug: commander-keen-3
+version: Installer
+slug: commander-keen-3-installer
+runner: dosbox
+
+
+script:
+  files:
+    - game: N/A:Select the file Keen3.exe
+    - patch : http://www.shikadi.net/wiki/files/tools/t.ckpatch_v.0.10.andrew_durdin.2007-11-23.zip
+  game:
+    main_file: $GAMEDIR/commander_keen.conf
+  installer:
+    - execute:
+        args: $GAMEDIR/HDD $GAMEDIR/HDD/keen3
+        file: mkdir
+
+    - extract:
+        dst: $CACHE
+        file: $patch
+        format: zip
+
+    - execute:
+        args:  $CACHE/CK3PATCH.EXE $GAMEDIR/HDD/keen3
+        file: /bin/cp 
+
+    - write_file:
+        content: '%ext ck3
+
+#Change the controls to: Space, shoot; Enter, status.
+
+%patch $11AF  $5274W
+
+%patch $8D6E  $5274W
+
+%patch $71C9  $90 $90 $90 $90 $90 $90 $90 $80 $3E $5291W  $00
+
+%patch $72FA  $90 $90 $90 $90 $90 $90 $90 $80 $3E $5291W  $00
+
+%patch $7461  $90 $90 $90 $90 $90 $90 $90 $80 $3E $5291W  $00
+
+%patch $7474  $90 $90 
+
+%patch $7515  $90 $90 $90 $90 $90 $90 $90 $80 $3E $5291W  $00
+
+%patch $76A1  $90 $90 $90 $90 $90 $90 $90 $80 $3E $5291W  $00
+
+%patch $7750  $90 $90 $90 $90 $90 $90 $90 $80 $3E $5291W  $00
+
+%end'
+        file: $GAMEDIR/HDD/keen3/PATCH.PAT
+
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+        
+        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+        cp -avr "$src_path/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: $game $GAMEDIR/HDD/keen3
+        file: $CACHE/bulkcopy.sh
+
+    - write_file:
+        content: '[cpu]
+
+          cputype=386_slow
+
+        [autoexec]
+
+          mount C "$GAMEDIR/HDD" -t dir
+
+          C:
+
+          cd keen3
+          
+          CK3PATCH.EXE patch.pat
+          
+          exit'
+        file: $GAMEDIR/commander_keen.conf
