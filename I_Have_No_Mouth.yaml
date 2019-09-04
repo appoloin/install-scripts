@@ -1,0 +1,33 @@
+name: I_Have_No_Mouth
+game_slug: I_Have_No_Mouth
+version: Installer
+slug:  I_Have_No_Mouth-installer
+runner: scummvm
+
+
+script:
+  files:
+    - game: N/A:Select the intall.exe file
+
+  game:
+    game_id: saga
+    path: $GAMEDIR
+  
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+        
+        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+        find "$src_path" -type f \( -name "*.res" -o -name "patch.re_" \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+
+    - chmodx: $CACHE/selectcopy.sh
+
+    - execute:
+        args: $game $GAMEDIR
+        file: $CACHE/selectcopy.sh

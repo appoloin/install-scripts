@@ -1,0 +1,52 @@
+#https://www.jameswoodcock.co.uk/product/the-7th-guest-soundtrack/ audio
+name: 7th Guest
+game_slug: 7th_Guest
+version: Installer
+slug:  7th Guest-installer
+runner: scummvm
+
+
+script:
+    game:
+        game_id: Groovie
+        path: $GAMEDIR
+
+    installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+        
+        find "$src" -type f \( -name "*.gjd" -o -name "*.grv" -o -name "*.rl" -o -name "fat.*" -o -name "sphinx.fnt" \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+
+    - chmodx: $CACHE/selectcopy.sh
+
+    - insert-disc:
+        description: Please insert disc 1
+        requires: t7g
+    
+    - execute:
+        args: $DISC/t7g $GAMEDIR
+        file: $CACHE/selectcopy.sh
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod
+
+
+    - insert-disc:
+        description: Please insert disc 2
+        requires: t7g
+
+    - execute:
+        args: $DISC/t7g $GAMEDIR
+        file: $CACHE/selectcopy.sh
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod
+
+

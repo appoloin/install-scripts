@@ -1,0 +1,69 @@
+name: Zork Grand Inquisitor
+game_slug: zork_grand_inquisitor
+version: Installer
+slug:  zork_grand_inquisitor-installer
+runner: scummvm
+
+
+script:
+    files:
+        - patch: http://www.thezorklibrary.com/installguides/Zpatch.exe
+    game:
+        game_id: zvision
+        path: $GAMEDIR
+
+    installer:
+        - task:
+            name: wine.create_prefix
+            prefix: $GAMEDIR
+            install_mono: false
+
+        - insert-disc:
+            description: Please insert disc 1
+            requires: setup.exe
+
+        - task:
+            executable: $DISC/setup.exe
+            name: wine.wineexec
+            prefix: $GAMEDIR
+
+        - task:
+            executable: $patch
+            name: wine.wineexec
+            prefix: $GAMEDIR
+            
+        - execute:
+            args: $GAMEDIR/zassets1 $GAMEDIR/zassets1  $GAMEDIR/zgi_mx
+            file: mkdir
+
+        - copy:
+            dst: $GAMEDIR/zassets1
+            src: $DISC/zassets1
+        - copy:
+            dst: $GAMEDIR/zgi_mx
+            src: $DISC/zgi/zgi_mx
+        - copy:
+            dst: $GAMEDIR
+            src: $DISC/zgi/cursor.zfs
+        - copy:
+            dst: $GAMEDIR
+            src: $DISC/zgi/death.zfs
+        - copy:
+            dst: $GAMEDIR
+            src: $DISC/zgi/inquis.str
+        - copy:
+            dst: $GAMEDIR
+            src: $DISC/zgi/inquis.zix
+        - copy:
+            dst: $GAMEDIR
+            src: $DISC/zgi/r.svr
+        - copy:
+            dst: $GAMEDIR
+            src: $DISC/zgi/scripts.zfs
+        - copy:
+            dst: $GAMEDIR
+            src: $DISC/zgi/subtitle.zfs
+
+        - copy:
+            dst: $GAMEDIR/zassets2
+            src: $DISC/zassets2

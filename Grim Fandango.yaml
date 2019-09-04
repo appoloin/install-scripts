@@ -1,0 +1,48 @@
+name:  Grim Fandango
+game_slug: grim_fandango
+version: Installer
+slug:  grim_fandango-installer
+runner: residualvm
+
+
+script:
+  files:
+    - file1: http://demos.residualvm.org/patches/gfupd101.exe
+  
+  game:
+    game_id: grim
+    path: $GAMEDIR
+  
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+        
+        find "$src" -type f -name "*.lab" -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+
+    - chmodx: $CACHE/selectcopy.sh
+
+    - copy:
+        dst: $GAMEDIR
+        src: file1
+
+    - insert-disc:
+        description: Please insert disc 1
+        requires: data000.lab
+
+    - execute:
+        args: $DISC $GAMEDIR
+        file: $CACHE/selectcopy.sh
+
+    - insert-disc:
+        description: Please insert disc 2
+        requires: data002.lab
+    
+    - execute:
+        args: $DISC $GAMEDIR
+        file: $CACHE/selectcopy.sh
+

@@ -1,0 +1,42 @@
+name: FarCry2
+game_slug: FarCry2
+version: Installer
+slug: FarCry2
+runner: wine
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Far Cry 2 Fortune's Edition/bin/farcry2.exe"
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - game: N/A:Select GOG installer.
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: dotnet20
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: d3dx9_36
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        description: Installing
+        executable: $game
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true

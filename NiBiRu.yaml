@@ -1,0 +1,31 @@
+name: NiBiRu
+game_slug: NiBiRu
+version: Installer
+slug:  NiBiRu-installer
+runner: wine
+
+script:
+  game:
+    exe: drive_c/Program Files/The Adventure Company/Nibiru/nibiru.exe
+    arch: win32
+    prefix: $GAMEDIR
+  
+  installer:
+    - insert-disc:
+        description: Please insert disc
+        requires: Setup.exe
+
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DISC/Setup.exe
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+    WineDesktop: 800x600

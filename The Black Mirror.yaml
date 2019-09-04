@@ -1,0 +1,32 @@
+#TODO no cd needed
+name: The Black Mirror
+game_slug: The_Black_Mirror
+version: Installer
+slug:  The_Black_Mirror-installer
+runner: wine
+
+script:
+  game:
+    exe: drive_c/Program Files/The Adventure Company/The Black Mirror/BMirror.exe
+    arch: win32
+    prefix: $GAMEDIR
+  
+  installer:
+    - insert-disc:
+        description: Please insert disc
+        requires: Setup.exe
+
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DISC/setup.exe
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+    WineDesktop: 800x600

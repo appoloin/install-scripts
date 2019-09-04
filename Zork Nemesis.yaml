@@ -1,0 +1,49 @@
+name: Zork Nemesis
+game_slug: zork_nemesis
+version: Installer
+slug:  zork_nemesis-installer
+runner: scummvm
+
+script:
+    game:
+        game_id: zvision
+        path: $GAMEDIR
+
+    installer:
+    - execute:
+        args: $GAMEDIR/znemmx $GAMEDIR/znemscr $GAMEDIR/zassets 
+        file: mkdir
+
+    - insert-disc:
+        description: Please insert disc 1
+        requires: zassets 
+    
+    - execute:
+        args: -r $DISC/nemesis/znemmx $GAMEDIR 
+        file: /bin/cp 
+    - execute:
+        args: -r $DISC/nemesis/znemscr $GAMEDIR 
+        file: /bin/cp 
+    - execute:
+        args: -r $DISC/zassets $GAMEDIR 
+        file: /bin/cp 
+
+    - copy:
+        dst: $GAMEDIR
+        src: $DISC/nemesis/nemesis.str
+
+    - insert-disc:
+        description: Please insert disc 2
+        requires: zassets
+
+    - execute:
+        args: -r $DISC/zassets $GAMEDIR 
+        file: /bin/cp 
+
+    - insert-disc:
+        description: Please insert disc 3
+        requires: zassets
+
+    - execute:
+        args: -r $DISC/zassets $GAMEDIR 
+        file: /bin/cp 

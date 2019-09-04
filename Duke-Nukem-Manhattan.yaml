@@ -1,0 +1,31 @@
+name: Duke-Nukem-Manhattan
+game_slug: Duke-Nukem-Manhattan
+version: Installer
+slug: Duke-Nukem-Manhattan
+runner: wine
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files/GOG.com/Duke Nukem - Manhattan Project/DukeNukemMP.exe"
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - game: N/A:Select GOG installer.
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        prefix: $GAMEDIR
+
+    - task:
+        description: Installing
+        executable: $game
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+

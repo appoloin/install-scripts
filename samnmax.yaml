@@ -1,0 +1,28 @@
+name:  Sam & Max
+game_slug: sam_&_max
+version: Installer
+slug:  sam_&_max-installer
+runner: scummvm
+
+
+script:
+  game:
+    game_id: samnmax
+    path: $GAMEDIR
+  
+  installer:
+    - insert-disc:
+        description: Please insert disc
+        requires: monster.sou
+
+    - copy:
+        dst: $GAMEDIR
+        src: $DISC/monster.sou
+
+    - copy:
+        dst: $GAMEDIR
+        src: $DISC/samnmax.000
+
+    - copy:
+        dst: $GAMEDIR
+        src: $DISC/samnmax.001

@@ -1,0 +1,75 @@
+name: veil of darkness
+game_slug: veil-of-darkness
+version: Installer
+slug:  veil-of-darkness-installer
+runner: dosbox
+
+
+script:
+  files:
+    - game: N/A:Select the file Veil.com
+  game:
+    main_file: $GAMEDIR/Veil.conf
+  installer:
+    - execute:
+        args: $GAMEDIR/HDD  $GAMEDIR/HDD/Veil
+        file: mkdir
+
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+        
+        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+        cp -avr "$src_path/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: $game $GAMEDIR/HDD/Veil
+        file: $CACHE/bulkcopy.sh
+    
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=20
+
+        [autoexec]
+
+          mount C "$GAMEDIR/HDD" -t dir
+
+          C:
+
+          cd Veil
+          
+          Veil
+          
+          exit'
+        file: $GAMEDIR/Veil.conf
+
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=20
+        
+        [autoexec]
+
+          mount C "$GAMEDIR/HDD" -t dir
+
+          C:
+
+          cd Veil
+
+          setup.com
+          
+          exit'
+        file: $GAMEDIR/veil-setup.conf
+
+    - task:
+        config_file: $GAMEDIR/veil-setup.conf
+        name: dosexec
+        working_dir: $GAMEDIR/HDD

@@ -1,0 +1,30 @@
+name: Journey to the center of the Earth
+game_slug: Journey-to-the-center-of-the-Earth
+version: Installer
+slug:  Journey-to-the-center-of-the-Earth-installer
+runner: wine
+
+script:
+  game:
+    exe: drive_c/Program Files/Strategy First/Viva Media/Journey to the Center of the Earth/game.exe
+    arch: win32
+    prefix: $GAMEDIR
+  
+  installer:
+    - insert-disc:
+        description: Please insert disc
+        requires: setup.exe
+
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DISC/setup.exe
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
