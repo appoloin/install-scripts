@@ -1,0 +1,136 @@
+name: Feeble Files 
+game_slug: Feeble 
+version: Installer
+slug:  Feeble-installer
+runner: scummvm
+
+
+script:
+  game:
+    game_id: feeble  
+    path: $GAMEDIR
+  
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src="$1"
+
+        dst="$2"
+
+        find "$src" -type f \( -iname "*.SMK" -o -iname "*.VGA" -o -iname "TABLES*" \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+
+    - chmodx: $CACHE/selectcopy.sh
+
+    - insert-disc:
+        description: Please insert disc 1
+        requires: SETUP.EXE
+
+    - task:
+        name: wine.create_prefix
+        arch: win32
+        install_mono: false
+        prefix: $GAMEDIR
+
+    - task:
+        name: wine.wineexec
+        executable: $DISC/SETUP.EXE
+        arch: win32
+        prefix: $GAMEDIR
+
+    - execute:
+        args: $DISC/Voices.wav $GAMEDIR/Voices1.wav
+        file: /bin/cp 
+
+    - execute:
+        args: "'$GAMEDIR/drive_c/Program Files/AdventureSoft (UK) Ltd/The Feeble Files' '$GAMEDIR'"
+        file: $CACHE/selectcopy.sh
+        
+    - copy:
+        dst: $GAMEDIR
+        src: $GAMEDIR/drive_c/Program Files/AdventureSoft (UK) Ltd/The Feeble Files/TBLLIST
+
+    - copy:
+        dst: $GAMEDIR
+        src: $GAMEDIR/drive_c/Program Files/AdventureSoft (UK) Ltd/The Feeble Files/GAME22
+
+    - copy:
+        dst: $GAMEDIR
+        src: $GAMEDIR/drive_c/Program Files/AdventureSoft (UK) Ltd/The Feeble Files/save.999
+
+    - execute:
+        args: $DISC $GAMEDIR
+        file: $CACHE/selectcopy.sh
+
+    - execute:
+        args: -R 775  $GAMEDIR
+        file: /bin/chmod
+
+    - insert-disc:
+        description: Please insert disc 2
+        requires: Voices.wav
+
+    - execute:
+        args:  $DISC/Voices.wav $GAMEDIR/Voices2.wav
+        file: /bin/cp 
+
+    - execute:
+        args: $DISC $GAMEDIR
+        file: $CACHE/selectcopy.sh
+
+    - execute:
+        args: -R 775  $GAMEDIR
+        file: /bin/chmod
+
+    - insert-disc:
+        description: Please insert disc 3
+        requires: Voices.wav
+  
+    - execute:
+        args:  $DISC/Voices.wav $GAMEDIR/Voices3.wav
+        file: /bin/cp 
+
+    - execute:
+        args: $DISC $GAMEDIR
+        file: $CACHE/selectcopy.sh
+
+    - execute:
+        args: -R 775  $GAMEDIR
+        file: /bin/chmod
+
+    - insert-disc:
+        description: Please insert disc 4
+        requires: Voices.wav
+
+    - execute:
+        args:  $DISC/Voices.wav $GAMEDIR/Voices4.wav
+        file: /bin/cp 
+
+    - execute:
+        args: $DISC $GAMEDIR
+        file: $CACHE/selectcopy.sh
+
+    - execute:
+        args: -R 775  $GAMEDIR
+        file: /bin/chmod
+
+    - execute:
+        args:  -r $GAMEDIR/drive_c
+        file: /bin/rm 
+
+    - execute:
+        args:  -r $GAMEDIR/dosdevices
+        file: /bin/rm 
+
+    - execute:
+        args:  -r $GAMEDIR/system.reg
+        file: /bin/rm 
+
+    - execute:
+        args:  -r $GAMEDIR/user.reg
+        file: /bin/rm 
+
+    - execute:
+        args:  -r $GAMEDIR/userdef.reg
+        file: /bin/rm 
