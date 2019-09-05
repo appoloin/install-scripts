@@ -22,7 +22,7 @@ script:
 
     - copy:
         dst: $GAMEDIR
-        src: $xcopy
+        src: $xcopy 
 
     - execute:
         args: -I app -d "$CACHE" "$game"
