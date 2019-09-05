@@ -1,0 +1,60 @@
+name: FBI Hopkins
+game_slug: FBI-Hopkins
+version: Installer
+slug:  FBI-Hopkins-installer
+runner: scummvm
+
+
+script:
+    game:
+        game_id: hopkins
+        path: $GAMEDIR
+
+    installer:
+    - insert-disc:
+        description: Please insert disc 
+        requires: ANIM
+    
+    - copy:
+        dst: $GAMEDIR/ANIM
+        src: $DISC/ANIM
+    - copy:
+        dst: $GAMEDIR/ANM
+        src: $DISC/ANM
+    - copy:
+        dst: $GAMEDIR/BASE
+        src: $DISC/BASE
+    - copy:
+        dst: $GAMEDIR/BUFFER
+        src: $DISC/BUFFER
+    - copy:
+        dst: $GAMEDIR/MUSIC
+        src: $DISC/MUSIC
+    - copy:
+        dst: $GAMEDIR/SAVE
+        src: $DISC/SAVE
+    - copy:
+        dst: $GAMEDIR/SEQ
+        src: $DISC/SEQ
+    - copy:
+        dst: $GAMEDIR/SOUND
+        src: $DISC/SOUND
+    - copy:
+        dst: $GAMEDIR/SVGA
+        src: $DISC/SVGA
+    - copy:
+        dst: $GAMEDIR/SYSTEM
+        src: $DISC/SYSTEM
+    - copy:
+        dst: $GAMEDIR/TSVGA
+        src: $DISC/TSVGA
+    - copy:
+        dst: $GAMEDIR/VOICE
+        src: $DISC/VOICE
+    - copy:
+        dst: $GAMEDIR/LINK
+        src: $DISC/LINK
+
+    - execute:
+        args: -R 775  $GAMEDIR
+        file: /bin/chmod
