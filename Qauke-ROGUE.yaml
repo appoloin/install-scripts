@@ -1,0 +1,40 @@
+name: Quake Rouge
+game_slug: Quake-Rouge
+version: Installer
+slug:  quake-rouge-installer
+runner: linux
+
+
+script:
+    files:
+        - game: N/A:Select a file with *.PAK extension
+
+    game:
+        args: -game rogue -rogue
+
+    installer:
+      - write_file:
+          content: '#!/bin/bash
+
+          src=$1
+
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+          find "$src_path" -type f \( -iname "*.PAK"  \) -exec cp {} "$dst" \;'
+          file: $CACHE/selectcopy.sh
+
+      - chmodx: $CACHE/selectcopy.sh
+
+      - execute:
+          args: $GAMEDIR/rouge
+          file: mkdir
+
+      - execute:
+          args: $game/ $GAMEDIR/rouge
+          file: $CACHE/selectcopy.sh
+
+    requires: quake-cdrom-installer
+
+

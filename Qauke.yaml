@@ -1,0 +1,43 @@
+name: Quake
+game_slug: Quake 
+version: Installer
+slug:  quake-cdrom-installer
+runner: linux
+
+
+script:
+    files:
+        - darkplaces-engine: http://icculus.org/twilight/darkplaces/files/darkplacesengine20140513.zip
+        - game: N/A:Select a file with *.PAK extension
+
+    game:
+        exe: darkplaces-linux-x86_64-glx
+
+    installer:
+      - write_file:
+          content: '#!/bin/bash
+
+          src=$1
+
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+          find "$src_path" -type f \( -iname "*.PAK"  \) -exec cp {} "$dst" \;'
+          file: $CACHE/selectcopy.sh
+
+      - chmodx: $CACHE/selectcopy.sh
+
+      - execute:
+          args: $GAMEDIR/id1
+          file: mkdir
+
+      - extract:
+          dst: $GAMEDIR
+          file: darkplaces-engine
+                  
+      - chmodx: $GAMEDIR/darkplaces-linux-x86_64-glx
+
+      - execute:
+          args: $game/ $GAMEDIR/id1
+          file: $CACHE/selectcopy.sh
