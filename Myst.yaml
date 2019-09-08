@@ -46,8 +46,4 @@ script:
     - execute:
         args: -r $CACHE/app/QTW $GAMEDIR/ 
         file: /bin/cp 
-        
-  scummvm:
-    aspect: true
-    gfx-mode: 3x
-    windowed: true
+
