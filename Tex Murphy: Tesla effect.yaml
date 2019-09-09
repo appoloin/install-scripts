@@ -1,0 +1,36 @@
+name: Tex Murphy Tesla effect
+game_slug: tm-te
+version: Installer
+slug: tm-te-installer
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Tesla Effect - A Tex Murphy Adventure/TeslaEffect.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select Setup
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        prefix: $GAMEDIR
+    
+    - task:
+        app: corefonts
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
