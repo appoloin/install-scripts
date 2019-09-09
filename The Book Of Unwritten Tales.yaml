@@ -1,0 +1,30 @@
+name: The Book Of Unwritten Tales
+game_slug: unwritten
+version: Installer
+slug: unwritten-installer
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files/GOG.com/The Book of Unwritten Tales/bout.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select Setup
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
