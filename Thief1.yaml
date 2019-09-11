@@ -1,0 +1,53 @@
+#Check patch install path. If the gog installer has used "program files" the patch installer will complane, you can ignore it.
+#https://www.ttlg.com/forums/showthread.php?t=134733
+name: Thief-1
+game_slug: thief-1
+version: Installer
+slug: thief-1-installer
+runner: wine
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+    - patch: N/A:Select Patch EXE
+
+  game:
+    arch: win32
+    exe: "$GAMEDIR/drive_c/Program Files/GOG.com/Thief Gold/THIEF.EXE"
+    prefix: $GAMEDIR
+
+  installer:
+
+    - task:
+        arch: win32
+        name: create_prefix
+        install_mono: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: vcrun2008
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: directx9
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        description: Installing Thief 
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        description: Installing NewDark
+        executable: $patch
+        name: wineexec
+        prefix: $GAMEDIR
+
+
+  wine:
+    Desktop: true
