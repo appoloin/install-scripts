@@ -1,0 +1,30 @@
+name: moon
+game_slug: moon
+version: Installer
+slug: moon-installer
+runner: wine
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    arch: win32
+    exe: "$GAMEDIR/drive_c/Program Files/GOG.com/To The Moon/To the Moon.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        arch: win32
+        name: create_prefix
+        install_mono: false
+        prefix: $GAMEDIR
+  
+    - task:
+        description: Installing To the Moon
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
