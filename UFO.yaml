@@ -1,7 +1,7 @@
 name: ufo
 game_slug: ufo
 version: Installer
-slug:  ufo-installer
+slug:  ufo-installer 
 runner: scummvm
 
 
