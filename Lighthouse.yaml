@@ -1,0 +1,56 @@
+name: lighthouse
+game_slug: lighthouse
+version: Installer
+slug:  lighthouse-installer
+runner: scummvm
+
+script:
+  game:
+    game_id: sci
+    path: $GAMEDIR
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+        
+        cp -avr "$src/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - insert-disc:
+        description: Please insert disc 1
+        requires: version
+
+    - execute:
+        args: $DISC $GAMEDIR
+        file: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod
+
+    - execute:
+        args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.000
+        file: /bin/mv
+
+    - insert-disc:
+        description: Please insert disc 2
+        requires: version
+
+    - execute:
+        args: $DISC $GAMEDIR
+        file: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod
+    
+    - execute:
+        args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.001
+        file: /bin/mv
+
