@@ -1,0 +1,65 @@
+name: starship
+game_slug: starship
+version: Installer
+slug:  starship-installer
+runner: scummvm
+
+script:
+  game:
+    game_id: Titanic
+    path: $GAMEDIR
+
+  installer:
+    - insert-disc:
+        description: Please insert disc
+        requires: setup.exe
+
+    - copy:
+        dst: $GAMEDIR/assets
+        src: $DISC/assets
+
+    - execute:
+        args: -R 775  "$GAMEDIR/assets"
+        file: /bin/chmod
+
+    - task:
+        name: wine.create_prefix
+        arch: win32
+        install_mono: false
+        prefix: $GAMEDIR
+
+    - task:
+        name: wine.wineexec
+        executable: $DISC/SETUP.EXE
+        arch: win32
+        prefix: $GAMEDIR
+
+    - copy:
+        dst: $GAMEDIR
+        src: $GAMEDIR/drive_c/Program Files/The Digital Village/Starship Titanic/newgame.st
+
+    - copy:
+        dst: $GAMEDIR/assets
+        src: $GAMEDIR/drive_c/Program Files/The Digital Village/Starship Titanic/Assets
+
+    - execute:
+        args:  -r $GAMEDIR/drive_c
+        file: /bin/rm 
+
+    - execute:
+        args:  -r $GAMEDIR/dosdevices
+        file: /bin/rm 
+
+    - execute:
+        args:  -r $GAMEDIR/system.reg
+        file: /bin/rm 
+
+    - execute:
+        args:  -r $GAMEDIR/user.reg
+        file: /bin/rm 
+
+    - execute:
+        args:  -r $GAMEDIR/userdef.reg
+        file: /bin/rm 
+
+
