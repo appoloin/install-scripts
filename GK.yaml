@@ -1,7 +1,7 @@
 name: GK1
 game_slug: GK1
 version: Installer
-slug: GK1-installer
+slug: GK1-installer 
 runner: scummvm
 
 
