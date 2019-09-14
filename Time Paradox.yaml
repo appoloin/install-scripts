@@ -1,0 +1,79 @@
+name: Time Paradox
+game_slug: Time-Paradox
+version: Installer
+slug: Time-Paradox-installer
+runner: dosbox
+
+
+script:
+  game:
+    main_file: $GAMEDIR/time-paradox.conf
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+      
+        cp -avr "$src/."  "$dst"'
+        file: $CACHE/bulkcopy-alt.sh
+
+    - chmodx: $CACHE/bulkcopy-alt.sh
+
+    - execute:
+        args: $GAMEDIR/HDD $GAMEDIR/CDD $GAMEDIR/CDD/DISC1
+        file: mkdir
+
+    - insert-disc:
+        description: Please insert disc 1
+        requires: setup.exe
+
+    - execute:
+        args: $DISC "$GAMEDIR/CDD/DISC1"
+        file: $CACHE/bulkcopy-alt.sh
+    
+    - execute:
+        args: -R 775  "$GAMEDIR/CDD/DISC1"
+        file: /bin/chmod
+
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=20
+
+        [autoexec]
+        
+          mount C "$GAMEDIR/HDD" -t dir
+
+          mount D "$GAMEDIR/CDD/DISC1" -t dir
+
+          D:
+
+          install.bat
+        
+          exit'
+        file: $GAMEDIR/time-paradox_setup.conf
+    - task:
+        config_file: $GAMEDIR/time-paradox_setup.conf
+        name: dosexec
+        working_dir: $GAMEDIR/HDD/
+    
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=20
+
+        [autoexec]
+        
+          mount C "$GAMEDIR/HDD" -t dir
+
+          mount D "$GAMEDIR/CDD/DISC1" -t dir
+
+          D:
+
+          paradox.bat
+          
+          exit'
+        file: $GAMEDIR/time-paradox.conf
