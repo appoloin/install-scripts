@@ -7,7 +7,7 @@ runner: scummvm
 
 script:
     files:
-      - game:  N/A:Select the file Setup.exe
+        - game:  N/A:Select the file Setup.exe
 
     game:
         game_id: eob2
