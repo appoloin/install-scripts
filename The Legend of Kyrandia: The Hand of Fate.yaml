@@ -1,7 +1,7 @@
-name: The Hand of Fate
+name: The Hand of Fate 
 game_slug:  The_Hand_of_Fate
 version: Installer
-slug:  The_Hand_of_Fate-installer
+slug:  The_Hand_of_Fate-installer 
 runner: scummvm
 
 
