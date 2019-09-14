@@ -1,0 +1,20 @@
+name: Hi-Res Adventure 0 Mission Asteroid
+game_slug: Mission-Asteroid
+version: Installer
+slug: Mission-Asteroid-installer
+runner: scummvm
+
+
+script:
+  files:
+    - game: N/A:Select the game file
+    
+  game:
+    game_id: hires0
+    path: $GAMEDIR
+
+  installer:
+    - execute:
+        args:  $game $GAMEDIR
+        file: /bin/cp 
+        
