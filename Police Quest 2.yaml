@@ -3,7 +3,7 @@ game_slug: police_quest_2
 version: Installer
 slug:   police_quest_2-installer
 runner: scummvm
-
+ 
 
 script:
   files:
