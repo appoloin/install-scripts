@@ -1,9 +1,9 @@
-name: Police Quest
+name: Police Quest 
 game_slug: police_quest
 version: Installer
 slug:   police_quest-installer
 runner: scummvm
-
+ 
 
 script:
   files:
