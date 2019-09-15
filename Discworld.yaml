@@ -3,7 +3,7 @@ game_slug: discworld
 version: Installer
 slug:  discworld-installer
 runner: scummvm
-
+ 
 
 script:
   game:

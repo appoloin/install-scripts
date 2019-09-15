@@ -89,7 +89,7 @@ script:
     - execute:
         args:  $DISC/DW2/FRENCH.SMP $GAMEDIR/FRENCH2.SMP
         file: /bin/cp 
-    - execute:
+    - execute: 
         args:  $DISC/DW2/GERMAN.SMP $GAMEDIR/GERMAN2.SMP
         file: /bin/cp 
     - execute:
