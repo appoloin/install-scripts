@@ -4,7 +4,7 @@ version: Installer
 slug:  simon_the_sorcerer-installer
 runner: scummvm
 
-
+ 
 script:
   files:
     - game:  N/A:Select the file ICON.DAT
