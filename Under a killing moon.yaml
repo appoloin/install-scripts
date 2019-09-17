@@ -83,13 +83,13 @@ script:
         
           mount C "$GAMEDIR/HDD" -t dir
 
-          mount D "$GAMEDIR/CDD/DISC1" -t -label DISK1 -t cdrom
+          mount D "$GAMEDIR/CDD/DISC1" -label DISK1 -t cdrom
 
-          mount E "$GAMEDIR/CDD/DISC2" -t -label DISK2 -t cdrom
+          mount E "$GAMEDIR/CDD/DISC2" -label DISK2 -t cdrom
 
-          mount F "$GAMEDIR/CDD/DISC3" -t -label DISK3 -t cdrom
+          mount F "$GAMEDIR/CDD/DISC3" -label DISK3 -t cdrom
 
-          mount G "$GAMEDIR/CDD/DISC4" -t -label DISK4 -t cdrom
+          mount G "$GAMEDIR/CDD/DISC4" -label DISK4 -t cdrom
 
           D:
 
@@ -111,13 +111,13 @@ script:
         
           mount C "$GAMEDIR/HDD" -t dir
 
-          mount D "$GAMEDIR/CDD/DISC1" -t -label DISK1 -t cdrom
+          mount D "$GAMEDIR/CDD/DISC1" -label DISK1 -t cdrom
 
-          mount E "$GAMEDIR/CDD/DISC2" -t -label DISK2 -t cdrom
+          mount E "$GAMEDIR/CDD/DISC2" -label DISK2 -t cdrom
 
-          mount F "$GAMEDIR/CDD/DISC3" -t -label DISK3 -t cdrom
+          mount F "$GAMEDIR/CDD/DISC3" -label DISK3 -t cdrom
 
-          mount G "$GAMEDIR/CDD/DISC4" -t -label DISK4 -t cdrom
+          mount G "$GAMEDIR/CDD/DISC4" -label DISK4 -t cdrom
 
           C:
 
