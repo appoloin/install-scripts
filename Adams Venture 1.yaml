@@ -1,0 +1,26 @@
+name: Adams Veuture 1
+game_slug: Adams-Veuture-1
+version: Installer
+slug:  Adams-Veuture-1-installer
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files/Adams Venture/Binaries/LTCG-VentureGame.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the Setup.exe
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
