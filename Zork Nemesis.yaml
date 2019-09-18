@@ -4,6 +4,7 @@ version: Installer
 slug:  zork_nemesis-installer
 runner: scummvm
 
+
 script:
     game:
         game_id: zvision
