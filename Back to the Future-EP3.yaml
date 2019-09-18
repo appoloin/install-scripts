@@ -3,7 +3,7 @@ game_slug: Back-to-the-Future-2
 version: Installer
 slug: Back-to-the-Future-2-installer
 runner: wine
-
+ 
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG/Episode 3 - Citizen Brown/BackToTheFuture103.exe
