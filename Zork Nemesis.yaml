@@ -48,3 +48,7 @@ script:
     - execute:
         args: -r $DISC/zassets $GAMEDIR 
         file: /bin/cp 
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod
