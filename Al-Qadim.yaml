@@ -80,3 +80,7 @@ script:
 
           exit'
         file: $GAMEDIR/Al-Qadim.conf
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod
