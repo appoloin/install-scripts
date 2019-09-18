@@ -1,0 +1,26 @@
+name: baldurs-gate
+game_slug: baldurs-gate
+version: Installer
+slug:  baldurs-gate-installer
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Baldur's Gate - Enhanced Edition/Baldur.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
