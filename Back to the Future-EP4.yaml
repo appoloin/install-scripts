@@ -3,7 +3,7 @@ game_slug: Back-to-the-Future-4
 version: Installer
 slug: Back-to-the-Future-4-installer
 runner: wine
-
+ 
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG/Episode 4 - Double Visions/BackToTheFuture104.exe
