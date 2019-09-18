@@ -5,6 +5,7 @@ slug:  zork_grand_inquisitor-installer
 runner: scummvm
 
 
+
 script:
     game:
         game_id: zvision
@@ -54,5 +55,10 @@ script:
     - copy:
         dst: $GAMEDIR/zassets2
         src: $DISC/zassets2
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod
+
 
 
