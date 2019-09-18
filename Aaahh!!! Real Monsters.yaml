@@ -1,0 +1,18 @@
+name: Real Monsters
+game_slug: Real-Monsters
+version: Installer
+slug: Real-Monsters-installer
+runner: dgen
+
+
+script:
+  files:
+    - game: N/A:Select ROM
+  game:
+    main_file:  $game
+
+  installer:
+    - execute:
+        args:  $game $GAMEDIR
+        file: /bin/cp 
+        
