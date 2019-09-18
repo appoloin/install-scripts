@@ -1,0 +1,82 @@
+name: Al-Qadim
+game_slug: Al-Qadim
+version: Installer
+slug: Al-Qadim-installer
+runner: dosbox
+
+
+script:
+  game:
+    main_file: $GAMEDIR/Al-Qadim.conf
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+      
+        cp -avr "$src/."  "$dst"'
+        file: $CACHE/bulkcopy-alt.sh
+
+    - chmodx: $CACHE/bulkcopy-alt.sh
+
+    - execute:
+        args: $GAMEDIR/HDD $GAMEDIR/CDD $GAMEDIR/CDD/DISC1
+        file: mkdir
+
+    - insert-disc:
+        description: Please insert disc
+        requires: install.exe
+
+    - execute:
+        args: $DISC "$GAMEDIR/CDD/DISC1"
+        file: $CACHE/bulkcopy-alt.sh
+    
+    - execute:
+        args: -R 775  "$GAMEDIR/CDD/DISC1"
+        file: /bin/chmod
+
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=30
+
+        [autoexec]
+        
+          mount C "$GAMEDIR/HDD" -t dir
+
+          mount D "$GAMEDIR/CDD/DISC1" -t cdrom
+
+          D:
+
+          install.exe
+        
+          exit'
+        file: $GAMEDIR/Al-Qadim_setup.conf
+
+    - task:
+        config_file: $GAMEDIR/Al-Qadim_setup.conf
+        name: dosexec
+        working_dir: $GAMEDIR/HDD/
+    
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=30
+
+        [autoexec]
+        
+          mount C "$GAMEDIR/HDD" -t dir
+
+          mount D "$GAMEDIR/CDD/DISC1" -t cdrom
+
+          C:
+
+          cd genie
+
+          genie
+
+          exit'
+        file: $GAMEDIR/Al-Qadim.conf
