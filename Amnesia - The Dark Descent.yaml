@@ -5,6 +5,7 @@ version: Installer
 slug: Amnesia:-The-Dark-Descent-installer
 runner: wine
 
+
 script:
   game:
     exe: $GAMEDIR/drive_c/Program Files/Amnesia - The Dark Descent/redist/Launcher.exe
