@@ -3,7 +3,7 @@ game_slug: Alone-in-the-dark-4
 version: Installer
 slug: Alone-in-the-dark-4-installer
 runner: wine
-
+ 
 script:
   game:
     exe: $GAMEDIR/drive_c/Program Files/GOG.com/Alone in the Dark - The New Nightmare/launch.exe
