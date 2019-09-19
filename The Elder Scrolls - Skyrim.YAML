@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR
+    exe: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Legendary Edition/SkyrimLauncher.exe
     arch: win32
     prefix: $GAMEDIR
 
