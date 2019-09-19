@@ -5,6 +5,7 @@ slug:  FBI-Hopkins-installer
 runner: scummvm
 
 
+
 script:
     game:
         game_id: hopkins
