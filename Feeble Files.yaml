@@ -5,7 +5,7 @@ slug:  Feeble-installer
 runner: scummvm
 
 
-
+ 
 script:
   game:
     game_id: feeble  
