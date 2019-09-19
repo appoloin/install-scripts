@@ -1,0 +1,67 @@
+name: skyrim
+game_slug:  skyrim
+version: Installer
+slug: skyrim
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: directx9
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: corefonts
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: tahoma
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: faudio
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: xact
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: vcrun2008
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+
