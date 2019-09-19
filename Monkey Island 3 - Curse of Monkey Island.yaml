@@ -1,0 +1,51 @@
+name: monkey 3
+game_slug: monkey3
+version: Installer
+slug:  monkey3-installer
+runner: scummvm
+
+script:
+    game:
+        game_id: comi
+        path: $GAMEDIR
+
+    installer:
+    - insert-disc:
+        description: Please insert disc 1
+        requires: resource
+    
+    - execute:
+        args: $GAMEDIR/resource
+        file: mkdir
+
+    - copy:
+        dst: $GAMEDIR/resource
+        src: $DISC/resource
+
+    - copy:
+        dst: $GAMEDIR
+        src: $DISC/comi.la0
+
+    - copy:
+        dst: $GAMEDIR
+        src: $DISC/comi.la1
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod
+
+    - insert-disc:
+        description: Please insert disc 2
+        requires: resource
+
+    - copy:
+        dst: $GAMEDIR/resource
+        src: $DISC/resource
+
+    - copy:
+        dst: $GAMEDIR
+        src: $DISC/comi.la2
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod
