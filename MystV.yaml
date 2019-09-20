@@ -4,6 +4,7 @@ version: Installer
 slug: Myst5-installer
 runner: wine
 
+
 script:
   game:
     exe: $GAMEDIR/drive_c/Program Files/GOG.com/Myst V End Of Ages/eoa.exe
