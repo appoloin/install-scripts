@@ -1,0 +1,33 @@
+name: Starwars
+game_slug: Starwars
+version: Installer
+slug: Starwars-installer
+runner: wine
+
+script:
+    files:
+      - installer: N/A:Select the game's setup file
+      
+    game:
+      arch: win32
+      exe:  $GAMEDIR/drive_c/GOG Games/Star Wars - Battlefront/LaunchBF.exe
+      prefix: $GAMEDIR
+
+    installer:
+      - task:
+          arch: win32
+          name: create_prefix
+          install_mono: false
+          prefix: $GAMEDIR
+      - task:
+          app: faudio d3dx9
+          name: winetricks
+          prefix: $GAMEDIR
+          arch: win32
+      - task:
+          executable: $installer
+          name: wineexec
+          prefix: $GAMEDIR
+
+    wine:
+      Desktop: true
