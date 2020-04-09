@@ -1,0 +1,57 @@
+name:  Alien Breed Tower Assault
+game_slug:  Alien-breed
+version: Installer
+slug:  Alien-breed-installer
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select GOG installer
+    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
+
+  game:
+    main_file: $GAMEDIR/alien.conf
+  
+  installer:
+    - extract:
+        dst: $CACHE
+        file: $inno
+        
+    - execute:
+        args: -I app -d "$CACHE" "$game"
+        file: $CACHE/innoextract
+
+    - execute:
+        args: $GAMEDIR/HDD $GAMEDIR/HDD/alien
+        file: mkdir
+
+    - merge:
+        dst: "$GAMEDIR/HDD/alien"
+        src: "$CACHE/app"
+
+    - execute:
+        args: -r $GAMEDIR/HDD/alien/DOSBOX
+        file: /bin/rm
+
+    - execute:
+        args: -r $GAMEDIR/HDD/alien/__support
+        file: /bin/rm
+        
+
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=20
+
+        [autoexec]
+
+          mount C "$GAMEDIR/HDD" -t dir
+
+          C:
+
+          cd alien
+          
+          TA.EXE
+          
+          exit'
+        file: $GAMEDIR/alien.conf

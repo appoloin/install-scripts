@@ -3,7 +3,7 @@ game_slug: Atlantis-The-Lost-Tales
 version: Installer
 slug: Atlantis-The-Lost-Tales-installer
 runner: wine
-
+ 
 script:
   game:
     exe: $GAMEDIR/drive_c/Program Files/GOG.com/Atlantis - The Lost Tales/Atlantis.exe

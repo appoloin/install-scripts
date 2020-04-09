@@ -4,6 +4,7 @@ version: Installer
 slug: FarCry2
 runner: wine
 
+
 script:
   game:
     exe: "$GAMEDIR/drive_c/GOG Games/Far Cry 2 Fortune's Edition/bin/farcry2.exe"

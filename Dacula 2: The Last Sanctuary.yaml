@@ -4,6 +4,7 @@ version: Installer
 slug: Dracula-the-Resurrection-installer
 runner: wine
 
+
 script:
   game:
     exe: "$GAMEDIR/drive_c/GOG/Dracula 2 - The Last Sanctuary/Dracula2.exe"

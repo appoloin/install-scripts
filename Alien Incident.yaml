@@ -6,12 +6,14 @@ runner: dosbox
 
 script:
   files:
-    - game: N/A:Select file Game.exe.
+    - game: N/A:Select file Install.exe.
+
   game:
     main_file: $GAMEDIR/alien-incident-play.conf
+
   installer:
     - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/CDD $GAMEDIR/HDD/alien 
+        args: $GAMEDIR/HDD $GAMEDIR/CDD $GAMEDIR/CDD/DISC1
         file: mkdir
 
     - write_file:
@@ -29,24 +31,31 @@ script:
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
-        args: $game $GAMEDIR/CDD
+        args: $game $GAMEDIR/CDD/DISC1
         file: $CACHE/bulkcopy.sh
 
     - write_file:
         content: '[sdl]
 
-          sensitivity=10
+          sensitivity=20
         
         [autoexec]
 
-          mount D "$GAMEDIR/CDD" -t iso
+          mount D "$GAMEDIR/CDD/DISC1" -t cdrom
+
           mount C "$GAMEDIR/HDD" -t dir
+
+          d:
+
+          install
 
           c:
 
-          cd alien
-          
-          Setup
+          cd games
+
+          cd ai
+
+          setup.bat
           
           exit'
         file: $GAMEDIR/alien-incident-setup.conf
@@ -59,17 +68,25 @@ script:
     - write_file:
         content: '[sdl]
 
-          sensitivity=10
+          sensitivity=20
         
         [autoexec]
+
+          mount D "$GAMEDIR/CDD/DISC1" -t cdrom
 
           mount C "$GAMEDIR/HDD" -t dir
           
           c:
 
-          cd alien
+          cd games
 
-          game
+          cd ai
+
+          AI.bat
           
           exit'
         file: $GAMEDIR/alien-incident-play.conf
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod

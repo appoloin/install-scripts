@@ -4,6 +4,7 @@ version: Installer
 slug:  Journey-to-the-center-of-the-Earth-installer
 runner: wine
 
+
 script:
   game:
     exe: drive_c/Program Files/Strategy First/Viva Media/Journey to the Center of the Earth/game.exe

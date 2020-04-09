@@ -5,6 +5,7 @@ slug:  I_Have_No_Mouth-installer
 runner: scummvm
 
 
+
 script:
   files:
     - game: N/A:Select the intall.exe file

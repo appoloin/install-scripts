@@ -4,6 +4,7 @@ version: Installer
 slug: Freespace-2-installer
 runner: wine
 
+
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Freespace 2/FreeSpace2.exe

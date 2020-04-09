@@ -1,0 +1,32 @@
+name: Deliverance-Stormlord-II
+game_slug: Deliverance-Stormlord-II
+version: Installer
+slug: Deliverance-Stormlord-II-installer
+runner: fsuae
+
+
+script:
+  files:
+    - disk1: N/A:Select Disc 1
+    - disk2: N/A:Select Disc 2
+    - disk3: N/A:Select Disc 2
+
+  
+  game:
+    disks:
+      - disk2 
+      - disk3
+
+    main_file:  disk1
+
+  installer:
+    - execute:
+        args:  $disk1 $GAMEDIR 
+        file: /bin/cp 
+    - execute:
+        args:  $disk2 $GAMEDIR 
+        file: /bin/cp 
+    - execute:
+        args:  $disk3 $GAMEDIR 
+        file: /bin/cp 
+

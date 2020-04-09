@@ -4,7 +4,7 @@ version: Installer
 slug: crime-time-installer
 runner: dosbox
 
-
+ 
 script:
   files:
     - game: N/A:Select the file CRIME.BAT

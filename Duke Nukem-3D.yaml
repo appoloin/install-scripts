@@ -5,6 +5,7 @@ slug: Duke-Nukem-3D-installer
 runner: linux
 
 
+
 script:
   files:
     - game: N/A:Select GOG installer.

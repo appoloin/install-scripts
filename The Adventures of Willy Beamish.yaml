@@ -1,0 +1,81 @@
+name: The Adventures of Willy Beamish
+game_slug:  beamish
+version: Installer
+slug:   beamish-installer
+runner: dosbox
+
+
+script:
+  files:
+    - game:  N/A:Select Willy.exe
+
+  game:
+    main_file: $GAMEDIR/willy.conf
+  
+  installer:
+    - execute:
+        args: $GAMEDIR/HDD $GAMEDIR/CDD $GAMEDIR/CDD/DISK1
+        file: mkdir
+
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+        
+        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+        cp -avr "$src_path/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: $game $GAMEDIR/CDD/DISK1
+        file: $CACHE/bulkcopy.sh
+
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=10
+        
+        [autoexec]
+
+          mount D "$GAMEDIR/CDD/DISK1" -t cdrom
+
+          mount C "$GAMEDIR/HDD" -t dir
+
+          D:
+          
+          install.com
+          
+          exit'
+        file: $GAMEDIR/willy-setup.conf
+
+    - task:
+        config_file: $GAMEDIR/willy-setup.conf
+        name: dosexec
+        working_dir: $GAMEDIR/HDD
+
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=10
+        
+        [autoexec]
+
+          mount D "$GAMEDIR/CDD/DISK1" -t cdrom
+
+          mount C "$GAMEDIR/HDD" -t dir
+          
+          c:
+
+          cd DYNAMIX
+
+          willy.bat
+          
+          exit'
+        file: $GAMEDIR/willy.conf
+
+

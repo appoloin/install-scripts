@@ -4,7 +4,7 @@ game_slug: Alan-Wakes-American-Nightmare
 version: Installer
 slug: Alan-Wakes-American-Nightmare-installer
 runner: wine
-
+ 
 script:
   game:
     exe: $GAMEDIR/drive_c/Program Files/GOG.com/Alan Wake American Nightmare/alan_wakes_american_nightmare.exe

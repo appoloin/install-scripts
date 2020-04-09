@@ -4,6 +4,7 @@ version: Installer
 slug: Dark-Fall-installer
 runner: wine
 
+
 script:
   game:
     exe:  drive_c/Program Files/GOG.com/Dark Fall - The Journal/darkfall.exe
@@ -16,6 +17,7 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:

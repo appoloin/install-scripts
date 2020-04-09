@@ -5,6 +5,7 @@ slug:  amazon-guardians-of-eden-installer
 runner: scummvm
 
 
+
 script:
   files:
     - game:  N/A:Select the file AMAZON.EXE

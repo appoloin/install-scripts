@@ -4,6 +4,7 @@ version: Installer
 slug:  NiBiRu-installer
 runner: wine
 
+
 script:
   game:
     exe: drive_c/Program Files/The Adventure Company/Nibiru/nibiru.exe

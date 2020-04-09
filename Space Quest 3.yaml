@@ -4,7 +4,6 @@ version: Installer
 slug:  space-quest-3-installer
 runner: scummvm
 
- 
 script:
   files:
     - game:  N/A:Select the file INSTALL.EXE

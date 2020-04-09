@@ -1,0 +1,31 @@
+name: COMMANDOS BEYOND THE CALL OF DUTY
+game_slug: commandos
+version: Installer
+slug: commandos
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files/Pyro Studios/Commandos1MP/coman_mp.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+

@@ -3,7 +3,7 @@ game_slug: Bargon-Attack
 version: Installer
 slug:  Bargon-Attack-installer
 runner: scummvm
-
+ 
 
 script:
     files:

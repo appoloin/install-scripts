@@ -1,0 +1,30 @@
+name: Return to Mysterious Island 
+game_slug:  Return-to-Mysterious-Island 
+version: Installer
+slug:  Return-to-Mysterious-Island-installer
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/Program Files/GOG.com/Return to Mysterious Island/RtMI.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+

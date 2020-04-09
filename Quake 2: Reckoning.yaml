@@ -1,0 +1,12 @@
+name: Quake Reckoning
+game_slug: Quake-Reckoning
+version: Installer
+slug:  quake-reckoning-installer
+runner: linux
+
+
+script:
+  game:
+    args: +set game xatrix
+      
+  requires: quake-2-cdrom-installer

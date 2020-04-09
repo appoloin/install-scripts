@@ -5,6 +5,7 @@ slug:  grim_fandango-installer
 runner: residualvm
 
 
+
 script:
   files:
     - file1: http://demos.residualvm.org/patches/gfupd101.exe

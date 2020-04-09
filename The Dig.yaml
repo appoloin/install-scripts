@@ -5,6 +5,7 @@ slug:  dig-installer
 runner: scummvm
 
 
+
 script:
   files:
     - game:  N/A:Select the file DIG.LA0

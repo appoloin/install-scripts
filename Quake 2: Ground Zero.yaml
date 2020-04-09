@@ -1,0 +1,12 @@
+name: Quake Ground Zero
+game_slug: Quake-Ground-Zero
+version: Installer
+slug:  quake-ground-zero-installer
+runner: linux
+
+
+script:
+  game:
+    args: +set game rogue
+      
+  requires: quake-2-cdrom-installer

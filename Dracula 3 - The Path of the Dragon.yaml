@@ -4,6 +4,7 @@ version: Installer
 slug: Dracula-the-Resurrection-installer
 runner: wine
 
+
 script:
   game:
     exe: "$GAMEDIR/drive_c/GOG/Dracula 3 - The Path of the Dragon/dracula3.exe"

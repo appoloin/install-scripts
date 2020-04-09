@@ -1,3 +1,4 @@
+#TODO
 name: FarCry3 
 game_slug: FarCry3
 version: Installer
@@ -12,42 +13,20 @@ script:
 
   files:
     - game: N/A:Select installer.
-    - laa-patcher: https://gist.github.com/daniel-j/28c6d207c5393aa64c3a9d8ee26d1425/raw/laa-patcher.tar.xz
 
   installer:
     - task:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
-
-    - extract:
-        description: Patching Fallout3.exe with Large Address Aware support
-        dst: $CACHE/laa-patcher
-        file: laa-patcher
 
     - task:
         description: Installing
         executable: $game
         name: wineexec
         prefix: $GAMEDIR
-
-    - task:
-        args: /LARGEADDRESSAWARE farcry3.exe
-        description: Patching farcry3.exe with Large Address Aware support
-        executable: $CACHE/laa-patcher/EDITBIN.EXE
-        name: wineexec
-        prefix: $GAMEDIR
-
-    - task:
-        arch: win32
-        args: /LARGEADDRESSAWARE farcry3.exe
-        description: Patching farcry3.exe with Large Address Aware support
-        executable: $CACHE/laa-patcher/EDITBIN.EXE
-        name: wineexec
-        prefix: $GAMEDIR/prefix
-        working_dir: $GAMEDIR
-
 
   wine:
     Desktop: true

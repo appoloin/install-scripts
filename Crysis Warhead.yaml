@@ -1,0 +1,61 @@
+name: crysis warhead
+game_slug: crysis warhead 
+version: Installer
+slug: crysis-warhead
+runner: wine
+
+script:
+  game: $GAMEDIR/drive_c/ 
+    exe: $GAMEDIR
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        prefix: $GAMEDIR
+
+  - task:
+        app: d3dx9
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: corefonts
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: tahoma
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+    
+    - task:
+        app: vcrun2008
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: vcrun2012
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+

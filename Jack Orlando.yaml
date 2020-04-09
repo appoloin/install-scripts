@@ -4,6 +4,7 @@ version: Installer
 slug:  Jack-Orlando-installer
 runner: wine
 
+
 script:
   game:
     exe: drive_c/Program Files/Jack Orlando Director's Cut/JackOrlando.exe

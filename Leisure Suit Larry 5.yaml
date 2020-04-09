@@ -3,7 +3,7 @@ game_slug: leisure_suit_larry_5
 version: Installer
 slug:  leisure_suit_larry_5-installer
 runner: scummvm
-
+ 
 
 script:
   files:

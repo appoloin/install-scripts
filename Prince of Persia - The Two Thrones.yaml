@@ -1,0 +1,30 @@
+name: Two-Thrones
+game_slug:  Two-Thrones
+version: Installer
+slug:  Two-Thrones-installer
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files/GOG.com/Prince of Persia - The Two Thrones/PrinceOfPersia.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+

@@ -28,7 +28,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: directx9
+        app: d3dx9
         arch: win32
         name: winetricks
         prefix: $GAMEDIR

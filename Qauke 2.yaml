@@ -1,0 +1,132 @@
+name: Quake-2
+game_slug: Quake-2
+version: Installer
+slug:  quake-2-cdrom-installer
+runner: linux
+
+
+script:
+    files:
+        - yamagi-engine: https://lutris.net/files/games/quake-2/yamagi-yquake2-5.34-x86_64.tar.gz   
+        - quakepatch: https://deponie.yamagi.org/quake2/idstuff/q2-3.20-x86-full-ctf.exe   
+        - game: N/A:Select Setup.exe
+
+    game:
+        exe: quake2
+
+    installer:
+        - write_file:
+            content: '#!/bin/bash
+
+            src=$1
+
+            dst=$2
+            
+            src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+            find "$src_path" -type f \( -iname "*.PAK"  \) -exec cp {} "$dst" \;'
+            file: $CACHE/selectcopy.sh
+
+        - chmodx: $CACHE/selectcopy.sh
+        
+        - extract:
+            dst: $GAMEDIR
+            file: $yamagi-engine
+
+        - task:
+            name: wine.create_prefix
+            arch: win32
+            install_mono: false
+            prefix: $GAMEDIR
+
+        - task:
+            name: wine.wineexec
+            executable: $game
+            arch: win32
+            prefix: $GAMEDIR
+
+        - extract:
+            dst: $GAMEDIR
+            file: $quakepatch
+            format: zip
+        
+        - execute:
+            args:  -r $GAMEDIR/3.20_Changes.txt
+            file: /bin/rm 
+        - execute:
+            args:  -r $GAMEDIR/quake2.exe
+            file: /bin/rm 
+        - execute:
+            args:  -r $GAMEDIR/ref_gl.dll
+            file: /bin/rm 
+        - execute:
+            args:  -r $GAMEDIR/ref_soft.dll
+            file: /bin/rm 
+        - execute:
+            args:  -r $GAMEDIR/baseq2/gamex86.dll
+            file: /bin/rm 
+        - execute:
+            args:  -r $GAMEDIR/ctf/ctf2.ico
+            file: /bin/rm 
+        - execute:
+            args:  -r $GAMEDIR/ctf/gamex86.dll
+            file: /bin/rm 
+        - execute:
+            args:  -r $GAMEDIR/ctf/readme.txt
+            file: /bin/rm 
+        - execute:
+            args:  -r $GAMEDIR/ctf/server.cfg
+            file: /bin/rm 
+        - execute:
+            args:  -r $GAMEDIR/xatrix/gamex86.dll
+            file: /bin/rm 
+        - execute:
+            args:  -r $GAMEDIR/rogue/gamex86.dll
+            file: /bin/rm 
+
+        - execute:
+            args: -r "$GAMEDIR/drive_c/Program Files/Quake II/baseq2/pak0.pak" $GAMEDIR/baseq2
+            file: /bin/cp 
+        - execute:
+            args: -r "$GAMEDIR/drive_c/Program Files/Quake II/baseq2/video" $GAMEDIR/baseq2/video
+            file: /bin/cp 
+
+        - execute:
+            args: -r "$GAMEDIR/drive_c/Program Files/Quake II/rogue/pak0.pak" $GAMEDIR/rogue
+            file: /bin/cp 
+        - execute:
+            args: -r "$GAMEDIR/drive_c/Program Files/Quake II/rogue/video" $GAMEDIR/rogue/video
+            file: /bin/cp 
+        - execute:
+            args: -r "$GAMEDIR/baseq2/game.so" $GAMEDIR/rogue
+            file: /bin/cp 
+    
+        - execute:
+            args: -r "$GAMEDIR/drive_c/Program Files/Quake II/xatrix/pak0.pak" $GAMEDIR/xatrix
+            file: /bin/cp 
+        - execute:
+            args: -r "$GAMEDIR/drive_c/Program Files/Quake II/xatrix/video" $GAMEDIR/xatrix/video
+            file: /bin/cp 
+        - execute:
+            args: -r "$GAMEDIR/baseq2/game.so" $GAMEDIR/xatrix
+            file: /bin/cp 
+
+        - execute:
+            args:  -r $GAMEDIR/dosdevices
+            file: /bin/rm 
+
+        - execute:
+            args:  -r $GAMEDIR/drive_c
+            file: /bin/rm 
+
+        - execute:
+            args:  -r $GAMEDIR/system.reg
+            file: /bin/rm 
+
+        - execute:
+            args:  -r $GAMEDIR/user.reg
+            file: /bin/rm 
+
+        - execute:
+            args:  -r $GAMEDIR/userdef.reg
+            file: /bin/rm 

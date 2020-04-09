@@ -5,6 +5,7 @@ version: Installer
 slug: Amber-Journeys-Beyond-installer
 runner: wine
 
+
 script:
   game:
     exe: $GAMEDIR/drive_c/AMBER_JB/AMBER_JB.EXE

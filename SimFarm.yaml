@@ -5,6 +5,8 @@ slug: Simfarm-installer
 runner: dosbox
 
 
+
+
 script:
   files:
     - game: N/A:Select the file SIMFARM.EXE

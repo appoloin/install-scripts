@@ -1,0 +1,60 @@
+name: rama
+game_slug: rama
+version: Installer
+slug:  rama-installer
+runner: scummvm
+
+script:
+    game:
+        game_id: sci
+        path: $GAMEDIR
+
+    installer:
+      - write_file:
+          content: '#!/bin/bash
+
+          src=$1
+
+          dst=$2
+        
+          cp -avr "$src/."  "$dst"'
+          file: $CACHE/bulkcopy-alt.sh
+
+      - chmodx: $CACHE/bulkcopy-alt.sh
+
+      - insert-disc:
+          description: Please insert disc 1
+          requires: audio
+
+      - execute:
+          args: $DISC "$GAMEDIR"
+          file: $CACHE/bulkcopy-alt.sh
+
+      - execute:
+          args: -R 775  "$GAMEDIR"
+          file: /bin/chmod
+
+      - insert-disc:
+          description: Please insert disc 2
+          requires: audio
+
+      - execute:
+          args: $DISC "$GAMEDIR"
+          file: $CACHE/bulkcopy-alt.sh
+
+      - execute:
+          args: -R 775  "$GAMEDIR"
+          file: /bin/chmod
+
+      - insert-disc:
+          description: Please insert disc 3
+          requires: audio
+
+      - execute:
+          args: $DISC "$GAMEDIR"
+          file: $CACHE/bulkcopy-alt.sh
+
+      - execute:
+          args: -R 775  "$GAMEDIR"
+          file: /bin/chmod
+    

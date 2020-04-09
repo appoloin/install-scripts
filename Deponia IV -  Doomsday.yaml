@@ -1,0 +1,31 @@
+name: Deponia Doomsday
+game_slug:  Deponia Doomsday
+version: Installer
+slug: Deponia Doomsday
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/c_drive/GOG Games/Deponia 4 - Doomsday/deponia4.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+

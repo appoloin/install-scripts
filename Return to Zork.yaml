@@ -5,6 +5,7 @@ slug:  return_to_zork-installer
 runner: scummvm
 
 
+
 script:
   files:
     - game:  N/A:Select the file RTZ.DAT

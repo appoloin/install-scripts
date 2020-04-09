@@ -1,0 +1,37 @@
+#TODO NOT working
+name: Journeyman-Project-3
+game_slug: Journeyman-Project-3
+version: Installer
+slug: Journeyman-Project-3-installer
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/drive_c/GOG Games/Journeyman Project 3 - Legacy of Time/Legacy.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select Setup
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: corefonts
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+

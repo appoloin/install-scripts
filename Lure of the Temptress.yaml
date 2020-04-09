@@ -5,6 +5,7 @@ slug:   Lure_of_the_Temptress-installer
 runner: scummvm
 
 
+
 script:
   files:
     - game:  N/A:Select a file with the extension *.vga

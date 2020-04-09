@@ -5,6 +5,7 @@ slug:  The_Colonel's_Bequest-installer
 runner: scummvm
 
 
+
 script:
   files:
     - game:  N/A:Select the file INSTALL.EXE

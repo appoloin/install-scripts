@@ -7,7 +7,7 @@ runner: wine
 script:
     files:
       - installer: N/A:Select the game's setup file
-      
+
     game:
       arch: win32
       exe:  $GAMEDIR/drive_c/GOG Games/Star Wars - Battlefront/LaunchBF.exe
@@ -23,7 +23,6 @@ script:
           app: faudio d3dx9
           name: winetricks
           prefix: $GAMEDIR
-          arch: win32
       - task:
           executable: $installer
           name: wineexec

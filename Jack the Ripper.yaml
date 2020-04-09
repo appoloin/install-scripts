@@ -5,6 +5,7 @@ slug:  jack_the_ripper-installer
 runner: dosbox
 
 
+
 script:
   files:
     - game:  N/A:Select the file JACK.BAT

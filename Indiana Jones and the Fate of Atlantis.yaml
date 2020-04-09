@@ -5,6 +5,7 @@ slug:  indiana_jones_and_the_fate_of_atlantis-installer
 runner: scummvm
 
 
+
 script:
   files:
     - game: N/A:Select the file Atlantis.000

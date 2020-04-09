@@ -5,6 +5,7 @@ slug: Simcity-2000-installer
 runner: dosbox
 
 
+
 script:
   files:
     - game: N/A:Select the file SC2000.EXE

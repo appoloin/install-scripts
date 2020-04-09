@@ -1,0 +1,84 @@
+#FIX ME intro stuttering
+name:  city
+game_slug:  city
+version: Installer
+slug:  city
+runner: dosbox
+
+
+
+script:
+  files:
+    - game: N/A:Select the CD.cue file. Note the cue/bin filename must be CD, and also all files within the same as the cue will be copied.
+
+  game:
+    main_file: $GAMEDIR/city.conf
+  installer:
+    - execute:
+        args: $GAMEDIR/HDD $GAMEDIR/CDD
+        file: mkdir
+
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+        
+        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+        cp -avr "$src_path/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: $game $GAMEDIR/CDD
+        file: $CACHE/bulkcopy.sh
+
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=20
+        
+        [autoexec]
+
+          imgmount D "$GAMEDIR/CDD/CD.cue" -t iso
+
+          mount C "$GAMEDIR/HDD" -t dir
+
+          d:
+
+          install
+
+          exit'
+        file: $GAMEDIR/city-setup.conf
+
+    - task:
+        config_file: $GAMEDIR/city-setup.conf
+        name: dosexec
+        working_dir: $GAMEDIR/HDD
+
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=20
+
+        [autoexec]
+
+          imgmount D "/home/andrew/Documents/Link to .games/city/CDD/CD.cue" -t iso
+
+          mount C "$GAMEDIR/HDD" -t dir
+
+          C:
+
+          cd cite
+
+          c.bat          
+          
+          exit'
+        file: $GAMEDIR/city.conf
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod

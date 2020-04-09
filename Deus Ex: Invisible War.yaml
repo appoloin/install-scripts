@@ -5,6 +5,7 @@ version: Installer
 slug: Deus-Ex-2-installer
 runner: wine
 
+
 script:
   game:
     exe: drive_c/Program Files/GOG.com/Deus Ex - Invisible War/System/dx2.exe

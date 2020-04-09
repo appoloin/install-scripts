@@ -4,7 +4,7 @@ game_slug: Culpa-Innata
 version: Installer
 slug: Culpa-Innata-installer
 runner: wine
-
+ 
 script:
   game:
     exe: drive_c/Program Files/Strategy First/Culpa Innata/game.exe

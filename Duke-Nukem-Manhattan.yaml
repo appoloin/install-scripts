@@ -4,6 +4,7 @@ version: Installer
 slug: Duke-Nukem-Manhattan
 runner: wine
 
+
 script:
   game:
     exe: "$GAMEDIR/drive_c/Program Files/GOG.com/Duke Nukem - Manhattan Project/DukeNukemMP.exe"

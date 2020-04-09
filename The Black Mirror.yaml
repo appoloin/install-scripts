@@ -5,6 +5,7 @@ version: Installer
 slug:  The_Black_Mirror-installer
 runner: wine
 
+
 script:
   game:
     exe: drive_c/Program Files/The Adventure Company/The Black Mirror/BMirror.exe

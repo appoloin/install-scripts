@@ -5,6 +5,7 @@ slug:  kings_quest_6-installer
 runner: scummvm
 
 
+
 script:
   files:
     - game:  N/A:Select a file with the extension *.000
