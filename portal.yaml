@@ -1,17 +1,18 @@
-name: deponia 
-game_slug: deponia
+name: portal
+game_slug: portal 
 version: Installer
-slug: deponia-installer
+slug: portal
 runner: wine
 
-
 script:
-  game:
-    exe: $GAMEDIR/drive_c/GOG Games/Chaos on Deponia/deponia2.exe
+  game: $GAMEDIR/drive_c/Program Files/Portal/Portal.exe
+    exe: $GAMEDIR
     arch: win32
     prefix: $GAMEDIR
+
   files:
-    - setup: N/A:Select the Setup file
+    - setup: N/A:Select installer
+
   installer:
     - task:
         name: create_prefix
@@ -27,4 +28,5 @@ script:
 
   wine:
     Desktop: true
+
 

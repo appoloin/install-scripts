@@ -4,9 +4,10 @@ version: Installer
 slug: deponia-installer
 runner: wine
 
+
 script:
   game:
-    exe: drive_c/GOG Games/Deponia/Deponia.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Deponia/Deponia.exe
     arch: win32
     prefix: $GAMEDIR
   files:
@@ -16,6 +17,7 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
