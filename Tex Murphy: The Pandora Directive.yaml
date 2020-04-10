@@ -135,19 +135,19 @@ script:
     - write_file:
         content: '[sdl]
 
-          sensitivity=20
+            sensitivity=20
 
-        fullresolution=desktop
+           fullresolution=desktop
 
-        windowresolution=original
+            windowresolution=original
 
-        output=opengl
+            output=opengl
 
         [render]
 
-        aspect=true
+            aspect=true
 
-        scaler=normal2x
+           scaler=normal2x
       
         [autoexec]
         
