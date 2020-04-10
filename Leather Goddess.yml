@@ -1,0 +1,17 @@
+name: Leather Goddess
+game_slug:  Leather Goddess
+version:  Leather Goddess
+slug:  Leather Goddess-installer
+runner: frotz
+
+
+script:
+  files:
+    - game: N/A:Select the story file
+  game:
+    story: $GAMEDIR/leather.z5
+  installer:
+    - execute:
+        args:  $game $GAMEDIR/leather.z5
+        file: /bin/cp 
+        

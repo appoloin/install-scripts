@@ -1,0 +1,21 @@
+name: Lurking Horror
+game_slug: Lurking_Horror
+version: Installer
+slug: Lurking_Horror-installer
+runner: frotz
+
+
+script:
+  files:
+    - game: N/A:Select the story file
+    - game2: N/A:Select the BLB file
+  game:
+    story: $GAMEDIR/lurking.z5
+  installer:
+    - execute:
+        args:  $game $GAMEDIR/lurking.z5
+        file: /bin/cp 
+        
+    - execute:
+        args:  $game2 $GAMEDIR/lurking.blb
+        file: /bin/cp 
