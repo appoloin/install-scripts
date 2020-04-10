@@ -107,6 +107,18 @@ script:
 
           sensitivity=12
 
+          fullresolution=desktop
+
+          windowresolution=original
+
+          output=opengl
+
+        [render]
+
+           aspect=true
+
+           scaler=normal2x
+
         [autoexec]
         
           mount C "$GAMEDIR/HDD" -t dir
