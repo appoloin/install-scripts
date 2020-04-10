@@ -117,7 +117,7 @@ script:
 
           mount G "$GAMEDIR/CDD/DISC4" -label PANDORA4 -t cdrom
 
-          mount H "$GAMEDIR/CDD/DISC6" -label PANDORA5 -t cdrom
+          mount H "$GAMEDIR/CDD/DISC5" -label PANDORA5 -t cdrom
 
           mount I "$GAMEDIR/CDD/DISC6" -label PANDORA5 -t cdrom
 
@@ -137,21 +137,33 @@ script:
 
           sensitivity=20
 
+        fullresolution=desktop
+
+        windowresolution=original
+
+        output=opengl
+
+        [render]
+
+        aspect=true
+
+        scaler=normal2x
+      
         [autoexec]
         
           mount C "$GAMEDIR/HDD" -t dir
 
-          mount D "$GAMEDIR/CDD/DISC1" -t -label PANDORA1 -t cdrom
+          mount D "$GAMEDIR/CDD/DISC1"  -label PANDORA1 -t cdrom
 
-          mount E "$GAMEDIR/CDD/DISC2" -t -label PANDORA2 -t cdrom
+          mount E "$GAMEDIR/CDD/DISC2"  -label PANDORA2 -t cdrom
 
-          mount F "$GAMEDIR/CDD/DISC3" -t -label PANDORA3 -t cdrom
+          mount F "$GAMEDIR/CDD/DISC3"  -label PANDORA3 -t cdrom
 
-          mount G "$GAMEDIR/CDD/DISC4" -t -label PANDORA4 -t cdrom
+          mount G "$GAMEDIR/CDD/DISC4"  -label PANDORA4 -t cdrom
 
-          mount H "$GAMEDIR/CDD/DISC6" -t -label PANDORA5 -t cdrom
+          mount H "$GAMEDIR/CDD/DISC5"  -label PANDORA5 -t cdrom
 
-          mount I "$GAMEDIR/CDD/DISC6" -t -label PANDORA6 -t cdrom
+          mount I "$GAMEDIR/CDD/DISC6"  -label PANDORA6 -t cdrom
 
           C:
 
