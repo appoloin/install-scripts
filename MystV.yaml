@@ -21,6 +21,42 @@ script:
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
+    
+    - task:
+        app: d3dx9
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: d3dcompiler_42
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: dsound
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: directmusic
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: corefonts
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: tahoma
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
 
     - task:
         executable: $setup
