@@ -6,7 +6,7 @@ runner: ags
 
 script:
   game:
-    main_file: "$GAMEDIR"
+    main_file: "$GAMEDIR/drive_c/Program Files/Games/Gemini Rue/Gemini_Rue.exe"
     arch: win32
     prefix: $GAMEDIR
 
