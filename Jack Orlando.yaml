@@ -20,6 +20,7 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
