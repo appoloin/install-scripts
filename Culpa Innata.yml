@@ -1,0 +1,43 @@
+name: Culpa Innata
+game_slug: Culpa-Innata
+version: Installer
+slug: Culpa-Innata-installer
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files/Strategy First/Culpa Innata/Game.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select Setup.exe
+    - patch: https://github.com/appoloin/WfW/raw/master/CulpaInnata_Upd_EN_100-103.exe
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $patch
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+    WineDesktop: 1024x768
+
+  system:
+    resolution: 1024x768
+    reset_desktop: true
+
+
