@@ -5,8 +5,8 @@ slug: portal
 runner: wine
 
 script:
-  game: $GAMEDIR/drive_c/Program Files/Portal/Portal.exe
-    exe: $GAMEDIR
+  game: 
+    exe: $GAMEDIR/drive_c/Program Files/Portal/Portal.exe
     arch: win32
     prefix: $GAMEDIR
 
