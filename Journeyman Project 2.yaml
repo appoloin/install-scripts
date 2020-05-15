@@ -19,7 +19,14 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
+
+    - task:
+        app: win95
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR  
 
     - task:
         executable: $setup

@@ -1,0 +1,30 @@
+name: Titanic
+game_slug:  Titanic
+version: Installer
+slug:  Titanic-installer
+runner: wine
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    arch: win32
+    exe: "$GAMEDIR/drive_c/GOG Games/Titanic Adventure Out of Time"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        arch: win32
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+  
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
