@@ -10,7 +10,7 @@ script:
 
   game:
     arch: win32
-    exe: "$GAMEDIR/drive_c/GOG Games/Titanic Adventure Out of Time"
+    exe: "$GAMEDIR/drive_c/GOG Games/Titanic Adventure Out of Time/TitanicStart.exe"
     prefix: $GAMEDIR
 
   installer:
@@ -28,3 +28,7 @@ script:
 
   wine:
     Desktop: true
+
+  system:
+    xephyr: 8bpp
+    xephyr_resolution: 800x600
