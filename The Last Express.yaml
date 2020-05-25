@@ -1,0 +1,82 @@
+name: last express
+game_slug: last express 
+version: Installer
+slug: last express
+runner: dosbox
+
+script:
+  game: 
+    main_file: $GAMEDIR/LastExpress.conf
+
+  files:
+    - setup: N/A:Select installer
+    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
+
+  installer:
+    - extract:
+        dst: $CACHE
+        file: $inno
+        
+    - execute:
+        args: -d "$CACHE" "$setup"
+        file: $CACHE/innoextract
+
+    - execute:
+        args: $GAMEDIR/data 
+        file: mkdir
+
+    - execute:
+        args: $GAMEDIR/cloud_saves 
+        file: mkdir
+
+    - merge:
+        src: "$CACHE/data"
+        dst: "$GAMEDIR/data"
+        
+    - copy:
+        src: $CACHE/EXPRESS.EXE
+        dst: $GAMEDIR
+
+    - copy:
+        src: $CACHE/HD.HPF
+        dst: $GAMEDIR
+
+    - copy:
+        src: $CACHE/Manual.pdf
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=30
+
+          fullresolution=desktop
+
+          windowresolution=original
+
+          fullscreen=true
+
+          output=opengl
+
+        [render]
+
+           aspect=true
+
+           scaler=normal2x
+
+        [autoexec]
+        
+          mount C "$GAMEDIR/" -t dir
+
+          mount C "$GAMEDIR/cloud_saves" -t overlay
+
+          mount D "$GAMEDIR/data" -t cdrom
+
+          c:
+
+          express.exe
+
+          exit'
+        file: $GAMEDIR/LastExpress.conf
+
+
