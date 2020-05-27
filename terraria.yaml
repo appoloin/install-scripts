@@ -34,17 +34,12 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        executable: $setup
-        name: wineexec
-        prefix: $GAMEDIR
-
-    - task:
-        app: dotnet40
+        app: msxml3
         name: winetricks
         prefix: $GAMEDIR
-    
+        
     - task:
-        app: msxml3
+        app: dotnet45
         name: winetricks
         prefix: $GAMEDIR
 
@@ -53,6 +48,10 @@ script:
         name: winetricks
         prefix: $GAMEDIR
 
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
 
   wine:
     Desktop: true
