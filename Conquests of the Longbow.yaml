@@ -4,7 +4,7 @@ version: Installer
 slug:  conquests-of-the-longbow-installer
 runner: scummvm
 
- 
+
 script:
   files:
     - game:  N/A:Select the file SIERRA.BAT
@@ -37,5 +37,8 @@ script:
         dst: $GAMEDIR
         file: $patch
         format: zip
+
+  scummvm:
+    fullscreen: true
 
 

@@ -1,7 +1,7 @@
 name: Full Throttle
-game_slug: full_throttle
+game_slug: full-throttle
 version: Installer
-slug:  full_throttle-installer
+slug:  full-throttle-installer
 runner: scummvm
 
 
@@ -32,3 +32,6 @@ script:
     - execute:
         args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
+  
+  scummvm:
+    fullscreen: true

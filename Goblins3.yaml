@@ -1,7 +1,7 @@
-name: Gobliins3
-game_slug: Gobliins3
+name: goblins-quest-3
+game_slug: goblins-quest-3
 version: Installer
-slug:  gobliins3-installer
+slug:  goblins-quest-3-installer
 runner: scummvm
 
 
@@ -32,3 +32,6 @@ script:
     - execute:
         args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
+
+  scummvm:
+    fullscreen: true

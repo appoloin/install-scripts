@@ -3,7 +3,7 @@ game_slug: police_quest
 version: Installer
 slug:   police_quest-installer
 runner: scummvm
- 
+
 
 script:
   files:
@@ -31,3 +31,6 @@ script:
     - execute:
         args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
+
+  scummvm:
+    fullscreen: true

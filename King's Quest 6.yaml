@@ -1,7 +1,7 @@
 name: King's Quest 6
-game_slug: kings_quest_6
+game_slug: kings-quest-vi
 version: Installer
-slug:  kings_quest_6-installer
+slug:  kings-quest-vi-installer
 runner: scummvm
 
 
@@ -32,3 +32,6 @@ script:
     - execute:
         args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
+
+  scummvm:
+    fullscreen: true

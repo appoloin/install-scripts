@@ -1,7 +1,7 @@
 name: King's Quest 3
-game_slug: kings_quest_3
+game_slug: kings-quest-iii-to-heir-is-human
 version: Installer
-slug:  kings_quest_3-installer
+slug:  kings-quest-iii-to-heir-is-human-installer
 runner: scummvm
 
 
@@ -32,3 +32,6 @@ script:
     - execute:
         args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
+
+  scummvm:
+    fullscreen: true

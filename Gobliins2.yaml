@@ -1,7 +1,7 @@
-name: Gobliins2
-game_slug: Gobliins2
+name: gobliins-2-the-prince-buffoon
+game_slug: gobliins-2-the-prince-buffoon
 version: Installer
-slug:  gobliins2-installer
+slug:  gobliins-2-the-prince-buffoon-installer
 runner: scummvm
 
 
@@ -32,3 +32,6 @@ script:
     - execute:
         args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
+
+  scummvm:
+    fullscreen: true

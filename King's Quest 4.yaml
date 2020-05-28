@@ -1,14 +1,14 @@
 name: King's Quest 4
-game_slug: kings_quest_4
+game_slug: kings-quest-iv-the-perils-of-rosella
 version: Installer
-slug:  kings_quest_4-installer
+slug:  kings-quest-iv-the-perils-of-rosella-installer
 runner: scummvm
 
 
 
 script:
   files:
-    - game:  N/A:Select a file with the extension *.000
+    - game:  N/A:Select a file with the extension *.001
 
   game:
     game_id: sci  
@@ -32,3 +32,6 @@ script:
     - execute:
         args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
+
+  scummvm:
+    fullscreen: true

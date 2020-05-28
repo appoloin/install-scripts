@@ -1,7 +1,7 @@
 name: Leisure Suit Larry 2
-game_slug: leisure_suit_larry_2
+game_slug: leisure-suit-larry-2-looking-for-love-in-several-w
 version: Installer
-slug:  leisure_suit_larry_2-installer
+slug:  leisure-suit-larry-2-looking-for-love-in-several-w-installer
 runner: scummvm
 
 
@@ -32,3 +32,6 @@ script:
     - execute:
         args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
+
+  scummvm:
+    fullscreen: true

@@ -1,7 +1,7 @@
 name: Leisure Suit Larry 1
-game_slug: leisure_suit_larry_1
+game_slug: leisure-suit-larry-1-in-the-land-of-the-lounge-liz
 version: Installer
-slug:  leisure_suit_larry_1-installer
+slug:  leisure-suit-larry-1-in-the-land-of-the-lounge-liz-installer
 runner: scummvm
 
 
@@ -32,3 +32,6 @@ script:
     - execute:
         args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
+
+  scummvm:
+    fullscreen: true

@@ -1,7 +1,7 @@
-name: Queen
-game_slug: queen
+name: flight-of-the-amazon-queen
+game_slug: flight-of-the-amazon-queen
 version: Installer
-slug:  queen-installer
+slug:  flight-of-the-amazon-queen-installer
 runner: scummvm
 
 

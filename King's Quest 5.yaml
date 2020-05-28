@@ -1,7 +1,7 @@
 name: King's Quest 5
-game_slug: kings_quest_5
+game_slug: kings-quest-v-absence-makes-the-heart-go-yonder
 version: Installer
-slug:  kings_quest_5-installer
+slug:  kings-quest-v-absence-makes-the-heart-go-yonder-installer
 runner: scummvm
 
 
@@ -32,3 +32,6 @@ script:
     - execute:
         args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
+
+  scummvm:
+    fullscreen: true

@@ -1,7 +1,7 @@
 name: Touché - The Adventures of the Fifth Musketeer
-game_slug: Touché
+game_slug: touche-the-adventures-of-the-fifth-musketeer
 version: Installer
-slug:  Touché-installer
+slug:  touche-the-adventures-of-the-fifth-musketeer-installer
 runner: scummvm
 
 
@@ -32,3 +32,6 @@ script:
     - execute:
         args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
+
+  scummvm:
+    fullscreen: true

@@ -1,9 +1,9 @@
 name: Leisure Suit Larry 5
-game_slug: leisure_suit_larry_5
+game_slug: leisure-suit-larry-5-passionate-patti-does-a-littl
 version: Installer
-slug:  leisure_suit_larry_5-installer
+slug:  leisure-suit-larry-5-passionate-patti-does-a-littl-installer
 runner: scummvm
- 
+
 
 script:
   files:
@@ -31,3 +31,6 @@ script:
     - execute:
         args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
+
+  scummvm:
+    fullscreen: true

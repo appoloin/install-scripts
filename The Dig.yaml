@@ -1,7 +1,7 @@
 name: The Dig
-game_slug: dig
+game_slug: the-dig
 version: Installer
-slug:  dig-installer
+slug:  the-dig-installer
 runner: scummvm
 
 
@@ -32,3 +32,6 @@ script:
     - execute:
         args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
+
+  scummvm:
+    fullscreen: true
