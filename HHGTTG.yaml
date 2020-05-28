@@ -1,0 +1,17 @@
+name: HHGTTG
+game_slug: HHGTTG
+version: Installer
+slug: HHGTTG-installer
+runner: frotz
+
+
+script:
+  files:
+    - game: N/A:Select the story file
+  game:
+    story: $GAMEDIR/HHGTTG.z5
+  installer:
+    - execute:
+        args:  $game $GAMEDIR/HHGTTG.z5
+        file: /bin/cp 
+        

@@ -1,0 +1,17 @@
+name: Cutthroat
+game_slug: Cutthroat
+version: Installer
+slug: Cutthroat-installer
+runner: frotz
+
+
+script:
+  files:
+    - game: N/A:Select the story file
+  game:
+    story: $GAMEDIR/Cutthroat.z5
+  installer:
+    - execute:
+        args:  $game $GAMEDIR/Cutthroat.z5
+        file: /bin/cp 
+        

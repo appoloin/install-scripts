@@ -1,0 +1,17 @@
+name: wishbringer
+game_slug: wishbringer
+version: Installer
+slug: wishbringer-installer
+runner: frotz
+
+
+script:
+  files:
+    - game: N/A:Select the story file
+  game:
+    story: $GAMEDIR/wishbringer.z5
+  installer:
+    - execute:
+        args:  $game $GAMEDIR/wishbringer.z5
+        file: /bin/cp 
+        

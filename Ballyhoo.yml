@@ -1,0 +1,17 @@
+name: ballyhoo
+game_slug: ballyhoo
+version: Installer
+slug: ballyhoo-installer
+runner: frotz
+
+
+script:
+  files:
+    - game: N/A:Select the story file
+  game:
+    story: $GAMEDIR/ballyhoo.z5
+  installer:
+    - execute:
+        args:  $game $GAMEDIR/ballyhoo.z5
+        file: /bin/cp 
+        
