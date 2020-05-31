@@ -1,0 +1,22 @@
+name: Corruption
+game_slug: Corruption
+version: Installer
+slug: Corruption-installer
+runner: frotz
+
+
+script:
+  files:
+    - game: N/A:Select the MAG file
+    - game1: N/A:Select the GXF file
+
+  game:
+    story: $GAMEDIR/corruption.mag
+  installer:
+    - execute:
+        args:  $game $GAMEDIR/corruption.mag
+        file: /bin/cp 
+    - execute:
+        args:  $game1 $GAMEDIR/corruption.gfx
+        file: /bin/cp 
+        

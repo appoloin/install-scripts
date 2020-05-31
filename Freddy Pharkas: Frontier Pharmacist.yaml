@@ -32,3 +32,6 @@ script:
         args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
 
+  scummvm:
+    fullscreen: true
+

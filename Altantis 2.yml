@@ -1,17 +1,16 @@
-name: Next Life
-game_slug: Next-Life
+name:  Altantis 2
+game_slug: Altantis 2
 version: Installer
-slug: Next-Life-installer
+slug: Altantis 2-installer
 runner: wine
 
-script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/The Adventure Company/Next Life/bin/NextLife.exe
+    exe: $GAMEDIR/drive_c/
     arch: win32
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select Setup
+    - setup: N/A:Select the GOG installer
 
   installer:
     - task:
@@ -22,15 +21,23 @@ script:
         prefix: $GAMEDIR
 
     - task:
+        app: corefonts
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
 
+
   wine:
     Desktop: true
-    WineDesktop: 1024x768
+    WineDesktop: 800x600
 
   system:
-    resolution: 1024x768
+    resolution: 800x600
     reset_desktop: true
+
 

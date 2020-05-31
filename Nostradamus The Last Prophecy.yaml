@@ -1,12 +1,12 @@
-name: Omerta
-game_slug: Omerta
+name: Nostradamus
+game_slug: Nostradamus
 version: Installer
-slug: Omerta-installer
+slug: Nostradamus-installer
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Omerta - City of Gangsters/Omerta.exe
+    exe: $GAMEDIR/drive_c/Elektrogames/Nostradamus/Nostradamus.exe
     arch: win32
     prefix: $GAMEDIR
 
@@ -18,7 +18,7 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
-        install_gecko:  false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:

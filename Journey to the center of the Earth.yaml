@@ -7,7 +7,7 @@ runner: wine
 
 script:
   game:
-    exe: drive_c/Program Files/Strategy First/Viva Media/Journey to the Center of the Earth/game.exe
+    exe: drive_c/Program Files/Viva Media/Journey to the Center of the Earth/game.exe
     arch: win32
     prefix: $GAMEDIR
   
@@ -20,6 +20,7 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:

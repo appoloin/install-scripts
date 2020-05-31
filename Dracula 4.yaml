@@ -1,24 +1,24 @@
-name: Omerta
-game_slug: Omerta
+name: Dracula 4
+game_slug:  Dracula 4
 version: Installer
-slug: Omerta-installer
+slug:  Dracula 4-installer
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Omerta - City of Gangsters/Omerta.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Dracula 4 - Shadow of the Dragon/Dracula4.exe
     arch: win32
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select Setup
+    - setup: N/A:Select GOG installer
 
   installer:
     - task:
         name: create_prefix
         arch: win32
         install_mono: false
-        install_gecko:  false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
@@ -28,4 +28,5 @@ script:
 
   wine:
     Desktop: true
+
 

@@ -1,0 +1,52 @@
+name: Nine Princes of Amber
+game_slug: Nine Princes of Amber
+version: Installer
+slug: Nine Princes of Amber-installer
+runner: dosbox
+
+
+script:
+  files:
+    - game: N/A:Select the file AMB.EXE
+  game:
+    main_file: $GAMEDIR/Amber.conf
+  installer:
+    - execute:
+        args: $GAMEDIR/HDD $GAMEDIR/HDD/Amber
+        file: mkdir
+
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+        
+        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+        cp -avr "$src_path/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: $game $GAMEDIR/HDD/Amber
+        file: $CACHE/bulkcopy.sh
+
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=10
+        
+        [autoexec]
+
+          mount C "$GAMEDIR/HDD" -t dir
+
+          C:
+
+          cd Amber
+          
+          AMB
+          
+          exit'
+        file: $GAMEDIR/Amber.conf

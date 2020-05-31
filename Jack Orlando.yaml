@@ -6,6 +6,9 @@ runner: wine
 
 
 script:
+  files:
+    - patch : https://github.com/appoloin/WfW/raw/master/JackOrlando.exe
+
   game:
     exe: drive_c/Program Files/Jack Orlando Director's Cut/JackOrlando.exe
     arch: win32

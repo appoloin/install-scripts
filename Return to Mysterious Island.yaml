@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/Program Files/GOG.com/Return to Mysterious Island/RtMI.exe
+    exe: $GAMEDIR/drive_c/Program Files/GOG.com/Return to Mysterious Island/RtMI.exe
     arch: win32
     prefix: $GAMEDIR
 
@@ -18,6 +18,7 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
@@ -27,4 +28,9 @@ script:
 
   wine:
     Desktop: true
+    WineDesktop: 1024x768
+
+  system:
+    resolution: 1024x768
+    reset_desktop: true
 

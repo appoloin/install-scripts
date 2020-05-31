@@ -1,12 +1,13 @@
-name: Omerta
-game_slug: Omerta
+name: Jack Orlando
+game_slug: Jack-Orlando
 version: Installer
-slug: Omerta-installer
+slug:  Jack-Orlando-installer
 runner: wine
+
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Omerta - City of Gangsters/Omerta.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Jack Orlando DC/JackOrlando.exe
     arch: win32
     prefix: $GAMEDIR
 
@@ -18,7 +19,7 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
-        install_gecko:  false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
@@ -28,4 +29,3 @@ script:
 
   wine:
     Desktop: true
-

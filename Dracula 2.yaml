@@ -1,13 +1,13 @@
-name: Dracula-the Resurrection
-game_slug: Dracula-the-Resurrection
+name: Dracula 2 - The Last Sanctuary
+game_slug: Dracula 2 - The Last Sanctuary
 version: Installer
-slug: Dracula-the-Resurrection-installer
+slug: Dracula 2 - The Last Sanctuary-installer
 runner: wine
 
 
 script:
   game:
-    exe: "$GAMEDIR/drive_c/GOG/Dracula - The Resurrection/Dracula.exe"
+    exe: "$GAMEDIR/drive_c/GOG/Dracula 2 - The Last Sanctuary/Dracula2.exe"
     arch: win32
     prefix: $GAMEDIR
 
@@ -24,7 +24,7 @@ script:
         prefix: $GAMEDIR
 
     - execute:
-        args: $GAMEDIR/drive_c/GOG  "$GAMEDIR/drive_c/GOG/Dracula - The Resurrection"
+        args: $GAMEDIR/drive_c/GOG  "$GAMEDIR/drive_c/GOG/Dracula 2 - The Last Sanctuary"
         file: mkdir
     
     - extract:
@@ -32,12 +32,12 @@ script:
         file: $inno
 
     - execute:
-        args: -I "app/Dracula - The Resurrection" -d "$CACHE" "$game"
+        args: -I "app/Dracula 2 - The Last Sanctuary" -d "$CACHE" "$game"
         file: $CACHE/innoextract
 
     - merge:
-        dst: "$GAMEDIR/drive_c/GOG/Dracula - The Resurrection"
-        src: "$CACHE/app/Dracula - The Resurrection"
+        dst: "$GAMEDIR/drive_c/GOG/Dracula 2 - The Last Sanctuary"
+        src: "$CACHE/app/Dracula 2 - The Last Sanctuary"
 
   wine:
     Desktop: true

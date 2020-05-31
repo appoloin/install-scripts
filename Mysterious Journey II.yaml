@@ -1,12 +1,12 @@
-name: Omerta
-game_slug: Omerta
+name: Mysterious Journey II 
+game_slug: Mysterious Journey II 
 version: Installer
-slug: Omerta-installer
+slug: Mysterious Journey II-installer
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Omerta - City of Gangsters/Omerta.exe
+    exe: $GAMEDIR/drive_c/Program Files/Mysterious Journey II/MJ2.exe
     arch: win32
     prefix: $GAMEDIR
 
@@ -18,7 +18,7 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
-        install_gecko:  false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
@@ -28,4 +28,8 @@ script:
 
   wine:
     Desktop: true
+    WineDesktop: 1024x768
 
+  system:
+    resolution: 1024x768
+    reset_desktop: true

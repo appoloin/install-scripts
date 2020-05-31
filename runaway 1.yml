@@ -1,0 +1,36 @@
+name: runaway 1
+game_slug: runaway 1
+version: Installer
+slug:  runaway 1-installer
+runner: wine
+
+script:
+    game:
+        exe: drive_c/GOG Games/Runaway - A Road Adventure/Runaway.exe
+        arch: win32
+        prefix: $GAMEDIR
+  
+    files:
+        - game: N/A:Select Setup.exe
+
+    installer:
+        - task:
+            name: create_prefix
+            arch: win32
+            install_mono: false
+            install_gecko: false
+            prefix: $GAMEDIR
+
+        - task:
+            executable: $game
+            name: wineexec
+            prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+    WineDesktop: 1024x768
+
+  system:
+    resolution: 1024x768
+    reset_desktop: true
+

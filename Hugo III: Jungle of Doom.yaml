@@ -10,7 +10,7 @@ script:
       - game:  N/A:Select file HUGO.exe
 
     game:
-        game_id: hugo2
+        game_id: hugo3
         path: $GAMEDIR
 
     installer:
