@@ -1,0 +1,93 @@
+name: Ultima 3
+game_slug: exodus-ultima-iii
+version: Installer
+slug: exodus-ultima-iii-installer
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select GOG installer.
+    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
+
+  game:
+    main_file: $GAMEDIR/Ultima.conf
+
+  installer:
+    - extract:
+        dst: $CACHE
+        file: $inno
+        
+    - execute:
+        args: -d "$CACHE" "$game"
+        file: $CACHE/innoextract
+
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+        
+        find "$src" -type f \( -name "*.ULT" -o
+                               -name "*.DAT" -o
+                               -name "*.IMG" -o
+                               -name "*.IBM" -o 
+                               -name "*.BIN" -o
+                               -name "*.COM" -o
+                               -name "Ultima_3_manual.pdf" \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+
+    - chmodx: $CACHE/selectcopy.sh
+
+    - execute:
+        args: $GAMEDIR/HDD $GAMEDIR/HDD/ultima
+        file: mkdir
+
+    - execute:
+        args: $CACHE $GAMEDIR/HDD/ultima
+        file: $CACHE/selectcopy.sh
+
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=20
+
+          fullresolution=desktop
+
+          windowresolution=original
+
+          fullscreen=true
+
+          output=opengl
+        
+        [cpu]
+
+        core=simple
+
+        cputype=386_slow
+
+        cycles=500
+
+        cycleup=100
+
+        cycledown=100
+
+        [render]
+
+           aspect=true
+
+           scaler=normal2x
+
+
+        [autoexec]
+        
+          mount C "$GAMEDIR/HDD" -t dir
+
+          C: 
+
+          cd ultima
+
+          ultima.com
+
+          exit'
+        file: $GAMEDIR/Ultima.conf
