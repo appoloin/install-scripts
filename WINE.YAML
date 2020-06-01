@@ -1,13 +1,13 @@
 #WINE TEMPLATE
-name: 
-game_slug:  
+name: WINE_TEMP
+game_slug:  WINE_TEMP
 version: Installer
-slug: 
+slug: WINE_TEMP_INSTALLER
 runner: wine
 
 script:
   game:
-    exe: 
+    exe: $GAMEDIR/drive_c/
     arch: win32
     prefix: $GAMEDIR
 
@@ -19,6 +19,7 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
