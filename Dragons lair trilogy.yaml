@@ -1,23 +1,24 @@
-name: Atlantis 2
-game_slug: Atlantis-2
+name: dragons lair trilogy
+game_slug: dragons-lair-trilogy
 version: Installer
-slug: Atlantis-2-installer
+slug: dragons-lair-trilogy-installer
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/GOG.com/Beyond Atlantis/Game.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Dragon's Lair/DragonsLair.exe
     arch: win32
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select the GOG installer
+    - setup: N/A:Select Setup
 
   installer:
     - task:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
