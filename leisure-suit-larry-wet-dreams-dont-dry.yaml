@@ -1,17 +1,17 @@
-name: Gabriel Knight 3
-game_slug: Gabriel Knight 3
+name: leisure-suit-larry-wet-dreams-dont-dry
+game_slug: leisure-suit-larry-wet-dreams-dont-dry
 version: Installer
-slug: Gabriel Knight 3-installer
+slug: leisure-suit-larry-wet-dreams-dont-dry_INSTALLER
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Gabriel Knight 3/GK3.exe
+    exe: $GAMEDIR/drive_c/GOG Games/lslwddd/lslwddd.exe
     arch: win32
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select Setup
+    - setup: N/A:Select installer
 
   installer:
     - task:

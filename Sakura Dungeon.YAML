@@ -1,9 +1,8 @@
-name:  GK3
-game_slug: GK3
+name: Sakura Dungeon
+game_slug:  sakura-dungeon
 version: Installer
-slug: GB3-installer
+slug: sakura-dungeon_INSTALLER
 runner: wine
-
 
 script:
   game:
@@ -12,13 +11,14 @@ script:
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select the GOG installer
+    - setup: N/A:Select installer
 
   installer:
     - task:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
@@ -28,4 +28,5 @@ script:
 
   wine:
     Desktop: true
+
 

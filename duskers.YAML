@@ -1,17 +1,17 @@
-name: Gabriel Knight 3
-game_slug: Gabriel Knight 3
+name: Duskers
+game_slug:  duskers
 version: Installer
-slug: Gabriel Knight 3-installer
+slug: duskers_INSTALLER
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Gabriel Knight 3/GK3.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Duskers/Duskers.exe
     arch: win32
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select Setup
+    - setup: N/A:Select installer
 
   installer:
     - task:

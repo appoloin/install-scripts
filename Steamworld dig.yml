@@ -1,17 +1,17 @@
-name: Gabriel Knight 3
-game_slug: Gabriel Knight 3
+name: Steamworld Dig
+game_slug:  steamworld-dig
 version: Installer
-slug: Gabriel Knight 3-installer
+slug: steamworld-dig
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Gabriel Knight 3/GK3.exe
+    exe: $GAMEDIR/drive_c/GOG Games/SteamWorld Dig/SteamWorldDig.exe
     arch: win32
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select Setup
+    - setup: N/A:Select installer
 
   installer:
     - task:

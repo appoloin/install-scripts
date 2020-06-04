@@ -1,17 +1,17 @@
-name: Gabriel Knight 3
-game_slug: Gabriel Knight 3
+name: teslagrad
+game_slug: teslagrad
 version: Installer
-slug: Gabriel Knight 3-installer
+slug: teslagrad
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Gabriel Knight 3/GK3.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Teslagrad/Teslagrad.exe
     arch: win32
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select Setup
+    - setup: N/A:Select installer
 
   installer:
     - task:

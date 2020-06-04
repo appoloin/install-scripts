@@ -1,17 +1,17 @@
-name: Gabriel Knight 3
-game_slug: Gabriel Knight 3
+name: Bermuda
+game_slug:  Bermuda
 version: Installer
-slug: Gabriel Knight 3-installer
+slug: Bermuda_INSTALLER
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Gabriel Knight 3/GK3.exe
+    exe: $GAMEDIR/drive_c/
     arch: win32
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select Setup
+    - setup: N/A:Select installer
 
   installer:
     - task:

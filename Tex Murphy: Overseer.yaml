@@ -1,0 +1,127 @@
+name: overseer
+game_slug:  tex-murphy-overseer
+version: Installer
+slug: tex-murphy-overseer_INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Overseer/OVERSEER.EXE
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - patch: https://github.com/appoloin/WfW/raw/master/Tex_Murphy_Overseer-104_NoCDs.7z
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+      
+        cp -avr "$src/."  "$dst"'
+        file: $CACHE/bulkcopy-alt.sh
+
+    - chmodx: $CACHE/bulkcopy-alt.sh
+    
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: win95
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR  
+
+    - execute:
+        args: $GAMEDIR/DISC  
+        file: mkdir
+
+    - insert-disc:
+        description: Please insert disc 1
+        requires: DATA 
+
+    - execute:
+        args: $DISC "$GAMEDIR/DISC"
+        file: $CACHE/bulkcopy-alt.sh
+
+    - insert-disc:
+        description: Please insert disc 2
+        requires: DATA
+
+    - execute:
+        args: $DISC "$GAMEDIR/DISC"
+        file: $CACHE/bulkcopy-alt.sh 
+
+    - insert-disc:
+        description: Please insert disc 3
+        requires: DATA
+
+    - execute:
+        args: $DISC "$GAMEDIR/DISC"
+        file: $CACHE/bulkcopy-alt.sh
+
+    - insert-disc:
+        description: Please insert disc 4
+        requires: DATA
+
+    - execute:
+        args: $DISC "$GAMEDIR/DISC"
+        file: $CACHE/bulkcopy-alt.sh
+
+    - insert-disc:
+        description: Please insert disc 5
+        requires: DATA
+
+    - execute:
+        args: $DISC "$GAMEDIR/DISC"
+        file: $CACHE/bulkcopy-alt.sh
+
+    - execute:
+        args: -R 775  "$GAMEDIR/DISC"
+        file: /bin/chmod
+
+    - task:
+        executable: $GAMEDIR/DISC/SETUP.EXE             
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        args: $GAMEDIR/DISC/DATA $GAMEDIR/drive_c/Overseer/DATA
+        file: $CACHE/bulkcopy-alt.sh
+
+    - execute:
+        args:  -r $GAMEDIR/DISC
+        file: /bin/rm    
+
+    - extract:
+        dst: $CACHE
+        file: $patch
+
+    - execute:
+        args: $GAMEDIR/drive_c/Overseer/OVERSEER.EXE $GAMEDIR/drive_c/Overseer/OVERSEER.EXE.old
+        file: /bin/mv
+
+    - task:
+        executable: $CACHE/TMO_Patch-1.04.exe          
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        args: $CACHE/OVERSEER.EXE $GAMEDIR/drive_c/Overseer/OVERSEER.EXE
+        file: /bin/mv
+
+    - execute:
+        args: $CACHE/Tex.ini $GAMEDIR/drive_c/Overseer/Tex.ini
+        file: /bin/mv
+
+  wine:
+    Desktop: true
+
+

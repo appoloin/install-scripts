@@ -1,17 +1,17 @@
-name: Gabriel Knight 3
-game_slug: Gabriel Knight 3
+name: legacy of kain soul reaver 2
+game_slug:  legacy-of-kain-soul-reaver-2
 version: Installer
-slug: Gabriel Knight 3-installer
+slug: legacy-of-kain-soul-reaver-2_INSTALLER
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Gabriel Knight 3/GK3.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Legacy of Kain Soul Reaver 2/sr2.exe
     arch: win32
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select Setup
+    - setup: N/A:Select installer
 
   installer:
     - task:

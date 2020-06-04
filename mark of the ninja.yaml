@@ -1,0 +1,50 @@
+name: Mark of the Ninja
+game_slug: mark-of-the-ninja
+version: Installer
+slug: mark-of-the-ninja_INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Mark of the Ninja/NinjaLauncher.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: dotnet40
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: d3dx10
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: dotnet40
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+
