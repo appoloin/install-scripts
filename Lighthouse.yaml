@@ -1,5 +1,5 @@
-name: lighthouse
-game_slug: lighthouse
+name: Lighthouse The Dark Being
+game_slug: lighthouse-the-dark-being
 version: Installer
 slug:  lighthouse-installer
 runner: scummvm
@@ -40,7 +40,7 @@ script:
 
     - insert-disc:
         description: Please insert disc 2
-        requires: version
+        requires: resource.aud
 
     - execute:
         args: $DISC $GAMEDIR

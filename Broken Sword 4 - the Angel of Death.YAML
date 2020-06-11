@@ -1,17 +1,17 @@
-name: Last Express
-game_slug: Last Exprees
+name: Broken Sword 4 - the Angel of Death
+game_slug:  broken-sword-4-the-angel-of-death
 version: Installer
-slug: Last-Express-installer
+slug: INSTALLER
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/
+    exe: $GAMEDIR/drive_c/GOG Games/Broken Sword 4/bs4pc.exe
     arch: win32
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select the Setup.exe
+    - setup: N/A:Select installer
 
   installer:
     - task:
@@ -28,4 +28,5 @@ script:
 
   wine:
     Desktop: true
+
 

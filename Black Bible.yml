@@ -1,17 +1,17 @@
-name: dragons lair trilogy
-game_slug: dragons-lair-trilogy
+name: Black Bible
+game_slug:  Black_Bible
 version: Installer
-slug: dragons-lair-trilogy-installer
+slug: Black_Bible_INSTALLER
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Dragon's Lair/DragonsLair.exe
+    exe: $GAMEDIR/drive_c/Program Files/BBLACK/BBLACK.EXE
     arch: win32
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select Setup
+    - setup: N/A:Select installer
 
   installer:
     - task:
@@ -28,4 +28,5 @@ script:
 
   wine:
     Desktop: true
+
 

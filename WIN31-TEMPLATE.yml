@@ -1,7 +1,8 @@
-name: 9 The Last Resort
-game_slug: 9-the-last-resort
+#TODO WIN31-TEMPLATE
+name: WIN31-TEMPLATE
+game_slug: WIN31-TEMPLATE
 version: Installer
-slug: The-Last-Resort-installer
+slug: WIN31-TEMPLATE-installer
 runner: dosbox
 
 script:
@@ -9,7 +10,7 @@ script:
         - game:  N/A:Select the Autoexec.bat from a Win3.1 install
         - runexit: https://github.com/appoloin/WfW/raw/master/runexit.zip
     game:
-        main_file: $GAMEDIR/nine.conf
+        main_file: $GAMEDIR/WIN31.conf
 
     installer:
         - write_file:
@@ -26,20 +27,8 @@ script:
 
         - chmodx: $CACHE/bulkcopy.sh
 
-        - write_file:
-            content: '#!/bin/bash
-
-            src=$1
-
-            dst=$2
-
-            cp -avr "$src/."  "$dst"'
-            file: $CACHE/bulkcopy-alt.sh
-
-        - chmodx: $CACHE/bulkcopy-alt.sh
-
         - execute:
-            args: $GAMEDIR/HDD  $GAMEDIR/HDD/runexit 
+            args: $GAMEDIR/HDD  $GAMEDIR/HDD/runexit  $GAMEDIR/HDD/win32
             file: mkdir
 
         - execute:
@@ -51,18 +40,22 @@ script:
             file: $runexit
             format: zip
 
+        - extract:
+            dst: $GAMEDIR/HDD/win32
+            file: $win32s
+            format: zip
 
         - execute:
             args: $game $GAMEDIR/HDD
             file: $CACHE/bulkcopy.sh
 
         - insert-disc:
-            description: Please insert disc 
+            description: Please insert disc 1
             requires: Setup.exe
             
         - execute:
             args: $DISC $GAMEDIR/CDD/DISC1
-            file: $CACHE/bulkcopy-alt.sh
+            file: $CACHE/bulkcopy.sh
         
         - execute:
             args: -R 775  "$GAMEDIR/CDD"
@@ -75,7 +68,7 @@ script:
 
             [sdl]
 
-            sensitivity=10
+            sensitivity=20
             
             [autoexec]
 
@@ -89,13 +82,13 @@ script:
             
             C:
 
-            win D:\setup16.exe
+            win runexit D:\setup.exe
 
             exit'
-            file: $GAMEDIR/nine-setup.conf
+            file: $GAMEDIR/Win31-setup.conf
 
         - task:
-            config_file: $GAMEDIR/nine-setup.conf
+            config_file: $GAMEDIR/Win31-setup.conf
             name: dosexec
             working_dir: $GAMEDIR/HDD
 
@@ -107,7 +100,7 @@ script:
 
             [sdl]
 
-            sensitivity=10
+            sensitivity=20
 
             [autoexec]
 
@@ -120,8 +113,6 @@ script:
             SET TEMP=C:\WINDOWS\TEMP
 
             C:
-
-            win runexit C:\nine\nine_31.exe
         
             exit'
-            file: $GAMEDIR/nine.conf
+            file: $GAMEDIR/Win31.conf

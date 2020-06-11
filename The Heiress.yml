@@ -1,12 +1,12 @@
-name: Geneforge
-game_slug:  geneforge-4
+name: The Heiress
+game_slug:  the-heiress
 version: Installer
-slug: geneforge-4_INSTALLER
+slug: the-heiress_INSTALLER
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Geneforge 4 - Rebellion/Geneforge 4.exe
+    exe: $GAMEDIR/drive_c/The Heiress/Game.exe
     arch: win32
     prefix: $GAMEDIR
 
@@ -28,10 +28,5 @@ script:
 
   wine:
     Desktop: true
-    WineDesktop: 1024x768
-
-  system:
-    resolution: 1024x768
-    reset_desktop: true
 
 

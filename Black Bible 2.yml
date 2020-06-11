@@ -1,12 +1,12 @@
-name: Geneforge
-game_slug:  geneforge-4
+name: Black Bible 2
+game_slug:  Black_Bible_2
 version: Installer
-slug: geneforge-4_INSTALLER
+slug: Black_Bible_INSTALLER
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Geneforge 4 - Rebellion/Geneforge 4.exe
+    exe: $GAMEDIR/drive_c/Program Files/ACTIVEJP.INI/BB_INFECTION/BB_INFECTION.EXE
     arch: win32
     prefix: $GAMEDIR
 
@@ -28,10 +28,5 @@ script:
 
   wine:
     Desktop: true
-    WineDesktop: 1024x768
-
-  system:
-    resolution: 1024x768
-    reset_desktop: true
 
 

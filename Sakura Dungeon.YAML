@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/
+    exe: $GAMEDIR/drive_c/Sakura Dungeon/sakura_dungeon.exe
     arch: win32
     prefix: $GAMEDIR
 

@@ -4,4 +4,8 @@ src=$1
 
 dst=$2
 
-find "$src" -type f \( -iname "*.SMK" -o -iname "*.VGA" -o -iname "TABLES*" -o -iname "TBLLIST" \) -exec cp {} "$dst" \;
+src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+find "$src_path" -type f \( -name "SAMPLE.AD" -o 
+                            -name "SAMPLE.OPL" -o 
+                            -name "WESTERN" \) -exec cp {} "$dst" \;'

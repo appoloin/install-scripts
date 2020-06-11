@@ -1,4 +1,4 @@
-name: galactic civilizations
+name: Galactic Civilizations II
 game_slug:  galactic-civilizations-ii-ultimate-edition
 version: Installer
 slug: galactic-civilizations-ii-ultimate-edition_INSTALLER
@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/
+    exe: $GAMEDIR/drive_c/GOG Games/Galactic Civilizations II/GalCiv2.exe
     arch: win32
     prefix: $GAMEDIR
 

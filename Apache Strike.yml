@@ -1,0 +1,55 @@
+name: Apache Strike
+game_slug: apache-strike
+version: Installer
+slug: apache-strike-installer
+runner: dosbox
+
+
+script:
+  game:
+    main_file: $GAMEDIR/apache.conf
+
+  files:
+    - game:  N/A:Select file Install.exe
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+        
+        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+        cp -avr "$src_path/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: $GAMEDIR/HDD  $GAMEDIR/HDD/apache
+        file: mkdir
+
+    - execute:
+        args: $game "$GAMEDIR/HDD/apache"
+        file: $CACHE/bulkcopy.sh
+    
+    
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=30
+
+        [autoexec]
+        
+          mount C "$GAMEDIR/HDD" -t dir
+
+          C:
+
+          cd apache
+
+          apache
+
+          exit'
+        file: $GAMEDIR/apache.conf

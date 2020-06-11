@@ -1,0 +1,172 @@
+name: Might and Magic
+game_slug: heroes-of-might-and-magic
+version: Installer
+slug: heroes-of-might-and-magic-installer
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select GOG installer.
+    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
+
+  game:
+    main_file: $GAMEDIR/MightAndMagic.conf
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+
+        file=$3
+
+        src_path=$(echo "$src" | sed -r "s/(.+)\/.+/\1/")
+
+        find "$src_path" -type f \( -name $file \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy2.sh
+    - chmodx: $CACHE/selectcopy2.sh
+
+    - extract:
+        dst: $CACHE
+        file: $inno
+        
+    - execute:
+        args: -d "$CACHE" "$game"
+        file: $CACHE/innoextract
+
+    - execute:
+        args: $GAMEDIR/HoMM $GAMEDIR/CDD   
+        file: mkdir
+    
+    - execute:
+        args: $CACHE $GAMEDIR *.pdf
+        file: $CACHE/selectcopy2.sh
+
+    - execute:
+        args: $CACHE $GAMEDIR/HoMM HEROES.*
+        file: $CACHE/selectcopy2.sh
+
+    - execute:
+        args: $CACHE $GAMEDIR/HoMM SETUP.EXE
+        file: $CACHE/selectcopy2.sh
+
+
+    - execute:
+        args: $CACHE $GAMEDIR/CDD homm1.gog
+        file: $CACHE/selectcopy2.sh
+
+    - execute:
+        args: $GAMEDIR/HoMM/cloud_saves  
+        file: mkdir
+
+    - copy:
+        src: $CACHE/HELP
+        dst: $GAMEDIR/HoMM/HELP
+
+    - copy:
+        src: $CACHE/DATA
+        dst: $GAMEDIR/HoMM/DATA
+
+    - copy: 
+        src: $CACHE/GAMES
+        dst: $GAMEDIR/HoMM/GAMES
+
+    - copy: 
+        src: $CACHE/MAPS
+        dst: $GAMEDIR/HoMM/MAPS
+
+
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=20
+
+          fullresolution=desktop
+
+          windowresolution=original
+
+          fullscreen=true
+
+          output=opengl
+
+        [render]
+
+           aspect=true
+
+           scaler=normal2x
+
+        [autoexec]
+
+          @echo off
+        
+          mount C "$GAMEDIR/" -t dir
+
+          mount C "$GAMEDIR/HoMM/cloud_saves" -t overlay
+
+          imgmount d "$GAMEDIR/CDD/homm1.gog" -t iso
+
+          C: 
+
+          ECHO OFF
+          
+          goto launcher
+
+          
+          :launcher
+          
+          cls
+          
+          ECHO  ------------------------------------------ 
+          
+          ECHO   Heroes of Might and Magic Launcher        
+          
+          ECHO  ------------------------------------------ 
+          
+          ECHO   1) Heroes of Might and Magic              
+          
+          ECHO   2) Game DOS Settings                      
+          
+          ECHO  ------------------------------------------ 
+          
+          ECHO   3) exit program                           
+          
+          ECHO  ------------------------------------------ 
+
+
+          choice /c123 /s Which program do you want to run? [1-3]: /n 
+          
+          if errorlevel 3 goto exit
+          
+          if errorlevel 2 goto setup
+          
+          if errorlevel 1 goto game
+
+          
+          :game
+          
+          cls
+          
+          cd HoMM
+          
+          loadfix -4 heroes.exe
+          
+          goto exit
+
+          
+          :setup
+          
+          cls
+          
+          cd HoMM
+          
+          setup.exe
+          
+          goto launcher
+
+          
+          :exit
+          
+          exit'
+        file: $GAMEDIR/MightAndMagic.conf

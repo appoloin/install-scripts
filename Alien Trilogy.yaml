@@ -1,0 +1,77 @@
+name: Alien Trilogy
+game_slug: alien-trilogy
+version: Installer
+slug: alien-trilogy-installer
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select file Install.bat.
+  game:
+    main_file: $GAMEDIR/alien.conf
+  installer:
+    - execute:
+        args: $GAMEDIR/HDD $GAMEDIR/CDD $GAMEDIR/CDD/DISC
+        file: mkdir
+
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+        
+        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+        cp -avr "$src_path/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: $game $GAMEDIR/CDD/DISC
+        file: $CACHE/bulkcopy.sh
+
+    - write_file:
+        content: '[sdl]
+
+        sensitivity=10
+        
+        [autoexec]
+
+        mount C "$GAMEDIR/HDD" -t dir
+
+        mount D "$GAMEDIR/CDD/DISC" -t cdrom
+      
+        D:
+
+        install
+
+        exit'
+        file: $GAMEDIR/alien-setup.conf
+
+    - task:
+        config_file: $GAMEDIR/alien-setup.conf
+        name: dosexec
+        working_dir: $GAMEDIR/HDD
+
+
+
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=10
+        
+        [autoexec]
+
+          mount C "$GAMEDIR/HDD" -t dir
+          
+          mount D "$GAMEDIR/CDD/DISC"  -t cdrom
+
+          c:
+
+          cd ACCLAIM/TRILOGY
+
+          TRILOGY
+          
+          exit'
+        file: $GAMEDIR/alien.conf
