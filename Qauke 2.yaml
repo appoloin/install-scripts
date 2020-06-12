@@ -1,7 +1,7 @@
-name: Quake-2
-game_slug: Quake-2
+name: Quake II
+game_slug: quake-II
 version: Installer
-slug:  quake-2-cdrom-installer
+slug:  installer
 runner: linux
 
 
@@ -9,6 +9,7 @@ script:
     files:
         - yamagi-engine: https://lutris.net/files/games/quake-2/yamagi-yquake2-5.34-x86_64.tar.gz   
         - quakepatch: https://deponie.yamagi.org/quake2/idstuff/q2-3.20-x86-full-ctf.exe   
+        - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
         - game: N/A:Select Setup.exe
 
     game:
@@ -19,114 +20,88 @@ script:
             content: '#!/bin/bash
 
             src=$1
-
-            dst=$2
             
-            src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+            dst=$2
 
-            find "$src_path" -type f \( -iname "*.PAK"  \) -exec cp {} "$dst" \;'
-            file: $CACHE/selectcopy.sh
+            file=$3
 
-        - chmodx: $CACHE/selectcopy.sh
+            find "$src" -maxdepth 1 -type f \( -iname $file \) -exec cp {} "$dst" \;'
+            file: $CACHE/selectcopy2.sh
+        - chmodx: $CACHE/selectcopy2.sh
+        
+        - write_file:
+            content: '#!/bin/bash
+
+            src=$1
+    
+            dst=$2
+
+            echo $dst
+
+            find "$src" -maxdepth 1 -type f -iname "*.ogg" -print0 | 
+
+                while IFS="" read -r -d "" FILENAME; 
+
+                    do mv "$FILENAME" "${dst}""/""${FILENAME##*/*[Tt][Rr][Aa][cC][kK]}";
+
+                done
+            '
+            file: $CACHE/copyrename.sh
+        - chmodx: $CACHE/copyrename.sh        
         
         - extract:
-            dst: $GAMEDIR
-            file: $yamagi-engine
-
-        - task:
-            name: wine.create_prefix
-            arch: win32
-            install_mono: false
-            prefix: $GAMEDIR
-
-        - task:
-            name: wine.wineexec
-            executable: $game
-            arch: win32
-            prefix: $GAMEDIR
+            dst: $CACHE
+            file: $inno
+ 
+        - execute:
+            args: $CACHE/patch 
+            file: mkdir
 
         - extract:
-            dst: $GAMEDIR
+            dst:  $CACHE/patch
             file: $quakepatch
             format: zip
         
         - execute:
-            args:  -r $GAMEDIR/3.20_Changes.txt
-            file: /bin/rm 
+            args: -I "app/baseq2" -I "app/music" -d "$CACHE" "$game"
+            file: $CACHE/innoextract
+
+        - copy:
+            src: $CACHE/patch/baseq2
+            dst: $GAMEDIR/baseq2
+
         - execute:
-            args:  -r $GAMEDIR/quake2.exe
-            file: /bin/rm 
-        - execute:
-            args:  -r $GAMEDIR/ref_gl.dll
-            file: /bin/rm 
-        - execute:
-            args:  -r $GAMEDIR/ref_soft.dll
-            file: /bin/rm 
-        - execute:
-            args:  -r $GAMEDIR/baseq2/gamex86.dll
-            file: /bin/rm 
-        - execute:
-            args:  -r $GAMEDIR/ctf/ctf2.ico
-            file: /bin/rm 
-        - execute:
-            args:  -r $GAMEDIR/ctf/gamex86.dll
-            file: /bin/rm 
-        - execute:
-            args:  -r $GAMEDIR/ctf/readme.txt
-            file: /bin/rm 
-        - execute:
-            args:  -r $GAMEDIR/ctf/server.cfg
-            file: /bin/rm 
-        - execute:
-            args:  -r $GAMEDIR/xatrix/gamex86.dll
-            file: /bin/rm 
-        - execute:
-            args:  -r $GAMEDIR/rogue/gamex86.dll
+            args: $GAMEDIR/baseq2/gamex86.dll
             file: /bin/rm 
 
         - execute:
-            args: -r "$GAMEDIR/drive_c/Program Files/Quake II/baseq2/pak0.pak" $GAMEDIR/baseq2
-            file: /bin/cp 
-        - execute:
-            args: -r "$GAMEDIR/drive_c/Program Files/Quake II/baseq2/video" $GAMEDIR/baseq2/video
-            file: /bin/cp 
+            args: $GAMEDIR/ctf 
+            file: mkdir
 
         - execute:
-            args: -r "$GAMEDIR/drive_c/Program Files/Quake II/rogue/pak0.pak" $GAMEDIR/rogue
-            file: /bin/cp 
-        - execute:
-            args: -r "$GAMEDIR/drive_c/Program Files/Quake II/rogue/video" $GAMEDIR/rogue/video
-            file: /bin/cp 
-        - execute:
-            args: -r "$GAMEDIR/baseq2/game.so" $GAMEDIR/rogue
-            file: /bin/cp 
-    
-        - execute:
-            args: -r "$GAMEDIR/drive_c/Program Files/Quake II/xatrix/pak0.pak" $GAMEDIR/xatrix
-            file: /bin/cp 
-        - execute:
-            args: -r "$GAMEDIR/drive_c/Program Files/Quake II/xatrix/video" $GAMEDIR/xatrix/video
-            file: /bin/cp 
-        - execute:
-            args: -r "$GAMEDIR/baseq2/game.so" $GAMEDIR/xatrix
-            file: /bin/cp 
+            args: $CACHE/patch/ctf $GAMEDIR/ctf *.pak
+            file: $CACHE/selectcopy2.sh
 
         - execute:
-            args:  -r $GAMEDIR/dosdevices
+            args: $GAMEDIR/ctf/gamex86.dll
             file: /bin/rm 
 
-        - execute:
-            args:  -r $GAMEDIR/drive_c
-            file: /bin/rm 
+        - execute: 
+            args: $CACHE/app/baseq2 $GAMEDIR/baseq2 pak0.pak
+            file: $CACHE/selectcopy2.sh
+
+        - copy:
+            src: $CACHE/app/baseq2/video
+            dst: $GAMEDIR/baseq2/video
 
         - execute:
-            args:  -r $GAMEDIR/system.reg
-            file: /bin/rm 
+            args: $GAMEDIR/music 
+            file: mkdir
 
         - execute:
-            args:  -r $GAMEDIR/user.reg
-            file: /bin/rm 
+            args: $CACHE/app/music $GAMEDIR/music
+            file: $CACHE/copyrename.sh
 
-        - execute:
-            args:  -r $GAMEDIR/userdef.reg
-            file: /bin/rm 
+        - extract:
+            dst: $GAMEDIR
+            file: $yamagi-engine
