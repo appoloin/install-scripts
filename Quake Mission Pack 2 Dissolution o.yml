@@ -1,7 +1,7 @@
-name: Quake
-game_slug: quake 
+name: Quake Mission Pack 2 Dissolution of Eternity
+game_slug: quake-mission-pack-2-dissolution-of-eternity
 version: Installer
-slug:  quake-cdrom-installer
+slug:  installer
 runner: linux
 
 
@@ -13,6 +13,7 @@ script:
 
     game:
         exe: darkplaces-linux-x86_64-glx
+        args : -game rogue -rogue
 
     installer:
     - write_file:
@@ -32,16 +33,20 @@ script:
         dst: $CACHE
         file: $inno
         
-    - execute:
-        args: -I "app/id1" -d "$CACHE" "$game"
+    - execute:        
+        args: -I "app/rogue" -I "app/id1"  -d "$CACHE" "$game"
         file: $CACHE/innoextract
 
     - execute:
-        args: $GAMEDIR/id1
+        args: $GAMEDIR/id1 $GAMEDIR/rogue
         file: mkdir
 
     - execute:
         args: $CACHE/app/id1 $GAMEDIR/id1 *.pak
+        file: $CACHE/selectcopy2.sh
+
+    - execute:
+        args: $CACHE/app/rogue $GAMEDIR/rogue *.pak
         file: $CACHE/selectcopy2.sh
 
     - extract:

@@ -1,0 +1,60 @@
+#TODO Need file list
+name: Might and Magic IV-V
+game_slug: might-and-magic-world-of-xeen
+version: Installer
+slug: installer
+runner: scummvm
+
+script:
+  files:
+    - game: N/A:Select GOG installer.
+    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
+
+  game:
+    game_id: worldofxeen
+    path: $GAMEDIR
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+        
+        dst=$2
+
+        file=$3
+
+        find "$src" -maxdepth 1 -type f \( -iname $file \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy2.sh
+    - chmodx: $CACHE/selectcopy2.sh
+
+    - extract:
+        dst: $CACHE
+        file: $inno
+        
+    - execute:
+        args: -d "$CACHE" "$game"
+        file: $CACHE/innoextract
+
+    - execute:
+        args: $CACHE $GAMEDIR *.pdf
+        file: $CACHE/selectcopy2.sh
+
+    - execute:
+        args: $CACHE $GAMEDIR XEEN.*
+        file: $CACHE/selectcopy2.sh
+
+    - execute:
+        args: $CACHE $GAMEDIR GAME*.*
+        file: $CACHE/selectcopy2.sh
+
+    - execute:
+        args: $CACHE $GAMEDIR INTRO.*
+        file: $CACHE/selectcopy2.sh
+
+    - copy: 
+        src: $CACHE/MUSIC
+        dst: $GAMEDIR/music
+
+  scummvm:
+    fullscreen: true

@@ -1,7 +1,7 @@
-name: Quake
-game_slug: quake 
+name: Quake Mission Pack 1 Scourge of Armagon
+game_slug: quake-mission-pack-1-scourge-of-armagon 
 version: Installer
-slug:  quake-cdrom-installer
+slug:  installer
 runner: linux
 
 
@@ -13,6 +13,7 @@ script:
 
     game:
         exe: darkplaces-linux-x86_64-glx
+        args : -game hipnotic -hipnotic
 
     installer:
     - write_file:
@@ -32,16 +33,20 @@ script:
         dst: $CACHE
         file: $inno
         
-    - execute:
-        args: -I "app/id1" -d "$CACHE" "$game"
+    - execute:        
+        args: -I "app/hipnotic" -I "app/id1"  -d "$CACHE" "$game"
         file: $CACHE/innoextract
 
     - execute:
-        args: $GAMEDIR/id1
+        args: $GAMEDIR/id1 $GAMEDIR/hipnotic
         file: mkdir
 
     - execute:
         args: $CACHE/app/id1 $GAMEDIR/id1 *.pak
+        file: $CACHE/selectcopy2.sh
+
+    - execute:
+        args: $CACHE/app/hipnotic $GAMEDIR/hipnotic *.pak
         file: $CACHE/selectcopy2.sh
 
     - extract:
