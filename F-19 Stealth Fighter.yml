@@ -1,0 +1,110 @@
+name: F-19 Stealth Fighter
+game_slug: f-19-stealth-fighter
+version: Installer
+slug: installer
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select GOG installer.
+    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
+
+  game:
+    main_file: $GAMEDIR/StealthFighter.conf
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+
+        find "$src" -maxdepth 1 -type f \( -iname "*.PIC" -o 
+                                           -iname "*.SP*" -o 
+                                           -iname "*.EXE" -o
+                                           -iname "B" -o
+                                           -iname "*.PAK" -o
+                                           -iname "*.TXT" -o
+                                           -iname "*.3D3" -o
+                                           -iname "*.3DG" -o
+                                           -iname "*.3DT" -o
+                                           -iname "*.WLD" -o
+                                           -iname "F19*" -o
+                                           -iname "LB.*" -o
+                                           -iname "NC.*" -o
+                                           -iname "PG.*" -o
+                                           -iname "Y" \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+    - chmodx: $CACHE/selectcopy.sh
+
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+        
+        dst=$2
+
+        file=$3
+
+        find "$src" -maxdepth 1 -type f \( -iname $file \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy2.sh
+    - chmodx: $CACHE/selectcopy2.sh
+
+    - extract:
+        dst: $CACHE
+        file: $inno
+        
+    - execute:
+        args: -d "$CACHE" "$game"
+        file: $CACHE/innoextract
+
+    - execute:
+        args: $GAMEDIR/stealth   
+        file: mkdir
+    
+    - execute:
+        args: $CACHE $GAMEDIR "*.PDF"
+        file: $CACHE/selectcopy2.sh
+
+    - execute:
+        args: $CACHE $GAMEDIR/stealth 
+        file: $CACHE/selectcopy.sh
+
+    - write_file:
+        content: '[cpu]
+
+        cycles=max
+
+        [sdl]
+
+          sensitivity=20
+
+          fullresolution=desktop
+
+          windowresolution=original
+
+          fullscreen=true
+
+          output=opengl
+
+        [render]
+
+          aspect=true
+
+          scaler=normal2x
+
+        [autoexec]
+
+          @echo off
+        
+          mount C "$GAMEDIR" -t dir
+
+          C: 
+
+          CD stealth
+
+          F19.BAT
+
+          exit'
+        file: $GAMEDIR/StealthFighter.conf

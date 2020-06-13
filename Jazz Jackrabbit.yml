@@ -1,0 +1,161 @@
+name: Jazz Jackrabbit
+game_slug: jazz-jackrabbit
+version: Installer
+slug: installer
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select GOG installer.
+    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
+
+  game:
+    main_file: $GAMEDIR/JackRabbit.conf
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+
+        find "$src" -maxdepth 1 -type f \( -iname "BLOCKS.*" -o 
+                                           -iname "*BONUS*.*" -o 
+                                           -iname "*.PSM" -o
+                                           -iname "*.0SC" -o
+                                           -iname "*.000" -o
+                                           -iname "*.EXE" -o
+                                           -iname "*.DIZ" -o
+                                           -iname "*.0FN" -o
+                                           -iname "*.DOC" -o
+                                           -iname "HISCORES" -o
+                                           -iname "LEVEL*" -o
+                                           -iname "MACRO.*" -o
+                                           -iname "*.MUS" -o
+                                           -iname "*.INT" -o
+                                           -iname "PLANET.*" -o
+                                           -iname "*.INF" -o
+                                           -iname "SOUNDS.*" -o
+                                           -iname "SPRITES.*" \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+    - chmodx: $CACHE/selectcopy.sh
+
+    - extract:
+        dst: $CACHE
+        file: $inno
+        
+    - execute:
+        args: -d "$CACHE" "$game"
+        file: $CACHE/innoextract
+
+    - execute:
+        args: $GAMEDIR/jazz   
+        file: mkdir
+    
+    - copy:
+        src: $CACHE/HH95
+        dst: $GAMEDIR/HH95
+
+    - execute:
+        args: $CACHE $GAMEDIR/jazz
+        file: $CACHE/selectcopy.sh
+
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=20
+
+          fullresolution=desktop
+
+          windowresolution=original
+
+          fullscreen=true
+
+          output=opengl
+
+        [render]
+
+          aspect=true
+
+          scaler=normal2x
+
+        [autoexec]
+
+          @echo off
+        
+          mount C "$GAMEDIR" -t dir
+
+          C: 
+
+          goto launcher
+
+          :launcher
+          
+          cls
+          
+          ECHO  ------------------------------------------ 
+          
+          ECHO  Jazz Jackrabbit Collection                 
+          
+          ECHO  ------------------------------------------ 
+          
+          ECHO   1) Jazz Jackrabbit CD-ROM version         
+          
+          ECHO   2) Jazz Jackrabbit Holiday Hare 95       
+          
+          ECHO  ------------------------------------------ 
+          
+          ECHO   3) Sound and Language Settings            
+          
+          ECHO  ------------------------------------------ 
+          
+          ECHO   4) exit program                           
+          
+          ECHO  ------------------------------------------ 
+
+          choice /c1234 /s Which game do you want to run? [1-4]: /n 
+
+          if errorlevel 4 goto exit
+
+          if errorlevel 3 goto setup
+
+          if errorlevel 2 goto hh95
+
+          if errorlevel 1 goto jazz
+
+          :jazz
+
+          cls
+
+          cd jazz
+
+          jazz.exe
+
+          goto exit
+
+
+          :hh95
+
+          cls
+
+          cd hh95
+
+          jazz.exe
+
+          goto exit
+
+          :setup
+
+          cls
+
+          cd jazz
+
+          setup.exe
+
+          goto launcher
+
+          :exit
+
+          exit'
+        file: $GAMEDIR/JackRabbit.conf
