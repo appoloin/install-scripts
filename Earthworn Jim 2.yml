@@ -1,0 +1,141 @@
+name: Earthworn Jim 2
+game_slug: earthworm-jim-2
+version: Installer
+slug: installer
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select GOG installer.
+    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
+
+  game:
+    main_file: $GAMEDIR/EarthwormJim.conf
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+
+        find "$src"  -maxdepth 1  -type f \(  -iname "EWJ2.DAT" -o
+                                              -iname "EWJ2.ICO" -o
+                                              -iname "EWJ2.ID" -o
+                                              -iname "*.EXE" -o 
+                                              -iname "sound.*" -o
+                                              -iname "WORMO.HLP" \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+    - chmodx: $CACHE/selectcopy.sh
+
+    - extract:
+        dst: $CACHE
+        file: $inno
+        
+    - execute:
+        args: -I "app" -d "$CACHE" "$game"
+        file: $CACHE/innoextract
+
+    - execute:
+        args: $GAMEDIR/EWJ $GAMEDIR/CDD    
+        file: mkdir
+    
+    - execute:
+        args: $CACHE/app $GAMEDIR/EWJ
+        file: $CACHE/selectcopy.sh
+
+    - copy:
+        src: $CACHE/app/EWJ2.inst
+        dst: $GAMEDIR/CDD
+
+    - copy: 
+        src: $CACHE/app/EWJ2.gog
+        dst: $GAMEDIR/CDD
+
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=20
+
+          fullresolution=desktop
+
+          windowresolution=original
+
+          fullscreen=true
+
+          output=opengl
+
+        [render]
+
+          aspect=true
+
+          scaler=normal2x
+
+        [autoexec]
+
+          @echo off
+        
+          mount C "$GAMEDIR" -t dir
+
+          imgmount D "$GAMEDIR/CDD/EWJ2.inst" -t iso -fs fat
+
+          C: 
+
+          CD EWJ
+
+          cls 
+
+          ECHO OFF
+
+          goto launcher
+
+          :launcher
+
+          cls 
+
+          ECHO  -------------------------------------------  
+          
+          ECHO   Earhworm Jim 2 Launcher  
+          
+          ECHO  -------------------------------------------  
+          
+          ECHO   1) Earthworm Jim 2       
+          
+          ECHO   2) Setup  
+
+          ECHO   3) Exit                             
+          
+          ECHO  -------------------------------------------  
+          
+          choice /c123 /s Which program do you want to run? [1-3]: /n 
+          
+          if errorlevel 3 goto exit
+          
+          if errorlevel 2 goto setup
+          
+          if errorlevel 1 goto game
+
+
+          :game
+
+          cls
+
+          EWJ2.exe
+
+          goto exit
+
+          
+          :setup
+
+          cls
+
+          SETUP.exe
+
+          goto launcher
+
+
+          :exit
+
+          exit'
+        file: $GAMEDIR/EarthwormJim.conf
