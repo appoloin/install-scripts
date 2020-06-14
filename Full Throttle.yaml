@@ -8,7 +8,7 @@ runner: scummvm
 
 script:
   files:
-    - game:  N/A:Select the file FT.LA0
+    - game:  N/A:Select the file Full Throttle.exe
 
   game:
     game_id: ft  
@@ -18,20 +18,23 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+        src="$1"
 
-        dst=$2
-        
+        dst="$2"
+
         src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        cp -avr "$src_path/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
+        find "$src_path" -type f \( -iname "ft.la*" -o 
+                                    -iname "monster.sou" \) -print  -exec cp {} "$dst" \;
 
-    - chmodx: $CACHE/bulkcopy.sh
+        find "$src_path" -type d \( -iname video -o
+                                    -iname data \) -print  -exec cp {} -r "$dst" \;'
+        file: $CACHE/selectcopy.sh
+    - chmodx: $CACHE/selectcopy.sh
 
     - execute:
         args: $game $GAMEDIR
-        file: $CACHE/bulkcopy.sh
-  
+        file: $CACHE/selectcopy.sh
+
   scummvm:
     fullscreen: true
