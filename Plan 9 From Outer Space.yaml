@@ -34,6 +34,10 @@ script:
         args: $game $GAMEDIR/HDD/plan9
         file: $CACHE/bulkcopy.sh
 
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod
+      
     - write_file:
         content: '[sdl]
         
@@ -47,26 +51,61 @@ script:
 
           cd plan9
           
+          cls 
+
+          ECHO OFF
+
+          goto launcher
+
+          :launcher
+
+          cls 
+
+          ECHO  -------------------------------------------  
+          
+          ECHO           Plan 9 From Outer Space 
+          
+          ECHO  -------------------------------------------  
+          
+          ECHO   1) Played Game       
+          
+          ECHO   2) Setup                               
+          
+          ECHO  -------------------------------------------  
+          
+          ECHO   3) exit program                             
+          
+          ECHO  -------------------------------------------  
+
+
+          choice /c123 /s Which program do you want to run? [1-3]: /n 
+          
+          if errorlevel 3 goto exit
+                    
+          if errorlevel 2 goto setup
+                    
+          if errorlevel 1 goto game
+
+
+          :game
+
+          cls
+
           PLAN9.EXE
+          
+          goto exit
+
+
+          :setup
+
+          cls
+
+          CONFIG.EXE
+
+          goto launcher
+
+
+          :exit
           
           exit'
         file: $GAMEDIR/plan9.conf
-
-
-    - write_file:
-        content: '[autoexec]
-        
-          mount C "$GAMEDIR/HDD" -t dir
-
-          C:
-
-          cd plan9
-          
-          CONFIG.EXE
-          
-          exit'
-        file: $GAMEDIR/plan9_setup.conf
-    - task:
-        config_file: $GAMEDIR/plan9_setup.conf
-        name: dosexec
-        working_dir: $GAMEDIR/HDD/plan9

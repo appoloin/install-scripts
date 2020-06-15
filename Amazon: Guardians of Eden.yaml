@@ -21,17 +21,24 @@ script:
         src=$1
 
         dst=$2
-        
+
         src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        cp -avr "$src_path/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-
-    - chmodx: $CACHE/bulkcopy.sh
+        find "$src_path" -type f \( -iname "*.AP" -o 
+                                    -iname "*.BLK" -o
+                                    -iname "*.DAT" -o
+                                    -iname "*.LZ" -o
+                                    -iname "*.MAP" \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+    - chmodx: $CACHE/selectcopy.sh
 
     - execute:
         args: $game $GAMEDIR
-        file: $CACHE/bulkcopy.sh
+        file: $CACHE/selectcopy.sh
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod
 
   scummvm:
     fullscreen: true
