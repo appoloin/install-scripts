@@ -14,14 +14,27 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+        src="$1"
 
-        dst=$2
+        dst="$2"
       
         cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy-alt.sh
 
     - chmodx: $CACHE/bulkcopy-alt.sh
+
+    - write_file:
+        content: '#!/bin/bash
+
+        src="$1"
+        
+        find "$src" -maxdepth 1 -type d \( -iname drive_c -o
+                                           -iname dosdevices \) -exec rm -r {}  \;
+                                           
+        find "$src" -maxdepth 1 -type f \( -iname "*.reg" -o
+                                           -iname "configure.exe" \) -exec rm {}  \;'
+        file: $CACHE/remove.sh
+    - chmodx: $CACHE/remove.sh
 
     - insert-disc:
         description: Please insert disc
@@ -31,6 +44,7 @@ script:
         name: wine.create_prefix
         arch: win32
         install_mono: false
+        install_geko: false
         prefix: $GAMEDIR
 
     - task:
@@ -48,25 +62,5 @@ script:
         file: /bin/chmod
 
     - execute:
-        args: $GAMEDIR/configure.exe
-        file: /bin/rm 
-
-    - execute:
-        args:  -r $GAMEDIR/drive_c
-        file: /bin/rm 
-
-    - execute:
-        args:  -r $GAMEDIR/dosdevices
-        file: /bin/rm 
-
-    - execute:
-        args:  -r $GAMEDIR/system.reg
-        file: /bin/rm 
-
-    - execute:
-        args:  -r $GAMEDIR/user.reg
-        file: /bin/rm 
-
-    - execute:
-        args:  -r $GAMEDIR/userdef.reg
-        file: /bin/rm 
+        args: "$GAMEDIR"
+        file: $CACHE/remove.sh
