@@ -7,8 +7,6 @@ runner: ags
 script:
   game:
     main_file: "$GAMEDIR/Unbound.exe"
-    arch: win32
-    prefix: $GAMEDIR
 
   files:
     - game: N/A:Select GOG installer.
