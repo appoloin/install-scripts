@@ -1,12 +1,12 @@
-name: kings_quest_8
+name: Kings Quest 8
 game_slug: kings-quest-viii-mask-of-eternity
 version: Installer
-slug: kings_quest_8-installer
+slug: installer
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Kings Quest 8/Mask.exe
+    exe: $GAMEDIR/drive_c/SIERRA/Mask/Mask.exe
     arch: win32
     prefix: $GAMEDIR
 

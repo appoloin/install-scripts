@@ -27,7 +27,14 @@ script:
         file: $CACHE/selectcopy.sh
 
     - chmodx: $CACHE/selectcopy.sh
-
+ 
     - execute:
         args: $game $GAMEDIR
         file: $CACHE/selectcopy.sh
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod
+        
+scummvm:
+    fullscreen: true
