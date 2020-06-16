@@ -28,4 +28,11 @@ script:
 
   wine:
     Desktop: true
+    WineDesktop: 1024x768
+    dxvk: false
+
+  system:
+    resolution: 1024x768
+    reset_desktop: true
+    
 
