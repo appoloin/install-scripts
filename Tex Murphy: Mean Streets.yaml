@@ -21,7 +21,10 @@ script:
 
         dst=$2
 
-        find "$src" -type f \( -iname "*.ACC" -o -iname  "MS.EXE" -o -iname  "MS._XE" -o -iname "*.pdf" \) -exec cp {} "$dst" \;'
+        find "$src" -type f \( -iname "*.ACC" -o 
+                               -iname  "MS.EXE" -o 
+                               -iname  "MS._XE" -o 
+                               -iname "*.pdf" \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
 
     - chmodx: $CACHE/selectcopy.sh
