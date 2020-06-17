@@ -1,4 +1,3 @@
-#GOG version
 name: A New Beginning
 game_slug: A-New-Beginning
 version: Installer
@@ -20,6 +19,21 @@ script:
         arch: win32
         install_mono: false
         install_gecko: false
+        prefix: $GAMEDIR
+  
+    - task:
+        app: vcrun2012
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: dotnet40 
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: win7
+        name: winetricks
         prefix: $GAMEDIR
 
     - task:

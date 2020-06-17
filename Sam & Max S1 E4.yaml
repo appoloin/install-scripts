@@ -19,6 +19,7 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - execute:
@@ -30,7 +31,7 @@ script:
         file: $inno
 
     - execute:
-        args: -I app -d "$CACHE" "$game"
+        args: -I "app/Episode 104 - Abe Lincoln Must Die!" -d "$CACHE" "$game"
         file: $CACHE/innoextract
 
     - merge:
