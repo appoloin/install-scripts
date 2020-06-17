@@ -1,14 +1,12 @@
-name:  blackwel-convergence
-game_slug: blackwell-convergence
+name:  blackwell-legacy
+game_slug: blackwell-legacy
 version: Installer
-slug: blackwell-convergence-installer
+slug: blackwell-legacy-installer
 runner: ags
 
 script:
   game:
-    main_file: "$GAMEDIR/Convergence.exe"
-    arch: win32
-    prefix: $GAMEDIR
+    main_file: $GAMEDIR/blackwell1.exe
 
   files:
     - game: N/A:Select GOG installer.
@@ -25,5 +23,8 @@ script:
 
     - merge:
         dst: "$GAMEDIR"
-        src: "$CACHE/app/Convergence"
+        src: "$CACHE/app/Legacy"
+
+  wine:
+    Desktop: true
 

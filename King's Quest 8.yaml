@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/SIERRA/Mask/Mask.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Kings Quest 8/Mask.exe
     arch: win32
     prefix: $GAMEDIR
 

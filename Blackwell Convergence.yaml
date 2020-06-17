@@ -1,14 +1,12 @@
-name:  blackwel-deception
-game_slug: blackwell-deception
+name:  blackwel-convergence
+game_slug: blackwell-convergence
 version: Installer
-slug: blackwell-deception-installer
+slug: blackwell-convergence-installer
 runner: ags
 
 script:
   game:
-    main_file: "$GAMEDIR/Deception.exe"
-    arch: win32
-    prefix: $GAMEDIR
+    main_file: "$GAMEDIR/Convergence.exe"
 
   files:
     - game: N/A:Select GOG installer.
@@ -25,4 +23,5 @@ script:
 
     - merge:
         dst: "$GAMEDIR"
-        src: "$CACHE/app/Deception"
+        src: "$CACHE/app/Convergence"
+

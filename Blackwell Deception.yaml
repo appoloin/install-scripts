@@ -1,14 +1,12 @@
-name:  blackwell-legacy
-game_slug: blackwell-legacy
+name:  blackwel-deception
+game_slug: blackwell-deception
 version: Installer
-slug: blackwell-legacy-installer
+slug: blackwell-deception-installer
 runner: ags
 
 script:
   game:
-    main_file: $GAMEDIR/blackwell1.exe
-    arch: win32
-    prefix: $GAMEDIR
+    main_file: "$GAMEDIR/Deception.exe"
 
   files:
     - game: N/A:Select GOG installer.
@@ -25,8 +23,4 @@ script:
 
     - merge:
         dst: "$GAMEDIR"
-        src: "$CACHE/app/Legacy"
-
-  wine:
-    Desktop: true
-
+        src: "$CACHE/app/Deception"
