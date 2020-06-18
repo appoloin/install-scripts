@@ -39,13 +39,12 @@ script:
 
           imgmount D "$CACHE/app/GK1.GOG" -t iso
 
-          ver set 6.22
+          ver set 6 22
 
           D:
           
           C:\xcopy.exe /E *.* C:\
-
-          exit'
+        '
         file: $CACHE/gk1.conf
 
     - task:

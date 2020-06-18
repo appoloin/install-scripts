@@ -81,7 +81,7 @@ script:
 
             imgmount D "$GAMEDIR/GAME1.GOG" -t iso
 
-            ver set 6.22
+            ver set 6 22
 
             D:
 
