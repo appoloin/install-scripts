@@ -111,13 +111,15 @@ script:
 
           windowresolution=original
 
+          fullscreen=true
+
           output=opengl
 
         [render]
 
-           aspect=true
+          aspect=true
 
-           scaler=normal2x
+          scaler=normal2x
 
         [autoexec]
         
