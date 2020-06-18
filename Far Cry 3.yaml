@@ -1,8 +1,7 @@
-#TODO
 name: FarCry3 
-game_slug: FarCry3
+game_slug: far-cry-3
 version: Installer
-slug: FarCry3
+slug: installer
 runner: wine
 
 script:
@@ -20,6 +19,41 @@ script:
         arch: win32
         install_mono: false
         install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: d3dx10
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: vcrun2015
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task: 
+        app: vcrun2010
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task: 
+        app: xact
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task: 
+        app: dotnet35
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: Faudio
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: d3dcompiler_43
+        name: winetricks
         prefix: $GAMEDIR
 
     - task:

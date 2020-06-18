@@ -1,5 +1,5 @@
 name: Tomb raider
-game_slug: tombraider
+game_slug: tomb-raider
 version: Installer
 slug: tombraider-installer
 runner: wine
@@ -19,6 +19,7 @@ script:
         arch: win32
         name: create_prefix
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
