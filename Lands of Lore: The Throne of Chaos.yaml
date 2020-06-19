@@ -39,7 +39,7 @@ script:
 
           imgmount D "$CACHE/app/Lands of Lore 1/GAME.DAT" -t iso
 
-          ver set 6.22
+          ver set 6 22
 
           D:
           
