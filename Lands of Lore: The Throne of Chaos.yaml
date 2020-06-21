@@ -25,7 +25,7 @@ script:
         src: $xcopy 
 
     - execute:
-        args: -I app -d "$CACHE" "$game"
+        args: -I "app/Lands of Lore 1" -d "$CACHE" "$game"
         file: $CACHE/innoextract
         
     - write_file:
@@ -74,3 +74,6 @@ script:
     - execute:
         args:  -r $GAMEDIR/XCOPY.EXE
         file: /bin/rm 
+
+  scummvm:
+    fullscreen: true
