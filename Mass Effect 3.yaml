@@ -1,5 +1,5 @@
 name: Mass effect 3
-game_slug: Mass-Effect-3
+game_slug: mass-effect-3
 version: Installer
 slug:  Mass-Effect-3-installer
 runner: wine
@@ -9,6 +9,7 @@ script:
         arch: win32
         exe: drive_c/Program Files/Mass Effect 3/Binaries/Win32/MassEffect3.exe
         prefix: $GAMEDIR
+        
     installer:
 
     - insert-disc:
@@ -17,15 +18,10 @@ script:
     - task:
         arch: win32
         name: create_prefix
+        install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
     
-    - task:
-        description: Setting OS as Windows 7.
-        key: Version
-        name: set_regedit
-        path: HKEY_CURRENT_USER\Software\Wine
-        prefix: $GAMEDIR
-        value: win7
     - task:
         description: Allow DirectX apps to stop the mouse leaving their window.
         key: GrabFullScreen
@@ -62,8 +58,14 @@ script:
         prefix: $GAMEDIR
         value: va
     - task:
-        app: d3dx11_43
-        description: Installing DirectX 11.
+        app: d3dx9
+        description: Installing DirectX 9.
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: d3dcompiler_42
+        arch: win32
         name: winetricks
         prefix: $GAMEDIR
     - task:
