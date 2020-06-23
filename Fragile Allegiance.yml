@@ -1,0 +1,94 @@
+name: Fragile Alliance
+game_slug: fragile-allegiance
+version: Installer
+slug: INSTALLER
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select GOG installer
+    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
+
+  game:
+    main_file: $GAMEDIR/fragile.conf
+  
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+
+        find "$src" -maxdepth 1  -type d \( -iname "_*" -o
+                                            -iname "INSTALL"  \) -exec cp {} -r "$dst" \;
+
+        find "$src" -maxdepth 1  -type f \( -iname "*.INI" -o
+                                            -iname "*.256" -o
+                                            -iname "*.exe" -o
+                                            -iname "*.ID" -o
+                                            -iname "*.386" -o
+                                            -iname "*.com" \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+
+    - chmodx: $CACHE/selectcopy.sh
+
+    - extract:
+        dst: $CACHE
+        file: $inno
+        
+    - execute:
+        args: -d "$CACHE" "$game"
+        file: $CACHE/innoextract
+
+    - execute:
+        args: $GAMEDIR/fragile 
+        file: mkdir
+
+    - copy:
+        src: $CACHE/FRAGILE.DAT
+        dst: $GAMEDIR/CDD
+
+    - copy:
+        src: $CACHE/Manual.pdf
+        dst: $GAMEDIR
+
+    - execute:
+        args: $CACHE  $GAMEDIR/fragile
+        file: $CACHE/selectcopy.sh
+
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=30
+
+          fullresolution=desktop
+
+          windowresolution=original
+
+          fullscreen=true
+
+          output=opengl
+
+          capture_mouse = onstart middlerelease
+
+        [render]
+
+          aspect=true
+
+          scaler=normal2x
+
+        [autoexec]
+
+          mount C "$GAMEDIR" -t dir
+
+          imgmount D "$GAMEDIR/CDD/FRAGILE.DAT" -t iso -fs iso
+
+          c:
+          
+          cd fragile
+
+          FRAGILE.EXE
+
+          exit'
+        file: $GAMEDIR/fragile.conf
