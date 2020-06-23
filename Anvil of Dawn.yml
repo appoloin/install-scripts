@@ -1,0 +1,181 @@
+name:  Anvil of Dawn
+game_slug:  anvil_of_dawn
+version: Installer
+slug:  installer
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select GOG installer
+    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
+    - GUS: https://raw.githubusercontent.com/appoloin/WfW/master/GUS_external_files.zip
+
+  game:
+    main_file: $GAMEDIR/anvil.conf
+  
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+
+        find "$src" -maxdepth 1  -type f \( -iname "*.dat" -o 
+                                            -iname "*.exe" -o 
+                                            -iname "*.bat" -o
+                                            -iname "*.BNK" -o
+                                            -iname "*.COM" -o 
+                                            -iname "*.386" -o
+                                            -iname "*.CFG" -o 
+                                            -iname "PATCH*" -o
+                                            -iname "README.*" -o
+                                            -iname "*.INI" -o
+                                            -iname "TEST.*"  \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+
+    - chmodx: $CACHE/selectcopy.sh
+
+    - extract:
+        dst: $CACHE
+        file: $inno
+        
+    - execute:
+        args: -I app -d "$CACHE" "$game"
+        file: $CACHE/innoextract
+
+    - extract:
+        dst: $GAMEDIR/ULTRASND
+        file: $GUS
+
+    - execute:
+        args: $GAMEDIR/anvil
+        file: mkdir
+
+    - copy:
+        src: $CACHE/app/Anvil of Dawn - Manual.pdf
+        dst: $GAMEDIR
+
+    - copy:
+        src: $CACHE/app/DATA
+        dst: $GAMEDIR/anvil/DATA
+
+    - execute:
+        args: $CACHE/app $GAMEDIR/anvil
+        file: $CACHE/selectcopy.sh
+
+    - write_file:
+        content: '[gus]
+
+          gus      = true
+
+          ultradir = C:\ULTRASND
+      
+        [cpu]
+
+        core=dynamic
+
+        cputype=dynamic
+
+        cycles=35000
+        
+        [sdl]
+
+          sensitivity=10
+
+          fullresolution=desktop
+
+          windowresolution=original
+
+          fullscreen=true
+
+          output=opengl
+
+        [render]
+
+          aspect=true
+
+          scaler=normal2x
+
+
+
+        [autoexec]
+
+          mount C "$GAMEDIR" -t dir
+
+          imgmount D "$GAMEDIR/anvil/Anvil.dat" -t iso -fs iso
+
+          C:
+
+          cd anvil
+
+          cls 
+
+          ECHO OFF
+
+          goto launcher
+
+          :launcher
+
+          cls 
+
+          ECHO  -----------------------------------------------------  
+          
+          ECHO                      Anvil of Dawn 
+          
+          ECHO  -----------------------------------------------------  
+          
+          ECHO   1) Play Game        
+          
+          ECHO   2) Play Game with Gravis Ultrasound
+
+          ECHO   3) Setup                          
+          
+          ECHO  -----------------------------------------------------  
+          
+          ECHO   4) Exit Program                             
+          
+          ECHO  -----------------------------------------------------  
+
+          choice /c1234 /s Which program do you want to run? [1-4]: /n 
+          
+          if errorlevel 4 goto exit
+
+          if errorlevel 3 goto setup
+          
+          if errorlevel 2 goto gravis
+          
+          if errorlevel 1 goto game
+
+
+          :game
+
+          cls
+
+          anvil
+
+          goto exit
+
+
+          :gravis
+
+          cls
+
+          GRAVIS.BAT
+
+          goto exit
+
+
+          :setup
+
+          cls
+
+          setup.exe
+
+          goto launcher
+
+
+          :exit
+          
+          exit'
+        file: $GAMEDIR/anvil.conf
