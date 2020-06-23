@@ -1,0 +1,157 @@
+name: Battle Isle
+game_slug:  battle-isle
+version: Installer
+slug: INSTALLER
+runner: dosbox
+
+script:
+  files:
+      - game: N/A:Select GOG installer
+      - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
+
+  game:
+    main_file: $GAMEDIR/battle.conf
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+
+        find "$src" -maxdepth 1  -type f \( -iname "*.pdf" \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+    - chmodx: $CACHE/selectcopy.sh
+
+    - extract:
+        dst: $CACHE
+        file: $inno
+        
+    - execute:
+        args: -d "$CACHE" "$game"
+        file: $CACHE/innoextract
+
+    - execute:
+        args: $GAMEDIR/battle
+        file: mkdir
+
+    - copy:
+        src: $CACHE/DESERT
+        dst: $GAMEDIR/battle/DESERT
+
+    - copy:
+        src: $CACHE/ISLE
+        dst: $GAMEDIR/battle/ISLE
+
+    - copy:
+        src: $CACHE/MOON
+        dst: $GAMEDIR/battle/MOON
+
+    - execute:
+        args: $CACHE/app $GAMEDIR
+        file: $CACHE/selectcopy.sh
+
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=10
+
+          fullresolution=desktop
+
+          windowresolution=original
+
+          fullscreen=true
+
+          texture_renderer = auto
+          
+          output=opengl
+
+        [render]
+
+          aspect=true
+
+          scaler=normal2x
+
+
+        [autoexec]
+
+          mount C "$GAMEDIR" -t dir
+
+          C:
+
+          cd battle 
+
+          cls 
+
+          ECHO OFF
+
+          goto launcher
+
+          :launcher
+
+          cls 
+
+          ECHO  -----------------------------------------------------  
+          
+          ECHO                      Battle Isle 
+          
+          ECHO  -----------------------------------------------------  
+          
+          ECHO   1) Battle Isle       
+          
+          ECHO   2) Battle Isle - The Desert
+
+          ECHO   3) Battle Isle - The Moon of Chromos                         
+          
+          ECHO  -----------------------------------------------------  
+          
+          ECHO   4) Exit Program                             
+          
+          ECHO  -----------------------------------------------------  
+
+          choice /c1234 /s Which program do you want to run? [1-4]: /n 
+          
+          if errorlevel 4 goto exit
+
+          if errorlevel 3 goto desert
+          
+          if errorlevel 2 goto moon
+          
+          if errorlevel 1 goto isle
+
+
+          :isle
+
+          cls
+
+          cd isle
+
+          bi.exe
+
+          goto exit
+
+
+          :desert
+
+          cls
+
+          Gdesert.exe
+
+          goto exit
+
+
+          :moon
+
+          cls
+
+          moon.exe
+
+          goto launcher
+
+
+          :exit
+          
+          exit'
+        file: $GAMEDIR/battle.conf
+
