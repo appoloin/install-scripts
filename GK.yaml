@@ -44,6 +44,8 @@ script:
           D:
           
           C:\xcopy.exe /E *.* C:\
+
+          exit
         '
         file: $CACHE/gk1.conf
 
