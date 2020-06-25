@@ -1,5 +1,5 @@
-name: Master of Orion
-game_slug: master-of-orion-1
+name: Master of Orion 2
+game_slug: master-of-orion-2
 version: Installer
 slug: INSTALLER
 runner: dosbox
@@ -20,9 +20,14 @@ script:
 
         dst=$2
 
-        find "$src" -maxdepth 1  -type f \( -iname "*.LBX" -o 
-                                            -iname "FAT.*" -o 
-                                            -iname "*.dat" -o
+        find "$src" -maxdepth 1  -type f \( -iname "*.LST" -o
+                                            -iname "*.DIG" -o
+                                            -iname "*.MDI" -o 
+                                            -iname "*.LBX" -o 
+                                            -iname "*.BAT" -o 
+                                            -iname "*.ini" -o
+                                            -iname "*.dll" -o
+                                            -iname "SAMPLE.*." -o
                                             -iname "*.exe"  \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
     - chmodx: $CACHE/selectcopy.sh
@@ -40,11 +45,7 @@ script:
         file: mkdir
 
     - copy:
-        src: $CACHE/manual.pdf
-        dst: $GAMEDIR
-
-    - copy:
-        src: $CACHE/ReferenceCard.pdf
+        src: $CACHE/Manual.PDF
         dst: $GAMEDIR
 
     - execute:
@@ -118,7 +119,7 @@ script:
 
           :game
 
-          orion
+          orion2
 
           cls
 
@@ -129,7 +130,7 @@ script:
 
           cls
 
-          install
+          setsound
 
           goto launcher
 
