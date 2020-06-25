@@ -1,0 +1,64 @@
+name: Prehistorik
+game_slug: prehistorik
+version: Installer
+slug: INSTALLER
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select GOG installer
+    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
+
+  game:
+    main_file: $GAMEDIR/prehistorik.conf
+  
+  installer:
+    - extract:
+        dst: $CACHE
+        file: $inno
+        
+    - execute:
+        args: -d "$CACHE" "$game"
+        file: $CACHE/innoextract
+
+    - execute:
+        args: $GAMEDIR/prehis
+        file: mkdir
+
+    - copy:
+        src: $CACHE/app/data
+        dst: $GAMEDIR/prehis
+
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=30
+
+          fullresolution=desktop
+
+          windowresolution=original
+
+          fullscreen=true
+
+          output=opengl
+
+          capture_mouse = onstart middlerelease
+
+        [render]
+
+          aspect=true
+
+          scaler=normal2x
+
+        [autoexec]
+
+          mount C "$GAMEDIR" -t dir
+
+          C:
+
+          cd prehis
+
+          TITUS.BAT
+          
+          exit'
+        file: $GAMEDIR/prehistorik.conf
