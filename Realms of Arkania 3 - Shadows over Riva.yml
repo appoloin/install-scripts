@@ -1,0 +1,203 @@
+name: Realms of Arkanis 3 - Shadows over Riva
+game_slug: realms-of-arkania-3-shadows-over-riva-classic
+version: Installer
+slug: INSTALLER
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select GOG installer
+    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
+
+  game:
+    main_file: $GAMEDIR/arkania.conf
+  
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+
+        find "$src" -maxdepth 1  -type d \( -iname data \) -exec cp {} -r "$dst" \;
+
+        find "$src/__support/save" -maxdepth 1  -type d \( -iname games \) -exec cp {} -r "$dst" \;
+
+        find "$src" -maxdepth 1  -type f \( -iname "*.EXE" -o 
+                                            -iname "*.TXT" -o 
+                                            -iname "*.bat"  \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+    - chmodx: $CACHE/selectcopy.sh
+
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+
+        echo $dst
+
+        find "$src" -maxdepth 1 -type f -iname "*.ogg" -print0 | 
+
+            while IFS="" read -r -d "" FILENAME; 
+
+                do
+                    name="${FILENAME##*/}"
+    
+                    mv "$FILENAME" "$dst""/""${name/ogg/OGG}";
+
+            done
+        '
+        file: $CACHE/copyrename.sh
+    - chmodx: $CACHE/copyrename.sh     
+
+
+    - extract:
+        dst: $CACHE
+        file: $inno
+        
+    - execute:
+        args: -d "$CACHE" "$game"
+        file: $CACHE/innoextract
+
+    - execute:
+        args: $GAMEDIR/arkania  $GAMEDIR/CDD $GAMEDIR/CDD/Music
+        file: mkdir
+
+    - copy:
+        src: $CACHE/Manual.pdf
+        dst: $GAMEDIR
+
+    - copy:
+        src: $CACHE/game.gog
+        dst: $GAMEDIR/CDD
+
+    - copy:
+        src: $CACHE/game.ins
+        dst: $GAMEDIR/CDD
+
+    - execute:
+        args: $CACHE/MUSIC $GAMEDIR/CDD/Music
+        file: $CACHE/copyrename.sh
+
+    - execute:
+        args: $CACHE $GAMEDIR/arkania
+        file: $CACHE/selectcopy.sh
+
+    - write_file:
+        content: '[sdl]
+
+          sensitivity=30
+
+          fullresolution=desktop
+
+          windowresolution=original
+
+          fullscreen=true
+
+          output=opengl
+
+          capture_mouse = onstart middlerelease
+
+        [render]
+
+          aspect=true
+
+          scaler=normal2x
+
+        [autoexec]
+
+          mount C "$GAMEDIR" -t dir
+
+          imgmount D "$GAMEDIR/CDD/game.ins" -t iso -fs iso
+
+          C:
+
+          cd arkania
+
+          cls 
+
+          ECHO OFF
+
+          goto launcher
+
+          :launcher
+
+          cls 
+
+          ECHO  -------------------------------------------------  
+          
+          ECHO    Reamls of Arkania 3 - Shadows over Riva 
+          
+          ECHO  -------------------------------------------------  
+          
+          ECHO   1) Realms of Arkania: Shadows over Riva       
+          
+          ECHO   2) Realms of Arkania: Shadows over Riva (JEMMEX) 
+
+          ECHO   3) Settings                              
+          
+          ECHO  ---------------------------------------------------  
+                    
+          ECHO   4) Exit Program                             
+          
+          ECHO  ---------------------------------------------------  
+
+
+          choice /c1234 /s Which program do you want to run? [1-4]: /n 
+          
+          if errorlevel 4 goto exit
+          
+          if errorlevel 3 goto setup
+          
+          if errorlevel 2 goto jemmex
+
+          if errorlevel 1 goto game
+
+
+          :game
+
+          cls
+
+          riva
+          
+          goto exit
+
+
+          :jemmex
+
+          CONFIG -set "xms=false"
+          
+          CONFIG -set "ems=false"
+          
+          CONFIG -set "umb=false"
+          
+          cls
+          
+          jemmex load noems
+          
+          RIVA
+          
+          goto exit
+
+
+          :setup
+
+          cd data
+
+          cls
+
+          setup
+
+          cd ..
+
+          goto launcher
+
+
+
+          :exit
+          
+          exit'
+        file: $GAMEDIR/arkania.conf

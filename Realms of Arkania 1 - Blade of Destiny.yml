@@ -1,0 +1,167 @@
+name: Realms of Arkania 1 - Blade of Destiny
+game_slug: realms-of-arkania-1-blade-of-destiny-classic
+version: Installer
+slug: INSTALLER
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select GOG installer
+    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
+
+  game:
+    main_file: $GAMEDIR/arkania.conf
+  
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+                
+        find "$src/__support/save" -maxdepth 1  -type f \( -iname "*.nam" -o
+                                                           -iname "*.GAM" \) -exec cp {} -r "$dst" \;
+
+
+        find "$src" -maxdepth 1  -type f \( -iname "*.AD*" -o 
+                                            -iname "*.CHR" -o 
+                                            -iname "*.BAT" -o                                       
+                                            -iname "*.CFG" -o 
+                                            -iname "*.BMP" -o 
+                                            -iname "*.LTX" -o 
+                                            -iname "*.AD" -o 
+                                            -iname "*.EXE" -o 
+                                            -iname "*.DIR" -o 
+                                            -iname "*.VOL" -o 
+                                            -iname "*.OVL" -o 
+                                            -iname "*.NVF" -o 
+                                            -iname "*.DAT" -o 
+                                            -iname "*.EXE" -o 
+                                            -iname "*.XMI"  \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+    - chmodx: $CACHE/selectcopy.sh
+
+    - extract:
+        dst: $CACHE
+
+        file: $inno
+        
+    - execute:
+        args: -d "$CACHE" "$game"
+        file: $CACHE/innoextract
+
+    - execute:
+        args: $GAMEDIR/arkania
+        file: mkdir
+
+    - copy:
+        src: $CACHE/app/Cluebook.pdf
+        dst: $GAMEDIR
+
+    - copy:
+        src: $CACHE/app/MANUAL.PDF
+        dst: $GAMEDIR
+
+    - copy:
+        src: $CACHE/app/passwords.pdf
+        dst: $GAMEDIR
+
+    - execute:
+        args: $CACHE/app $GAMEDIR/arkania
+        file: $CACHE/selectcopy.sh
+
+    - write_file:
+        content: '[cpu]
+
+        cycles=fixed 12000
+
+        [sdl]
+
+          sensitivity=30
+
+          fullresolution=desktop
+
+          windowresolution=original
+
+          fullscreen=true
+
+          output=opengl
+
+          capture_mouse = onstart middlerelease
+
+        [render]
+
+          aspect=true
+
+          scaler=normal2x
+
+        [autoexec]
+
+          mount C "$GAMEDIR" -t dir
+
+          C:
+
+          cd arkania
+
+          cls 
+
+          ECHO OFF
+
+          goto launcher
+
+          :launcher
+
+          cls 
+
+          ECHO  -------------------------------------------  
+          
+          ECHO     Reamls of Arkania 1 - Blade of Destiny 
+          
+          ECHO  -------------------------------------------  
+          
+          ECHO   1) Play Game        
+          
+          ECHO   2) Setup                               
+          
+          ECHO  -------------------------------------------  
+                    
+          ECHO   3) Exit Program                             
+          
+          ECHO  -------------------------------------------  
+
+
+          choice /c123 /s Which program do you want to run? [1-3]: /n 
+          
+          if errorlevel 3 goto exit
+          
+          if errorlevel 2 goto setup
+          
+          if errorlevel 1 goto game
+
+
+          :game
+
+          cls
+
+          intro
+
+          bladem
+          
+          goto exit
+
+
+          :setup
+
+          cls
+
+          sound
+
+          goto launcher
+
+
+
+          :exit
+          
+          exit'
+        file: $GAMEDIR/arkania.conf
