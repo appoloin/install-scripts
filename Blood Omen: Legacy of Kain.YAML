@@ -1,0 +1,39 @@
+name: Blood Omen Legacy of Kain
+game_slug: blood-omen-legacy-of-kain
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files/KAIN/KAIN.EXE
+    prefix: $GAMEDIR
+
+  files:
+    #https://verokster.blogspot.com/2018/05/legacy-of-kain-blood-omen-gl-wrapper.html
+    #https://drive.google.com/uc?id=18l0WgBvhSeUA0LSrWZsK5wMO-p0F8aOB
+    - setup:  N/A:Insert CD and select Patch 
+
+  installer:
+    - extract:
+        dst: $CACHE
+        file: $setup
+        format: 7z
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $CACHE/SETUP.EXE
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+    overrides:
+        ddraw.dll: n,b
+
+
