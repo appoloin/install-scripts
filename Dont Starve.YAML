@@ -1,12 +1,12 @@
-name: Deponia Doomsday
-game_slug:  Deponia Doomsday
+name: Don't Strave
+game_slug:  dont-starve
 version: Installer
-slug: Deponia Doomsday
+slug:  INSTALLER
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/c_drive/GOG Games/Deponia Doomsday/deponia4.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Dont Starve/bin/dontstarve.exe
     arch: win32
     prefix: $GAMEDIR
 

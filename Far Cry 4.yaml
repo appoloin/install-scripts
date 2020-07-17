@@ -1,0 +1,69 @@
+name: FarCry4
+game_slug: far-cry-4
+version: Installer
+slug: installer
+runner: wine
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Far Cry 4/bin/FarCry4.exe"
+    prefix: $GAMEDIR
+
+  files:
+    - game: N/A:Select installer.
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: d3dx10
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: vcrun2015
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task: 
+        app: vcrun2010
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task: 
+        app: xact_x64
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task: 
+        app: dotnet35
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: faudio
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: d3dcompiler_43
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: winxp
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        description: Installing
+        executable: $game
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
