@@ -41,8 +41,9 @@ script:
         args: -d "$GAMEDIR" "$game"
         file: $CACHE/innoextract
 
-    
-
+    - execute:
+        args: $GAMEDIR
+        file: $CACHE/remove.sh
 
   scummvm:
     fullscreen: true
