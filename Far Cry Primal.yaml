@@ -12,17 +12,18 @@ script:
   files:
     - game: N/A:Select installer.
 
+
   installer:
     - task:
         name: create_prefix
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
-
+    
     - task:
-        app: d3dx10
+        app: winxp
         name: winetricks
-        prefix: $GAMEDIR
+        prefix: $GAMEDIR 
 
     - task:
         app: vcrun2015
@@ -35,29 +36,14 @@ script:
         prefix: $GAMEDIR
 
     - task: 
-        app: xact_x64
+        app: xact_x64 xact
         name: winetricks
         prefix: $GAMEDIR
 
     - task: 
         app: dotnet35
         name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: faudio
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: d3dcompiler_43
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: winxp
-        name: winetricks
-        prefix: $GAMEDIR    
+        prefix: $GAMEDIR   
 
     - task:
         description: Installing
