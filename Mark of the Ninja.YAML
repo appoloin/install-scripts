@@ -1,14 +1,13 @@
-name: Subnatica
-game_slug: subnautica
+name: Mark of the Ninja
+game_slug:  mark-of-the-ninja
 version: Installer
-slug:  NSTALLER
+slug:  INSTALLER
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Games/Subnautica/Subnautica.exe
-    arch: win64
-    args: -force-glcore45
+    exe: $GAMEDIR/drive_c/GOG Games/Mark of the Ninja/bin/game.exe
+    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -17,7 +16,7 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win64
+        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR

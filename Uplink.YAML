@@ -1,14 +1,13 @@
-name: Subnatica
-game_slug: subnautica
+name: Uplink
+game_slug: uplink
 version: Installer
-slug:  NSTALLER
+slug: INSTALLER
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Games/Subnautica/Subnautica.exe
-    arch: win64
-    args: -force-glcore45
+    exe: $GAMEDIR/drive_c/GOG Games/Uplink/uplink.exe
+    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -17,9 +16,15 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win64
+        arch: win32
         install_mono: false
         install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: corefonts
+        arch: win32
+        name: winetricks
         prefix: $GAMEDIR
 
     - task:
