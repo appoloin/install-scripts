@@ -1,12 +1,12 @@
-name: crysis warhead
-game_slug: crysis warhead 
+name: crysis 2
+game_slug: crysis-2
 version: Installer
-slug: crysis-warhead
+slug: crysis-2
 runner: wine
 
 script:
-  game:
-    exe: $GAMEDIR/drive_c/ 
+  game: 
+    exe: $GAMEDIR/drive_c/Program Files/Crytek/Crysis 2 - Maximum Edition/bin32/Crysis2.exe
     arch: win32
     prefix: $GAMEDIR
 

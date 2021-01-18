@@ -1,12 +1,12 @@
-name: crysis warhead
-game_slug: crysis warhead 
+name: Portal 2
+game_slug: portal-2 
 version: Installer
-slug: crysis-warhead
+slug: portal-2
 runner: wine
 
 script:
-  game:
-    exe: $GAMEDIR/drive_c/ 
+  game: 
+    exe: $GAMEDIR/drive_c/Program Files/Valve/Portal 2/Launcher.exe
     arch: win32
     prefix: $GAMEDIR
 
@@ -22,34 +22,22 @@ script:
         prefix: $GAMEDIR
 
     - task:
+        app: mfc42
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
         app: d3dx9
         arch: win32
         name: winetricks
-        prefix: $GAMEDIR
+        prefix: $GAMEDIR      
 
     - task:
-        app: corefonts
+        app: d3dcompiler_43
         arch: win32
         name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: tahoma
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-    
-    - task:
-        app: vcrun2008
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: vcrun2012
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
+        prefix: $GAMEDIR      
 
     - task:
         executable: $setup
