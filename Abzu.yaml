@@ -1,0 +1,29 @@
+name: Abzu
+game_slug: abzu
+version: Installer
+slug: abzu
+runner: wine
+ 
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files/GOG Games/ABZU/AbzuGame.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
