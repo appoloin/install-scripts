@@ -1,7 +1,7 @@
 name:  Alien Breed Tower Assault
-game_slug:  Alien-breed
+game_slug:  alien-breed-tower-assault
 version: Installer
-slug:  Alien-breed-installer
+slug:  alien-breed-tower-assault
 runner: dosbox
 
 script:
@@ -37,6 +37,9 @@ script:
         args: -r $GAMEDIR/HDD/alien/__support
         file: /bin/rm
         
+    - copy:
+        src: $GAMEDIR/HDD/alien/TOWER/TA.CFG
+        dst: $GAMEDIR/HDD/alien
 
     - write_file:
         content: '[sdl]
@@ -47,11 +50,68 @@ script:
 
           mount C "$GAMEDIR/HDD" -t dir
 
+          cls 
+
+          ECHO OFF
+
+          goto launcher
+
+          :launcher
+
+          cls 
+
+          ECHO  -------------------------------------------  
+          
+          ECHO      Alien Breed Tower Assult 
+          
+          ECHO  -------------------------------------------  
+          
+          ECHO   1) Play        
+          
+          ECHO   2) Set Sound                                   
+          
+          ECHO  -------------------------------------------  
+          
+          ECHO   3) exit program                             
+          
+          ECHO  -------------------------------------------  
+
+          choice /c123 /s Which program do you want to run? [1-3]: /n 
+          
+          if errorlevel 3 goto exit
+                    
+          if errorlevel 2 goto setup
+          
+          if errorlevel 1 goto game
+
+
+          :game
+
+          cls
+
           C:
 
           cd alien
           
           TA.EXE
+
+          goto exit
+
+
+          :setup
+
+          cls
+
+          C:
+
+          cd alien
+          
+          setsound.EXE
+
+          goto launcher
+
+
+          :exit
           
           exit'
         file: $GAMEDIR/alien.conf
