@@ -1,0 +1,39 @@
+name: Assasssin's Creed II
+game_slug: assassins-creed-ii
+version: Installer
+slug: assassins-creed-ii_INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: win7 d3dcompiler_43 d3dx9 vcrun2008
+        arch: win64
+        description: Installing additional components
+        name: winetricks
+        prefix: $GAMEDIR
+        
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+
