@@ -1,0 +1,32 @@
+name: Thimbleweed Park
+game_slug:  thimbleweed-park
+version: Installer
+slug: thimbleweed-park_INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Thimbleweed Park/ThimbleweedPark.exe
+    arch: win64
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win64
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+
