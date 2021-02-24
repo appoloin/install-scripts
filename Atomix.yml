@@ -1,7 +1,7 @@
 name: Atomix
 game_slug: atomix
 version: Installer
-slug: Atomix-installer
+slug: atomix-installer
 runner: dosbox
 
 
@@ -39,15 +39,17 @@ script:
     - write_file:
         content: '[sdl]
 
-          sensitivity=30
+          capture_mouse=onclick middlerelease
 
         [autoexec]
         
           mount C "$GAMEDIR/HDD" -t dir
 
-          C:
+          cls 
 
-          cd Atomix
+          c:
+
+          cd atomix
 
           game
 
