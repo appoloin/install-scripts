@@ -10,7 +10,7 @@ script:
     - game:  N/A:Select the file Brain.exe
 
   game:
-    game_id: sci  
+    game_id: castlebrain  
     path: $GAMEDIR
   
   installer:

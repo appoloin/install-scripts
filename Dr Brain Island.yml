@@ -10,7 +10,7 @@ script:
     - game:  N/A:Select the file Sierra.exe
 
   game:
-    game_id: sci  
+    game_id: islandbrain  
     path: $GAMEDIR
   
   installer:
