@@ -7,7 +7,6 @@ runner: wine
 script:
   game:
     exe: $GAMEDIR/drive_c/scummvm/scummvm.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -16,7 +15,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
