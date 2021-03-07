@@ -1,5 +1,5 @@
 name: Zork II
-game_slug: Zork_II
+game_slug: zork-ii
 version: Installer
 slug: Zork1I-installer
 runner: frotz
