@@ -1,4 +1,4 @@
-name: kings-bounty-the-legend
+name: Kings Bounty The Legend
 game_slug:  kings-bounty-the-legend
 version: Installer
 slug: kings-bounty-the-legend_INSTALLER
@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Kings Bounty The Legend/kb.exe
+    exe: $GAMEDIR/drive_c/GOG Games/King's Bounty The Legend/kb.exe
     arch: win32
     prefix: $GAMEDIR
 
