@@ -1,5 +1,5 @@
 name: Zork III
-game_slug: zork-iiI
+game_slug: zork-iii
 version: Installer
 slug: Zork1-installer
 runner: scummvm
