@@ -1,5 +1,5 @@
 name: Starcross
-game_slug: Starcross
+game_slug: starcross
 version: Installer
 slug: Starcross-installer
 runner: frotz
