@@ -17,7 +17,7 @@ script:
         requires: ZGI
     
     - execute:
-        args: $GAMEDIR/zassets1 $GAMEDIR/zassets1  $GAMEDIR/zgi_mx
+        args: $GAMEDIR/zassets1 $GAMEDIR/zassets2  $GAMEDIR/zgi_mx
         file: mkdir
 
     - copy:
