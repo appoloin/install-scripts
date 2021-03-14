@@ -1,7 +1,7 @@
 name: Zork Nemesis
-game_slug: zork_nemesis
+game_slug: zork-nemesis-the-forbidden-lands
 version: Installer
-slug:  zork_nemesis-installer
+slug:  installer
 runner: scummvm
 
 
