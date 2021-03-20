@@ -11,7 +11,7 @@ script:
     main_file: $GAMEDIR/cutthroat.conf
   installer:
     - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/HDD/
+        args: $GAMEDIR/HDD
         file: mkdir
 
     - write_file:
@@ -29,7 +29,7 @@ script:
     - chmodx: $CACHE/selectcopy.sh
 
     - insert-disc:
-        description: Please insert Infocom Treasures II disc
+        description: Please insert Lost Treasures of Infocom II CD
         requires: DOS
 
     - execute:
