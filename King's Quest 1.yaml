@@ -11,7 +11,7 @@ script:
     - game:  N/A:Select a file with the extension *.001
 
   game:
-    game_id: sci  
+    game_id: kq1sci  
     path: $GAMEDIR
   
   installer:
