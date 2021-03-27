@@ -24,7 +24,7 @@ script:
         src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
         find "$src" -type f \( -iname "setup.*" -o 
-                               -iname "ansi.CFG" -o                                       
+                               -iname "ansi.exe" -o                                       
                                -iname "install.dat" -o
                                -iname "sorcerer.COM"  \) -exec cp {} "$dst" \;
 
