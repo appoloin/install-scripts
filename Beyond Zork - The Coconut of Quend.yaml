@@ -1,7 +1,7 @@
 name: Beyond Zork - The Coconut of Quendor
-game_slug: Beyond Zork - The Coconut of Quendor
+game_slug: beyond-zork-the-coconut-of-quendor
 version: Installer
-slug: Beyond Zork - The Coconut of Quendor-installer
+slug: installer
 runner: frotz
 
 

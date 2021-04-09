@@ -1,7 +1,7 @@
 name: Plundered hearts
-game_slug:  hollywood hijinx
-version:  hollywood hijinx
-slug:  hollywood hijinx-installer
+game_slug:  plundered-hearts
+version:  infocom
+slug:  installer
 runner: frotz
 
 
