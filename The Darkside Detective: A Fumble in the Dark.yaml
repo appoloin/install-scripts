@@ -1,0 +1,32 @@
+name: The Darkside Detective A Fumble in the Dark
+game_slug:  the-darkside-detective-a-fumble-in-the-dark
+version: Installer
+slug: NSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/The Darkside Detective 2/The Darkside Detective 2.exe
+    arch: win64
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win64
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+
