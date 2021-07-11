@@ -1,0 +1,36 @@
+name: Assassin's Creed Brotherhood
+game_slug: assassins-creed-brotherhood
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/assassins-creed-brotherhood/drive_c/Program Files (x86)/Assassin's Creed Brotherhood/AssassinsCreedBrotherhood.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: win7 d3dcompiler_43 d3dx9 vcrun2008
+        description: Installing additional components
+        name: winetricks
+        prefix: $GAMEDIR
+        
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+        
+  wine:
+    Desktop: true
+
+
