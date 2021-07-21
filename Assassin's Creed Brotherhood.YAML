@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/assassins-creed-brotherhood/drive_c/Program Files (x86)/Assassin's Creed Brotherhood/AssassinsCreedBrotherhood.exe
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Assassin's Creed Brotherhood/AssassinsCreedBrotherhood.exe
     prefix: $GAMEDIR
 
   files:

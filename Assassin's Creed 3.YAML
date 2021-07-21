@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Ubisoft/Assassins Creed III/AssassinsCreed3.exe
     prefix: $GAMEDIR
 
   files:

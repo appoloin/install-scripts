@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/assassins-creed-brotherhood/drive_c/Games/Assassins Creed Revelations/ACRSP.exe
+    exe: $GAMEDIR/drive_c/Games/Assassins Creed Revelations/ACRSP.exe
     prefix: $GAMEDIR
 
   files:
