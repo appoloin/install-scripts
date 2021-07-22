@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files (x86)/Ubisoft/Assassins Creed III/AC3SP.exe
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Assassin's Creed III/AssassinsCreed3.exe
     prefix: $GAMEDIR
 
   files:
@@ -27,7 +27,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx11_43 d3dcompiler_43
+        app: d3dx9 d3dcompiler_43
         arch: win64
         description: Installing DirectX dlls
         name: winetricks
