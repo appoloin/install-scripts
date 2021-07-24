@@ -20,7 +20,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: corefonts
+        app: corefonts tahoma
         arch: win64
         description: Installing corefonts
         name: winetricks
@@ -39,7 +39,11 @@ script:
         description: Installing Visual C++ librairies (2008 & 2010)
         name: winetricks
         prefix: $GAMEDIR
-        
+
+    - write_file:
+        content: "overlay: \n  enabled: false\n"
+        file: $GAMEDIR/drive_c/users/$USER/Local Settings/Application Data/Ubisoft Game Launcher/settings.yml
+
     - task:
         executable: $setup
         name: wineexec
