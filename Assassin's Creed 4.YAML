@@ -40,7 +40,7 @@ script:
     - task:
         executable: $CACHE/dxsetup/DXSETUP.exe
         name: wineexec
-        prefix: $GAMEDIR/prefix
+        prefix: $GAMEDIR
 
     - task:
         app: dotnet472
