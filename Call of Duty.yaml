@@ -1,0 +1,45 @@
+name: Call of Duty
+game_slug: call-of-duty
+version: Installer
+slug:  installer
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files/Call of Duty Deluxe Edition/CoDSP.exe
+    arch: win32
+    prefix: $GAMEDIR
+    args: +set r_ignorehwgamma 1
+
+  files:
+    - setup: N/A:Select Setup
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+   - task:
+        app: winxp d3dcompiler_43 d3dx9 vcrun2008
+        description: Installing additional components
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+    WineDesktop: 1024x768
+
+  system:
+    resolution: 1024x768
+    reset_desktop: true
+    MESA_EXTENSION_MAX_YEAR: 2008
+    __GL_ExtensionStringVersion: 17700
+ 
