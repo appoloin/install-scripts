@@ -1,0 +1,60 @@
+name: Call of Duty 2
+game_slug: call-of-duty-2
+version: Installer
+slug:  installer
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files/Activision/Call of Duty 2/CoD2SP_s.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select Setup
+    - patch13: N/A:Select Patch
+    - crack: N/A:Select Crack
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: winxp d3dcompiler_43 d3dx9 vcrun2008
+        description: Installing additional components
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        description: After the installer crashes, you'll have to end the process "cod2.exe" using a task manager
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $patch13
+        description: Instaling Patch
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - copy:
+        dst: "$GAMEDIR/drive_c/Program Files/Activision/Call of Duty 2/CoD2SP_s.exe.old"
+        src: "$GAMEDIR/drive_c/Program Files/Activision/Call of Duty 2/CoD2SP_s.exe"
+
+    - execute:
+        args:  -r "$GAMEDIR/drive_c/Program Files/Activision/Call of Duty 2/CoD2SP_s.exe"
+        file: /bin/rm 
+
+    - copy:
+        dst: "$GAMEDIR/drive_c/Program Files/Activision/Call of Duty 2"
+        src: $crack
+
+  wine:
+    Desktop: true
+
+  system:
+    reset_desktop: true
