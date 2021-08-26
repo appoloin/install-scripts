@@ -55,6 +55,7 @@ script:
 
   wine:
     Desktop: true
+    esync: false
 
   system:
     reset_desktop: true
