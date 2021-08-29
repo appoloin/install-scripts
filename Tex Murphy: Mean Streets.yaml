@@ -1,7 +1,7 @@
-name: tm-ms
-game_slug: tm-ms
+name: Tex Murphy Mean Streets
+game_slug: tex-murphy-mean-streets
 version: Installer
-slug:  tm-ms-installer
+slug:  installer
 runner: dosbox
 
 
@@ -21,10 +21,9 @@ script:
 
         dst=$2
 
-        find "$src" -type f \( -iname "*.ACC" -o 
-                               -iname  "MS.EXE" -o 
-                               -iname  "MS._XE" -o 
-                               -iname "*.pdf" \) -exec cp {} "$dst" \;'
+        find "$src" -type f \( -iname "*.ACC"  -o 
+                               -iname "MS.EXE" -o 
+                               -iname "MS._XE"  \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
 
     - chmodx: $CACHE/selectcopy.sh
@@ -45,10 +44,30 @@ script:
         args: $CACHE/app $GAMEDIR/HDD/mean
         file: $CACHE/selectcopy.sh
 
-    - write_file:
-        content: '[sdl]
+    - copy:
+        src: $CACHE/app/manual.pdf
+        dst: $GAMEDIR
 
-          sensitivity=20
+    - copy:
+        src: $CACHE/app/mean_streets_detective_information_chart.pdf
+        dst: $GAMEDIR
+
+    - copy:
+        src: $CACHE/app/mean_streets_map.pdf
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[cpu]
+
+          cputype=386_slow
+        
+        [sdl]
+
+          fullscreen=true
+
+          fullresolution=orginal
+
+          capture_mouse=onstart middlerelease
 
         [autoexec]
 
@@ -57,6 +76,8 @@ script:
           C:
 
           cd mean
+
+          AUTOTYPE -w 1 1 -p 0.5 1
           
           ms.exe
           
