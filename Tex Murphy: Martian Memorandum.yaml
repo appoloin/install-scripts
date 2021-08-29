@@ -12,6 +12,7 @@ script:
 
   game:
     main_file: $GAMEDIR/martian.conf
+    args: -userconf
 
   installer:
     - write_file:
@@ -26,7 +27,6 @@ script:
                                 -o -iname  "*.LZ" 
                                 -o -iname "*.SC" 
                                 -o -iname "*.DAT" 
-                                -o -iname "*.PDF" 
                                 -o -iname "*.VID"
                                 -o -iname "*.COL"
                                 -o -iname "MM.EXE" \) -exec cp {} "$dst" \;'
@@ -50,10 +50,18 @@ script:
         args: $CACHE/app $GAMEDIR/HDD/martian
         file: $CACHE/selectcopy.sh
 
+    - copy:
+        src: $CACHE/app/manual.pdf
+        dst: $GAMEDIR
+
     - write_file:
         content: '[sdl]
 
-          sensitivity=20
+          fullscreen=true
+
+          fullresolution=orginal
+
+          capture_mouse=onstart middlerelease
 
         [autoexec]
 
