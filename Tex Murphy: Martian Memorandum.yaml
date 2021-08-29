@@ -1,7 +1,7 @@
-name: tm-mm
-game_slug: tm-mm
+name: Tex Murphy Martian Memorandum
+game_slug: tex-murphy-martian-memorandum
 version: Installer
-slug:  tm-mm-installer
+slug:  installer
 runner: dosbox
 
 
@@ -55,7 +55,31 @@ script:
         dst: $GAMEDIR
 
     - write_file:
-        content: '[sdl]
+        content: '11232'
+        file: $GAMEDIR/HDD/martian/MM.CFG
+
+    - write_file:
+        content: '[cpu]
+      
+         cycles=fixed 4000
+
+        [midi]
+
+         mididevice = mt32
+        
+        [mixer]
+
+         rate=22050
+
+         blocksize=2048
+
+         prebuffer=80
+
+        [speaker]
+
+         pcrate=22050
+
+        [sdl]
 
           fullscreen=true
 
