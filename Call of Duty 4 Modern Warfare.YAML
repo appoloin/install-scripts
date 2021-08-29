@@ -1,0 +1,43 @@
+name: Call of Duty 4 - Modern Warfare
+game_slug:  call-of-duty-4-modern-warfare
+version: Installer
+slug: call-of-duty-4-modern-warfare
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files/Call of Duty 4 Modern Warfare/iw3sp.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: winxp
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task: 
+        app: xact
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    esync: false
+    Desktop: true
+
+
