@@ -1,0 +1,107 @@
+name: Beyond Good and Evil
+game_slug:  beyond-good-evil
+version: Installer
+slug: beyond-good-evil
+runner: wine
+
+script:
+  game:
+    exe: drive_c/GOG Games/Beyond Good and Evil/run.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the EXE downloaded from GOG
+    - wds: https://github.com/legluondunet/MyLittleLutrisScripts/raw/master/Beyond%20Good%20and%20Evil/bgewidescreen.zip
+    - audio: https://github.com/legluondunet/MyLittleLutrisScripts/raw/master/Beyond%20Good%20and%20Evil/dsound.dll
+    - gppx360: https://github.com/legluondunet/MyLittleLutrisScripts/raw/master/Beyond%20Good%20and%20Evil/gamepad%20profiles/bge_x360.gamecontroller.amgp
+    - gppsteam: https://github.com/legluondunet/MyLittleLutrisScripts/raw/master/Beyond%20Good%20and%20Evil/gamepad%20profiles/bge_steam.sccprofile
+    - gppreadme: https://github.com/legluondunet/MyLittleLutrisScripts/raw/master/Beyond%20Good%20and%20Evil/gamepad%20profiles/bge_gamepad_readme.html
+ 
+  installer:
+    - task:
+        arch: win64
+        install_gecko: false
+        install_mono: false
+        name: create_prefix
+        prefix: $GAMEDIR
+
+    - task:
+        description: Installing...
+        executable: setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - extract:
+        dst: $GAMEDIR/drive_c/GOG Games/Beyond Good and Evil/
+        src: wds
+        
+    - write_config:
+        data:
+          MAIN:
+            Height: $RESOLUTION_HEIGHT
+            Width: $RESOLUTION_WIDTH
+        file: $GAMEDIR/drive_c/GOG Games/Beyond Good and Evil/bge.ini
+
+    - task:
+        arch: win64
+        key: d3d9
+        name: set_regedit
+        path: HKEY_CURRENT_USER\Software\Wine\DllOverrides\
+        prefix: $GAMEDIR
+        type: REG_SZ
+        value: native,builtin
+
+    - copy:
+        dst: $GAMEDIR/drive_c/GOG Games/Beyond Good and Evil/
+        src: audio
+
+    - merge:
+        dst: $GAMEDIR/drive_c/GOG Games/Beyond Good and Evil/gamepad profiles/
+        src: gppreadme
+
+    - merge:
+        dst: $GAMEDIR/drive_c/GOG Games/Beyond Good and Evil/gamepad profiles/
+        src: gppx360
+
+    - merge:
+        dst: $GAMEDIR/drive_c/GOG Games/Beyond Good and Evil/gamepad profiles/
+        src: gppsteam
+
+    - task:
+        arch: win64
+        key: dsound
+        name: set_regedit
+        path: HKEY_CURRENT_USER\Software\Wine\DllOverrides\
+        prefix: $GAMEDIR
+        type: REG_SZ
+        value: native,builtin
+
+    - task:
+        arch: win64
+        key: csmt
+        name: set_regedit
+        path: HKEY_CURRENT_USER\Software\Wine\Direct3D\
+        prefix: $GAMEDIR
+        type: REG_DWORD
+        value: '00000000'
+
+    - task:
+        arch: win64
+        key: background
+        name: set_regedit
+        path: HKEY_CURRENT_USER\Control Panel\Colors\
+        prefix: $GAMEDIR
+        type: REG_SZ
+        value: 0 0 0
+
+    - task:
+        description: Please choose only your resolution, save and quit.
+        executable: $GAMEDIR/drive_c/GOG Games/Beyond Good and Evil/SettingsApplication.exe
+        name: wineexec
+  wine:
+    Desktop: true
+
+  system:
+    single_cpu: true
+
+
