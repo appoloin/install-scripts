@@ -39,10 +39,6 @@ script:
         file: $dgv
         dst: $CACHE
 
-    - execute:
-        args: -r "$GAMEDIR/drive_c/GOG Games/Splinter Cell/system/dgVoodoo.conf"
-        file: /bin/rm
-
     - copy:
         src: $CACHE/MS/x86/D3D8.dll
         dst: $GAMEDIR/drive_c/GOG Games/Splinter Cell/system/
@@ -58,20 +54,6 @@ script:
     - copy:
         src: $CACHE/MS/x86/D3DImm.dll
         dst: $GAMEDIR/drive_c/GOG Games/Splinter Cell/system/
-
-    - write_config:
-        data:
-          DirectX:
-            AppControlledScreenMode: false
-            DisableAltEnterToToggleScreenMode: false
-            ForceVerticalSync: true
-            Resolution: unforced
-            VRAM: 256
-            dgVoodooWatermark: false
-          General:
-            CaptureMouse: false
-        file: "$GAMEDIR/drive_c/GOG Games/Splinter Cell/system/dgVoodoo.conf"
-
 
   wine:
     Desktop: true
