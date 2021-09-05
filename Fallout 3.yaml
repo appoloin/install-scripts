@@ -360,7 +360,6 @@ script:
             mesa_glthread: 'true'
     wine:
         Desktop: true
-        WineDesktop: 1280x720
         overrides:
             winegstreamer: disabled
 
