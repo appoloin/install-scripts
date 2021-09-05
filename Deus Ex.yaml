@@ -1,0 +1,74 @@
+name: Deus Ex
+game_slug:  deus-ex
+version: Installer
+slug:  deus-ex
+runner: wine
+
+
+script:
+  game:
+    exe: drive_c/GOG Games/Deus Ex GOTY/System/DeusEx.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the Setup file
+    - d3d9renderer: https://lutris.net/files/games/deus-ex/dxd3d9r13.zip
+
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: vcrun2010 win7
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        args: /DIR="C:\GOG Games\Deus Ex GOTY"
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - extract:
+        dst: $GAMEDIR/drive_c/GOG Games/Deus Ex GOTY/System/
+        file: d3d9renderer
+
+    - write_config:
+        file: $GAMEDIR/drive_c/GOG Games/Deus Ex GOTY/System/DeusEx.ini
+        key: GameRenderDevice
+        section: Engine.Engine
+        value: D3D9Drv.D3D9RenderDevice
+
+    - write_config:
+        file: $GAMEDIR/drive_c/GOG Games/Deus Ex GOTY/System/DeusEx.ini
+        key: FirstRun
+        section: FirstRun
+        value: 1100
+    - write_config:
+        file: $GAMEDIR/drive_c/GOG Games/Deus Ex GOTY/System/DeusEx.ini
+        key: FullscreenColorBits
+        section: WinDrv.WindowsClient
+        value: 32
+    - write_config:
+        file: $GAMEDIR/drive_c/GOG Games/Deus Ex GOTY/System/DeusEx.ini
+        key: FullscreenViewportX
+        section: WinDrv.WindowsClient
+        value: $RESOLUTION_WIDTH
+    - write_config:
+        file: $GAMEDIR/drive_c/GOG Games/Deus Ex GOTY/System/DeusEx.ini
+        key: FullscreenViewportY
+        section: WinDrv.WindowsClient
+        value: $RESOLUTION_HEIGHT
+
+  wine:
+    Desktop: true
+
+  system:
+    single_cpu: true
+
