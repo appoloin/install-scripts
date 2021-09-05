@@ -31,6 +31,25 @@ script:
             name: winetricks
             prefix: $GAMEDIR
 
+        - task:
+            arch: win64
+            description: Forcing Nvidia VideoPci
+            key: VideoPciDeviceID
+            name: set_regedit
+            path: HKEY_CURRENT_USER\Software\Wine\Direct3D
+            prefix: $GAMEDIR
+            type: REG_DWORD
+            value: '402'
+        - task:
+            arch: win64
+            description: Forcing Nvidia VideoPci
+            key: VideoPciVendorID
+            name: set_regedit
+            path: HKEY_CURRENT_USER\Software\Wine\Direct3D
+            prefix: $GAMEDIR
+            type: REG_DWORD
+            value: 10de
+
         - extract:
             dst: $CACHE/innoextract
             file: innoextract
@@ -186,6 +205,17 @@ script:
             section: Controls
             value: 1
 
+        - task:
+            name: wineexec
+            prefix: $GAMEDIR
+            arch: win64
+            description: 'Configure data files (DLCs), video settings and exit the launcher.
+
+            Don''t forget to set your native resolution!
+
+            '
+            executable: $GAMEDIR/drive_c/Fallout 3/FalloutLauncher.exe
+           
         - task:
             arch: win64
             name: winekill
