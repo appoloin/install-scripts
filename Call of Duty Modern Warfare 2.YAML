@@ -1,0 +1,37 @@
+name: Call of Duty - Modern Warfare 2
+game_slug: call-of-duty-modern-warfare-2
+version: Installer
+slug: call-of-duty-modern-warfare-2
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Call of Duty Modern Warfare 2/iw4sp.exe
+    prefix: $GAMEDIR
+
+  installer:
+    - insert-disc:
+          description: Select game folder
+          requires: iw4sp.exe
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: winxp d3dcompiler_43 d3dx9 vcrun2008
+        description: Installing additional components
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - execute:
+        args: -r "$DISC/"  "$GAMEDIR/drive_c/"
+        file: /bin/cp 
+
+  wine:
+    esync: false
+    Desktop: true
+
+
