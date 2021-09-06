@@ -22,12 +22,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: winxp
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task: 
-        app: xact
+        app: winxp d3dx9 vcrun2008
         name: winetricks
         prefix: $GAMEDIR
 
