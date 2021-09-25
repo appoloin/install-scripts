@@ -25,7 +25,7 @@ script:
             prefix: $GAMEDIR
 
         - task:
-            app: winxp quartz d3dx9 vcrun2005 faudio
+            app: winxp quartz d3dx9 vcrun2005 dsound faudio
             arch: win64
             description: 'winetricks: winxp quartz'
             name: winetricks
