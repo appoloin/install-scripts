@@ -1,0 +1,115 @@
+name: Surviving Mars
+game_slug: surviving-mars
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Surviving Mars/MarsGOG.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select Surviving Mars installer
+    - DLC: N/A:Select Upgrade Package
+    - DLC1: N/A:Select DLC Stellaris Dome Set installer
+    - DLC2: N/A:Select DLC Space Race installer
+    - DLC3: N/A:Select DLC Mysteries Resupply installer
+    - DLC4: N/A:Select DLC Marsvision Song Contest installer
+    - DLC5: N/A:Select DLC Colony Design Set installer
+    - DLC6: N/A:Select DLC Green Planet installer
+    - DLC7: N/A:Select DLC Project Laika installer
+    - DLC8: N/A:Select DLC Mars Lifestyle Radio installer
+    - DLC9: N/A:Select DLC In Domes Building installer
+    - DLC10: N/A:Select DLC Below and Above installer
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: win7 d3dx11_43 d3dcompiler_47 
+        description: 'winetricks: Direct X'
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        description: 'Installing Surviving Mars'
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC
+        description: 'Installing Upgrade'
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC1
+        description: 'Installing Stellaris Dome Set '
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC2
+        description: 'Installing Space Race '
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC3
+        description: 'Installing Mysteries Resupply '
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC4
+        description: 'Installing Marsvision Song Contest '
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC5
+        description: 'Installing Colony Design Set '
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC6
+        description: 'Installing Green Planet '
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC7
+        description: 'Installing Project Laika '
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC8
+        description: 'Installing Mars Lifestyle Radio '
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC9
+        description: 'Installing In Domes Building '
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC10
+        description: 'Installing Below and Above '
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+    esync: false
+
