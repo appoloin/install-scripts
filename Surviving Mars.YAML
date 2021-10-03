@@ -41,72 +41,84 @@ script:
         executable: $setup
         description: 'Installing Surviving Mars'
         name: wineexec
+        args: /SILENT
         prefix: $GAMEDIR
 
     - task:
         executable: $DLC
         description: 'Installing Upgrade'
         name: wineexec
+        args: /SILENT
         prefix: $GAMEDIR
 
     - task:
         executable: $DLC1
         description: 'Installing Stellaris Dome Set '
         name: wineexec
+        args: /SILENT
         prefix: $GAMEDIR
 
     - task:
         executable: $DLC2
         description: 'Installing Space Race '
         name: wineexec
+        args: /SILENT
         prefix: $GAMEDIR
 
     - task:
         executable: $DLC3
         description: 'Installing Mysteries Resupply '
         name: wineexec
+        args: /SILENT
         prefix: $GAMEDIR
 
     - task:
         executable: $DLC4
         description: 'Installing Marsvision Song Contest '
         name: wineexec
+        args: /SILENT
         prefix: $GAMEDIR
 
     - task:
         executable: $DLC5
         description: 'Installing Colony Design Set '
         name: wineexec
+        args: /SILENT
         prefix: $GAMEDIR
 
     - task:
         executable: $DLC6
         description: 'Installing Green Planet '
         name: wineexec
+        args: /SILENT
         prefix: $GAMEDIR
 
     - task:
         executable: $DLC7
         description: 'Installing Project Laika '
         name: wineexec
+        args: /SILENT
         prefix: $GAMEDIR
 
     - task:
         executable: $DLC8
         description: 'Installing Mars Lifestyle Radio '
         name: wineexec
+        args: /SILENT
         prefix: $GAMEDIR
 
     - task:
         executable: $DLC9
         description: 'Installing In Domes Building '
         name: wineexec
+        args: /SILENT
         prefix: $GAMEDIR
 
     - task:
         executable: $DLC10
         description: 'Installing Below and Above '
         name: wineexec
+        args: /SILENT
         prefix: $GAMEDIR
 
   wine:
