@@ -1,0 +1,89 @@
+name: Northgard
+game_slug: northgard
+version: Installer
+slug:  northgard
+runner: wine
+
+
+script:
+    files:
+    - setup: N/A:Please select installer exe from GOG
+    - DLC1:  N/A:Please select DLC Brundr & Kaelinn, Clan of the Lynx
+    - DLC2:  N/A:Please select DLC Ratatoskr, Clan of the Squirrel
+    - DLC3:  N/A:Please select DLC Sváfnir, Clan of the Snake
+    - DLC4:  N/A:Please select DLC Himminbrjotir, Clan of the Ox
+    - DLC5:  N/A:Please select DLC Nidhogg, Clan of the Dragon
+    - DLC6:  N/A:Please select DLC Lyngbakr, Clan of the Kraken
+    - DLC7:  N/A:Please select DLC Svardilfari, Clan of the Horse
+
+    game:
+      exe: $GAMEDIR/drive_c/GOG Games/Northgard/Northgard.exe
+      prefix: $GAMEDIR
+
+    installer:
+      - task:
+          description: Creating 64-bit Wine prefix
+          install_gecko: false
+          install_mono: false
+          name: create_prefix
+          prefix: $GAMEDIR
+
+      - task:
+          executable: $setup
+          name: wineexec
+          args: /SILENT
+          prefix: $GAMEDIR
+
+      - task:
+          executable: $DLC1
+          description: 'Installing DLC Brundr & Kaelinn, Clan of the Lynx'
+          name: wineexec
+          args: /SILENT
+          prefix: $GAMEDIR
+
+      - task:
+          executable: $DLC2
+          description: 'Installing DLC Ratatoskr, Clan of the Squirrel'
+          name: wineexec
+          args: /SILENT
+          prefix: $GAMEDIR
+
+      - task:
+          executable: $DLC3
+          description: 'Installing DLC Sváfnir, Clan of the Snake'
+          name: wineexec
+          args: /SILENT
+          prefix: $GAMEDIR
+
+      - task:
+          executable: $DLC4
+          description: 'Installing DLC Himminbrjotir, Clan of the Ox'
+          name: wineexec
+          args: /SILENT
+          prefix: $GAMEDIR
+
+      - task:
+          executable: $DLC5
+          description: 'Installing DLC Nidhogg, Clan of the Dragon'
+          name: wineexec
+          args: /SILENT
+          prefix: $GAMEDIR
+
+      - task:
+          executable: $DLC6
+          description: 'Installing DLC Lyngbakr, Clan of the Kraken'
+          name: wineexec
+          args: /SILENT
+          prefix: $GAMEDIR
+
+      - task:
+          executable: $DLC7
+          description: 'Installing DLC Svardilfari, Clan of the Horse'
+          name: wineexec
+          args: /SILENT
+          prefix: $GAMEDIR
+
+
+    wine:
+        Desktop: true
+ 
