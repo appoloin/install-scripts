@@ -1,0 +1,35 @@
+name: Lifeless Planet
+game_slug: lifeless-planet
+version: Installer
+slug: lifeless-planet-installer
+runner: wine
+
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Lifeless Planet/LifelessPlanet.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: winxp d3dx9 d3dcompiler_43
+        description: 'winetricks: WinXP, Direct X; D3DCompiler'
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+  wine:
+    Desktop: true
