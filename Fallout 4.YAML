@@ -20,8 +20,8 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: win7 vcrun2015 d3dx11_43 d3dcompiler_47 xact_x64 faudio
-        description: 'winetricks: Direct X, XAct, faudio, VCrun2015'
+        app: win7 xact xact_x64 
+        description: 'winetricks: Win7 XAct'
         name: winetricks
         prefix: $GAMEDIR
 
@@ -32,7 +32,3 @@ script:
 
   wine:
     Desktop: true
-    esync: false
-
-  system:
-    pulse_latency: true
