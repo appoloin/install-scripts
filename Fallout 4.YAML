@@ -6,13 +6,15 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Games/Fallout 4/Fallout4Launcher.exe
+    exe: $GAMEDIR/drive_c/Fallout 4/Fallout4Launcher.exe
     prefix: $GAMEDIR
 
-  files:
-    - setup: N/A:Select installer
-
   installer:
+    - insert-disc:
+        description: Select game folder
+        requires: Fallout4.exe
+
+
     - task:
         name: create_prefix
         install_mono: false
@@ -20,15 +22,15 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: win7 xact xact_x64 
-        description: 'winetricks: Win7 XAct'
+        app: win7 xact xact_x64 vcrun2015 
+        description: 'winetricks: Win7 XAct Vcrun2015'
         name: winetricks
         prefix: $GAMEDIR
 
-    - task:
-        executable: $setup
-        name: wineexec
-        prefix: $GAMEDIR
+    - execute:
+        args: -r "$DISC/"  "$GAMEDIR/drive_c/Fallout 4"
+        file: /bin/cp 
+
 
   wine:
     Desktop: true
