@@ -1,0 +1,40 @@
+name: Hand Of Fate
+game_slug: hand-of-fate
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Hand of Fate/Hand of Fate.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+    - DLC: N/A:Select DLC
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC
+        description: 'Installing DLC'
+        name: wineexec
+        args: /SILENT
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+  system:
+    pulse_latency: true
