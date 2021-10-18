@@ -1,0 +1,65 @@
+name: Darksider
+game_slug: darksiders-warmastered-edition
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Darksiders
+    prefix: $GAMEDIR
+    arch: win32
+
+  files:
+    - setup: N/A:Select installer
+    - mfplatdll: https://github.com/legluondunet/MyLittleLutrisScripts/raw/master/Darksiders%20-%20Warmastered%20Edition/mfplat.7z
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: mf
+        name: winetricks
+    - task:
+        cabfile: $HOME/.cache/winetricks/win7sp1/windows6.1-KB976932-X86.exe
+        component: mediafoundation
+        name: install_cab_component
+    - task:
+        cabfile: $HOME/.cache/winetricks/win7sp1/windows6.1-KB976932-X86.exe
+        component: mf_
+        name: install_cab_component
+    - task:
+        cabfile: $HOME/.cache/winetricks/win7sp1/windows6.1-KB976932-X86.exe
+        component: mfreadwrite
+        name: install_cab_component
+    - task:
+        cabfile: $HOME/.cache/winetricks/win7sp1/windows6.1-KB976932-X86.exe
+        component: wmadmod
+        name: install_cab_component
+    - task:
+        cabfile: $HOME/.cache/winetricks/win7sp1/windows6.1-KB976932-X86.exe
+        component: wmvdecod
+        name: install_cab_component
+    - extract:
+        dst: $GAMEDIR/drive_c/GOG Games/Darksiders
+        file: mfplatdll
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  system:
+    pulse_latency: false
+    resolution: 1024x768
+    reset_desktop: true
+
+
+  wine:
+    Desktop: true
+    WineDesktop: 1024x768
