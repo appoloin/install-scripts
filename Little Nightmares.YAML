@@ -1,0 +1,76 @@
+name: Little Nightmares
+game_slug: little-nightmares
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Little Nightmares/Atlas/Binaries/Win64/LittleNightmares.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+    - DLC: N/A:Select DLC Fox Mask
+    - DLC1: N/A:Select DLC Hideaway
+    - DLC2: N/A:Select DLC Scarecrow Sack
+    - DLC3: N/A:Select DLC Tengu Sack
+    - DLC4: N/A:Select DLC The Depth
+    - DLC5: N/A:Select DLC The Residence
+    - DLC6: N/A:Select DLC The Upside Down Teapot
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: xact vcrun2013 vcrun2015 win7
+        description: Installing xact, VCrun2013, VCrun2015
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC1
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC2
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC3
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC4
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC5
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC6
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
