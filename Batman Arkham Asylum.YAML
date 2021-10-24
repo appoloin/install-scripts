@@ -1,0 +1,37 @@
+name: Batman Arkham Asylum
+game_slug: batman-arkham-asylum-goty-edition
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Batman Arkham Asylum GOTY/Binaries/BmLauncher.exe
+
+  files:
+    - setup: N/A:Select installer
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+        
+    - task:
+        app: win7 d3dx9 d3dcompiler_47 mdx
+        description: 'winetricks: Win7, Direct X9, MDX'
+        name: winetricks
+        prefix: $GAMEDIR
+
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+    esync: false
+
