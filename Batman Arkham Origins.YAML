@@ -1,15 +1,16 @@
-name: Metro Last Light Redux
-game_slug: metro-last-light-redux
+name: Batman Arkham Origins
+game_slug: batmantm-arkham-origins
 version: Installer
 slug: INSTALLER
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Metro Last Light Redux/metro.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Batman Arkham Origins/SinglePlayer/Binaries/Win32/BatmanOrigins.exe
 
   files:
     - setup: N/A:Select installer
+    - DLC: N/A:Select DLC
 
 
   installer:
@@ -18,21 +19,24 @@ script:
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
-        
+    
     - task:
-        app:  d3dx10 vcrun2012
-        description: 'winetricks: Direct X10, vcrun2012'
+        app: vcrun2012 win7 d3dx10 d3dcompiler_43 xact
+        description: 'winetricks: Win7, Direct X9, MDX'
         name: winetricks
         prefix: $GAMEDIR
-
 
     - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
 
+    - task:
+        executable: $DLC
+        name: wineexec
+        prefix: $GAMEDIR
+
+
   wine:
     Desktop: true
-    esync: false
-
 

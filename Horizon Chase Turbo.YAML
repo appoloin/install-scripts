@@ -1,12 +1,12 @@
-name: Metro Last Light Redux
-game_slug: metro-last-light-redux
+name: Horizon Chase Turbo
+game_slug: horizon-chase-turbo
 version: Installer
 slug: INSTALLER
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Metro Last Light Redux/metro.exe
+    exe: $GAMEDIR/drive_c/Games/Horizon Chase Turbo Senna Forever/HorizonChase.exe
 
   files:
     - setup: N/A:Select installer
@@ -18,21 +18,13 @@ script:
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
-        
-    - task:
-        app:  d3dx10 vcrun2012
-        description: 'winetricks: Direct X10, vcrun2012'
-        name: winetricks
-        prefix: $GAMEDIR
-
-
+    
     - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
 
+
   wine:
     Desktop: true
-    esync: false
-
 
