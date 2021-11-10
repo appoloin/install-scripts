@@ -1,0 +1,38 @@
+name: Metro 2033 Redux
+game_slug: metro-2033-redux
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Metro 2033 Redux/metro.exe
+
+  files:
+    - setup: N/A:Select installer
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+        
+    - task:
+        app:  d3dx10 vcrun2012
+        description: 'winetricks: Direct X10, vcrun2012'
+        name: winetricks
+        prefix: $GAMEDIR
+
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+    esync: false
+
+
