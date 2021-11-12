@@ -67,3 +67,6 @@ script:
         d3dimm.dll: n,b
         msacm32: n,b
         msvfw32: n,b
+
+  system:
+    single_cpu: true
