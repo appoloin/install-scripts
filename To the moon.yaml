@@ -1,5 +1,5 @@
-name: moon
-game_slug: moon
+name: To the Moon
+game_slug: to-the-moon
 version: Installer
 slug: moon-installer
 runner: wine
@@ -10,7 +10,7 @@ script:
 
   game:
     arch: win32
-    exe: "$GAMEDIR/drive_c/Program Files/GOG.com/To The Moon/To the Moon.exe"
+    exe: "$GAMEDIR/drive_c/GOG Games/To The Moon/To the Moon.exe"
     prefix: $GAMEDIR
 
   installer:
@@ -18,8 +18,15 @@ script:
         arch: win32
         name: create_prefix
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
   
+    - task:
+        app: corefonts
+        description: Installing corefonts.
+        name: winetricks
+        prefix: $GAMEDIR
+
     - task:
         description: Installing To the Moon
         executable: $setup
