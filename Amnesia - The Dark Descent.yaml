@@ -1,8 +1,8 @@
 #DVD version
 name: Amnesia - The Dark Descent
-game_slug: Amnesia:-The-Dark-Descent
+game_slug: amnesia-the-dark-descent
 version: Installer
-slug: Amnesia:-The-Dark-Descent-installer
+slug: amnesia-the-dark-descent-installer
 runner: wine
 
 
