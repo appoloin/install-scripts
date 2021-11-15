@@ -6,53 +6,42 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files (x86)/Assassin s Creed Chronicles India/Binaries/Win32/ACCGame-Win32-Shipping.exe
+    exe: $GAMEDIR/drive_c/Assassins Creed Chronicles India/Binaries/Win32/ACCGame-Win32-Shipping.launcher.exe
     prefix: $GAMEDIR
-    args:  -seekfreeloadingpcconsole
 
   files:
-    - setup: N/A:Select installer
     - dx2010: https://lutris.net/files/tools/directx-2010.tar.gz
 
 
   installer:
+    - insert-disc:
+        description: Select game folder
+        requires: ACC_PC.ico
+
     - task:
         name: create_prefix
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
-    - task:
-        app: corefonts tahoma arial
-        description: Installing corefonts
-        name: winetricks
-        prefix: $GAMEDIR
-
     - extract:
-        dst: $CACHE/dxsetup
+        dst: $GAMEDIR/drive_c/dxsetup
         file: dx2010
 
     - task:
-        app: vcrun2008 vcrun2010 win7 d3dcompiler_43
-        description: Installing Visual C++ librairies (2008 & 2010)
+        app: vcrun2008 vcrun2010 win7 d3dcompiler_43 corefonts dotnet40
+        description: Installing Visual C++ (2008 & 2010), Corefonts, Dotnet4, Win7
         name: winetricks
         prefix: $GAMEDIR
 
     - task:
-        executable: $CACHE/dxsetup/DXSETUP.exe
+        executable: $GAMEDIR/drive_c/dxsetup/DXSETUP.exe
         name: wineexec
         prefix: $GAMEDIR
 
-    - task:
-        app: dotnet40 
-        description: Please be patient while we install .NET 4
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        executable: $setup
-        name: wineexec
-        prefix: $GAMEDIR
+    - execute:
+        args: -r "$DISC/"  "$GAMEDIR/drive_c/"
+        file: /bin/cp 
 
   wine:
     Desktop: true
