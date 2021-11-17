@@ -59,6 +59,10 @@ script:
 
           capture_mouse = onstart middlerelease  
         
+        [cpu]
+
+          cputype = pentium_slow
+        
         [autoexec]
 
           mount C "$GAMEDIR/HDD" -t dir
