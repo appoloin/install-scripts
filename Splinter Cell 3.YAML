@@ -60,7 +60,7 @@ script:
 
 
   wine:
-    Desktop: false
+    Desktop: true
     overrides:
         d3d9.dll: n,b
         msacm32.dll: n,b
