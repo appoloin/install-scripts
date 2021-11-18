@@ -1,0 +1,78 @@
+name: Tom Clancy's Splinter Cell Chaos Theory
+game_slug:  tom-clancys-splinter-cell-chaos-theory
+version: Installer
+slug: tom-clancys-splinter-cell-chaos-theory
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Games/Splinter Cell Chaos Theory/System/splintercell3.exe
+    prefix: $GAMEDIR
+    arch: win32
+
+
+  files:
+    - setup: N/A:Select installer
+    - scws: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/scct/SplinterCellChaosTheory.WidescreenFix.zip
+    - profile: https://github.com/appoloin/misc/raw/main/Tom%20Clancy's%20Splinter%20Cell%20Chaos%20Theory.zip
+
+
+  installer:
+    - task:
+        arch: win32
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: d3dcompiler_47
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - extract:  
+        file: scws
+        dst:  $CACHE 
+
+    - copy:
+        src: $CACHE/d3d9.dll
+        dst: $GAMEDIR/drive_c/Games/Splinter Cell Chaos Theory/System/
+
+    - copy:
+        src: $CACHE/d3d9.ini
+        dst: $GAMEDIR/drive_c/Games/Splinter Cell Chaos Theory/System/
+
+    - copy:
+        src: $CACHE/msacm32.dll
+        dst: $GAMEDIR/drive_c/Games/Splinter Cell Chaos Theory/System/
+
+    - copy:
+        src: $CACHE/msvfw32.dll
+        dst: $GAMEDIR/drive_c/Games/Splinter Cell Chaos Theory/System/
+
+    - copy:
+        src: $CACHE/scripts
+        dst: $GAMEDIR/drive_c/Games/Splinter Cell Chaos Theory/System/Scripts
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_c/ProgramData/Ubisoft/
+
+    - extract:  
+        file: profile
+        dst:  $GAMEDIR/drive_c/ProgramData/Ubisoft
+
+
+
+
+  wine:
+    Desktop: true
+    overrides:
+        d3d9.dll: n
+
+
