@@ -14,8 +14,7 @@ script:
   files:
     - setup: N/A:Select installer
     - scws: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/scct/SplinterCellChaosTheory.WidescreenFix.zip
-    - profile: https://github.com/appoloin/misc/raw/main/Tom%20Clancy's%20Splinter%20Cell%20Chaos%20Theory.zip
-
+    - controller: https://github.com/appoloin/misc/blob/main/scfix_0_1.zip
 
   installer:
     - task:
@@ -23,11 +22,6 @@ script:
         name: create_prefix
         install_mono: false
         install_gecko: false
-        prefix: $GAMEDIR
-
-    - task:
-        app: d3dcompiler_47
-        name: winetricks
         prefix: $GAMEDIR
 
     - task:
@@ -59,20 +53,18 @@ script:
         src: $CACHE/scripts
         dst: $GAMEDIR/drive_c/Games/Splinter Cell Chaos Theory/System/Scripts
 
-    - execute:
-        file: mkdir
-        args: $GAMEDIR/drive_c/ProgramData/Ubisoft/
-
     - extract:  
-        file: profile
-        dst:  $GAMEDIR/drive_c/ProgramData/Ubisoft
-
+        file: controller
+        dst:  $GAMEDIR/drive_c/Games/Splinter Cell Chaos Theory/System/
 
 
 
   wine:
-    Desktop: true
+    Desktop: false
     overrides:
-        d3d9.dll: n
+        d3d9.dll: n,b
+        msacm32.dll: n,b
+        msvfw32.dll: n,b
+        dinput8.dll: n,b
 
 
