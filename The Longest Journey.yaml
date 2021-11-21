@@ -1,8 +1,8 @@
 name: The Longest Journey
-game_slug: The-Longest-Journey
+game_slug: the-longest-journey
 version: Installer
 slug:  The-Longest-Journey-installer
-runner: residualvm
+runner: scummvm
 
 
 script:
@@ -44,7 +44,7 @@ script:
         name: wine.create_prefix
         arch: win32
         install_mono: false
-        install_geko: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
