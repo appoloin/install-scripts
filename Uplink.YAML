@@ -6,12 +6,14 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Uplink/uplink.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Uplink/UplinkOS.exe
     arch: win32
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
+    - update: N/A:Select UplinkOS installer
+
 
   installer:
     - task:
@@ -31,6 +33,11 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+    - extract:
+        file: $update
+        dst: $GAMEDIR/drive_c/GOG Games/Uplink/
+
 
   wine:
     Desktop: true
