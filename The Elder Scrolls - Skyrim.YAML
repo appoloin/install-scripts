@@ -7,7 +7,6 @@ runner: wine
 script:
   game:
     exe: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Legendary Edition/SkyrimLauncher.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -16,44 +15,12 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx9
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: corefonts
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: tahoma
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: faudio
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: xact
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: vcrun2008
-        arch: win32
+        app: d3dx9 xact corefonts tahoma vcrun2008
         name: winetricks
         prefix: $GAMEDIR
 
