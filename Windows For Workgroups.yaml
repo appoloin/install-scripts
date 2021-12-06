@@ -62,7 +62,7 @@ script:
           
           imgmount G "$Disc7" -t floppy
           
-          imgmount H "$Disc1" -t floppy
+          imgmount H "$Disc8" -t floppy
           
           mount B "$GAMEDIR/FDD/Drivers" -t dir
 
