@@ -1,0 +1,46 @@
+name: Trine 3 - The Artifacts of Power
+game_slug:  trine-4-the-nightmare-prince
+version: Installer
+slug: trine-4-the-nightmare-prince
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Trine 4/trine4.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+    - DLC: N/A:Select DLC 1
+    - DLC1: N/A:Select DLC 2
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC
+        name: wineexec
+        args: /SILENT
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC1
+        name: wineexec
+        args: /SILENT
+        prefix: $GAMEDIR
+
+
+  wine:
+    Desktop: true
+
+
