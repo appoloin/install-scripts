@@ -11,6 +11,8 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - patch: N/A:Select patch
+
 
   installer:
     - task:
@@ -21,13 +23,22 @@ script:
 
     - task:
         app: d3dx9 xact corefonts tahoma vcrun2008
+        description: Instaling dependances 
         name: winetricks
         prefix: $GAMEDIR
 
     - task:
         executable: $setup
+        description: Instaling Game
         name: wineexec
         prefix: $GAMEDIR
+
+    - task:
+        executable: $patch
+        description: Instaling Patch
+        name: wineexec
+        prefix: $GAMEDIR
+
 
   wine:
     Desktop: true
