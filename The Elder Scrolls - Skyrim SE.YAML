@@ -54,7 +54,7 @@ script:
         path: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Bethesda Softworks\Skyrim Special Edition
         prefix: $GAMEDIR
         type: REG_SZ
-        value: c:\\Games\\skyrim special edition
+        value: c:\\Games\\The Elder Scrolls V Skyrim Special Edition
         
     - task:
         key: Installed Path
@@ -62,7 +62,7 @@ script:
         path: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Valve\Steam\Apps\489830
         prefix: $GAMEDIR
         type: REG_SZ
-        value: c:\\Games\\skyrim special edition
+        value: c:\\Games\\The Elder Scrolls V Skyrim Special Edition
 
     - task:
         executable: $wrye
