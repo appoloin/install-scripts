@@ -10,9 +10,9 @@ script:
     prefix: $GAMEDIR
 
   files:
-   # - setup: N/A:Select installer
-   # - patch: N/A:Select patch
-   # - patch2: N/A:Select patch 2
+    - setup: N/A:Select installer
+    - patch: N/A:Select patch
+    - patch2: N/A:Select patch 2
     - wrye: N/A:Select Wrye Bash installer
     - loot: N/A:Select Loot installer
 
@@ -51,8 +51,7 @@ script:
     - task:
         key: Installed Path
         name: set_regedit
-        path: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Bethesda Softworks\Skyrim Special
-          Edition
+        path: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Bethesda Softworks\Skyrim Special Edition
         prefix: $GAMEDIR
         type: REG_SZ
         value: c:\\Games\\skyrim special edition
