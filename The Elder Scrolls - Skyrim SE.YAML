@@ -10,8 +10,11 @@ script:
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select installer
-    - patch: N/A:Select patch
+   # - setup: N/A:Select installer
+   # - patch: N/A:Select patch
+   # - patch2: N/A:Select patch 2
+    - wrye: N/A:Select Wrye Bash installer
+    - loot: N/A:Select Loot installer
 
 
   installer:
@@ -22,22 +25,58 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx9 xact corefonts tahoma vcrun2008
+        app: xact corefonts tahoma vcrun2008 vcrun2015 vcrun2017
         description: Instaling dependances 
         name: winetricks
         prefix: $GAMEDIR
 
     - task:
         executable: $setup
-        description: Instaling Game
+        description: Installing Game
         name: wineexec
         prefix: $GAMEDIR
 
     - task:
         executable: $patch
-        description: Instaling Patch
+        description: Installing AE Patch
         name: wineexec
         prefix: $GAMEDIR
+
+    - task:
+        executable: $patch2
+        description: Installing Fix
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        key: Installed Path
+        name: set_regedit
+        path: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Bethesda Softworks\Skyrim Special
+          Edition
+        prefix: $GAMEDIR
+        type: REG_SZ
+        value: c:\\Games\\skyrim special edition
+        
+    - task:
+        key: Installed Path
+        name: set_regedit
+        path: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Valve\Steam\Apps\489830
+        prefix: $GAMEDIR
+        type: REG_SZ
+        value: c:\\Games\\skyrim special edition
+
+    - task:
+        executable: $wrye
+        description: Installing Wrye Bash
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $loot
+        description: Installing Loot
+        name: wineexec
+        prefix: $GAMEDIR
+
 
 
   wine:
