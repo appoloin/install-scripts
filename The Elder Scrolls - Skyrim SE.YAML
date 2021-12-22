@@ -77,6 +77,10 @@ script:
         prefix: $GAMEDIR
 
 
+  system:
+    env:
+        PULSE_LATENCY_MSEC: '90'
+    #pulse_latency: true
 
   wine:
     Desktop: true
