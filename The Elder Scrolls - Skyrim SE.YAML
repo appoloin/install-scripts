@@ -25,7 +25,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: xact corefonts tahoma vcrun2008 vcrun2015 vcrun2017
+        app: xact xact_x64 corefonts tahoma vcrun2008 vcrun2015 vcrun2017
         description: Instaling dependances 
         name: winetricks
         prefix: $GAMEDIR
