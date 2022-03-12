@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/
+    exe: $GAMEDIR/drive_c/GOG Games/Shadow Tactics Blades of the Shogun - Aiko's Choice/Shadow Tactics.exe
     prefix: $GAMEDIR
 
   files:
