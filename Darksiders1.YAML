@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Darksiders
+    exe: $GAMEDIR/drive_c/GOG Games/Darksiders/DarksidersPC.exe
     prefix: $GAMEDIR
     arch: win32
 
