@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/
+    exe: $GAMEDIR/drive_c/GOG Games/Styx Master of Shadows/Binaries/Win32/StyxGame.exe
     arch: win64
     prefix: $GAMEDIR
 
