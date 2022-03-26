@@ -1,0 +1,30 @@
+name: Adams Veuture Chronicles
+game_slug: adams-venture-chronicles
+version: Installer
+slug:  Adams-Veuture-installer
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Vertigo Games/Adam's Venture Chronicles/Binaries/Win32/VentureGame.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the Setup.exe
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task: 
+        app: dotnet35
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
