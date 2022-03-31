@@ -11,6 +11,8 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - patch: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/justcause/JustCause.WidescreenFix.zip
+
 
   installer:
     - task:
@@ -19,12 +21,31 @@ script:
         install_gecko: false
         prefix: $GAMEDIR
 
+    - extract:  
+        file: patch
+        dst:  $CACHE 
+
     - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
 
+    - copy:
+        src: $CACHE/scripts
+        dst: $GAMEDIR/drive_c/GOG Games/Just Cause/Scripts
+
+    - copy:
+        src: $CACHE/dinput8.dll
+        dst: $GAMEDIR/drive_c/GOG Games/Just Cause/
+
+
+
   wine:
     Desktop: true
+    overrides:
+      dinput8.dll: n,b
+
+
+
 
 
