@@ -1,0 +1,38 @@
+name: just Cause 3
+game_slug: just-cause-3
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/JustCause3/JustCause3.exe
+    prefix: $GAMEDIR
+
+  installer:
+    - insert-disc:
+          description: Select game folder
+          requires: JustCause3.exe
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+        arch: win64
+
+    - task:
+        app: vcrun2010 d3dx10
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - execute:
+        args: -r "$DISC/"  "$GAMEDIR/drive_c/"
+        file: /bin/cp 
+
+
+
+  wine:
+    Desktop: true
+
+

@@ -1,0 +1,35 @@
+name: Far Cry 3 Blood Dragon
+game_slug: far-cry-3-blood-dragon
+version: Installer
+slug: installer
+runner: wine
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files/Ubisoft/Far Cry 3 Blood Dragon/bin/fc3_blooddragon_d3d11.exe"
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - game: N/A:Select installer.
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: dotnet35 vcrun2010 vcrun2015 d3dx10 d3dcompiler_43 xact 
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        description: Installing
+        executable: $game
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
