@@ -1,0 +1,44 @@
+name: Bioshock infinite
+game_slug: bioshock-infinite
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/
+    prefix: $GAMEDIR
+
+  files:
+    - game: N/A:Select installer.
+
+
+  installer:
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+        arch: win64
+
+    - task:
+        app: winvista d3dx10 xact
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        description: Installing
+        executable: $game
+        name: wineexec
+        prefix: $GAMEDIR
+
+  system:
+    env:
+        PULSE_LATENCY_MSEC: '90'
+
+
+  wine:
+    Desktop: true
+
+
