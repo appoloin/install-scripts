@@ -23,7 +23,7 @@ script:
         arch: win64
 
     - task:
-        app: winvista d3dx10 xact_x64 xact
+        app: vista d3dx10 xact_x64 xact
         name: winetricks
         prefix: $GAMEDIR
 
