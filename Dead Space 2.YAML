@@ -1,0 +1,33 @@
+name: Dead Space 2
+game_slug: dead-space-2
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Dead Space 2/deadspace2.exe
+    prefix: $GAMEDIR
+
+  files:
+    - game: N/A:Select installer.
+
+
+  installer:
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        description: Installing
+        executable: $game
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+

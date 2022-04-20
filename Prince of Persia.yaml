@@ -1,0 +1,153 @@
+name: Prince of Persia
+game_slug: prince-of-persia
+version: Installer
+slug:  prince-of-persia-installer
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select ISO file.
+
+  game:
+    main_file: $GAMEDIR/prince-play.conf
+
+  installer:
+    - execute:
+        args: $GAMEDIR/HDD $GAMEDIR/CDD $GAMEDIR/CDD/DISC1
+        file: mkdir
+
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+        
+        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+        cp -avr "$src_path/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: $game $GAMEDIR/CDD/DISC1
+        file: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod
+
+
+    - write_file:
+        content: '[midi]
+
+         mididevice = mt32
+        
+        [sdl]
+
+          capture_mouse=onclick middlerelease
+        
+        [autoexec]
+
+          imgmount D "$GAMEDIR/CDD/DISC1/princecd.iso" -t iso 
+
+          mount C "$GAMEDIR/HDD" -t dir
+
+          D:
+
+          cd prince 
+
+          install
+          
+          exit'
+        file: $GAMEDIR/prince-setup.conf
+
+    - task:
+        config_file: $GAMEDIR/prince-setup.conf
+        name: dosexec
+        working_dir: $GAMEDIR/HDD
+
+
+
+
+    - write_file:
+        content: '[midi]
+
+         mididevice = mt32
+        
+        [sdl]
+
+          capture_mouse=onclick middlerelease
+
+        [autoexec]
+
+          imgmount D "$GAMEDIR/CDD/DISC1/princecd.iso" -t iso 
+
+          mount C "$GAMEDIR/HDD" -t dir
+
+          cls 
+
+          ECHO OFF
+
+          goto launcher
+
+          :launcher
+
+          cls 
+
+          ECHO  -------------------------------------------  
+          
+          ECHO                  Prince of Persia
+          
+          ECHO  -------------------------------------------  
+          
+          ECHO   1) Play        
+                    
+          ECHO   2) Setup  
+
+          ECHO  -------------------------------------------  
+          
+          ECHO   3) exit program                             
+          
+          ECHO  -------------------------------------------  
+
+          choice /c123 /s Which program do you want to run? [1-3]: /n 
+          
+          if errorlevel 3 goto exit
+
+          if errorlevel 2 goto install
+                              
+          if errorlevel 1 goto game
+
+
+          :game
+
+          cls
+
+          c:
+
+          cd  prince 
+
+          prince
+
+          goto exit
+
+
+         :install
+
+          cls
+
+          c:
+
+          cd prince 
+
+          setup
+
+          goto launcher
+
+          :exit
+
+          exit'
+        file: $GAMEDIR/prince-play.conf
+
