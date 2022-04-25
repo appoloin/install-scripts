@@ -1,0 +1,41 @@
+name: Wolfenstein
+game_slug: wolfenstein
+version: Installer
+slug: wolfenstein_INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Activision/Wolfenstein/SP/Wolf2.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task: 
+        app: vista xact xact_x64
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  system:
+    env:
+        PULSE_LATENCY_MSEC: '90'
+
+     
+  wine:
+    Desktop: true
+    dxvk: false
+
+
