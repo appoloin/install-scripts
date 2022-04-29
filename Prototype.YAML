@@ -1,0 +1,30 @@
+name: Prototype
+game_slug: prototype
+version: Installer
+slug: prototype
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+
