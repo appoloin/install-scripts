@@ -1,0 +1,36 @@
+name: Borderlands 2
+game_slug: borderlands-2
+version: Installer
+slug: borderlands-2_INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Games/Borderlands 2 GOTY/Binaries/Win32/Borderlands2.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: vcrun2010 dotnet40
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+     
+  wine:
+    Desktop: true
+
+
