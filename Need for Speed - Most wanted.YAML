@@ -1,0 +1,46 @@
+name: Need for Speed - Most Wanted
+game_slug: need-for-speed-most-wanted
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Most Wanted 2005/speed.exe
+
+  files:
+    - setup: N/A:Select installer
+    - patch: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/nfsmw/NFSMostWanted.WidescreenFix.zip
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+    
+    - extract:  
+        file: patch
+        dst:  $CACHE 
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - copy:
+        src: $CACHE/scripts
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Most Wanted 2005/Scripts
+
+    - copy:
+        src: $CACHE/dinput8.dll
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Most Wanted 2005/
+
+
+
+  wine:
+    Desktop: true
+    overrides:
+      dinput8.dll: n,b
+
+

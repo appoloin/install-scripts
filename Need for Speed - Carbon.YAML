@@ -1,0 +1,53 @@
+name: Need for Speed - Carbon
+game_slug: need-for-speed-carbon
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Games/Need for Speed Carbon/NFSC.exe
+
+  files:
+    - setup: N/A:Select installer
+    - patch: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/nfsc/NFSCarbon.WidescreenFix.zip
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+    
+    - extract:  
+        file: patch
+        dst:  $CACHE 
+
+    - task:
+        app: mfc42 d3dcompiler_43 d3dx9 vcrun2005 dotnet20
+        description: Installing dependencies...
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - copy:
+        src: $CACHE/scripts
+        dst: $GAMEDIR/drive_c/Games/Need for Speed Carbon/Scripts
+
+    - copy:
+        src: $CACHE/dinput8.dll
+        dst: $GAMEDIR/drive_c/Games/Need for Speed Carbon/
+
+
+
+  wine:
+    Desktop: true
+    overrides:
+      dinput8.dll: n,b
+
+  system:
+    single_cpu: true
+
