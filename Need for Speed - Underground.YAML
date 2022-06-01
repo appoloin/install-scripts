@@ -1,0 +1,46 @@
+name: Need for Speed - Underground
+game_slug: need-for-speed-underground
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground/Speed.exe
+
+  files:
+    - setup: N/A:Select installer
+    - patch: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/nfsu/NFSUnderground.WidescreenFix.zip
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+    
+    - extract:  
+        file: patch
+        dst:  $CACHE 
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - copy:
+        src: $CACHE/scripts
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground/Scripts
+
+    - copy:
+        src: $CACHE/dinput8.dll
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground/
+
+
+
+  wine:
+    Desktop: true
+    overrides:
+      dinput8.dll: n,b
+
+
