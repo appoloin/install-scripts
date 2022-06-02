@@ -11,6 +11,7 @@ script:
   files:
     - setup: N/A:Select installer
     - patch: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/nfsu2/NFSUnderground2.WidescreenFix.zip
+    - patch1: https://github.com/xan1242/NFSU-XtendedInput/releases/download/2.2/Release-UG2-Pack.zip
 
   installer:
     - task:
@@ -29,12 +30,17 @@ script:
         prefix: $GAMEDIR
 
     - copy:
+        src: $CACHE/dinput8.dll
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground 2/
+
+    - extract:  
+        file: patch1
+        dst:  $CACHE 
+
+    - copy:
         src: $CACHE/scripts
         dst: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground 2/Scripts
 
-    - copy:
-        src: $CACHE/dinput8.dll
-        dst: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground 2/
 
     - input_menu:
         description: Please choose your main desktop width for the widescreen patch
