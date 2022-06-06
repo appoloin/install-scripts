@@ -55,7 +55,7 @@ script:
         prefix: $GAMEDIR
 
   system:
-    pulse_latency: false
+    pulse_latency: true
     resolution: 1024x768
     reset_desktop: true
 
