@@ -1,31 +1,24 @@
-name: No One Lives in Heaven
-game_slug: no-one-lives-in-heaven
+name: The Lightbringer
+game_slug: the-lightbringer
 version: Installer
 slug:  installer
 runner: wine
 
 script:
     game:
-        exe: drive_c/GOG Games/No One Lives in Heaven/Game.exe
-        arch: win32
+        exe: drive_c/GOG Games/The Lightbringer/Lightbringer.exe
         prefix: $GAMEDIR
   
     files:
         - game: N/A:Select Setup.exe
 
+
     installer:
         - task:
             name: create_prefix
-            arch: win32
             install_mono: false
             install_gecko: false
             prefix: $GAMEDIR
-
-        - task:
-            app: vista xact_x64 xact
-            name: winetricks
-            prefix: $GAMEDIR
-
 
         - task:
             executable: $game
@@ -35,8 +28,4 @@ script:
 
     wine:
         Desktop: true
-
-    system:
-      pulse_latency: true
-
 
