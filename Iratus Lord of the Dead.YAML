@@ -11,6 +11,11 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - DLC1: N/A:Select DLC1 installer
+    - DLC2: N/A:Select DLC2 installer
+    - DLC3: N/A:Select DLC3 installer
+
+
 
   installer:
     - task:
@@ -23,6 +28,23 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC1
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC2
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC3
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+
 
   wine:
     Desktop: true
