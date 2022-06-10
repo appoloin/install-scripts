@@ -1,0 +1,25 @@
+name: The Blind Prophet
+game_slug: the-blind-prophet
+version: Installer
+slug: installer
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/GOG Games/The Blind Prophet/The Blind Prophet.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
