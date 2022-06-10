@@ -1,0 +1,124 @@
+name: Legends of Murder Collection
+game_slug: legends-of-murder-ii-grey-haven
+version: Installer
+slug: installer
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select GOG installer.
+    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
+
+  game:
+    main_file: $GAMEDIR/Legends.conf
+
+  installer:
+    - extract:
+        dst: $CACHE
+        file: $inno
+        
+    - execute:
+        args: -I "C" -d "$CACHE" "$game"
+        file: $CACHE/innoextract
+
+    - execute:
+        args: $GAMEDIR/HDD   
+        file: mkdir
+    
+    - copy:
+        src: $CACHE/C
+        dst: $GAMEDIR/HDD
+
+    - write_file:
+        content: '[sdl]
+
+          capture_mouse=onclick middlerelease
+
+
+          fullresolution=desktop
+
+          windowresolution=original
+
+          fullscreen=true
+
+          output=opengl
+
+        [render]
+
+          aspect=true
+
+          scaler=normal2x
+
+        [autoexec]
+
+          @echo off
+        
+          mount C "$GAMEDIR/HDD" -t dir
+
+          C: 
+
+          cls 
+
+          ECHO OFF
+
+          goto launcher
+
+          :launcher
+
+          cls 
+
+          ECHO  -------------------------------------------  
+          
+          ECHO        Legends of Murder Collection
+          
+          ECHO  -------------------------------------------  
+          
+          ECHO   1) Play Stonedale Castle     
+                    
+          ECHO   2) Play Grey Haven  
+
+          ECHO  -------------------------------------------  
+          
+          ECHO   3) Exit Program                             
+          
+          ECHO  -------------------------------------------  
+
+          choice /c123 /s Which program do you want to run? [1-3]: /n 
+          
+          if errorlevel 3 goto exit
+
+          if errorlevel 2 goto game2
+                              
+          if errorlevel 1 goto game1
+
+
+          :game1
+
+          cls
+
+          c:
+
+          cd LoM1
+
+          STONEDAL.exe
+
+          goto launcher
+
+
+         :game2
+
+          cls
+
+          C:
+
+          cd LoM2
+
+          GREYHAVE.exe
+
+          goto launcher
+
+
+          :exit
+
+          exit'
+        file: $GAMEDIR/Legends.conf
