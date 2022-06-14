@@ -1,12 +1,12 @@
-name: bards tales
-game_slug: bards tales
+name: The Bards Tales
+game_slug: the-bards-tale-trilogy
 version: Installer
-slug: bards tales
+slug: the-bards-tale-trilogy
 runner: wine
 
 script:
   game: 
-    exe: $GAMEDIR/drive_c/GOG Games/The Bards Tale/The Bard's Tale.exe
+    exe: $GAMEDIR/drive_c/GOG Games/The Bard's Tale Trilogy/TheBardsTaleTrilogy.exe
     prefix: $GAMEDIR
 
   files:
@@ -17,16 +17,6 @@ script:
         name: create_prefix
         install_mono: false
         install_gecko: false
-        prefix: $GAMEDIR
-
-    - task:
-        app: wmp9
-        name: winetricks
-        prefix: $GAMEDIR
-    
-    - task:
-        app: wmp10
-        name: winetricks
         prefix: $GAMEDIR
 
     - task:
