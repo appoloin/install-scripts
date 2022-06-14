@@ -1,0 +1,25 @@
+name: Scarlet Hood and the Wicked Wood
+game_slug: scarlet-hood-and-the-wicked-wood
+version: Installer
+slug: installer
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/GOG Games/Scarlet Hood and the Wicked Wood/ScarletHood.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

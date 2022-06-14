@@ -1,0 +1,25 @@
+name: Inferno - Beyond the 7th Circle
+game_slug: inferno-beyond-the-7th-circle
+version: Installer
+slug: installer
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/GOG Games/Inferno - Beyond the 7th Circle/Inferno - Beyond the 7th Circle.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

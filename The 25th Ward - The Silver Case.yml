@@ -1,12 +1,12 @@
-name: Steamworld Quest
-game_slug:  steamworld-quest-hand-of-gilgamech
+name: The 25th Ward - The Silver Case
+game_slug: the-25th-ward-the-silver-case
 version: Installer
-slug: steamworld-quest-hand-of-gilgamech
+slug: the-25th-ward-the-silver-case
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Hellmut - The Badass from Hell/HellMut.exe
+    exe: $GAMEDIR/drive_c/GOG Games/The 25th Ward - The Silver Case/The25thWard.exe
     arch: win32
     prefix: $GAMEDIR
 

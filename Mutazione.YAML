@@ -1,13 +1,12 @@
-name: Steamworld Quest
-game_slug:  steamworld-quest-hand-of-gilgamech
+name: Mutazione
+game_slug: mutazione
 version: Installer
-slug: steamworld-quest-hand-of-gilgamech
+slug: INSTALLER
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Hellmut - The Badass from Hell/HellMut.exe
-    arch: win32
+    exe: $GAMEDIR/drive_c/GOG Games/Mutazione/Mutazione.exe
     prefix: $GAMEDIR
 
   files:
@@ -16,7 +15,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR

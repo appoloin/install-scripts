@@ -1,12 +1,12 @@
-name: Steamworld Quest
-game_slug:  steamworld-quest-hand-of-gilgamech
+name: The 7th Circle - Endless Nightmare
+game_slug: the-7th-circle-endless-nightmare
 version: Installer
-slug: steamworld-quest-hand-of-gilgamech
+slug: the-7th-circle-endless-nightmare
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Hellmut - The Badass from Hell/HellMut.exe
+    exe: $GAMEDIR/drive_c/GOG Games/The 7th Circle - Endless Nightmare/The7thCircle.exe
     arch: win32
     prefix: $GAMEDIR
 
