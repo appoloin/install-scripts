@@ -1,7 +1,7 @@
 name: Deponia Doomsday
-game_slug:  Deponia Doomsday
+game_slug: deponia-doomsday
 version: Installer
-slug: Deponia Doomsday
+slug: deponia-doomsday
 runner: wine
 
 script:
