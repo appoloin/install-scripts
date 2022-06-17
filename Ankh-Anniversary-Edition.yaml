@@ -1,0 +1,32 @@
+name: Ankh - Anniversary Edition
+game_slug: ankh-anniversary-edition
+version: Installer
+slug: ankh-anniversary-edition
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/c_drive/GOG Games/Ankh - Anniversary Edition/bin/release/Ankh.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+

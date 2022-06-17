@@ -1,0 +1,30 @@
+name: Oxygen Not Included
+game_slug: oxygen-not-included
+version: Installer
+slug: oxygen-not-included
+runner: wine
+
+script:
+  game: 
+    exe: $GAMEDIR/drive_c/Games/Oxygen Not Included Meeps Mandatory Recreation Content Pack/OxygenNotIncluded.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+

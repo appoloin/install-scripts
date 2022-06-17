@@ -1,0 +1,30 @@
+name: The Journey Down - Chapter Three
+game_slug: the-journey-down-chapter-three
+version: Installer
+slug: the-journey-down-chapter-three
+runner: wine
+
+script:
+  game: 
+    exe: $GAMEDIR/drive_c/GOG Games/The Journey Down - Chapter Three/JourneyDown3.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+
