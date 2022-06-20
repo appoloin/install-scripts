@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Risen 3 - Titan Lords/system/Risen3.exe
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Deep Silver/Risen 3 - Titan Lords/system/Risen3.exe
     prefix: $GAMEDIR
 
   files:

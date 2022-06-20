@@ -1,13 +1,12 @@
-name: King's Bounty - Dark Side
-game_slug:  kings-bounty-dark-side
+name: Betrayer
+game_slug: betrayer
 version: Installer
-slug: kings-bounty-dark-side_INSTALLER
+slug: betrayer
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Kings Bounty Dark Side/KBDarksideStart.exe
-    arch: win32
+    exe: $GAMEDIR/c_drive/Program Files (x86)/Blackpowder Games/Betrayer/Binaries/Win32/Betrayer.exe
     prefix: $GAMEDIR
 
   files:
@@ -16,7 +15,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR

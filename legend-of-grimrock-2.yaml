@@ -1,13 +1,12 @@
-name: King's Bounty - Dark Side
-game_slug:  kings-bounty-dark-side
+name: Legend of Grimrock 2
+game_slug: legend-of-grimrock-2
 version: Installer
-slug: kings-bounty-dark-side_INSTALLER
+slug: legend-of-grimrock-2
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Kings Bounty Dark Side/KBDarksideStart.exe
-    arch: win32
+    exe: $GAMEDIR/c_drive/GOG Games/Legend of Grimrock II/grimrock2.exe
     prefix: $GAMEDIR
 
   files:
@@ -16,7 +15,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR

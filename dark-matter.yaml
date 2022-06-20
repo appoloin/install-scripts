@@ -1,13 +1,12 @@
-name: King's Bounty - Dark Side
-game_slug:  kings-bounty-dark-side
+name: Dark Matter
+game_slug: dark-matter
 version: Installer
-slug: kings-bounty-dark-side_INSTALLER
+slug: dark-matter
 runner: wine
 
 script:
-  game:
-    exe: $GAMEDIR/drive_c/GOG Games/Kings Bounty Dark Side/KBDarksideStart.exe
-    arch: win32
+  game: 
+    exe: $GAMEDIR/drive_c/GOG Games/Dark Matter/darkmatter.exe
     prefix: $GAMEDIR
 
   files:
@@ -16,7 +15,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
