@@ -1,7 +1,7 @@
-name: Duke Nukem-1
-game_slug: Duke-Nukem
+name: Duke Nukem II
+game_slug: duke-nukem-2
 version: Installer
-slug: Duke-Nukem-1-installer
+slug: installer
 runner: dosbox
 
 
@@ -34,7 +34,7 @@ script:
     - write_file:
         content: '[sdl]
 
-          sensitivity=30
+        capture_mouse=onclick middlerelease
 
         [autoexec]
         
