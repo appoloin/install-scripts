@@ -1,5 +1,5 @@
-name: baldurs-gate
-game_slug: baldurs-gate
+name: Baldurs Gate
+game_slug: baldurs-gate-enhanced-edition
 version: Installer
 slug:  baldurs-gate-installer
 runner: wine
@@ -24,3 +24,8 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+
+  wine:
+    Desktop: true
+

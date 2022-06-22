@@ -1,5 +1,5 @@
-name: baldurs-gate 2
-game_slug: baldurs-gate-2
+name: Baldurs Gate 2
+game_slug: baldurs-gate-ii-enhanced-edition
 version: Installer
 slug:  baldurs-gate-2-installer
 runner: wine
@@ -25,3 +25,7 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
