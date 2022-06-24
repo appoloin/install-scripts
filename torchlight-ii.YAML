@@ -1,0 +1,32 @@
+name: Torchlight II
+game_slug: torchlight-ii
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Torchlight 2/Torchlight2.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+
+  wine:
+    Desktop: true
+
+
