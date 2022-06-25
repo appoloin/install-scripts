@@ -1,7 +1,7 @@
 name: Rhem 4
-game_slug: Rhem-4
+game_slug: rhem-4-the-golden-fragments
 version: Installer
-slug:  Rhem-4-installer
+slug: installer
 runner: wine
 
 script:
@@ -18,6 +18,7 @@ script:
             name: create_prefix
             arch: win32
             install_mono: false
+            install_gecko: false
             prefix: $GAMEDIR
 
         - task:
