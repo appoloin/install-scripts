@@ -1,4 +1,4 @@
-name: black mirror 3
+name: Black Mirror 3
 game_slug:  black-mirror-3
 version: Installer
 slug: black-mirror-3
@@ -18,6 +18,7 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
