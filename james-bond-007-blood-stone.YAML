@@ -1,0 +1,38 @@
+name: James Bone 007 - Blood Stone
+game_slug: james-bond-007-blood-stone
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Games/James Bond 007 Blood Stone/Bond.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: vista xact_x64 xact
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+  system:
+    pulse_latency: true
+
+
