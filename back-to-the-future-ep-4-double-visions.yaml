@@ -1,12 +1,12 @@
-name: Back to the Future
-game_slug: Back-to-the-Future-2
+name: Back to the Future - EP 4 - Double Visions
+game_slug: back-to-the-future-ep-4-double-visions
 version: Installer
-slug: Back-to-the-Future-1-installer
+slug: nstaller
 runner: wine
  
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG/Episode 2 - Get Tannen!/BackToTheFuture102.exe
+    exe: $GAMEDIR/drive_c/GOG/Episode 4 - Double Visions/BackToTheFuture104.exe
     arch: win32
     prefix: $GAMEDIR
 
@@ -19,10 +19,11 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - execute:
-        args: $GAMEDIR/drive_c/GOG  "$GAMEDIR/drive_c/GOG/Episode 2 - Get Tannen!"
+        args: $GAMEDIR/drive_c/GOG  "$GAMEDIR/drive_c/GOG/Episode 4 - Double Visions"
         file: mkdir
     
     - extract:
@@ -30,12 +31,12 @@ script:
         file: $inno
 
     - execute:
-        args: -I app -d "$CACHE" "$game"
+        args: -I "Episode 4 - Double Visions" -d "$CACHE" "$game"
         file: $CACHE/innoextract
 
     - merge:
-        dst: "$GAMEDIR/drive_c/GOG/Episode 2 - Get Tannen!"
-        src: "$CACHE/app/Episode 2 - Get Tannen!"
+        dst: "$GAMEDIR/drive_c/GOG/Episode 4 - Double Visions"
+        src: "$CACHE/app/Episode 4 - Double Visions"
 
   wine:
     Desktop: true

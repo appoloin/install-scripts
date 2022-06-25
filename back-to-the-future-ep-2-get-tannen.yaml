@@ -1,12 +1,12 @@
-name: Back to the Future
-game_slug: Back-to-the-Future-5
+name: Back to the Future - EP 2 - Get Tannen
+game_slug: back-to-the-future-ep-2-get-tannen
 version: Installer
-slug: Back-to-the-Future-4-installer
+slug: installer
 runner: wine
  
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG/Episode 5 - OUTATIME/BackToTheFuture105.exe
+    exe: $GAMEDIR/drive_c/GOG/Episode 2 - Get Tannen!/BackToTheFuture102.exe
     arch: win32
     prefix: $GAMEDIR
 
@@ -19,10 +19,11 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - execute:
-        args: $GAMEDIR/drive_c/GOG  "$GAMEDIR/drive_c/GOG/Episode 5 - OUTATIME"
+        args: $GAMEDIR/drive_c/GOG  "$GAMEDIR/drive_c/GOG/Episode 2 - Get Tannen!"
         file: mkdir
     
     - extract:
@@ -30,12 +31,12 @@ script:
         file: $inno
 
     - execute:
-        args: -I app -d "$CACHE" "$game"
+        args: -I "Episode 2 - Get Tannen!" -d "$CACHE" "$game"
         file: $CACHE/innoextract
 
     - merge:
-        dst: "$GAMEDIR/drive_c/GOG/Episode 5 - OUTATIME"
-        src: "$CACHE/app/Episode 5 - OUTATIME"
+        dst: "$GAMEDIR/drive_c/GOG/Episode 2 - Get Tannen!"
+        src: "$CACHE/app/Episode 2 - Get Tannen!"
 
   wine:
     Desktop: true
