@@ -1,7 +1,7 @@
-name: Dracula 4
-game_slug:  Dracula 4
+name: Dracula 4 - Shadow of the Dragon
+game_slug: dracula-4-shadow-of-the-dragon
 version: Installer
-slug:  Dracula 4-installer
+slug:  installer
 runner: wine
 
 script:
