@@ -1,7 +1,7 @@
 name: Dracula 2 - The Last Sanctuary
-game_slug: Dracula 2 - The Last Sanctuary
+game_slug: dracula-2-the-last-sanctuary
 version: Installer
-slug: Dracula 2 - The Last Sanctuary-installer
+slug: installer
 runner: wine
 
 

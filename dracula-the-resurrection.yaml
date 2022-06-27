@@ -1,5 +1,5 @@
-name: Dracula-the Resurrection
-game_slug: Dracula-the-Resurrection
+name: Dracula - The Resurrection
+game_slug: dracula-the-resurrection
 version: Installer
 slug: Dracula-the-Resurrection-installer
 runner: wine
