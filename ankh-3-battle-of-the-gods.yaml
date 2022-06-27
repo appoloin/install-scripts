@@ -1,0 +1,32 @@
+name: Ankh 3 - Battle of the Gods
+game_slug: ankh-3-battle-of-the-gods
+version: GOG
+slug: ankh-3-battle-of-the-gods
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/c_drive/GOG Games/Ankh 3 Battle of the Gods/bin/release/StartGame.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+

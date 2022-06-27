@@ -1,0 +1,30 @@
+name: S.t.a.l.k.e.r. - Call of Pripyat
+game_slug: stalker-call-of-pripyat
+version: Installer
+slug: installer
+runner: wine
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    arch: win32
+    exe: $GAMEDIR/drive_c/GOG Games/S.T.A.L.K.E.R. Call of Pripyat/Stalker-COP.exe
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        arch: win32
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
