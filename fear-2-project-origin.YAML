@@ -1,0 +1,32 @@
+name: F.E.A.R. 2 - Project Orgin
+game_slug:  fear-2-project-origin
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Games/F.E.A.R. 2/FEAR2.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+
