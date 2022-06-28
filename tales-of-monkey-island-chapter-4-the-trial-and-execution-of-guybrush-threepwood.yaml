@@ -1,5 +1,5 @@
-name:  monkey E4
-game_slug:  monkey-E4
+name: Tale of Monkey Island - Chapter 4
+game_slug: tales-of-monkey-island-chapter-4-the-trial-and-execution-of-guybrush-threepwood
 version: Installer
 slug:  monkey-E4-installer
 runner: wine
@@ -30,7 +30,7 @@ script:
         file: $inno
 
     - execute:
-        args: -I app -d "$CACHE" "$game"
+        args: -I "app/The Trial and Execution of Guybrush Threepwood" -d "$CACHE" "$game"
         file: $CACHE/innoextract
 
     - merge:

@@ -1,5 +1,5 @@
-name:  Sam & Max S1 E3
-game_slug: sam_&_max_s1_3
+name:  Sam & Max 103 - The Mole the Mob and the Meatball
+game_slug: sam-max-103-the-mole-the-mob-and-the-meatball
 version: Installer
 slug: sam_&_max_s1_3-installer
 runner: wine
@@ -11,7 +11,7 @@ script:
     prefix: $GAMEDIR
 
   files:
-    - game: N/A:Select GOG installer.
+    - game: N/A:Select Sam & Max Save The World installer.
     - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
 
   installer:

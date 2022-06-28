@@ -1,12 +1,12 @@
-name:  Sam & Max S1 E4
-game_slug: sam_&_max_s1_4
+name: Tale of Monkey Island - Chapter 3
+game_slug:  tales-of-monkey-island-chapter-3-lair-of-the-leviathan
 version: Installer
-slug: sam_&_max_s1_4-installer
+slug:  monkey-E3-installer
 runner: wine
 
 script:
   game:
-    exe: "$GAMEDIR/drive_c/GOG/Episode 104 - Abe Lincoln Must Die!/SamMax104.exe"
+    exe: "$GAMEDIR/drive_c/GOG/Lair of the Leviathan/MonkeyIsland103.exe"
     arch: win32
     prefix: $GAMEDIR
 
@@ -23,7 +23,7 @@ script:
         prefix: $GAMEDIR
 
     - execute:
-        args: $GAMEDIR/drive_c/GOG  "$GAMEDIR/drive_c/GOG/Episode 104 - Abe Lincoln Must Die!"
+        args: $GAMEDIR/drive_c/GOG  "$GAMEDIR/drive_c/GOG/Lair of the Leviathan"
         file: mkdir
     
     - extract:
@@ -31,12 +31,12 @@ script:
         file: $inno
 
     - execute:
-        args: -I "app/Episode 104 - Abe Lincoln Must Die!" -d "$CACHE" "$game"
+        args: -I "app/Lair of the Leviathan" -d "$CACHE" "$game"
         file: $CACHE/innoextract
 
     - merge:
-        dst: "$GAMEDIR/drive_c/GOG/Episode 104 - Abe Lincoln Must Die!"
-        src: "$CACHE/app/Episode 104 - Abe Lincoln Must Die!"
+        dst: "$GAMEDIR/drive_c/GOG/Lair of the Leviathan"
+        src: "$CACHE/app/Lair of the Leviathan"
 
   wine:
     Desktop: true

@@ -1,5 +1,5 @@
-name:  monkey E5
-game_slug:  monkey-E5
+name: Tales of Monkeu Island - Chapter 5
+game_slug: tales-of-monkey-island-chapter-5-rise-of-the-pirate-god
 version: Installer
 slug:  monkey-E5-installer
 runner: wine
@@ -19,6 +19,7 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - execute:
@@ -30,7 +31,7 @@ script:
         file: $inno
 
     - execute:
-        args: -I app -d "$CACHE" "$game"
+        args: -I "app/Rise of the Pirate God" -d "$CACHE" "$game"
         file: $CACHE/innoextract
 
     - merge:

@@ -1,12 +1,12 @@
-name:  monkey E3
-game_slug:  monkey-E3
+name: Tale of Monkey Island - Chapter 1
+game_slug:  tales-of-monkey-island-chapter-1-launch-of-the-screaming-narwhal
 version: Installer
-slug:  monkey-E3-installer
+slug:  monkey-E1-installer
 runner: wine
 
 script:
   game:
-    exe: "$GAMEDIR/drive_c/GOG/Lair of the Leviathan/MonkeyIsland103.exe"
+    exe: "$GAMEDIR/drive_c/GOG/Launch of the Screaming Narwhal/MonkeyIsland101.exe"
     arch: win32
     prefix: $GAMEDIR
 
@@ -19,10 +19,11 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - execute:
-        args: $GAMEDIR/drive_c/GOG  "$GAMEDIR/drive_c/GOG/Lair of the Leviathan"
+        args: $GAMEDIR/drive_c/GOG  "$GAMEDIR/drive_c/GOG/Launch of the Screaming Narwhal"
         file: mkdir
     
     - extract:
@@ -30,12 +31,12 @@ script:
         file: $inno
 
     - execute:
-        args: -I app -d "$CACHE" "$game"
+        args: -I "app/Launch of the Screaming Narwhal" -d "$CACHE" "$game"
         file: $CACHE/innoextract
 
     - merge:
-        dst: "$GAMEDIR/drive_c/GOG/Lair of the Leviathan"
-        src: "$CACHE/app/Lair of the Leviathan"
+        dst: "$GAMEDIR/drive_c/GOG/Launch of the Screaming Narwhal"
+        src: "$CACHE/app/Launch of the Screaming Narwhal"
 
   wine:
     Desktop: true
