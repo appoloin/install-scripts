@@ -1,0 +1,56 @@
+name: Runaway 3 - A Twist of Fate
+game_slug: runaway-3-a-twist-of-fate
+version: Installer
+slug:  installer
+runner: wine
+
+script:
+    game:
+        exe: drive_c/GOG Games/GOG Games/Runaway - A Twist Of Fate/RATOF.exe
+        arch: win32
+        prefix: $GAMEDIR
+  
+    files:
+        - game: N/A:Select Setup.exe
+        - dgv: https://github.com/legluondunet/mlls-tools/raw/master/dgVoodoo2/dgVoodoo2_61.zip
+
+    installer:
+        - task:
+            name: create_prefix
+            arch: win32
+            install_mono: false
+            install_gecko: false
+            prefix: $GAMEDIR
+
+        - task:
+            executable: $game
+            name: wineexec
+            prefix: $GAMEDIR
+
+        - extract:
+            file: $dgv
+            dst: $CACHE
+
+        - copy:
+            src: $CACHE/MS/x86/DDraw.dll
+            dst: "$GAMEDIR/drive_c/GOG Games/Runaway - A Twist of Fate"
+           
+        - write_config:
+            data:
+                DirectX:
+                    dgVoodooWatermark: false
+            file: "$GAMEDIR/drive_c/GOG Games/Runaway - A Twist of Fate/dgVoodoo.conf"
+
+
+
+    wine:
+        Desktop: true
+        WineDesktop: 1024x768
+        overrides:
+            ddraw.dll: n
+
+    system:
+        resolution: 1024x768
+        reset_desktop: true
+
+
