@@ -1,5 +1,5 @@
-name: Two-Thrones
-game_slug:  Two-Thrones
+name: Prince of Persia - The Two Thrones
+game_slug: prince-of-persia-the-two-thrones
 version: Installer
 slug:  Two-Thrones-installer
 runner: wine
@@ -18,10 +18,12 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
         executable: $setup
+        arch: win32
         name: wineexec
         prefix: $GAMEDIR
 
