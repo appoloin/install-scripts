@@ -1,5 +1,5 @@
 name: FarCry2
-game_slug: FarCry2
+game_slug: far-cry-2
 version: Installer
 slug: FarCry2
 runner: wine
@@ -19,6 +19,7 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
