@@ -1,5 +1,5 @@
 name: Heroes of Might & Magic V
-game_slug:  heroes-of-might-magic-v
+game_slug: heroes-of-might-magic-v
 version:  GOG
 slug: WINE_TEMP_INSTALLER
 runner: wine

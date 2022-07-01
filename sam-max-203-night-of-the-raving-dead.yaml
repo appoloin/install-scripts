@@ -1,12 +1,12 @@
-name:  Sam & Max S2 E5
-game_slug: sam_&_max_s2_5
+name:  Sam & Max 203 - Night of the Raving Dead
+game_slug: sam-max-203-night-of-the-raving-dead
 version: Installer
-slug: sam_&_max_s2_5-installer
+slug: sam_&_max_s2_3-installer
 runner: wine
 
 script:
   game:
-    exe: "$GAMEDIR/drive_c/GOG/Episode 205 - What's New, Beelzebub/SamMax205.exe"
+    exe: "$GAMEDIR/drive_c/GOG/Episode 203 - Night of the Raving Dead/SamMax203.exe"
     arch: win32
     prefix: $GAMEDIR
 
@@ -23,7 +23,7 @@ script:
         prefix: $GAMEDIR
 
     - execute:
-        args: $GAMEDIR/drive_c/GOG  "$GAMEDIR/drive_c/GOG/Episode 205 - What's New, Beelzebub"
+        args: $GAMEDIR/drive_c/GOG  "$GAMEDIR/drive_c/GOG/Episode 203 - Night of the Raving Dead"
         file: mkdir
     
     - extract:
@@ -31,12 +31,12 @@ script:
         file: $inno
 
     - execute:
-        args: -I "app/Episode 205 - What's New, Beelzebub" -d "$CACHE" "$game"
+        args: -I "app/Episode 203 - Night of the Raving Dead" -d "$CACHE" "$game"
         file: $CACHE/innoextract
 
     - merge:
-        dst: "$GAMEDIR/drive_c/GOG/Episode 205 - What's New, Beelzebub"
-        src: "$CACHE/app/Episode 205 - What's New, Beelzebub"
+        dst: "$GAMEDIR/drive_c/GOG/Episode 203 - Night of the Raving Dead"
+        src: "$CACHE/app/Episode 203 - Night of the Raving Dead"
 
   wine:
     Desktop: true

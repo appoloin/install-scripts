@@ -1,12 +1,12 @@
-name:  Sam & Max S2 E3
-game_slug: sam_&_max_s2_3
+name:  Sam & Max 204 - Chariots of the Dogs
+game_slug: sam-max-204-chariots-of-the-dogs
 version: Installer
-slug: sam_&_max_s2_3-installer
+slug: sam_&_max_s2_4-installer
 runner: wine
 
 script:
   game:
-    exe: "$GAMEDIR/drive_c/GOG/Episode 203 - Night of the Raving Dead/SamMax203.exe"
+    exe: "$GAMEDIR/drive_c/GOG/Episode 204 - Chariots of the Dogs/SamMax204.exe"
     arch: win32
     prefix: $GAMEDIR
 
@@ -23,7 +23,7 @@ script:
         prefix: $GAMEDIR
 
     - execute:
-        args: $GAMEDIR/drive_c/GOG  "$GAMEDIR/drive_c/GOG/Episode 203 - Night of the Raving Dead"
+        args: $GAMEDIR/drive_c/GOG  "$GAMEDIR/drive_c/GOG/Episode 204 - Chariots of the Dogs"
         file: mkdir
     
     - extract:
@@ -31,12 +31,12 @@ script:
         file: $inno
 
     - execute:
-        args: -I "app/Episode 203 - Night of the Raving Dead" -d "$CACHE" "$game"
+        args: -I "app/Episode 204 - Chariots of the Dogs" -d "$CACHE" "$game"
         file: $CACHE/innoextract
 
     - merge:
-        dst: "$GAMEDIR/drive_c/GOG/Episode 203 - Night of the Raving Dead"
-        src: "$CACHE/app/Episode 203 - Night of the Raving Dead"
+        dst: "$GAMEDIR/drive_c/GOG/Episode 204 - Chariots of the Dogs"
+        src: "$CACHE/app/Episode 204 - Chariots of the Dogs"
 
   wine:
     Desktop: true

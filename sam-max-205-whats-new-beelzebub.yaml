@@ -1,12 +1,12 @@
-name:  Sam & Max S2 E4
-game_slug: sam_&_max_s2_4
+name:  Sam & Max 205 - What's New Beelzebub
+game_slug: sam-max-205-whats-new-beelzebub
 version: Installer
-slug: sam_&_max_s2_4-installer
+slug: sam_&_max_s2_5-installer
 runner: wine
 
 script:
   game:
-    exe: "$GAMEDIR/drive_c/GOG/Episode 204 - Chariots of the Dogs/SamMax204.exe"
+    exe: "$GAMEDIR/drive_c/GOG/Episode 205 - What's New, Beelzebub/SamMax205.exe"
     arch: win32
     prefix: $GAMEDIR
 
@@ -23,7 +23,7 @@ script:
         prefix: $GAMEDIR
 
     - execute:
-        args: $GAMEDIR/drive_c/GOG  "$GAMEDIR/drive_c/GOG/Episode 204 - Chariots of the Dogs"
+        args: $GAMEDIR/drive_c/GOG  "$GAMEDIR/drive_c/GOG/Episode 205 - What's New, Beelzebub"
         file: mkdir
     
     - extract:
@@ -31,12 +31,12 @@ script:
         file: $inno
 
     - execute:
-        args: -I "app/Episode 204 - Chariots of the Dogs" -d "$CACHE" "$game"
+        args: -I "app/Episode 205 - What's New, Beelzebub" -d "$CACHE" "$game"
         file: $CACHE/innoextract
 
     - merge:
-        dst: "$GAMEDIR/drive_c/GOG/Episode 204 - Chariots of the Dogs"
-        src: "$CACHE/app/Episode 204 - Chariots of the Dogs"
+        dst: "$GAMEDIR/drive_c/GOG/Episode 205 - What's New, Beelzebub"
+        src: "$CACHE/app/Episode 205 - What's New, Beelzebub"
 
   wine:
     Desktop: true
