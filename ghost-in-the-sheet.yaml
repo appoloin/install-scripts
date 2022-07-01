@@ -1,0 +1,36 @@
+name: Ghost in the Sheet
+game_slug: ghost-in-the-sheet
+version: Installer
+slug:  Rhem-3-installer
+runner: wine
+
+
+script:
+  game:
+    exe: drive_c/Tri Synergy/Ghost in the Sheet/gits.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - game: N/A:Select Install.exe
+
+
+  installer:
+
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+
+    - task:
+        executable: $game
+        name: wineexec
+        prefix: $GAMEDIR
+    
+
+  wine:
+    Desktop: true
+    WineDesktop: 800x600
