@@ -1,5 +1,5 @@
 name: Nostradamus
-game_slug: Nostradamus
+game_slug: nostradamus-the-last-prophecy
 version: Installer
 slug: Nostradamus-installer
 runner: wine
