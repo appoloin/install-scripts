@@ -1,0 +1,29 @@
+name: Brothers in Arms - Road to Hill 30
+game_slug: brothers-in-arms-road-to-hill-30
+version: Installer
+slug: abzu
+runner: wine
+ 
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Brothers in Arms - Road to Hill 30/System/bia.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+

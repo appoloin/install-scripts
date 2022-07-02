@@ -1,0 +1,29 @@
+name: Stubbs the Zombie in Rebel without a Pulse
+game_slug: stubbs-the-zombie-in-rebel-without-a-pulse
+version: Installer
+slug: abzu
+runner: wine
+ 
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Stubbs the Zombie in Rebel Without a Pulse/StubbsTheZombie.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
