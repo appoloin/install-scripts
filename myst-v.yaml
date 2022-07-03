@@ -1,5 +1,5 @@
-name: Myst5
-game_slug: Myst5
+name: Myst V
+game_slug: myst-v
 version: Installer
 slug: Myst5-installer
 runner: wine
