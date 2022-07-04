@@ -1,4 +1,4 @@
-name: Return to Mysterious Island 
+name: Return to Mysterious Island 2
 game_slug:  return-to-mysterious-island-2
 version: Installer
 slug:  return-to-mysterious-island-2-installer
@@ -29,7 +29,8 @@ script:
   wine:
     Desktop: true
     WineDesktop: 1024x768
-
+    dxvk: false
+    
   system:
     resolution: 1024x768
     reset_desktop: true
