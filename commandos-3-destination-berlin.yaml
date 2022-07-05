@@ -1,12 +1,12 @@
-name: COMMANDOS 3 DESTINATION BERLIN
-game_slug: commandos
+name: Commandos 3 - Destination Berlin
+game_slug: commandos-3-destination-berlin
 version: Installer
 slug: commandos
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/Eidos/Pyro Studios/Commandos 3 - Destination Berlin/commandos3.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Commandos 3/Commandos3.exe
     arch: win32
     prefix: $GAMEDIR
 
@@ -18,10 +18,12 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
         executable: $setup
+        arch: win32
         name: wineexec
         prefix: $GAMEDIR
 
