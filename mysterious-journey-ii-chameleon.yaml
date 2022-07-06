@@ -1,5 +1,5 @@
-name: Mysterious Journey II 
-game_slug: Mysterious Journey II 
+name: Mysterious Journey II - Chameleon
+game_slug: mysterious-journey-ii-chameleon
 version: Installer
 slug: Mysterious Journey II-installer
 runner: wine
