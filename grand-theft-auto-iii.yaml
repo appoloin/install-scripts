@@ -1,0 +1,62 @@
+name: Grand Theft Auto III
+game_slug: grand-theft-auto-iii
+version: Installer
+slug: grand-theft-auto-iii
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Game/re3.exe
+    prefix: $GAMEDIR
+
+  files:
+    - Disc1: N/A:Select setup.exe from Disc1
+    - Disc2: N/A:Select secdrv.sys from Disc2
+    - Engine: N/A:Select Engine
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+        
+        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+        cp -avr "$src_path/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - execute:
+        args: $GAMEDIR/drive_c/Game
+        file: mkdir
+
+    - execute:
+        args: $Disc1 $GAMEDIR/drive_c/Game
+        file: $CACHE/bulkcopy.sh
+    - execute:
+        args: -R 775  "$GAMEDIR/drive_c/Game"
+        file: /bin/chmod
+
+    - execute:
+        args: $Disc2 $GAMEDIR/drive_c/Game
+        file: $CACHE/bulkcopy.sh
+    - execute:
+        args: -R 775  "$GAMEDIR/drive_c/Game"
+        file: /bin/chmod
+
+    - extract:
+        dst: $GAMEDIR/drive_c/Game
+        file: $Engine
+
+  wine:
+    Desktop: true
+
+
