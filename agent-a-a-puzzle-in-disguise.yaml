@@ -1,7 +1,7 @@
-name: aagent
-game_slug: aagent
+name: Agent A - A Puzzle in Disguise
+game_slug: agent-a-a-puzzle-in-disguise
 version: Installer
-slug: aagent
+slug: agent-a-a-puzzle-in-disguise
 runner: wine
 
 script:
