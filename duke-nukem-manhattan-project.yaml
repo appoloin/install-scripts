@@ -1,7 +1,7 @@
-name: Duke-Nukem-Manhattan
-game_slug: Duke-Nukem-Manhattan
+name: Duke Nukem - Manhattan Project
+game_slug: duke-nukem-manhattan-project
 version: Installer
-slug: Duke-Nukem-Manhattan
+slug: duke-nukem-manhattan-project
 runner: wine
 
 
@@ -19,6 +19,7 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
