@@ -1,0 +1,29 @@
+name: Hitman 2 - Silent Assassin
+game_slug: hitman-2-silent-assassin
+version: Installer
+slug: hitman-2-silent-assassin
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/Program Files (x86)/GOG.com/Hitman 2 Silent Assassin/hitman2.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+
+  wine:
+    Desktop: true

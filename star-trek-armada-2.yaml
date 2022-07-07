@@ -1,0 +1,29 @@
+name: Star Trek - Armada 2
+game_slug: star-trek-armada-2
+version: Installer
+slug: star-trek-armada-2
+runner: wine
+ 
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Star Trek Armada II/Armada2.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
