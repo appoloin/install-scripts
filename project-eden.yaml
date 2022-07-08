@@ -1,23 +1,24 @@
-name: Alone in the dark 4
-game_slug: Alone-in-the-dark-4
+name: Project Eden
+game_slug:  project-eden
 version: Installer
-slug: Alone-in-the-dark-4-installer
+slug:  project-eden
 runner: wine
- 
+
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/GOG.com/Alone in the Dark - The New Nightmare/launch.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Project Eden/Eden.exe
     arch: win32
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select the GOG installer
+    - setup: N/A:Select GOG installer
 
   installer:
     - task:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:

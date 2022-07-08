@@ -1,17 +1,17 @@
-name: Eden
-game_slug:  Eden
+name: Commandos 2 - Men of Courage
+game_slug: commandos-2-men-of-courage
 version: Installer
-slug:  Eden-installer
+slug: commandos-2-men-of-courage
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Project Eden/Eden.exe
+    exe: $GAMEDIR/drive_c/Program Files/Commandos II/comm2.exe
     arch: win32
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select GOG installer
+    - setup: N/A:Select installer
 
   installer:
     - task:
@@ -28,4 +28,5 @@ script:
 
   wine:
     Desktop: true
+
 

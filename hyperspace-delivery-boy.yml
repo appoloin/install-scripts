@@ -1,7 +1,7 @@
 name: Hyperspace Delivery Boy
 game_slug: hyperspace-delivery-boy
 version: Installer
-slug:  hyperspace-delivery-boy-installer
+slug: hyperspace-delivery-boy
 runner: scummvm
 
 

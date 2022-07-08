@@ -1,23 +1,24 @@
-name: COMMANDOS 2 MEN OF COURAGE
-game_slug: commandos
+name: Alone in the dark 4
+game_slug: alone-in-the-dark-the-new-nightmare
 version: Installer
-slug: commandos
+slug: alone-in-the-dark-the-new-nightmare
 runner: wine
-
+ 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/Commandos II/comm2.exe
+    exe: $GAMEDIR/drive_c/Program Files/GOG.com/Alone in the Dark - The New Nightmare/launch.exe
     arch: win32
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select installer
+    - setup: N/A:Select the GOG installer
 
   installer:
     - task:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
@@ -27,5 +28,4 @@ script:
 
   wine:
     Desktop: true
-
 
