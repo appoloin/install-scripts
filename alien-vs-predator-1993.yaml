@@ -1,12 +1,12 @@
-name: Commandos 3 - Destination Berlin
-game_slug: commandos-3-destination-berlin
+name: Alien vs Predator
+game_slug: alien-vs-predator-1993
 version: Installer
-slug: commandos-3-destination-berlin
+slug:  alien-vs-predator-1993
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Commandos 3/Commandos3.exe
+    exe: $GAMEDIR/drive_c/GOG Games/AvP Classic/AvP_Classic.exe
     arch: win32
     prefix: $GAMEDIR
 
@@ -23,7 +23,6 @@ script:
 
     - task:
         executable: $setup
-        arch: win32
         name: wineexec
         prefix: $GAMEDIR
 

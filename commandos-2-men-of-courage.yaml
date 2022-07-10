@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/Commandos II/comm2.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Commandos 2/comm2.exe
     arch: win32
     prefix: $GAMEDIR
 

@@ -1,12 +1,12 @@
-name: Commandos 3 - Destination Berlin
-game_slug: commandos-3-destination-berlin
+name: Vampire - The Masquerade Redemption
+game_slug: vampire-the-masquerade-redemption
 version: Installer
-slug: commandos-3-destination-berlin
+slug: vampire-the-masquerade-redemption
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Commandos 3/Commandos3.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Vampire The Masquerade - Redemption/Vampire.exe
     arch: win32
     prefix: $GAMEDIR
 
@@ -23,7 +23,6 @@ script:
 
     - task:
         executable: $setup
-        arch: win32
         name: wineexec
         prefix: $GAMEDIR
 

@@ -1,12 +1,12 @@
-name: Commandos 3 - Destination Berlin
-game_slug: commandos-3-destination-berlin
+name: Metal Slug - 3
+game_slug: metal-slug-3
 version: Installer
-slug: commandos-3-destination-berlin
+slug: virtumetal-slug-3averse
 runner: wine
 
 script:
-  game:
-    exe: $GAMEDIR/drive_c/GOG Games/Commandos 3/Commandos3.exe
+  game: 
+    exe: $GAMEDIR/drive_c/GOG Games/Metal Slug 3/mslug3.exe
     arch: win32
     prefix: $GAMEDIR
 
@@ -16,14 +16,13 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
+        arch: win32
         prefix: $GAMEDIR
 
     - task:
         executable: $setup
-        arch: win32
         name: wineexec
         prefix: $GAMEDIR
 
