@@ -2,7 +2,7 @@
 name: Might and Magic III 
 game_slug: might-and-magic-iii-isles-of-terra
 version: Installer
-slug: installer
+slug: might-and-magic-iii-isles-of-terra
 runner: scummvm
 
 script:

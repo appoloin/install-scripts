@@ -1,12 +1,12 @@
-name: COMMANDOS BEYOND THE CALL OF DUTY
-game_slug: commandos
+name: Commandos - Beyond the Call of Duty
+game_slug: commandos-beyond-the-call-of-duty
 version: Installer
-slug: commandos
+slug: commandos-beyond-the-call-of-duty
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/Pyro Studios/Commandos1MP/coman_mp.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Commandos BCD/coman_mp.exe
     arch: win32
     prefix: $GAMEDIR
 

@@ -1,7 +1,7 @@
 name: Jagged Alliance
 game_slug: jagged-alliance
 version: Installer
-slug: INSTALLER
+slug: jagged-alliance
 runner: dosbox
 
 script:

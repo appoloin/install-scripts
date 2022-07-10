@@ -1,7 +1,7 @@
-name: Ultima 9
+name: Ultima 9 - Ascension
 game_slug: ultima-ix-ascension
 version: Installer
-slug: INSTALLER
+slug: ultima-ix-ascension
 runner: wine
 
 script:
