@@ -1,7 +1,7 @@
 name: Gabriel Knight 3
-game_slug: Gabriel Knight 3
+game_slug: gabriel-knight-3-blood-of-the-sacred-blood-of-the-
 version: Installer
-slug: Gabriel Knight 3-installer
+slug: gabriel-knight-3-blood-of-the-sacred-blood-of-the-
 runner: wine
 
 script:

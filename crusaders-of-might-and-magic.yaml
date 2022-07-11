@@ -1,7 +1,7 @@
-name: crusader might and magic
-game_slug: crusader might and magic
+name: Crusader of Might and Magic
+game_slug: crusaders-of-might-and-magic
 version: Installer
-slug:  crusader might and magic-installer
+slug:  crusaders-of-might-and-magic
 runner: wine
 
 script:
