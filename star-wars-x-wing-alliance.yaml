@@ -1,0 +1,29 @@
+name: Star Wars - X Wing Alliance
+game_slug: star-wars-x-wing-alliance
+version: Installer
+slug: star-wars-x-wing-alliance
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Star Wars - X-Wing Alliance/SysCheck.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: true
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
