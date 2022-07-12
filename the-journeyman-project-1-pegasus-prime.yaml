@@ -1,7 +1,7 @@
 name: Journeyman Project 1 
-game_slug: Journeyman-Project-1
+game_slug: the-journeyman-project-1-pegasus-prime
 version: Installer
-slug:  Journeyman-Project-1-installer
+slug:  the-journeyman-project-1-pegasus-prime
 runner: scummvm
 
 

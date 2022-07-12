@@ -1,7 +1,7 @@
 name: Ion Fury
 game_slug: ion-fury
 version: Installer
-slug: ion-fury_INSTALLER
+slug: ion-fury
 runner: wine
 
 script:
