@@ -1,0 +1,54 @@
+name:  Grim Fandango
+game_slug: grim-fandango
+version: Installer
+slug: grim-fandango
+runner: scummvm
+
+
+script:
+  files:
+    - DISC1: N/A:Select grim.exe from Disc 1
+    - DISC2: N/A:Select autosub.exe from Disc 2
+    - file1: https://scummvm.org/frs/extras/patches/gfupd101.exe
+
+
+  game:
+    game_id: grim
+    path: $GAMEDIR
+  
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+        
+        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+        find "$src_path" -type f \( -iname "*.lab" \) -exec cp {} "$dst" \;'
+
+        file: $CACHE/selectcopy.sh
+
+    - chmodx: $CACHE/selectcopy.sh
+
+    - copy:
+        dst: $GAMEDIR
+        src: file1
+
+    - execute:
+        args: $DISC1 $GAMEDIR
+        file: $CACHE/selectcopy.sh
+    
+    - execute:
+        args: -R 775  $GAMEDIR
+        file: /bin/chmod
+
+    - execute:
+        args: $DISC2 $GAMEDIR
+        file: $CACHE/selectcopy.sh
+        
+    - execute:
+        args: -R 775  $GAMEDIR
+        file: /bin/chmod
+

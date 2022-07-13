@@ -1,7 +1,7 @@
 name: The Quest
 game_slug: the-quest
 version: Installer
-slug: the-silver-case
+slug: the-quest
 runner: wine
 
 script:
