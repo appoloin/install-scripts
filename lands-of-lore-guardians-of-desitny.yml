@@ -1,7 +1,7 @@
-name: Lands of Lore 2
+name: Lands of Lore - Guardians of Desitny
 game_slug: lands-of-lore-guardians-of-desitny
 version: Installer
-slug:  installer 
+slug:  lands-of-lore-guardians-of-desitny 
 runner: dosbox
 
 
@@ -63,7 +63,7 @@ script:
     - write_file:
         content: '[sdl]
 
-          sensitivity=30
+          capture_mouse=onclick middlerelease
                     
           fullresolution=desktop
 
