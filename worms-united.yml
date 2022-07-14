@@ -82,8 +82,6 @@ script:
 
         [sdl]
 
-          sensitivity=30
-
           fullresolution=desktop
 
           windowresolution=original

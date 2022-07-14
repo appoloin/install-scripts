@@ -1,13 +1,19 @@
-name: urbanrunner
-game_slug: urbanrunner
+name: Urban Runner
+game_slug: urban-runner
 version: Installer
-slug:  urbanrunner-installer
+slug:  urban-runner
 runner: scummvm
 
 
 script:
+  files:
+    - DISC1: N/A:Select cd1.itk from Disc1.
+    - DISC2: N/A:Select cd2.itk from Disc2.
+    - DISC3: N/A:Select cd3.itk from Disc3.
+    - DISC4: N/A:Select cd4.itk from Disc4.
+
   game:
-      game_id: gob
+      game_id: urban
       path: $GAMEDIR
 
   installer:
@@ -20,53 +26,37 @@ script:
 
       src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-      find "$src_path" -type f \( -name "*.stk" -o -name "*.itk" \) -exec cp {} "$dst" \;'
+      find "$src_path" -type f \( -name "*.stk" -o 
+                                  -name "*.itk" \) -exec cp {} "$dst" \;'
       file: $CACHE/selectcopy.sh
-
   - chmodx: $CACHE/selectcopy.sh
-
-  - insert-disc:
-      description: Please insert disc 1
-      requires: cd1.itk
   
   - execute:
-      args: $DISC $GAMEDIR
+      args: $DISC1 $GAMEDIR
       file: $CACHE/selectcopy.sh
 
   - execute:
       args: -R 775  "$GAMEDIR"
       file: /bin/chmod
 
-  - insert-disc:
-      description: Please insert disc 2
-      requires: cd2.itk
-  
   - execute:
-      args: $DISC $GAMEDIR
+      args: $DISC2 $GAMEDIR
       file: $CACHE/selectcopy.sh
 
   - execute:
       args: -R 775  "$GAMEDIR"
       file: /bin/chmod
 
-  - insert-disc:
-      description: Please insert disc 3
-      requires: cd3.itk
-  
   - execute:
-      args: $DISC $GAMEDIR
+      args: $DISC3 $GAMEDIR
       file: $CACHE/selectcopy.sh
 
   - execute:
       args: -R 775  "$GAMEDIR"
       file: /bin/chmod
-
-  - insert-disc:
-      description: Please insert disc 4
-      requires: cd4.itk
-  
+ 
   - execute:
-      args: $DISC $GAMEDIR
+      args: $DISC4 $GAMEDIR
       file: $CACHE/selectcopy.sh
 
   - execute:

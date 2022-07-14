@@ -1,11 +1,14 @@
 name: Time Paradox 
-game_slug: Time-Paradox
+game_slug: time-paradox
 version: Installer
-slug: Time-Paradox-installer
+slug: time-paradox
 runner: dosbox
 
 
 script:
+  files:
+    - DISC1: N/A:Select Install.bat from Disc1.
+
   game:
     main_file: $GAMEDIR/time-paradox.conf
 
@@ -16,23 +19,21 @@ script:
         src=$1
 
         dst=$2
-      
-        cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy-alt.sh
+        
+        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-    - chmodx: $CACHE/bulkcopy-alt.sh
+        cp -avr "$src_path/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
         args: $GAMEDIR/HDD $GAMEDIR/CDD $GAMEDIR/CDD/DISC1
         file: mkdir
 
-    - insert-disc:
-        description: Please insert disc 1
-        requires: setup.exe
 
     - execute:
-        args: $DISC "$GAMEDIR/CDD/DISC1"
-        file: $CACHE/bulkcopy-alt.sh
+        args: $DISC1 "$GAMEDIR/CDD/DISC1"
+        file: $CACHE/bulkcopy.sh
     
     - execute:
         args: -R 775  "$GAMEDIR/CDD/DISC1"
@@ -41,7 +42,7 @@ script:
     - write_file:
         content: '[sdl]
 
-          sensitivity=20
+          capture_mouse=onclick middlerelease
 
         [autoexec]
         
@@ -63,7 +64,7 @@ script:
     - write_file:
         content: '[sdl]
 
-          sensitivity=20
+          capture_mouse=onclick middlerelease
 
         [autoexec]
         

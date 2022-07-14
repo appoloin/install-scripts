@@ -1,0 +1,46 @@
+name: Toonstruck
+game_slug: toonstruck
+version: Installer
+slug:  toonstruck
+runner: scummvm
+
+script:
+    files:
+        - DISC1: N/A:Select Install.bat from Disc1.
+        - DISC2: N/A:Select Install.bat from Disc2.
+
+    game:
+        game_id: toon
+        path: $GAMEDIR
+
+    installer:
+        - write_file:
+            content: '#!/bin/bash
+
+            src=$1
+
+            dst=$2
+
+            src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+            find "$src_path" -type d \( -iname "ACT1" -o 
+                                        -iname "ACT2" -o
+                                        -iname "MISC" \) -exec cp {} -r "$dst" \;'
+            file: $CACHE/selectcopy.sh
+        - chmodx: $CACHE/selectcopy.sh
+
+        - execute:
+            args: $DISC1 $GAMEDIR
+            file: $CACHE/selectcopy.sh
+
+        - execute:
+            args: -R 775  "$GAMEDIR"
+            file: /bin/chmod
+
+        - execute:
+            args: $DISC2 $GAMEDIR
+            file: $CACHE/selectcopy.sh
+
+        - execute:
+            args: -R 775  "$GAMEDIR"
+            file: /bin/chmod

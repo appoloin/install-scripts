@@ -1,7 +1,7 @@
 name: Bud Tucker in Double Trouble
-game_slug: Bud-Tucker-in-Double-Trouble
+game_slug: bud-tucker-in-double-trouble
 version: Installer
-slug:  Bud-Tucker-in-Double-Trouble-installer
+slug:  bud-tucker-in-double-trouble
 runner: scummvm
 
  

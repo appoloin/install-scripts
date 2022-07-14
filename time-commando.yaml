@@ -54,6 +54,7 @@ script:
         [autoexec]
 
           mount C "$GAMEDIR/time" -t dir
+          
           imgmount D "$GAMEDIR/time/GAME.DAT" -t cdrom
 
 
