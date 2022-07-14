@@ -1,7 +1,7 @@
 name: Blood Omen Legacy of Kain
 game_slug: blood-omen-legacy-of-kain
 version: Installer
-slug: INSTALLER
+slug: blood-omen-legacy-of-kain
 runner: wine
 
 script:
@@ -11,14 +11,12 @@ script:
 
   files:
     #https://verokster.blogspot.com/2018/05/legacy-of-kain-blood-omen-gl-wrapper.html
-    #https://drive.google.com/uc?id=18l0WgBvhSeUA0LSrWZsK5wMO-p0F8aOB
-    - setup:  N/A:Insert CD and select Patch 
+    - setup:  N/A:Insert CD and select "Legacy of Kain - Blood Omen - Verok's GL Wrapper/Patch" 
 
   installer:
     - extract:
-        dst: $CACHE
         file: $setup
-        format: 7z
+        dst: $CACHE
 
     - task:
         name: create_prefix
@@ -27,9 +25,11 @@ script:
         prefix: $GAMEDIR
 
     - task:
+        description: Installing Legacy of Kain
         executable: $CACHE/SETUP.EXE
         name: wineexec
-        prefix: $GAMEDIR
+        return_code: 256
+
 
   wine:
     Desktop: true
