@@ -1,7 +1,7 @@
 name: Realms of Arkania 2 - Star Trail
 game_slug: realms-of-arkania-2-star-trail-classic
 version: Installer
-slug: INSTALLER
+slug: realms-of-arkania-2-star-trail-classic
 runner: dosbox
 
 script:

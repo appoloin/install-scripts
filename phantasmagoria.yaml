@@ -1,4 +1,4 @@
-name:  phantasmagoria
+name:  Phantasmagoria
 game_slug:  phantasmagoria
 version: Installer
 slug:   phantasmagoria-installer
@@ -7,8 +7,17 @@ runner: scummvm
 
 script:
   game:
-    game_id: sci
+    game_id: phantasmagoria
     path: $GAMEDIR
+
+  files:
+    - DISC1: N/A:Please select resmap.001
+    - DISC2: N/A:Please select resmap.002
+    - DISC3: N/A:Please select resmap.003
+    - DISC4: N/A:Please select resmap.004
+    - DISC5: N/A:Please select resmap.005
+    - DISC6: N/A:Please select resmap.006
+    - DISC7: N/A:Please select resmap.007
 
   installer:
     - write_file:
@@ -17,27 +26,33 @@ script:
         src=$1
 
         dst=$2
-      
-        cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
+        
+        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
+        cp -avr "$src_path/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
     - chmodx: $CACHE/bulkcopy.sh
-    
-    - insert-disc:
-        description: Please insert disc 1
-        requires: vmd
-    
+        
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+
+        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+        find "$src_path" -type f \( -iname "PDOCO.TXT"  \) -exec cp -r {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+    - chmodx: $CACHE/selectcopy.sh
+
     - execute:
-        args: $DISC $GAMEDIR
+        args: $DISC1 $GAMEDIR
         file: $CACHE/bulkcopy.sh
 
     - execute:
         args: -R 775  "$GAMEDIR"
         file: /bin/chmod
-
-    - execute:
-        args: $DISC/PDOCO.TXT  $CACHE/PDOCO.TXT
-        file: /bin/cp
 
     - execute:
         args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.001
@@ -46,13 +61,9 @@ script:
     - execute:
         args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.001
         file: /bin/mv
-
-    - insert-disc:
-        description: Please insert disc 2
-        requires: vmd
     
     - execute:
-        args: $DISC $GAMEDIR
+        args: $DISC2 $GAMEDIR
         file: $CACHE/bulkcopy.sh
 
     - execute:
@@ -66,13 +77,9 @@ script:
     - execute:
         args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.002
         file: /bin/mv
-
-    - insert-disc:
-        description: Please insert disc 3
-        requires: vmd
     
     - execute:
-        args: $DISC $GAMEDIR
+        args: $DISC3 $GAMEDIR
         file: $CACHE/bulkcopy.sh
 
     - execute:
@@ -87,12 +94,8 @@ script:
         args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.003
         file: /bin/mv
 
-    - insert-disc:
-        description: Please insert disc 4
-        requires: vmd
-    
     - execute:
-        args: $DISC $GAMEDIR
+        args: $DISC4 $GAMEDIR
         file: $CACHE/bulkcopy.sh
 
     - execute:
@@ -106,13 +109,9 @@ script:
     - execute:
         args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.004
         file: /bin/mv
-
-    - insert-disc:
-        description: Please insert disc 5
-        requires: vmd
     
     - execute:
-        args: $DISC $GAMEDIR
+        args: $DISC5 $GAMEDIR
         file: $CACHE/bulkcopy.sh
 
     - execute:
@@ -126,13 +125,9 @@ script:
     - execute:
         args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.005
         file: /bin/mv
-
-    - insert-disc:
-        description: Please insert disc 6
-        requires: vmd
     
     - execute:
-        args: $DISC $GAMEDIR
+        args: $DISC6 $GAMEDIR
         file: $CACHE/bulkcopy.sh
 
     - execute:
@@ -146,13 +141,9 @@ script:
     - execute:
         args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.006
         file: /bin/mv
-
-    - insert-disc:
-        description: Please insert disc 7
-        requires: vmd
     
     - execute:
-        args: $DISC $GAMEDIR
+        args: $DISC7 $GAMEDIR
         file: $CACHE/bulkcopy.sh
 
     - execute:
@@ -167,7 +158,6 @@ script:
         args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.007
         file: /bin/mv
 
-
     - execute:
-        args: $CACHE/PDOCO.TXT $GAMEDIR/PDOCO.TXT  
-        file: /bin/cp
+        args: $DISC1 $GAMEDIR
+        file: $CACHE/selectcopy.sh

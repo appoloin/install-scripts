@@ -1,0 +1,49 @@
+name: Duke Nukem - 3D
+game_slug: duke-nukem-3d
+version: Installer
+slug: duke-nukem-3d
+runner: linux
+
+
+
+script:
+  files:
+    - game: N/A:Select GOG installer.
+    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
+    - eduke32: https://github.com/legluondunet/MyLittleLutrisScripts/raw/master/Duke%20Nukem%203D/eduke32.tar.xz
+
+
+  game:
+    exe: $GAMEDIR/eduke32.sh
+
+  installer:
+    - extract:
+        dst: $CACHE
+        file: $inno
+    
+    - extract:
+        dst: $GAMEDIR
+        format: txz
+        file: $eduke32
+
+    - execute:
+        args: -I app -d "$CACHE" "$game"
+        file: $CACHE/innoextract
+      
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+
+        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+        find "$src_path" -type f \( -iname "DUKE3D.GRP"  \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+    - chmodx: $CACHE/selectcopy.sh
+
+    - execute:
+        args: $CACHE $GAMEDIR/dn3d/gog
+        file: $CACHE/selectcopy.sh
+   

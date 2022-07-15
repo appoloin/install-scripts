@@ -1,0 +1,49 @@
+name: Space Quest 6 - The Spinal Frontier
+game_slug: space-quest-6-the-spinal-frontier
+version: Installer
+slug:  space-quest-6-the-spinal-frontier
+runner: scummvm
+
+
+script:
+  files:
+    - game:  N/A:Please select the GoG installer
+    - inno: https://github.com/dscharrer/innoextract/releases/download/1.8/innoextract-1.8-linux.tar.xz
+
+  game:
+    game_id: sq6  
+    path: $GAMEDIR
+  
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+        
+        find "$src" -maxdepth 1 -type d \( -iname app -o
+                                           -iname commonappdata -o
+                                           -iname *redist -o
+                                           -iname scummvm -o
+                                           -iname dosbox -o
+                                           -iname *support -o
+                                           -iname tmp \) -exec rm -r {}  \;
+                                           
+        find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
+        file: $CACHE/remove.sh
+    - chmodx: $CACHE/remove.sh
+
+    - extract:
+        dst: $CACHE
+        file: $inno
+
+    - execute:
+        args: -d "$GAMEDIR" "$game"
+        file: $CACHE/innoextract
+
+    - execute:
+        args: $GAMEDIR
+        file: $CACHE/remove.sh
+
+
+  scummvm:
+    fullscreen: true

@@ -1,7 +1,7 @@
 name: Realms of Arkanis 3 - Shadows over Riva
 game_slug: realms-of-arkania-3-shadows-over-riva-classic
 version: Installer
-slug: INSTALLER
+slug: realms-of-arkania-3-shadows-over-riva-classic
 runner: dosbox
 
 script:

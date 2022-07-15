@@ -1,7 +1,7 @@
-name:  Neverhood
-game_slug:  Neverhood
+name: The Neverhood
+game_slug:  the-neverhood
 version: Installer
-slug:   Neverhood-installer
+slug:  the-neverhood
 runner: scummvm
 
 
