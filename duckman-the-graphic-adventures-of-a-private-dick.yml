@@ -1,0 +1,45 @@
+name: Duckman - The Graphic Adventures of a Private Dick
+game_slug: duckman-the-graphic-adventures-of-a-private-dick
+version: Installer
+slug: duckman-the-graphic-adventures-of-a-private-dick
+runner: scummvm
+
+
+script:
+  files:
+    - game:  N/A:Select the file DUCKMAN.exe
+
+  game:
+    game_id: duckman  
+    path: $GAMEDIR
+  
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+
+        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+        
+        find "$src_path" -type f \( -iname DUCKMAN.GAM \) -print  -exec cp {} -r "$dst" \;
+
+        find "$src_path" -type d \( -iname MUSIC -o
+                                    -iname SFX -o
+                                    -iname VIDEO -o
+                                    -iname VOICE \) -print  -exec cp {} -r "$dst" \;'
+        file: $CACHE/selectcopy.sh
+    - chmodx: $CACHE/selectcopy.sh
+
+    - execute:
+        args: $game $GAMEDIR
+        file: $CACHE/selectcopy.sh
+      
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod
+
+
+  scummvm:
+    fullscreen: true
