@@ -1,7 +1,7 @@
 name: TeenAgent
-game_slug: TeenAgent
+game_slug: teenagent
 version: Installer
-slug:  TeenAgent-installer
+slug:  teenagent
 runner: scummvm
 
 
@@ -23,7 +23,8 @@ script:
 
         src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        find "$src_path" -type f \( -iname "*.DAT" -o -iname "*.RES"  \) -exec cp {} "$dst" \;'
+        find "$src_path" -type f \( -iname "*.DAT" -o 
+                                    -iname "*.RES"  \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
 
     - chmodx: $CACHE/selectcopy.sh

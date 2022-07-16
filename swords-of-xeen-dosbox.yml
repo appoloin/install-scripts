@@ -1,4 +1,4 @@
-name: Might and Magic Swords of Xeen
+name: Might and Magic - Swords of Xeen
 game_slug: swords-of-xeen
 version: Installer
 slug: swords-of-xeen-installer
@@ -20,11 +20,12 @@ script:
         
         dst=$2
 
-        file=$3
-
-        find "$src" -maxdepth 1 -type f \( -iname $file \) -exec cp {} "$dst" \;'
-        file: $CACHE/selectcopy2.sh
-    - chmodx: $CACHE/selectcopy2.sh
+        find "$src" -maxdepth 1 -type f \( -iname "*.pdf" -o
+                                           -iname "SWORDS.*" -o 
+                                           -iname "SWRD.*" -o
+                                           -iname "XEEN.*" \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+    - chmodx: $CACHE/selectcopy.sh
 
     - extract:
         dst: $CACHE
@@ -39,29 +40,13 @@ script:
         file: mkdir
     
     - execute:
-        args: $CACHE $GAMEDIR *.pdf
-        file: $CACHE/selectcopy2.sh
-
-    - execute:
-        args: $CACHE $GAMEDIR/MM SWORDS.EXE
-        file: $CACHE/selectcopy2.sh
-
-    - execute:
-        args: $CACHE $GAMEDIR/MM SWRD.*  
-        file: $CACHE/selectcopy2.sh
-
-    - execute:
-        args: $CACHE $GAMEDIR/MM XEEN.*
-        file: $CACHE/selectcopy2.sh
-
-    - execute:
-        args: $GAMEDIR/HoMM/cloud_saves  
-        file: mkdir
+        args: $CACHE $GAMEDIR/MM
+        file: $CACHE/selectcopy.sh
 
     - write_file:
         content: '[sdl]
 
-          sensitivity=20
+          capture_mouse=onclick middlerelease
 
           fullresolution=desktop
 
@@ -81,9 +66,7 @@ script:
 
           @echo off
         
-          mount C "$GAMEDIR/" -t dir
-
-          mount C "$GAMEDIR/MM/cloud_saves" -t overlay
+          mount C "$GAMEDIR" -t dir
 
           C: 
 

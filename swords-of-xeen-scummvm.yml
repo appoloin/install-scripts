@@ -1,4 +1,4 @@
-name: Might and Magic Swords of Xeen -Scummvm 
+name: Might and Magic - Swords of Xeen
 game_slug: swords-of-xeen
 version: Installer
 slug: swords-of-xeen-installer
@@ -21,11 +21,12 @@ script:
         
         dst=$2
 
-        file=$3
-
-        find "$src" -maxdepth 1 -type f \( -iname $file \) -exec cp {} "$dst" \;'
-        file: $CACHE/selectcopy2.sh
-    - chmodx: $CACHE/selectcopy2.sh
+        find "$src" -maxdepth 1 -type f \( -iname "*.pdf" -o
+                                           -iname "SWORDS.*" -o 
+                                           -iname "SWRD.*" -o
+                                           -iname "XEEN.*" \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+    - chmodx: $CACHE/selectcopy.sh
 
     - extract:
         dst: $CACHE
@@ -36,20 +37,8 @@ script:
         file: $CACHE/innoextract
 
     - execute:
-        args: $CACHE $GAMEDIR *.pdf
-        file: $CACHE/selectcopy2.sh
-
-    - execute:
-        args: $CACHE $GAMEDIR SWORDS.EXE
-        file: $CACHE/selectcopy2.sh
-
-    - execute:
-        args: $CACHE $GAMEDIR SWRD.*  
-        file: $CACHE/selectcopy2.sh
-
-    - execute:
-        args: $CACHE $GAMEDIR XEEN.*
-        file: $CACHE/selectcopy2.sh
+        args: $CACHE $GAMEDIR 
+        file: $CACHE/selectcopy.sh
 
   scummvm:
     fullscreen: true
