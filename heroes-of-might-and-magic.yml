@@ -1,4 +1,4 @@
-name: Might and Magic
+name: Heroes of Might and Magic
 game_slug: heroes-of-might-and-magic
 version: Installer
 slug: heroes-of-might-and-magic-installer
@@ -81,7 +81,7 @@ script:
     - write_file:
         content: '[sdl]
 
-          sensitivity=20
+          capture_mouse=onclick middlerelease
 
           fullresolution=desktop
 

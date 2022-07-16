@@ -1,7 +1,7 @@
-name: I_Have_No_Mouth
-game_slug: I_Have_No_Mouth
+name: I Have No Mouth, and I Must Scream
+game_slug: i-have-no-mouth-and-i-must-scream
 version: Installer
-slug:  I_Have_No_Mouth-installer
+slug: i-have-no-mouth-and-i-must-scream
 runner: scummvm
 
 
@@ -11,7 +11,7 @@ script:
     - game: N/A:Select the intall.exe file
 
   game:
-    game_id: saga
+    game_id: ihnm
     path: $GAMEDIR
   
   installer:
@@ -24,7 +24,8 @@ script:
         
         src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        find "$src_path" -type f \( -name "*.res" -o -name "patch.re_" \) -exec cp {} "$dst" \;'
+        find "$src_path" -type f \( -iname "*.res" -o 
+                                    -iname "patch.re_" \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
 
     - chmodx: $CACHE/selectcopy.sh

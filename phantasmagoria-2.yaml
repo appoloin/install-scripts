@@ -1,4 +1,4 @@
-name:  phantasmagoria2
+name:  Phantasmagoria 2
 game_slug:  phantasmagoria-2
 version: Installer
 slug:   phantasmagoria-2-installer
@@ -7,8 +7,16 @@ runner: scummvm
 
 script:
   game:
-    game_id: sci
+    game_id: phantasmagoria2
     path: $GAMEDIR
+
+  files:
+    - DISC1: N/A:Please select resmap.001
+    - DISC2: N/A:Please select resmap.002
+    - DISC3: N/A:Please select resmap.003
+    - DISC4: N/A:Please select resmap.004
+    - DISC5: N/A:Please select resmap.005
+
 
   installer:
     - write_file:
@@ -17,18 +25,15 @@ script:
         src=$1
 
         dst=$2
-      
-        cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
+        
+        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
+        cp -avr "$src_path/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
     - chmodx: $CACHE/bulkcopy.sh
-    
-    - insert-disc:
-        description: Please insert disc 1
-        requires: duk
-    
+        
     - execute:
-        args: $DISC $GAMEDIR
+        args: $DISC1 $GAMEDIR
         file: $CACHE/bulkcopy.sh
 
     - execute:
@@ -43,12 +48,8 @@ script:
         args: $GAMEDIR/RESOURCE.SFX  $GAMEDIR/RESSFX.001
         file: /bin/mv
 
-    - insert-disc:
-        description: Please insert disc 2
-        requires: duk
-    
     - execute:
-        args: $DISC $GAMEDIR
+        args: $DISC2 $GAMEDIR
         file: $CACHE/bulkcopy.sh
 
     - execute:
@@ -63,12 +64,8 @@ script:
         args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.002
         file: /bin/mv
 
-    - insert-disc:
-        description: Please insert disc 3
-        requires: duk
-    
     - execute:
-        args: $DISC $GAMEDIR
+        args: $DISC3 $GAMEDIR
         file: $CACHE/bulkcopy.sh
 
     - execute:
@@ -83,12 +80,8 @@ script:
         args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.003
         file: /bin/mv
 
-    - insert-disc:
-        description: Please insert disc 4
-        requires: duk
-    
     - execute:
-        args: $DISC $GAMEDIR
+        args: $DISC4 $GAMEDIR
         file: $CACHE/bulkcopy.sh
 
     - execute:
@@ -103,12 +96,8 @@ script:
         args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.004
         file: /bin/mv
 
-    - insert-disc:
-        description: Please insert disc 5
-        requires: duk
-    
     - execute:
-        args: $DISC $GAMEDIR
+        args: $DISC5 $GAMEDIR
         file: $CACHE/bulkcopy.sh
 
     - execute:

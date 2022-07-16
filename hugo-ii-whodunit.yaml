@@ -1,7 +1,7 @@
-name: Hugo3
-game_slug: Hugo3
+name: Hugo II - Whodunit
+game_slug: hugo-ii-whodunit
 version: Installer
-slug:  Hugo3-installer
+slug:  hugo-ii-whodunit
 runner: scummvm
 
 
@@ -10,7 +10,7 @@ script:
       - game:  N/A:Select file HUGO.exe
 
     game:
-        game_id: hugo3
+        game_id: hugo2
         path: $GAMEDIR
 
     installer:
