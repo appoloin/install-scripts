@@ -38,7 +38,7 @@ script:
 
         [sdl]
 
-        sensitivity=10
+          capture_mouse=onclick middlerelease
         
         [autoexec]
 
