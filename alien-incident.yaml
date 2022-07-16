@@ -1,7 +1,7 @@
 name: Alien Incident
 game_slug: alien-incident
 version: Installer
-slug: alien-incident-installer
+slug: alien-incident
 runner: dosbox
 
 script:
