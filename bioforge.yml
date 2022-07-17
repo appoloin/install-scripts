@@ -6,72 +6,141 @@ runner: dosbox
 
 script:
   files:
-    - game: N/A:Select file Install.bat.
+    - game: N/A:Select GOG installer.
+    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
+  
   game:
     main_file: $GAMEDIR/Bioforge.conf
+  
   installer:
-    - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/CDD $GAMEDIR/CDD/DISC
-        file: mkdir
-
     - write_file:
         content: '#!/bin/bash
 
         src=$1
-
-        dst=$2
         
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+        find "$src" -maxdepth 1 -type d \( -iname app -o
+                                           -iname commonappdata -o
+                                           -iname *redist -o
+                                           -iname scummvm -o
+                                           -iname dosbox -o
+                                           -iname *support -o
+                                           -iname tmp \) -exec rm -r {}  \;
+                                           
+        find "$src" -maxdepth 1 -type f \( -iname "goggame*" -o
+                                           -iname "webcache.zip" -o
+                                           -iname "GameuxInstallHelper.dll" \) -exec rm {}  \;'
+        file: $CACHE/remove.sh
+    - chmodx: $CACHE/remove.sh
 
-        cp -avr "$src_path/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
 
+    - extract:
+        dst: $CACHE
+        file: $inno
+        
     - execute:
-        args: $game $GAMEDIR/CDD/DISC
-        file: $CACHE/bulkcopy.sh
+        args: -I "app" -d "$CACHE" "$game"
+        file: $CACHE/innoextract
 
-    - write_file:
-        content: '[sdl]
-
-        sensitivity=10
-        
-        [autoexec]
-
-        mount C "$GAMEDIR/HDD" -t dir
-
-        mount D "$GAMEDIR/CDD/DISC" -t cdrom
-      
-        D:
-
-        install
-
-        exit'
-        file: $GAMEDIR/Bioforge-setup.conf
-
-    - task:
-        config_file: $GAMEDIR/Bioforge-setup.conf
-        name: dosexec
-        working_dir: $GAMEDIR/HDD
+    - merge:
+        dst: "$GAMEDIR"
+        src: "$CACHE/app"
 
 
 
     - write_file:
-        content: '[sdl]
+        content: ' [midi]
 
-          sensitivity=10
+         mididevice = mt32
+
+        [sdl]
+
+          capture_mouse=onclick middlerelease
+
+          fullresolution=desktop
+
+          windowresolution=original
+
+          fullscreen=true
+
+          output=opengl
         
+        [render]
+
+          aspect=true
+
+          scaler=normal2x
+
         [autoexec]
 
-          mount C "$GAMEDIR/HDD" -t dir
+          mount C "$GAMEDIR" -t dir
           
-          mount D "$GAMEDIR/CDD/DISC" -t cdrom
+          cls 
+
+          ECHO OFF
+
+          goto launcher
+
+          :launcher
+
+          cls 
+
+          ECHO  -------------------------------------------  
+          
+          ECHO                 Bioforge
+          
+          ECHO  -------------------------------------------  
+          
+          ECHO   1) Play        
+          
+          ECHO   2) Setup                                
+          
+          ECHO  -------------------------------------------  
+          
+          ECHO   3) Exit Program                             
+          
+          ECHO  -------------------------------------------  
+
+          choice /c1234 /s Which program do you want to run? [1-3]: /n 
+          
+          if errorlevel 3 goto exit
+                    
+          if errorlevel 2 goto setup
+          
+          if errorlevel 1 goto game
+
+
+          :game
+
+          cls
 
           c:
 
           cd Bioforge
 
-          BIOSFORGE
-          
+          BIOFORGE.EXE
+
+          goto exit
+
+
+          :setup
+
+          cls
+
+          c:
+
+          cd Bioforge
+
+          INSTALL.EXE
+
+          goto launcher
+
+
+          :exit
+                    
           exit'
         file: $GAMEDIR/Bioforge.conf
+
+
+    - execute:
+        args: $GAMEDIR
+        file: $CACHE/remove.sh
