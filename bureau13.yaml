@@ -1,4 +1,4 @@
-name: bureau13
+name: Bureau 13
 game_slug: bureau13
 version: Installer
 slug: bureau13-installer
@@ -39,7 +39,7 @@ script:
     - write_file:
         content: '[sdl]
 
-          sensitivity=5
+          capture_mouse=onclick middlerelease
         
         [autoexec]
 
@@ -68,7 +68,7 @@ script:
 
         [autoexec]
         
-          mount C "$GAMEDIR/HDD" -t dir
+          capture_mouse=onclick middlerelease
 
           C:
 
