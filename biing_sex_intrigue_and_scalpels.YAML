@@ -1,7 +1,7 @@
 name: Biing Sex Intrigue and Scalpels
 game_slug:  biing_sex_intrigue_and_scalpels
 version: Installer
-slug: INSTALLER
+slug: biing_sex_intrigue_and_scalpels
 runner: dosbox
 
 script:
@@ -54,7 +54,7 @@ script:
         
         [sdl]
 
-          sensitivity=10
+          capture_mouse=onclick middlerelease
 
           fullresolution=desktop
 
