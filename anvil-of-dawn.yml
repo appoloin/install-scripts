@@ -1,7 +1,7 @@
 name:  Anvil of Dawn
-game_slug:  anvil_of_dawn
+game_slug: anvil-of-dawn
 version: Installer
-slug:  installer
+slug:  anvil-of-dawn
 runner: dosbox
 
 script:
@@ -81,7 +81,7 @@ script:
         
         [sdl]
 
-          sensitivity=10
+          capture_mouse=onclick middlerelease
 
           fullresolution=desktop
 

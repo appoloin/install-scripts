@@ -1,4 +1,4 @@
-name: Wing Commander III
+name: Wing Commander III - Heart of the Tiger
 game_slug: wing-commander-iii-heart-of-the-tiger
 version: Installer
 slug: INSTALLER
@@ -50,7 +50,11 @@ script:
         file: $CACHE/selectcopy.sh
 
     - write_file:
-        content: '[cpu]
+        content: '[midi]
+
+         mididevice = mt32
+         
+        [cpu]
 
           core=auto
 
@@ -64,7 +68,7 @@ script:
 
         [sdl]
 
-          sensitivity=30
+          capture_mouse=onclick middlerelease
 
           fullresolution=desktop
 
