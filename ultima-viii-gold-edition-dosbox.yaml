@@ -1,7 +1,7 @@
-name: Ultima 8 
-game_slug:  ultima-8-gold-edition
+name: Ultima 8 - Gold Edition
+game_slug: ultima-viii-gold-edition
 version: Installer
-slug: ultima-8-gold-edition_INSTALLER
+slug: ultima-viii-gold-edition
 runner: dosbox
 
 script:
@@ -64,7 +64,7 @@ script:
     - write_file:
         content: '[sdl]
 
-          sensitivity=20
+          capture_mouse=onclick middlerelease
 
           fullresolution=desktop
 
