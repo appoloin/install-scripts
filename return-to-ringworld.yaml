@@ -8,7 +8,7 @@ runner: scummvm
 
 script:
   game:
-    game_id: tsage
+    game_id: ringworld2
     path: $GAMEDIR
   
   files:
