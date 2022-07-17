@@ -1,0 +1,155 @@
+name: Lemmings 2 - The Tribes
+game_slug: lemmings-2-the-tribes
+version: Installer
+slug:  lemmings-2-the-tribes
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select install.exe
+
+  game:
+    main_file: $GAMEDIR/lemmings.conf
+
+  installer:
+    - execute:
+        args: $GAMEDIR/HDD $GAMEDIR/FDD 
+        file: mkdir
+
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+        
+        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+        cp -avr "$src_path/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: $game $GAMEDIR/FDD
+        file: $CACHE/bulkcopy.sh
+
+    - write_file:
+        content: '[sdl]
+
+          capture_mouse=onclick middlerelease
+        
+        [autoexec]
+
+          mount A "$GAMEDIR/FDD" -t floppy 
+
+          mount C "$GAMEDIR/HDD" -t dir
+
+          A:
+
+          install
+          
+          exit'
+        file: $GAMEDIR/lemmings-setup.conf
+
+    - task:
+        config_file: $GAMEDIR/lemmings-setup.conf
+        name: dosexec
+        working_dir: $GAMEDIR/HDD
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod
+
+
+    - write_file:
+        content: '[midi]
+
+         mididevice = mt32
+         
+        [sdl]
+
+          capture_mouse=onclick middlerelease
+
+          fullresolution=desktop
+
+          windowresolution=original
+
+          fullscreen=true
+
+          output=opengl
+
+        [render]
+
+          aspect=true
+
+          scaler=normal2x
+          
+        [autoexec]
+
+          mount A "$GAMEDIR/FDD" -t floppy
+
+          mount C "$GAMEDIR/HDD" -t dir
+
+          cls 
+
+          ECHO OFF
+
+          goto launcher
+
+          :launcher
+
+          cls 
+
+          ECHO  -------------------------------------------  
+          
+          ECHO                  Lemmmings
+          
+          ECHO  -------------------------------------------  
+          
+          ECHO   1) Play Lemmings      
+                              
+          ECHO   2) Install  
+
+          ECHO  -------------------------------------------  
+          
+          ECHO   3) exit program                             
+          
+          ECHO  -------------------------------------------  
+
+          choice /c123 /s Which program do you want to run? [1-4]: /n 
+          
+          if errorlevel 3 goto exit
+
+          if errorlevel 2 goto install
+                              
+          if errorlevel 1 goto game
+
+
+          :game
+
+          cls
+
+          c:
+
+          cd l2
+
+          l2
+
+          goto exit
+
+
+         :install
+
+          cls
+
+          C:
+
+          install
+
+          goto launcher
+
+          :exit
+
+          exit'
+        file: $GAMEDIR/lemmings.conf
+
