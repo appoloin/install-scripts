@@ -1,7 +1,7 @@
 name: Return to Ringworld
-game_slug: Return-to-Ringworld
+game_slug: return-to-ringworld
 version: Installer
-slug: Return-to-Ringworld-installer
+slug: return-to-ringworld
 runner: scummvm
 
 
