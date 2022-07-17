@@ -73,15 +73,15 @@ script:
         file: $CACHE/selectcopy.sh
 
     - write_file:
-        content: '[cpu]
+        content: '[midi]
 
-        core=auto
+         mididevice = mt32
 
-        cputype=386_prefetch
-        
+        [cpu]
+
+          cycles=7000        
+  
         [sdl]
-
-          sensitivity=10
 
           fullresolution=desktop
 
@@ -104,10 +104,6 @@ script:
           mount C "$GAMEDIR" -t dir
 
           imgmount D "$GAMEDIR/CDD/JA1.gog" -t iso -fs iso
-
-          c:
-          
-          cd jagged
 
           cls 
 
@@ -148,6 +144,10 @@ script:
 
           cls
 
+          c:
+          
+          cd jagged
+
           ja.exe
 
           goto exit
@@ -156,6 +156,10 @@ script:
           :setup
 
           cls
+
+          c:
+          
+          cd jagged
 
           SETSOUND.EXE
 
