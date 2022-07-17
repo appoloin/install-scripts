@@ -1,7 +1,7 @@
 name: Biing Sex Intrigue and Scalpels
-game_slug:  biing_sex_intrigue_and_scalpels
+game_slug: biing-sex-intrigue-and-scalpels
 version: Installer
-slug: biing_sex_intrigue_and_scalpels
+slug: biing-sex-intrigue-and-scalpels
 runner: dosbox
 
 script:
