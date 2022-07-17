@@ -1,15 +1,19 @@
 name: King's Quest 7
-game_slug: kings_quest_7
+game_slug: kings-quest-vii-the-princeless-bride
 version: Installer
-slug:  kings_quest_7-installer
+slug:  kings-quest-vii-the-princeless-bride
 runner: scummvm
 
 
 script:
   game:
-    game_id: sci  
+    game_id: kq7  
     path: $GAMEDIR
   
+  files:
+    - DISC: N/A:Select file AUTOPLAY.exe.
+
+
   installer:
     - write_file:
         content: '#!/bin/bash
@@ -17,17 +21,15 @@ script:
         src=$1
 
         dst=$2
+        
+        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        cp -avr "$src"  "$dst"'
+        cp -avr "$src_path/."  "$dst"'
         file: $CACHE/bulkcopy.sh
     - chmodx: $CACHE/bulkcopy.sh
 
-    - insert-disc:
-        description: Please insert disc
-        requires: AVI
-
     - execute:
-        args: $DISC/. $GAMEDIR
+        args: $DISC $GAMEDIR
         file: $CACHE/bulkcopy.sh
 
     - execute:
