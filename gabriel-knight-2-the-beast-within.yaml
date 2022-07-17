@@ -1,0 +1,36 @@
+name: Gabriel Knight 2 - The Beast Within
+game_slug: gabriel-knight-2-the-beast-within
+version: Installer
+slug: gabriel-knight-2-the-beast-within
+runner: scummvm
+
+
+script:
+  game:
+    game_id: gk2  
+    path: $GAMEDIR
+
+  files:
+    - DISC: N/A:Select GK2CD.BAT.
+
+  installer:  
+    - write_file: 
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+        
+        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+        cp -avr "$src_path/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: $DISC $GAMEDIR
+        file: $CACHE/bulkcopy.sh
+        
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod
