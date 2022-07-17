@@ -1,7 +1,7 @@
 name: Bioforge
-game_slug: Bioforge
+game_slug: bioforge
 version: Installer
-slug: Bioforge-installer
+slug: bioforge
 runner: dosbox
 
 script:

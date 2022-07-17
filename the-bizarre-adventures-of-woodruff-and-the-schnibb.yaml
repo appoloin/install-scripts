@@ -1,7 +1,7 @@
-name: woodruff
-game_slug: woodruff
+name: The Bizarre Adventures of Woodruff and the Schnibble
+game_slug: the-bizarre-adventures-of-woodruff-and-the-schnibb
 version: Installer
-slug:  woodruff-installer
+slug: the-bizarre-adventures-of-woodruff-and-the-schnibb
 runner: scummvm
 
 
@@ -10,7 +10,7 @@ script:
       - game:  N/A:Select the file *.stk
 
     game:
-        game_id: gob
+        game_id: woodruff
         path: $GAMEDIR
 
     installer:
@@ -23,7 +23,8 @@ script:
 
         src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        find "$src_path" -type f \( -iname "*.stk" -o -iname "*.ITK" \) -exec cp {} "$dst" \;'
+        find "$src_path" -type f \( -iname "*.stk" -o 
+                                    -iname "*.ITK" \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
 
     - chmodx: $CACHE/selectcopy.sh
