@@ -1,7 +1,7 @@
 name: Universe
-game_slug: Universe
+game_slug: universe
 version: Installer
-slug: Universe-installer
+slug: universe
 runner: dosbox
 
 
@@ -35,9 +35,41 @@ script:
         file: $CACHE/bulkcopy.sh
     
     - write_file:
-        content: '[sdl]
+        content: '[midi]
 
-          sensitivity=20
+         mididevice = mt32
+        
+        [cpu]
+
+          core=auto
+
+          cputype=auto
+
+          cycles=6000
+
+          cycleup=1000
+
+          cycledown=1000
+
+         
+        [sdl]
+
+          capture_mouse=onclick middlerelease
+
+          fullresolution=desktop
+
+          windowresolution=original
+
+          fullscreen=true
+
+          output=opengl
+
+
+        [render]
+
+          aspect=true
+
+          scaler=normal2x
 
         [autoexec]
 
