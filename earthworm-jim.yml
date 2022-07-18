@@ -1,7 +1,7 @@
 name: Earthworn Jim
 game_slug: earthworm-jim
 version: Installer
-slug: installer
+slug: earthworm-jim
 runner: dosbox
 
 script:
@@ -61,7 +61,7 @@ script:
         
         [sdl]
 
-          sensitivity=20
+          capture_mouse=onclick middlerelease
 
           fullresolution=desktop
 
