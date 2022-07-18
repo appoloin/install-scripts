@@ -1,7 +1,7 @@
-name:  Wing Commander Privateer
+name:  Wing Commander - Privateer
 game_slug: wing-commander-privateer
 version: Installer
-slug: INSTALLER
+slug: wing-commander-privateer
 runner: dosbox
 
 script:
