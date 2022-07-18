@@ -1,7 +1,7 @@
-name: Ween
-game_slug: ween
+name: Ween - The Prophecy
+game_slug: ween-the-prophecy
 version: Installer
-slug:  ween-installer
+slug:  ween-the-prophecy
 runner: scummvm
 
 

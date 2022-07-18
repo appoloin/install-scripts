@@ -1,16 +1,16 @@
-name: Police Quest 4
-game_slug: police_quest_4
+name: The Legend of Kyrandia - The Hand of Fate 
+game_slug:  the-legend-of-kyrandia-hand-of-fate-book-two
 version: Installer
-slug:   police_quest_4-installer
+slug: the-legend-of-kyrandia-hand-of-fate-book-two
 runner: scummvm
 
 
 script:
   files:
-    - game:  N/A:Select the file install.exe
+    - game:  N/A:Select the file HOF.EXE
 
   game:
-    game_id: sci  
+    game_id: kyra2  
     path: $GAMEDIR
   
   installer:
