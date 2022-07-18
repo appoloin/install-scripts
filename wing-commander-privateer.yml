@@ -61,7 +61,7 @@ script:
     - write_file:
         content: '[sdl]
 
-          sensitivity=30
+          capture_mouse=onclick middlerelease
 
           fullresolution=desktop
 

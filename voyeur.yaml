@@ -1,7 +1,7 @@
-name: voyeur
+name: Voyeur
 game_slug: voyeur
 version: Installer
-slug:  voyeur-installer 
+slug:  voyeur
 runner: scummvm
 
 
