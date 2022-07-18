@@ -1,0 +1,91 @@
+name: The Elder Scrolls - Arena
+game_slug: the-elder-scrolls-arena
+version: Installer
+slug: the-elder-scrolls-arena
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select GOG installer.
+    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
+
+  game:
+    main_file: $GAMEDIR/arena.conf
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+        
+        find "$src" -maxdepth 1 -type d \( -iname app -o
+                                           -iname commonappdata -o
+                                           -iname *redist -o
+                                           -iname scummvm -o
+                                           -iname dosbox -o
+                                           -iname *support -o
+                                           -iname tmp \) -exec rm -r {}  \;
+                                           
+        find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
+        file: $CACHE/remove.sh
+    - chmodx: $CACHE/remove.sh
+
+    - extract:
+        dst: $CACHE
+        file: $inno
+        
+    - execute:
+        args: -I "app" -d "$CACHE" "$game"
+        file: $CACHE/innoextract
+
+    - merge:
+        dst: "$GAMEDIR"
+        src: "$CACHE/app"
+
+    - write_file:
+        content: '[midi]
+
+         mididevice = mt32
+         
+        [sdl]
+
+          capture_mouse=onclick middlerelease
+
+          fullresolution=desktop
+
+          windowresolution=original
+
+          fullscreen=true
+
+          output=opengl
+
+        [render]
+
+          aspect=true
+
+          scaler=normal2x
+
+        [autoexec]
+
+          @echo off
+        
+          mount C "$GAMEDIR" -t dir
+
+          mount D "$GAMEDIR" -t cdrom
+
+         cls 
+
+          ECHO OFF
+        
+          SET ARENADATA=C:
+          
+          d:
+          
+          ACD -Ssbpdig.adv -IOS220 -IRQS7 -DMAS1 -Mgenmidi.adv -IOM330 -IRQM2 -DMAM1
+          
+          exit'
+        file: $GAMEDIR/arena.conf
+
+    - execute:
+        args: $GAMEDIR
+        file: $CACHE/remove.sh
