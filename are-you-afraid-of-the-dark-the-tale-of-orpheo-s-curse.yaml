@@ -1,7 +1,7 @@
-name: Are You Afraid of the Dark
-game_slug:  are-you-afraid-of-the-dark
+name: Are You Afraid of the Dark ? The Tales of Orpheos Curse
+game_slug:  are-you-afraid-of-the-dark-the-tale-of-orpheo-s-curse
 version: Installer
-slug:   Dark-installer
+slug:   are-you-afraid-of-the-dark-the-tale-of-orpheo-s-curse
 runner: dosbox
 
 
@@ -52,10 +52,10 @@ script:
           install.exe
           
           exit'
-        file: $GAMEDIR/Dark-setup.conf
+        file: $GAMEDIR/setup.conf
 
     - task:
-        config_file: $GAMEDIR/Dark-setup.conf
+        config_file: $GAMEDIR/setup.conf
         name: dosexec
         working_dir: $GAMEDIR/HDD
 
@@ -65,7 +65,11 @@ script:
 
 
     - write_file:
-        content: '[gus]
+        content: '[midi]
+
+         mididevice = mt32
+         
+        [gus]
 
         gus = true
         
