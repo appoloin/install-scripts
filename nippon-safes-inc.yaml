@@ -1,17 +1,16 @@
-name: King's Quest 6
-game_slug: kings-quest-vi
+name: Nippon Safes inc
+game_slug: nippon-safes-inc
 version: Installer
-slug:  kings-quest-vi-installer
+slug:  nippon-safes-inc
 runner: scummvm
-
 
 
 script:
   files:
-    - game:  N/A:Select a file with the extension *.000
+    - game:  N/A:Select the file DISK1
 
   game:
-    game_id: sci  
+    game_id: nippon  
     path: $GAMEDIR
   
   installer:

@@ -1,7 +1,7 @@
-name: Serrated Scalpel
-game_slug: Serrated-Scalpel
+name: The Case of the Serrated Scalpel
+game_slug: the-lost-files-of-sherlock-holmes-the-case-of-the-
 version: Installer
-slug:  Serrated Scalpel-installer
+slug:  the-lost-files-of-sherlock-holmes-the-case-of-the-
 runner: scummvm
 
 

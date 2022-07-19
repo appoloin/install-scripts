@@ -1,7 +1,7 @@
-name: elvira 2
-game_slug: elvira 2
+name: Elvira 2 - The Jaws of Cerberus
+game_slug: elvira-ii-the-jaws-of-cerberus
 version: Installer
-slug:  elvira-2-installer
+slug: elvira-ii-the-jaws-of-cerberus
 runner: scummvm
 
 

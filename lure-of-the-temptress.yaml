@@ -1,18 +1,20 @@
-name:  rex
-game_slug: rex
+name: Lure of the Temptress
+game_slug:  lure-of-the-temptress
 version: Installer
-slug:  rex-installer
+slug: lure-of-the-temptress
 runner: scummvm
 
 
-script:
-  game:
-    game_id: nebular
-    path: $GAMEDIR
 
+script:
   files:
-    - game: N/A:Select the file REX.BAT
- 
+    - game:  N/A:Select a file with the extension *.vga
+    - patch: https://github.com/scummvm/scummvm/raw/master/dists/engine-data/lure.dat
+
+  game:
+    game_id: lure
+    path: $GAMEDIR
+  
   installer:
     - write_file:
         content: '#!/bin/bash
@@ -23,10 +25,7 @@ script:
 
         src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        find "$src_path" -type f \( -iname "*.00?" -o
-                                    -iname "*.HAG" -o 
-                                    -iname "*.RES" -o
-                                    -iname "DIGITAL.ADA" \) -exec cp {} "$dst" \;'
+        find "$src_path" -type f \( -iname "*.vga"  \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
     - chmodx: $CACHE/selectcopy.sh
 
@@ -34,8 +33,13 @@ script:
         args: $game $GAMEDIR
         file: $CACHE/selectcopy.sh
 
+    - copy:
+        src: $patch
+        dst: $GAMEDIR
+
     - execute:
         args: -R 775  "$GAMEDIR"
         file: /bin/chmod
+
   scummvm:
     fullscreen: true

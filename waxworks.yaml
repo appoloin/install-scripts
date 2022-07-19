@@ -1,7 +1,7 @@
-name: waxworks
+name: Waxworks
 game_slug: waxworks
 version: Installer
-slug:  waxworks-installer 
+slug: waxworks
 runner: scummvm
 
 

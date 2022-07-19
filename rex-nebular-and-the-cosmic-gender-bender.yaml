@@ -1,19 +1,18 @@
-name:  ringworld2 
-game_slug: ringworld2
+name:  rex
+game_slug: rex-nebular-and-the-cosmic-gender-bender
 version: Installer
-slug:  ringworld2-installer
+slug: rex-nebular-and-the-cosmic-gender-bender
 runner: scummvm
 
 
 script:
   game:
-    game_id: tsage
+    game_id: nebular
     path: $GAMEDIR
 
-    
   files:
-    - game: N/A:Select the file RING.EXE
-
+    - game: N/A:Select the file REX.BAT
+ 
   installer:
     - write_file:
         content: '#!/bin/bash
@@ -24,7 +23,10 @@ script:
 
         src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        find "$src_path" -type f \( -iname "*.rlb"  \) -exec cp {} "$dst" \;'
+        find "$src_path" -type f \( -iname "*.00?" -o
+                                    -iname "*.HAG" -o 
+                                    -iname "*.RES" -o
+                                    -iname "DIGITAL.ADA" \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
     - chmodx: $CACHE/selectcopy.sh
 
@@ -35,6 +37,5 @@ script:
     - execute:
         args: -R 775  "$GAMEDIR"
         file: /bin/chmod
-
   scummvm:
     fullscreen: true

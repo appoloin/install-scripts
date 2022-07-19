@@ -1,13 +1,13 @@
-name:  blue force
-game_slug: blue force
+name:  Blue Force
+game_slug: blue-force
 version: Installer
-slug:  blue force-installer
+slug: blue-force
 runner: scummvm
 
 
 script:
   game:
-    game_id: tsage
+    game_id: blueforce
     path: $GAMEDIR
   
   files:

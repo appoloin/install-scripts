@@ -1,7 +1,7 @@
 name: HOOK
-game_slug: HOOK
+game_slug: hook
 version: Installer
-slug:  HOOK-installer
+slug:  hook
 runner: dosbox
 
 
@@ -34,9 +34,13 @@ script:
         file: $CACHE/bulkcopy.sh
     
     - write_file:
-        content: '[sdl]
+        content: '[midi]
 
-          sensitivity=20
+          mididevice = mt32
+
+        [sdl]
+
+            capture_mouse=onclick middlerelease
 
         [autoexec]
 
