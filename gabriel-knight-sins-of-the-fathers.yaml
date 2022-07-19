@@ -1,7 +1,7 @@
-name: GK1
-game_slug: GK1
+name: Gabriel Knight - Sins of the Fathers
+game_slug: gabriel-knight-sins-of-the-fathers
 version: Installer
-slug: GK1-installer 
+slug: gabriel-knight-sins-of-the-fathers
 runner: scummvm
 
 
@@ -12,7 +12,7 @@ script:
     - xcopy: https://github.com/appoloin/WfW/raw/master/XCOPY.EXE
 
   game:
-    game_id: sci  
+    game_id: gk1  
     path: $GAMEDIR
 
   installer:

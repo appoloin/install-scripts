@@ -1,7 +1,7 @@
-name: Freddy Pharkas Frontier Pharmacist
-game_slug: freddy
+name: Freddy Pharkas - Frontier Pharmacist
+game_slug: freddy-pharkas-frontier-pharmacist
 version: Installer
-slug:  freddy-installer
+slug: freddy-pharkas-frontier-pharmacist
 runner: scummvm
 
 
@@ -10,7 +10,7 @@ script:
   files:
     - game:  N/A:Select the file SIERRA.COM
   game:
-    game_id: sci  
+    game_id: freddypharkas  
     path: $GAMEDIR
   
   installer:
