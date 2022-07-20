@@ -1,7 +1,7 @@
 name: Sid Meiers Covert Action
-game_slug: id-meiers-covert-action-classic
+game_slug: sid-meiers-covert-action-classic
 version: Installer
-slug: INSTALLER
+slug: sid-meiers-covert-action-classic
 runner: dosbox
 
 script:
@@ -27,9 +27,12 @@ script:
 
 
     - write_file:
-        content: '[sdl]
+        content: '[midi]
 
-          sensitivity=30
+         mididevice = mt32
+         
+        [sdl]
+
 
           fullresolution=desktop
 

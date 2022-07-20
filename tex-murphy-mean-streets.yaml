@@ -1,7 +1,7 @@
 name: Tex Murphy Mean Streets
 game_slug: tex-murphy-mean-streets
 version: Installer
-slug:  installer
+slug:  tex-murphy-mean-streets
 runner: dosbox
 
 
@@ -57,7 +57,15 @@ script:
         dst: $GAMEDIR
 
     - write_file:
-        content: '[cpu]
+        content: '[midi]
+
+         mididevice = mt32
+         
+        [sdl]
+
+         capture_mouse=onclick middlerelease
+
+        [cpu]
 
           cputype=386_slow
         

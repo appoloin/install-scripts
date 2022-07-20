@@ -1,7 +1,7 @@
-name: BAT2
-game_slug: BAT2
+name: B.A.T. 2 - The Koshan Conspiracy
+game_slug: b-a-t-ii-the-koshan-conspiracy
 version: Installer
-slug: BAT2-installer
+slug: b-a-t-ii-the-koshan-conspiracy
 runner: dosbox
 
 
@@ -36,9 +36,28 @@ script:
         file: $CACHE/bulkcopy.sh
     
     - write_file:
-        content: '[sdl]
+        content: '[midi]
 
-          sensitivity=20
+          mididevice = mt32
+
+          [sdl]
+
+            capture_mouse=onclick middlerelease
+            
+            fullresolution=desktop
+
+          windowresolution=original
+
+          fullscreen=true
+
+          output=opengl
+
+        [render]
+
+          aspect=true
+
+          scaler=normal2x
+
 
         [autoexec]
         

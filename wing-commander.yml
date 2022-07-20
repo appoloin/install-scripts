@@ -1,7 +1,7 @@
-name: Wing Commander II
-game_slug: wing-commander-ii-deluxe-edition
+name: Wing Commander
+game_slug: wing-commander
 version: Installer
-slug: INSTALLER
+slug: wing-commander
 runner: dosbox
 
 script:
@@ -20,11 +20,8 @@ script:
 
         dst=$2
 
-        find "$src" -maxdepth 1  -type d \( -iname "GAMEDAT" \) -exec cp {} -r "$dst" \;
-
-        find "$src" -maxdepth 1  -type f \( -iname "*.DAT" -o
-                                            -iname "*.EXE" -o
-                                            -iname "*.cfg"   \) -exec cp {} "$dst" \;'
+        find "$src" -maxdepth 1  -type f \( -iname "*.CFG" -o
+                                            -iname "*.EXE"   \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
     - chmodx: $CACHE/selectcopy.sh
 
@@ -41,7 +38,28 @@ script:
         file: mkdir
 
     - copy:
+        src: $CACHE/__support/save
+        dst: $GAMEDIR/wing/save
+
+    - copy:
+        src: $CACHE/GAMEDAT
+        dst: $GAMEDIR/wing/GAMEDAT
+
+
+    - copy:
         src: $CACHE/manual.pdf
+        dst: $GAMEDIR
+
+    - copy:
+        src: $CACHE/Ships Blueprints.pdf
+        dst: $GAMEDIR
+
+    - copy:
+        src: $CACHE/The Secret Missions 2 - Reference Card.pdf
+        dst: $GAMEDIR
+
+    - copy:
+        src: $CACHE/The Secret Missions - Reference Card.pdf
         dst: $GAMEDIR
 
     - execute:
@@ -49,17 +67,13 @@ script:
         file: $CACHE/selectcopy.sh
 
     - write_file:
-        content: '[cpu]
+        content: '[midi]
 
-          core=auto
+          mididevice = mt32
+          
+          [cpu]
 
-          cputype=auto
-
-          cycles=8000
-
-          cycleup=1000
-
-          cycledown=1000
+        cycles=4000
 
         [sdl]
 
@@ -99,32 +113,28 @@ script:
 
           cls 
 
-          ECHO  -------------------------------------------------  
+          ECHO  -------------------------------------------  
           
-          ECHO                Wing Commander II
+          ECHO                Wing  Commander
           
-          ECHO  -------------------------------------------------  
+          ECHO  -------------------------------------------  
           
-          ECHO   1) Wing Commander II - Vengeance of the Kilrathi      
+          ECHO   1) Wing Commander with Secret Missions      
                                         
-          ECHO   2) Wing Commander II - Special Operations 1   
-
-          ECHO   3) Wing Commander II - Special Operations 2                               
+          ECHO   2) The Secrets Missions 2 - Crusade                               
           
-          ECHO  -------------------------------------------------  
+          ECHO  -------------------------------------------  
           
-          ECHO   4) Exit Program                             
+          ECHO   3) Exit Program                             
           
-          ECHO  -------------------------------------------------  
+          ECHO  -------------------------------------------  
 
 
-          choice /c1234 /s Which program do you want to run? [1-4]: /n 
+          choice /c123 /s Which program do you want to run? [1-3]: /n 
           
-          if errorlevel 4 goto exit
+          if errorlevel 3 goto exit
 
-          if errorlevel 3 goto addon2
-
-          if errorlevel 2 goto addon1
+          if errorlevel 2 goto addons
                     
           if errorlevel 1 goto game
 
@@ -133,27 +143,19 @@ script:
 
           cls
 
-          loadfix -32 wc2.exe
+          loadfix -1 wc
           
           goto exit
 
 
-          :addons1
+          :addons
 
           cls
 
-          loadfix -32 so1.exe
+          loadfix -1 sm2
 
           goto launcher
 
-
-          :addons1
-
-          cls
-
-          loadfix -32 so2.exe
-
-          goto launcher
 
           :exit
           

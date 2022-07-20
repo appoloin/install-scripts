@@ -1,18 +1,18 @@
-name: space quest 4
-game_slug: space-quest-4
+name: Wonderland
+game_slug: Wonderland
 version: Installer
-slug:  space-quest-4-installer
+slug: Wonderland-installer
 runner: scummvm
 
- 
+
 script:
   files:
-    - game:  N/A:Select the file INSTALL.EXE
+    - game: N/A:Select the MAG file
 
   game:
-    game_id: sci  
+    game_id: wonderland  
     path: $GAMEDIR
-  
+
   installer:
     - write_file:
         content: '#!/bin/bash
@@ -31,3 +31,4 @@ script:
     - execute:
         args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
+

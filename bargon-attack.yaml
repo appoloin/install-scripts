@@ -1,7 +1,7 @@
 name: Bargon Attack
-game_slug: Bargon-Attack
+game_slug: bargon-attack
 version: Installer
-slug:  Bargon-Attack-installer
+slug: bargon-attack
 runner: scummvm
  
 
@@ -10,7 +10,7 @@ script:
       - game:  N/A:Select a file with the extension *.SND
 
     game:
-        game_id: Gob
+        game_id: bargon
         path: $GAMEDIR
 
     installer:

@@ -1,7 +1,7 @@
-name: Amazon Guardians of Eden
-game_slug: amazon guardians of eden
+name: Amazon - Guardians of Eden
+game_slug: amazon-guardians-of-eden
 version: Installer
-slug:  amazon-guardians-of-eden-installer
+slug: amazon-guardians-of-eden
 runner: scummvm
 
 
