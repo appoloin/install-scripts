@@ -1,7 +1,7 @@
 name: Lancelot
-game_slug: Lancelot
+game_slug: lancelot
 version: Installer
-slug:  Lancelot-installer
+slug: lancelot
 runner: dosbox
 
 

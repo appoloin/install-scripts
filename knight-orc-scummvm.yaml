@@ -1,17 +1,17 @@
-name: Conquests of Camelot
-game_slug: conquests-of-camelot
+name: Knight Orc
+game_slug: knight-orc
 version: Installer
-slug:  conquests-of-camelot-installer
+slug:  knight-orc
 runner: scummvm
 
 
 script:
   files:
-    - game:  N/A:Select the file SIERRA.COM
+    - game: N/A:Select the file GAMEDATA1.DAT
   game:
-    game_id: sci  
+    game_id: knightorc  
     path: $GAMEDIR
-  
+
   installer:
     - write_file:
         content: '#!/bin/bash
@@ -24,13 +24,9 @@ script:
 
         cp -avr "$src_path/."  "$dst"'
         file: $CACHE/bulkcopy.sh
-
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
         args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
-
-  scummvm:
-    fullscreen: true
-
+    

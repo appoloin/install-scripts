@@ -1,7 +1,7 @@
 name: Knight Orc
-game_slug: Knight Orc
+game_slug: knight-orc
 version: Installer
-slug:  Knight Orc-installer
+slug:  knight-orc
 runner: dosbox
 
 
