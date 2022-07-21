@@ -1,0 +1,20 @@
+name: Hi-Res Adventure 1 Mystery House
+game_slug: mystery-house
+version: Installer
+slug: mystery-house
+runner: scummvm
+
+
+script:
+  files:
+    - game: N/A:Select the game file
+    
+  game:
+    game_id: hires1
+    path: $GAMEDIR
+
+  installer:
+    - execute:
+        args:  $game $GAMEDIR
+        file: /bin/cp 
+        
