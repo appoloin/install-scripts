@@ -1,0 +1,65 @@
+name: Cadaver
+game_slug: cadaver
+version: Installer
+slug: cadaver
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select file CAD.exe.
+
+  game:
+    main_file: $GAMEDIR/cadaver.conf
+
+  installer:
+    - execute:
+        args: $GAMEDIR/HDD $GAMEDIR/FDD 
+        file: mkdir
+
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+        
+        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+        cp -avr "$src_path/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: $game $GAMEDIR/FDD
+        file: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod
+
+
+    - write_file:
+        content: '[midi]
+
+         mididevice = mt32
+
+        [sdl]
+
+          capture_mouse=onclick middlerelease
+
+        [autoexec]
+
+          mount A "$GAMEDIR" -t dir 
+
+          mount B "$GAMEDIR/FDD" -t floppy
+
+          cls 
+
+          B:
+
+          cad
+
+          exit'
+        file: $GAMEDIR/cadaver.conf
+
