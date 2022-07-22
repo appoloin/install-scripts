@@ -7,7 +7,8 @@ runner: scummvm
 
 script:
   files:
-    - game:  N/A:Select the file INSTALL.EXE
+    - game:  N/A:Select the GOG installer
+    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
 
   game:
     game_id: torin  
@@ -18,23 +19,30 @@ script:
         content: '#!/bin/bash
 
         src=$1
-
-        dst=$2
         
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+        find "$src" -maxdepth 1 -type d \( -iname app -o
+                                           -iname commonappdata -o
+                                           -iname *redist -o
+                                           -iname scummvm -o
+                                           -iname dosbox -o
+                                           -iname *support -o
+                                           -iname tmp \) -exec rm -r {}  \;
+                                           
+        find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
+        file: $CACHE/remove.sh
+    - chmodx: $CACHE/remove.sh
 
-        cp -avr "$src_path/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-
-    - chmodx: $CACHE/bulkcopy.sh
+    - extract:
+        dst: $CACHE
+        file: $inno
+        
+    - execute:
+        args: -d "$GAMEDIR" "$game"
+        file: $CACHE/innoextract
 
     - execute:
-        args: $game $GAMEDIR
-        file: $CACHE/bulkcopy.sh
-
-    - execute:
-        args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
-
-  scummvm:
-    fullscreen: true
+        args: $GAMEDIR
+        file: $CACHE/remove.sh
+        
+scummvm:
+  fullscreen: true
