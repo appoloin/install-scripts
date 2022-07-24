@@ -8,8 +8,9 @@ runner: scummvm
 
 script:
   files:
-    - game:  N/A:Select a file with the extension *.vga
+    - game:  N/A:Select GOG installer
     - patch: https://github.com/scummvm/scummvm/raw/master/dists/engine-data/lure.dat
+    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
 
   game:
     game_id: lure
@@ -20,26 +21,34 @@ script:
         content: '#!/bin/bash
 
         src=$1
+        
+        find "$src" -maxdepth 1 -type d \( -iname app -o
+                                           -iname commonappdata -o
+                                           -iname *redist -o
+                                           -iname scummvm -o
+                                           -iname dosbox -o
+                                           -iname *support -o
+                                           -iname tmp \) -exec rm -r {}  \;
+                                           
+        find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
+        file: $CACHE/remove.sh
+    - chmodx: $CACHE/remove.sh
 
-        dst=$2
-
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-        find "$src_path" -type f \( -iname "*.vga"  \) -exec cp {} "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
-
+    - extract:
+        dst: $CACHE
+        file: $inno
+        
     - execute:
-        args: $game $GAMEDIR
-        file: $CACHE/selectcopy.sh
+        args: -d "$GAMEDIR" "$game"
+        file: $CACHE/innoextract
 
     - copy:
         src: $patch
         dst: $GAMEDIR
 
     - execute:
-        args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
+        args: $GAMEDIR
+        file: $CACHE/remove.sh
 
   scummvm:
     fullscreen: true
