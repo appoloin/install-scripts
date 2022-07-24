@@ -1,4 +1,4 @@
-name: Nostradamus
+name: Nostradamus The Last prophecy
 game_slug: nostradamus-the-last-prophecy
 version: Installer
 slug: Nostradamus-installer
@@ -6,12 +6,12 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Elektrogames/Nostradamus/Nostradamus.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Nostradamus/Nostradamus.exe
     arch: win32
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select Setup
+    - setup: N/A:Select GOG installer
 
   installer:
     - task:
