@@ -1,0 +1,159 @@
+name: psychic Detective
+game_slug: psychic-detective
+version: Installer
+slug: psychic-detective
+runner: dosbox
+
+
+script:
+  files:
+    - DISC1: N/A:Select CD1 ISO
+    - DISC2: N/A:Select CD2 ISO
+    - DISC3: N/A:Select CD3 ISO
+    - GUS: https://raw.githubusercontent.com/appoloin/WfW/master/GUS_external_files.zip
+
+
+  game:
+    main_file: $GAMEDIR/play.conf
+
+  installer:
+    - execute:
+        args: $GAMEDIR/CDD $GAMEDIR/HDD  $GAMEDIR/HDD/ULTRASND
+        file: mkdir
+
+    - extract:
+        dst: $GAMEDIR/HDD/ULTRASND
+        file: $GUS
+
+
+    - execute:
+        args: $DISC1 $GAMEDIR/CDD/CD1.ISO
+        file: /bin/cp 
+    - execute:
+        args: $DISC2 $GAMEDIR/CDD/CD2.ISO
+        file: /bin/cp 
+    - execute:
+        args: $DISC3 $GAMEDIR/CDD/CD3.ISO
+        file: /bin/cp 
+
+        
+    - write_file:
+        content: '[mt32]
+
+         mididevice = mt32
+
+        [gus]
+
+          gus      = true
+
+          ultradir = C:\ULTRASND
+      
+        [sdl]
+
+          fullscreen=false
+
+          capture_mouse=onclick middlerelease
+
+
+        [autoexec]
+        
+          mount C "$GAMEDIR/HDD" -t dir
+
+          imgmount d "$GAMEDIR/CDD/CD1.ISO" -t iso
+
+          imgmount e "$GAMEDIR/CDD/CD2.ISO" -t iso
+
+          imgmount f "$GAMEDIR/CDD/CD3.ISO" -t iso
+
+          cls
+
+          e:
+
+          install
+          
+          exit'
+        file: $GAMEDIR/setup.conf
+    - task:
+        config_file: $GAMEDIR/setup.conf
+        name: dosexec
+        working_dir: $GAMEDIR/HDD
+
+    - execute:
+        args: $GAMEDIR/HDD/PSYCHIC/PD.INI
+        file: /bin/rm
+
+
+    - write_file:
+        content: 'vesaMode  0x111
+
+        fsFrameRate  12
+        
+        chapterInfo  10  1  D:\MOVIES\CH10.STR
+        
+        chapterInfo  20  1  D:\MOVIES\CH20.STR
+        
+        chapterInfo  30  2  E:\MOVIES\CH30.STR
+        
+        chapterInfo  40  2  E:\MOVIES\CH40.STR
+        
+        chapterInfo  45  2  E:\MOVIES\CH45.STR
+        
+        chapterInfo  50  3  F:\MOVIES\CH50.STR
+        
+        chapterInfo  59  3  F:\MOVIES\CH50.STR
+        
+        chapterInfo  60  2  E:\MOVIES\CH60.STR
+        
+        chapterInfo  69  3  F:\MOVIES\CH69.STR'
+        file: $GAMEDIR/HDD/PSYCHIC/PD.INI
+
+
+
+    - write_file:
+        content: '[mt32]
+
+         mididevice = mt32
+
+        [gus]
+
+          gus      = true
+
+          ultradir = C:\ULTRASND
+      
+        [sdl]
+
+          fullscreen=true
+
+          fulldouble = true
+        
+          output=opengl
+
+          capture_mouse=onclick middlerelease
+
+        [render]
+
+          aspect=true
+
+          scaler=hq3x
+
+
+        [autoexec]
+        
+          mount C "$GAMEDIR/HDD" -t dir
+
+          imgmount d "$GAMEDIR/CDD/CD1.ISO" -t iso
+
+          imgmount e "$GAMEDIR/CDD/CD2.ISO" -t iso
+
+          imgmount f "$GAMEDIR/CDD/CD3.ISO" -t iso
+
+          cls 
+
+          C:
+
+          cd psychic
+
+          pd
+          
+          exit'
+        file: $GAMEDIR/play.conf
