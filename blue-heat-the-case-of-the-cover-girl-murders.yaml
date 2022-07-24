@@ -59,7 +59,7 @@ script:
 
           mount D "$GAMEDIR/CDD/CD1.iso"   "$GAMEDIR/CDD/CD2.iso"   "$GAMEDIR/CDD/CD3.iso"   "$GAMEDIR/CDD/CD4.iso" -t cdrom
 
-          SET PATH=%PATH%;C:\WINDOWS;
+          SET PATH=%PATH%;C:\WINDOWS;C:\;
 
           SET TEMP=C:\WINDOWS\TEMP
 
@@ -96,7 +96,7 @@ script:
 
           imgmount D "$GAMEDIR/CDD/CD1"   "$GAMEDIR/CDD/CD2"   "$GAMEDIR/CDD/CD3"   "$GAMEDIR/CDD/CD4" -t cdrom
 
-          SET PATH=%PATH%;C:\WINDOWS;
+          SET PATH=%PATH%;C:\WINDOWS;C:\;
 
           SET TEMP=C:\WINDOWS\TEMP
           
