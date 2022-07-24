@@ -14,7 +14,7 @@ script:
 
 
   game:
-    main_file: $GAMEDIR/blueheat.conf
+    main_file: $GAMEDIR/play.conf
     args: -userconf
 
 
@@ -94,7 +94,7 @@ script:
 
           mount C "$GAMEDIR/HDD" -t dir
 
-          imgmount D "$GAMEDIR/CDD/CD1"   "$GAMEDIR/CDD/CD2"   "$GAMEDIR/CDD/CD3"   "$GAMEDIR/CDD/CD4" -t cdrom
+          mount D "$GAMEDIR/CDD/CD1.iso"   "$GAMEDIR/CDD/CD2.iso"   "$GAMEDIR/CDD/CD3.iso"   "$GAMEDIR/CDD/CD4.iso" -t cdrom
 
           SET PATH=%PATH%;C:\WINDOWS;C:\;
 
@@ -198,4 +198,4 @@ script:
           :exit
           
           exit'
-        file: $GAMEDIR/blueheat.conf
+        file: $GAMEDIR/play.conf
