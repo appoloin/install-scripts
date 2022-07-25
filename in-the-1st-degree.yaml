@@ -49,9 +49,7 @@ script:
 
           mount C "$GAMEDIR/HDD" -t dir
 
-          imgmount D "$GAMEDIR/CDD/CD1.iso" -t cdrom
-
-          imgmount E "$GAMEDIR/CDD/CD2.iso" -t cdrom
+          imgmount D "$GAMEDIR/CDD/CD1.iso" "$GAMEDIR/CDD/CD2.iso" -t cdrom
 
 
           SET PATH=%PATH%;C:\WINDOWS;C:\;
@@ -91,9 +89,7 @@ script:
 
           mount C "$GAMEDIR/HDD" -t dir
 
-          imgmount D "$GAMEDIR/CDD/CD1.iso" -t iso
-
-          imgmount E "$GAMEDIR/CDD/CD2.iso" -t iso
+          imgmount D "$GAMEDIR/CDD/CD1.iso"  "$GAMEDIR/CDD/CD2.iso" -t iso
 
           SET PATH=%PATH%;C:\WINDOWS;C:\;
 
@@ -115,7 +111,7 @@ script:
           
           ECHO  -------------------------------------------  
           
-          ECHO   1) Play    
+          ECHO   1) Play    (NB use CTRL-F4 to swap CD)
           
           ECHO   2) Setup                                
           
