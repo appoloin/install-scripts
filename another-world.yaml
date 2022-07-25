@@ -1,7 +1,7 @@
-name: another world
-game_slug: another world
+name: Another World
+game_slug: another-world
 version: Installer
-slug: another world-installer
+slug: another-world
 runner: wine
 
 script:
