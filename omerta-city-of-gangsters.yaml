@@ -1,7 +1,7 @@
-name: Omerta
-game_slug: Omerta
+name: Omerta - City of Gangsters
+game_slug: omerta-city-of-gangsters
 version: Installer
-slug: Omerta-installer
+slug: omerta-city-of-gangsters
 runner: wine
 
 script:

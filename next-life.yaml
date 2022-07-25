@@ -1,7 +1,7 @@
 name: Next Life
-game_slug: Next-Life
+game_slug: next-life
 version: Installer
-slug: Next-Life-installer
+slug: next-life
 runner: wine
 
 script:
