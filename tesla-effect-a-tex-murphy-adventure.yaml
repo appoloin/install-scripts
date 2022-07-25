@@ -1,8 +1,7 @@
-name: Tex Murphy Tesla effect
-game_slug: tm-te
+name: Tesla Effect - A Text Murphy Adventure
+game_slug: tesla-effect-a-tex-murphy-adventure
 version: Installer
-slug: tm-te-installer
-runner: wine
+slug: tesla-effect-a-tex-murphy-adventure
 
 script:
   game:
@@ -18,6 +17,7 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
     
     - task:
