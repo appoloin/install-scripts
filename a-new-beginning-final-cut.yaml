@@ -1,7 +1,7 @@
 name: A New Beginning
-game_slug: A-New-Beginning
+game_slug: a-new-beginning-final-cut
 version: Installer
-slug: A-New-Beginning-installer
+slug: a-new-beginning-final-cut
 runner: wine
 
 script:
