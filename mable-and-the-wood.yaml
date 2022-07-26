@@ -1,7 +1,7 @@
 name: Mable and the Wood
-game_slug: mable-the-wood
+game_slug: mable-and-the-wood
 version: Installer
-slug: installer
+slug: mable-and-the-wood
 runner: wine
 
 script:

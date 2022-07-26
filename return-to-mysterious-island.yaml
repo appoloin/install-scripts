@@ -1,7 +1,7 @@
 name: Return to Mysterious Island 
-game_slug:  Return-to-Mysterious-Island 
+game_slug: return-to-mysterious-island
 version: Installer
-slug:  Return-to-Mysterious-Island-installer
+slug: return-to-mysterious-island
 runner: wine
 
 script:
