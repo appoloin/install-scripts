@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c//Program Files/Microids/Return to Mysterious Island 2/RTMI2.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Return to Mysterious Island 2/RTMI2.exe
     arch: win32
     prefix: $GAMEDIR
 
