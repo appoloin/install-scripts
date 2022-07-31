@@ -1,0 +1,32 @@
+name: Altantis Evolution
+game_slug: atlantis-evolution
+version: Installer
+slug: atlantis-evolution
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files (x86)/The Adventure Company/Atlantis Evolution/Atlantis Evolution.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+  system:
+    single_cpu: true
+

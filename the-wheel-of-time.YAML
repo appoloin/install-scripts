@@ -1,0 +1,31 @@
+name: The Wheel of Time
+game_slug: the-wheel-of-time
+version: Installer
+slug: the-wheel-of-time
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/The Wheel of Time/System/WoT.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+    esync: false
+
