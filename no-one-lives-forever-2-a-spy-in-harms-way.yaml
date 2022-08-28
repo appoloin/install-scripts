@@ -1,0 +1,38 @@
+name: No One Lives Forever 2 - A Spy in Harms Way
+game_slug: no-one-lives-forever-2-a-spy-in-harms-way
+version: Installer
+slug: no-one-lives-forever-2-a-spy-in-harms-way
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Game/NOLF2.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - extract:
+        dst:  $GAMEDIR/drive_c/Game
+        file: $setup
+
+    - task:
+        app: directmusic dsound vcrun6 winxp
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: "$GAMEDIR/drive_c/Game/NOLF2.bat"
+        arch: win32
+        name: wineexec
+        prefix: $GAMEDIR

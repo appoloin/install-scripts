@@ -1,0 +1,146 @@
+name: Voodoo Kid
+game_slug: voodoo-kid
+version: Installer
+slug: voodoo-kid
+runner: dosbox
+
+
+script:
+  game:
+    main_file: $GAMEDIR/play.conf
+
+  files:
+    - setup: N/A:Select Windows 3.11 Bottle
+    - DISC1:  N/A:Select DISC iso
+    - GUS: https://raw.githubusercontent.com/appoloin/WfW/master/GUS_external_files.zip
+
+
+  installer:
+    - extract:
+        dst: $GAMEDIR
+        file: $setup
+
+    - execute:
+        args: $DISC1 $GAMEDIR/CDD/CD1.iso
+        file: /bin/cp 
+
+    - write_file:
+        content: '[gus]
+
+          gus      = true
+
+          ultradir = C:\ULTRASND
+
+          gusbase  = 220
+          
+          gusirq   = 11
+
+          gusdma   = 1
+
+        [sblaster]
+
+          irq=5
+
+        [midi]
+
+          mididevice = mt32
+
+          [sdl]
+
+            capture_mouse=onclick middlerelease
+          
+        [autoexec]
+        
+          mount C "$GAMEDIR/HDD" -t dir
+
+          imgmount D -t iso -fs iso "$GAMEDIR/CDD/CD1.iso" 
+
+          SET PATH=%PATH%;C:\WINDOWS;C:\;
+
+          SET TEMP=C:\WINDOWS\TEMP
+
+          C:
+
+          ECHO OFF 
+
+          cls
+
+          goto launcher
+
+          :launcher
+ 
+          cls
+
+          ECHO  -------------------------------------------  
+          
+          ECHO                Voodoo Kid
+          
+          ECHO  -------------------------------------------  
+          
+          ECHO   1) Play   
+          
+          ECHO   2) Setup                                
+          
+          ECHO  -------------------------------------------  
+          
+          ECHO   3) Exit                              
+          
+          ECHO  -------------------------------------------  
+
+          choice /c123 /s Which program do you want to run? [1-3]: /n 
+          
+          if errorlevel 3 goto exit
+                    
+          if errorlevel 2 goto setup
+          
+          if errorlevel 1 goto game
+
+
+          :game
+
+          cls
+
+          win runexit D:\voodoo.exe    
+          
+          goto launcher
+
+
+          :setup
+
+          cls
+
+          ECHO  -------------------------------------------  
+
+          ECHO                   SETUP
+
+          ECHO  -------------------------------------------  
+
+          ECHO   1) System    
+
+          ECHO   2) Main Menu                                
+
+          ECHO  -------------------------------------------  
+
+          choice /c12 /s Which program do you want to run? [1-2]: /n 
+
+
+          if errorlevel 2 goto launcher
+
+          if errorlevel 1 goto system
+
+
+          :system
+
+          CLS 
+
+          C:
+
+          call System.bat
+
+          goto setup
+
+
+          :exit
+          
+          exit'
+        file: $GAMEDIR/play.conf

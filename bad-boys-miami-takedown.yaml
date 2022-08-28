@@ -1,0 +1,49 @@
+name: Bad Boys - Miami Takedown
+game_slug: bad-boys-miami-takedown
+version: Installer
+slug: bad-boys-miami-takedown
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/drive_c/Program Files (x86)/Empire Interactive/Bad Boys 2/BBpc.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+    #https://community.pcgamingwiki.com/files/file/1679-bad-boys-miami-takedown-fov-fps-fix/
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+        src=$1
+
+        dst=$2
+
+        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+        find "$src_path" -type d \( -name "VIDEOS"  \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+    - chmodx: $CACHE/selectcopy.sh
+
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        args: $setup $GAMEDIR/drive_c/Program Files (x86)/Empire Interactive/Bad Boys 2
+        file: $CACHE/selectcopy.sh
+
+  wine:
+    Desktop: true
+
+

@@ -1,0 +1,30 @@
+name: The Moment of Silence
+game_slug:  the-moment-of-silence
+version: Installer
+slug: the-moment-of-silence
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/The Moment of Silence/mos.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+

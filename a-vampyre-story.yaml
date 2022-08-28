@@ -1,0 +1,35 @@
+name: A Vampyre Story
+game_slug: a-vampyre-story
+version: Installer
+slug: a-vampyre-story
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Game/A Vampyre Story/game/main.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: winxp
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+

@@ -1,0 +1,48 @@
+name: Metal Gear Solid 2 - Substance
+game_slug: metal-gear-solid-2-substance
+version: Installer
+slug: metal-gear-solid-2-substance
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Metal Gear Solid 2 Substance/bin/mgs2_sse.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        arch: win32
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        arch: win32
+        app: directmusic dsdmo quartz
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        arch: win32
+        key: csmt
+        name: set_regedit
+        path: HKEY_CURRENT_USER\Software\Wine\Direct3D\
+        prefix: $GAMEDIR
+        type: REG_DWORD
+        value: '00000000'
+
+    - task:
+        arch: win32
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+

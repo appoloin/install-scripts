@@ -1,0 +1,37 @@
+name: Helllpoint
+game_slug:  hellpoint
+version: Installer
+slug: hellpoint
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Hellpoint/Hellpoint.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+    - DLC: N/A:Select DLC installer
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+
