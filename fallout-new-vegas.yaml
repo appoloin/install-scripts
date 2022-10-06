@@ -8,10 +8,7 @@ runner: wine
 script:
     files:
     - setup: N/A:Please select installer exe from GOG
-    - innoextract: http://constexpr.org/innoextract/files/innoextract-1.8/innoextract-1.8-linux.tar.xz
-    - modpack: https://djazz.se/nas/games/falloutnv/modpack.tar.xz
-    - launchmenu: https://gist.github.com/daniel-j/953311dec023c4c1b77103a085e1151a/archive/master.tar.gz
-    - wallpaper: https://gist.github.com/daniel-j/28c6d207c5393aa64c3a9d8ee26d1425/raw/wallpaper-falloutnv.tar.xz
+    - modpack:  N/A:Please select Mod Pack
  
     game:
         arch: win64
@@ -34,6 +31,21 @@ script:
             name: winetricks
             prefix: $GAMEDIR
 
+        - execute:
+            command: mkdir -pv "$GAMEDIR/drive_c/Fallout New Vegas" "$CACHE/extract"
+        - execute:
+            command: ln -sv "$GAMEDIR/drive_c/Fallout New Vegas" "$CACHE/extract/app"
+
+        - extract:
+            format: gog
+            file: $setup
+            args: --gog --include app" 
+            dst: $CACHE/extract
+            description: Extracting game files
+
+        - extract:
+            dst: $GAMEDIR/drive_c/Fallout New Vegas
+            file: modpack
 
         - task:
             arch: win64
@@ -43,9 +55,7 @@ script:
             path: HKEY_CURRENT_USER\Software\Wine\Explorer\Desktops
             prefix: $GAMEDIR
             value: ''
-        - extract:
-            dst: $GAMEDIR/drive_c
-            file: wallpaper
+
         - task:
             arch: win64
             description: Setting wallpaper
@@ -61,7 +71,7 @@ script:
             name: set_regedit
             path: HKEY_CURRENT_USER\Control Panel\Desktop
             prefix: $GAMEDIR
-            value: c:\\wallpaper.bmp
+            value: $GAMEDIR/drive_c/Fallout New Vegas/wallpaper.bmp
         - task:
             arch: win64
             description: Enabling GrabFullscreen for FalloutNV.exe
@@ -122,18 +132,6 @@ script:
             prefix: $GAMEDIR
             type: REG_DWORD
             value: 0190
-
-
-        - extract:
-            dst: $CACHE/innoextract
-            file: innoextract
-
-        - execute:
-            command: mkdir -pv "$GAMEDIR/drive_c/Fallout New Vegas" "$CACHE/extract"; ln -sv "$GAMEDIR/drive_c/Fallout New Vegas" "$CACHE/extract/app"
-        - execute:
-            args: --gog --exclude-temp --output-dir "$CACHE/extract" "$setup" 
-            description: Extracting game files
-            file: $CACHE/innoextract/innoextract
 
         - write_file:
             content: 'REGEDIT4
@@ -283,12 +281,6 @@ script:
             section: Controls
             value: 1
 
-        - extract:
-            dst: $GAMEDIR/drive_c/Fallout New Vegas
-            file: launchmenu
-        - extract:
-            dst: $GAMEDIR/drive_c/Fallout New Vegas
-            file: modpack
         - task:
             arch: win64
             description: Enabling virtual desktop
