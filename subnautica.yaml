@@ -8,7 +8,9 @@ script:
   game:
     exe: $GAMEDIR/drive_c/Games/Subnautica/Subnautica.exe
     arch: win64
-    args: -force-glcore45
+    args: -force-opengl
+   #args: -force-glcore
+   #args: -force-glcore45
     prefix: $GAMEDIR
 
   files:
