@@ -8,8 +8,9 @@ script:
   game:
     exe: $GAMEDIR/drive_c/Games/Subnautica - Below Zero/SubnauticaZero.exe
     arch: win64
-    args: -opengl
-    #args: -force-glcore45
+    args: -force-opengl
+   #args: -force-glcore
+   #args: -force-glcore45
     prefix: $GAMEDIR
 
   files:
@@ -22,6 +23,12 @@ script:
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
+
+    - task:
+        app: vcrun2015
+        name: winetricks
+        prefix: $GAMEDIR
+
 
     - task:
         executable: $setup
