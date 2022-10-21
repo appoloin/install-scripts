@@ -7,13 +7,12 @@ runner: wine
 script:
     game:
         arch: win32
-        exe: $GAMEDIR/Games/Mass Effect/MassEffectLauncher.exe
+        exe: $GAMEDIR/Program Files/Mass Effect/Binaries/MassEffect.exe
         prefix: $GAMEDIR
 
     files:
       - setup: N/A:Select Setup.exe
-      - patch: N/A:Select SilentPatchMe
-
+      - patch: https://github.com/CookiePLMonster/SilentPatchME/releases/latest/download/SilentPatchME.zip
 
     installer:    
       - task:
@@ -91,10 +90,8 @@ script:
 
       - merge:
           src: "$CACHE/Binaries"
-          dst: "$GAMEDIR/Games/Mass Effect"
+          dst: "$GAMEDIR/Program Files/Mass Effect"
       
-    
-
     wine:
         overrides:
             dxgi: disable
