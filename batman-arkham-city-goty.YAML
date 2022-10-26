@@ -7,6 +7,8 @@ runner: wine
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Batman Arkham City GOTY/Binaries/Win32/BmLauncher.exe
+    prefix: $GAMEDIR
+
 
   files:
     - setup: N/A:Select installer
