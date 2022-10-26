@@ -17,12 +17,12 @@ script:
   installer:
     - task:
         name: create_prefix
-        install_mono: false
+        install_mono: true
         install_gecko: false
         prefix: $GAMEDIR
         
     - task:
-        app: win7 d3dx9 d3dcompiler_47 mdx
+        app: win7 d3dx9 d3dcompiler_47 mdx vcrun2005 physx
         description: 'winetricks: Win7, Direct X9, MDX'
         name: winetricks
         prefix: $GAMEDIR
