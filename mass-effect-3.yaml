@@ -9,12 +9,11 @@ script:
         arch: win32
         exe: drive_c/Program Files/Mass Effect 3/Binaries/Win32/MassEffect3.exe
         prefix: $GAMEDIR
-        
-    installer:
 
-    - insert-disc:
-        requires: Setup.exe
-    
+    files:
+        - setup: N/A:Select Setup.exe
+
+    installer:    
     - task:
         arch: win32
         name: create_prefix
@@ -79,7 +78,7 @@ script:
           The installating folder MUST BE ''C:\Program Files\Mass Effect 3''
 
           Ignore install of DirectX, Visual C++ and PhysX.'
-        executable: $DISC/Setup.exe
+        executable: $setup
         name: wineexec
         prefix: $GAMEDIR
     wine:
