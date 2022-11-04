@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Games/Subnautica - Below Zero/SubnauticaZero.exe
+    exe: $GAMEDIR/drive_c/drive_c/Games/Subnautica Below Zero/SubnauticaZero.exe
     arch: win64
     args: -force-opengl
    #args: -force-glcore
