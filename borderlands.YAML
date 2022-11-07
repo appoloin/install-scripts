@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Games/Borderlands Game of the Year Enhanced/Binaries/Win64/BorderlandsGOTY.exe
+    exe: $GAMEDIR/drive_c/Games/Borderlands GOTY/Binaries/Borderlands.exe
     prefix: $GAMEDIR
 
   files:
@@ -20,7 +20,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: vcrun2010
+        app: vcrun2010 physx
         name: winetricks
         prefix: $GAMEDIR
 
