@@ -56,22 +56,13 @@ script:
         path: HKEY_CURRENT_USER\Software\Wine\DXVA2
         prefix: $GAMEDIR
         value: va
-    - task:
-        app: d3dx9
-        description: Installing DirectX 9.
-        name: winetricks
-        prefix: $GAMEDIR
 
     - task:
-        app: d3dcompiler_42
+        app: d3dx9 d3dcompiler_42 physx
         arch: win32
         name: winetricks
         prefix: $GAMEDIR
-    - task:
-        app: physx
-        description: Installing PhysX.
-        name: winetricks
-        prefix: $GAMEDIR
+
     - task:
         description: 'Installing Mass Effect 3.
 
