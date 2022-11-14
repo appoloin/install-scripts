@@ -7,7 +7,7 @@ runner: wine
 script:
     game:
         arch: win32
-        exe: $GAMEDIR/Program Files/Mass Effect/Binaries/MassEffect.exe
+        exe: $GAMEDIR/drive_c/Program Files/Mass Effect Ultimate Edition/Binaries/MassEffect.exe
         prefix: $GAMEDIR
 
     files:
@@ -57,23 +57,12 @@ script:
           path: HKEY_CURRENT_USER\Software\Wine\DXVA2
           prefix: $GAMEDIR
           value: va
-      - task:
-          app: d3dx9
-          description: Installing DirectX 9.
-          name: winetricks
-          prefix: $GAMEDIR
 
       - task:
-          app: d3dcompiler_42
+          app: d3dx9 d3dcompiler_42 physx
           arch: win32
           name: winetricks
           prefix: $GAMEDIR
-      - task:
-          app: physx
-          description: Installing PhysX.
-          name: winetricks
-          prefix: $GAMEDIR
-
 
       - task:
           executable: $setup
@@ -90,9 +79,10 @@ script:
 
       - merge:
           src: "$CACHE/Binaries"
-          dst: "$GAMEDIR/Program Files/Mass Effect"
+          dst: "$GAMEDIR/drive_c/Program Files/Mass Effect Ultimate Edition/Binaries"
       
     wine:
+        Desktop: true
         overrides:
             dxgi: disable
             nvcuda: disable
