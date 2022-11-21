@@ -1,0 +1,55 @@
+name: Battlefield Bad Company 2
+game_slug: battlefield-bad-company-2
+version: Installer
+slug: battlefield-bad-company-2
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Games/Battlefield Bad Company 2/BFBC2Game.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: d3dx9 vcrun2005 vcrun2008 vcrun2010
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        arch: win32
+        key: wined3d
+        name: set_regedit
+        path: HKEY_CURRENT_USER\Software\Wine\DllRedirects
+        prefix: $GAMEDIR
+        value: wined3d-csmt.dll
+
+    - write_config:
+        file: $GAMEDIR/drive_c/users/$USER/My Documents/BFBC2/settings.ini
+        key: bBackgroundMouse
+        section: Controls
+        value: '1'
+
+    - write_config:
+        file: $GAMEDIR/drive_c/users/$USER/My Documents/BFBC2/settings.ini
+        key: DxVersion
+        section: Graphics
+        value: 9
+
+  wine:
+    Desktop: true
+
+
