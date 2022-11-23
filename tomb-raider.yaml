@@ -24,7 +24,7 @@ script:
 
     - task:
         arch: win32
-        app: vcrun2008 d3dx9 tahoma xact xinput
+        app: vcrun2008 d3dx9 tahoma xact
         name: winetricks
         prefix: $GAMEDIR
 
