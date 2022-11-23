@@ -1,4 +1,4 @@
-name: Tomb raider
+name: Tomb Raider
 game_slug: tomb-raider
 version: Installer
 slug: tombraider-installer
@@ -10,7 +10,7 @@ script:
 
   game:
     arch: win32
-    args:  -no-dwrite -no-cef-sandbox
+    args: -no-dwrite -no-cef-sandbox
     exe: "$GAMEDIR/drive_c/Program Files/Eidos Interactive/Tomb Raider GOTY Edition/TombRaider.exe"
     prefix: $GAMEDIR
 
@@ -23,36 +23,13 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: vcrun2008
         arch: win32
+        app: vcrun2008 d3dx9 tahoma xact xinput
         name: winetricks
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx9
         arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: tahoma
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: faudio
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: xinput
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
         description: Installing Tomb Raider 
         executable: $setup
         name: wineexec
