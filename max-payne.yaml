@@ -1,0 +1,51 @@
+name: Max Payne 
+game_slug: max-payne
+version: Installer
+slug:  installer
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files/Max Payne/MaxPayne.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select Setup
+    - patch: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/mp1/MaxPayne.WidescreenFix.zip
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - extract:  
+        file: patch
+        dst:  $CACHE 
+
+    - copy:
+        src: $CACHE/scripts
+        dst: $GAMEDIR/drive_c/Program Files/Max Payne/Scripts
+
+    - copy:
+        src: $CACHE/d3d8.dll
+        dst: $GAMEDIR/drive_c/Program Files/Max Payne/
+
+
+  wine:
+    Desktop: true
+    overrides:
+        d3d8.dll: n,b
+
+
+
+ 
+ 
