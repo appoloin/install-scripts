@@ -12,7 +12,9 @@ script:
 
   files:
     - setup: N/A:Select Setup
-    - patch: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/mp1/MaxPayne.WidescreenFix.zip
+    - patch1: N/A:Select 1.05 patch
+    - nocd: N/A:Select NOCD patch
+    - patch2: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/mp1/MaxPayne.WidescreenFix.zip
 
   installer:
     - task:
@@ -23,14 +25,40 @@ script:
         prefix: $GAMEDIR
 
     - task:
+        app: winxp
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
 
     - extract:  
-        file: patch
+        file: $patch1
         dst:  $CACHE 
 
+    - task:
+        executable: $CACHE/maxpayne1-05patch.exe
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - extract:  
+        file: $nocd
+        dst:  $CACHE 
+
+    - rename:
+        src: $GAMEDIR/drive_c/Program Files/Max Payne/MaxPayne.exe
+        dst: $GAMEDIR/drive_c/Program Files/Max Payne/MaxPayne.exe.old
+
+    - copy:
+        src: $CACHE/MaxPayne.exe
+        dst: $GAMEDIR/drive_c/Program Files/Max Payne/
+
+    - extract:  
+        file: patch2
+        dst:  $CACHE 
+        
     - copy:
         src: $CACHE/scripts
         dst: $GAMEDIR/drive_c/Program Files/Max Payne/Scripts
