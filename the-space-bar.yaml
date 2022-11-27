@@ -1,0 +1,104 @@
+name: The Space Bar
+game_slug: the-space-bar
+version: Installer
+slug:  installer
+runner: wine
+
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/thespacebar/SPACEBAR.EXE
+    arch: win32
+    prefix: $GAMEDIR
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$1
+
+          dst=$2
+          
+          find "$src" -type f \( -iname "DISK1" -o 
+                                 -iname "DISK2" -o 
+                                 -iname "DISK3" -o
+                                 -iname "MSS16.DLL" -o
+                                 -iname "MSS32.DLL" -o
+                                 -iname "MSSB16.TSK" -o
+                                 -iname "SB_MODE1.exe" -o
+                                 -iname "SMACKW32.DLL" -o
+                                 -iname "SPACEBAR.EXE" \) -exec cp {} "$dst" \;
+                                
+          find "$src" -type d \( -iname "AUDITON" -o
+                                -iname "BAR" -o
+                                -iname "CREDITS" -o
+                                -iname "GENERAL" -o
+                                -iname "INTRO" -o
+                                -iname "KERPUPU" -o
+                                -iname "NEBLITZ" -o
+                                -iname "SRAFFA" -o
+                                -iname "TRISECKS" -o
+                                -iname "VEDJ" -o
+                                -iname "VILDROID" -o
+                                -iname "ZZAZZL" -o
+                                -iname "WLD" \) -exec cp {} -r "$dst" \;'
+        file: $CACHE/selectcopy.sh
+    - chmodx: $CACHE/selectcopy.sh
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        arch: win32
+        prefix: $GAMEDIR
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_c/thespacebar
+
+    - insert-disc:
+        description: Please insert disc 1
+        requires: DISK1
+    
+    - execute:
+        args: $DISC $GAMEDIR/drive_c/thespacebar
+        file: $CACHE/selectcopy.sh
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod
+
+    - insert-disc:
+        description: Please insert disc 2
+        requires: DISK2
+
+    - execute:
+        args: $DISC $GAMEDIR/drive_c/thespacebar
+        file: $CACHE/selectcopy.sh
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod
+
+    - insert-disc:
+        description: Please insert disc 3
+        requires: DISK3
+
+    - execute:
+        args: $DISC $GAMEDIR/drive_c/thespacebar
+        file: $CACHE/selectcopy.sh
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod
+
+  wine:
+    Desktop: true
+    WineDesktop: 640x480
+
+  system:
+    resolution:  640x480
+    reset_desktop: true
+
+
+
