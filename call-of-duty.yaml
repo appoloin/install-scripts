@@ -9,7 +9,7 @@ script:
     exe: $GAMEDIR/drive_c/Program Files/Call of Duty Deluxe Edition/CoDSP.exe
     arch: win32
     prefix: $GAMEDIR
-    args: +set r_ignorehwgamma 1
+    args: +set r_ignorehwgamma 1 +set r_mode -1 +set r_customheight 768 +set r_customwidth 1366 +set cg_fov 95 +set cg_drawfps 0 +set r_customaspect 1.7 +set com_introplayed 1 +set com_maxfps 60
 
   files:
     - setup: N/A:Select Setup
@@ -22,8 +22,8 @@ script:
         install_gecko: false
         prefix: $GAMEDIR
 
-   - task:
-        app: winxp d3dcompiler_43 d3dx9 vcrun2008
+    - task:
+        app: winxp d3dcompiler_43 d3dx9 vcrun2003
         description: Installing additional components
         name: winetricks
         prefix: $GAMEDIR
@@ -35,11 +35,12 @@ script:
 
   wine:
     Desktop: true
-    WineDesktop: 1024x768
+  #  WineDesktop: 1024x768
 
   system:
-    resolution: 1024x768
-    reset_desktop: true
-    MESA_EXTENSION_MAX_YEAR: 2008
-    __GL_ExtensionStringVersion: 17700
- 
+   # resolution: 1024x768
+   # reset_desktop: true
+    env:
+      MESA_EXTENSION_MAX_YEAR: 2008
+      __GL_ExtensionStringVersion: 17700
+  
