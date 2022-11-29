@@ -1,0 +1,44 @@
+name: Far Cry
+game_slug: far-cry
+version: Installer
+slug: installer
+runner: wine
+
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Far Cry/Bin32/FarCry.exe"
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - game: N/A:Select GOG installer.
+    - patch: N/A:Select Tent AI patch.
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        description: Installing
+        executable: $game
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - extract:
+        file: $patch
+        dst: $GAMEDIR/drive_c/GOG Games/Far Cry/FCData/
+
+    - execute:
+        file: /bin/chmod
+        args: -R 775  "$GAMEDIR/drive_c/GOG Games/Far Cry/FCData/Tent AI Bug Fix.pak"
+    - execute:
+        file: /bin/chmod
+        args: -R 775  "$GAMEDIR/drive_c/GOG Games/Far Cry/FCData/Read Me.txt"
+
+  wine:
+    Desktop: true
