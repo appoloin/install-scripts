@@ -9,7 +9,7 @@ script:
     exe: $GAMEDIR/drive_c/Program Files/Call of Duty Deluxe Edition/CoDSP.exe
     arch: win32
     prefix: $GAMEDIR
-    args: +set r_ignorehwgamma 1 +set r_mode -1 +set r_customheight 768 +set r_customwidth 1366 +set cg_fov 95 +set cg_drawfps 0 +set r_customaspect 1.7 +set com_introplayed 1 +set com_maxfps 60 +set r_smp 1
+    args: +set r_ignorehwgamma 1 +set r_mode -1 +set r_customheight 768 +set r_customwidth 1366 +set cg_fov 95 +set cg_drawfps 0 +set r_customaspect 1.7 +set com_introplayed 1 +set r_vsync 0 +set com_maxfps 60 +set r_smp 1
 
   files:
     - setup: N/A:Select Setup
