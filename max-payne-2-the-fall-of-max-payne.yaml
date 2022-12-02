@@ -12,6 +12,7 @@ script:
 
   files:
     - setup: N/A:Select Setup
+    - patch: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/mp2/MaxPayne2.WidescreenFix.zip
 
   installer:
     - task:
@@ -26,7 +27,22 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+    - extract:  
+        file: patch
+        dst:  $CACHE 
+        
+    - copy:
+        src: $CACHE/scripts
+        dst: $GAMEDIR/drive_c/Games/Max Payne 2 The Fall of Max Payne/Scripts
+
+    - copy:
+        src: $CACHE/d3d8.dll
+        dst: $GAMEDIR/drive_c/Games/Max Payne 2 The Fall of Max Payne/
+
+
   wine:
     Desktop: true
- 
+    overrides:
+      d3d8.dll: n,b
+
  
