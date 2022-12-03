@@ -26,18 +26,21 @@ script:
     - task:
         app: winxp d3dcompiler_43 d3dx9 vcrun2008
         description: Installing additional components
+        arch: win32
         name: winetricks
         prefix: $GAMEDIR
 
     - task:
         executable: $setup
         description: After the installer crashes, you'll have to end the process "cod2.exe" using a task manager
+        arch: win32
         name: wineexec
         prefix: $GAMEDIR
 
     - task:
         executable: $patch13
         description: Instaling Patch
+        arch: win32
         name: wineexec
         prefix: $GAMEDIR
 
