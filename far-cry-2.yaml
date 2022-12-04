@@ -21,19 +21,7 @@ script:
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
-
-    - task:
-        app: dotnet20
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: d3dx9_36
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-
+        
     - task:
         description: Installing
         executable: $game
