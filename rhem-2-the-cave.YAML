@@ -1,0 +1,35 @@
+name: Rhem 2 The Cave
+game_slug: rhem-2-the-cave
+version: Installer
+slug: install
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/steam/steamapps/common/RHEM II SE The Cave/RhemIISE.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select 
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_c/steam
+   
+    - extract:
+        file: $setup
+        dst: $GAMEDIR/drive_c/steam
+
+  wine:
+    Desktop: true
+
+
