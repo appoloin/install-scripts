@@ -1,0 +1,28 @@
+name: Half-Life 2
+game_slug: half-life-2
+version: Installer
+slug: half-life-2
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Games/The Orange Box/hl2.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
