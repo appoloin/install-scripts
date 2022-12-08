@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: "$GAMEDIR/drive_c/Program Files/Konami/Silent Hill 2/"
+    exe: "$GAMEDIR/drive_c/Program Files/Konami/Silent Hill 2/sh2pc.exe"
     arch: win32
     prefix: $GAMEDIR
 
