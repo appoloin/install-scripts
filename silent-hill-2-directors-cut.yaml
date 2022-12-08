@@ -1,0 +1,41 @@
+name: Silent Hill 2
+game_slug: silent-hill-2-directors-cut
+version: Installer
+slug: installer
+runner: wine
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files/Konami/Silent Hill 2/"
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - game: N/A:Select installer.
+    - patch: https://enhanced.townofsilenthill.com/files/SH2EE/SH2EEsetup.exe
+
+  installer:
+    - task:
+        arch: win32
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_c/Program Files/Konami/Silent Hill 2/
+
+    - extract:
+        file: $game
+        args: $GAMEDIR/drive_c/Program Files/Konami/Silent Hill 2/
+    
+    - task:
+        arch: win32
+        description: Installing
+        executable: $patch
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
