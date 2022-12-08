@@ -59,6 +59,10 @@ script:
     - chmodx: $CACHE/remove.sh
 
     - execute:
+        args: $GAMEDIR
+        file: $CACHE/remove.sh
+
+    - execute:
         file: 7z
         args: e $uplay -o$GAMEDIR/drive_c/Program Files/Ubisoft/FarCry 3/bin
 
