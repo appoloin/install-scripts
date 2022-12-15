@@ -1,0 +1,130 @@
+name: Silent Hill 3
+game_slug: silent-hill-3
+version: Installer
+slug: installer
+runner: wine
+
+script:
+  files:
+    - widescreen_patch: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/sh3/SilentHill3.WidescreenFix.zip
+
+  game:
+    arch: win32
+    exe: $GAMEDIR/drive_c/Program Files/KONAMI/SILENT HILL 3/sh3.exe
+    prefix: $GAMEDIR
+
+  installer:
+    - insert-disc:
+        description: Waiting for game installer...
+        message: Select the path for the Silent Hill 3 DVD
+        requires: SILENT HILL 3.msi
+
+    - task:
+        arch: win32
+        description: Creating Wine prefix...
+        name: create_prefix
+        prefix: $GAMEDIR
+  
+    - write_file:
+        content: '[{14D10AAC-9737-454E-A247-8075C26C30E1}-DlgOrder]
+
+          Dlg0={14D10AAC-9737-454E-A247-8075C26C30E1}-SdWelcome-0
+
+          Count=6
+
+          Dlg1={14D10AAC-9737-454E-A247-8075C26C30E1}-SdLicense-0
+
+          Dlg2={14D10AAC-9737-454E-A247-8075C26C30E1}-SdAskDestPath-0
+
+          Dlg3={14D10AAC-9737-454E-A247-8075C26C30E1}-SdComponentTree-0
+
+          Dlg4={14D10AAC-9737-454E-A247-8075C26C30E1}-SdStartCopy-0
+
+          Dlg5={14D10AAC-9737-454E-A247-8075C26C30E1}-SdFinish-0
+
+          [{14D10AAC-9737-454E-A247-8075C26C30E1}-SdWelcome-0]
+
+          Result=1
+
+          [{14D10AAC-9737-454E-A247-8075C26C30E1}-SdLicense-0]
+
+          Result=1
+
+          [{14D10AAC-9737-454E-A247-8075C26C30E1}-SdAskDestPath-0]
+
+          szDir=C:\Program Files\KONAMI\SILENT HILL 3\
+
+          Result=1
+
+          [{14D10AAC-9737-454E-A247-8075C26C30E1}-SdComponentTree-0]
+
+          szDir=C:\Program Files\KONAMI\SILENT HILL 3\
+
+          Component-type=string
+
+          Component-count=6
+
+          Component-0=Exe
+
+          Component-1=ConfigExe
+
+          Component-2=MainApp
+
+          Component-3=Sound
+
+          Component-4=SoundDemo
+
+          Component-5=Movie
+
+          Result=1
+
+          [{14D10AAC-9737-454E-A247-8075C26C30E1}-SdStartCopy-0]
+
+          Result=1
+
+          [{14D10AAC-9737-454E-A247-8075C26C30E1}-SdFinish-0]
+
+          Result=1
+
+          bOpt1=0
+
+          bOpt2=0'
+        file: $GAMEDIR/drive_c/setup.iss
+ 
+    - task:     
+        args: /s /f1"c:\setup.iss"
+        description: Installing Game, this will take a while...
+        executable: $DISC/setup.exe
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - rename:
+        src: $GAMEDIR/drive_c/Program Files/KONAMI/SILENT HILL 3/sh3.exe
+        dst: $GAMEDIR/drive_c/Program Files/KONAMI/SILENT HILL 3/sh3.exe.old
+
+
+    - copy:
+        src: $DISC/Deviance/sh3.exe
+        dst: $GAMEDIR/drive_c/Program Files/KONAMI/SILENT HILL 3/
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR/drive_c/Program Files/KONAMI/SILENT HILL 3/sh3.exe"
+
+    - extract:
+        description: Installing the widescreen patch
+        dst: $GAMEDIR/drive_c/Program Files/KONAMI/SILENT HILL 3/
+        file: $widescreen_patch
+ 
+    - execute:
+        args: -i -e 's/^ResX = 0/ResX = $RESOLUTION_WIDTH/' -e 's/^ResY = 0/ResY = $RESOLUTION_HEIGHT/'
+          '$GAMEDIR/drive_c/Program Files/KONAMI/SILENT HILL 3/scripts/SilentHill3.WidescreenFix.ini'
+        file: sed
+
+  wine:
+    Desktop: true
+    esync: false
+    overrides:
+      dinput8.dll: n,b
+      dsound.dll: b
+      winegstreamer: b
