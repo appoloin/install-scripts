@@ -48,7 +48,7 @@ script:
     - chmodx: $CACHE/remove.sh
 
     - execute:
-        args: $GAMEDIR/drive_c/Program Files/Ubisoft/Far Cry 3 Blood Dragon/bin/
+        args: "$GAMEDIR/drive_c/Program\ Files/Ubisoft/Far\ Cry\ 3\ Blood\ Dragon/bin/"
         file: $CACHE/remove.sh
 
     - execute:
