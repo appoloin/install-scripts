@@ -1,4 +1,4 @@
-name: FarCry Primal
+name: Far Cry Primal
 game_slug: far-cry-primal
 version: Installer
 slug: installer
@@ -21,29 +21,9 @@ script:
         prefix: $GAMEDIR
     
     - task:
-        app: winxp
+        app: winxp vcrun2015 vcrun2010 xact_x64 xact dotnet35
         name: winetricks
         prefix: $GAMEDIR 
-
-    - task:
-        app: vcrun2015
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task: 
-        app: vcrun2010
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task: 
-        app: xact_x64 xact
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task: 
-        app: dotnet35
-        name: winetricks
-        prefix: $GAMEDIR   
 
     - task:
         description: Installing
