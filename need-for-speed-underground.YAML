@@ -104,7 +104,7 @@ script:
           MAIN:
             ResX: $INPUT_RESX
             ResY: $INPUT_RESY
-        file: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground/scripts/NFSUnderground.WidescreenFix.ini
+        file: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground/Scripts/NFSUnderground.WidescreenFix.ini
 
 
 
