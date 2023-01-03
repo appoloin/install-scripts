@@ -8,7 +8,8 @@ runner: wine
 script:
     files:
     - setup: N/A:Please select installer exe from GOG
-    - modpack: N/A:Please Select Mod Pack
+    #https://drive.google.com/open?id=1gdADeVldWFIJ1_nuMCA89ynTSdMqs_zU
+    - modpack: https://drive.google.com/uc?export=download&id=1gdADeVldWFIJ1_nuMCA89ynTSdMqs_zU
  
     game:
         exe: drive_c/Fallout 3/launch.bat
@@ -44,16 +45,16 @@ script:
             content: 'REGEDIT4
 
 
-            [HKEY_LOCAL_MACHINE\Software\Bethesda Softworks\Fallout3]
+             [HKEY_LOCAL_MACHINE\Software\Bethesda Softworks\Fallout3]
 
-            "Installed Path"="C:\\Fallout 3\\"
+             "Installed Path"="C:\\Fallout 3\\"
 
 
-            [HKEY_LOCAL_MACHINE\Software\Wow6432Node\Bethesda Softworks\Fallout3]
+             [HKEY_LOCAL_MACHINE\Software\Wow6432Node\Bethesda Softworks\Fallout3]
 
-            "Installed Path"="C:\\Fallout 3\\"
+             "Installed Path"="C:\\Fallout 3\\"
 
-            '
+             '
             file: $CACHE/fallout3.reg
         - task:
             filename: $CACHE/fallout3.reg
@@ -233,9 +234,9 @@ script:
             prefix: $GAMEDIR
             description: 'Configure data files (DLCs), video settings and exit the launcher.
 
-            Don''t forget to set your native resolution!
+             Don''t forget to set your native resolution!
 
-            '
+             '
             env:
                 WINEDEBUG: -all
             executable: $GAMEDIR/drive_c/Fallout 3/FalloutLauncher.exe

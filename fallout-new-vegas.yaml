@@ -8,7 +8,8 @@ runner: wine
 script:
     files:
     - setup: N/A:Please select installer exe from GOG
-    - modpack:  N/A:Please select Mod Pack
+    #https://drive.google.com/open?id=19pzAalUDtmRZ75tKiI403fptsnjhZzkR
+    - modpack: https://drive.google.com/uc?export=download&id=19pzAalUDtmRZ75tKiI403fptsnjhZzkR
  
     game:
         arch: win64
@@ -147,7 +148,7 @@ script:
                 "Installed Path"="C:\\Fallout New Vegas\\"
 
 
-            '
+             '
             file: $CACHE/install.reg
         - task:
             arch: win64
@@ -309,9 +310,9 @@ script:
             arch: win64
             description: 'Configure data files (DLCs), video settings and exit the launcher.
 
-            Don''t forget to set your native resolution!
+             Don''t forget to set your native resolution!
 
-            '
+             '
             executable: $GAMEDIR/drive_c/Fallout New Vegas/FalloutNVLauncher.exe
            
         - task:
