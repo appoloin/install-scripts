@@ -1,0 +1,135 @@
+name: Tex Murphy - Overseer
+game_slug: tex-murphy-overseer
+version: Installer
+slug:  installer
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Overseer/OVERSEER.EXE
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+  #https://drive.google.com/open?id=1f6idTOlBjFkBHipXzkox3LRmFhEJqrKu
+    - patch: https://drive.google.com/uc?export=download&id=1f6idTOlBjFkBHipXzkox3LRmFhEJqrKu
+  #https://drive.google.com/open?id=1111u9ChPwUjPa9TgwfhIUEl5h2l29Ydr
+    - nocd:  https://drive.google.com/uc?export=download&id=1111u9ChPwUjPa9TgwfhIUEl5h2l29Ydr
+
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$1
+
+          dst=$2
+    
+          cp -avr "$src/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: win95
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_c/OVERSEER1
+
+    - insert-disc:
+        description: Please insert disc 1
+        requires: DATA
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $DISC "$GAMEDIR/drive_c/OVERSEER1"      
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR/drive_c/OVERSEER1"
+    - insert-disc:
+        description: Please insert disc 2
+        requires: DATA
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $DISC "$GAMEDIR/drive_c/OVERSEER1"      
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR/drive_c/OVERSEER1"
+    - insert-disc:
+        description: Please insert disc 3
+        requires: DATA
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $DISC "$GAMEDIR/drive_c/OVERSEER1"      
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR/drive_c/OVERSEER1"
+    - insert-disc:
+        description: Please insert disc 4
+        requires: DATA
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $DISC "$GAMEDIR/drive_c/OVERSEER1"      
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR/drive_c/OVERSEER1"
+    - insert-disc:
+        description: Please insert disc 5
+        requires: DATA
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $DISC "$GAMEDIR/drive_c/OVERSEER1"      
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR/drive_c/OVERSEER1"
+
+    - task:
+        executable: "$GAMEDIR/drive_c/OVERSEER1/SETUP.EXE"
+        arch: win32
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: mkdir
+        args: "$GAMEDIR/drive_c/Overseer/DATA"
+    - merge:
+        src: "$GAMEDIR/drive_c/OVERSEER1/DATA"
+        dst: "$GAMEDIR/drive_c/Overseer/DATA"
+
+
+    - execute:
+        file: mkdir
+        args: "$GAMEDIR/drive_c/Overseer/update"
+    - extract:
+        file: $patch
+        dst: "$GAMEDIR/drive_c/Overseer/update"
+    - task:
+        executable: "$GAMEDIR/drive_c/Overseer/update/Update.exe"
+        arch: win32
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: e $nocd -o$GAMEDIR/drive_c/Overseer/ -ppassword -y
+
+    - execute:
+        file: rm 
+        args:  -r "$GAMEDIR/drive_c/OVERSEER1"
+
+  wine:
+    Desktop: true
+
+  system:
+    dgvoodoo2: true
+    single_cpu: true
+
