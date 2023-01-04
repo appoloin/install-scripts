@@ -1,0 +1,128 @@
+name: Black Dahlia
+game_slug: black-dahlia
+version: Installer
+slug:  installer
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/
+    arch: win32
+    prefix: $GAMEDIR
+
+ # files:
+  #https://drive.google.com/open?id=1f6idTOlBjFkBHipXzkox3LRmFhEJqrKu
+ #   - patch: https://drive.google.com/uc?export=download&id=1f6idTOlBjFkBHipXzkox3LRmFhEJqrKu
+  #https://drive.google.com/open?id=1111u9ChPwUjPa9TgwfhIUEl5h2l29Ydr
+  #  - nocd:  https://drive.google.com/uc?export=download&id=1111u9ChPwUjPa9TgwfhIUEl5h2l29Ydr
+
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$1
+
+          dst=$2
+    
+          cp -avr "$src/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: win95
+        arch: win32
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_c/black
+
+    - insert-disc:
+        description: Please insert disc 1
+        requires: p1a
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $DISC "$GAMEDIR/drive_c/black"      
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR/drive_c/black"
+    - insert-disc:
+        description: Please insert disc 2
+        requires: p1b
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $DISC "$GAMEDIR/drive_c/black"      
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR/drive_c/black"
+    - insert-disc:
+        description: Please insert disc 3
+        requires: p2a
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $DISC "$GAMEDIR/drive_c/black"      
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR/drive_c/black"
+    - insert-disc:
+        description: Please insert disc 4
+        requires: p3a
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $DISC "$GAMEDIR/drive_c/black"      
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR/drive_c/black"
+    - insert-disc:
+        description: Please insert disc 5
+        requires: p3b
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $DISC "$GAMEDIR/drive_c/black"      
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR/drive_c/black"
+    - insert-disc:
+        description: Please insert disc 6
+        requires: p4a
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $DISC "$GAMEDIR/drive_c/black"      
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR/drive_c/black"
+    - insert-disc:
+        description: Please insert disc 7
+        requires: p5a
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $DISC "$GAMEDIR/drive_c/black"      
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR/drive_c/black"
+    - insert-disc:
+        description: Please insert disc 8
+        requires: p6a
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $DISC "$GAMEDIR/drive_c/black"      
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR/drive_c/black"
+
+  wine:
+    Desktop: true
+
+  system:
+    dgvoodoo2: true
+    single_cpu: true
+
