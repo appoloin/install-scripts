@@ -1,4 +1,4 @@
-name: portal
+name: Portal
 game_slug: portal 
 version: Installer
 slug: portal
@@ -22,22 +22,10 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: mfc42
+        app: mfc42 d3dx9 d3dcompiler_43
         arch: win32
         name: winetricks
         prefix: $GAMEDIR
-
-    - task:
-        app: d3dx9
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR      
-
-    - task:
-        app: d3dcompiler_43
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR      
 
     - task:
         executable: $setup
