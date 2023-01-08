@@ -101,7 +101,7 @@ script:
           MAIN:
             ResX: $INPUT_RESX
             ResY: $INPUT_RESY
-        file: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground 2/scripts/NFSUnderground2.WidescreenFix.ini
+        file: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground 2/Scripts/NFSUnderground2.WidescreenFix.ini
 
   wine:
     Desktop: true
