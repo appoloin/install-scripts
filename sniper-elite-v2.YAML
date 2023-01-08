@@ -23,7 +23,7 @@ script:
         arch: win64
 
     - task:
-        app: d3dx10 xact
+        app: d3dx10 xact xact_x64
         name: winetricks
         prefix: $GAMEDIR
 
@@ -35,7 +35,7 @@ script:
 
   system:
     env:
-        PULSE_LATENCY_MSEC: '90'
+        PULSE_LATENCY_MSEC: '30'
 
 
   wine:
