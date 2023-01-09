@@ -123,8 +123,8 @@ script:
 
   wine:
     Desktop: true
+    dgvoodoo2: true
 
   system:
-    dgvoodoo2: true
     single_cpu: true
 
