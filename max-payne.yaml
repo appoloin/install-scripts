@@ -12,8 +12,10 @@ script:
 
   files:
     - setup: N/A:Select Setup
-    - patch1: N/A:Select 1.05 patch
-    - nocd: N/A:Select NOCD patch
+    #https://drive.google.com/open?id=1WNvXMZOBrsLj6BINhAXctUU3eFrtAyxB
+    - patch1: https://drive.google.com/uc?export=download&id=1WNvXMZOBrsLj6BINhAXctUU3eFrtAyxB  
+    #https://drive.google.com/open?id=1AUReGcNW8X6Tfy2fgZuS1YbeHW8Ry0Nb
+    - nocd: https://drive.google.com/uc?export=download&id=1AUReGcNW8X6Tfy2fgZuS1YbeHW8Ry0Nb
     - patch2: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/mp1/MaxPayne.WidescreenFix.zip
 
   installer:
@@ -43,9 +45,9 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-    - extract:  
-        file: $nocd
-        dst:  $CACHE 
+    - execute:
+        file: 7z
+        args: e $nocd -o$CACHE  -ppassword -y
 
     - rename:
         src: $GAMEDIR/drive_c/Program Files/Max Payne/MaxPayne.exe
