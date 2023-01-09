@@ -1,0 +1,136 @@
+name: Druuna - Morbus Gravis
+game_slug: druuna-morbus-gravis
+version: Installer
+slug:  installer
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/drunna/Druuna.exe
+    arch: win32
+    prefix: $GAMEDIR
+ 
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$1
+
+          dst=$2
+    
+          cp -avr "$src/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: win95
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_c/drunna $GAMEDIR/drive_c/SaveGame
+
+    - insert-disc:
+        description: Please insert disc 1
+        requires: Setup.exe
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $DISC "$GAMEDIR/drive_c/drunna"      
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR/drive_c/drunna"
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_c/drunna/Morbus_1
+    - execute:
+        file: mv
+        args: $GAMEDIR/drive_c/drunna/Film $GAMEDIR/drive_c/drunna/Morbus_1
+    - execute:
+        file: mv
+        args: $GAMEDIR/drive_c/drunna/Sfondi.dat $GAMEDIR/drive_c/drunna/Morbus_1
+    - rename:
+        src: $GAMEDIR/drive_c/drunna/Druuna.eee
+        dst: $GAMEDIR/drive_c/drunna/Druuna.exe
+        
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_c/drunna/Morbus_2
+    - insert-disc:
+        description: Please insert disc 2
+        requires: Film
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $DISC "$GAMEDIR/drive_c/drunna/Morbus_2"      
+  
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_c/drunna/Morbus_3
+    - insert-disc:
+        description: Please insert disc 3
+        requires: Film
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $DISC "$GAMEDIR/drive_c/drunna/Morbus_3"      
+  
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_c/drunna/Morbus_4
+    - insert-disc:
+        description: Please insert disc 4
+        requires: Film
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $DISC "$GAMEDIR/drive_c/drunna/Morbus_4"      
+ 
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_c/drunna/Morbus_5
+    - insert-disc:
+        description: Please insert disc 5
+        requires: film
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $DISC "$GAMEDIR/drive_c/drunna/Morbus_5"      
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_c/drunna/Morbus_6
+    - insert-disc:
+        description: Please insert disc 6
+        requires: film
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $DISC "$GAMEDIR/drive_c/drunna/Morbus_6"      
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR/drive_c/drunna"
+
+
+    - write_config:
+        data:
+            DirectX:
+                dgVoodooWatermark: false
+                Resolution: desktop
+        file: "$GAMEDIR/drive_c/drunna/dgVoodoo.conf"
+
+
+
+  wine:
+    dgvoodoo2: true
+    Desktop: true
+    dxvk: true
+    overrides:
+      ddraw: native
+      d3d8: native
+      d3d9: native
+      D3DImm: native
+
