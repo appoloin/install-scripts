@@ -1,0 +1,63 @@
+name: Agatha Christe - Murder on the Orient Express
+game_slug: agatha-christie-murder-on-the-orient-express
+version: Installer
+slug:  installer
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files/The Adventure Company/Murder on the Orient Express/motoe.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select Setup
+    #https://drive.google.com/open?id=17F_Gq4KxA3Wc2Fk5G-ZEO_E-poQptmIS
+    - patch1: https://drive.google.com/uc?export=download&id=17F_Gq4KxA3Wc2Fk5G-ZEO_E-poQptmIS
+    #https://drive.google.com/open?id=195ZKhiWJUPdcfYbPb-mQp0tu7FkvEdi2
+    - nocd: https://drive.google.com/uc?export=download&id=195ZKhiWJUPdcfYbPb-mQp0tu7FkvEdi2
+ 
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: winxp
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod
+
+    - extract:  
+        file: $patch1
+        dst:  $GAMEDIR/drive_c/Program Files/The Adventure Company/Murder on the Orient Express/
+
+    - task:
+        executable: $GAMEDIR/drive_c/Program Files/The Adventure Company/Murder on the Orient Express/motoe_patch1.exe
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: e $nocd -o$GAMEDIR/drive_c/Program Files/The Adventure Company/Murder on the Orient Express/ -ppassword -y
+        
+  wine:
+    Desktop: true
+    WineDesktop: 1024x768
+
+  system:
+    resolution: 1024x768
+    reset_desktop: true
+
+ 
+ 
