@@ -24,7 +24,17 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+    - write_config:
+        data:
+            DirectX:
+                dgVoodooWatermark: false
+                Resolution: desktop
+        file: "$GAMEDIR/drive_c/Games/The Lord of the Rings The Return of the King/dgVoodoo.conf"
+
+
   wine:
     Desktop: true
+    dgvoodoo2: true
+
 
 
