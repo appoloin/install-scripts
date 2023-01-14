@@ -35,6 +35,9 @@ script:
   wine:
     Desktop: true
     dgvoodoo2: true
+    overrides:
+      d3d8: native
+      d3d9: native
 
 
 
