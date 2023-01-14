@@ -6,11 +6,13 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Activision/Prototype/prototypef.exe
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
+    - patch: https://drive.google.com/uc?export=download&id=1dtWSpyQ_wEgW0xtMAKlaNaXgFbbqC74h
+
 
   installer:
     - task:
@@ -20,9 +22,22 @@ script:
         prefix: $GAMEDIR
 
     - task:
+        app: xact_x64 xact
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+    - rename:
+        src: $GAMEDIR/drive_c/Program Files (x86)/Activision/Prototype/prototypeenginef.dll
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Activision/Prototype/prototypeenginef.dll
+
+    - extract:  
+        file: $patch
+        dst:  $GAMEDIR/drive_c/Program Files (x86)/Activision/Prototype/
 
   wine:
     Desktop: true
