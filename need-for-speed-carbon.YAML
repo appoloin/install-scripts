@@ -7,6 +7,7 @@ runner: wine
 script:
   game:
     exe: $GAMEDIR/drive_c/Games/Need for Speed Carbon/NFSC.exe
+    prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer

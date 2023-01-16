@@ -7,6 +7,7 @@ runner: wine
 script:
   game:
     exe: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Most Wanted 2005/speed.exe
+    prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
