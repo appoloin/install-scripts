@@ -95,7 +95,7 @@ script:
           MAIN:
             ResX: $INPUT_RESX
             ResY: $INPUT_RESY
-        file: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Most Wanted 2005/scripts/NFSMostWanted.WidescreenFix.ini
+        file: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Most Wanted 2005/Scripts/NFSMostWanted.WidescreenFix.ini
 
 
 
