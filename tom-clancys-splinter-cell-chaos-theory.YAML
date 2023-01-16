@@ -14,7 +14,7 @@ script:
   files:
     - setup: N/A:Select installer
     - scws: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/scct/SplinterCellChaosTheory.WidescreenFix.zip
-    - controller: https://github.com/appoloin/misc/blob/main/scfix_0_1.zip
+    - controller: https://drive.google.com/uc?export=download&id=1prOuF16AaqKrP_tEsXRAthnUdpPSbAYT
 
   installer:
     - task:
