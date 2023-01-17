@@ -12,10 +12,12 @@ script:
 
   files:
     - setup: N/A:Select Setup
-    #https://drive.google.com/open?id=1WNvXMZOBrsLj6BINhAXctUU3eFrtAyxB
-    - patch1: https://drive.google.com/uc?export=download&id=1WNvXMZOBrsLj6BINhAXctUU3eFrtAyxB  
-    #https://drive.google.com/open?id=1AUReGcNW8X6Tfy2fgZuS1YbeHW8Ry0Nb
-    - nocd: https://drive.google.com/uc?export=download&id=1AUReGcNW8X6Tfy2fgZuS1YbeHW8Ry0Nb
+    - patch1: 
+        url: https://drive.google.com/uc?export=download&id=1WNvXMZOBrsLj6BINhAXctUU3eFrtAyxB
+        filename: Max Payne Patch 1_05.zip
+    - nocd: 
+        url: https://drive.google.com/uc?export=download&id=1WNvXMZOBrsLj6BINhAXctUU3eFrtAyxB
+        filename: MaxPayne-NoCD.7z.001
     - patch2: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/mp1/MaxPayne.WidescreenFix.zip
 
   installer:

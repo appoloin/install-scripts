@@ -11,8 +11,9 @@ script:
 
   files:
     - setup: N/A:Select installer
-    - patch: https://drive.google.com/uc?export=download&id=1dtWSpyQ_wEgW0xtMAKlaNaXgFbbqC74h
-
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=1dtWSpyQ_wEgW0xtMAKlaNaXgFbbqC74h
+        filename: Prototype_All_Res.zip
 
   installer:
     - task:

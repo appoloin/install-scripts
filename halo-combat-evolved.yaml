@@ -12,8 +12,10 @@ script:
 
   files:
     - setup: N/A:Select Setup
-    - patch: https://drive.google.com/uc?export=download&id=1vWcnoqZZhLwHIRru3fk8M4RjBnyj1tcW
-
+    - patch:  
+        url: https://drive.google.com/uc?export=download&id=1vWcnoqZZhLwHIRru3fk8M4RjBnyj1tcW
+        filename: halopc-patch-1.0.10.7z
+        
   installer:
     - task:
         name: create_prefix
@@ -44,9 +46,6 @@ script:
         name: wineexec
         prefix: $GAMEDIR
         arch: win32
-
-
-
 
   wine:
     Desktop: true

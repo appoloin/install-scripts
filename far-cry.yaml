@@ -13,8 +13,9 @@ script:
 
   files:
     - game: N/A:Select GOG installer.
-    #https://drive.google.com/open?id=1xdPAJXPyAbbIwP_ywKWf9pXXpkLO02q4
-    - patch: https://drive.google.com/uc?export=download&id=1xdPAJXPyAbbIwP_ywKWf9pXXpkLO02q4
+    - patch:  
+        url: https://drive.google.com/uc?export=download&id=1xdPAJXPyAbbIwP_ywKWf9pXXpkLO02q4
+        filename: Tent_AI_Bug_Fix_Final.zip
 
   installer:
     - task:

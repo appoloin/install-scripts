@@ -11,10 +11,12 @@ script:
     prefix: $GAMEDIR
 
   files:
-  #https://drive.google.com/open?id=1f6idTOlBjFkBHipXzkox3LRmFhEJqrKu
-    - patch: https://drive.google.com/uc?export=download&id=1f6idTOlBjFkBHipXzkox3LRmFhEJqrKu
-  #https://drive.google.com/open?id=1111u9ChPwUjPa9TgwfhIUEl5h2l29Ydr
-    - nocd:  https://drive.google.com/uc?export=download&id=1111u9ChPwUjPa9TgwfhIUEl5h2l29Ydr
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=1f6idTOlBjFkBHipXzkox3LRmFhEJqrKu
+        filename: tex5b104.zip
+    - nocd: 
+        url:  https://drive.google.com/uc?export=download&id=1111u9ChPwUjPa9TgwfhIUEl5h2l29Ydr
+        filename: Overseer-NoCD.7z
 
 
   installer:

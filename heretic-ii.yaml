@@ -12,10 +12,16 @@ script:
 
   files:
     - dxwnd: https://freefr.dl.sourceforge.net/project/dxwnd/Latest%20build/v2_05_28_build.rar
-    - patch107w: https://drive.google.com/uc?export=download&id=1nim8Y_XEvFM7pH5p9xY9lH5NmKJZvuq6
-    - maps: https://drive.google.com/uc?export=download&id=1fQvbg35j_7eOI9enFqKezIEjJRgwpXlP
-    - scripts: https://drive.google.com/uc?export=download&id=1nJiNy4kx5JVomISygBKr7AlRV_T8oKVr
-  
+    - ppatch107w:  
+        url: https://drive.google.com/uc?export=download&id=1nim8Y_XEvFM7pH5p9xY9lH5NmKJZvuq6
+        filename: patch107w.7z
+    - maps: 
+        url: https://drive.google.com/uc?export=download&id=1fQvbg35j_7eOI9enFqKezIEjJRgwpXlP
+        filename: dm-maps.tar.xz
+    - scripts: 
+        url: https://drive.google.com/uc?export=download&id=1nJiNy4kx5JVomISygBKr7AlRV_T8oKVr
+        filename: scripts.7z
+   
 
   installer:
     - task:

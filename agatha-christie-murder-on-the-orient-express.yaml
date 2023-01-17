@@ -12,11 +12,13 @@ script:
 
   files:
     - setup: N/A:Select Setup
-    #https://drive.google.com/open?id=17F_Gq4KxA3Wc2Fk5G-ZEO_E-poQptmIS
-    - patch1: https://drive.google.com/uc?export=download&id=17F_Gq4KxA3Wc2Fk5G-ZEO_E-poQptmIS
-    #https://drive.google.com/open?id=195ZKhiWJUPdcfYbPb-mQp0tu7FkvEdi2
-    - nocd: https://drive.google.com/uc?export=download&id=195ZKhiWJUPdcfYbPb-mQp0tu7FkvEdi2
- 
+    - patch1: 
+        url: https://drive.google.com/uc?export=download&id=17F_Gq4KxA3Wc2Fk5G-ZEO_E-poQptmIS
+        filename: motoe_patch1.7z
+    - nocd: 
+        url: https://drive.google.com/uc?export=download&id=195ZKhiWJUPdcfYbPb-mQp0tu7FkvEdi2
+        filename: motoe-NoCD.7z.001
+
   installer:
     - task:
         name: create_prefix
