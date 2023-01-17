@@ -1,0 +1,46 @@
+name: Halo 2
+game_slug: halo-2
+version: Installer
+slug:  installer
+runner: wine
+
+script:
+  game:
+    arch: win32
+    args: -hiresfix
+    exe: $GAMEDIR/drive_c/Games/Halo 2 Project Cartographer/halo2.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select Install
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: win7 powershell20 wmp10
+        description: Installing additional components
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: videomemorysize=1024
+        arch: win32
+        description: Setting video memory size
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        arch: win32
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+  
