@@ -63,7 +63,7 @@ script:
         - '5120': '5120'
         - '7680': '7680'
         - '15360': '15360'
-        preselect: '1920'
+        preselect: '1366'
 
     - input_menu:
         description: Please choose your main desktop height for the widescreen patch
@@ -90,7 +90,7 @@ script:
         - '2880': '2880'
         - '4320': '4320'
         - '8640': '8640'
-        preselect: '1080'
+        preselect: '768'
     - write_config:
         data:
           MAIN:
