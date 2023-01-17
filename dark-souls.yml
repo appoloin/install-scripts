@@ -1,0 +1,123 @@
+name: Dark Souls
+game_slug: dark-souls
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files (x86)/BANDAI NAMCO Games/DARK SOULS - Prepare To Die Edition/DATA/DARKSOULS.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+    - patch:  
+        url: https://drive.google.com/uc?export=download&id=1gS2DUJAhjIAl2QBQkk_eYFRVZ4F2837Y
+        filename: DSFix 2.4-19-2-4.zip
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: wmp9 dinput
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - extract:  
+        file: $patch
+        dst:  $GAMEDIR/drive_c/Program Files (x86)/BANDAI NAMCO Games/DARK SOULS - Prepare To Die Edition/DATA/
+
+    - input_menu:
+        description: Please choose your main desktop width for the widescreen patch
+        id: RESX
+        options:
+        - '256': '256'
+        - '426': '426'
+        - '640': '640'
+        - '768': '768'
+        - '800': '800'
+        - '848': '848'
+        - '854': '854'
+        - '960': '960'
+        - '1024': '1024'
+        - '1280': '1280'
+        - '1366': '1366'
+        - '1600': '1600'
+        - '1920': '1920'
+        - '2048': '2048'
+        - '2560': '2560'
+        - '2880': '2880'
+        - '3200': '3200'
+        - '3840': '3840'
+        - '4096': '4096'
+        - '5120': '5120'
+        - '7680': '7680'
+        - '15360': '15360'
+        preselect: '1366'
+
+    - input_menu:
+        description: Please choose your main desktop height for the widescreen patch
+        id: RESY
+        options:
+        - '144': '144'
+        - '240': '240'
+        - '360': '360'
+        - '432': '432'
+        - '450': '450'
+        - '480': '480'
+        - '540': '540'
+        - '576': '576'
+        - '720': '720'
+        - '768': '768'
+        - '900': '900'
+        - '1080': '1080'
+        - '1152': '1152'
+        - '1440': '1440'
+        - '1620': '1620'
+        - '1800': '1800'
+        - '2160': '2160'
+        - '2304': '2304'
+        - '2880': '2880'
+        - '4320': '4320'
+        - '8640': '8640'
+        preselect: '768'
+
+
+    - write_file:
+        content: '#!/bin/bash
+
+            height="$1"
+
+            width="$2"
+
+            path="$3"
+
+            sed -i "s/^renderWidth.*$/renderWidth $width/g" "$path"
+
+            sed -i "s/^renderHeight.*$/renderHeight $height/g" "$path"
+
+            sed -i "s/^forceFullscreen.*$/forceFullscreen 1/g" "$path"
+            '
+        file: $CACHE/update.sh
+    - chmodx: $CACHE/update.sh
+
+    - execute:
+        args: $INPUT_RESY $INPUT_RESX "$GAMEDIR/drive_c/Program Files (x86)/BANDAI NAMCO Games/DARK SOULS - Prepare To Die Edition/DATA/DSfix.ini"
+        file: $CACHE/update.sh
+
+
+  wine:
+    Desktop: true
+    overrides:
+      dinput8.dll: n,b
+
+
