@@ -98,6 +98,11 @@ script:
             ResY: $INPUT_RESY
         file: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Most Wanted 2005/Scripts/NFSMostWanted.WidescreenFix.ini
 
+    - write_config:
+        data:
+          MISC:
+            ImproveGamepadSupport: 1 
+        file: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Most Wanted 2005/Scripts/NFSMostWanted.WidescreenFix.ini
 
 
   wine:
