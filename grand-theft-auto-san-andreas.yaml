@@ -1,0 +1,87 @@
+name: Grand Theft Auto - San Andreas
+game_slug: grand-theft-auto-san-andreas
+version: Installer
+slug: installer
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas/gta_sa.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select setup.exe
+    - loader: 
+        url: https://drive.google.com/uc?export=download&id=1Z3DGvvo5SP-1vheYleyBqUZvV5W1tXBv
+        filename: silents_asi_loader_13.zip
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=1rxUSxrosSz5zrdIqDTDrdooR_YgZe76a
+        filename: SilentPatchSA.zip
+    - exeV1: 
+        url: https://drive.google.com/uc?export=download&id=149_rmVfmzO_99_SwU1hzH1_FgxfpQ_Rc
+        filename: gta_sa_v1_exe.7z
+
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        arch: win32
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        name: winekill
+        prefix: $GAMEDIR
+
+
+    - extract:  
+        file: $loader
+        dst:  $CACHE 
+    - rename:
+        src: $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas/vorbisFile.dll
+        dst: $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas/vorbisFile-dll.old    
+    - copy:
+        src: $CACHE/scripts
+        dst: $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas/scripts
+    - copy:
+        src: $CACHE/vorbisFile.dll
+        dst:  $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas
+    - copy:
+        src: $CACHE/vorbisHooked.dll
+        dst:  $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas/
+
+
+    - extract:  
+        file: $patch
+        dst:  $CACHE 
+    - copy:
+        src: $CACHE/SilentPatchSA.asi
+        dst:  $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas/scripts/
+    - copy:
+        src: $CACHE/SilentPatchSA.ini
+        dst:  $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas/scripts/
+
+
+    - execute:
+        file: 7z
+        args: e $exeV1 -o$CACHE  -ppassword -y
+    - rename:
+        src: $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas/gta_sa.exe
+        dst: $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas/gta_sa.exe.old
+    - copy:
+        src: $CACHE/gta_sa.exe
+        dst:  $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas/
+
+
+  wine:
+    Desktop: true
+
+
