@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files (x86)/Activision/Prototype/prototypef.exe
+    exe: $GAMEDIR/drive_c/Games/Prototype/prototypef.exe
     prefix: $GAMEDIR
 
   files:
@@ -33,12 +33,12 @@ script:
         prefix: $GAMEDIR
 
     - rename:
-        src: $GAMEDIR/drive_c/Program Files (x86)/Activision/Prototype/prototypeenginef.dll
-        dst: $GAMEDIR/drive_c/Program Files (x86)/Activision/Prototype/prototypeenginef.dll
+        src: $GAMEDIR/drive_c/Games/Prototype/prototypeenginef.dll
+        dst: $GAMEDIR/drive_c/Games/Prototype/prototypeenginef.dll.old
 
     - extract:  
         file: $patch
-        dst:  $GAMEDIR/drive_c/Program Files (x86)/Activision/Prototype/
+        dst:  $GAMEDIR/drive_c/Games/Prototype/
 
   wine:
     Desktop: true
