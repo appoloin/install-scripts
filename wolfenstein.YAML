@@ -11,6 +11,9 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=1sGYJ75WjqkOICcdXMOdSNWx2J8ZYznVW
+        filename: patch.7z
 
   installer:
     - task:
@@ -28,6 +31,17 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: e $patch -o$CACHE -ppassword -y
+
+    - rename:
+        src: $GAMEDIR/drive_c/Program Files (x86)/Activision/Wolfenstein/SP/Wolf2.exe
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Activision/Wolfenstein/SP/Wolf2.exe.old
+    - copy:
+        src: $CACHE/Wolf2.exe
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Activision/Wolfenstein/SP/
 
   system:
     env:
