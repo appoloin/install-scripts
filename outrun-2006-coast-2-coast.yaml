@@ -27,8 +27,8 @@ script:
         prefix: $GAMEDIR
         
     - execute:
+        file: chmod
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
 
 
 
