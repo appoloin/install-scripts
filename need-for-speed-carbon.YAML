@@ -102,8 +102,13 @@ script:
           MAIN:
             ResX: $INPUT_RESX
             ResY: $INPUT_RESY
-        file: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Most Wanted 2005/scripts/NFSCarbon.WidescreenFix.ini
+        file: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Most Wanted 2005/Scripts/NFSCarbon.WidescreenFix.ini
 
+    - write_config:
+        data:
+          MISC:
+            ImproveGamepadSupport: 1 
+        file: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Most Wanted 2005/Scripts/NFSCarbon.WidescreenFix.ini
 
 
   wine:
