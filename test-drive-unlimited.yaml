@@ -7,7 +7,7 @@ runner: wine
 
 script:
   game:
-    exe:  drive_c/Program Files/Test Drive Unlimited/TestDriveUnlimited.exe
+    exe:  $GAMEDIR/drive_c/Program Files/Test Drive Unlimited/TestDriveUnlimited.exe
     arch: win32
     prefix: $GAMEDIR
   files:
