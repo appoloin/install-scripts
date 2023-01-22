@@ -11,9 +11,16 @@ script:
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select installer
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=1omDKGSA9PMVFKkwRBKEwE6bqOHVmqzTg
+        filename: patch.7z
+
 
   installer:
+    - insert-disc:
+        description: Please insert disc
+        requires: AutoRun.exe
+
     - task:
         name: create_prefix
         arch: win32
@@ -22,9 +29,17 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        executable: $setup
+        executable: $DISC/AutoRun.exe
         name: wineexec
         prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch -o$GAMEDIR/drive_c/tmp/patch/ -ppassword -y
+
+    - copy:
+        src: "$GAMEDIR/drive_c/tmp/patch/"
+        dst: "$GAMEDIR/drive_c/Program Files/Electronic Arts/Medal of Honor/"
 
   wine:
     Desktop: true
