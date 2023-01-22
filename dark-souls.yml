@@ -14,6 +14,10 @@ script:
     - patch:  
         url: https://drive.google.com/uc?export=download&id=1gS2DUJAhjIAl2QBQkk_eYFRVZ4F2837Y
         filename: DSFix 2.4-19-2-4.zip
+    - fix:  
+        url: https://drive.google.com/uc?export=download&id=1Ew5MXUcxzzo7NsFlyTHWtSeTu64OWVIF
+        filename: patch.z7
+
 
   installer:
     - task:
@@ -113,6 +117,10 @@ script:
     - execute:
         args: $INPUT_RESY $INPUT_RESX "$GAMEDIR/drive_c/Program Files (x86)/BANDAI NAMCO Games/DARK SOULS - Prepare To Die Edition/DATA/DSfix.ini"
         file: $CACHE/update.sh
+
+    - execute:
+        file: 7z
+        args: e $fix -o"$GAMEDIR/drive_c/Program Files (x86)/BANDAI NAMCO Games/DARK SOULS - Prepare To Die Edition/DATA/" -ppassword -y
 
 
   wine:
