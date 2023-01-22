@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/F1 2010/f1_2010.exe
+    exe: $GAMEDIR/drive_c/Games/F1 2010/f1_2010.exe
     prefix: $GAMEDIR
 
   files:
