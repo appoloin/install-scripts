@@ -11,6 +11,9 @@ script:
 
   files:
     - game: N/A:Select installer.
+    - fix:  
+        url: https://drive.google.com/uc?export=download&id=1WPKpYyZE3sNCSKawmccsjrrO5zvgoFIr
+        filename: patch.z7
 
 
   installer:
@@ -26,6 +29,10 @@ script:
         executable: $game
         name: wineexec
         prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: e $fix -o"$GAMEDIR/drive_c/Program Files (x86)/Capcom/Resident Evil 4 - Ultimate HD Edition/Bin32/" -ppassword -y
 
   wine:
     Desktop: true
