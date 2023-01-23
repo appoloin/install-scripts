@@ -7,11 +7,13 @@ runner: wine
 
 script:
   game:
-    exe:  drive_c/Games/Test Drive Ferrari Racing Legends/TDFerrari.exe
+    exe:  $GAMEDIR/drive_c/Games/Test Drive Ferrari Racing Legends/TDFerrari.exe
     arch: win32
     prefix: $GAMEDIR
+
   files:
     - setup: N/A:Select the Setup.exe
+
   installer:
     - task:
         name: create_prefix
