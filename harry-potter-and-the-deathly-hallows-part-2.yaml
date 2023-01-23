@@ -6,7 +6,9 @@ runner: wine
 
 script:
   files:
-    - setup: N/A:Select setup file from GOG
+    - patch:  
+        url: https://drive.google.com/uc?export=download&id=1OTPz2P_wG6PIv6fUdtMa5pwVOywtuWTk
+        filename: patch.7z
 
   game:
     arch: win32
@@ -14,6 +16,10 @@ script:
     prefix: $GAMEDIR
 
   installer:
+    - insert-disc:
+        description: Select game folder
+        requires: AutoRun.exe
+
     - task:
         arch: win32
         name: create_prefix
@@ -25,6 +31,10 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: e $patch -o"$GAMEDIR/drive_c/Program Files/Electronic Arts/Harry Potter and the Deathly Hallows(TM) - Part 2/pc/" -ppassword -y
 
   wine:
     Desktop: true
