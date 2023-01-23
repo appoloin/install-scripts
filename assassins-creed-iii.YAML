@@ -20,23 +20,8 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: corefonts tahoma
-        arch: win64
-        description: Installing corefonts
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: d3dx9 d3dcompiler_43
-        arch: win64
+        app: corefonts tahoma d3dx9 d3dcompiler_43 vcrun2008 vcrun2010
         description: Installing DirectX dlls
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: vcrun2008 vcrun2010
-        arch: win64
-        description: Installing Visual C++ librairies (2008 & 2010)
         name: winetricks
         prefix: $GAMEDIR
 
