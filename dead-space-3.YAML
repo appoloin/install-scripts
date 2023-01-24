@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Sniper Elite 4/stp-se4dx11.exe
+    exe: $GAMEDIR/Program Files (x86)/2K Games/Dead Space 3 Complete Edition/deadspace3.exee
     prefix: $GAMEDIR
 
   files:
