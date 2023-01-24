@@ -11,7 +11,6 @@ script:
 
   files:
     - setup: N/A:Select installer
-    - dx2010: https://lutris.net/files/tools/directx-2010.tar.gz
 
 
   installer:
@@ -22,29 +21,8 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: corefonts tahoma
-        description: Installing corefonts
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - extract:
-        dst: $CACHE/dxsetup
-        file: dx2010
-
-    - task:
-        app: vcrun2008 vcrun2010
+        app: d3dx10 d3dcompiler_43 corefonts tahoma vcrun2008 vcrun2010 dotnet472
         description: Installing Visual C++ librairies (2008 & 2010)
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        executable: $CACHE/dxsetup/DXSETUP.exe
-        name: wineexec
-        prefix: $GAMEDIR
-
-    - task:
-        app: dotnet472
-        description: Please be patient while we install .NET 4.7.2
         name: winetricks
         prefix: $GAMEDIR
 
