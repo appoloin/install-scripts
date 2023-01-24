@@ -1,5 +1,5 @@
 name: Assasssin's Creed Chronicles Chine
-game_slug: assassins-creed-chronicles-china
+game_slug: assassins-creed-chronicles-china--1
 version: Installer
 slug: INSTALLER
 runner: wine
@@ -11,7 +11,6 @@ script:
 
   files:
     - setup: N/A:Select installer
-    - dx2010: https://lutris.net/files/tools/directx-2010.tar.gz
 
 
   installer:
@@ -22,29 +21,8 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: corefonts tahoma arial
-        description: Installing corefonts
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - extract:
-        dst: $GAMEDIR/drive_c/dxsetup
-        file: dx2010
-
-    - task:
-        app: vcrun2008 vcrun2010 win7 d3dcompiler_43
-        description: Installing Visual C++ librairies (2008 & 2010)
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        executable: $GAMEDIR/drive_c/dxsetup/DXSETUP.exe
-        name: wineexec
-        prefix: $GAMEDIR
-
-    - task:
-        app: dotnet40 
-        description: Please be patient while we install .NET 4.7.2
+        app: d3dx10 d3dcompiler_43 corefonts tahoma arial vcrun2008 vcrun2010 win7 dotnet40
+        description: Installing librairies
         name: winetricks
         prefix: $GAMEDIR
 
