@@ -6,14 +6,15 @@ runner: wine
 
 script:
   game:
-    exe: "$GAMEDIR/drive_c/Program Files/Ubisoft/FarCry 3/bin/farcry3.exe"
+    exe: "$GAMEDIR/drive_c/Program Files/Ubisoft/FarCry 3/bin/farcry3_d3d11.exe"
     arch: win32
     prefix: $GAMEDIR
 
   files:
     - game: N/A:Select installer.
-    - patch: N/A:Select Game Patch
-    - uplay: N/A:Select Uplay upgrade ;)
+    - fix: 
+        url: https://drive.google.com/uc?export=download&id=1lKjC-E5i7foHBUldO9S_okg8Icje6XP7
+        filename: fix.7z
 
   installer:
     - task:
@@ -36,33 +37,47 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-    - task:
-        arch: win32
-        description: Installing
-        executable: $patch
-        name: wineexec
-        prefix: $GAMEDIR
-
+    #This is need for a file over 100MB
     - write_file:
         content: '#!/bin/bash
 
-         src=$1
-                                                           
-         find "$src" -maxdepth 1 -type f \( -iname "FC3.dll" -o
-                                            -iname "FC3_d3d11.dll" -o
-                                            -iname "orbit_api.ini" -o
-                                            -iname "ubiorbitapi-_r2_loader.dll" -o
-                                            -iname "uplay_r1_loader" \) -exec rm {}  \;'
-        file: $CACHE/remove.sh
-    - chmodx: $CACHE/remove.sh
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
 
     - execute:
-        args: "$GAMEDIR/drive_c/Program\ Files/Ubisoft/FarCry\ 3/bin"
-        file: $CACHE/remove.sh
+        file: $CACHE/download.sh
+        args: 1lom31OC1O6ALj4TFm6Ge2XJO1_okN4f8 $CACHE/patch.7z
 
     - execute:
         file: 7z
-        args: e $uplay -o$GAMEDIR/drive_c/Program Files/Ubisoft/FarCry 3/bin
+        args: e "$CACHE/patch.7z" -o"$GAMEDIR/drive_c/Program Files/Ubisoft/FarCry 3/" -ppassword -y
+
+    - task:
+        arch: win32
+        description: Installing
+        executable: "$GAMEDIR/drive_c/Program Files/Ubisoft/FarCry 3/farcry3_1.05.exe"
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: e $fix -o"$GAMEDIR/drive_c/Program Files/Ubisoft/FarCry 3/bin" -ppassword -y
 
   wine:
     Desktop: true
