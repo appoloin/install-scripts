@@ -10,10 +10,16 @@ script:
     arch: win32
     prefix: $GAMEDIR
 
+
   files:
     - setup: N/A:Select Setup
-    - patch13: N/A:Select Patch
-    - crack: N/A:Select Crack
+    - patch13: 
+        url: https://drive.google.com/uc?export=download&id=1jbcpMsIlMYCAVeBy7jsZmsBf7F5D1pX3
+        filename: patch.7z
+    - crack: 
+        url: https://drive.google.com/uc?export=download&id=1DgfBEPngcXuAQfv67vrExfpgh7nqFYlw
+        filename: crack.7z
+
 
   installer:
     - task:
@@ -37,24 +43,28 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+    - execute:
+        file: 7z
+        args: e  $patch13 -o"$GAMEDIR/drive_c/tmp/" -ppassword -y
+
     - task:
-        executable: $patch13
+        executable: "$GAMEDIR/drive_c/tmp/callofduty2patchv1_3.exe"
         description: Instaling Patch
         arch: win32
         name: wineexec
         prefix: $GAMEDIR
 
-    - copy:
-        dst: "$GAMEDIR/drive_c/Program Files/Activision/Call of Duty 2/CoD2SP_s.exe.old"
-        src: "$GAMEDIR/drive_c/Program Files/Activision/Call of Duty 2/CoD2SP_s.exe"
+    - rename:
+        src: $GAMEDIR/drive_c/Program Files/Activision/Call of Duty 2/CoD2SP_s.exe
+        dst: $GAMEDIR/drive_c/Program Files/Activision/Call of Duty 2/CoD2SP_s.exe.old
 
     - execute:
-        args:  -r "$GAMEDIR/drive_c/Program Files/Activision/Call of Duty 2/CoD2SP_s.exe"
-        file: /bin/rm 
+        file: 7z
+        args: e  $crack -o"$GAMEDIR/drive_c/tmp/" -ppassword -y
 
     - copy:
+        src: $GAMEDIR/drive_c/tmp/CoD2SP_s.exe
         dst: "$GAMEDIR/drive_c/Program Files/Activision/Call of Duty 2"
-        src: $crack
 
   wine:
     Desktop: true
