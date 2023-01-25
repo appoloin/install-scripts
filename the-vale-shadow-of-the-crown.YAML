@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Games/The Vale - Shadow of the Crown
+    exe: $GAMEDIR/drive_c/steam/TheVale.exe
     prefix: $GAMEDIR
 
   files:
@@ -19,10 +19,13 @@ script:
         install_gecko: false
         prefix: $GAMEDIR
 
-    - task:
-        executable: $setup
-        name: wineexec
-        prefix: $GAMEDIR
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_c/steam
+   
+    - extract:
+        file: $setup
+        dst: $GAMEDIR/drive_c/steam
 
   wine:
     Desktop: true
