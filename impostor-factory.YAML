@@ -27,8 +27,8 @@ script:
         prefix: $GAMEDIR
 
     - execute:
+        file: cp 
         args: -r "$DISC/"  "$GAMEDIR/drive_c/"
-        file: /bin/cp 
 
   wine:
     esync: false
