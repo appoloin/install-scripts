@@ -11,6 +11,9 @@ script:
 
   files:
     - setup: N/A:Select the Setup.exe
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=1BK0-sml6W4jy28Qv4PFmYXW2drs948fk
+        filename: patch.7z
 
   installer:
     - task:
@@ -28,3 +31,8 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: e $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Vertigo Games/Adam's Venture Chronicles" -ppassword -y
+
