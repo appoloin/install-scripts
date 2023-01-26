@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/
+    exe: $GAMEDIR/Games/Lacuna - A Sci-Fi Noir Adventure/Lacuna.exe
     prefix: $GAMEDIR
 
   files:
