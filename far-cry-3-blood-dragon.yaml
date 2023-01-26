@@ -12,7 +12,9 @@ script:
 
   files:
     - game: N/A:Select installer.
-    - uplay: N/A:Select Uplay upgrade ;)
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=1Em_ESfJKWtAFw9Co6DGbLt3r5XcO4rT0
+        filename: patch.7z
 
   installer:
     - task:
@@ -32,28 +34,9 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-    - write_file:
-        content: '#!/bin/bash
-
-         src=$1
-                                                           
-         find "$src" -maxdepth 1 -type f \( -iname "FC3.dll" -o
-                                            -iname "FC3_d3d11.dll" -o
-                                            -iname "orbit_api.ini" -o
-                                            -iname "ubiorbitapi-_r2_loader.dll" -o
-                                            -iname "uplay_r1_loader" -o
-                                            -iname "fc3_blooddragon.exe" -o
-                                            -iname "fc3_blooddragon_d3d11.exe" \) -exec rm {} \;'
-        file: $CACHE/remove.sh
-    - chmodx: $CACHE/remove.sh
-
-    - execute:
-        args: "$GAMEDIR/drive_c/Program\ Files/Ubisoft/Far\ Cry\ 3\ Blood\ Dragon/bin/"
-        file: $CACHE/remove.sh
-
     - execute:
         file: 7z
-        args: e $uplay -o$GAMEDIR/drive_c/Program Files/Ubisoft/Far Cry 3 Blood Dragon/bin/
+        args: e $patch -o"$GAMEDIR/drive_c/Program Files/Ubisoft/Far Cry 3 Blood Dragon/bin/" -ppassword -y
 
 
   wine:
