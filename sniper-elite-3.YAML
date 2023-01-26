@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/
+    exe: $GAMEDIR/drive_c/Games/Sniper Elite III Ultimate Edition/bin/SniperElite3.exe
     prefix: $GAMEDIR
 
   files:
@@ -23,7 +23,7 @@ script:
         arch: win64
 
     - task:
-        app: d3dx10 xact
+        app: d3dx10 xact xact_x64
         name: winetricks
         prefix: $GAMEDIR
 
