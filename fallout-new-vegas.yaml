@@ -42,7 +42,7 @@ script:
     - extract:
         format: gog
         file: $setup
-        args: --gog --include app" 
+        args: --gog --include app 
         dst: $CACHE/extract
         description: Extracting game files
 
