@@ -10,7 +10,11 @@ script:
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select the GOG installer
+    - setup: N/A:Select the installer
+    - patch:  
+        url: https://drive.google.com/uc?export=download&id=1RzhdV-7ZO2srZmR8bWPuN1jPM7fqWFh4
+        filename: patch.7z
+
 
 
   installer:
@@ -25,11 +29,16 @@ script:
         name: winetricks
         prefix: $GAMEDIR
 
-
     - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/2K Games/The Darkness II - Limited Edition/" -ppassword -y
+
+
 
   wine:
     Desktop: true
