@@ -1,5 +1,5 @@
 name: Culpa Innata
-game_slug: Culpa-Innata
+game_slug: culpa-innata
 version: Installer
 slug: Culpa-Innata-installer
 runner: wine
@@ -12,7 +12,9 @@ script:
 
   files:
     - setup: N/A:Select Setup.exe
-    - patch: https://github.com/appoloin/WfW/raw/master/CulpaInnata_Upd_EN_100-103.exe
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=1MpTm9tMveGIlPkM1ByT1AP9UKYdHNR6r
+        filename: patch.zip
 
   installer:
     - task:
@@ -27,8 +29,12 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+    - extract:
+        dst: $CACHE
+        file: $patch
+
     - task:
-        executable: $patch
+        executable: $CACHE/CulpaInnata_Upd_EN_100-103.exe
         name: wineexec
         prefix: $GAMEDIR
 
