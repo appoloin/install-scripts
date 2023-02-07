@@ -7,6 +7,9 @@ runner: wine
 script:
   files:
     - setup: N/A:Select setup file
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=1AVB2yFnbU4yyYG1LHHf5OfKojIQ3G4xH
+        filename: patch.zip
 
   game:
     arch: win32
@@ -35,6 +38,9 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+    - execute:
+        file: 7z
+        args: e  $patch -o"$GAMEDIR/drive_c/Program Files/Eidos Interactive/Tomb Raider GOTY Edition/" -ppassword -y
 
   wine:
     Desktop: true
