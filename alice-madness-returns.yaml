@@ -6,12 +6,15 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/Program Files (x86)/Electronic Arts/Alice Madness Returns - The Complete Collection/Game/Alice2/Binaries/Win32/AliceMadnessReturns.exe
+    exe: $GAMEDIR/drive_c/Program Files/Electronic Arts/Alice Madness Returns - The Complete Collection/Game/Alice2/Binaries/Win32/AliceMadnessReturns.exe
     arch: win32
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select the GOG installer
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=1zQW9nYC4GfTmkaFJ953YB-ZPmADp9HST
+        filename: patch.7z
 
   installer:
     - task:
@@ -32,6 +35,11 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files/Electronic Arts/Alice Madness Returns - The Complete Collection/"  -y
+
 
 
   wine:
