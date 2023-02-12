@@ -7,6 +7,9 @@ runner: wine
 script:
   files:
     - setup: N/A:Select setup file from GOG
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=15mDr-Rmus8eH-XLnoHJdLqHYBsnnWB3f
+        filename: patch.7z
 
   game:
     arch: win32
@@ -25,6 +28,11 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: e $patch -o"$GAMEDIR/drive_c/Program Files/Electronic Arts/Harry Potter and the Half-Blood Prince™/pc/"  -y
+
 
   wine:
     Desktop: true
