@@ -6,18 +6,35 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition/SkyrimSELauncher.exe
+    exe: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition/skse64_loader.exe
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
-    - patch: N/A:Select patch
-    - patch2: N/A:Select patch 2
-    - wrye: N/A:Select Wrye Bash installer
-    - loot: N/A:Select Loot installer
-
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - task:
         name: create_prefix
         install_mono: false
@@ -25,8 +42,8 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: xact xact_x64 corefonts tahoma vcrun2008 vcrun2015 vcrun2017
-        description: Instaling dependances 
+        app: xact xact_x64 corefonts tahoma vcrun2019
+        description: Installing dependances 
         name: winetricks
         prefix: $GAMEDIR
 
@@ -37,14 +54,53 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        executable: $patch
-        description: Installing AE Patch
+        executable: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition/SkyrimSELauncher.exe
+        description: Running game to create ini files
+        name: wineexec
+        prefix: $GAMEDIR
+
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1zuPNXIsgvpYV8VD5n4xZ20KEgkVbHwKR $CACHE/patchs.zip
+
+    - execute:
+        file: 7z
+        args: e  $CACHE/patchs.zip -o"$GAMEDIR/drive_c/Games/" -ppassword -y
+
+    - task:
+        executable: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition update 1.6.138 - 1.6.323.exe
+        description: Installing Patch 1
         name: wineexec
         prefix: $GAMEDIR
 
     - task:
-        executable: $patch2
-        description: Installing Fix
+        executable: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition update 1.6.323 - 1.6.342.exe
+        description: Installing Patch 2
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition update 1.6.342 - 1.6.353.exe
+        description: Installing Patch 3
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition update 1.6.353 - 1.6.629.exe
+        description: Installing Patch 4
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition update 1.6.629 - 1.6.640.exe
+        description: Installing Patch 5
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition/SkyrimSELauncher.exe
+        description: Running game to create ini files
         name: wineexec
         prefix: $GAMEDIR
 
@@ -64,23 +120,76 @@ script:
         type: REG_SZ
         value: c:\\Games\\The Elder Scrolls V Skyrim Special Edition
 
+    - execute:
+        file: $CACHE/download.sh
+        args: 12s7oQdduWkskbbWWvJC5j03TkRax_3zv $CACHE/wyre_bash.7z
+
+    - execute:
+        file: 7z
+        args: e  $CACHE/wyre_bash.7z -o"$GAMEDIR/drive_c/Games/" -ppassword -y
+
     - task:
-        executable: $wrye
-        description: Installing Wrye Bash
+        executable: $GAMEDIR/drive_c/Games/Wrye Bash 310 - Installer-1840-310-1658670684.exe
+        description: Installing Wyre Bash
         name: wineexec
         prefix: $GAMEDIR
 
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 18vLZhP-SoxAfY7F4FmTmPfcnHITf3I9N $CACHE/loot.7z
+
+    - execute:
+        file: 7z
+        args: e  $CACHE/loot.7z -o"$GAMEDIR/drive_c/Games/" -ppassword -y
+
     - task:
-        executable: $loot
+        executable: $GAMEDIR/drive_c/Games/loot_0.19.1-win64.exe
         description: Installing Loot
         name: wineexec
         prefix: $GAMEDIR
 
+    - task:
+        executable: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition/Mopy/Wrye Bash.exe
+        description: Running Wyre Bash
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1KItSyOne8nK5RvmgfqeCMklxV1_DmwI_ $CACHE/skse.zip
+
+    - execute:
+        file: 7z
+        args: x  $CACHE/skse.zip -o"$GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition/"  -y
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1YzkHP9oFRfhaKxCMbbB1UPHiHDk11NSl $CACHE/AllInOne.zip
+
+    - execute:
+        file: 7z
+        args: x $CACHE/AllInOne.zip -o"$GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition/Data"  -y
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 17Yw4ZT3httjF-MH243EETZE2o-e61nw3 $CACHE/SKSEini.zip
+
+    - execute:
+        file: 7z
+        args: x $CACHE/SKSEini.zip -o"$GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition/" -y
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1ewc5LdmlrXk3WvgNWKIgnr3gxppr-TCv $CACHE/PapyrusUtil.zip
+
+    - execute:
+        file: 7z
+        args: x $CACHE/PapyrusUtil.zip -o"$GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition/Data"  -y
 
   system:
     env:
         PULSE_LATENCY_MSEC: '90'
-    #pulse_latency: true
 
   wine:
     Desktop: true
