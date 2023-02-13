@@ -5,35 +5,39 @@ slug:  installer
 runner: wine
 
 script:
-    game:
+  game:
+    arch: win32
+    exe: $GAMEDIR/drive_c/Program Files/The Adventure Company/Keepsake/Keepsake.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select Setup.exe
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=1IghnI-0x0rP6gzJFzsDFWPeJH7XsKMGk
+        filename: patch.7z
+
+  installer:    
+    - task:
         arch: win32
-        exe: $GAMEDIR/drive_c/Program Files/The Adventure Company/Keepsake/Keepsake.exe
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
+    
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR  
 
-    files:
-      - setup: N/A:Select Setup.exe
-      - patch: N/A:Select patch.exe
+    - execute:
+        file: 7z
+        args: e $patch -o"$GAMEDIR/drive_c/tmp/" -ppassword -y
 
-    installer:    
-      - task:
-          arch: win32
-          name: create_prefix
-          install_mono: false
-          install_gecko: false
-          prefix: $GAMEDIR
-      
-      - task:
-          executable: $setup
-          name: wineexec
-          prefix: $GAMEDIR  
+    - task:
+        executable: "$GAMEDIR/drive_c/tmp/keepsake-patch-1.6.exe" 
+        name: wineexec
+        prefix: $GAMEDIR  
 
-      - task:
-          executable: $path
-          name: wineexec
-          prefix: $GAMEDIR  
+  wine:
+      Desktop: true
 
-
-
-    wine:
-        Desktop: true
- 
