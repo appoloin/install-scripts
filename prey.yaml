@@ -1,0 +1,44 @@
+name: Prey
+game_slug: prey
+version: Installer
+slug:  installer
+runner: wine
+
+script:
+  game:
+    arch: win32
+    exe: $GAMEDIR/drive_c/Program Files/Prey/PREY.exe
+    prefix: $GAMEDIR
+    args: +set r_ignorehwgamma 1 +set r_mode -1 +set r_customheight 768 +set r_customwidth 1366 +set cg_fov 95 +set cg_drawfps 0 +set r_customaspect 1.7 +set com_introplayed 1 +set r_vsync 0 +set com_maxfps 60 +set r_smp 1
+
+  files:
+    - setup: N/A:Select Setup.exe
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=1sall5QX_npTxtmZLts9VtJgWw0HuRnNV
+        filename: patch.7z
+
+  installer:    
+    - task:
+        arch: win32
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+    
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR  
+
+    - execute:
+        file: 7z
+        args: e $patch -o"$GAMEDIR/drive_c/tmp/" -ppassword -y
+
+    - task:
+        executable: "$GAMEDIR/drive_c/tmp/SetupPreyPt1.4.exe" 
+        name: wineexec
+        prefix: $GAMEDIR  
+
+  wine:
+      Desktop: true
+
