@@ -11,6 +11,9 @@ script:
 
   files:
     - setup: N/A:Select the GOG installer
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=1Sl9Jptg7N3Oj-rpjjFXZclbswZCKq7G6
+        filename: patch.7z
 
   installer:
     - task:
@@ -23,6 +26,10 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: e $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/Harry Potter and the Goblet of Fire/" -ppassword -y
 
   wine:
     Desktop: true
