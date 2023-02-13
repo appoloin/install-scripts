@@ -37,7 +37,7 @@ script:
         executable: "$GAMEDIR/drive_c/tmp/keepsake-patch-1.6.exe" 
         name: wineexec
         prefix: $GAMEDIR  
-
+        
   wine:
       Desktop: true
 
