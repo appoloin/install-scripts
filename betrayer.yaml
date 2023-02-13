@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/c_drive/Program Files (x86)/Blackpowder Games/Betrayer/Binaries/Win32/Betrayer.exe
+    exe: $GAMEDIR/c_drive/Games/Betrayer/Binaries/Win32/Betrayer.exe
     prefix: $GAMEDIR
 
   files:
