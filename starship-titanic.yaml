@@ -1,5 +1,5 @@
-name: starship
-game_slug: starship
+name: Starship Titanic
+game_slug: starship-titanic
 version: Installer
 slug:  starship-installer
 runner: scummvm
