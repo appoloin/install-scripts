@@ -6,11 +6,13 @@ runner: dosbox
 
 script:
   files:
-    - setup: N/A:Select Windows 3.11 Bottle
     - DISC1: N/A:Select Disc 1 iso
     - DISC2: N/A:Select Disc 2 iso
     - DISC3: N/A:Select Disc 3 iso
     - DISC4: N/A:Select Disc 4 iso
+    - setup: 
+        url: https://drive.google.com/uc?export=download&id=12xs1EbZLNzgiICr6AJZboLHCCLYXyD4X
+        filename: win311.7z
 
 
   game:
@@ -19,53 +21,55 @@ script:
 
 
   installer:
-    - extract:
-        dst: $GAMEDIR
-        file: $setup
+    - execute:
+        file: 7z
+        args: x $setup -o"$GAMEDIR" -ppassword -y
 
     - execute:
         args: $DISC1 $GAMEDIR/CDD/CD1.iso
-        file: /bin/cp 
+        file: cp 
     - execute:
         args: $DISC2 $GAMEDIR/CDD/CD2.iso
-        file: /bin/cp 
+        file: cp 
     - execute:
         args: $DISC3 $GAMEDIR/CDD/CD3.iso
-        file: /bin/cp 
+        file: cp 
     - execute:
         args: $DISC4 $GAMEDIR/CDD/CD4.iso
-        file: /bin/cp 
+        file: cp 
 
     - write_file:
         content: '[midi]
 
-          mididevice = mt32
+            mididevice = mt32
 
-        [sblaster]
+          [sblaster]
 
-          irq=5
+            irq=5
 
-        [sdl]
+          [mouse]
 
-          capture_mouse = onstart middlerelease  
-        
-        [cpu]
+            capture_mouse = onstart middlerelease  
 
-          cputype = pentium_slow
-        
-        [autoexec]
+            mouse_sensitivity= 15
+          
+          [cpu]
 
-          mount C "$GAMEDIR/HDD" -t dir
+            cputype = pentium_slow
+          
+          [autoexec]
 
-          imgmount D "$GAMEDIR/CDD/CD1.iso"   "$GAMEDIR/CDD/CD2.iso"   "$GAMEDIR/CDD/CD3.iso"   "$GAMEDIR/CDD/CD4.iso" -t cdrom
+            mount C "$GAMEDIR/HDD" -t dir
 
-          SET PATH=%PATH%;C:\WINDOWS;C:\;
+            imgmount D "$GAMEDIR/CDD/CD1.iso"   "$GAMEDIR/CDD/CD2.iso"   "$GAMEDIR/CDD/CD3.iso"   "$GAMEDIR/CDD/CD4.iso" -t cdrom
 
-          SET TEMP=C:\WINDOWS\TEMP
+            SET PATH=%PATH%;C:\WINDOWS;C:\;
 
-          win runexit D:\Blueheat\setup
-            
-          exit'
+            SET TEMP=C:\WINDOWS\TEMP
+
+            win runexit D:\Blueheat\setup
+              
+            exit'
         file: $GAMEDIR/setup.conf
 
     - task:
@@ -76,126 +80,128 @@ script:
     - write_file:
         content: '[midi]
 
-          mididevice = mt32
+            mididevice = mt32
 
-        [sblaster]
+          [sblaster]
 
-          irq=5
+            irq=5
 
-        [sdl]
+          [mouse]
 
-          capture_mouse = onstart middlerelease  
-        
-        [cpu]
-
-          cputype = pentium_slow
-        
-        [autoexec]
-
-          mount C "$GAMEDIR/HDD" -t dir
-
-          imgmount D "$GAMEDIR/CDD/CD1.iso"   "$GAMEDIR/CDD/CD2.iso"   "$GAMEDIR/CDD/CD3.iso"   "$GAMEDIR/CDD/CD4.iso" -t cdrom
-
-          SET PATH=%PATH%;C:\WINDOWS;C:\;
-
-          SET TEMP=C:\WINDOWS\TEMP
+            capture_mouse = onstart middlerelease  
           
-          ECHO OFF
+            mouse_sensitivity= 15
 
-          goto launcher
+          [cpu]
 
-          :launcher
-
-          cls 
-
-          ECHO  -------------------------------------------  
+            cputype = pentium_slow
           
-          ECHO                  Blue  Heat
-          
-          ECHO  -------------------------------------------  
-          
-          ECHO   1) Play    (NB use CTRL-F4 to swap CD)
-          
-          ECHO   2) Setup                                
-          
-          ECHO  -------------------------------------------  
-          
-          ECHO   3) Exit                              
-          
-          ECHO  -------------------------------------------  
+          [autoexec]
 
-          choice /c123 /s Which program do you want to run? [1-3]: /n 
-          
-          if errorlevel 3 goto exit
-                    
-          if errorlevel 2 goto setup
-          
-          if errorlevel 1 goto game
+            mount C "$GAMEDIR/HDD" -t dir
 
+            imgmount D "$GAMEDIR/CDD/CD1.iso"   "$GAMEDIR/CDD/CD2.iso"   "$GAMEDIR/CDD/CD3.iso"   "$GAMEDIR/CDD/CD4.iso" -t cdrom
 
-          :game
+            SET PATH=%PATH%;C:\WINDOWS;C:\;
 
-          cls
+            SET TEMP=C:\WINDOWS\TEMP
+            
+            ECHO OFF
 
-          win runexit C:\BLHEAT\BLHEAT16.exe        
-          
-          goto launcher
+            goto launcher
 
+            :launcher
 
-          :setup
+            cls 
 
-          cls
+            ECHO  -------------------------------------------  
+            
+            ECHO                  Blue  Heat
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Play    (NB use CTRL-F4 to swap CD)
+            
+            ECHO   2) Setup                                
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   3) Exit                              
+            
+            ECHO  -------------------------------------------  
 
-          ECHO  -------------------------------------------  
-
-          ECHO                   SETUP
-
-          ECHO  -------------------------------------------  
-
-          ECHO   1) Install Game    
-
-          ECHO   2) System
-
-          ECHO  -------------------------------------------  
-
-          ECHO   3) Main Menu                                
-
-          ECHO  -------------------------------------------  
-
-          choice /c123 /s Which program do you want to run? [1-3]: /n 
+            choice /c123 /s Which program do you want to run? [1-3]: /n 
+            
+            if errorlevel 3 goto exit
+                      
+            if errorlevel 2 goto setup
+            
+            if errorlevel 1 goto game
 
 
-          if errorlevel 3 goto launcher
+            :game
 
-          if errorlevel 2 goto system
+            cls
 
-          if errorlevel 1 goto GameInstall
-
-
-
-          :GameInstall
-
-          cls
-
-          C:
-
-          win D:\setup
-
-          goto setup
+            win runexit C:\BLHEAT\BLHEAT16.exe        
+            
+            goto launcher
 
 
-          :system
+            :setup
 
-          CLS 
+            cls
 
-          C:
+            ECHO  -------------------------------------------  
 
-          call System.bat
+            ECHO                   SETUP
 
-          goto setup
+            ECHO  -------------------------------------------  
+
+            ECHO   1) Install Game    
+
+            ECHO   2) System
+
+            ECHO  -------------------------------------------  
+
+            ECHO   3) Main Menu                                
+
+            ECHO  -------------------------------------------  
+
+            choice /c123 /s Which program do you want to run? [1-3]: /n 
 
 
-          :exit
-          
-          exit'
+            if errorlevel 3 goto launcher
+
+            if errorlevel 2 goto system
+
+            if errorlevel 1 goto GameInstall
+
+
+
+            :GameInstall
+
+            cls
+
+            C:
+
+            win runexit D:\Blueheat\setup
+
+            goto launcher
+
+
+            :system
+
+            CLS 
+
+            C:
+
+            call System.bat
+
+            goto setup
+
+
+            :exit
+            
+            exit'
         file: $GAMEDIR/play.conf
