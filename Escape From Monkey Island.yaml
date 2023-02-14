@@ -2,7 +2,7 @@ name: Monkey4
 game_slug: Monkey4
 version: Installer
 slug:  Monkey4-installer
-runner: residualvm
+runner: scummvm
 
 script:
     files:
@@ -16,11 +16,11 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+            src=$1
 
-        dst=$2
+            dst=$2
 
-        cp -avr "$src/."  "$dst"'
+            cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy-alt.sh
 
     - chmodx: $CACHE/bulkcopy-alt.sh
