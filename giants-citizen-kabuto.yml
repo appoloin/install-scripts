@@ -1,0 +1,46 @@
+name: Giants - Citizen Kabuto
+game_slug: giants-citizen-kabuto
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Giants - Citizen Kabuto/Giants.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - write_config:
+        data:
+            DirectX:
+                dgVoodooWatermark: false
+                Resolution: desktop
+        file: "$GAMEDIR/drive_c/GOG Games/Giants - Citizen Kabuto/dgVoodoo.conf"
+
+
+  wine:
+    dgvoodoo2: true
+    Desktop: true
+    overrides:
+      ddraw: native
+      d3d8: native
+      d3d9: native
+      D3DImm: native
+
+
