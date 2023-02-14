@@ -1,5 +1,5 @@
-name: Monkey4
-game_slug: Monkey4
+name: Escape from Monkey Island
+game_slug: escape-from-monkey-island
 version: Installer
 slug:  Monkey4-installer
 runner: scummvm
