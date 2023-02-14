@@ -22,46 +22,46 @@ script:
         - write_file:
             content: '#!/bin/bash
 
-            src="$1"
+                src="$1"
 
-            dst="$2"
-            
-            src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+                dst="$2"
+                
+                src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-            find "$src_path" -type f \( -iname "*.SMK" -o 
-                                        -iname "*.VGA" -o 
-                                        -iname "TABLES*" \) -exec cp {} "$dst" \;'
+                find "$src_path" -type f \( -iname "*.SMK" -o 
+                                            -iname "*.VGA" -o 
+                                            -iname "TABLES*" \) -exec cp {} "$dst" \;'
             file: $CACHE/selectcopy.sh
         - chmodx: $CACHE/selectcopy.sh
 
         - write_file:
             content: '#!/bin/bash
 
-            src="$1"
+                src="$1"
 
-            scr_file="S2"
+                scr_file="S2"
 
-            dst="$3"
+                dst="$3"
 
-            dst_file="$4"
+                dst_file="$4"
 
-            src_path=$(echo "$src" | sed -r "s/(.+)\/.+/\1/")
+                src_path=$(echo "$src" | sed -r "s/(.+)\/.+/\1/")
 
-            find "$src_path" -type f \( -iname "scr_file" \) -exec cp {} "$dst/$dst_file" \;'
+                find "$src_path" -type f \( -iname "scr_file" \) -exec cp {} "$dst/$dst_file" \;'
             file: $CACHE/copy&rename.sh
         - chmodx: $CACHE/copy&rename.sh
 
         - write_file:
             content: '#!/bin/bash
 
-            src=$1
-            
-            find "$src" -maxdepth 1 -type d \( -iname drive_c -o
-                                               -iname dosdevices \) -exec rm -r {}  \;
-                                            
-            find "$src" -maxdepth 1 -type f \( -iname "system.reg" -o
-                                               -iname "user.reg" -o 
-                                               -iname "userdef.reg" \) -exec rm {}  \;'
+                src=$1
+                
+                find "$src" -maxdepth 1 -type d \( -iname drive_c -o
+                                                -iname dosdevices \) -exec rm -r {}  \;
+                                                
+                find "$src" -maxdepth 1 -type f \( -iname "system.reg" -o
+                                                -iname "user.reg" -o 
+                                                -iname "userdef.reg" \) -exec rm {}  \;'
             file: $CACHE/remove.sh
         - chmodx: $CACHE/remove.sh
 
