@@ -14,11 +14,11 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src="$1"
+            src="$1"
 
-        dst="$2"
-      
-        cp -avr "$src/."  "$dst"'
+            dst="$2"
+        
+            cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy-alt.sh
 
     - chmodx: $CACHE/bulkcopy-alt.sh
@@ -26,13 +26,13 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src="$1"
-        
-        find "$src" -maxdepth 1 -type d \( -iname drive_c -o
-                                           -iname dosdevices \) -exec rm -r {}  \;
-                                           
-        find "$src" -maxdepth 1 -type f \( -iname "*.reg" -o
-                                           -iname "configure.exe" \) -exec rm {}  \;'
+            src="$1"
+            
+            find "$src" -maxdepth 1 -type d \( -iname drive_c -o
+                                            -iname dosdevices \) -exec rm -r {}  \;
+                                            
+            find "$src" -maxdepth 1 -type f \( -iname "*.reg" -o
+                                            -iname "configure.exe" \) -exec rm {}  \;'
         file: $CACHE/remove.sh
     - chmodx: $CACHE/remove.sh
 
