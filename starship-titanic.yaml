@@ -12,54 +12,54 @@ script:
   installer:
     - insert-disc:
         description: Please insert disc
-        requires: setup.exe
+        requires: Setup.exe
 
     - copy:
-        dst: $GAMEDIR/assets
-        src: $DISC/assets
-
+        src: $DISC/Assets
+        dst: $GAMEDIR/Assets
     - execute:
-        args: -R 775  "$GAMEDIR/assets"
-        file: /bin/chmod
+        file: chmod
+        args: -R 775  "$GAMEDIR/Assets"
 
     - task:
         name: wine.create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
         name: wine.wineexec
-        executable: $DISC/SETUP.EXE
+        executable: $DISC/Setup.exe
         arch: win32
         prefix: $GAMEDIR
 
     - copy:
-        dst: $GAMEDIR
         src: $GAMEDIR/drive_c/Program Files/The Digital Village/Starship Titanic/newgame.st
+        dst: $GAMEDIR
 
     - copy:
-        dst: $GAMEDIR/assets
         src: $GAMEDIR/drive_c/Program Files/The Digital Village/Starship Titanic/Assets
+        dst: $GAMEDIR/Assets
 
     - execute:
+        file: rm 
         args:  -r $GAMEDIR/drive_c
-        file: /bin/rm 
 
     - execute:
+        file: rm 
         args:  -r $GAMEDIR/dosdevices
-        file: /bin/rm 
 
     - execute:
+        file: rm 
         args:  -r $GAMEDIR/system.reg
-        file: /bin/rm 
 
-    - execute:
+    - execute:        
+        file: rm
         args:  -r $GAMEDIR/user.reg
-        file: /bin/rm 
 
     - execute:
+        file: rm 
         args:  -r $GAMEDIR/userdef.reg
-        file: /bin/rm 
 
 
