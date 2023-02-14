@@ -2,8 +2,7 @@ name: Myst 3
 game_slug: myst3
 version: Installer
 slug:  myst3-installer
-runner: residualvm
-
+runner: scummvm
 
 
 script:
