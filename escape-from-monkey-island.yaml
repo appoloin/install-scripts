@@ -6,7 +6,7 @@ runner: scummvm
 
 script:
     files:
-        - patch : https://demos.residualvm.org/patches/MonkeyUpdate.exe
+        - patch : https://downloads.scummvm.org/frs/extras/patches/MonkeyUpdate.exe
 
     game:
         game_id: monkey4
