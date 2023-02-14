@@ -10,7 +10,7 @@ script:
     game:
         game_id: hopkins
         path: $GAMEDIR
-    
+
     files:
         - game: N/A:Select Hokins.exe.
 
@@ -20,25 +20,25 @@ script:
         - write_file:
             content: '#!/bin/bash
 
-            src=$1
+                src=$1
 
-            dst=$2
+                dst=$2
 
-            src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-            
-            find "$src_path" -type d \( -iname ANIM -o
-                                        -iname ANM  -o
-                                        -iname BUFFER  -o
-                                        -name MUSIC  -o
-                                        -name SAVE  -o
-                                        -name SEQ  -o
-                                        -name SOUND  -o
-                                        -name SVGA  -o
-                                        -name SYSTEM  -o
-                                        -name TSVGA  -o
-                                        -name VOICE  -o
-                                        -name LINK  -o
-                                        -iname BASE \) -print  -exec cp {} -r "$dst" \;'
+                src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+                
+                find "$src_path" -type d \( -iname ANIM -o
+                                            -iname ANM  -o
+                                            -iname BUFFER  -o
+                                            -name MUSIC  -o
+                                            -name SAVE  -o
+                                            -name SEQ  -o
+                                            -name SOUND  -o
+                                            -name SVGA  -o
+                                            -name SYSTEM  -o
+                                            -name TSVGA  -o
+                                            -name VOICE  -o
+                                            -name LINK  -o
+                                            -iname BASE \) -print  -exec cp {} -r "$dst" \;'
             file: $CACHE/selectcopy.sh
         - chmodx: $CACHE/selectcopy.sh
 
