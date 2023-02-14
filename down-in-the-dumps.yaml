@@ -39,37 +39,37 @@ script:
 
           gus      = true
 
-        [sdl]
+          [sdl]
 
-          capture_mouse=onclick middlerelease
-        
-        [autoexec]
-
-          ver set 6 22
-
-          imgmount D "$GAMEDIR/CDD/CD1.iso"   "$GAMEDIR/CDD/CD2.iso"   "$GAMEDIR/CDD/CD3.iso"  -t cdrom
-
-          mount C "$GAMEDIR/HDD" -t dir
-
-          C:\
-
-          xcopy.exe D:\ITOON c:\down\itoon
-        
-          xcopy.exe D:\CHANGECD c:\down\changecd
-
-          xcopy.exe D:\FONT c:\down\font
-
-          xcopy.exe D:\DID.EXE c:\down\
+            capture_mouse=onclick middlerelease
           
-          xcopy.exe D:\DOS4GW.EXE c:\down\
-        
-          xcopy.exe D:\HMIDET.386 c:\down\
+          [autoexec]
 
-          xcopy.exe D:\HMIDRV.386 c:\down\
+            ver set 6 22
 
-          xcopy.exe  D:\PLAYDID.BAT c:\down\
+            imgmount D "$GAMEDIR/CDD/CD1.iso"   "$GAMEDIR/CDD/CD2.iso"   "$GAMEDIR/CDD/CD3.iso"  -t cdrom
 
-          exit'
+            mount C "$GAMEDIR/HDD" -t dir
+
+            C:\
+
+            xcopy.exe D:\ITOON c:\down\itoon
+          
+            xcopy.exe D:\CHANGECD c:\down\changecd
+
+            xcopy.exe D:\FONT c:\down\font
+
+            xcopy.exe D:\DID.EXE c:\down\
+            
+            xcopy.exe D:\DOS4GW.EXE c:\down\
+          
+            xcopy.exe D:\HMIDET.386 c:\down\
+
+            xcopy.exe D:\HMIDRV.386 c:\down\
+
+            xcopy.exe  D:\PLAYDID.BAT c:\down\
+
+            exit'
         file: $GAMEDIR/setup.conf
 
     - task:
@@ -82,77 +82,77 @@ script:
 
           gus      = true
           
-        [sdl]
+          [sdl]
 
-          capture_mouse=onclick middlerelease
+            capture_mouse=onclick middlerelease
 
-        [autoexec]
+          [autoexec]
 
-          imgmount D "$GAMEDIR/CDD/CD1.iso"   "$GAMEDIR/CDD/CD2.iso"   "$GAMEDIR/CDD/CD3.iso"  -t cdrom
+            imgmount D "$GAMEDIR/CDD/CD1.iso"   "$GAMEDIR/CDD/CD2.iso"   "$GAMEDIR/CDD/CD3.iso"  -t cdrom
 
-          mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/HDD" -t dir
 
-          cls 
+            cls 
 
-          ECHO OFF
+            ECHO OFF
 
-          goto launcher
+            goto launcher
 
-          :launcher
+            :launcher
 
-          cls 
+            cls 
 
-          ECHO  -------------------------------------------  
-          
-          ECHO                Down in the Dumps
-          
-          ECHO  -------------------------------------------  
-          
-          ECHO   1) Play        
-          
-          ECHO   2) Setup                                
-          
-          ECHO  -------------------------------------------  
-          
-          ECHO   3) exit program                             
-          
-          ECHO  -------------------------------------------  
+            ECHO  -------------------------------------------  
+            
+            ECHO                Down in the Dumps
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Play        
+            
+            ECHO   2) Setup                                
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   3) exit program                             
+            
+            ECHO  -------------------------------------------  
 
-          choice /c123 /s Which program do you want to run? [1-3]: /n 
-          
-          if errorlevel 3 goto exit
-                    
-          if errorlevel 2 goto setup
-          
-          if errorlevel 1 goto game
-
-
-          :game
-
-          cls
-
-          c:
-
-          cd DOWN
-
-          PLAYDID
-
-          goto exit
+            choice /c123 /s Which program do you want to run? [1-3]: /n 
+            
+            if errorlevel 3 goto exit
+                      
+            if errorlevel 2 goto setup
+            
+            if errorlevel 1 goto game
 
 
-          :setup
+            :game
 
-          cls
+            cls
 
-          D:
-  
-          setup
+            c:
 
-          goto launcher
+            cd DOWN
+
+            PLAYDID
+
+            goto exit
 
 
-          :exit
-          
-          exit'
+            :setup
+
+            cls
+
+            D:
+    
+            setup
+
+            goto launcher
+
+
+            :exit
+            
+            exit'
         file: $GAMEDIR/play.conf
 
