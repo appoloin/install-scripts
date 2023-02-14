@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/
+    exe: $GAMEDIR/drive_c/Program Files/The Adventure Company/Atlantis Evolution/Atlantis Evolution.exe
     arch: win32
     prefix: $GAMEDIR
 
@@ -29,3 +29,5 @@ script:
   wine:
     Desktop: true
 
+  system:
+    single_cpu: true
