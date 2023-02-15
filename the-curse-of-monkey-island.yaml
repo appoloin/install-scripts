@@ -1,5 +1,5 @@
-name: monkey 3
-game_slug: monkey3
+name: The Curse of Monkey Island
+game_slug: the-curse-of-monkey-island
 version: Installer
 slug:  monkey3-installer
 runner: scummvm
@@ -48,4 +48,4 @@ script:
 
     - execute:
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
+        file: chmod
