@@ -10,7 +10,7 @@ script:
     - DISC1: N/A:Select grim.exe from Disc 1
     - DISC2: N/A:Select autosub.exe from Disc 2
     - patch: 
-        url: https://drive.google.com/uc?export=download&id=1gfchx-coCOQhxlRL-WSdmoj6j5DgfRGX
+        url: https://drive.google.com/uc?export=download&id=1YYRqeQe_VNK1MUIp4eUf8wWqEqsHe5Hb
         filename: patch.7z
 
 
