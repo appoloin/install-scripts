@@ -18,13 +18,13 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
-        
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src_path/."  "$dst"'
         file: $CACHE/bulkcopy.sh
 
     - chmodx: $CACHE/bulkcopy.sh
@@ -34,19 +34,19 @@ script:
         file: $CACHE/bulkcopy.sh
 
     - write_file:
-        content: '[sdl]
+        content: '[mouse]
 
-          capture_mouse=onclick middlerelease
+            capture_mouse=onclick middlerelease
 
-        [autoexec]
+          [autoexec]
 
-          mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/HDD" -t dir
 
-          C:
+            C:
 
-          cd Callahan
-          
-          CCS.EXE 
-          
-          exit'
+            cd Callahan
+            
+            CCS.EXE 
+            
+            exit'
         file: $GAMEDIR/Callahan.conf
