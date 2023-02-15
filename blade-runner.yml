@@ -70,21 +70,21 @@ script:
 
     - execute:
         args: $DISC/CD1/CDFRAMES.DAT  $GAMEDIR/CDFRAMES1.DAT
-        file: /bin/cp 
+        file: cp 
     - execute:
         args: $DISC/CD2/CDFRAMES.DAT  $GAMEDIR/CDFRAMES2.DAT
-        file: /bin/cp 
+        file: cp 
     - execute:
         args: $DISC/CD3/CDFRAMES.DAT  $GAMEDIR/CDFRAMES3.DAT
-        file: /bin/cp 
+        file: cp 
     - execute:
         args: $DISC/CD4/CDFRAMES.DAT  $GAMEDIR/CDFRAMES4.DAT
-        file: /bin/cp 
+        file: cp 
 
 
     - execute:
         args: -R 775  $GAMEDIR
-        file: /bin/chmod
+        file: chmod
 
 scummvm:
     fullscreen: true
