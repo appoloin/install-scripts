@@ -7,7 +7,10 @@ runner: dosbox
 script:
   files:
     - DISC1: N/A:Select Disc 1 iso
-    - GUS: https://raw.githubusercontent.com/appoloin/WfW/master/GUS_external_files.zip
+    - GUS: 
+        url: https://drive.google.com/uc?export=download&id=1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6
+        filename: gus.zip
+
 
   game:
     main_file: $GAMEDIR/play.conf
@@ -20,7 +23,7 @@ script:
 
     - execute:
         args: $DISC1 $GAMEDIR/CDD/CD1.iso
-        file: /bin/cp 
+        file: cp 
 
     - extract:
         dst: $GAMEDIR/HDD/ULTRASND
@@ -29,29 +32,32 @@ script:
     - write_file:
         content: '[gus]
 
-          gus      = true
+            gus      = true
 
-          ultradir = C:\ULTRASND
+            ultradir = C:\ULTRASND
 
-        [midi]
+          [midi]
 
-          mididevice = mt32
+            mididevice = mt32
 
-        [sdl]
+          [mouse]
 
-          capture_mouse = onstart middlerelease  
-        
-        [autoexec]
+           mouse_sensitivity= 30
 
-          mount C "$GAMEDIR/HDD" -t dir
+           capture_mouse=onclick middlerelease
+          
+          
+          [autoexec]
 
-          imgmount D "$GAMEDIR/CDD/CD1.iso"  -t cdrom
+            mount C "$GAMEDIR/HDD" -t dir
 
-          D:
+            imgmount D "$GAMEDIR/CDD/CD1.iso"  -t cdrom
 
-          install.exe
+            D:
 
-          exit'
+            install.exe
+
+            exit'
         file: $GAMEDIR/setup.conf
     - task:
         config_file: $GAMEDIR/setup.conf
@@ -65,76 +71,91 @@ script:
 
           ultradir = C:\ULTRASND
 
-        [midi]
+          [midi]
 
-          mididevice = mt32
+            mididevice = mt32
 
-        [sdl]
+          [mouse]
 
-          capture_mouse = onstart middlerelease  
-        
-        
-        [autoexec]
+           mouse_sensitivity= 30
 
-          mount C "$GAMEDIR/HDD" -t dir
+           capture_mouse=onclick middlerelease
+              
+          [autoexec]
 
-          imgmount D "$GAMEDIR/CDD/CD1.iso"  -t cdrom
+            mount C "$GAMEDIR/HDD" -t dir
 
-          C:
+            imgmount D "$GAMEDIR/CDD/CD1.iso"  -t cdrom
 
-          ECHO OFF
+            C:
 
-          goto launcher
+            ECHO OFF
 
-          :launcher
+            goto launcher
 
-          cls 
+            :launcher
 
-          ECHO  -------------------------------------------  
-          
-          ECHO                    Fable
-          
-          ECHO  -------------------------------------------  
-          
-          ECHO   1) Play  
-          
-          ECHO   2) Setup                                
-          
-          ECHO  -------------------------------------------  
-          
-          ECHO   3) Exit                              
-          
-          ECHO  -------------------------------------------  
+            cls 
 
-          choice /c123 /s Which program do you want to run? [1-3]: /n 
-          
-          if errorlevel 3 goto exit
-                    
-          if errorlevel 2 goto setup
-          
-          if errorlevel 1 goto game
+            ECHO  -------------------------------------------  
+            
+            ECHO                    Fable
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Play  
+            
+            ECHO   2) Setup             
 
+            ECHO   3) Install                  
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   4) Exit                              
+            
+            ECHO  -------------------------------------------  
 
-          :game
+            choice /c1234 /s Which program do you want to run? [1-4]: /n 
+            
+            if errorlevel 4 goto exit
 
-          cls
+            if errorlevel 3 goto install
 
-          cd Fable
-
-          fable       
-          
-          goto exit
+            if errorlevel 2 goto setup
+            
+            if errorlevel 1 goto game
 
 
-          :setup
+            :game
 
-          cls
+            cls
 
-          setup
+            cd Fable
 
-          goto launcher
+            fable       
+            
+            goto exit
 
-          :exit
-          
-          exit'
+
+            :setup
+
+            cls
+
+            setup
+
+            goto launcher
+
+
+            :install 
+
+            D:
+
+            install.exe
+
+            goto launcher
+            
+            
+            :exit
+            
+            exit'
         file: $GAMEDIR/play.conf
