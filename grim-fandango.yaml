@@ -9,7 +9,9 @@ script:
   files:
     - DISC1: N/A:Select grim.exe from Disc 1
     - DISC2: N/A:Select autosub.exe from Disc 2
-    - file1: https://scummvm.org/frs/extras/patches/gfupd101.exe
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=1gfchx-coCOQhxlRL-WSdmoj6j5DgfRGX
+        filename: patch.7z
 
 
   game:
@@ -32,9 +34,9 @@ script:
 
     - chmodx: $CACHE/selectcopy.sh
 
-    - copy:
-        dst: $GAMEDIR
-        src: file1
+    - execute:
+      file: 7z
+      args: e $patch -o"$GAMEDIR" -ppassword -y
 
     - execute:
         args: $DISC1 $GAMEDIR
