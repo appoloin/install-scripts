@@ -8,7 +8,9 @@ runner: dosbox
 script:
   files:
     - DISC1: N/A:Select Disc 1 iso
-    - GUS: https://raw.githubusercontent.com/appoloin/WfW/master/GUS_external_files.zip
+    - GUS: 
+        url: https://drive.google.com/uc?export=download&id=1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6
+        filename: gus.zip
 
   game:
     main_file: $GAMEDIR/play.conf
@@ -23,40 +25,42 @@ script:
 
     - execute:
         args: $DISC1 $GAMEDIR/CDD/CD1.iso
-        file: /bin/cp 
+        file: cp 
 
     - write_file:
         content: '[gus]
 
-          gus      = true
+            gus      = true
 
-          ultradir = C:\ULTRASND
+            ultradir = C:\ULTRASND
 
-          gusbase  = 220
-          
-          gusirq   = 11
+            gusbase  = 220
+            
+            gusirq   = 11
 
-          gusdma   = 1
+            gusdma   = 1
 
-        [midi]
+          [midi]
 
-          mididevice = mt32
+            mididevice = mt32
 
-        [sdl]
+          [mouse]
 
-          capture_mouse = onstart middlerelease
+            capture_mouse = onstart middlerelease  
 
-        [autoexec]
+            mouse_sensitivity= 15
 
-          mount C "$GAMEDIR/HDD" -t dir
+          [autoexec]
 
-          imgmount D "$GAMEDIR/CDD/CD1.iso" -t cdrom
+            mount C "$GAMEDIR/HDD" -t dir
 
-          D:
+            imgmount D "$GAMEDIR/CDD/CD1.iso" -t cdrom
 
-          install.exe
-          
-          exit'
+            D:
+
+            install.exe
+            
+            exit'
         file: $GAMEDIR/setup.conf
     - task:
         config_file: $GAMEDIR/setup.conf
@@ -66,92 +70,107 @@ script:
     - write_file:
         content: '[gus]
 
-          gus      = true
+            gus      = true
 
-          ultradir = C:\ULTRASND
+            ultradir = C:\ULTRASND
 
-          gusbase  = 220
+            gusbase  = 220
+            
+            gusirq   = 11
+
+            gusdma   = 1
+
+
+          [midi]
+
+            mididevice = mt32   
+
+          [mouse]
+
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
+
+          [autoexec]
           
-          gusirq   = 11
+            mount C "$GAMEDIR/HDD" -t dir
 
-          gusdma   = 1
+            imgmount D "$GAMEDIR/CDD/CD1.iso" -t cdrom
+            
+            C:
 
+            cls 
 
-        [midi]
+            ECHO OFF
 
-          mididevice = mt32   
+            goto launcher
 
-        [sdl]
+            :launcher
 
-          capture_mouse = onstart middlerelease
+            cls 
 
-        [autoexec]
-        
-          mount C "$GAMEDIR/HDD" -t dir
+            ECHO  -------------------------------------------  
+            
+            ECHO          Evidence - The Last Report  
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Play Game        
+            
+            ECHO   2) Setup      
 
-          imgmount D "$GAMEDIR/CDD/CD1.iso" -t cdrom
-          
-          C:
-
-          cls 
-
-          ECHO OFF
-
-          goto launcher
-
-          :launcher
-
-          cls 
-
-          ECHO  -------------------------------------------  
-          
-          ECHO          Evidence - The Last Report  
-          
-          ECHO  -------------------------------------------  
-          
-          ECHO   1) Play Game        
-          
-          ECHO   2) Setup                               
-          
-          ECHO  -------------------------------------------  
-                    
-          ECHO   3) Exit Program                             
-          
-          ECHO  -------------------------------------------  
+            ECHO   3) Install                         
+            
+            ECHO  -------------------------------------------  
+                      
+            ECHO   4) Exit Program                             
+            
+            ECHO  -------------------------------------------  
 
 
-          choice /c123 /s Which program do you want to run? [1-3]: /n 
-          
-          if errorlevel 3 goto exit
-          
-          if errorlevel 2 goto setup
-          
-          if errorlevel 1 goto game
+            choice /c1234 /s Which program do you want to run? [1-4]: /n 
+            
+            if errorlevel 4 goto exit
+
+            if errorlevel 3 goto install
+            
+            if errorlevel 2 goto setup
+            
+            if errorlevel 1 goto game
 
 
-          :game
+            :game
 
-          cls
+            cls
 
-          C:
+            C:
 
-          EVIDENCE.BAT
-          
-          goto exit
-
-
-          :setup
-
-          cls
-
-          c:
-          
-          install.exe
-
-          goto launcher
+            EVIDENCE.BAT
+            
+            goto exit
 
 
-          :exit
-          
-          exit'
+            :setup
+
+            cls
+
+            c:
+            
+            install.exe
+
+            goto launcher
+
+
+            :install
+            
+            D:
+
+            install.exe
+
+            goto launcher
+
+
+            :exit
+            
+            exit'
         file: $GAMEDIR/play.conf
