@@ -15,8 +15,9 @@ script:
     - DISC3:  N/A:Select DISC3 iso
     - DISC4:  N/A:Select DISC4 iso
     - DISC5:  N/A:Select DISC5 iso
-    - GUS: https://raw.githubusercontent.com/appoloin/WfW/master/GUS_external_files.zip
-
+    - GUS: 
+        url: https://drive.google.com/uc?export=download&id=1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6
+        filename: gus.zip
 
 
   installer:
@@ -26,23 +27,23 @@ script:
 
     - execute:
         args: $DISC1 $GAMEDIR/CDD/CD1.iso
-        file: /bin/cp 
+        file: cp 
     - execute:
         args: $DISC2 $GAMEDIR/CDD/CD2.iso
-        file: /bin/cp 
+        file: cp 
     - execute:
         args: $DISC3 $GAMEDIR/CDD/CD3.iso
-        file: /bin/cp 
+        file: cp 
     - execute:
         args: $DISC4 $GAMEDIR/CDD/CD4.iso
-        file: /bin/cp 
+        file: cp 
     - execute:
         args: $DISC5 $GAMEDIR/CDD/CD5.iso
-        file: /bin/cp 
+        file: cp 
 
     - extract:
-        dst: $GAMEDIR/HDD/ULTRASND
         file: $GUS
+        dst: $GAMEDIR/HDD/ULTRASND
 
 
     - write_file:
@@ -53,25 +54,28 @@ script:
           ultradir = C:\ULTRASND
 
         
-        [midi]
+          [midi]
 
-         mididevice = mt32
+          mididevice = mt32
         
-        [sdl]
+            [mouse]
 
-          capture_mouse=onclick middlerelease
+              capture_mouse = onstart middlerelease  
+
+              mouse_sensitivity= 15
+          
         
-        [autoexec]
+          [autoexec]
 
-          imgmount D -t iso -fs iso "$GAMEDIR/CDD/CD1.iso" "$GAMEDIR/CDD/CD2.iso" "$GAMEDIR/CDD/CD3.iso" "$GAMEDIR/CDD/CD4.iso" "$GAMEDIR/CDD/CD5.iso"   
+            imgmount D -t iso -fs iso "$GAMEDIR/CDD/CD1.iso" "$GAMEDIR/CDD/CD2.iso" "$GAMEDIR/CDD/CD3.iso" "$GAMEDIR/CDD/CD4.iso" "$GAMEDIR/CDD/CD5.iso"   
 
-          mount C "$GAMEDIR/HDD" -t dir
-          
-          d:
-          
-          install
-          
-          exit'
+            mount C "$GAMEDIR/HDD" -t dir
+            
+            d:
+            
+            install
+            
+            exit'
         file: $GAMEDIR/setup.conf
 
     - task:
@@ -87,83 +91,99 @@ script:
 
           ultradir = C:\ULTRASND
 
-        [midi]
+          [midi]
 
-         mididevice = mt32
+          mididevice = mt32
 
-        [sdl]
+          [mouse]
 
-            capture_mouse=onclick middlerelease
-          
-        [autoexec]
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
         
-          mount C "$GAMEDIR/HDD" -t dir
-
-          imgmount D -t iso -fs iso "$GAMEDIR/CDD/CD1.iso" "$GAMEDIR/CDD/CD2.iso" "$GAMEDIR/CDD/CD3.iso" "$GAMEDIR/CDD/CD4.iso" "$GAMEDIR/CDD/CD5.iso"   
-
-
-          C:
-
-          ECHO OFF 
-
-          cls
-
-          goto launcher
-
-          :launcher
- 
-          cls
-
-          ECHO  -------------------------------------------  
+            
+          [autoexec]
           
-          ECHO       Nemesis - The Wizardry Adventure
-          
-          ECHO  -------------------------------------------  
-          
-          ECHO   1) Play   
-          
-          ECHO   2) Setup                                
-          
-          ECHO  -------------------------------------------  
-          
-          ECHO   3) Exit                              
-          
-          ECHO  -------------------------------------------  
+            mount C "$GAMEDIR/HDD" -t dir
 
-          choice /c123 /s Which program do you want to run? [1-3]: /n 
-          
-          if errorlevel 3 goto exit
-                    
-          if errorlevel 2 goto setup
-          
-          if errorlevel 1 goto game
+            imgmount D -t iso -fs iso "$GAMEDIR/CDD/CD1.iso" "$GAMEDIR/CDD/CD2.iso" "$GAMEDIR/CDD/CD3.iso" "$GAMEDIR/CDD/CD4.iso" "$GAMEDIR/CDD/CD5.iso"   
 
 
-          :game
+            C:
 
-          cls
+            ECHO OFF 
 
-          c:
+            cls
 
-          cd NEMESIS
+            goto launcher
 
-          NEMESIS.BAT
+            :launcher
+  
+            cls
 
-          
-          goto exit
+            ECHO  -------------------------------------------  
+            
+            ECHO       Nemesis - The Wizardry Adventure
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Play   
+            
+            ECHO   2) Setup                                
+            
+            ECHO   3) Install                                
+
+            ECHO  -------------------------------------------  
+            
+            ECHO   4) Exit                              
+            
+            ECHO  -------------------------------------------  
+
+            choice /c1234 /s Which program do you want to run? [1-3]: /n 
+            
+            if errorlevel 4 goto exit
+                      
+            if errorlevel 3 goto install
+
+            if errorlevel 2 goto setup
+            
+            if errorlevel 1 goto game
 
 
-          :setup
+            :game
 
-          c:
+            cls
 
-          cd NEMESIS
+            c:
 
-          setsound
+            cd NEMESIS
 
-          goto launcher
+            NEMESIS.BAT
 
-          :exit
-          
-          exit'
+            
+            goto exit
+
+
+            :setup
+
+            c:
+
+            cd NEMESIS
+
+            setsound
+
+            goto launcher
+
+
+            :install
+
+            d:
+            
+            install
+
+            goto :launcher
+            
+            :exit
+            
+            exit'
         file: $GAMEDIR/play.conf
