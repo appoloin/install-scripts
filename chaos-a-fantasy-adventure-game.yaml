@@ -6,187 +6,193 @@ runner: dosbox
 
 
 script:
-    game:
-      main_file: $GAMEDIR/play.conf
+  game:
+    main_file: $GAMEDIR/play.conf
 
-    files:
-        - setup: N/A:Select Windows 3.11 Bottle
-        - DISC1: N/A:Select Disc 1 iso.
+  files:
+    - DISC1: N/A:Select Disc 1 iso.
+    - setup: 
+        url: https://drive.google.com/uc?export=download&id=12xs1EbZLNzgiICr6AJZboLHCCLYXyD4X
+        filename: win311.7z
 
-    installer:  
-        - extract:
-            dst: $GAMEDIR
-            file: $setup
+  installer:  
+    - execute:
+        file: 7z
+        args: x $setup -o"$GAMEDIR" -ppassword -y
 
-        - execute:
-            args: $DISC1 $GAMEDIR/CDD/CD1.iso
-            file: /bin/cp 
+    - execute:
+        args: $DISC1 $GAMEDIR/CDD/CD1.iso
+        file: cp 
 
-        - write_file:
-            content: '[midi]
+    - write_file:
+        content: '[midi]
 
-            mididevice = mt32
+          mididevice = mt32
 
-            [sblaster]
+          [sblaster]
 
-            irq=5
+          irq=5
 
-            [sdl]
-
-            capture_mouse = onstart middlerelease  
-            
-            [cpu]
-
-            cputype = pentium_slow
-            
-            [autoexec]
-
-            mount C "$GAMEDIR/HDD" -t dir
-
-            imgmount D "$GAMEDIR/CDD/CD1.iso" -t cdrom
-
-
-            SET PATH=%PATH%;C:\WINDOWS;C:\;
-
-            SET TEMP=C:\WINDOWS\TEMP
-
-            C:
-
-            win D:\install
-                
-            exit'
-            file: $GAMEDIR/setup.conf
-
-        - task:
-            config_file: $GAMEDIR/setup.conf
-            name: dosexec
-            working_dir: $GAMEDIR/HDD
-
-        - write_file:
-            content: '[midi]
-
-            mididevice = mt32
-
-            [sblaster]
-
-            irq=5
-
-            [sdl]
+          [mouse]
 
             capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
+          
+          [cpu]
+
+          cputype = pentium_slow
+          
+          [autoexec]
+
+          mount C "$GAMEDIR/HDD" -t dir
+
+          imgmount D "$GAMEDIR/CDD/CD1.iso" -t cdrom
+
+
+          SET PATH=%PATH%;C:\WINDOWS;C:\;
+
+          SET TEMP=C:\WINDOWS\TEMP
+
+          C:
+
+          win D:\install
+              
+          exit'
+        file: $GAMEDIR/setup.conf
+
+    - task:
+        config_file: $GAMEDIR/setup.conf
+        name: dosexec
+        working_dir: $GAMEDIR/HDD
+
+    - write_file:
+        content: '[midi]
+
+          mididevice = mt32
+
+          [sblaster]
+
+          irq=5
+
+          [mouse]
+
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
             
-            [cpu]
+          [cpu]
 
-            cputype = pentium_slow
-            
-            [autoexec]
+          cputype = pentium_slow
+          
+          [autoexec]
 
-            mount C "$GAMEDIR/HDD" -t dir
+          mount C "$GAMEDIR/HDD" -t dir
 
-            imgmount D "$GAMEDIR/CDD/CD1.iso" -t iso
+          imgmount D "$GAMEDIR/CDD/CD1.iso" -t iso
 
-            SET PATH=%PATH%;C:\WINDOWS;C:\;
+          SET PATH=%PATH%;C:\WINDOWS;C:\;
 
-            SET TEMP=C:\WINDOWS\TEMP
-            
-            c:
+          SET TEMP=C:\WINDOWS\TEMP
+          
+          c:
 
-            ECHO OFF
+          ECHO OFF
 
-            goto launcher
+          goto launcher
 
-            :launcher
+          :launcher
 
-            cls 
+          cls 
 
-            ECHO  -------------------------------------------  
-            
-            ECHO       Chaos: A Fantasy Adventure Game   
-            
-            ECHO  -------------------------------------------  
-            
-            ECHO   1) Play    
-            
-            ECHO   2) Setup                                
-            
-            ECHO  -------------------------------------------  
-            
-            ECHO   3) Exit                              
-            
-            ECHO  -------------------------------------------  
+          ECHO  -------------------------------------------  
+          
+          ECHO       Chaos: A Fantasy Adventure Game   
+          
+          ECHO  -------------------------------------------  
+          
+          ECHO   1) Play    
+          
+          ECHO   2) Setup                                
+          
+          ECHO  -------------------------------------------  
+          
+          ECHO   3) Exit                              
+          
+          ECHO  -------------------------------------------  
 
-            choice /c123 /s Which program do you want to run? [1-3]: /n 
-            
-            if errorlevel 3 goto exit
-                        
-            if errorlevel 2 goto setup
-            
-            if errorlevel 1 goto game
-
-
-            :game
-
-            cls
-
-            win runexit C:\chaos\chaos            
-            
-            goto launcher
+          choice /c123 /s Which program do you want to run? [1-3]: /n 
+          
+          if errorlevel 3 goto exit
+                      
+          if errorlevel 2 goto setup
+          
+          if errorlevel 1 goto game
 
 
-            :setup
+          :game
 
-            cls
+          cls
 
-            ECHO  -------------------------------------------  
-
-            ECHO                   SETUP
-
-            ECHO  -------------------------------------------  
-
-            ECHO   1) Install Game    
-
-            ECHO   2) System
-
-            ECHO  -------------------------------------------  
-
-            ECHO   3) Main Menu                                
-
-            ECHO  -------------------------------------------  
-
-            choice /c123 /s Which program do you want to run? [1-3]: /n 
+          win runexit C:\chaos\chaos            
+          
+          goto launcher
 
 
-            if errorlevel 3 goto launcher
+          :setup
 
-            if errorlevel 2 goto system
+          cls
 
-            if errorlevel 1 goto GameInstall
+          ECHO  -------------------------------------------  
 
+          ECHO                   SETUP
 
+          ECHO  -------------------------------------------  
 
-            :GameInstall
+          ECHO   1) Install Game    
 
-            cls
+          ECHO   2) System
 
-            C:
+          ECHO  -------------------------------------------  
 
-            win D:\install
+          ECHO   3) Main Menu                                
 
-            goto setup
+          ECHO  -------------------------------------------  
 
-
-            :system
-
-            CLS 
-
-            C:
-
-            call System.bat
-
-            goto setup
+          choice /c123 /s Which program do you want to run? [1-3]: /n 
 
 
-            :exit
-            
-            exit'
-            file: $GAMEDIR/play.conf
+          if errorlevel 3 goto launcher
+
+          if errorlevel 2 goto system
+
+          if errorlevel 1 goto GameInstall
+
+
+
+          :GameInstall
+
+          cls
+
+          C:
+
+          win D:\install
+
+          goto setup
+
+
+          :system
+
+          CLS 
+
+          C:
+
+          call System.bat
+
+          goto setup
+
+
+          :exit
+          
+          exit'
+        file: $GAMEDIR/play.conf
