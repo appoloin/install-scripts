@@ -1,5 +1,5 @@
-name: Discworld 2
-game_slug: discworld2
+name: Discworld II Missing Presumed
+game_slug: discworld-ii-missing-presumed
 version: Installer
 slug:  discworld2-installer
 runner: scummvm
@@ -7,21 +7,98 @@ runner: scummvm
 
 script:
   game:
-    game_id: tinsel
+    game_id: dw2-us
     path: $GAMEDIR
   
   installer:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
-        
-        find "$src" -type f \( -name "*.BMV" -o -name "*.CDP" -o -name "*.MUS" -o -name "*.SCN" -o -name "GDATA" -o -name "HOPPER" -o -name "INDEX" -o -name "SAMPLE.BNK" \) -exec cp {} "$dst" \;'
+          dst=$2
+          
+          find "$src" -type f \( -iname "*.BMV" -o 
+                                 -iname "*.CDP" -o 
+                                 -iname "*.MUS" -o 
+                                 -iname "*.SCN" -o 
+                                 -iname "GDATA" -o 
+                                 -iname "HOPPER" -o 
+                                 -iname "INDEX" -o 
+                                 -iname "SAMPLE.BNK" \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
-
     - chmodx: $CACHE/selectcopy.sh
+
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$1
+
+          dst=$2
+
+          find "$src" -type f \( -iname "ENGLISH.SMP" \)  -exec cp {} "$dst/ENGLISH1.SMP" \;
+          
+          find "$src" -type f \( -iname "ENGLISH.TXT" \)  -exec cp {} "$dst/ENGLISH1.TXT" \;
+
+          find "$src" -type f \( -iname "ENGLISH.UDX" \)  -exec cp {} "$dst/ENGLISH1.IDX" \;
+
+          find "$src" -type f \( -iname "US.SMP" \)  -exec cp {} "$dst/US1.SMP" \;
+
+          find "$src" -type f \( -iname "US.TXT" \)  -exec cp {} "$dst/US1.TXT" \;
+
+          find "$src" -type f \( -iname "US.IDX" \)  -exec cp {} "$dst/US1.IDX" \;
+      
+          find "$src" -type f \( -iname "FRENCH.SMP" \)  -exec cp {} "$dst/FRENCH1.SMP" \;
+
+          find "$src" -type f \( -iname "FRENCH.TXT" \)  -exec cp {} "$dst/FRENCH1.TXT" \;
+
+          find "$src" -type f \( -iname "FRENCH.IDX" \)  -exec cp {} "$dst/FRENCH1.IDX" \;
+
+          find "$src" -type f \( -iname "GERMAN.SMP" \)  -exec cp {} "$dst/GERMAN1.SMP" \;
+
+          find "$src" -type f \( -iname "GERMAN.TXT" \)  -exec cp {} "$dst/GERMAN1.TXT" \;
+
+          find "$src" -type f \( -iname "GERMAN.IDX" \)  -exec cp {} "$dst/GERMAN1.IDX" \;
+
+          '
+        file: $CACHE/findrename.sh
+    - chmodx: $CACHE/findrename.sh
+
+
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$1
+
+          dst=$2
+
+          find "$src" -type f \( -iname "ENGLISH.SMP" \)  -exec cp {} "$dst/ENGLISH2.SMP" \;
+          
+          find "$src" -type f \( -iname "ENGLISH.TXT" \)  -exec cp {} "$dst/ENGLISH2.TXT" \;
+
+          find "$src" -type f \( -iname "ENGLISH.UDX" \)  -exec cp {} "$dst/ENGLISH2.IDX" \;
+
+          find "$src" -type f \( -iname "US.SMP" \)  -exec cp {} "$dst/US2.SMP" \;
+
+          find "$src" -type f \( -iname "US.TXT" \)  -exec cp {} "$dst/US2.TXT" \;
+
+          find "$src" -type f \( -iname "US.IDX" \)  -exec cp {} "$dst/US2.IDX" \;
+      
+          find "$src" -type f \( -iname "FRENCH.SMP" \)  -exec cp {} "$dst/FRENCH2.SMP" \;
+
+          find "$src" -type f \( -iname "FRENCH.TXT" \)  -exec cp {} "$dst/FRENCH2.TXT" \;
+
+          find "$src" -type f \( -iname "FRENCH.IDX" \) -exec cp {} "$dst/FRENCH2.IDX" \;
+
+          find "$src" -type f \( -iname "GERMAN.SMP" \) -exec cp {} "$dst/GERMAN2.SMP" \;
+
+          find "$src" -type f \( -iname "GERMAN.TXT" \) -exec cp {} "$dst/GERMAN2.TXT" \;
+
+          find "$src" -type f \( -iname "GERMAN.IDX" \) -exec cp {} "$dst/GERMAN2.IDX" \;
+
+          '
+        file: $CACHE/findrename2.sh
+    - chmodx: $CACHE/findrename2.sh
 
     - insert-disc:
         description: Please insert disc 1
@@ -31,45 +108,9 @@ script:
         args: $DISC $GAMEDIR
         file: $CACHE/selectcopy.sh
 
-
     - execute:
-        args:  $DISC/DW2/ENGLISH.SMP $GAMEDIR/ENGLISH1.SMP
-        file: /bin/cp         
-    - execute:
-        args:  $DISC/DW2/US.SMP $GAMEDIR/US1.SMP
-        file: /bin/cp 
-    - execute:
-        args:  $DISC/DW2/FRENCH.SMP $GAMEDIR/FRENCH1.SMP
-        file: /bin/cp 
-    - execute:
-        args:  $DISC/DW2/GERMAN.SMP $GAMEDIR/GERMAN1.SMP
-        file: /bin/cp 
-    - execute:
-        args:  $DISC/DW2/ENGLISH.TXT $GAMEDIR/ENGLISH1.TXT
-        file: /bin/cp         
-    - execute:
-        args:  $DISC/DW2/US.TXT $GAMEDIR/US1.TXT
-        file: /bin/cp 
-    - execute:
-        args:  $DISC/DW2/FRENCH.TXT $GAMEDIR/FRENCH1.TXT
-        file: /bin/cp 
-    - execute:
-        args:  $DISC/DW2/GERMAN.TXT $GAMEDIR/GERMAN1.TXT
-        file: /bin/cp 
-    - execute:
-        args:  $DISC/DW2/ENGLISH.IDX $GAMEDIR/ENGLISH1.IDX
-        file: /bin/cp         
-    - execute:
-        args:  $DISC/DW2/US.IDX $GAMEDIR/US1.IDX
-        file: /bin/cp 
-    - execute:
-        args:  $DISC/DW2/FRENCH.IDX $GAMEDIR/FRENCH1.IDX
-        file: /bin/cp 
-    - execute:
-        args:  $DISC/DW2/GERMAN.IDX $GAMEDIR/GERMAN1.IDX
-        file: /bin/cp 
-
-
+        args: $DISC $GAMEDIR
+        file: $CACHE/findrename.sh
 
     - insert-disc:
         description: Please insert disc 2
@@ -79,40 +120,12 @@ script:
         args: $DISC $GAMEDIR
         file: $CACHE/selectcopy.sh
 
+    - execute:
+        args: $DISC $GAMEDIR
+        file: $CACHE/findrename2.sh
 
     - execute:
-        args:  $DISC/DW2/ENGLISH.SMP $GAMEDIR/ENGLISH2.SMP
-        file: /bin/cp         
-    - execute:
-        args:  $DISC/DW2/US.SMP $GAMEDIR/US2.SMP
-        file: /bin/cp 
-    - execute:
-        args:  $DISC/DW2/FRENCH.SMP $GAMEDIR/FRENCH2.SMP
-        file: /bin/cp 
-    - execute: 
-        args:  $DISC/DW2/GERMAN.SMP $GAMEDIR/GERMAN2.SMP
-        file: /bin/cp 
-    - execute:
-        args:  $DISC/DW2/ENGLISH.TXT $GAMEDIR/ENGLISH2.TXT
-        file: /bin/cp         
-    - execute:
-        args:  $DISC/DW2/US.TXT $GAMEDIR/US2.TXT
-        file: /bin/cp 
-    - execute:
-        args:  $DISC/DW2/FRENCH.TXT $GAMEDIR/FRENCH2.TXT
-        file: /bin/cp 
-    - execute:
-        args:  $DISC/DW2/GERMAN.TXT $GAMEDIR/GERMAN2.TXT
-        file: /bin/cp 
-    - execute:
-        args:  $DISC/DW2/ENGLISH.IDX $GAMEDIR/ENGLISH2.IDX
-        file: /bin/cp         
-    - execute:
-        args:  $DISC/DW2/US.IDX $GAMEDIR/US2.IDX
-        file: /bin/cp 
-    - execute:
-        args:  $DISC/DW2/FRENCH.IDX $GAMEDIR/FRENCH2.IDX
-        file: /bin/cp 
-    - execute:
-        args:  $DISC/DW2/GERMAN.IDX $GAMEDIR/GERMAN2.IDX
-        file: /bin/cp 
+        args: -R 775  "$GAMEDIR"
+        file: chmod
+
+
