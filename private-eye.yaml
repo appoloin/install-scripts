@@ -17,30 +17,30 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
+          dst=$2
 
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        find "$src_path" -maxdepth 1 -type d \( -iname "GLOBAL" -o 
-                                    -iname "INFACE" -o 
-                                    -iname "INTRO" -o
-                                    -iname "BO" -o 
-                                    -iname "CS" -o
-                                    -iname "CW" -o
-                                    -iname "DA" -o
-                                    -iname "DC" -o
-                                    -iname "DL" -o
-                                    -iname "GZ" -o
-                                    -iname "IS" -o
-                                    -iname "MO" -o
-                                    -iname "MW" -o
-                                    -iname "PO" -o
-                                    -iname "SG" -o
-                                    -iname "TS" -o
-                                    -iname "VN" -o
-                                    -iname "SUPPORT" \) -exec cp -r {} "$dst" \;'
+          find "$src_path" -maxdepth 1 -type d \( -iname "GLOBAL" -o 
+                                      -iname "INFACE" -o 
+                                      -iname "INTRO" -o
+                                      -iname "BO" -o 
+                                      -iname "CS" -o
+                                      -iname "CW" -o
+                                      -iname "DA" -o
+                                      -iname "DC" -o
+                                      -iname "DL" -o
+                                      -iname "GZ" -o
+                                      -iname "IS" -o
+                                      -iname "MO" -o
+                                      -iname "MW" -o
+                                      -iname "PO" -o
+                                      -iname "SG" -o
+                                      -iname "TS" -o
+                                      -iname "VN" -o
+                                      -iname "SUPPORT" \) -exec cp -r {} "$dst" \;'
         file: $CACHE/selectcopy.sh
     - chmodx: $CACHE/selectcopy.sh
 
@@ -54,12 +54,12 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
-                                            
-        find "$src" -type f \( -iname "BPMC_WEB.z" -o
-                               -iname "SUPPORT.z" -o
-                               -iname "WIN32S.Z" -o
-                               -iname "WING.Z" \) -exec rm {} \;'
+          src=$1
+                                              
+          find "$src" -type f \( -iname "BPMC_WEB.z" -o
+                                -iname "SUPPORT.z" -o
+                                -iname "WIN32S.Z" -o
+                                -iname "WING.Z" \) -exec rm {} \;'
         file: $CACHE/remove.sh
     - chmodx: $CACHE/remove.sh
 
