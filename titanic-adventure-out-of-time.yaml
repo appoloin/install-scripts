@@ -6,6 +6,7 @@ runner: dosbox
 
 script:
   files:
+    - discs: N/A:Select first cue file .
     - setup: 
         url: https://drive.google.com/uc?export=download&id=12xs1EbZLNzgiICr6AJZboLHCCLYXyD4X
         filename: win311.7z
@@ -23,34 +24,19 @@ script:
 
           dst=$2
           
-          cp -avr "$src/."  "$dst"'
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+          cp -avr "$src_path/."  "$dst"'
         file: $CACHE/bulkcopy.sh
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
         file: 7z
         args: x $setup -o"$GAMEDIR" -ppassword -y
-
-    - execute:
-        args: $GAMEDIR/CDD/TITANIC1 $GAMEDIR/CDD/TITANIC2
-        file: mkdir
-
-
-    - insert-disc:
-        description: Please insert disc 1
-        requires: BLKJACK
     
     - execute:
-        args: $DISC $GAMEDIR/CDD/TITANIC1
         file: $CACHE/bulkcopy.sh
-
-    - insert-disc:
-        description: Please insert disc 2
-        requires: BLKJACK
-
-    - execute:
-        args: $DISC $GAMEDIR/CDD/TITANIC2
-        file: $CACHE/bulkcopy.sh
+        args: $discs "$GAMEDIR/CDD"
 
     - write_file:
         content: '[sblaster]
@@ -71,9 +57,9 @@ script:
 
             mount C "$GAMEDIR/HDD" -t dir
 
-            mount D "$GAMEDIR/CDD/TITANIC1" -t cdrom
+            imgmount D -t iso -fs iso "$GAMEDIR/CDD/Titanic1.cue"
 
-            mount E "$GAMEDIR/CDD/TITANIC2" -t cdrom
+            imgmount E -t iso -fs iso "$GAMEDIR/CDD/Titanic2.cue"
 
             SET PATH=%PATH%;C:\WINDOWS;
 
