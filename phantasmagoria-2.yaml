@@ -22,13 +22,13 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
-        
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src_path/."  "$dst"'
         file: $CACHE/bulkcopy.sh
     - chmodx: $CACHE/bulkcopy.sh
         
@@ -38,15 +38,15 @@ script:
 
     - execute:
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
+        file: chmod
 
     - execute:
         args: $GAMEDIR/RESOURCE.AUD  $GAMEDIR/RESAUD.001
-        file: /bin/mv
+        file: mv
 
     - execute:
         args: $GAMEDIR/RESOURCE.SFX  $GAMEDIR/RESSFX.001
-        file: /bin/mv
+        file: mv
 
     - execute:
         args: $DISC2 $GAMEDIR
@@ -54,15 +54,15 @@ script:
 
     - execute:
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
+        file: chmod
 
     - execute:
         args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.002
-        file: /bin/mv
+        file: mv
 
     - execute:
         args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.002
-        file: /bin/mv
+        file: mv
 
     - execute:
         args: $DISC3 $GAMEDIR
@@ -70,15 +70,15 @@ script:
 
     - execute:
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
+        file: chmod
 
     - execute:
         args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.003
-        file: /bin/mv
+        file: mv
 
     - execute:
         args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.003
-        file: /bin/mv
+        file: mv
 
     - execute:
         args: $DISC4 $GAMEDIR
@@ -86,15 +86,15 @@ script:
 
     - execute:
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
+        file: chmod
 
     - execute:
         args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.004
-        file: /bin/mv
+        file: mv
 
     - execute:
         args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.004
-        file: /bin/mv
+        file: mv
 
     - execute:
         args: $DISC5 $GAMEDIR
@@ -102,12 +102,12 @@ script:
 
     - execute:
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
+        file: chmod
 
     - execute:
         args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.005
-        file: /bin/mv
+        file: mv
 
     - execute:
         args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.005
-        file: /bin/mv
+        file: mv
