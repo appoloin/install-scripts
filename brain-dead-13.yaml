@@ -11,26 +11,32 @@ script:
 
   files:
     - game:  N/A:Select file CUE file
-    - GUS: https://raw.githubusercontent.com/appoloin/WfW/master/GUS_external_files.zip
+    - GUS: 
+        url: https://drive.google.com/uc?export=download&id=1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6
+        filename: gus.zip
 
 
   installer:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
-        
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src_path/."  "$dst"'
         file: $CACHE/bulkcopy.sh
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
         args: $GAMEDIR/HDD  $GAMEDIR/CDD
         file: mkdir
+
+    - extract:
+        dst: $GAMEDIR/HDD/ULTRASND
+        file: $GUS
 
     - execute:
         args: $game "$GAMEDIR/CDD"
@@ -39,43 +45,45 @@ script:
     - write_file:
         content: '[gus]
 
-          gus      = true
+            gus      = true
 
-          ultradir = C:\ULTRASND
+            ultradir = C:\ULTRASND
 
-          gusbase  = 220
+            gusbase  = 220
+            
+            gusirq   = 11
+
+            gusdma   = 1
+            
+          [midi]
+
+            mididevice = mt32
+
+          [sblaster]
+
+            irq=5
+
+          [mouse]
+
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
           
-          gusirq   = 11
+          [cpu]
 
-          gusdma   = 1
+            cputype = pentium_slow
           
-        [midi]
+          [autoexec]
 
-          mididevice = mt32
+            mount C "$GAMEDIR/HDD" -t dir
 
-        [sblaster]
+            imgmount D -t iso -fs iso "$GAMEDIR/CDD/Brain_Dead_13.cue"
 
-          irq=5
+            D:
 
-        [sdl]
+            install.bat
 
-          capture_mouse = onstart middlerelease  
-        
-        [cpu]
-
-          cputype = pentium_slow
-        
-        [autoexec]
-
-          mount C "$GAMEDIR/HDD" -t dir
-
-          imgmount D -t iso -fs iso "$GAMEDIR/CDD/Brain_Dead_13.cue"
-
-          D:
-
-          install.exe
-
-          exit'
+            exit'
         file: $GAMEDIR/setup.conf
 
     - task:
@@ -88,91 +96,109 @@ script:
     - write_file:
         content: '[gus]
 
-          gus      = true
+            gus      = true
 
-          ultradir = C:\ULTRASND
+            ultradir = C:\ULTRASND
 
-          gusbase  = 220
+            gusbase  = 220
+            
+            gusirq   = 11
+
+            gusdma   = 1
+
+          [midi]
+
+            mididevice = mt32
+
+          [mouse]
+
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
           
-          gusirq   = 11
-
-          gusdma   = 1
-
-        [midi]
-
-          mididevice = mt32
-
-          [sdl]
-
-            capture_mouse=onclick middlerelease
+          [autoexec]
           
-        [autoexec]
-        
-          mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/HDD" -t dir
 
-          imgmount D -t iso -fs iso "$GAMEDIR/CDD/Brain_Dead_13.cue"
+            imgmount D -t iso -fs iso "$GAMEDIR/CDD/Brain_Dead_13.cue"
 
-          C:
+            C:
 
-          cls 
+            cls 
 
-          ECHO OFF
+            ECHO OFF
 
-          goto launcher
+            goto launcher
 
-          :launcher
+            :launcher
 
-          cls 
+            cls 
 
-          ECHO  -------------------------------------------  
-          
-          ECHO                 Brain Dead  13  
-          
-          ECHO  -------------------------------------------  
-          
-          ECHO   1) Play Game        
-          
-          ECHO   2) Setup                               
-          
-          ECHO  -------------------------------------------  
-                    
-          ECHO   3) Exit Program                             
-          
-          ECHO  -------------------------------------------  
+            ECHO  -------------------------------------------  
+            
+            ECHO                 Brain Dead  13  
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Play Game        
+            
+            ECHO   2) Setup                               
+            
+            ECHO   3) Install
 
-
-          choice /c123 /s Which program do you want to run? [1-3]: /n 
-          
-          if errorlevel 3 goto exit
-          
-          if errorlevel 2 goto setup
-          
-          if errorlevel 1 goto game
+            ECHO  -------------------------------------------  
+                      
+            ECHO   4) Exit Program                             
+            
+            ECHO  -------------------------------------------  
 
 
-          :game
+            choice /c1234 /s Which program do you want to run? [1-4]: /n 
+            
+            if errorlevel 4 goto exit
+            
+            if errorlevel 3 goto install
 
-          cls
-
-          D:
-
-          BD13.exe
-          
-          goto exit
-
-
-          :setup
-
-          cls
-
-          D:
-          
-          setup.exe
-
-          goto launcher
+            if errorlevel 2 goto setup
+            
+            if errorlevel 1 goto game
 
 
-          :exit
-          
-          exit'
+            :game
+
+            cls
+
+            D:
+
+            BD13.exe
+            
+            goto exit
+
+
+            :setup
+
+            cls
+
+            D:
+            
+            setup.exe
+
+            goto launcher
+
+
+            :install
+
+            cls
+
+            D:
+            
+            install.bat
+
+            goto launcher
+
+
+
+            :exit
+            
+            exit'
         file: $GAMEDIR/play.conf
