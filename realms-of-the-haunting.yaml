@@ -6,46 +6,47 @@ runner: dosbox
 
 
 script:
-    files:
-        - game: N/A:Select GOG installer.
-        - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
+  files:
+    - game: N/A:Select GOG installer.
 
-    game:
-        main_file: $GAMEDIR/haunting.conf
+  game:
+    main_file: $GAMEDIR/haunting.conf
 
-    installer:
-        - write_file:
-            content: '#!/bin/bash
+  installer:
+    - write_file:
+        content: '#!/bin/bash
 
-            src=$1
-            
-            find "$src" -maxdepth 1 -type d \( -iname scummvm -o
-                                               -iname save -o
-                                               -iname dosbox \) -exec rm -r {}  \;
-                                            
-            find "$src" -maxdepth 1 -type f \( -iname "*.dll" -o
-                                               -iname "*.ico" -o
-                                               -iname "*.ini" -o
-                                               -iname "gog*" \) -exec rm {}  \;'
-            file: $CACHE/remove.sh
-        - chmodx: $CACHE/remove.sh   
+          src=$1
+          
+          find "$src" -maxdepth 1 -type d \( -iname scummvm -o
+                                              -iname save -o
+                                              -iname dosbox \) -exec rm -r {}  \;
+                                              
+          find "$src" -maxdepth 1 -type f \( -iname "*.dll" -o
+                                            -iname "*.ico" -o
+                                            -iname "*.ini" -o
+                                            -iname "gog*" \) -exec rm {}  \;
+          '
+        file: $CACHE/remove.sh
+    - chmodx: $CACHE/remove.sh
 
-        - extract:
-            dst: $CACHE
-            file: $inno
-            
-        - execute:
-            args: -I "app" -d "$GAMEDIR" "$game"
-            file: $CACHE/innoextract
+    - extract:
+        format: gog
+        file: $game
+        args: --gog --include app" 
+        dst: $GAMEDIR
+        description: Extracting game files
+         
+    - write_file:
+        content: '[mouse]
 
-        - write_file:
-            content: '[sdl]
+            capture_mouse = onstart middlerelease  
 
-            capture_mouse=onclick middlerelease
+            mouse_sensitivity= 15
 
             [autoexec]
 
-            mount C "$GAMEDIR/app" -t dir
+            mount C "$GAMEDIR" -t dir
 
             ECHO OFF
 
@@ -109,8 +110,8 @@ script:
             :exit
 
             exit'
-            file: $GAMEDIR/haunting.conf
+        file: $GAMEDIR/haunting.conf
 
-        - execute:
-            args: $GAMEDIR
-            file: $CACHE/remove.sh
+    - execute:
+        args: $GAMEDIR
+        file: $CACHE/remove.sh
