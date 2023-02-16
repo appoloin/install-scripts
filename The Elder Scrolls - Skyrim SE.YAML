@@ -130,7 +130,7 @@ script:
 
     - task:
         executable: $GAMEDIR/drive_c/Games/Wrye Bash 310 - Installer-1840-310-1658670684.exe
-        description: Installing Wyre Bash
+        description: Installing Wyre Bash NB Install mods as project not archive
         name: wineexec
         prefix: $GAMEDIR
 
