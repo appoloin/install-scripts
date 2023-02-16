@@ -1,0 +1,234 @@
+name: Tex Murphy The Pandora Directive
+game_slug: tex-murphy-the-pandora-directive
+version: Installer
+slug:  Pandora-installer
+runner: dosbox
+
+
+script:
+  game:
+    main_file: $GAMEDIR/pandora.conf
+
+  installer:  
+    - write_file:
+        content: '#!/bin/bash
+
+            src=$1
+
+            dst=$2
+        
+            cp -avr "$src/."  "$dst"'
+        file: $CACHE/bulkcopy-alt.sh
+
+    - chmodx: $CACHE/bulkcopy-alt.sh
+  
+    - execute:
+        args: $GAMEDIR/HDD $GAMEDIR/CDD $GAMEDIR/CDD/DISC1 $GAMEDIR/CDD/DISC2 $GAMEDIR/CDD/DISC3 $GAMEDIR/CDD/DISC4 $GAMEDIR/CDD/DISC5 $GAMEDIR/CDD/DISC6
+        file: mkdir
+
+    - insert-disc:
+        description: Please insert disc 1
+        requires: data01
+
+    - execute:
+        args: $DISC "$GAMEDIR/CDD/DISC1"
+        file: $CACHE/bulkcopy-alt.sh
+
+    - execute:
+        args: -R 775  "$GAMEDIR/CDD/DISC1"
+        file: chmod
+
+    - insert-disc:
+        description: Please insert disc 2
+        requires: data01
+
+    - execute:
+        args: $DISC "$GAMEDIR/CDD/DISC2"
+        file: $CACHE/bulkcopy-alt.sh
+
+    - execute:
+        args: -R 775  "$GAMEDIR/CDD/DISC2"
+        file: chmod
+
+    - insert-disc:
+        description: Please insert disc 3
+        requires: data01
+
+    - execute:
+        args: $DISC "$GAMEDIR/CDD/DISC3"
+        file: $CACHE/bulkcopy-alt.sh
+
+    - execute:
+        args: -R 775  "$GAMEDIR/CDD/DISC3"
+        file: chmod
+
+    - insert-disc:
+        description: Please insert disc 4
+        requires: data01
+
+    - execute:
+        args: $DISC "$GAMEDIR/CDD/DISC4"
+        file: $CACHE/bulkcopy-alt.sh
+
+    - execute:
+        args: -R 775  "$GAMEDIR/CDD/DISC4"
+        file: chmod
+
+
+    - insert-disc:
+        description: Please insert disc 5
+        requires: data01
+
+    - execute:
+        args: $DISC "$GAMEDIR/CDD/DISC5"
+        file: $CACHE/bulkcopy-alt.sh
+
+    - execute:
+        args: -R 775  "$GAMEDIR/CDD/DISC5"
+        file: chmod
+
+    - insert-disc:
+        description: Please insert disc 6
+        requires: data01
+
+    - execute:
+        args: $DISC "$GAMEDIR/CDD/DISC6"
+        file: $CACHE/bulkcopy-alt.sh
+
+    - execute:
+        args: -R 775  "$GAMEDIR/CDD/DISC6"
+        file: chmod
+
+
+    - write_file:
+        content: '[mouse]
+
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
+
+          [autoexec]
+          
+            mount C "$GAMEDIR/HDD" -t dir
+
+            mount D "$GAMEDIR/CDD/DISC1" -label PANDORA1 -t cdrom
+
+            mount E "$GAMEDIR/CDD/DISC2" -label PANDORA2 -t cdrom
+
+            mount F "$GAMEDIR/CDD/DISC3" -label PANDORA3 -t cdrom
+
+            mount G "$GAMEDIR/CDD/DISC4" -label PANDORA4 -t cdrom
+
+            mount H "$GAMEDIR/CDD/DISC5" -label PANDORA5 -t cdrom
+
+            mount I "$GAMEDIR/CDD/DISC6" -label PANDORA5 -t cdrom
+
+            D:
+
+            install
+          
+            exit'
+        file: $GAMEDIR/pandora_setup.conf
+    - task:
+        config_file: $GAMEDIR/pandora_setup.conf
+        name: dosexec
+        working_dir: $GAMEDIR/HDD/
+    
+    - write_file:
+        content: '[mouse]
+
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
+
+          [sdl]
+
+           fullresolution=desktop
+
+            windowresolution=original
+
+            output=opengl
+
+          [render]
+
+            aspect=true
+
+            scaler=normal2x
+      
+          [autoexec]
+          
+            mount C "$GAMEDIR/HDD" -t dir
+
+            mount D "$GAMEDIR/CDD/DISC1"  -label PANDORA1 -t cdrom
+
+            mount E "$GAMEDIR/CDD/DISC2"  -label PANDORA2 -t cdrom
+
+            mount F "$GAMEDIR/CDD/DISC3"  -label PANDORA3 -t cdrom
+
+            mount G "$GAMEDIR/CDD/DISC4"  -label PANDORA4 -t cdrom
+
+            mount H "$GAMEDIR/CDD/DISC5"  -label PANDORA5 -t cdrom
+
+            mount I "$GAMEDIR/CDD/DISC6"  -label PANDORA6 -t cdrom
+
+            ECHO OFF
+
+            goto launcher
+
+            :launcher
+
+            cls 
+
+            ECHO  -------------------------------------------  
+            
+            ECHO      Tex Murphy - The Pandora Directive
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Play        
+            
+            ECHO   2) Setup                                
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   3) Exit                              
+            
+            ECHO  -------------------------------------------  
+
+            choice /c123 /s Which program do you want to run? [1-3]: /n 
+            
+            if errorlevel 3 goto exit
+                      
+            if errorlevel 2 goto setup
+            
+            if errorlevel 1 goto game
+
+
+            :game
+
+            cls
+
+            C:
+
+            cd pandora
+
+            pandora
+          
+            goto launcher
+
+
+            :setup
+
+            cls
+
+            D:
+
+            install
+
+            goto launcher
+
+
+            :exit
+            
+            exit'
+        file: $GAMEDIR/pandora.conf
