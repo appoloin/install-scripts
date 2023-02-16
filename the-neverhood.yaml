@@ -17,13 +17,13 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
+          dst=$2
 
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        find "$src_path" -type f \( -iname "*.BLB" \) -exec cp {} "$dst" \;'
+          find "$src_path" -type f \( -iname "*.BLB" \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
 
     - chmodx: $CACHE/selectcopy.sh
