@@ -1,5 +1,5 @@
 name: Mission Critical
-game_slug: Mission-Critical
+game_slug: mission-critical
 version: Installer
 slug:  Mission-Critical-installer
 runner: dosbox
@@ -13,13 +13,12 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+            src=$1
 
-        dst=$2
-        
-        cp -avr "$src/."  "$dst"'
+            dst=$2
+            
+            cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy.sh
-
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
