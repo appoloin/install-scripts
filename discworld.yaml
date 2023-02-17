@@ -7,7 +7,7 @@ runner: scummvm
 
 script:
   game:
-    game_id: tinsel
+    game_id: dw-cd
     path: $GAMEDIR
   
   installer:
