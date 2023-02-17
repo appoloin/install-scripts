@@ -1,5 +1,5 @@
 name: Simon the Sorcerer 2
-game_slug: simon_the_sorcerer_2
+game_slug: simon-the-sorcerer-ii
 version: Installer 
 slug:  simon_the_sorcerer_2-installer
 runner: scummvm
