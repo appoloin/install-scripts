@@ -19,15 +19,14 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+            src=$1
 
-        dst=$2
-        
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+            dst=$2
+            
+            src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        cp -avr "$src_path/."  "$dst"'
+            cp -avr "$src_path/."  "$dst"'
         file: $CACHE/bulkcopy.sh
-
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
@@ -37,49 +36,52 @@ script:
     - write_file:
         content: '[midi]
 
-         mididevice = mt32
+          mididevice = mt32
         
-        [cpu]
+          [cpu]
 
-          core=auto
+            core=auto
 
-          cputype=auto
+            cputype=auto
 
-          cycles=6000
+            cycles=6000
 
-          cycleup=1000
+            cycleup=1000
 
-          cycledown=1000
+            cycledown=1000
 
-         
-        [sdl]
+          [mouse]
 
-          capture_mouse=onclick middlerelease
+            capture_mouse = onstart middlerelease  
 
-          fullresolution=desktop
+            mouse_sensitivity= 15
+       
+          [sdl]
 
-          windowresolution=original
+            fullresolution=desktop
 
-          fullscreen=true
+            windowresolution=original
 
-          output=opengl
+            fullscreen=true
+
+            output=opengl
 
 
-        [render]
+          [render]
 
-          aspect=true
+            aspect=true
 
-          scaler=normal2x
+            scaler=normal2x
 
-        [autoexec]
+          [autoexec]
 
-          mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/HDD" -t dir
 
-          C:
+            C:
 
-          cd Universe
-          
-          Universe
-          
-          exit'
+            cd Universe
+            
+            Universe
+            
+            exit'
         file: $GAMEDIR/Universe.conf
