@@ -1,7 +1,7 @@
-name: Killing Moon
-game_slug: Killing-moon
+name: Tex Murphy - Under a Killing Moon
+game_slug: tex-murphy-under-a-killing-moon
 version: Installer
-slug:  Killing-moon-installer
+slug:  installer
 runner: dosbox
 
 
