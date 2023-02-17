@@ -1,0 +1,36 @@
+name: Dreamweb
+game_slug: dreamweb
+version: Installer
+slug: installer
+runner: scummvm
+
+
+script:
+  game:
+    game_id: dreamweb
+    path: $GAMEDIR
+
+  files:
+    - DISC: N/A:Select DREAMWEB.EXE
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$1
+
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+          cp -avr "$src_path/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: $DISC "$GAMEDIR"
+        file: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: chmod
