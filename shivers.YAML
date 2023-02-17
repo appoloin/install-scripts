@@ -1,0 +1,36 @@
+name: Shivers
+game_slug:  shivers
+version: Installer
+slug: INSTALLER
+runner: scummvm
+
+script:
+  game:
+    game_id: shivers
+    path: $GAMEDIR
+
+  files:
+    - setup: N/A:Select setup.exe
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$1
+
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+          cp -avr "$src_path/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: $setup $GAMEDIR
+        file: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: chmod
+
