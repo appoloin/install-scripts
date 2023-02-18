@@ -1,5 +1,5 @@
 name: Day of the Tentacle
-game_slug: day_of_the_tentacle
+game_slug: day-of-the-tentacle
 version: Installer
 slug:  day_of_the_tentacle-installer
 runner: scummvm
@@ -17,17 +17,20 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
-        
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src_path/."  "$dst"'
         file: $CACHE/bulkcopy.sh
-
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
         args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: chmod
