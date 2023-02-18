@@ -19,15 +19,14 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
-        
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src_path/."  "$dst"'
         file: $CACHE/bulkcopy.sh
-
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
@@ -35,15 +34,22 @@ script:
         file: $CACHE/bulkcopy.sh
 
     - write_file:
-        content: '[autoexec]
+        content: '[mouse]
 
-          mount C "$GAMEDIR/HDD" -t dir
+            capture_mouse = onstart middlerelease  
 
-          C:
+            mouse_sensitivity= 15
 
-          cd black
-          
-          bs.bat
-          
-          exit'
+        
+          [autoexec]
+
+            mount C "$GAMEDIR/HDD" -t dir
+
+            C:
+
+            cd black
+            
+            bs.bat
+            
+            exit'
         file: $GAMEDIR/black.conf
