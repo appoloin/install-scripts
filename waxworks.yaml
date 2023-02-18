@@ -17,31 +17,30 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
+          dst=$2
 
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        find "$src_path" -type f \( -iname "*.MUS" 
-                                    -o -iname "MENUS.DAT"
-                                    -o -iname "MUSIC.DRV"
-                                    -o -iname "ROOMS*"
-                                    -o -iname "ROOMSLST*"
-                                    -o -iname "START*"
-                                    -o -iname "STATELST"
-                                    -o -iname "STRIPPED.TXT"
-                                    -o -iname "TABLES*"
-                                    -o -iname "TBLLIST"
-                                    -o -iname "TEXT*"
-                                    -o -iname "WAX.FXB"
-                                    -o -iname "XTABLE*"
-                                    -o -iname "XTBLLIST"
-                                    -o -iname "*.VGA" 
-                                    -o -iname "GAMEPC" 
-                                    -o -iname "ICON.DAT" \) -exec cp {} "$dst" \;'
+          find "$src_path" -type f \( -iname "*.MUS" 
+                                      -o -iname "MENUS.DAT"
+                                      -o -iname "MUSIC.DRV"
+                                      -o -iname "ROOMS*"
+                                      -o -iname "ROOMSLST*"
+                                      -o -iname "START*"
+                                      -o -iname "STATELST"
+                                      -o -iname "STRIPPED.TXT"
+                                      -o -iname "TABLES*"
+                                      -o -iname "TBLLIST"
+                                      -o -iname "TEXT*"
+                                      -o -iname "WAX.FXB"
+                                      -o -iname "XTABLE*"
+                                      -o -iname "XTBLLIST"
+                                      -o -iname "*.VGA" 
+                                      -o -iname "GAMEPC" 
+                                      -o -iname "ICON.DAT" \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
-
     - chmodx: $CACHE/selectcopy.sh
 
     - execute:
