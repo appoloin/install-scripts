@@ -1,6 +1,6 @@
 #https://www.jameswoodcock.co.uk/product/the-7th-guest-soundtrack/ audio
-name: 7th Guest 
-game_slug: 7th_Guest
+name: The 7th Guest 
+game_slug: the-7th-guest
 version: Installer
 slug:  7th Guest-installer
 runner: scummvm
@@ -15,11 +15,15 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+            src=$1
 
-        dst=$2
-        
-        find "$src" -type f \( -name "*.gjd" -o -name "*.grv" -o -name "*.rl" -o -name "fat.*" -o -name "sphinx.fnt" \) -exec cp {} "$dst" \;'
+            dst=$2
+            
+            find "$src" -type f \( -name "*.gjd" -o 
+                                 -name "*.grv" -o 
+                                 -name "*.rl" -o 
+                                 -name "fat.*" -o 
+                                 -name "sphinx.fnt" \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
 
     - chmodx: $CACHE/selectcopy.sh
