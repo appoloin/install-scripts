@@ -16,15 +16,14 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
-        
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src_path/."  "$dst"'
         file: $CACHE/bulkcopy.sh
-
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
@@ -38,36 +37,41 @@ script:
     - write_file:
         content: '[midi]
 
-          mididevice = mt32
+            mididevice = mt32
+       
+           [mouse]
 
-          [sdl]
+            capture_mouse = onstart middlerelease  
 
-            capture_mouse=onclick middlerelease
-            
-            fullresolution=desktop
-
-          windowresolution=original
-
-          fullscreen=true
-
-          output=opengl
-
-        [render]
-
-          aspect=true
-
-          scaler=normal2x
+            mouse_sensitivity= 15
 
 
-        [autoexec]
-        
-          mount C "$GAMEDIR/HDD" -t dir
+            [sdl]
+              
+              fullresolution=desktop
 
-          C:
+            windowresolution=original
 
-          cd BAT2
+            fullscreen=true
 
-          BAT2.bat
+            output=opengl
 
-          exit'
+          [render]
+
+            aspect=true
+
+            scaler=normal2x
+
+
+          [autoexec]
+          
+            mount C "$GAMEDIR/HDD" -t dir
+
+            C:
+
+            cd BAT2
+
+            BAT2.bat
+
+            exit'
         file: $GAMEDIR/BAT.conf
