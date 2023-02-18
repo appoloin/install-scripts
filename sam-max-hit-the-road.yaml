@@ -1,5 +1,5 @@
-name:  Sam & Max
-game_slug: sam_&_max
+name:  Sam & Max Hit the Road
+game_slug: sam-max-hit-the-road
 version: Installer
 slug:  sam_&_max-installer
 runner: scummvm
@@ -26,3 +26,8 @@ script:
     - copy:
         dst: $GAMEDIR
         src: $DISC/samnmax.001
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: chmod
+
