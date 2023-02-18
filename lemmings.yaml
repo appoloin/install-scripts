@@ -19,15 +19,14 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
-        
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src_path/."  "$dst"'
         file: $CACHE/bulkcopy.sh
-
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
@@ -35,21 +34,23 @@ script:
         file: $CACHE/bulkcopy.sh
 
     - write_file:
-        content: '[sdl]
+        content: '[mouse]
 
-          capture_mouse=onclick middlerelease
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
         
-        [autoexec]
+          [autoexec]
 
-          imgmount D "$GAMEDIR/CDD/DISC1/AZ-2246.cue" -t iso 
+            imgmount D "$GAMEDIR/CDD/DISC1/AZ-2246.cue" -t iso 
 
-          mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/HDD" -t dir
 
-          D:
+            D:
 
-          install
-          
-          exit'
+            install
+            
+            exit'
         file: $GAMEDIR/lemmings-setup.conf
 
     - task:
@@ -59,102 +60,104 @@ script:
 
     - execute:
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
+        file: chmod
 
 
     - write_file:
         content: '[dosbox]
-          
-          machine=vgaonly
+            
+            machine=vgaonly
 
-        [sdl]
+          [mouse]
 
-          capture_mouse=onclick middlerelease
+            capture_mouse = onstart middlerelease  
 
-        [autoexec]
+            mouse_sensitivity= 15
 
-          mount D "$GAMEDIR/CDD/DISC1" -t iso
+          [autoexec]
 
-          mount C "$GAMEDIR/HDD" -t dir
+            imagmout D "$GAMEDIR/CDD/DISC1" -t iso
 
-          cls 
+            mount C "$GAMEDIR/HDD" -t dir
 
-          ECHO OFF
+            cls 
 
-          goto launcher
+            ECHO OFF
 
-          :launcher
+            goto launcher
 
-          cls 
+            :launcher
 
-          ECHO  -------------------------------------------  
-          
-          ECHO                  Lemmmings
-          
-          ECHO  -------------------------------------------  
-          
-          ECHO   1) Play Lemmings      
-                    
-          ECHO   2) Play Oh No More Lemmings
-          
-          ECHO   3) Install  
+            cls 
 
-          ECHO  -------------------------------------------  
-          
-          ECHO   4) exit program                             
-          
-          ECHO  -------------------------------------------  
+            ECHO  -------------------------------------------  
+            
+            ECHO                  Lemmmings
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Play Lemmings      
+                      
+            ECHO   2) Play Oh No More Lemmings
+            
+            ECHO   3) Install  
 
-          choice /c1234 /s Which program do you want to run? [1-4]: /n 
-          
-          if errorlevel 4 goto exit
+            ECHO  -------------------------------------------  
+            
+            ECHO   4) exit program                             
+            
+            ECHO  -------------------------------------------  
 
-          if errorlevel 3 goto install
+            choice /c1234 /s Which program do you want to run? [1-4]: /n 
+            
+            if errorlevel 4 goto exit
 
-          if errorlevel 2 goto game2
-                              
-          if errorlevel 1 goto game
+            if errorlevel 3 goto install
 
-
-          :game
-
-          cls
-
-          c:
-
-          cd cdlemm
-
-          lemmings
-
-          goto exit
+            if errorlevel 2 goto game2
+                                
+            if errorlevel 1 goto game
 
 
+            :game
 
-          :game2
+            cls
 
-          cls
+            c:
 
-          c:
+            cd cdlemm
 
-          cd cdlemm
+            lemmings
 
-          ohno
-
-          goto exit
+            goto exit
 
 
-         :install
 
-          cls
+            :game2
 
-          D:
+            cls
 
-          install
+            c:
 
-          goto launcher
+            cd cdlemm
 
-          :exit
+            ohno
 
-          exit'
+            goto exit
+
+
+          :install
+
+            cls
+
+            D:
+
+            install
+
+            goto launcher
+
+            :exit
+
+            exit'
         file: $GAMEDIR/lemmings-play.conf
 
