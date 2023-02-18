@@ -19,33 +19,35 @@ script:
 
       - execute:
           args: $DISC1 $GAMEDIR/CDD/CD1.ISO
-          file: /bin/cp 
+          file: cp 
       - execute:
           args: $DISC2 $GAMEDIR/CDD/CD2.ISO
-          file: /bin/cp 
+          file: cp 
 
       - write_file:
           content: '[midi]
 
-          mididevice = mt32
+            mididevice = mt32
 
-          [sdl]
+            [mouse]
 
-            capture_mouse=onclick middlerelease
-          
-          [autoexec]
+              capture_mouse = onstart middlerelease  
 
-            mount C "$GAMEDIR/HDD" -t dir
-
-            imgmount d "$GAMEDIR/CDD/CD1.ISO" -t iso
-
-            imgmount e "$GAMEDIR/CDD/CD2.ISO" -t iso
-
-            D:
-
-            setup
+              mouse_sensitivity= 15
             
-            exit'
+            [autoexec]
+
+              mount C "$GAMEDIR/HDD" -t dir
+
+              imgmount d "$GAMEDIR/CDD/CD1.ISO" -t iso
+
+              imgmount e "$GAMEDIR/CDD/CD2.ISO" -t iso
+
+              D:
+
+              setup
+              
+              exit'
           file: $GAMEDIR/setup.conf
 
       - task:
@@ -58,94 +60,98 @@ script:
       - write_file:
           content: '[midi]
 
-          mididevice = mt32
+            mididevice = mt32
+          
+            mouse]
 
-          [sdl]
+            capture_mouse = onstart middlerelease  
 
-            capture_mouse=onclick middlerelease
+            mouse_sensitivity= 15
+
+              [sdl]
+                
+                fullresolution=desktop
+
+              windowresolution=original
+
+              fullscreen=true
+
+              output=opengl
+
+            [render]
+
+              aspect=true
+
+              scaler=normal2x
+
+
+              [autoexec]
+              
+              mount C "$GAMEDIR/HDD" -t dir
+
+              imgmount d "$GAMEDIR/CDD/CD1.ISO" -t iso
+
+              imgmount e "$GAMEDIR/CDD/CD2.ISO" -t iso
+
+
+              cls 
+
+              ECHO OFF
+
+              goto launcher
+
+              :launcher
+
+              cls 
+
+              ECHO  -------------------------------------------  
+              
+              ECHO                  Night Trap
+              
+              ECHO  -------------------------------------------  
+              
+              ECHO   1) Play        
+              
+              ECHO   2) Setup    
+              
+              ECHO  -------------------------------------------  
+              
+              ECHO   3) Exit Program                             
+              
+              ECHO  -------------------------------------------  
+
+              choice /c123 /s Which program do you want to run? [1-3]: /n 
+              
+              if errorlevel 3 goto exit
+
+              if errorlevel 2 goto setup
+              
+              if errorlevel 1 goto game
+
+
+              :game
+
+              cls
+
+              D:
+
+              nt
+
+              goto exit
+
+
+              :setup
+
+              cls
+
+              d:
+
+              setup
+              
+              goto launcher
+
             
-            fullresolution=desktop
-
-          windowresolution=original
-
-          fullscreen=true
-
-          output=opengl
-
-        [render]
-
-          aspect=true
-
-          scaler=normal2x
-
-
-          [autoexec]
-          
-          mount C "$GAMEDIR/HDD" -t dir
-
-          imgmount d "$GAMEDIR/CDD/CD1.ISO" -t iso
-
-          imgmount e "$GAMEDIR/CDD/CD2.ISO" -t iso
-
-
-          cls 
-
-          ECHO OFF
-
-          goto launcher
-
-          :launcher
-
-          cls 
-
-          ECHO  -------------------------------------------  
-          
-          ECHO                  Night Trap
-          
-          ECHO  -------------------------------------------  
-          
-          ECHO   1) Play        
-          
-          ECHO   2) Setup    
-          
-          ECHO  -------------------------------------------  
-          
-          ECHO   3) Exit Program                             
-          
-          ECHO  -------------------------------------------  
-
-          choice /c123 /s Which program do you want to run? [1-3]: /n 
-          
-          if errorlevel 3 goto exit
-
-          if errorlevel 2 goto setup
-          
-          if errorlevel 1 goto game
-
-
-          :game
-
-          cls
-
-          D:
-
-         nt
-
-          goto exit
-
-
-          :setup
-
-          cls
-
-          d:
-
-          setup
-          
-          goto launcher
-
-        
-          :exit
-          
-          exit'
+              :exit
+              
+              exit'
           file: $GAMEDIR/night-trap.conf
