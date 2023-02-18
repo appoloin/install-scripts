@@ -76,7 +76,7 @@ script:
 
           [autoexec]
 
-            imagmout D "$GAMEDIR/CDD/DISC1" -t iso
+            imgmount D "$GAMEDIR/CDD/DISC1/AZ-2246.cue" -t iso 
 
             mount C "$GAMEDIR/HDD" -t dir
 
