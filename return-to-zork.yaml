@@ -1,5 +1,5 @@
 name: Return to Zork
-game_slug: return_to_zork
+game_slug: return-to-zork
 version: Installer
 slug:  return_to_zork-installer
 runner: scummvm
@@ -11,20 +11,20 @@ script:
     - game:  N/A:Select the file RTZ.DAT
 
   game:
-    game_id: made
+    game_id: rtz-cd
     path: $GAMEDIR
   
   installer:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
-        
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src_path/."  "$dst"'
         file: $CACHE/bulkcopy.sh
 
     - chmodx: $CACHE/bulkcopy.sh
@@ -35,7 +35,7 @@ script:
 
     - execute:
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
+        file: chmod
 
   scummvm:
     fullscreen: true
