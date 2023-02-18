@@ -8,7 +8,7 @@ runner: scummvm
 
 script:
     game:
-        game_id: Groovie
+        game_id: t7g
         path: $GAMEDIR
 
     installer:
@@ -38,7 +38,7 @@ script:
 
     - execute:
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
+        file: chmod
 
 
     - insert-disc:
@@ -51,6 +51,6 @@ script:
 
     - execute:
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
+        file: chmod
 
 
