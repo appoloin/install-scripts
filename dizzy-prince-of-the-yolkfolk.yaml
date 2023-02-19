@@ -1,0 +1,38 @@
+name: Prince of the Yolkfolk
+game_slug: dizzy-prince-of-the-yolkfolk
+version: Installer
+slug: dizzy_prince_of_the_yolkfolk_installer
+runner: dosbox
+
+
+script:
+  files:
+    - game: N/A:Select the file YOLK.EXE 
+  game:
+    main_file: $GAMEDIR/dizzy_prince_of_the_yolkfolk_dosbox.conf
+  installer:
+    - execute:
+        args: $GAMEDIR/HDD
+        file: mkdir
+
+    - execute:
+        args: $GAMEDIR/HDD/dizzy
+        file: mkdir
+
+    - copy:
+        dst: $GAMEDIR/HDD/dizzy
+        src: $game
+
+    - write_file:
+        content: '[autoexec]
+
+          mount C "$GAMEDIR/HDD" -t dir
+
+          C:
+
+          cd dizzy
+          
+          YOLK.EXE
+          
+          exit'
+        file: $GAMEDIR/dizzy_prince_of_the_yolkfolk_dosbox.conf

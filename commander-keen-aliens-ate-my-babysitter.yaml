@@ -18,13 +18,13 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
-        
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src_path/."  "$dst"'
         file: $CACHE/bulkcopy.sh
 
     - chmodx: $CACHE/bulkcopy.sh
@@ -36,25 +36,27 @@ script:
     - write_file:
         content: '[midi]
 
-         mididevice = mt32
+          mididevice = mt32
          
-        [sdl]
+          [mouse]
 
-          capture_mouse=onclick middlerelease
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
           
-        [cpu]
+          [cpu]
 
-          cputype=386_slow
-          
-        [autoexec]
+            cputype=386_slow
+            
+          [autoexec]
 
-          mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/HDD" -t dir
 
-          C:
+            C:
 
-          cd keen6
-          
-          keen6c.EXE
-          
-          exit'
+            cd keen6
+            
+            keen6c.EXE
+            
+            exit'
         file: $GAMEDIR/commander_keen.conf

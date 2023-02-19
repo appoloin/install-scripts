@@ -1,0 +1,66 @@
+name: Rick Dangerous
+game_slug: rick-dangerous
+version: Installer
+slug:  installer
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select Sart,bat.
+
+  game:
+    main_file: $GAMEDIR/play.conf
+
+  installer:
+    - execute:
+        args: $GAMEDIR/HDD $GAMEDIR/HDD/rick 
+        file: mkdir
+
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$1
+
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+          cp -avr "$src_path/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: $game $GAMEDIR/HDD/rick
+        file: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: chmod
+
+
+    - write_file:
+        content: '[midi]
+
+           mididevice = mt32
+        
+          [mouse]
+
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
+
+          [autoexec]
+
+            mount C "$GAMEDIR/HDD" -t dir
+
+            c:
+
+            cd  rick 
+
+            start.bat
+            
+            goto exit
+
+            exit'
+        file: $GAMEDIR/play.conf
+

@@ -18,15 +18,14 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
-        
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src_path/."  "$dst"'
         file: $CACHE/bulkcopy.sh
-
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
@@ -38,15 +37,15 @@ script:
 
           cputype=386_slow
           
-        [autoexec]
+          [autoexec]
 
-          mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/HDD" -t dir
 
-          C:
+            C:
 
-          cd keen4
-          
-          keen4e.EXE
-          
-          exit'
+            cd keen4
+            
+            keen4e.EXE
+            
+            exit'
         file: $GAMEDIR/commander_keen.conf

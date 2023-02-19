@@ -19,15 +19,14 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
-        
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src_path/."  "$dst"'
         file: $CACHE/bulkcopy.sh
-
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
@@ -39,33 +38,38 @@ script:
 
           mididevice = mt32
 
-          [sdl]
+          [mouse]
 
-            capture_mouse=onclick middlerelease
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
+
+            [sdl]
+
+              
+              fullresolution=desktop
+
+            windowresolution=original
+
+            fullscreen=true
+
+            output=opengl
+
+          [render]
+
+            aspect=true
+
+            scaler=normal2x
+          
+          [autoexec]
+
+            mount C "$GAMEDIR/HDD" -t dir
+
+            C:
+
+            cd neuro
             
-            fullresolution=desktop
-
-          windowresolution=original
-
-          fullscreen=true
-
-          output=opengl
-
-        [render]
-
-          aspect=true
-
-          scaler=normal2x
-        
-        [autoexec]
-
-          mount C "$GAMEDIR/HDD" -t dir
-
-          C:
-
-          cd neuro
-          
-          neuro.EXE
-          
-          exit'
+            neuro.EXE
+            
+            exit'
         file: $GAMEDIR/neuro.conf

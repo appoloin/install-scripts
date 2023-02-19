@@ -19,13 +19,13 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
-        
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src_path/."  "$dst"'
         file: $CACHE/bulkcopy.sh
 
     - chmodx: $CACHE/bulkcopy.sh
@@ -36,30 +36,32 @@ script:
 
     - execute:
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
+        file: chmod
 
 
     - write_file:
         content: '[midi]
 
-         mididevice = mt32
+          mididevice = mt32
 
-        [sdl]
+          [mouse]
 
-          capture_mouse=onclick middlerelease
+            capture_mouse = onstart middlerelease  
 
-        [autoexec]
+            mouse_sensitivity= 15
 
-          mount A "$GAMEDIR" -t dir 
+          [autoexec]
 
-          mount B "$GAMEDIR/FDD" -t floppy
+            mount A "$GAMEDIR" -t dir 
 
-          cls 
+            mount B "$GAMEDIR/FDD" -t floppy
 
-          B:
+            cls 
 
-          cad
+            B:
 
-          exit'
+            cad
+
+            exit'
         file: $GAMEDIR/cadaver.conf
 

@@ -19,15 +19,14 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
-        
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src_path/."  "$dst"'
         file: $CACHE/bulkcopy.sh
-
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
@@ -36,32 +35,34 @@ script:
 
     - execute:
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
+        file: chmod
 
     - write_file:
-          content: '[midi]
+        content: '[midi]
 
-          mididevice = mt32
+           mididevice = mt32
 
-          [sdl]
+            [mouse]
 
-            capture_mouse=onclick middlerelease
-          
-          [autoexec]
+              capture_mouse = onstart middlerelease  
 
-            mount C "$GAMEDIR/HDD" -t dir
-
-            mount A "$GAMEDIR/FDD" -t floppy
-
-
-            A:
-
-            autotype 1 a c enter enter enter
-
-            install
+              mouse_sensitivity= 15
             
-            exit'
-          file: $GAMEDIR/setup.conf
+            [autoexec]
+
+              mount C "$GAMEDIR/HDD" -t dir
+
+              mount A "$GAMEDIR/FDD" -t floppy
+
+
+              A:
+
+              autotype 1 a c enter enter enter
+
+              install
+              
+              exit'
+        file: $GAMEDIR/setup.conf
 
     - task:
         config_file: $GAMEDIR/setup.conf
@@ -69,34 +70,89 @@ script:
         working_dir: $GAMEDIR/HDD
 
 
-
-
-
     - write_file:
         content: '[midi]
 
-         mididevice = mt32
+          mididevice = mt32
+          
+          [mouse]
 
-        [sdl]
+            capture_mouse = onstart middlerelease  
 
-          capture_mouse=onclick middlerelease
+            mouse_sensitivity= 15
 
-        [autoexec]
 
-          mount C "$GAMEDIR/HDD" -t dir 
+          [autoexec]
 
-          mount A "$GAMEDIR/FDD" -t floppy
+            mount C "$GAMEDIR/HDD" -t dir 
 
-          cls 
+            mount A "$GAMEDIR/FDD" -t floppy
 
-          c:
+            cls 
 
-         cd circuit
+            ECHO OFF
 
-         AUTOTYPE -w 0.5 1
+            goto launcher
 
-          edge
-           
-          exit'
+            :launcher
+            
+            cls 
+            
+            ECHO  -------------------------------------------  
+
+            ECHO                 Circuit Edge
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Play        
+            
+            ECHO   2) Install                                 
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   3) Exit Program                             
+            
+            ECHO  -------------------------------------------  
+
+            choice /c123 /s Which program do you want to run? [1-3]: /n 
+
+            if errorlevel 3 goto exit
+                    
+            if errorlevel 2 goto install
+
+            if errorlevel 1 goto game
+
+
+            :game
+
+            cls
+            
+            c:
+
+            cd circuit
+
+            AUTOTYPE -w 0.5 1
+
+            edge
+
+            goto exit
+
+
+            :install
+
+            cls
+            
+            A:
+
+            autotype 1 a c enter enter enter
+
+            install
+            
+            goto launcher
+
+
+            :exit
+            
+            exit'
         file: $GAMEDIR/circuits-edge.conf
 
