@@ -1,26 +1,26 @@
-name: Planetfall
-game_slug: planetfall
+name: The Witness
+game_slug: the-witness--1
 version: Installer
-slug:  installer
+slug: installer
 runner: scummvm
 
 
 script:
   game:
-    game_id: planetfall  
+    game_id: thewitness
     path: $GAMEDIR
 
   installer:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
+          dst=$2
 
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        find "$src_path" -type f \( -iname "planetfa.DAT"  \) -exec cp {} "$dst" \;'
+          find "$src_path" -type f \( -iname "witness.DAT"  \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
 
     - chmodx: $CACHE/selectcopy.sh
@@ -35,4 +35,4 @@ script:
 
     - execute:
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
+        file: chmod
