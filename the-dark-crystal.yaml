@@ -1,7 +1,7 @@
-name: Hi-Res Adventure 5 Time Zone
-game_slug: hi-res-adventure-5-time-zone
+name: The Dark Crystal
+game_slug: the-dark-crystal
 version: Installer
-slug: hi-res-adventure-5-time-zone
+slug: the-dark-crystal
 runner: scummvm
 
 
@@ -10,22 +10,21 @@ script:
     - game: N/A:Select the game file
     
   game:
-    game_id: hires5
+    game_id: hires6
     path: $GAMEDIR
 
   installer:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
+          dst=$2
 
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        find "$src_path" -type f \( -iname "TZONE*.*" \) -exec cp {} "$dst" \;'
+          find "$src_path" -type f \( -iname "DARK*.*" \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
-
     - chmodx: $CACHE/selectcopy.sh
 
     - execute:

@@ -1,7 +1,7 @@
-name: Hi-Res Adventure 1 Mystery House
-game_slug: mystery-house
+name: The Wizard and the Princess
+game_slug: the-wizard-and-the-princess
 version: Installer
-slug: mystery-house
+slug: the-wizard-and-the-princess
 runner: scummvm
 
 
@@ -10,11 +10,11 @@ script:
     - game: N/A:Select the game file
     
   game:
-    game_id: hires1
+    game_id: hires2
     path: $GAMEDIR
 
   installer:
     - execute:
         args:  $game $GAMEDIR
-        file: /bin/cp 
+        file: cp 
         
