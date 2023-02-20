@@ -1,0 +1,137 @@
+name:  Alien Breed
+game_slug:  alien-breed
+version: Installer
+slug:  Alien-breed-installer
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select GOG installer
+
+  game:
+    main_file: $GAMEDIR/alien.conf
+  
+  installer:
+    - extract:
+        format: gog
+        file: $game
+        args: --gog --include app" 
+        dst: $CACHE
+        description: Extracting game files
+
+    - execute:
+        args: $GAMEDIR/HDD $GAMEDIR/HDD/alien
+        file: mkdir
+
+    - merge:
+        dst: "$GAMEDIR/HDD/alien"
+        src: "$CACHE/app"
+
+    - execute:
+        args: -R $GAMEDIR/HDD/alien/DOSBOX
+        file: rm
+
+    - execute:
+        args: -R $GAMEDIR/HDD/alien/__support
+        file: rm
+
+    - write_file:
+        content: '[mouse]
+
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
+
+         [autoexec]
+
+          mount C "$GAMEDIR/HDD" -t dir
+
+          C:
+
+          cd alien
+          
+          config.EXE
+          
+          exit'
+        file: $GAMEDIR/alien-setup.conf
+
+    - task:
+        config_file: $GAMEDIR/alien-setup.conf
+        name: dosexec
+        working_dir: $GAMEDIR/HDD
+
+    - write_file:
+        content: '[mouse]
+
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
+
+
+          [autoexec]
+
+            mount C "$GAMEDIR/HDD" -t dir
+            
+            cls 
+
+            ECHO OFF
+
+            goto launcher
+
+            :launcher
+
+            cls 
+
+            ECHO  -------------------------------------------  
+            
+            ECHO                Alien Breen
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Play        
+            
+            ECHO   2) Install      
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   3) Exit Program                             
+            
+            ECHO  -------------------------------------------  
+
+            choice /c123 /s Which program do you want to run? [1-3]: /n 
+            
+            if errorlevel 3 goto exit
+
+            if errorlevel 2 goto install
+            
+            if errorlevel 1 goto game
+
+
+            :game
+
+            cls 
+
+            C:
+
+            cd alien
+            
+            alien.EXE
+
+            goto launcher
+
+
+            :install
+
+            C:
+
+            cd alien
+            
+            config.EXE
+
+            goto launcher
+
+
+            :exit
+            
+            exit'
+        file: $GAMEDIR/alien.conf

@@ -17,15 +17,14 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
-        
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src_path/."  "$dst"'
         file: $CACHE/bulkcopy.sh
-
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
@@ -33,19 +32,22 @@ script:
         file: $CACHE/bulkcopy.sh
 
     - write_file:
-        content: '[sdl]
+        content: '[mouse]
 
-          sensitivity=20
+            capture_mouse = onstart middlerelease  
 
-        [autoexec]
+            mouse_sensitivity= 15
 
-          mount C "$GAMEDIR/HDD" -t dir
 
-          C:
+          [autoexec]
 
-          cd SHOGUN
+            mount C "$GAMEDIR/HDD" -t dir
 
-          SHOGUN.EXE
-          
-          exit'
+            C:
+
+            cd SHOGUN
+
+            SHOGUN.EXE
+            
+            exit'
         file: $GAMEDIR/SHOGUN.conf

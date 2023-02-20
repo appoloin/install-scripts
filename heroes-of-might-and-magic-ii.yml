@@ -7,7 +7,6 @@ runner: dosbox
 script:
   files:
     - game: N/A:Select GOG installer.
-    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
 
   game:
     main_file: $GAMEDIR/MightAndMagic.conf
@@ -16,23 +15,21 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
-        
-        dst=$2
+          src=$1
+          
+          dst=$2
 
-        file=$3
+          file=$3
 
-        find "$src" -maxdepth 1 -type f \( -iname $file \) -exec cp {} "$dst" \;'
+          find "$src" -maxdepth 1 -type f \( -iname $file \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy2.sh
     - chmodx: $CACHE/selectcopy2.sh
 
     - extract:
+        format: gog
+        file: $game
         dst: $CACHE
-        file: $inno
-        
-    - execute:
-        args: -d "$CACHE" "$game"
-        file: $CACHE/innoextract
+        description: Extracting game files
 
     - execute:
         args: $GAMEDIR/HoMM $GAMEDIR/CDD   
@@ -91,190 +88,194 @@ script:
         dst: $GAMEDIR/HoMM/SOUND
 
     - write_file:
-        content: '[sdl]
+        content: '[mouse]
 
-          sensitivity=20
+            capture_mouse = onstart middlerelease  
 
-          fullresolution=desktop
+            mouse_sensitivity= 15
 
-          windowresolution=original
+          [sdl]
 
-          fullscreen=true
+            fullresolution=desktop
 
-          output=opengl
+            windowresolution=original
 
-        [render]
+            fullscreen=true
 
-           aspect=true
+            output=opengl
 
-           scaler=normal2x
+          [render]
 
-        [autoexec]
+            aspect=true
 
-          @echo off
-        
-          mount C "$GAMEDIR/" -t dir
+            scaler=normal2x
 
-          mount C "$GAMEDIR/HoMM/cloud_saves" -t overlay
+          [autoexec]
 
-          imgmount D "$GAMEDIR/CDD/homm2.ins" -t iso -fs iso
-
-          C: 
-
-          cd HoMM
-
-          cls 
-
-          ECHO OFF
-
-          goto launcher
-
-          :launcher
-
-          cls 
-
-          ECHO  -------------------------------------------  
+            @echo off
           
-          ECHO   Heroes of Might and Magic II GOLD Launcher  
-          
-          ECHO  -------------------------------------------  
-          
-          ECHO   1) Heroes of Might and Magic II GOLD        
-          
-          ECHO   2) Map Editor                               
-          
-          ECHO  -------------------------------------------  
-          
-          ECHO   3) Game DOS Settings                        
-          
-          ECHO   4) Music Tracks Selector                    
-          
-          ECHO  -------------------------------------------  
-          
-          ECHO   5) exit program                             
-          
-          ECHO  -------------------------------------------  
+            mount C "$GAMEDIR/" -t dir
+
+            mount C "$GAMEDIR/HoMM/cloud_saves" -t overlay
+
+            imgmount D "$GAMEDIR/CDD/homm2.ins" -t iso -fs iso
+
+            C: 
+
+            cd HoMM
+
+            cls 
+
+            ECHO OFF
+
+            goto launcher
+
+            :launcher
+
+            cls 
+
+            ECHO  -------------------------------------------  
+            
+            ECHO   Heroes of Might and Magic II GOLD Launcher  
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Heroes of Might and Magic II GOLD        
+            
+            ECHO   2) Map Editor                               
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   3) Game DOS Settings                        
+            
+            ECHO   4) Music Tracks Selector                    
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   5) exit program                             
+            
+            ECHO  -------------------------------------------  
 
 
-          choice /c12345 /s Which program do you want to run? [1-5]: /n 
-          
-          if errorlevel 5 goto exit
-          
-          if errorlevel 4 goto music
-          
-          if errorlevel 3 goto setup
-          
-          if errorlevel 2 goto editor
-          
-          if errorlevel 1 goto game
+            choice /c12345 /s Which program do you want to run? [1-5]: /n 
+            
+            if errorlevel 5 goto exit
+            
+            if errorlevel 4 goto music
+            
+            if errorlevel 3 goto setup
+            
+            if errorlevel 2 goto editor
+            
+            if errorlevel 1 goto game
 
 
-          :game
+            :game
 
-          cls
+            cls
 
-          heroes2.exe
+            heroes2.exe
 
-          goto exit
+            goto exit
 
-          :editor
+            :editor
 
-          cls
+            cls
 
-          EDITOR2.EXE
+            EDITOR2.EXE
 
-          goto exit
-
-
-          :setup
-
-          cls
-
-          install.exe
-
-          goto launcher
+            goto exit
 
 
-          :music
+            :setup
 
-          cls
+            cls
 
-          ECHO  ------------------------------------------- 
+            install.exe
 
-          ECHO  HoMM II Track Selector                      
-
-          ECHO  ------------------------------------------- 
-
-          ECHO   1) Succession Wars music tracks            
-
-          ECHO   2) Price of Loyalty music tracks           
-
-          ECHO  ------------------------------------------- 
-
-          ECHO   3) Leave without change                    
-
-          ECHO  ------------------------------------------- 
-
-          CHOICE /c123 /s Which town tracks do you want to use in-game? [1-3]: /n 
-
-          IF errorlevel 3 goto launcher
-
-          IF errorlevel 2 goto pol
-
-          IF errorlevel 1 goto sw
+            goto launcher
 
 
-          :sw
+            :music
 
-          mount -u D
+            cls
 
-          mount D "$GAMEDIR/CDD/" -t dir
-          
-          cls
+            ECHO  ------------------------------------------- 
 
-          COPY D:\music\sw\*.* D:\music\*.*
+            ECHO  HoMM II Track Selector                      
 
-          ECHO .
+            ECHO  ------------------------------------------- 
 
-          ECHO The game will now use Succession Wars tracks for town music.
+            ECHO   1) Succession Wars music tracks            
 
-          pause
+            ECHO   2) Price of Loyalty music tracks           
 
-          mount -u D
+            ECHO  ------------------------------------------- 
 
-          imgmount D "$GAMEDIR/CDD/homm2.ins" -t iso -fs iso
+            ECHO   3) Leave without change                    
 
-          cls
+            ECHO  ------------------------------------------- 
 
-          goto launcher
+            CHOICE /c123 /s Which town tracks do you want to use in-game? [1-3]: /n 
 
-          :pol
+            IF errorlevel 3 goto launcher
 
-          cls
+            IF errorlevel 2 goto pol
 
-          mount -u D
+            IF errorlevel 1 goto sw
 
-          mount D "$GAMEDIR/CDD/" -t dir
 
-          COPY D:\music\pol\*.* D:\music\*.*
+            :sw
 
-          cls
-          
-          ECHO .
+            mount -u D
 
-          ECHO The game will now use Price of Loyalty tracks for town music.
+            mount D "$GAMEDIR/CDD/" -t dir
+            
+            cls
 
-          pause
+            COPY D:\music\sw\*.* D:\music\*.*
 
-          mount -u D
+            ECHO .
 
-          imgmount D "$GAMEDIR/CDD/homm2.ins" -t iso -fs iso
+            ECHO The game will now use Succession Wars tracks for town music.
 
-          cls
+            pause
 
-          goto launcher
+            mount -u D
 
-          :exit
-          
-          exit'
+            imgmount D "$GAMEDIR/CDD/homm2.ins" -t iso -fs iso
+
+            cls
+
+            goto launcher
+
+            :pol
+
+            cls
+
+            mount -u D
+
+            mount D "$GAMEDIR/CDD/" -t dir
+
+            COPY D:\music\pol\*.* D:\music\*.*
+
+            cls
+            
+            ECHO .
+
+            ECHO The game will now use Price of Loyalty tracks for town music.
+
+            pause
+
+            mount -u D
+
+            imgmount D "$GAMEDIR/CDD/homm2.ins" -t iso -fs iso
+
+            cls
+
+            goto launcher
+
+            :exit
+            
+            exit'
         file: $GAMEDIR/MightAndMagic.conf

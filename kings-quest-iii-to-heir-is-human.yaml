@@ -1,7 +1,7 @@
-name: Quest for Glory II - Trial by Fire
-game_slug: quest-for-glory-ii-trial-by-fire
+name: King's Quest 3
+game_slug: kings-quest-iii-to-heir-is-human
 version: Installer
-slug:  quest-for-glory-ii-trial-by-fire
+slug:  kings-quest-iii-to-heir-is-human-installer
 runner: scummvm
 
 
@@ -11,7 +11,7 @@ script:
     - game:  N/A:Select Setup.exe
 
   game:
-    game_id: qfg2  
+    game_id: kq3  
     path: $GAMEDIR
   
   installer:
@@ -25,20 +25,16 @@ script:
                                             -iname *redist -o
                                             -iname scummvm -o
                                             -iname *support -o
-                                            -iname dosbox -o
-                                            -iname ega -o
                                             -iname tmp \) -exec rm -r {}  \;
                                             
-          find "$src" -maxdepth 1 -type f \( -iname "goggame*" -o
-                                            -iname "999.*" -o
-                                            -iname "994.*" \) -exec rm {}  \;'
+         find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
         file: $CACHE/remove.sh
     - chmodx: $CACHE/remove.sh
 
     - extract:
         format: gog
         file: $game
-        args: --gog
+        args: --gog --include app" 
         dst: $GAMEDIR
         description: Extracting game files
 
