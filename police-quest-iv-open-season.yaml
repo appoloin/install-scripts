@@ -9,8 +9,6 @@ runner: scummvm
 script:
   files:
     - game:  N/A:Select Setup.exe
-    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
-    - xcopy: https://github.com/appoloin/WfW/raw/master/XCOPY.EXE
 
   game:
     game_id: pq4  
@@ -18,46 +16,19 @@ script:
   
   installer:
     - extract:
+        format: gog
+        file: $game
+        args: --gog 
         dst: $CACHE
-        file: $inno 
-
-    - copy:
-        dst: $GAMEDIR
-        src: $xcopy 
-
-    - execute:
-        args: -d "$CACHE" "$game"
-        file: $CACHE/innoextract
+        description: Extracting game files
 
     - copy:
         src: $CACHE/manual.pdf
         dst: $GAMEDIR
 
-    - write_file:
-        content: '[autoexec]
-        
-          mount C "$GAMEDIR" -t dir
-
-          imgmount D "$CACHE/PQ4.gog" -t iso
-
-          ver set 6 22
-
-          D:
-          
-          C:\xcopy.exe /E *.* C:\
-
-          exit
-        '
-        file: $CACHE/pq4.conf
-
-    - task:
-        config_file: $CACHE/pq4.conf
-        name: dosbox.dosexec
-        working_dir: $GAMEDIR
-
-    - execute:
-        args:  -r $GAMEDIR/XCOPY.EXE
-        file: /bin/rm 
+    - extract:
+        file: $CACHE/PQ4.gog
+        dst: $GAMEDIR
 
   scummvm:
     fullscreen: true

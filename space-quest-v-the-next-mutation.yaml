@@ -8,7 +8,6 @@ runner: scummvm
 script:
   files:
     - game:  N/A:Select GOG installer
-    - inno: https://github.com/dscharrer/innoextract/releases/download/1.8/innoextract-1.8-linux.tar.xz
 
   game:
     game_id: sq5  
@@ -18,27 +17,26 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
-        
-        find "$src" -maxdepth 1 -type d \( -iname app -o
-                                           -iname commonappdata -o
-                                           -iname *redist -o
-                                           -iname scummvm -o
-                                           -iname dosbox -o
-                                           -iname *support -o
-                                           -iname tmp \) -exec rm -r {}  \;
-                                           
-        find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
+          src=$1
+          
+          find "$src" -maxdepth 1 -type d \( -iname app -o
+                                            -iname commonappdata -o
+                                            -iname *redist -o
+                                            -iname scummvm -o
+                                            -iname dosbox -o
+                                            -iname *support -o
+                                            -iname tmp \) -exec rm -r {}  \;
+                                            
+          find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
         file: $CACHE/remove.sh
     - chmodx: $CACHE/remove.sh
 
     - extract:
-        dst: $CACHE
-        file: $inno
-
-    - execute:
-        args: -d "$GAMEDIR" "$game"
-        file: $CACHE/innoextract
+        format: gog
+        file: $game
+        args: --gog 
+        dst: $GAMEDIR
+        description: Extracting game files
 
     - execute:
         args: $GAMEDIR
