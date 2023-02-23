@@ -1,0 +1,31 @@
+name: Jazz Jackrabbit 2
+game_slug: jazz-jackrabbit-2
+version: Installer
+slug: installer
+runner: wine
+
+script:
+  files:
+    - game: N/A:Select GOG installer.
+    - j2r: https://github.com/deathkiller/jazz2/releases/download/1.4.0/Jazz2_1.4.0_Linux.zip
+
+  game:
+      exe: $GAMEDIR/Jazz Jackrabbit 2/jazz2_sdl2
+
+  installer:
+    - extract:
+        file: j2r
+        dst: $GAMEDIR/Jazz Jackrabbit 2
+
+    - extract:
+        format: gog
+        file: $game
+        args: --gog --include app
+        dst: $CACHE
+        description: Extracting game files
+
+    - merge:
+        src: $CACHE
+        dst: $GAMEDIR/Jazz Jackrabbit 2/Source
+        
+    - chmodx: $GAMEDIR/Jazz Jackrabbit 2/jazz2_sdl2

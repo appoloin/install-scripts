@@ -1,20 +1,18 @@
-name: Goblins Quest 3
-game_slug: goblins-quest-3
+name:  Little Big Adventure
+game_slug: little-big-adventure
 version: Installer
-slug:  goblins-quest-3-installer
+slug: installer
 runner: scummvm
 
-
-
 script:
-  files:
-    - game:  N/A:Select Setup.exe
-
   game:
-    game_id: gob3  
+    game_id: lba  
     path: $GAMEDIR
   
-  installer:
+  files:
+    - game: N/A:Select GOG installer.
+
+  installer: 
     - write_file:
         content: '#!/bin/bash
 
@@ -24,6 +22,7 @@ script:
                                             -iname commonappdata -o
                                             -iname *redist -o
                                             -iname scummvm -o
+                                            -iname dosbox -o
                                             -iname *support -o
                                             -iname tmp \) -exec rm -r {}  \;
                                             
@@ -34,7 +33,7 @@ script:
     - extract:
         format: gog
         file: $game
-        args: --gog 
+        args: --gog --include app
         dst: $GAMEDIR
         description: Extracting game files
 
@@ -44,3 +43,6 @@ script:
 
   scummvm:
     fullscreen: true
+
+    
+

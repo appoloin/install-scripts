@@ -1,12 +1,12 @@
-name: Ghost
-game_slug: ghost-10
+name: Hacknet
+game_slug:  hacknet
 version: Installer
-slug: ghost-10
+slug: WINE_TEMP_INSTALLER
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Ghost 1.0/ghost.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Hacknet/Hacknet.exe
     arch: win32
     prefix: $GAMEDIR
 
@@ -19,6 +19,12 @@ script:
         arch: win32
         install_mono: false
         install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: d3dx9 dotnet40 xna40
+        arch: win32
+        name: winetricks
         prefix: $GAMEDIR
 
     - task:

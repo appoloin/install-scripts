@@ -1,14 +1,12 @@
-#WINE TEMPLATE
-name: WINE_TEMP
-game_slug:  WINE_TEMP
+name: The Book of Unwritten tales 2
+game_slug: the-book-of-unwritten-tales-2
 version: Installer
-slug: WINE_TEMP_INSTALLER
+slug: installer
 runner: wine
 
 script:
-  game:
-    exe: $GAMEDIR/drive_c/
-    arch: win64
+  game: 
+    exe: $GAMEDIR/drive_c/GOG Games/The Book of Unwritten Tales 2/bout2.exe
     prefix: $GAMEDIR
 
   files:
@@ -17,11 +15,10 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win64
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
-
+        
     - task:
         executable: $setup
         name: wineexec
