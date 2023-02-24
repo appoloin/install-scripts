@@ -1,19 +1,20 @@
-name: TeenAgent
-game_slug: teenagent
+name: flight-of-the-amazon-queen
+game_slug: flight-of-the-amazon-queen
 version: Installer
-slug:  teenagent
+slug:  flight-of-the-amazon-queen-installer
 runner: scummvm
 
 
+
 script:
-    files:
-      - game:  N/A:Select the GOG installer
+  files:
+    - game:  N/A:Select GOG installer.
 
-    game:
-        game_id: teenagent
-        path: $GAMEDIR
-
-    installer:
+  game:
+    game_id: queen  
+    path: $GAMEDIR
+  
+  installer:
     - write_file:
         content: '#!/bin/bash
 
@@ -34,13 +35,13 @@ script:
     - extract:
         format: gog
         file: $game
-        args: --gog --include "app"
+        args: --gog
         dst: $GAMEDIR
         description: Extracting game files
-        
+
     - execute:
         args: $GAMEDIR
         file: $CACHE/remove.sh
-        
-scummvm:
+
+  scummvm:
     fullscreen: true

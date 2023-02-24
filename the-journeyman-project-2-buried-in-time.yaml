@@ -1,4 +1,3 @@
-#TODO NOT WORKING
 name:  Journeyman Project 2
 game_slug: the-journeyman-project-2-buried-in-time
 version: Installer
@@ -12,34 +11,28 @@ script:
 
   files:
     - game: N/A:Select the GOG installer
-    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
 
 
   installer:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
-        
-        find "$src" -maxdepth 1 -type d \( -iname data1 -o
-                                           -iname data2 -o
-                                           -iname data3 \) -exec rm -r {}  \;
-                                           
-        find "$src" -maxdepth 1 -type f \( -iname "*.ico" \) -exec rm {}  \;'
+          src=$1
+          
+          find "$src" -maxdepth 1 -type d \( -iname data1 -o
+                                            -iname data2 -o
+                                            -iname data3 \) -exec rm -r {}  \;
+                                            
+          find "$src" -maxdepth 1 -type f \( -iname "*.ico" \) -exec rm {}  \;'
         file: $CACHE/remove.sh
     - chmodx: $CACHE/remove.sh   
   
     - extract:
-        dst: $CACHE
-        file: $inno
-
-    - execute:
-        args: -I app -d "$CACHE" "$game"
-        file: $CACHE/innoextract
-
-    - merge:
-        dst: "$GAMEDIR"
-        src: "$CACHE/app"
+        format: gog
+        file: $game
+        args: --gog --include "app"
+        dst: $GAMEDIR
+        description: Extracting game files
 
     - execute:
         args: $GAMEDIR/BITDATA
@@ -47,13 +40,13 @@ script:
 
     - execute:
         args: -r $GAMEDIR/data1/BITDATA $GAMEDIR
-        file: /bin/cp 
+        file: cp 
     - execute:
         args: -r $GAMEDIR/data2/BITDATA $GAMEDIR
-        file: /bin/cp 
+        file: cp 
     - execute:
         args: -r $GAMEDIR/data3/BITDATA $GAMEDIR
-        file: /bin/cp 
+        file: cp 
 
     - execute:
         args: $GAMEDIR

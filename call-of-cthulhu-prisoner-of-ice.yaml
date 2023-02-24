@@ -1,15 +1,18 @@
-name: Disneys The Lion King
-game_slug: disney-the-lion-king
+name: Call of Cthulhu - Prisoner of Ice
+game_slug: call-of-cthulhu-prisoner-of-ice
 version: Installer
-slug: installer
+slug: cthulhu-installer
 runner: dosbox
 
 script:
   files:
-    - game: N/A:Select GOG installer.
+    - game: N/A:Select GOG setup.
+    - GUS: 
+        url: https://drive.google.com/uc?export=download&id=1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6
+        filename: gus.zip
 
   game:
-    main_file: $GAMEDIR/lionking.conf
+    main_file: $GAMEDIR/cthulhu.conf
 
   installer:
     - write_file:
@@ -32,12 +35,22 @@ script:
     - extract:
         format: gog
         file: $game
-        args: --gog --include app
+        args: --gog --include "app"
         dst: $GAMEDIR
         description: Extracting game files
-        
+
+    - extract:
+        file: $GUS
+        dst: $GAMEDIR/ULTRASND
+
     - write_file:
-        content: '[midi]
+        content: '[gus]
+
+          gus= true
+
+          ultradir= C:\ULTRASND
+          
+          [midi]
 
           mididevice = mt32
 
@@ -46,30 +59,15 @@ script:
             capture_mouse = onstart middlerelease  
 
             mouse_sensitivity= 15
-        
-          [sdl]
 
-            fullresolution=desktop
-
-            windowresolution=original
-
-            fullscreen=true
-
-            output=opengl
-
-          [render]
-
-            aspect=true
-
-            scaler=normal2x
 
           [autoexec]
 
-            @echo off
-          
-            mount C "$GAMEDIR" -t dir
+            mount C -t dir "$GAMEDIR" 
 
-          cls 
+            mount D -t cdrom "$GAMEDIR/CD"
+
+            cls 
 
             ECHO OFF
 
@@ -81,21 +79,21 @@ script:
 
             ECHO  -------------------------------------------  
             
-            ECHO                 Abuse
+            ECHO      Call of Cthulhu - Prisoner of Ice
             
             ECHO  -------------------------------------------  
             
             ECHO   1) Play        
             
-            ECHO   2) Setup                                
+            ECHO   2) Set Sound                                   
             
             ECHO  -------------------------------------------  
             
-            ECHO   3) Exit Program                             
+            ECHO   3) exit program                             
             
             ECHO  -------------------------------------------  
 
-            choice /c1234 /s Which program do you want to run? [1-3]: /n 
+            choice /c123 /s Which program do you want to run? [1-3]: /n 
             
             if errorlevel 3 goto exit
                       
@@ -108,30 +106,28 @@ script:
 
             cls
 
-            C: 
+            D:
 
-            cls
+            ICE640
 
-            lionking
-
-            goto exit
+            goto launcher
 
 
             :setup
 
             cls
 
-            c:
+            D:
 
-            install
+            ICE640 -CONFIG
 
             goto launcher
 
 
             :exit
-
+            
             exit'
-        file: $GAMEDIR/lionking.conf
+        file: $GAMEDIR/cthulhu.conf
 
     - execute:
         args: $GAMEDIR

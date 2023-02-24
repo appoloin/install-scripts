@@ -34,7 +34,7 @@ script:
     - extract:
         format: gog
         file: $game
-        args: --gog --include app" 
+        args: --gog --include "app" 
         dst: $GAMEDIR
         description: Extracting game files
 

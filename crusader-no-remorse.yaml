@@ -1,0 +1,42 @@
+name: Crusader - No Regret
+game_slug: crusader-no-remorse
+version: Installer
+slug:  installer
+runner: scummvm
+
+script:
+  files:
+    - game: N/A:Select GOG installer
+
+  game:
+      game_id: remorse
+      path: $GAMEDIR
+  
+  installer:
+    - extract:
+        format: gog
+        file: $game
+        args: --gog 
+        dst: $CACHE
+        description: Extracting game files
+
+    - extract:
+        file: $CACHE/GAME.GOG
+        dst: $CACHE/iso
+        description: Extracting ISO
+      
+    - merge:
+        src: $CACHE/USECODE
+        dst: $GAMEDIR/USECODE
+        
+    - merge:
+        src: $CACHE/STATIC
+        dst: $GAMEDIR/STATIC
+
+    - merge:
+        src: $CACHE/iso/FLICS
+        dst: $GAMEDIR/FLICS
+
+    - merge:
+        src: $CACHE/iso/SOUND
+        dst: $GAMEDIR/SOUND

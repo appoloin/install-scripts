@@ -62,7 +62,7 @@ script:
 
             mididevice = mt32
           
-            mouse]
+            [mouse]
 
             capture_mouse = onstart middlerelease  
 

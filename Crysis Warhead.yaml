@@ -1,5 +1,5 @@
 name: crysis warhead
-game_slug: crysis warhead 
+game_slug: crysis-warhead
 version: Installer
 slug: crysis-warhead
 runner: wine

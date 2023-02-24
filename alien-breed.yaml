@@ -15,7 +15,7 @@ script:
     - extract:
         format: gog
         file: $game
-        args: --gog --include app" 
+        args: --gog --include "app" 
         dst: $CACHE
         description: Extracting game files
 

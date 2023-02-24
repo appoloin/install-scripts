@@ -1,0 +1,29 @@
+name: The Elder Scrolls II - Daggerfall
+game_slug: the-elder-scrolls-ii-daggerfall
+version: Installer
+slug: GOG
+runner: linux
+
+script:
+  files:
+    - game: N/A:Select file INSTALL.exe.
+    - dfu: N/A:Provide Linux Universal Build from "https://www.dfworkshop.net/projects/daggerfall-unity/live-
+  
+  game:
+    exe: $GAMEDIR/DaggerfallUnity.x86_64
+
+  installer:
+    - extract:
+        format: gog
+        file: $game
+        args: --gog
+        dst: $GAMEDIR/GameDATA
+        description: Extracting game files
+
+    - extract:
+        file: $dfu
+        dst: $GAMEDIR
+        description: Extracting Engine
+
+
+

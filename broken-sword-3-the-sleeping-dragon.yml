@@ -1,23 +1,24 @@
-name: COMMANDOS Behind Enemy Lines 
-game_slug: commandos
+name: Broken Sword 3 - The Sleeping Dragon
+game_slug: broken-sword-3-the-sleeping-dragon
 version: Installer
-slug: commandos
+slug: Broken Sword 3-installer
 runner: wine
-
+ 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/Pyro Studios/Commandos/comandos.exe
+    exe: $GAMEDIR/drive_c/Program Files/THQ/Broken Sword - The Sleeping Dragon/bs3pc.exe
     arch: win32
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select installer
+    - setup: N/A:Select the Setup.exe
 
   installer:
     - task:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
@@ -27,5 +28,4 @@ script:
 
   wine:
     Desktop: true
-
 

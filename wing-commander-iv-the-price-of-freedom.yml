@@ -1,0 +1,157 @@
+name:  Wing Commander IV - The Price of Freedom
+game_slug: wing-commander-iv-the-price-of-freedom
+version: Installer
+slug: installer
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select GOG installer
+    - GUS: 
+        url: https://drive.google.com/uc?export=download&id=1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6
+        filename: gus.zip
+
+  game:
+    main_file: $GAMEDIR/wing.conf
+  
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$1
+          
+          find "$src" -maxdepth 1 -type d \( -iname app -o
+                                            -iname commonappdata -o
+                                            -iname *redist -o
+                                            -iname scummvm -o
+                                            -iname dosbox* -o
+                                            -iname *support -o
+                                            -iname __unpacker -o
+                                            -iname game  -o
+                                            -iname tmp \) -exec rm -r {}  \;
+                                            
+          find "$src" -maxdepth 1 -type f \( -iname "gog*" \) -exec rm {}  \;'
+        file: $CACHE/remove.sh
+    - chmodx: $CACHE/remove.sh
+
+    - extract:
+        format: gog
+        file: $game
+        args: --gog --include "game" 
+        dst: $GAMEDIR
+        description: Extracting game files
+
+    - merge:
+        src: "$GAMEDIR/game"
+        dst: "$GAMEDIR"
+
+    - extract:
+        file: $GUS
+        dst: $GAMEDIR/ULTRASND
+
+    - execute:
+        args: $GAMEDIR
+        file: $CACHE/remove.sh
+
+    - write_file:
+        content: '[gus]
+
+          gus= true
+
+          ultradir = C:\ULTRASND
+  
+          [sdl]
+
+          fullresolution=desktop
+
+          windowresolution=original
+
+          fullscreen=true
+
+          output=opengl
+
+          [mouse]
+
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 30
+
+
+          [render]
+
+            aspect=true
+
+            scaler=normal2x
+
+          [autoexec]
+
+            mount C -t dir "$GAMEDIR" 
+
+            mount D -t cdrom "$GAMEDIR/CD1" 
+
+
+            goto launcher
+
+            :launcher
+
+            cls
+                        
+            ECHO OFF
+
+
+            ECHO  ------------------------------------------
+
+            ECHO            Wing Commander IV
+
+            ECHO  ------------------------------------------
+
+            ECHO   1) Wing Commander IV: The Price of Freedom
+
+            ECHO   2) Game settings
+
+            ECHO  ------------------------------------------
+
+            ECHO   3) Exit
+
+            ECHO  ------------------------------------------
+
+            @choice /c123 /s Choose option [1-3]: /n
+
+            if errorlevel 3 goto exit
+
+            if errorlevel 2 goto setup
+
+            if errorlevel 1 goto play
+
+
+            :play
+
+            cls
+
+            C: 
+
+            cd wc4
+
+            wc4.exe
+
+            goto exit
+
+
+
+            :setup 
+
+            cls
+
+            C:
+
+            cd WC4 
+
+            wc4.exe -i
+
+            goto launcher
+
+
+            :exit
+
+            exit'
+        file: $GAMEDIR/wing.conf
