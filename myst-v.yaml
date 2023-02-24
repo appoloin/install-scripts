@@ -23,37 +23,7 @@ script:
         prefix: $GAMEDIR
     
     - task:
-        app: d3dx9
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: d3dcompiler_42
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: dsound
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: directmusic
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: corefonts
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: tahoma
+        app: d3dx9 d3dcompiler_42 dsound directmusic corefonts tahoma
         arch: win32
         name: winetricks
         prefix: $GAMEDIR
