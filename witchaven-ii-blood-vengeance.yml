@@ -7,7 +7,6 @@ runner: dosbox
 script:
   files:
     - game: N/A:Select GOG installer
-    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
 
   game:
     main_file: $GAMEDIR/witchheaven.conf
@@ -16,101 +15,108 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
-        
-        find "$src" -type d \( -iname dosbox  \) -exec rm -r {}  \;'
-                                           
+          src=$1
+          
+          find "$src" -maxdepth 1 -type d \( -iname app -o
+                                            -iname commonappdata -o
+                                            -iname *redist -o
+                                            -iname scummvm -o
+                                            -iname dosbox -o
+                                            -iname *support -o
+                                            -iname tmp \) -exec rm -r {}  \;
+                                            
+          find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
         file: $CACHE/remove.sh
     - chmodx: $CACHE/remove.sh
 
     - extract:
-        dst: $CACHE
-        file: $inno
-        
-    - execute:
-        args: -I Enhanced -d "$GAMEDIR" "$game"
-        file: $CACHE/innoextract
-
-
-    - write_file:
-        content: '[sdl]
-
-          capture_mouse = onstart middlerelease
-
-        [autoexec]
-
-          mount C "$GAMEDIR/Enhanced/GAME" -t dir
-
-          imgmount D "$GAMEDIR/witch2.iso" -t iso
-
-          cls 
-
-          ECHO OFF
-
-          goto launcher
-
-          :launcher
-
-          cls 
-
-          ECHO  -------------------------------------------  
-          
-          ECHO      Witchhaven II - Blood Vengeance
-          
-          ECHO  -------------------------------------------  
-          
-          ECHO   1) Play        
-          
-          ECHO   2) Setup                                   
-          
-          ECHO  -------------------------------------------  
-          
-          ECHO   3) exit program                             
-          
-          ECHO  -------------------------------------------  
-
-          choice /c123 /s Which program do you want to run? [1-3]: /n 
-          
-          if errorlevel 3 goto exit
-                    
-          if errorlevel 2 goto setup
-          
-          if errorlevel 1 goto game
-
-
-          :game
-
-          cls
-
-          C:
-
-          cd whaven2
-
-          egwh2.exe
-
-          goto exit
-
-
-          :setup
-
-          config -securemode
-
-          cls
-
-          C:
-
-          cd whaven2
-          
-          egsetup.exe
-
-          goto launcher
-
-
-          :exit
-          
-          exit'
-        file: $GAMEDIR/witchheaven.conf
+        format: gog
+        file: $game
+        args: --gog --include "Enhanced"
+        dst: $GAMEDIR
+        description: Extracting game files
 
     - execute:
         args: $GAMEDIR
         file: $CACHE/remove.sh
+
+    - write_file:
+        content: '[mouse]
+
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
+
+          [autoexec]
+
+            mount C "$GAMEDIR/Enhanced/GAME" -t dir
+
+            imgmount D "$GAMEDIR/witch2.iso" -t iso
+
+            cls 
+
+            ECHO OFF
+
+            goto launcher
+
+            :launcher
+
+            cls 
+
+            ECHO  -------------------------------------------  
+            
+            ECHO      Witchhaven II - Blood Vengeance
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Play        
+            
+            ECHO   2) Setup                                   
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   3) exit program                             
+            
+            ECHO  -------------------------------------------  
+
+            choice /c123 /s Which program do you want to run? [1-3]: /n 
+            
+            if errorlevel 3 goto exit
+                      
+            if errorlevel 2 goto setup
+            
+            if errorlevel 1 goto game
+
+
+            :game
+
+            cls
+
+            C:
+
+            cd whaven2
+
+            egwh2.exe
+
+            goto exit
+
+
+            :setup
+
+            config -securemode
+
+            cls
+
+            C:
+
+            cd whaven2
+            
+            egsetup.exe
+
+            goto launcher
+
+
+            :exit
+            
+            exit'
+        file: $GAMEDIR/witchheaven.conf

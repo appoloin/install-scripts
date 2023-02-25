@@ -1,24 +1,18 @@
-name:  Time Commando
-game_slug:  time-commando
+name: Tomb Raider 1
+game_slug: tomb-raider-i
 version: Installer
-slug:  time-commando
+slug:  tombraider-1-installer
 runner: dosbox
+
 
 script:
   files:
-    - game: N/A:Select GOG installer
+    - game: N/A:Select GOG installer.
 
   game:
-    main_file: $GAMEDIR/time.conf
-  
-  installer:
-    - extract:
-        format: gog
-        file: $game
-        args: --gog --include app
-        dst: $GAMEDIR
-        description: Extracting game files
+    main_file: $GAMEDIR/tombraider.conf
 
+  installer:
     - write_file:
         content: '#!/bin/bash
 
@@ -35,10 +29,41 @@ script:
         file: $CACHE/remove.sh
     - chmodx: $CACHE/remove.sh
 
+    - extract:
+        format: gog
+        file: $game
+        args: --gog --include "app/Tomb Raider 1"
+        dst: $GAMEDIR
+        description: Extracting game files
+        
     - execute:
         args: $GAMEDIR
         file: $CACHE/remove.sh
- 
+        
+    - write_file:
+        content: '[mouse]
+
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
+
+          [autoexec]
+          
+            mount C "$GAMEDIR" -t dir
+
+            imgmount D "$GAMEDIR/GAME.DAT" -t iso
+
+            D:
+
+            INSTALL
+
+            exit'
+        file: $GAMEDIR/tombraider-setup.conf
+
+    - task:
+        config_file: $GAMEDIR/tombraider-setup.conf
+        name: dosexec
+        working_dir: $GAMEDIR
 
     - write_file:
         content: '[mouse]
@@ -47,13 +72,35 @@ script:
 
             mouse_sensitivity= 15
 
+          [sdl]
+          
+          fulldouble=false
+          
+          fullresolution=original
+          
+          windowresolution=original
+
+          output=opengl
+          
+          [render]
+          
+          multiscan=false
+          
+          scaler=supereagle
+          
+          [cpu]
+          
+          core=auto
+          
+          cputype=auto
+          
+          cycles=auto
 
           [autoexec]
+        
+          mount C "$GAMEDIR" -t dir
 
-          mount C "$GAMEDIR/" -t dir
-          
-          imgmount D "$GAMEDIR/GAME.DAT" -t cdrom
-
+          imgmount D "$GAMEDIR/GAME.DAT" -t iso
 
           cls 
 
@@ -67,7 +114,7 @@ script:
 
           ECHO  -------------------------------------------  
           
-          ECHO               Time Commando
+          ECHO               Tomb Raider
           
           ECHO  -------------------------------------------  
           
@@ -94,9 +141,9 @@ script:
 
           cls
 
-          C:
-        
-          TIMECO.EXE
+          D:
+
+          tomb
 
           goto exit
 
@@ -105,9 +152,9 @@ script:
 
           cls
 
-          C:
-         
-          setsound
+          D:
+
+          INSTALL
 
           goto launcher
 
@@ -115,4 +162,4 @@ script:
           :exit
           
           exit'
-        file: $GAMEDIR/time.conf
+        file: $GAMEDIR/tombraider.conf

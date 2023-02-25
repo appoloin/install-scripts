@@ -1,16 +1,16 @@
-name: Space Quest VI - The Spinal Frontier
-game_slug: space-quest-6-the-spinal-frontier
+name: Riven 
+game_slug: riven-the-sequel-to-myst
 version: Installer
-slug:  space-quest-6-the-spinal-frontier
+slug:  Riven-installer
 runner: scummvm
 
 
 script:
   files:
-    - game:  N/A:Please select the GoG installer
+    - game: N/A:Select GOG installer.
 
   game:
-    game_id: sq6  
+    game_id: riven
     path: $GAMEDIR
   
   installer:
@@ -37,11 +37,8 @@ script:
         args: --gog
         dst: $GAMEDIR
         description: Extracting game files
-
+        
     - execute:
         args: $GAMEDIR
         file: $CACHE/remove.sh
 
-
-  scummvm:
-    fullscreen: true

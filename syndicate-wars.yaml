@@ -1,7 +1,7 @@
-name: Harvester
-game_slug: harvester
+name: Syndicate Wars
+game_slug: syndicate-wars
 version: Installer
-slug: harvester
+slug: installer
 runner: dosbox
 
 script:
@@ -98,66 +98,17 @@ script:
           
           mount C "$GAMEDIR" -t dir
 
-          imgmount D -t iso -fs iso "$GAMEDIR/HARVEST.DAT" "$GAMEDIR/HARVEST3.DAT" "$GAMEDIR/HARVEST4.DAT"
+          imgmount d -t iso -fs iso "$GAMEDIR/SWARS/swars.inst"
 
           cls 
 
-          ECHO OFF
-
-          goto launcher
-
-          :launcher
-
-          cls 
-
-          ECHO  -------------------------------------------  
-          
-          ECHO                Harvester
-          
-          ECHO  -------------------------------------------  
-          
-          ECHO   1) Play        
-          
-          ECHO   2) Setup    
-          
-          ECHO  -------------------------------------------  
-          
-          ECHO   3) Exit Program                             
-          
-          ECHO  -------------------------------------------  
-
-          choice /c123 /s Which program do you want to run? [1-3]: /n 
-          
-          if errorlevel 3 goto exit
-
-          if errorlevel 2 goto setup
-          
-          if errorlevel 1 goto game
-
-
-          :game
-
-          cls
-
           c:
 
-          harvest.exe
-
-          goto exit
-
-
-          :setup
+          cd SWARS
 
           cls
-
-          c:
-
-          setsound.bat
           
-          goto launcher
-
-        
-          :exit
+          call play.bat
           
           exit'
         file: $GAMEDIR/play.conf    

@@ -7,7 +7,6 @@ runner: dosbox
 script:
   files:
     - game: N/A:Select GOG installer
-    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
 
   game:
     main_file: $GAMEDIR/arkania.conf
@@ -16,51 +15,49 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
+          dst=$2
 
-        find "$src" -maxdepth 1  -type d \( -iname data \) -exec cp {} -r "$dst" \;
+          find "$src" -maxdepth 1  -type d \( -iname data \) -exec cp {} -r "$dst" \;
 
-        find "$src/__support/save" -maxdepth 1  -type d \( -iname games \) -exec cp {} -r "$dst" \;
+          find "$src/__support/save" -maxdepth 1  -type d \( -iname games \) -exec cp {} -r "$dst" \;
 
-        find "$src" -maxdepth 1  -type f \( -iname "*.EXE" -o 
-                                            -iname "*.TXT" -o 
-                                            -iname "*.bat"  \) -exec cp {} "$dst" \;'
+          find "$src" -maxdepth 1  -type f \( -iname "*.EXE" -o 
+                                              -iname "*.TXT" -o 
+                                              -iname "*.bat"  \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
     - chmodx: $CACHE/selectcopy.sh
 
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
+          dst=$2
 
-        echo $dst
+          echo $dst
 
-        find "$src" -maxdepth 1 -type f -iname "*.ogg" -print0 | 
+          find "$src" -maxdepth 1 -type f -iname "*.ogg" -print0 | 
 
-            while IFS="" read -r -d "" FILENAME; 
+              while IFS="" read -r -d "" FILENAME; 
 
-                do
-                    name="${FILENAME##*/}"
-    
-                    mv "$FILENAME" "$dst""/""${name/ogg/OGG}";
+                  do
+                      name="${FILENAME##*/}"
+      
+                      mv "$FILENAME" "$dst""/""${name/ogg/OGG}";
 
-            done
-        '
+              done
+          '
         file: $CACHE/copyrename.sh
     - chmodx: $CACHE/copyrename.sh     
 
-
     - extract:
+        format: gog
+        file: $game
+        args: --gog
         dst: $CACHE
-        file: $inno
-        
-    - execute:
-        args: -d "$CACHE" "$game"
-        file: $CACHE/innoextract
+        description: Extracting game files
 
     - execute:
         args: $GAMEDIR/arkania  $GAMEDIR/CDD $GAMEDIR/CDD/Music
@@ -87,117 +84,119 @@ script:
         file: $CACHE/selectcopy.sh
 
     - write_file:
-        content: '[sdl]
+        content: '[mouse]
 
-          sensitivity=30
+            capture_mouse = onstart middlerelease  
 
-          fullresolution=desktop
+            mouse_sensitivity= 15
 
-          windowresolution=original
+          [sdl]
 
-          fullscreen=true
+            fullresolution=desktop
 
-          output=opengl
+            windowresolution=original
 
-          capture_mouse = onstart middlerelease
+            fullscreen=true
 
-        [render]
+            output=opengl
 
-          aspect=true
+          [render]
 
-          scaler=normal2x
+            aspect=true
 
-        [autoexec]
+            scaler=normal2x
 
-          mount C "$GAMEDIR" -t dir
+          [autoexec]
 
-          imgmount D "$GAMEDIR/CDD/game.ins" -t iso -fs iso
+            mount C "$GAMEDIR" -t dir
 
-          C:
+            imgmount D "$GAMEDIR/CDD/game.ins" -t iso -fs iso
 
-          cd arkania
+            C:
 
-          cls 
+            cd arkania
 
-          ECHO OFF
+            cls 
 
-          goto launcher
+            ECHO OFF
 
-          :launcher
+            goto launcher
 
-          cls 
+            :launcher
 
-          ECHO  -------------------------------------------------  
-          
-          ECHO    Reamls of Arkania 3 - Shadows over Riva 
-          
-          ECHO  -------------------------------------------------  
-          
-          ECHO   1) Realms of Arkania: Shadows over Riva       
-          
-          ECHO   2) Realms of Arkania: Shadows over Riva (JEMMEX) 
+            cls 
 
-          ECHO   3) Settings                              
-          
-          ECHO  ---------------------------------------------------  
-                    
-          ECHO   4) Exit Program                             
-          
-          ECHO  ---------------------------------------------------  
+            ECHO  -------------------------------------------------  
+            
+            ECHO    Reamls of Arkania 3 - Shadows over Riva 
+            
+            ECHO  -------------------------------------------------  
+            
+            ECHO   1) Realms of Arkania: Shadows over Riva       
+            
+            ECHO   2) Realms of Arkania: Shadows over Riva (JEMMEX) 
 
-
-          choice /c1234 /s Which program do you want to run? [1-4]: /n 
-          
-          if errorlevel 4 goto exit
-          
-          if errorlevel 3 goto setup
-          
-          if errorlevel 2 goto jemmex
-
-          if errorlevel 1 goto game
+            ECHO   3) Settings                              
+            
+            ECHO  ---------------------------------------------------  
+                      
+            ECHO   4) Exit Program                             
+            
+            ECHO  ---------------------------------------------------  
 
 
-          :game
+            choice /c1234 /s Which program do you want to run? [1-4]: /n 
+            
+            if errorlevel 4 goto exit
+            
+            if errorlevel 3 goto setup
+            
+            if errorlevel 2 goto jemmex
 
-          cls
-
-          riva
-          
-          goto exit
-
-
-          :jemmex
-
-          CONFIG -set "xms=false"
-          
-          CONFIG -set "ems=false"
-          
-          CONFIG -set "umb=false"
-          
-          cls
-          
-          jemmex load noems
-          
-          RIVA
-          
-          goto exit
+            if errorlevel 1 goto game
 
 
-          :setup
+            :game
 
-          cd data
+            cls
 
-          cls
-
-          setup
-
-          cd ..
-
-          goto launcher
+            riva
+            
+            goto exit
 
 
+            :jemmex
 
-          :exit
-          
-          exit'
+            CONFIG -set "xms=false"
+            
+            CONFIG -set "ems=false"
+            
+            CONFIG -set "umb=false"
+            
+            cls
+            
+            jemmex load noems
+            
+            RIVA
+            
+            goto exit
+
+
+            :setup
+
+            cd data
+
+            cls
+
+            setup
+
+            cd ..
+
+            goto launcher
+
+
+
+            :exit
+            
+            exit'
         file: $GAMEDIR/arkania.conf

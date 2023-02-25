@@ -1,0 +1,118 @@
+name: Hexen II
+game_slug: hexen-ii
+version: Installer
+slug: hexen-ii
+runner: linux
+
+
+script:
+    files:
+      - game: N/A:Select GOG installer.
+      - uhx2: 
+          url: https://drive.google.com/uc?export=download&id=1dKWw6qIy1upHL_Gcub_XKaFVgDQsiF-k
+          filename: engine.tgz
+
+    game:
+      args: -vsync
+      exe: glhexen2
+
+
+    installer:
+      - write_file:
+          content: '#!/bin/bash
+
+            src=$1
+            
+            find "$src" -maxdepth 1 -type d \( -iname app -o
+                                              -iname commonappdata -o
+                                              -iname *redist -o
+                                              -iname scummvm -o
+                                              -iname dosbox -o
+                                              -iname *support -o
+                                              -iname tmp \) -exec rm -r {}  \;
+                                              
+            find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
+          file: $CACHE/remove.sh
+      - chmodx: $CACHE/remove.sh
+
+      - extract:
+          format: gog
+          file: $game
+          args: --gog 
+          dst: $GAMEDIR
+          description: Extracting game files
+
+      - execute:
+          args: $GAMEDIR
+          file: $CACHE/remove.sh
+
+      - extract:
+          src: $CACHE/uhx2/engine.tgz
+          dst: $GAMEDIR
+
+      - execute:
+        args: $GAMEDIR/music
+        file: mkdir
+
+      - move:
+          dst: $GAMEDIR/data1/music/casa1.ogg
+          src: $GAMEDIR/music/Track02.ogg
+      - move:
+          dst: $GAMEDIR/data1/music/casa2.ogg
+          src: $GAMEDIR/music/Track03.ogg
+      - move:
+          dst: $GAMEDIR/data1/music/casa3.ogg
+          src: $GAMEDIR/music/Track04.ogg
+      - move:
+          dst: $GAMEDIR/data1/music/casa4.ogg
+          src: $GAMEDIR/music/Track05.ogg
+      - move:
+          dst: $GAMEDIR/data1/music/egyp1.ogg
+          src: $GAMEDIR/music/Track06.ogg
+      - move:
+          dst: $GAMEDIR/data1/music/egyp2.ogg
+          src: $GAMEDIR/music/Track07.ogg
+      - move:
+          dst: $GAMEDIR/data1/music/egyp3.ogg
+          src: $GAMEDIR/music/Track08.ogg
+      - move:
+          dst: $GAMEDIR/data1/music/meso1.ogg
+          src: $GAMEDIR/music/Track09.ogg
+      - move:
+          dst: $GAMEDIR/data1/music/meso2.ogg
+          src: $GAMEDIR/music/Track10.ogg
+      - move:
+          dst: $GAMEDIR/data1/music/meso3.ogg
+          src: $GAMEDIR/music/Track11.ogg
+      - move:
+          dst: $GAMEDIR/data1/music/roma1.ogg
+          src: $GAMEDIR/music/Track12.ogg
+      - move:
+          dst: $GAMEDIR/data1/music/roma2.ogg
+          src: $GAMEDIR/music/Track13.ogg
+      - move:
+          dst: $GAMEDIR/data1/music/roma3.ogg
+          src: $GAMEDIR/music/Track14.ogg
+      - move:
+          dst: $GAMEDIR/data1/music/casb1.ogg
+          src: $GAMEDIR/music/Track15.ogg
+      - move:
+          dst: $GAMEDIR/data1/music/casb2.ogg
+          src: $GAMEDIR/music/Track16.ogg
+      - move:
+          dst: $GAMEDIR/data1/music/casb3.ogg
+          src: $GAMEDIR/music/Track17.ogg
+      - write_file:
+          content: 'bgmtype "midi"
+
+            vid_config_glx "$RESOLUTION_WIDTH"
+
+            vid_config_gly "$RESOLUTION_HEIGHT"
+
+            vid_config_fscr "1"
+
+            '
+          file: $GAMEDIR/config.cfg
+      - merge:
+          dst: $HOME/.hexen2/data1/
+          src: $GAMEDIR/config.cfg

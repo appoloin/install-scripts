@@ -28,6 +28,7 @@ script:
     - extract:
         format: gog
         file: $game
+        args: --gog
         dst: $CACHE
         description: Extracting game files
 
