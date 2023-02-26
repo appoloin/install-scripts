@@ -1,22 +1,19 @@
-name: Dark Fall Lost Souls 
-game_slug:   Dark Fall Lost Souls 
+name: Lula - The Sexy Empire
+game_slug: lula-the-sexy-empire
 version: Installer
-slug:  Dark Fall Lost Souls 
+slug: lula-the-sexy-empire
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/Dark Fall Lost Souls/DarkFallLostSouls.exe
-    arch: win32
+    exe: drive_c/GOG Games/Lula - The Sexy Empire/WET.EXE
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select installer
-
+    - setup: N/A:Select the Setup file
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
@@ -26,7 +23,11 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+    - task:
+        app: icodecs quartz
+        name: winetricks
+        prefix: $GAMEDIR
+
   wine:
     Desktop: true
-
 

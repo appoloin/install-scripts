@@ -24,7 +24,7 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-   wine:
+  wine:
     Desktop: true
     WineDesktop: 1024x768
     

@@ -1,0 +1,43 @@
+name:  Broken Sword 2 - The Smoking Mirror
+game_slug: broken-sword-2-the-smoking-mirror
+version: Installer
+slug: installer
+runner: scummvm
+
+script:
+  game:
+    game_id: sword2  
+    path: $GAMEDIR
+  
+  files:
+    - game: N/A:Select GOG installer.
+
+  installer: 
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$1
+          
+          find "$src" -maxdepth 1 -type d \( -iname scummvm -o
+                                            -iname save \) -exec rm -r {}  \;
+                                            
+          find "$src" -maxdepth 1 -type f \( -iname "*.dll" -o
+                                            -iname "*.ico" -o
+                                            -iname "*.ini" \) -exec rm {}  \;'
+        file: $CACHE/remove.sh
+    - chmodx: $CACHE/remove.sh   
+
+    - extract:
+        format: gog
+        file: $game
+        args: --gog --include "app"
+        dst: $GAMEDIR
+        description: Extracting game files
+
+    - execute:
+        args: $GAMEDIR
+        file: $CACHE/remove.sh
+
+
+  scummvm:
+    fullscreen: true

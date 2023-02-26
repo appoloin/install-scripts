@@ -1,13 +1,12 @@
-name: Jade Empire
-game_slug: jade-empire-special-edition
+name: Unreal Gold
+game_slug: unreal-gold
 version: Installer
-slug: INSTALLER
+slug: unreal-gold
 runner: wine
 
 script:
-  game:
-    exe: $GAMEDIR/drive_c/GOG Games/Jade Empire/JadeEmpire.exe
-    arch: win32
+  game: 
+    exe: $GAMEDIR/drive_c/GOG Games/
     prefix: $GAMEDIR
 
   files:
@@ -16,14 +15,8 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
-        prefix: $GAMEDIR
-
-    - task:
-        app: win7
-        name: winetricks
         prefix: $GAMEDIR
 
     - task:

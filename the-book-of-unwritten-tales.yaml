@@ -1,12 +1,12 @@
-name: signal ops
-game_slug: signal-ops
+name: The Book Of Unwritten Tales
+game_slug: the-book-of-unwritten-tales
 version: Installer
-slug: signal-ops-installer
+slug: unwritten-installer
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Signal Ops/signalops_client.exe
+    exe: $GAMEDIR/drive_c/Program Files/GOG.com/The Book of Unwritten Tales/bout.exe
     arch: win32
     prefix: $GAMEDIR
 
@@ -18,6 +18,7 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:

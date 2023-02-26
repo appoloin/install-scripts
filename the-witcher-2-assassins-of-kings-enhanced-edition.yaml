@@ -1,5 +1,5 @@
-name: wither-2
-game_slug: witcher-2
+name: The Wither 2 - Assassins of Kings
+game_slug: the-witcher-2-assassins-of-kings-enhanced-edition
 version: Installer
 slug: witcher-2-installer
 runner: wine
@@ -22,45 +22,10 @@ script:
             prefix: $GAMEDIR
 
         - task:
-            app: gdiplus
+            app: gdiplus d3dx9_36 d3dx9_39 vcrun2010 win7 dotnet40
             arch: win32
             name: winetricks
             prefix: $GAMEDIR
-
-        - task:
-            app: d3dx9_36
-            arch: win32
-            name: winetricks
-            prefix: $GAMEDIR
-
-        - task:
-            app: d3dx9_39
-            arch: win32
-            name: winetricks
-            prefix: $GAMEDIR
-
-        - task:
-            app: vcrun2010 win7
-            arch: win32
-            name: winetricks
-            prefix: $GAMEDIR
-
-        - task:
-            app: dotnet40
-            arch: win32
-            name: winetricks
-            prefix: $GAMEDIR
-
-        - task:
-            app: galliumnine
-            arch: win32
-            name: winetricks
-            prefix: $GAMEDIR
-
-        - task:
-            executable: ninewinecfg
-            prefix: $GAMEDIR
-            name: wineexec
 
         - task:
             description: Installing Witcher 2

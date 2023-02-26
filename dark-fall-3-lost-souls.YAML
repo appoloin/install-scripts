@@ -1,12 +1,12 @@
-name: teslagrad
-game_slug: teslagrad
+name: Dark Fall Lost Souls 
+game_slug:  dark-fall-3-lost-souls
 version: Installer
-slug: teslagrad
+slug: dark-fall-3-lost-souls
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Teslagrad/Teslagrad.exe
+    exe: $GAMEDIR/drive_c/Program Files/Dark Fall Lost Souls/DarkFallLostSouls.exe
     arch: win32
     prefix: $GAMEDIR
 

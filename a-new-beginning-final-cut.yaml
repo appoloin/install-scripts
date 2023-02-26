@@ -22,17 +22,7 @@ script:
         prefix: $GAMEDIR
   
     - task:
-        app: vcrun2012
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: dotnet40 
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: win7
+        app: vcrun2012 dotnet40 win7
         name: winetricks
         prefix: $GAMEDIR
 

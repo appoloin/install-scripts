@@ -1,6 +1,5 @@
-#TODO no cd needed
 name: The Black Mirror
-game_slug: The_Black_Mirror
+game_slug: the-black-mirror
 version: Installer
 slug:  The_Black_Mirror-installer
 runner: wine

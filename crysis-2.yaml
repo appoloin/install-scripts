@@ -1,29 +1,29 @@
-name: LEGO Batman 3 - Beyond Gotham
-game_slug: lego-batman-3-beyond-gotham
+name: crysis 2
+game_slug: crysis-2
 version: Installer
-slug: INSTALLER
+slug: crysis-2
 runner: wine
 
 script:
-  game:
-    exe: $GAMEDIR/drive_c/GOG Games/Lego - Star Wars - The Complete Saga/LEGOStarWarsSaga.exe
+  game: 
+    exe: $GAMEDIR/drive_c/Program Files/Crytek/Crysis 2 - Maximum Edition/bin32/Crysis2.exe
+    arch: win32
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
-    - DLC: N/A:Select DLC installer
-
 
   installer:
     - task:
         name: create_prefix
+        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx9 d3dcompiler_47 xact
-        description: Installing D3DX9, d3dcompiler_47, xact
+        app: d3dx9 corefonts tahoma vcrun2008 vcrun2012
+        arch: win32
         name: winetricks
         prefix: $GAMEDIR
 
@@ -34,5 +34,5 @@ script:
 
   wine:
     Desktop: true
-    esync: false
+
 

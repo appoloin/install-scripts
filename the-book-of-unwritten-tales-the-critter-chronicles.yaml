@@ -1,29 +1,23 @@
-name: Jade Empire
-game_slug: jade-empire-special-edition
+name: The Book Of Unwritten Tales - The Critter Chronicles
+game_slug: the-book-of-unwritten-tales-the-critter-chronicles
 version: Installer
-slug: INSTALLER
+slug: unwritten-installer
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Jade Empire/JadeEmpire.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Critter Chronicles/CritterChronicles.exe
     arch: win32
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select installer
+    - setup: N/A:Select Setup
 
   installer:
     - task:
         name: create_prefix
         arch: win32
         install_mono: false
-        install_gecko: false
-        prefix: $GAMEDIR
-
-    - task:
-        app: win7
-        name: winetricks
         prefix: $GAMEDIR
 
     - task:
@@ -33,5 +27,4 @@ script:
 
   wine:
     Desktop: true
-
 

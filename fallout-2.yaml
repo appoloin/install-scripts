@@ -1,4 +1,4 @@
-name: Fallout
+name: Fallout 2
 game_slug: fallout-2
 version: Installer
 slug: fallout
@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: drive_c/GOG Games/Betrayal in Antara/ANTARAR.EXE
+    exe: drive_c/GOG Games/Fallout 2/fallout2.exe
     prefix: $GAMEDIR
 
   files:

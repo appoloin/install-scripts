@@ -1,13 +1,12 @@
-name: Jade Empire
-game_slug: jade-empire-special-edition
+name: Tomb Raider II
+game_slug: tomb-raider-iii
 version: Installer
-slug: INSTALLER
+slug: tomb-raider-ii
 runner: wine
 
 script:
-  game:
-    exe: $GAMEDIR/drive_c/GOG Games/Jade Empire/JadeEmpire.exe
-    arch: win32
+  game: 
+    exe: $GAMEDIR/drive_c/GOG Games/Tomb Raider 3/tomb3.exe
     prefix: $GAMEDIR
 
   files:
@@ -16,14 +15,8 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
-        prefix: $GAMEDIR
-
-    - task:
-        app: win7
-        name: winetricks
         prefix: $GAMEDIR
 
     - task:

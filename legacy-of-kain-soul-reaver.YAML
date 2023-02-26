@@ -1,12 +1,12 @@
-name: Jade Empire
-game_slug: jade-empire-special-edition
+name: Legacy of Kain Soul - Reaver 2
+game_slug:  legacy-of-kain-soul-reaver
 version: Installer
 slug: INSTALLER
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Jade Empire/JadeEmpire.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Legacy of Kain Soul Reaver/kain2.exe
     arch: win32
     prefix: $GAMEDIR
 
@@ -19,11 +19,6 @@ script:
         arch: win32
         install_mono: false
         install_gecko: false
-        prefix: $GAMEDIR
-
-    - task:
-        app: win7
-        name: winetricks
         prefix: $GAMEDIR
 
     - task:

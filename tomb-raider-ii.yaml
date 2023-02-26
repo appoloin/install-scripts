@@ -1,23 +1,22 @@
-name: The Book Of Unwritten Tales critter
-game_slug: unwritten
+name: Tomb Raider II
+game_slug: tomb-raider-ii
 version: Installer
-slug: unwritten-installer
+slug: tomb-raider-ii
 runner: wine
 
 script:
-  game:
-    exe: $GAMEDIR/drive_c/GOG Games/Critter Chronicles/CritterChronicles.exe
-    arch: win32
+  game: 
+    exe: $GAMEDIR/drive_c/GOG Games/Tomb Raider 2/Tomb2.exe
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select Setup
+    - setup: N/A:Select installer
 
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
@@ -27,4 +26,5 @@ script:
 
   wine:
     Desktop: true
+
 

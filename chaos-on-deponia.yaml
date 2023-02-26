@@ -1,18 +1,17 @@
-name: Jade Empire
-game_slug: jade-empire-special-edition
+name: Chaos on Deponia 
+game_slug: chaos-on-deponia
 version: Installer
-slug: INSTALLER
+slug: deponia-installer
 runner: wine
+
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Jade Empire/JadeEmpire.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Chaos on Deponia/deponia2.exe
     arch: win32
     prefix: $GAMEDIR
-
   files:
-    - setup: N/A:Select installer
-
+    - setup: N/A:Select the Setup file
   installer:
     - task:
         name: create_prefix
@@ -22,16 +21,10 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: win7
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
 
   wine:
     Desktop: true
-
 

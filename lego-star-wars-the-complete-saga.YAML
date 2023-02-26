@@ -1,28 +1,29 @@
-name: Jade Empire
-game_slug: jade-empire-special-edition
+name: LEGO Star Wars
+game_slug: lego-star-wars-the-complete-saga
 version: Installer
 slug: INSTALLER
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Jade Empire/JadeEmpire.exe
-    arch: win32
+    exe: $GAMEDIR/drive_c/GOG Games/Lego - Star Wars - The Complete Saga/LEGOStarWarsSaga.exe
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
+    - DLC: N/A:Select DLC installer
+
 
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
     - task:
-        app: win7
+        app: d3dx9 d3dcompiler_47 xact
+        description: Installing D3DX9, d3dcompiler_47, xact
         name: winetricks
         prefix: $GAMEDIR
 
@@ -33,5 +34,5 @@ script:
 
   wine:
     Desktop: true
-
+    esync: false
 
