@@ -1,12 +1,12 @@
-name: Unreal Gold
-game_slug: unreal-gold
+name: Might and Magic VII - For Blood and Honor
+game_slug: might-and-magic-vii-for-blood-and-honor
 version: Installer
-slug: unreal-gold
+slug: might-and-magic-vii-for-blood-and-honor
 runner: wine
 
 script:
   game: 
-    exe: $GAMEDIR/drive_c/GOG Games/Unreal Gold/System/Unreal.exe
+    exe: $GAMEDIR/drive_c/Program Files/GOG.com/Might and Magic VII/MM7.exe
     prefix: $GAMEDIR
 
   files:

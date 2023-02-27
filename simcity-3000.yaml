@@ -1,12 +1,12 @@
-name: Unreal Gold
-game_slug: unreal-gold
+name: Simcity 3000
+game_slug: simcity-3000
 version: Installer
-slug: unreal-gold
+slug: simcity-3000
 runner: wine
 
 script:
   game: 
-    exe: $GAMEDIR/drive_c/GOG Games/Unreal Gold/System/Unreal.exe
+    exe: $GAMEDIR/drive_c/GOG Games/SimCity 3000 Unlimited/Apps/SC3U.exe
     prefix: $GAMEDIR
 
   files:

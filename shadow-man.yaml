@@ -1,12 +1,12 @@
-name: Unreal Gold
-game_slug: unreal-gold
+name: Shadow Ma
+game_slug: shadow-man
 version: Installer
-slug: unreal-gold
+slug: shadow-man
 runner: wine
 
 script:
   game: 
-    exe: $GAMEDIR/drive_c/GOG Games/Unreal Gold/System/Unreal.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Shadow Man/Shadowman.exe
     prefix: $GAMEDIR
 
   files:

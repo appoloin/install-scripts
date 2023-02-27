@@ -1,12 +1,12 @@
-name: Unreal Gold
-game_slug: unreal-gold
+name: Rollercoaster Tycoon 2
+game_slug: rollercoaster-tycoon-2
 version: Installer
-slug: unreal-gold
+slug: rollercoaster-tycoon-2
 runner: wine
 
 script:
   game: 
-    exe: $GAMEDIR/drive_c/GOG Games/Unreal Gold/System/Unreal.exe
+    exe: $GAMEDIR/drive_c/Program Files (x86)/GOGcom/RollerCoaster Tycoon/rc2.exe
     prefix: $GAMEDIR
 
   files:
