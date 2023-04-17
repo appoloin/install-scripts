@@ -135,7 +135,15 @@ script:
         working_dir: $GAMEDIR/HDD/
     
     - write_file:
-        content: '[mouse]
+        content: '[midi]
+        
+            mididevice = mt32
+
+          [gus]
+
+            gus = true
+
+          [mouse]
 
             capture_mouse = onstart middlerelease  
 
@@ -143,11 +151,13 @@ script:
 
           [sdl]
 
-           fullresolution=desktop
+          fullresolution=desktop
 
-            windowresolution=original
+          windowresolution=original
 
-            output=opengl
+          fullscreen=true
+
+          output=opengl
 
           [render]
 
