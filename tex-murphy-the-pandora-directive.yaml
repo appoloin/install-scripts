@@ -9,6 +9,11 @@ script:
   game:
     main_file: $GAMEDIR/pandora.conf
 
+  files:
+    - GUS: 
+        url: https://drive.google.com/uc?export=download&id=1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6
+        filename: gus.zip
+
   installer:  
     - write_file:
         content: '#!/bin/bash
@@ -25,6 +30,10 @@ script:
     - execute:
         args: $GAMEDIR/HDD $GAMEDIR/CDD $GAMEDIR/CDD/DISC1 $GAMEDIR/CDD/DISC2 $GAMEDIR/CDD/DISC3 $GAMEDIR/CDD/DISC4 $GAMEDIR/CDD/DISC5 $GAMEDIR/CDD/DISC6
         file: mkdir
+
+    - extract:
+        file: $GUS
+        dst: $GAMEDIR/HDD/ULTRASND
 
     - insert-disc:
         description: Please insert disc 1
@@ -137,11 +146,13 @@ script:
     - write_file:
         content: '[midi]
         
-            mididevice = mt32
+            mididevice = fluidsynth
 
           [gus]
 
             gus = true
+
+            ultradir = C:\ULTRASND
 
           [mouse]
 
