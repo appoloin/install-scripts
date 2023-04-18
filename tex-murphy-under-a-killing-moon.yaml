@@ -127,8 +127,11 @@ script:
 
             mouse_sensitivity= 15
 
-         [sdl]
+         [cpu]
 
+           cycles = 12000
+
+         [sdl]
 
           fullresolution=desktop
 
