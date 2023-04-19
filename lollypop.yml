@@ -1,0 +1,69 @@
+name:  Lollypop
+game_slug: lollypop
+version: Installer
+slug: lollypop
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select GOG installer
+
+  game:
+    main_file: $GAMEDIR/play.conf
+  
+  installer:
+    - extract:
+        format: gog
+        file: $game
+        args: --gog 
+        dst: $CACHE
+        description: Extracting game files
+
+    - copy:
+        src: $CACHE/GameData/C
+        dst: $GAMEDIR/HDD
+
+    - copy:
+        src: $CACHE/GameData/CD
+        dst: $GAMEDIR/CDD
+
+    - copy:
+        src: $CACHE/GameData/Manuals
+        dst: $GAMEDIR/Manuals
+
+    - write_file:
+        content: '[sdl]
+
+          fullresolution=desktop
+
+          windowresolution=original
+
+          fullscreen=true
+
+          output=opengl
+
+          [mouse]
+
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
+
+
+          [render]
+
+            aspect=true
+
+            scaler=normal2x
+
+          [autoexec]
+
+            mount C -t dir "$GAMEDIR/HDD" 
+
+            imgmount D -t iso -fs iso "$GAMEDIR/CDD/LOLLYPOP.cue" 
+
+            C:
+
+            run
+
+            exit'
+        file: $GAMEDIR/play.conf
