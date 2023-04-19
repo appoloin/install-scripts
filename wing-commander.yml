@@ -71,13 +71,13 @@ script:
           
           [cpu]
 
-         cycles=4000
+         cycles=3000
 
           [mouse]
 
             capture_mouse = onstart middlerelease  
 
-            mouse_sensitivity= 15
+            mouse_sensitivity= 30
 
 
           [sdl]
