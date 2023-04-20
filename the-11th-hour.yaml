@@ -1,0 +1,46 @@
+name: The 11th Hour 
+game_slug: the-11th-hour
+version: Installer
+slug: the-11th-hour
+runner: scummvm
+
+
+script:
+  files:
+     - game:  N/A:Select GOG installer
+
+  game:
+      game_id: groovie:11h
+      path: $GAMEDIR
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$1
+          
+          find "$src" -maxdepth 1 -type d \( -iname app -o
+                                            -iname commonappdata -o
+                                            -iname *redist -o
+                                            -iname scummvm -o
+                                            -iname dosbox -o
+                                            -iname *support -o
+                                            -iname tmp \) -exec rm -r {}  \;
+                                            
+          find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
+        file: $CACHE/remove.sh
+    - chmodx: $CACHE/remove.sh
+
+    - extract:
+        format: gog
+        file: $game
+        args: --gog 
+        dst: $GAMEDIR
+        description: Extracting game files
+
+    - execute:
+        args: $GAMEDIR
+        file: $CACHE/remove.sh
+        
+  scummvm:
+      fullscreen: true
