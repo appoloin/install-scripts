@@ -1,16 +1,16 @@
-name: Star Trek - Armada 2
-game_slug: star-trek-armada-2
+name: Guns Gore and Cannoli
+game_slug: guns-gore-and-cannoli
 version: Installer
-slug: star-trek-armada-2
+slug: guns-gore-and-cannoli
 runner: wine
- 
+
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Star Trek Armada/Armada.exe
+    exe: $GAMEDIR/drive_c//GOG Games/Guns, Gore & Cannoli/ggc.exe
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select the GOG installer
+    - setup: N/A:Select installer
 
   installer:
     - task:
@@ -24,6 +24,8 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+
   wine:
     Desktop: true
+
 

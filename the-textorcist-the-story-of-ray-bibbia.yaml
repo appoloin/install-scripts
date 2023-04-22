@@ -1,12 +1,12 @@
-name: Star Trek - Armada 2
-game_slug: star-trek-armada-2
+name: The Textorcist - The Story of Ray Bibbia
+game_slug: the-textorcist-the-story-of-ray-bibbia
 version: Installer
-slug: star-trek-armada-2
+slug: installer
 runner: wine
- 
+
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Star Trek Armada/Armada.exe
+    exe: $GAMEDIR/drive_c/GOG Games/The Textorcist The Story of Ray Bibbia/Textorcist.exe
     prefix: $GAMEDIR
 
   files:
@@ -23,7 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-

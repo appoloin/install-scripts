@@ -1,12 +1,12 @@
-name: Star Trek - Armada 2
-game_slug: star-trek-armada-2
+name: XIII
+game_slug: xiii
 version: Installer
-slug: star-trek-armada-2
+slug: xiii
 runner: wine
  
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Star Trek Armada/Armada.exe
+    exe: $GAMEDIR/drive_c/GOG Games/
     prefix: $GAMEDIR
 
   files:
