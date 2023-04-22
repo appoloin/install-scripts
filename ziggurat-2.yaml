@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/
+    exe: $GAMEDIR/drive_c/GOG Games/Ziggurat2/Ziggurat2.exe
     prefix: $GAMEDIR
 
   files:
