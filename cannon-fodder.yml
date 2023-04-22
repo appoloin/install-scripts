@@ -1,0 +1,97 @@
+name: Cannon Fodder
+game_slug: cannon-fodder
+version: Installer
+slug: installer
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select GOG installer.
+
+  game:
+    main_file: $GAMEDIR/CannonFodder.conf
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$1
+          
+          dst=$2
+
+          file=$3
+
+          find "$src" -maxdepth 1 -type f \( -iname $file \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy2.sh
+    - chmodx: $CACHE/selectcopy2.sh
+
+    - extract:
+        format: gog
+        file: $game
+        args: --gog
+        dst: $CACHE
+        description: Extracting game files
+
+    - execute:
+        args: $GAMEDIR/cannon   
+        file: mkdir
+    
+    - execute:
+        args: $CACHE $GAMEDIR "*.PDF"
+        file: $CACHE/selectcopy2.sh
+
+    - execute:
+        args: $CACHE $GAMEDIR/cannon "*.BIN"
+        file: $CACHE/selectcopy2.sh
+
+    - execute:
+        args: $CACHE $GAMEDIR/cannon "*.EXE"
+        file: $CACHE/selectcopy2.sh
+
+    - execute:
+        args: $CACHE $GAMEDIR/cannon "*.DAT"
+        file: $CACHE/selectcopy2.sh
+
+    - write_file:
+        content: '[cpu]
+
+          cycles=max
+
+          [mouse]
+
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 25
+
+          [sdl]
+
+            fullresolution=desktop
+
+            windowresolution=original
+
+            fullscreen=true
+
+            output=opengl
+
+          [render]
+
+            aspect=true
+
+            scaler=normal2x
+
+          [autoexec]
+
+            @echo off
+          
+            mount C "$GAMEDIR" -t dir
+
+            C: 
+
+            CD cannon
+
+            INTRO.EXE
+
+            CF_ENG.EXE /f
+
+            exit'
+        file: $GAMEDIR/CannonFodder.conf
