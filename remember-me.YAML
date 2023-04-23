@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/Games/Remember Me/Binaries/Win32/RememberMe.exe
+    exe: $GAMEDIR/drive_c/Games/Remember Me/Binaries/Win32/RememberMe.exe
     prefix: $GAMEDIR
 
   files:
