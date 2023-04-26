@@ -6,7 +6,7 @@ runner: wine
  
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Star Trek Bridge Commander/stbc.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Star Trek SFC3/SFC3.exe
     prefix: $GAMEDIR
 
   files:
