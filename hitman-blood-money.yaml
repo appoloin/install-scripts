@@ -1,0 +1,30 @@
+name: Hitman - Blood Money
+game_slug: hitman-blood-money
+version: Installer
+slug: installer
+runner: wine
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    arch: win32
+    exe: $GAMEDIR/drive_c/GOG Games/Hitman Blood Money/HitmanBloodMoney.exe
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        arch: win32
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true

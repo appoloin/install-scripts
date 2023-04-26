@@ -1,0 +1,29 @@
+name: Prince of Persia
+game_slug: prince-of-persia-2008
+version: Installer
+slug: installer
+runner: wine
+ 
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Prince of Persia/Prince of Persia.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+

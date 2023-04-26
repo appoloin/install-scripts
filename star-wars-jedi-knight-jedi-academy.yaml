@@ -1,0 +1,32 @@
+name: Star Wars - Jedi knight - Jedi Academy
+game_slug: star-wars-jedi-knight-jedi-academy
+version: Installer
+slug: installer
+runner: wine
+
+script:
+  game: 
+    exe: $GAMEDIR/drive_c/GOG Games/Star Wars Jedi Knight - Jedi Academy/JediAcademy.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        arch: win32
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
+
