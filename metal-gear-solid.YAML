@@ -1,0 +1,69 @@
+name: Metal Gear Solid
+game_slug: metal-gear-solid
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Metal Gear Solid/MGSILauncher.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1K5dxzk_XdzZuYcSfCcPPSieRdvePkobF $CACHE/MGSILauncher-1.3.6.zip
+
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: wsh57 dotnet48
+        description: Install components with Winetricks
+        name: winetricks
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x "$CACHE/MGSILauncher-1.3.6.zip" -o"$GAMEDIR/drive_c/GOG Games/Metal Gear Solid/" -ppassword -y
+        
+  wine:
+    overrides:
+        ddraw.dll: n,b
+        dinput.dll: n,b    
+    Desktop: true
+
+

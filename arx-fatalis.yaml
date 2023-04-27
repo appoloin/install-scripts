@@ -1,0 +1,34 @@
+name: Arx Fatalis
+game_slug: arx-fatalis
+version: Installer
+slug: installer
+runner: linux
+
+script:
+  game: 
+    exe: $GAMEDIR/arx
+    working_dir: $GAMEDIR 
+
+  files:
+    - game: N/A:Select installer
+    - arx-libertatis-x64:
+        url: https://drive.google.com/uc?export=download&id=1rXtkLAGhQdZZkE35snpO_XM9LDlxR3-D
+        filename: arx-libertatis-1.2.1-linux.tar.xz
+
+  installer:
+    - extract:
+        format: gog
+        file: $game
+        args: --gog --include app
+        dst: $CACHE
+        description: Extracting game files
+
+    - extract:
+        file: arx-libertatis-x64
+        dst: $GAMEDIR
+    
+    - execute:
+        file: $GAMEDIR/bin/arx-install-data
+        args: --batch --source $CACHE/app --data-dir $GAMEDIR/data
+
+

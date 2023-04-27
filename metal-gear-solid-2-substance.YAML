@@ -1,0 +1,70 @@
+name: Metal Gear Solid 2 - Substance
+game_slug: metal-gear-solid-2-substance
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Metal Gear Solid 2 Substance/bin/MGS2SSetup.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1FwfpcPX1fQ1Xf2TD8wUfhDSOUOC7vyt0 $CACHE/MGS.V.s.Fix.v1.8.1.7z
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: directmusic dsdmo 
+        description: Install components with Winetricks
+        name: winetricks
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x "$CACHE/MGS.V.s.Fix.v1.8.1.7z" -o"$GAMEDIR/drive_c/GOG Games/Metal Gear Solid 2 Substance/bin" -ppassword -y
+
+
+  wine:
+    overrides:
+      d3d8.dll: n,b
+      d3d9.dll: n,b
+      dsound_x64.dll: n,b
+    Desktop: true
+
+
