@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/
+    exe: $GAMEDIR/drive_c/GOG Games/Necronomicon/Necrono.exe
     arch: win32
     prefix: $GAMEDIR
 
