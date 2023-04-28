@@ -1,0 +1,28 @@
+name: Sid Meyers - Alpha Centauri
+game_slug: sid-meyers-alpha-centauri
+version: Installer
+slug: installer
+runner: wine
+
+script:
+  game:
+    prefix: $GAMEDIR
+    exe: $GAMEDIR/drive_c/GOG Games/Sid Meier's Alpha Centauri/axstart.exe
+
+  files:
+    - setup: N/A:Select the Setup file
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    Desktop: true
+
