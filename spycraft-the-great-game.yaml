@@ -1,0 +1,125 @@
+name: Codename - Iceman
+game_slug: spycraft-the-great-game
+version: Installer
+slug:  installer
+runner: dosbox
+
+
+script:
+  files:
+    - game:  N/A:Select the GOG installer
+
+  game:
+    main_file: $GAMEDIR/play.conf
+  
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$1
+          
+          find "$src" -maxdepth 1 -type d \( -iname app -o
+                                            -iname commonappdata -o
+                                            -iname *redist -o
+                                            -iname scummvm -o
+                                            -iname dosbox -o
+                                            -iname *support -o
+                                            -iname tmp \) -exec rm -r {}  \;
+                                            
+          find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
+        file: $CACHE/remove.sh
+    - chmodx: $CACHE/remove.sh
+
+    - extract:
+        format: gog
+        file: $game
+        args: --gog
+        dst: $GAMEDIR
+        description: Extracting game files
+        
+    - write_file:
+        content: '[midi]
+
+          mididevice = mt32
+    
+         [mouse]
+
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 10
+
+          
+          [autoexec]
+
+            mount D "$GAMEDIR/DATA/" -t -cdrom 
+
+            mount C "$GAMEDIR" -t dir -freesize 1024
+             
+            c:
+
+            cls 
+
+            ECHO OFF
+
+            goto launcher
+
+            :launcher
+
+            cls 
+
+            ECHO  -------------------------------------------  
+            
+            ECHO                 Skycraft
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Play        
+            
+            ECHO   2) Setup                                
+           
+
+            ECHO  -------------------------------------------  
+            
+            ECHO   3) exit program                             
+            
+            ECHO  -------------------------------------------  
+
+            choice /c123 /s Which program do you want to run? [1-3]: /n 
+            
+            if errorlevel 3 goto exit
+                      
+            if errorlevel 2 goto setup
+            
+            if errorlevel 1 goto game
+
+
+            :game
+
+            cls
+
+            c:
+
+            spydos
+
+            goto exit
+
+
+          :setup
+
+            cls
+
+            C:
+
+            setsound
+
+            goto launcher
+
+
+            :exit
+                      
+            exit'
+        file: $GAMEDIR/play.conf
+
+    - execute:
+        args: $GAMEDIR
+        file: $CACHE/remove.sh

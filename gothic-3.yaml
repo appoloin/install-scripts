@@ -6,12 +6,15 @@ runner: wine
 
 script:
   game: 
-    exe: $GAMEDIR/drive_c/GOG Games/Legacy of Kain Defiance/defiance.exe
+    exe: $GAMEDIR/drive_c/Program Files/Nordic Games/Gothic 3 Forsaken Gods - Enhanced Edition/Gothic III Forsaken Gods.exe
     arch: win32
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=1EiVeTCD-MbNYWD3icNqEkUZpTYRWO7Am
+        filename: patch.zip
 
   installer:
     - task:
@@ -25,6 +28,11 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: e  $patch -o"$GAMEDIR/drive_c/Program Files/Nordic Games/Gothic 3 Forsaken Gods - Enhanced Edition/" -ppassword -y
+
 
   wine:
     Desktop: true

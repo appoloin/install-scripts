@@ -1,0 +1,81 @@
+name: Battlestar Galactica - Deadlock
+game_slug: battlestar-galactica-deadlock
+version: Installer
+slug: installer
+runner: wine
+ 
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Battlestar Galactica Deadlock/BSG.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+    - DLC1: N/A:Select DLC1 installer
+    - DLC2: N/A:Select DLC2 installer
+    - DLC3: N/A:Select DLC3 installer
+    - DLC4: N/A:Select DLC4 installer
+    - DLC5: N/A:Select DLC5 installer
+    - DLC6: N/A:Select DLC6 installer
+    - DLC7: N/A:Select DLC7 installer
+    - DLC8: N/A:Select DLC8 installer
+
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC1
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC2
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC3
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC4
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC5
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC6
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC7
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC8
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+
+
+  wine:
+    Desktop: true
+

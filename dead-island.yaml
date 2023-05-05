@@ -1,22 +1,20 @@
-name: F.E.A.R. 2 - Project Orgin
-game_slug:  fear-2-project-origin
+name: Dead Island
+game_slug: dead-island
 version: Installer
-slug: INSTALLER
+slug: dead-island
 runner: wine
-
+ 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/FEAR 2/FEAR2.exe
-    arch: win32
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Games/Dead.Island.Game.of.The.Year.Edition/DeadIslandGame.exe
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select installer
+    - setup: N/A:Select the GOG installer
 
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
@@ -28,5 +26,4 @@ script:
 
   wine:
     Desktop: true
-
 
