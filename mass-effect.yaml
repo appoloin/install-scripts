@@ -6,7 +6,6 @@ runner: wine
 
 script:
     game:
-        arch: win32
         exe: $GAMEDIR/drive_c/Program Files/Mass Effect Ultimate Edition/Binaries/MassEffect.exe
         prefix: $GAMEDIR
 
@@ -16,7 +15,6 @@ script:
 
     installer:    
       - task:
-          arch: win32
           name: create_prefix
           install_mono: false
           install_gecko: false
@@ -59,8 +57,7 @@ script:
           value: va
 
       - task:
-          app: d3dx9 d3dcompiler_42 physx
-          arch: win32
+          app:  physx vcrun2012
           name: winetricks
           prefix: $GAMEDIR
 
