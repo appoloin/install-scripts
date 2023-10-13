@@ -1,7 +1,7 @@
 #TODO not working
 #seanky peak single-core enable
-name: Thief-3
-game_slug: thief-3
+name: Thief - Deadly Shadows
+game_slug: thief-deadly-shadows
 version: Installer
 slug: thief-3-installer
 runner: wine
@@ -17,22 +17,15 @@ script:
     prefix: $GAMEDIR
 
   installer:
-
     - task:
         arch: win32
         name: create_prefix
         install_mono: false
-        intall_gecko: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
         app: vcrun2008
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: d3dx9
         arch: win32
         name: winetricks
         prefix: $GAMEDIR
