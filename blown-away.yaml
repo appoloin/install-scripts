@@ -1,0 +1,205 @@
+name: BLown Away
+game_slug: blown-away
+version: Installer
+slug: blown-away
+runner: dosbox
+
+script:
+  files:
+    - $DISC1: N/A:Select CUE file.
+    - setup: 
+        url: https://drive.google.com/uc?export=download&id=12xs1EbZLNzgiICr6AJZboLHCCLYXyD4X
+        filename: win311.7z
+
+
+  game:
+    main_file: $GAMEDIR/play.conf
+    args: -userconf
+
+
+  installer:
+    - execute:
+        file: 7z
+        args: x $setup -o"$GAMEDIR" -ppassword -y
+
+
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$1
+
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+          cp -avr "$src_path/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: $DISC1 $GAMEDIR/CDD/
+        file: $CACHE/bulkcopy.sh
+
+    - write_file:
+        content: '[midi]
+
+            mididevice = mt32
+
+          [sblaster]
+
+            irq=5
+
+          [mouse]
+
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
+          
+          [autoexec]
+
+            mount C "$GAMEDIR/HDD" -t dir
+
+            imgmount D "$GAMEDIR/CDD/1476.cue" -t iso 
+
+            SET PATH=%PATH%;C:\WINDOWS;C:\;
+
+            SET TEMP=C:\WINDOWS\TEMP
+
+            win runexit D:\setup
+              
+            exit'
+        file: $GAMEDIR/setup.conf
+
+    - task:
+        config_file: $GAMEDIR/setup.conf
+        name: dosexec
+        working_dir: $GAMEDIR/HDD
+
+    - write_file:
+        content: '[midi]
+
+            mididevice = mt32
+
+          [sblaster]
+
+            irq=5
+
+          [mouse]
+
+            capture_mouse = onstart middlerelease  
+          
+            mouse_sensitivity= 15
+
+          [cpu]
+
+            cputype = pentium_slow
+          
+          [autoexec]
+
+            mount C "$GAMEDIR/HDD" -t dir
+
+            imgmount D "$GAMEDIR/CDD/1476.cue" -t iso 
+
+            SET PATH=%PATH%;C:\WINDOWS;C:\;
+
+            SET TEMP=C:\WINDOWS\TEMP
+            
+            ECHO OFF
+
+            goto launcher
+
+            :launcher
+
+            cls 
+
+            ECHO  -------------------------------------------  
+            
+            ECHO                  Blown Away
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Play    (NB use CTRL-F4 to swap CD)
+            
+            ECHO   2) Setup                                
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   3) Exit                              
+            
+            ECHO  -------------------------------------------  
+
+            choice /c123 /s Which program do you want to run? [1-3]: /n 
+            
+            if errorlevel 3 goto exit
+                      
+            if errorlevel 2 goto setup
+            
+            if errorlevel 1 goto game
+
+
+            :game
+
+            cls
+
+            win runexit C:\ba\blownaway.exe        
+            
+            goto launcher
+
+
+            :setup
+
+            cls
+
+            ECHO  -------------------------------------------  
+
+            ECHO                   SETUP
+
+            ECHO  -------------------------------------------  
+
+            ECHO   1) Install Game    
+
+            ECHO   2) System
+
+            ECHO  -------------------------------------------  
+
+            ECHO   3) Main Menu                                
+
+            ECHO  -------------------------------------------  
+
+            choice /c123 /s Which program do you want to run? [1-3]: /n 
+
+
+            if errorlevel 3 goto launcher
+
+            if errorlevel 2 goto system
+
+            if errorlevel 1 goto GameInstall
+
+
+
+            :GameInstall
+
+            cls
+
+            C:
+
+            win runexit D:\setup.exe
+
+            goto launcher
+
+
+            :system
+
+            CLS 
+
+            C:
+
+            call System.bat
+
+            goto setup
+
+
+            :exit
+            
+            exit'
+        file: $GAMEDIR/play.conf

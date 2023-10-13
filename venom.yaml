@@ -1,0 +1,57 @@
+name: Venom
+game_slug: venom
+version: Installer
+slug:   installer
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select TRILOGY.com
+
+  game:
+    main_file: $GAMEDIR/play.conf
+
+  installer:
+    - execute:
+        args: $GAMEDIR/HDD  $GAMEDIR/HDD/venom
+        file: mkdir
+
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$1
+
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+          cp -avr "$src_path/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: $game $GAMEDIR/HDD/venom
+        file: $CACHE/bulkcopy.sh
+
+    - write_file:
+        content: '[mouse]
+
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
+
+          [autoexec]
+
+            mount C "$GAMEDIR/HDD" -t dir
+
+            cls 
+
+            c: 
+
+            cd Venom 
+
+            TRILOGY.com
+
+            exit'
+        file: $GAMEDIR/play.conf
+

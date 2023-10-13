@@ -1,0 +1,158 @@
+name: The Rocketeer
+game_slug: the-rocketeer
+version: Installer
+slug:  installer
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select install.exe file.
+
+  game:
+    main_file: $GAMEDIR/play.conf
+
+  installer:
+    - execute:
+        args: $GAMEDIR/HDD $GAMEDIR/CDD $GAMEDIR/CDD/DISC1
+        file: mkdir
+
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$1
+
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+          cp -avr "$src_path/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: $game $GAMEDIR/CDD/DISC1
+        file: $CACHE/bulkcopy.sh
+
+    - write_file:
+        content: '[mouse]
+
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
+        
+          [autoexec]
+
+            mount D "$GAMEDIR/CDD/DISC1" -t dir 
+
+            mount C "$GAMEDIR/HDD" -t dir
+
+            D:
+
+            install
+            
+            exit'
+        file: $GAMEDIR/setup.conf
+
+    - task:
+        config_file: $GAMEDIR/setup.conf
+        name: dosexec
+        working_dir: $GAMEDIR/HDD
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: chmod
+
+
+    - write_file:
+        content: '[mouse]
+
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
+
+          [autoexec]
+
+            mount D "$GAMEDIR/CDD/DISC1" -t dir 
+
+            mount C "$GAMEDIR/HDD" -t dir
+
+            cls 
+
+            ECHO OFF
+
+            goto launcher
+
+            :launcher
+
+            cls 
+
+            ECHO  -------------------------------------------  
+            
+            ECHO             The Rocketeer
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Play       
+
+            ECHO   2) Setup
+
+            ECHO   3) Install  
+
+            ECHO  -------------------------------------------  
+            
+            ECHO   4) exit program                             
+            
+            ECHO  -------------------------------------------  
+
+            choice /c1234 /s Which program do you want to run? [1-4]: /n 
+            
+            if errorlevel 4 goto exit
+
+            if errorlevel 3 goto install
+
+            if errorlevel 2 goto setup
+
+            if errorlevel 1 goto game
+
+
+            :game
+
+            cls
+
+            c:
+
+            cd rocket
+
+            rocket
+
+            goto exit
+
+
+            :setup
+
+            cls
+
+            c:
+
+            cd rocket
+            
+            setup
+
+            goto launcher
+
+
+          :install
+
+            cls
+
+            D:
+
+            install
+
+            goto launcher
+
+            :exit
+
+            exit'
+        file: $GAMEDIR/play.conf
+
