@@ -35,8 +35,8 @@ script:
     - chmodx: $CACHE/selectcopy.sh
 
     - execute:
-      file: 7z
-      args: e $patch -o"$GAMEDIR" -ppassword -y
+        file: 7z
+        args: e $patch -o"$GAMEDIR" -ppassword -y
 
     - execute:
         args: $DISC1 $GAMEDIR
