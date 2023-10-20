@@ -1,5 +1,5 @@
-name: Arctcio
-game_slug: arctcio
+name: Arctico
+game_slug: Arctico
 version: Installer
 slug: INSTALLER
 runner: wine
