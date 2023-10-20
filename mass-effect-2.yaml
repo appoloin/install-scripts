@@ -6,7 +6,7 @@ runner: wine
 
 script:
     game:
-        exe: $GAMEDIR/drive_c/Program Files/Mass Effect 2 Ultimate Edition/Binaries/MassEffect2.exe
+        exe: $GAMEDIR/drive_c/Program Files (x86)/Mass Effect 2 Ultimate Edition/Binaries/MassEffect2.exe
         prefix: $GAMEDIR
 
     files:

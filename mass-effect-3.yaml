@@ -6,7 +6,7 @@ runner: wine
 
 script:
     game:
-        exe: drive_c/Program Files/Mass Effect 3/Binaries/Win32/MassEffect3.exe
+        exe: drive_c/Program Files (x86)/Mass Effect 3/Binaries/Win32/MassEffect3.exe
         prefix: $GAMEDIR
 
     files:
