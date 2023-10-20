@@ -15,8 +15,8 @@ script:
   installer:
     - task:
         name: create_prefix
-        install_mono: false
-        install_gecko: false
+        install_mono: true
+        install_gecko: true
         prefix: $GAMEDIR
 
     - task:
