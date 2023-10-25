@@ -1,0 +1,39 @@
+name: Alpha Protocol
+game_slug: alpha-protocol
+version: Installer
+slug: installer
+runner: wine
+ 
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files (x86)/SEGA/Alpha Protocol/APLauncher.exe
+    args: -dx9
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=1k1R8JundS40WA1d5Wo0gR-oGikqlfq7y
+        filename: patch.7z
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: physx
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/$GAMEDIR/drive_c/Program Files (x86)/SEGA/Alpha Protocol/" -ppassword -y
+
