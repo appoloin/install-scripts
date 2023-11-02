@@ -33,9 +33,3 @@ script:
         executable: $patch
         name: wineexec
         prefix: $GAMEDIR
-
-
-  wine:
-    Desktop: true
-
-
