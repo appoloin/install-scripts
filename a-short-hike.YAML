@@ -26,8 +26,5 @@ script:
         args: /SILENT
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true
-
   system:
     pulse_latency: true
