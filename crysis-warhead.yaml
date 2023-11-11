@@ -7,7 +7,6 @@ runner: wine
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Crysis Warhead/Bin64/Crysis.exe 
-    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -21,7 +20,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx9 corefonts tahoma vcrun2008 vcrun2012
+        app: corefonts tahoma vcrun2008 vcrun2012
         name: winetricks
         prefix: $GAMEDIR
 
