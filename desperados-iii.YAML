@@ -43,9 +43,3 @@ script:
         name: wineexec
         args: /SILENT /DIR="C:/game"
         prefix: $GAMEDIR
-
-
-  wine:
-    Desktop: true
-
-
