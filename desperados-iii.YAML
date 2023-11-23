@@ -26,20 +26,20 @@ script:
     - task:
         executable: $setup
         name: wineexec
-        args: /SILENT /DIR="C:/game"
+        args: /DIR="C:/game"
         prefix: $GAMEDIR
     - task:
         executable: $DLC1
         name: wineexec
-        args: /SILENT /DIR="C:/game"
+        args: /DIR="C:/game"
         prefix: $GAMEDIR
     - task:
         executable: $DLC2
         name: wineexec
-        args: /SILENT /DIR="C:/game"
+        args: /DIR="C:/game"
         prefix: $GAMEDIR
     - task:
         executable: $DLC3
         name: wineexec
-        args: /SILENT /DIR="C:/game"
+        args: /DIR="C:/game"
         prefix: $GAMEDIR
