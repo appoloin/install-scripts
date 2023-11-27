@@ -32,5 +32,5 @@ script:
     - write_config:
         file: $GAMEDIR/drive_c/Games/Borderlands Game of the Year Enhanced/Binaries/Win64/steam_emu.ini 
         section: Settings
-        key: Oflline
+        key: Offline
         value: 1
