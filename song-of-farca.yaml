@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/
+    exe: $GAMEDIR/drive_c/GOG Games/Song of Farca/Song of Farca.exe
     prefix: $GAMEDIR
 
   files:
@@ -23,6 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
