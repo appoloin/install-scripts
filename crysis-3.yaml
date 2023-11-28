@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game: 
-    exe: $GAMEDIR/drive_c/drive_c/Program Files (x86)/Crysis 3/Bin32/Crysis3.exe
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Crysis 3/Bin32/Crysis3.exe
     prefix: $GAMEDIR
 
   files:
@@ -19,7 +19,7 @@ script:
     - task:
         name: create_prefix
         install_gecko: false
-        install_mono: false
+        install_mono: true
         prefix: $GAMEDIR
 
     - task:
@@ -34,5 +34,5 @@ script:
 
     - execute:
         file: 7z
-        args: e $patch -o"$GAMEDIR/drive_c/drive_c/Program Files (x86)/Crysis 3/" -ppassword -y
+        args: e $patch -o"$GAMEDIR/drive_c/drive_c/Program Files (x86)/Crysis 3" -ppassword -y
 
