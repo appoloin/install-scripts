@@ -23,7 +23,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: vcrun2012
+        app: vcrun2012 d3dx11_43 xact xact_64
         name: winetricks
         prefix: $GAMEDIR
 
