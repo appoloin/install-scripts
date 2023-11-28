@@ -1,4 +1,4 @@
-name: crysis-3
+name: Crysis 3
 game_slug: crysis-3
 version: Installer
 slug: crysis-3
@@ -34,5 +34,5 @@ script:
 
     - execute:
         file: 7z
-        args: e $patch -o"$GAMEDIR/drive_c/drive_c/Program Files (x86)/Crysis 3" -ppassword -y
+        args: e $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Crysis 3" -ppassword -y
 
