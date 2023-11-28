@@ -34,5 +34,5 @@ script:
 
     - execute:
         file: 7z
-        args: e $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Crysis 3" -ppassword -y
+        args: e $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Crysis 3/Bin32/" -ppassword -y
 
