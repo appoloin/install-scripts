@@ -1,4 +1,4 @@
-name: Monkey Island - 2 - LeChucks Revenge
+name: Monkey Island 2 - LeChucks Revenge
 game_slug: monkey-island-2-lechucks-revenge
 version: Installer
 slug:  monkey_island_2_lechucks_revenge-installer
@@ -31,3 +31,7 @@ script:
     - execute:
         args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
+
+
+  scummvm:
+    fullscreen: true
