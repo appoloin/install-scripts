@@ -18,26 +18,14 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: true
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx9
+        app:  d3dx9 corefonts tahoma
         arch: win32
         name: winetricks
         prefix: $GAMEDIR
-
-    - task:
-        app: corefonts
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: tahoma
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-
 
     - task:
         executable: $setup
