@@ -73,7 +73,6 @@ script:
 
 
   wine:
-    Desktop: true
     overrides:
         d3d8.dll: n,b
 
