@@ -41,6 +41,5 @@ script:
 
   wine:
     esync: false
-    Desktop: true
 
 
