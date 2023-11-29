@@ -29,7 +29,4 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true
-
-
+ 
