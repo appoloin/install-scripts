@@ -78,6 +78,3 @@ script:
     - execute:
         file: 7z
         args: e $fix -o"$GAMEDIR/drive_c/Program Files/Ubisoft/FarCry 3/bin" -ppassword -y
-
-  wine:
-    Desktop: true

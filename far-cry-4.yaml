@@ -36,6 +36,3 @@ script:
     - execute:
         file: 7z
         args: e $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Far Cry 4/bin/" -ppassword -y
-
-  wine:
-    Desktop: true
