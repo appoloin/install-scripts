@@ -1,7 +1,7 @@
-name: Spellcaster Collection
-game_slug: spellcaster-collection
+name: Spellcasting Collection
+game_slug: spellcasting-collection
 version: Installer
-slug: spellcaster-101-installer
+slug: spellcasting-collection
 runner: dosbox
 
 
@@ -71,15 +71,15 @@ script:
 
             ECHO  -------------------------------------------  
             
-            ECHO          Spellcaster Collection  
+            ECHO          Spellcasting Collection  
             
             ECHO  -------------------------------------------  
             
-            ECHO   1) Spellcaster 101        
+            ECHO   1) Spellcasting 101        
             
-            ECHO   2) Spellcaster 201                                  
+            ECHO   2) Spellcastiing 201                                  
             
-            ECHO   3) Spellcaster 301                                   
+            ECHO   3) Spellcasting 301                                   
 
             ECHO  -------------------------------------------  
             
