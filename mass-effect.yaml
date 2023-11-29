@@ -5,84 +5,83 @@ slug:  Mass-Effect-installer
 runner: wine
 
 script:
-    game:
-        exe: $GAMEDIR/drive_c/Program Files (x86)/Mass Effect Ultimate Edition/Binaries/MassEffect.exe
+  game:
+      exe: $GAMEDIR/drive_c/Program Files (x86)/Mass Effect Ultimate Edition/Binaries/MassEffect.exe
+      prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select Setup.exe
+    - patch: https://github.com/CookiePLMonster/SilentPatchME/releases/latest/download/SilentPatchME.zip
+
+  installer:    
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+    
+    - task:
+        description: Allow DirectX apps to stop the mouse leaving their window.
+        key: GrabFullScreen
+        name: set_regedit
+        path: HKEY_CURRENT_USER\Software\Wine\X11 Driver
+        prefix: $GAMEDIR
+        value: Y
+    - task:
+        description: Deny the window manager to decorate the windows.
+        key: Decorated
+        name: set_regedit
+        path: HKEY_CURRENT_USER\Software\Wine\X11 Driver
+        prefix: $GAMEDIR
+        value: N
+    - task:
+        description: Allow the window manager to control the windows.
+        key: Managed
+        name: set_regedit
+        path: HKEY_CURRENT_USER\Software\Wine\X11 Driver
+        prefix: $GAMEDIR
+        value: Y
+    - task:
+        description: Enabling CSMT for better graphic performance.
+        key: wined3d
+        name: set_regedit
+        path: HKEY_CURRENT_USER\Software\Wine\DllRedirects
+        prefix: $GAMEDIR
+        value: wined3d-csmt.dll
+    - task:
+        description: Enabling VAAPI as backend for DXVA2 GPU decoding.
+        key: backend
+        name: set_regedit
+        path: HKEY_CURRENT_USER\Software\Wine\DXVA2
+        prefix: $GAMEDIR
+        value: va
+
+    - task:
+        app:  physx vcrun2012
+        name: winetricks
         prefix: $GAMEDIR
 
-    files:
-      - setup: N/A:Select Setup.exe
-      - patch: https://github.com/CookiePLMonster/SilentPatchME/releases/latest/download/SilentPatchME.zip
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR  
 
-    installer:    
-      - task:
-          name: create_prefix
-          install_mono: false
-          install_gecko: false
-          prefix: $GAMEDIR
-      
-      - task:
-          description: Allow DirectX apps to stop the mouse leaving their window.
-          key: GrabFullScreen
-          name: set_regedit
-          path: HKEY_CURRENT_USER\Software\Wine\X11 Driver
-          prefix: $GAMEDIR
-          value: Y
-      - task:
-          description: Deny the window manager to decorate the windows.
-          key: Decorated
-          name: set_regedit
-          path: HKEY_CURRENT_USER\Software\Wine\X11 Driver
-          prefix: $GAMEDIR
-          value: N
-      - task:
-          description: Allow the window manager to control the windows.
-          key: Managed
-          name: set_regedit
-          path: HKEY_CURRENT_USER\Software\Wine\X11 Driver
-          prefix: $GAMEDIR
-          value: Y
-      - task:
-          description: Enabling CSMT for better graphic performance.
-          key: wined3d
-          name: set_regedit
-          path: HKEY_CURRENT_USER\Software\Wine\DllRedirects
-          prefix: $GAMEDIR
-          value: wined3d-csmt.dll
-      - task:
-          description: Enabling VAAPI as backend for DXVA2 GPU decoding.
-          key: backend
-          name: set_regedit
-          path: HKEY_CURRENT_USER\Software\Wine\DXVA2
-          prefix: $GAMEDIR
-          value: va
+    - task:
+        name: winekill
+        prefix: $GAMEDIR
 
-      - task:
-          app:  physx vcrun2012
-          name: winetricks
-          prefix: $GAMEDIR
+    - extract:
+        dst: $CACHE
+        file: $patch
 
-      - task:
-          executable: $setup
-          name: wineexec
-          prefix: $GAMEDIR  
-
-      - task:
-          name: winekill
-          prefix: $GAMEDIR
-
-      - extract:
-          dst: $CACHE
-          file: $patch
-
-      - merge:
-          src: "$CACHE/Binaries"
-          dst: "$GAMEDIR/drive_c/Program Files/Mass Effect Ultimate Edition/Binaries"
-      
-    wine:
-        Desktop: true
-        overrides:
-            dxgi: disable
-            nvcuda: disable
-            d3dx9: n
+    - merge:
+        src: "$CACHE/Binaries"
+        dst: "$GAMEDIR/drive_c/Program Files/Mass Effect Ultimate Edition/Binaries"
+    
+  wine:
+      overrides:
+          dxgi: disable
+          nvcuda: disable
+          d3dx9: n
 
 
