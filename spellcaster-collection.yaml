@@ -1,0 +1,139 @@
+name: Spellcaster Collection
+game_slug: spellcaster-collection
+version: Installer
+slug: spellcaster-101-installer
+runner: dosbox
+
+
+script:
+  files:
+    - game: N/A:Select GOG installer
+
+  game:
+    main_file: $GAMEDIR/play.conf
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$1
+          
+          find "$src" -maxdepth 1 -type d \( -iname app -o
+                                            -iname commonappdata -o
+                                            -iname *redist -o
+                                            -iname scummvm -o
+                                            -iname *support -o
+                                            -iname dosbox -o
+                                            -iname ega -o
+                                            -iname tmp \) -exec rm -r {}  \;
+                                            
+          find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
+        file: $CACHE/remove.sh
+    - chmodx: $CACHE/remove.sh
+
+    - extract:
+        format: gog
+        file: $game
+        args: --gog 
+        dst: $GAMEDIR
+        description: Extracting game files
+
+    - execute:
+        args: $GAMEDIR
+        file: $CACHE/remove.sh
+
+    - write_file:
+        content: '[midi]
+
+          mididevice = mt32
+         
+          [mouse]
+
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
+
+          [autoexec]
+
+            mount C "$GAMEDIR" -t dir
+
+            c: 
+            
+            cls 
+
+            ECHO OFF
+
+            goto launcher
+
+            :launcher
+
+            cls 
+
+            ECHO  -------------------------------------------  
+            
+            ECHO          Spellcaster Collection  
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Spellcaster 101        
+            
+            ECHO   2) Spellcaster 201                                  
+            
+            ECHO   3) Spellcaster 301                                   
+
+            ECHO  -------------------------------------------  
+            
+            ECHO   4) Exit Program                             
+            
+            ECHO  -------------------------------------------  
+
+            choice /c1234 /s Which program do you want to run? [1-4]: /n 
+
+            if errorlevel 4 goto exit
+
+            if errorlevel 3 goto 301
+                      
+            if errorlevel 2 goto 201
+            
+            if errorlevel 1 goto 101
+
+
+            :101
+
+            cls
+
+            cd 101
+            
+            S101.EXE mt32
+
+            goto exit
+
+
+
+            :201
+
+            cls
+
+            cd 201
+            
+            S201.EXE mt32
+
+            goto exit
+
+
+
+            :301
+
+            cls
+
+            cd 301
+            
+            S301.EXE mt32
+
+            goto exit
+
+
+            :exit
+            
+            exit'
+        file: $GAMEDIR/play.conf
