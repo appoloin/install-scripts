@@ -57,9 +57,3 @@ script:
         section: Settings
         key: PlayerName
         value: Appoloin
-
-
-  wine:
-    Desktop: true
-
-
