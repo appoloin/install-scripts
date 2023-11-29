@@ -49,7 +49,3 @@ script:
         section: Graphics
         value: 9
 
-  wine:
-    Desktop: true
-
-
