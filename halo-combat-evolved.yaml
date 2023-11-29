@@ -46,7 +46,3 @@ script:
         name: wineexec
         prefix: $GAMEDIR
         arch: win32
-
-  wine:
-    Desktop: true
-  
