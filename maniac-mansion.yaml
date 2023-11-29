@@ -1,5 +1,5 @@
 name: Maniac Mansion
-game_slug: maniac_mansion
+game_slug: maniac-mansion
 version: Installer
 slug: maniac_mansion-installer
 runner: scummvm
@@ -18,13 +18,13 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$1
 
-        dst=$2
-        
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          dst=$2
+          
+          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src_path/."  "$dst"'
         file: $CACHE/bulkcopy.sh
 
     - chmodx: $CACHE/bulkcopy.sh
@@ -32,3 +32,6 @@ script:
     - execute:
         args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
+
+  scummvm:
+    fullscreen: true
