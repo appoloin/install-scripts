@@ -33,13 +33,8 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true
-  #  WineDesktop: 1024x768
 
   system:
-   # resolution: 1024x768
-   # reset_desktop: true
     env:
       MESA_EXTENSION_MAX_YEAR: 2008
       __GL_ExtensionStringVersion: 17700
