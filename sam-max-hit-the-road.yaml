@@ -31,3 +31,5 @@ script:
         args: -R 775  "$GAMEDIR"
         file: chmod
 
+  scummvm:
+    fullscreen: true
