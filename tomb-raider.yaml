@@ -42,5 +42,3 @@ script:
         file: 7z
         args: e  $patch -o"$GAMEDIR/drive_c/Program Files/Eidos Interactive/Tomb Raider GOTY Edition/" -ppassword -y
 
-  wine:
-    Desktop: true
