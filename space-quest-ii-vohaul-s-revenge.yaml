@@ -43,3 +43,6 @@ script:
     - execute:
         args: $GAMEDIR
         file: $CACHE/remove.sh
+
+  scummvm:
+    fullscreen: true
