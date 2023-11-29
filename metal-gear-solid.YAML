@@ -64,6 +64,5 @@ script:
     overrides:
         ddraw.dll: n,b
         dinput.dll: n,b    
-    Desktop: true
 
 
