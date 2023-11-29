@@ -105,7 +105,6 @@ script:
         file: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground 2/Scripts/NFSUnderground2.WidescreenFix.ini
 
   wine:
-    Desktop: true
     overrides:
       dinput8.dll: n,b
 

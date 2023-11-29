@@ -110,7 +110,6 @@ script:
 
 
   wine:
-    Desktop: true
     overrides:
       dinput8.dll: n,b
 
