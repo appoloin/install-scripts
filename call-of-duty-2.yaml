@@ -67,7 +67,6 @@ script:
         dst: "$GAMEDIR/drive_c/Program Files/Activision/Call of Duty 2"
 
   wine:
-    Desktop: true
     esync: false
     fsync: false
 
