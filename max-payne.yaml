@@ -18,7 +18,9 @@ script:
     - nocd: 
         url: https://drive.google.com/uc?export=download&id=1WNvXMZOBrsLj6BINhAXctUU3eFrtAyxB
         filename: MaxPayne-NoCD.7z.001
-    - patch2: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/mp1/MaxPayne.WidescreenFix.zip
+    - patch2: 
+        url: https://drive.google.com/uc?export=download&id=11L94RUyYVQsQz8zyH2DV2QshWsJk2UwP
+        filename: MaxPayne-WidescreenFix.zip
 
   installer:
     - task:
