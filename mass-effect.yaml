@@ -11,7 +11,9 @@ script:
 
   files:
     - setup: N/A:Select Setup.exe
-    - patch: https://github.com/CookiePLMonster/SilentPatchME/releases/latest/download/SilentPatchME.zip
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=1Xg6Go8_egR7rVSS8VK7lWpzG94xYYCc9
+        filename: SilentPatchME.zip
 
   installer:    
     - task:
