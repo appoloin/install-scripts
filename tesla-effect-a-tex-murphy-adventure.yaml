@@ -2,6 +2,8 @@ name: Tesla Effect - A Text Murphy Adventure
 game_slug: tesla-effect-a-tex-murphy-adventure
 version: Installer
 slug: tesla-effect-a-tex-murphy-adventure
+runner: wine
+
 
 script:
   game:
@@ -30,7 +32,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
