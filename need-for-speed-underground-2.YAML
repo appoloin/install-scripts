@@ -11,8 +11,12 @@ script:
 
   files:
     - setup: N/A:Select installer
-    - patch: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/nfsu2/NFSUnderground2.WidescreenFix.zip
-    - patch1: https://github.com/xan1242/NFSU-XtendedInput/releases/download/2.2/Release-UG2-Pack.zip
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=1Og-WmKKBR8-JyqL90BIckJKo61lmi-6v
+        filename: NFSUnderground2-WidescreenFix.zi
+    - patch1: 
+        url: https://drive.google.com/uc?export=download&id=19N1mC-UV8cluCMb5d8HJ62aH1im0AkBy
+        filename: Release-UG2-Pack.zip
 
   installer:
     - task:
