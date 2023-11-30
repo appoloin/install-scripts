@@ -10,7 +10,7 @@ script:
     - game: N/A:Select GOG installer.
 
   game:
-    game_id: Mohawk
+    game_id: myst-win
     path: $GAMEDIR
   
   installer:
