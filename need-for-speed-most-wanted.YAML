@@ -11,7 +11,9 @@ script:
 
   files:
     - setup: N/A:Select installer
-    - patch: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/nfsmw/NFSMostWanted.WidescreenFix.zip
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=1vyJG76-1Vb7H8_o_Uh5xEvdWeYJJo9I8
+        filename: NFSMostWanted-WidescreenFix.zip
 
   installer:
     - task:
