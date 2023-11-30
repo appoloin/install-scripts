@@ -32,7 +32,7 @@ script:
 
     - execute:
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
+        file: chmod
 
     - insert-disc:
         description: Please insert disc 2
