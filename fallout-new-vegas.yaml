@@ -323,7 +323,6 @@ script:
         prefix: $GAMEDIR
 
   wine:
-    Desktop: true
     overrides:
       quartz: builtin
       winegstreamer: disabled
