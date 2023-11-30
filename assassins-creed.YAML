@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Assassins Creed/AssassinsCreed_Dx9.exe
+    exe: $GAMEDIR/drive_c/Program Files (x86)/GOG.com/Assassins Creed/AssassinsCreed_Dx9.exe
     prefix: $GAMEDIR
 
   files:
