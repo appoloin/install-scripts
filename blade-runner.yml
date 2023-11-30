@@ -7,11 +7,11 @@ runner: scummvm
 
 
 script:
-    game:
-        game_id: bladerunner
-        path: $GAMEDIR
+  game:
+      game_id: bladerunner
+      path: $GAMEDIR
 
-    installer:
+  installer:
     - insert-disc:
         description: Please insert disc 
         requires: base
@@ -81,10 +81,9 @@ script:
         args: $DISC/CD4/CDFRAMES.DAT  $GAMEDIR/CDFRAMES4.DAT
         file: cp 
 
-
     - execute:
         args: -R 775  $GAMEDIR
         file: chmod
 
-scummvm:
+  scummvm:
     fullscreen: true
