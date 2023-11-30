@@ -129,3 +129,5 @@ script:
         file: chmod
 
 
+  scummvm:
+    fullscreen: true
