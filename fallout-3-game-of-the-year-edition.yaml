@@ -251,7 +251,6 @@ script:
         PULSE_LATENCY_MSEC: '90'
 
   wine:
-    Desktop: true
     overrides:
         winegstreamer: disabled
 
