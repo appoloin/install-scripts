@@ -12,7 +12,9 @@ script:
 
   files:
     - setup: N/A:Select Setup
-    - patch: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/mp2/MaxPayne2.WidescreenFix.zip
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=1Tota_vOB6hnENjQiyyO-nwthPy-zK3y7
+        filename: MaxPayne2-WidescreenFix.zip
 
   installer:
     - task:
