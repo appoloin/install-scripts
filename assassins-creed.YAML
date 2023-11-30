@@ -1,0 +1,28 @@
+name: Assassin's Creed
+game_slug: assassins-creed
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Assassins Creed/AssassinsCreed_Dx9.exe
+    prefix: $GAMEDIR
+
+  files:
+    - game: N/A:Select installer.
+
+
+  installer:
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        description: Installing
+        executable: $game
+        name: wineexec
+        prefix: $GAMEDIR
