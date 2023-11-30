@@ -131,4 +131,6 @@ script:
       - execute:
           args:  -r $GAMEDIR/userdef.reg
           file: rm 
-
+          
+  scummvm:
+    fullscreen: true
