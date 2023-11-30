@@ -59,8 +59,11 @@ script:
 
     - execute:
         args: -R 775  $GAMEDIR
-        file: /bin/chmod
+        file: chmod
 
     - execute:
         args: "$GAMEDIR"
         file: $CACHE/remove.sh
+
+  scummvm:
+    fullscreen: true
