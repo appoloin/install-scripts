@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/Program Files (x86)/2K Games/Dead Space 3 Complete Edition/deadspace3.exee
+    exe: $GAMEDIR/Program Files (x86)/2K Games/Dead Space 3 Complete Edition/deadspace3.exe
     prefix: $GAMEDIR
 
   files:
