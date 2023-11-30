@@ -5,11 +5,11 @@ slug:  monkey3-installer
 runner: scummvm
 
 script:
-    game:
-        game_id: comi
-        path: $GAMEDIR
+  game:
+      game_id: comi
+      path: $GAMEDIR
 
-    installer:
+  installer:
     - insert-disc:
         description: Please insert disc 1
         requires: resource
@@ -49,3 +49,6 @@ script:
     - execute:
         args: -R 775  "$GAMEDIR"
         file: chmod
+
+  scummvm:
+    fullscreen: true
