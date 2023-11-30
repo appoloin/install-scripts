@@ -1,16 +1,16 @@
 name: Myst 3
-game_slug: myst3
+game_slug: myst-iii-exile
 version: Installer
 slug:  myst3-installer
 runner: scummvm
 
 
 script:
-    game:
-        game_id: myst3
-        path: $GAMEDIR
+  game:
+      game_id: myst3
+      path: $GAMEDIR
 
-    installer:
+  installer:
     - insert-disc:
         description: Please insert disc 1
         requires: Data
@@ -28,7 +28,7 @@ script:
 
     - execute:
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
+        file: chmod
 
     - insert-disc:
         description: Please insert disc 2
@@ -40,7 +40,7 @@ script:
 
     - execute:
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
+        file: chmod
 
     - insert-disc:
         description: Please insert disc 3
@@ -52,7 +52,7 @@ script:
 
     - execute:
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
+        file: chmod
 
     - insert-disc:
         description: Please insert disc 4
@@ -64,4 +64,9 @@ script:
 
     - execute:
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
+        file: chmod
+
+  scummvm:
+    fullscreen: true
+
+
