@@ -9,6 +9,11 @@ script:
   game:
     main_file: $GAMEDIR/mission-critical.conf
 
+  files:
+    - GUS: 
+        url: https://drive.google.com/uc?export=download&id=1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6
+        filename: gus.zip
+
   installer:
     - write_file:
         content: '#!/bin/bash
@@ -24,6 +29,10 @@ script:
     - execute:
         args: $GAMEDIR/HDD $GAMEDIR/CDD  $GAMEDIR/CDD/DISC
         file: mkdir
+
+    - extract:
+        file: $GUS
+        dst: $GAMEDIR/HDD/ULTRASND
 
     - insert-disc:
         description: Please insert disc 1
@@ -62,7 +71,17 @@ script:
         file: chmod
 
     - write_file:
-        content: '[mouse]
+        content: '[midi]
+
+            mididevice = mt32
+
+          [gus]
+
+            gus= true
+
+            ultradir = C:\ULTRASND
+   
+          [mouse]
 
             capture_mouse = onstart middlerelease  
 
@@ -87,7 +106,17 @@ script:
         working_dir: $GAMEDIR/HDD/
 
     - write_file:
-        content: '[mouse]
+        content: '[midi]
+
+            mididevice = mt32
+
+          [gus]
+
+            gus= true
+
+            ultradir = C:\ULTRASND
+   
+          [mouse]
 
             capture_mouse = onstart middlerelease  
 
