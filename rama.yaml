@@ -1,61 +1,61 @@
-name: rama
+name: Rama
 game_slug: rama
 version: Installer
 slug:  rama-installer
 runner: scummvm
 
 script:
-    game:
-        game_id: rama
-        path: $GAMEDIR
+  game:
+      game_id: rama
+      path: $GAMEDIR
 
-    installer:
-      - write_file:
-          content: '#!/bin/bash
+  installer:
+    - write_file:
+        content: '#!/bin/bash
 
-            src=$1
+          src=$1
 
-            dst=$2
-            
-            cp -avr "$src/."  "$dst"'
-          file: $CACHE/bulkcopy-alt.sh
-      - chmodx: $CACHE/bulkcopy-alt.sh
+          dst=$2
+          
+          cp -avr "$src/."  "$dst"'
+        file: $CACHE/bulkcopy-alt.sh
+    - chmodx: $CACHE/bulkcopy-alt.sh
 
-      - insert-disc:
-          description: Please insert disc 1
-          requires: audio
+    - insert-disc:
+        description: Please insert disc 1
+        requires: audio
 
-      - execute:
-          args: $DISC "$GAMEDIR"
-          file: $CACHE/bulkcopy-alt.sh
+    - execute:
+        args: $DISC "$GAMEDIR"
+        file: $CACHE/bulkcopy-alt.sh
 
-      - execute:
-          args: -R 775  "$GAMEDIR"
-          file: chmod
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: chmod
 
-      - insert-disc:
-          description: Please insert disc 2
-          requires: audio
+    - insert-disc:
+        description: Please insert disc 2
+        requires: audio
 
-      - execute:
-          args: $DISC "$GAMEDIR"
-          file: $CACHE/bulkcopy-alt.sh
+    - execute:
+        args: $DISC "$GAMEDIR"
+        file: $CACHE/bulkcopy-alt.sh
 
-      - execute:
-          args: -R 775  "$GAMEDIR"
-          file: chmod
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: chmod
 
-      - insert-disc:
-          description: Please insert disc 3
-          requires: audio
+    - insert-disc:
+        description: Please insert disc 3
+        requires: audio
 
-      - execute:
-          args: $DISC "$GAMEDIR"
-          file: $CACHE/bulkcopy-alt.sh
+    - execute:
+        args: $DISC "$GAMEDIR"
+        file: $CACHE/bulkcopy-alt.sh
 
-      - execute:
-          args: -R 775  "$GAMEDIR"
-          file: chmod
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: chmod
     
-scummvm:
+  scummvm:
     fullscreen: true
