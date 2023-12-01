@@ -7,7 +7,6 @@ runner: wine
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Styx Master of Shadows/Binaries/Win32/StyxGame.exe
-    arch: win64
     prefix: $GAMEDIR
 
   files:
@@ -16,13 +15,12 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win64
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
     - task:
-        app: dotnet40 d3dx10 xact
+        app: dotnet40 d3dx10 xact xact_64
         description: 'winetricks: Xact, Direct X10, DotNet'
         name: winetricks
         prefix: $GAMEDIR
@@ -32,8 +30,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-
