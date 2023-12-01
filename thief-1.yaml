@@ -1,7 +1,7 @@
 #Check patch install path. If the gog installer has used "program files" the patch installer will complane, you can ignore it.
 #https://www.ttlg.com/forums/showthread.php?t=134733
-name: Thief-1
-game_slug: thief-1
+name: Thief
+game_slug: thief-gold
 version: Installer
 slug: thief-1-installer
 runner: wine
@@ -22,17 +22,11 @@ script:
         arch: win32
         name: create_prefix
         install_mono: false
-        intall_gecko: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
-        app: vcrun2008
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
-        app: d3dx9
+        app: vcrun2008 d3dx9 icodecs
         arch: win32
         name: winetricks
         prefix: $GAMEDIR
@@ -49,6 +43,3 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-
-  wine:
-    Desktop: true
