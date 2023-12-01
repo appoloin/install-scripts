@@ -6,11 +6,15 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Square Enix/Just Cause 2/JustCause2.exe
+    args: /Decals=0 /borderless=1 /dx11
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=1o6hUN8DaXGTI1u-WBV_HPhXN0LUUUYFl
+        filename: patch.7z
 
   installer:
     - task:
@@ -20,11 +24,20 @@ script:
         prefix: $GAMEDIR
 
     - task:
+        app: vcrun2005 d3dx10 d3dcompiler_43 d3dcompiler_47
+        description: Installing librairies
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
 
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Square Enix/Just Cause 2/" -ppassword -y
+
   wine:
-    Desktop: true
-
-
+    esync: false
+    fsync: false
