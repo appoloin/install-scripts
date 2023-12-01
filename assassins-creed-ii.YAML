@@ -36,8 +36,3 @@ script:
   system:
     env:
       WINE_LARGE_ADDRESS_AWARE: 1
-      
-  wine:
-    Desktop: true
-
-
