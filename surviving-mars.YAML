@@ -41,14 +41,12 @@ script:
         executable: $setup
         description: 'Installing Surviving Mars'
         name: wineexec
-        args: /SILENT
         prefix: $GAMEDIR
 
     - task:
         executable: $DLC
         description: 'Installing Upgrade'
         name: wineexec
-        args: /SILENT
         prefix: $GAMEDIR
 
     - task:
@@ -122,6 +120,6 @@ script:
         prefix: $GAMEDIR
 
   wine:
-    Desktop: true
+    fsync: false
     esync: false
 
