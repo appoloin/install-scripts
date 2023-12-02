@@ -18,15 +18,18 @@ script:
 
           src=$1
           
-          find "$src" -maxdepth 1 -type d \( -iname scummvm -o
-                                            -iname save \) -exec rm -r {}  \;
+          find "$src" -maxdepth 1 -type d \( -iname app -o
+                                            -iname commonappdata -o
+                                            -iname *redist -o
+                                            -iname scummvm -o
+                                            -iname dosbox -o
+                                            -iname *support -o
+                                            -iname tmp \) -exec rm -r {}  \;
                                             
-          find "$src" -maxdepth 1 -type f \( -iname "*.dll" -o
-                                            -iname "*.ico" -o
-                                            -iname "*.ini" \) -exec rm {}  \;'
+          find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
         file: $CACHE/remove.sh
-    - chmodx: $CACHE/remove.sh   
-
+    - chmodx: $CACHE/remove.sh
+    
     - extract:
         format: gog
         file: $game
