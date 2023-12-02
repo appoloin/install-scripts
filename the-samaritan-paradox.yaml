@@ -2,27 +2,28 @@ name:  The Samaritan Paradox
 game_slug: the-samaritan-paradox
 version: Installer
 slug: installer
-runner: ags
+runner: scummvm
 
 script:
   game:
-    main_file: $GAMEDIR/samaritan.exe
+    game_id: samaritan  
+    path: $GAMEDIR
 
   files:
-    - game: N/A:Select GOG installer.
-    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
+    - game: N/A:Select installer
 
   installer:    
     - extract:
+        format: gog
+        file: $game
+        args: --gog --include "app"
         dst: $CACHE
-        file: $inno
-
-    - execute:
-        args: -d "$CACHE" "$game"
-        file: $CACHE/innoextract
+        description: Extracting game files
 
     - merge:
-        dst: "$GAMEDIR"
         src: "$CACHE/app"
+        dst: "$GAMEDIR"
 
+  scummvm:
+    fullscreen: true
 
