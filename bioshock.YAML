@@ -33,8 +33,3 @@ script:
         prefix: $GAMEDIR
         type: REG_SZ
         value: ''
-
-  wine:
-    Desktop: true
-
-
