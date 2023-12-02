@@ -2,29 +2,45 @@ name: The Shivah
 game_slug: the-shivah
 version: Installer
 slug: INSTALLER
-runner: wine
+runner: scummvm
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Shivah/Shivah.exe
-    prefix: $GAMEDIR
+    game_id: shivahkosher  
+    path: $GAMEDIR
 
   files:
-    - setup: N/A:Select installer
+    - game: N/A:Select GOG installer.
 
-  installer:
-    - task:
-        name: create_prefix
-        install_mono: false
-        install_gecko: false
-        prefix: $GAMEDIR
+  installer:    
+    - write_file:
+        content: '#!/bin/bash
 
-    - task:
-        executable: $setup
-        name: wineexec
-        prefix: $GAMEDIR
+          src=$1
+          
+          find "$src" -maxdepth 1 -type d \( -iname app -o
+                                            -iname commonappdata -o
+                                            -iname *redist -o
+                                            -iname scummvm -o
+                                            -iname dosbox -o
+                                            -iname *support -o
+                                            -iname tmp \) -exec rm -r {}  \;
+                                            
+          find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
+        file: $CACHE/remove.sh
+    - chmodx: $CACHE/remove.sh
 
-  wine:
-    Desktop: true
+    - extract:
+        format: gog
+        file: $game
+        args: --gog --include "app"
+        dst: $GAMEDIR
+        description: Extracting game files
+
+    - execute:
+        args: $GAMEDIR
+        file: $CACHE/remove.sh
 
 
+  scummvm:
+    fullscreen: true
