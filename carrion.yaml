@@ -1,7 +1,7 @@
 name: Carrion
 game_slug: carrion
 version: Installer
-slug:  braid-installer
+slug:  installer
 runner: wine
 
 script:
