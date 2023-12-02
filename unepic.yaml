@@ -5,26 +5,22 @@ slug:  unepic-installer
 runner: wine
 
 script:
-    game:
-        exe: drive_c/GOG Games/Unepic/unepic.exe
-        arch: win32
+  game:
+    exe: drive_c/GOG Games/Unepic/unepic.exe
+    prefix: $GAMEDIR
+
+  files:
+    - game: N/A:Select Setup.exe
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
-  
-    files:
-        - game: N/A:Select Setup.exe
 
-    installer:
-        - task:
-            name: create_prefix
-            arch: win32
-            install_mono: false
-            install_gecko: false
-            prefix: $GAMEDIR
+    - task:
+        executable: $game
+        name: wineexec
+        prefix: $GAMEDIR
 
-        - task:
-            executable: $game
-            name: wineexec
-            prefix: $GAMEDIR
-
-    wine:
-        Desktop: true
