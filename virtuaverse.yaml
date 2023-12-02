@@ -7,7 +7,6 @@ runner: wine
 script:
   game: 
     exe: $GAMEDIR/drive_c/GOG Games/VirtuaVerse/VirtuaVerse.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -18,15 +17,9 @@ script:
         name: create_prefix
         install_mono: false
         install_gecko: false
-        arch: win32
         prefix: $GAMEDIR
 
     - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-
