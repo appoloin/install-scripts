@@ -1,0 +1,28 @@
+name:  Blackwell Unbound
+game_slug: blackwell-unbound
+version: Installer
+slug: blackwell-Unbound-installer
+runner: scummvm
+
+script:
+  game:
+    game_id: blackwell2  
+    path: $GAMEDIR
+
+  files:
+    - game: N/A:Select GOG installer.
+
+  installer:    
+    - extract:
+        format: gog
+        file: $game
+        args: --gog --include "app"
+        dst: $CACHE
+        description: Extracting game files
+
+    - merge:
+        src: "$CACHE/Unbound"
+        dst: "$GAMEDIR"
+
+  scummvm:
+    fullscreen: true
