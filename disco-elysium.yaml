@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/GOG Games/Disco Elysium/Disco Elysium.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Disco Elysium/Disco Elysium.exe
     prefix: $GAMEDIR
 
   files:
