@@ -20,7 +20,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: dotnet40 d3dx10 xact xact_64
+        app: dotnet40 d3dx10 xact xact_x64
         description: 'winetricks: Xact, Direct X10, DotNet'
         name: winetricks
         prefix: $GAMEDIR
