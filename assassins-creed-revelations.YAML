@@ -33,8 +33,3 @@ script:
     - rename:
         src: $GAMEDIR/drive_c/Games/Assassins Creed Revelations/systemdetection.dll
         dst: $GAMEDIR/drive_c/Games/Assassins Creed Revelations/systemdetection.dll.old
-   
-  wine:
-    Desktop: true
-
-
