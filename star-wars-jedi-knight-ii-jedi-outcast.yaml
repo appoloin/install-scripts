@@ -1,0 +1,39 @@
+name: Star Wars - Jedi knight  II - Jedi Outcast
+game_slug: star-wars-jedi-knight-ii-jedi-outcast
+version: Installer
+slug: installer
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Star Wars Jedi Knight II - Jedi Outcast/JediOutcast.exe
+    prefix: $GAMEDIR
+    args: +set r_ignorehwgamma 1 +set r_mode -1 +set r_customheight 768 +set r_customwidth 1366 +set cg_fov 95 +set cg_drawfps 0 +set r_customaspect 1.7 +set com_introplayed 1 +set r_vsync 0 +set com_maxfps 60 +set r_smp 1
+    
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: winxp d3dcompiler_43 d3dx9 vcrun2003
+        description: Installing additional components
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+
+  system:
+    env:
+      MESA_EXTENSION_MAX_YEAR: 2008
+      __GL_ExtensionStringVersion: 17700
+  
