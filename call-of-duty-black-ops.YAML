@@ -25,7 +25,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: winxp xact
+        app: winxp vcrun2008 vcrun2010 d3dcompiler_43 d3dx9 xact
         name: winetricks
         prefix: $GAMEDIR
 
@@ -41,5 +41,6 @@ script:
 
   wine:
     esync: false
+    fsync: false
 
 
