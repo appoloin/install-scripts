@@ -1,16 +1,19 @@
-name: LEGO Batman 2
-game_slug: lego-batman-2
+name: LEGO Batman 2 - DC Super Heroes
+game_slug: lego-batman-2-dc-super-heroes
 version: Installer
 slug: INSTALLER
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/LEGO Batman 2/LEGOBatman2.exe
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Warner Bros. Interactive Entertainment/LEGO® Batman™ 2/LEGOBatman2.exe
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=10l13xeogFS3OmhXoLVY7BiN7yhBql9V2
+        filename: patch.7z
 
 
   installer:
@@ -31,5 +34,7 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Warner Bros. Interactive Entertainment/LEGO® Batman™ 2/" -ppassword -y
+
