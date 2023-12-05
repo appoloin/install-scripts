@@ -21,7 +21,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx10 d3dcompiler_43 corefonts tahoma vcrun2008 vcrun2010 dotnet472
+        app: d3dx10 d3dcompiler_43 corefonts tahoma vcrun2008 vcrun2010 dotnet40
         description: Installing Visual C++ librairies (2008 & 2010)
         name: winetricks
         prefix: $GAMEDIR
@@ -30,8 +30,5 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 
 
