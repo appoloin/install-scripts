@@ -34,4 +34,5 @@ script:
      
   wine:
     esync: false
+    fsync: false
 
