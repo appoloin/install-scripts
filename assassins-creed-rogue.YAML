@@ -30,9 +30,3 @@ script:
         description: Installing Game
         name: wineexec
         prefix: $GAMEDIR
-
-
-  wine:
-    Desktop: true
-
-
