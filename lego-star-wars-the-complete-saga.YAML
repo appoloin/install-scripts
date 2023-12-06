@@ -11,8 +11,6 @@ script:
 
   files:
     - setup: N/A:Select installer
-    - DLC: N/A:Select DLC installer
-
 
   installer:
     - task:
@@ -33,6 +31,5 @@ script:
         prefix: $GAMEDIR
 
   wine:
-    Desktop: true
     esync: false
-
+    fsync: false
