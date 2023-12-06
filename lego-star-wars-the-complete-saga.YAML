@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Lego - Star Wars - The Complete Saga/LEGOStarWarsSaga.exe
+    exe: $GAMEDIR/drive_c/GOG Games/LEGO Star Wars/LEGOStarWarsSaga.exe
     prefix: $GAMEDIR
 
   files:
