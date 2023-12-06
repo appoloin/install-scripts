@@ -7,13 +7,19 @@ runner: wine
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Splinter Cell/system/SplinterCell.exe
+    #args: -shadowmode=projector
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
-    - dgv: https://github.com/legluondunet/mlls-tools/raw/master/dgVoodoo2/dgVoodoo2_61.zip
-    - scws: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/sc/SplinterCell.WidescreenFix.zip
-  
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=10uInQUDL7FTy5M7U9Q5ulB9yI7EFWB6o
+        filename: SplinterCell.WidescreenFix.zip
+    - dgv: 
+        url: https://drive.google.com/uc?export=download&id=1HyNnnCuOCrvlWxv0UU_rvNvjEKSOKJiT
+        filename: DgVoodoo_2_8.zip
+
+
   installer:
     - task:
         name: create_prefix
@@ -32,10 +38,6 @@ script:
         prefix: $GAMEDIR
 
     - extract:
-        file: scws
-        dst: $GAMEDIR/drive_c/GOG Games/Splinter Cell/system/
-       
-    - extract:
         file: $dgv
         dst: $CACHE
 
@@ -43,27 +45,16 @@ script:
         src: $CACHE/MS/x86/D3D8.dll
         dst: $GAMEDIR/drive_c/GOG Games/Splinter Cell/system/
 
-    - copy:
-        src: $CACHE/MS/x86/D3D9.dll
+    - extract:
+        file: $patch
         dst: $GAMEDIR/drive_c/GOG Games/Splinter Cell/system/
-
-    - copy:
-        src: $CACHE/MS/x86/DDraw.dll
-        dst: $GAMEDIR/drive_c/GOG Games/Splinter Cell/system/
-
-    - copy:
-        src: $CACHE/MS/x86/D3DImm.dll
-        dst: $GAMEDIR/drive_c/GOG Games/Splinter Cell/system/
+       
 
   wine:
-    Desktop: true
     overrides:
-        d3d8.dll: n,b
-        d3d9.dll: n,b
-        ddraw.dl: n,b
-        d3dimm.dll: n,b
-        msacm32: n,b
-        msvfw32: n,b
+        d3d8.dll: native
+        msacm32: native
+        msvfw32: native
 
   system:
     single_cpu: true
