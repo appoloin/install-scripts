@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/
+    exe: $GAMEDIR/drive_c/Games/Sniper Elite 4/Launcher/SniperElite4.exe
     prefix: $GAMEDIR
 
   files:
@@ -20,10 +20,9 @@ script:
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
-        arch: win64
 
     - task:
-        app: vista d3dx10 xact_x64
+        app: vista d3dx10 xact xact_x64
         name: winetricks
         prefix: $GAMEDIR
 
@@ -39,7 +38,7 @@ script:
 
 
   wine:
-    Desktop: true
     esync: false
+    fsync: false
 
 
