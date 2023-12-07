@@ -38,7 +38,3 @@ script:
         executable: "$GAMEDIR/drive_c/tmp/SetupPreyPt1.4.exe" 
         name: wineexec
         prefix: $GAMEDIR  
-
-  wine:
-      Desktop: true
-
