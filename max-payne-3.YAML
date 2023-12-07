@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/
+    exe: $GAMEDIR/drive_c/Games/Max Payne 3/Max Payne 3/MaxPayne3.exe
     prefix: $GAMEDIR
 
   files:
@@ -21,18 +21,11 @@ script:
 
     - task:
         app: vcrun2008 dotnet35
-        arch: win64
         description: Installing additional components
         name: winetricks
         prefix: $GAMEDIR
-
 
     - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-
