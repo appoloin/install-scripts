@@ -1,4 +1,4 @@
-name: Star Trek - Voyager - Elite Force
+name: Star Trek - Elite Force II
 game_slug: star-trek-elite-force-ii
 version: Installer
 slug: INSTALLER
@@ -7,26 +7,29 @@ runner: wine
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Star Trek Elite Force II/EF2.exe
-    arch: win32
     prefix: $GAMEDIR
+    args: +set r_ignorehwgamma 1 +set r_mode -1 +set r_customheight 768 +set r_customwidth 1366 +set cg_fov 95 +set cg_drawfps 0 +set r_customaspect 1.7 +set com_introplayed 1 +set r_vsync 0 +set com_maxfps 60 +set r_smp 0
 
   files:
     - setup: N/A:Select installer
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=1M_E5wj_AKZPTn4lBVnq2FxiAgkpC6wpw
+        filename: SkipIntroMovies.zip
 
 
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
     - task:
         executable: $setup
-        arch: win32
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: false
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/GOG Games/Star Trek Elite Force II/base" -y
+
