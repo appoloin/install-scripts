@@ -1,4 +1,4 @@
-name: Shadow Tactics Blades of the Shogun Aikos Choice
+name: Shadow Tactics Blades of the Shogun - Aikos Choice
 game_slug: shadow-tactics-blades-of-the-shogun-aikos-choice
 version: Installer
 slug: shadow-tactics-blades-of-the-shogun-aikos-choice
@@ -23,8 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-
