@@ -6,11 +6,14 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/BioShock Infinite/Binaries/Win32/BioShockInfinite.exe
+    exe: $GAMEDIR/drive_c/Program Files (x86)/2K Games/BioShock Infinite/Binaries/Win32/BioShockInfinite.exe
     prefix: $GAMEDIR
 
   files:
     - game: N/A:Select installer.
+    - patch: 
+        url: https://drive.google.com/uc?export=download&id=16t7uH3YpEZylWjv3RGr8Oynnkb3OF4C0
+        filename: patch.7z
 
 
   installer:
@@ -20,7 +23,6 @@ script:
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
-        arch: win64
 
     - task:
         app: vista d3dx10 xact_x64 xact
@@ -33,12 +35,10 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/2K Games/BioShock Infinite/Binaries/Win32/" -ppassword -y
+
   system:
     env:
         PULSE_LATENCY_MSEC: '90'
-
-
-  wine:
-    Desktop: true
-
-
