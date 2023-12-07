@@ -13,7 +13,7 @@ script:
     - setup: N/A:Select installer
     - patch: 
         url: https://drive.google.com/uc?export=download&id=1wuQ2MgwlTx6J2U7-nHXJq64DK3OEQqK_
-        file: NFSCarbon-WidescreenFix.zip
+        filename: NFSCarbon-WidescreenFix.zip
  
   installer:
     - task:
