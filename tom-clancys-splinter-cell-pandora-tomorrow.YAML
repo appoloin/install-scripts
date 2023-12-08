@@ -13,7 +13,12 @@ script:
 
   files:
     - setup: N/A:Select installer
-    - scws: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/scpt/SplinterCellPandoraTomorrow.WidescreenFix.zip
+    - scws: 
+        url: https://drive.google.com/uc?export=download&id=10Kz0GXsZYFKidMLtDP-x51TFiiFCoFuL
+        filename: SplinterCellPandoraTomorrow.WidescreenFix.zip
+    - dgv: 
+        url: https://drive.google.com/uc?export=download&id=1HyNnnCuOCrvlWxv0UU_rvNvjEKSOKJiT
+        filename: DgVoodoo_2_8.zip
 
   installer:
     - task:
@@ -34,17 +39,24 @@ script:
         prefix: $GAMEDIR
 
     - extract:
+        file: $dgv
+        dst: $CACHE
+
+    - copy:
+        src: $CACHE/MS/x86/D3D8.dll
+        dst: $GAMEDIR/drive_c/Games/Splinter Cell Pandora Tomorrow/offline/
+    - copy:
+        src: $CACHE/MS/x86/D3D9.dll
+        dst: $GAMEDIR/drive_c/Games/Splinter Cell Pandora Tomorrow/offline/
+
+    - extract:
         file: scws
         dst: $GAMEDIR/drive_c/Games/Splinter Cell Pandora Tomorrow/offline/
        
   wine:
-    dgvoodoo2: true
-    Desktop: true
     overrides:
         d3d8.dll: n,b
         d3d9.dll: n,b
-        ddraw.dl: n,b
-        d3dimm.dll: n,b
         msacm32: n,b
         msvfw32: n,b
 
