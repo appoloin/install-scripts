@@ -13,7 +13,9 @@ script:
 
   files:
     - setup: N/A:Select installer
-    - scws: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/scct/SplinterCellChaosTheory.WidescreenFix.zip
+    - scws: 
+        url: https://drive.google.com/uc?export=download&id=1E7jKBRTO54uvwL1eWhwVeMWR2TetH2KB
+        filename: SplinterCellChaosTheory.WidescreenFix.zip
     - controller: 
         url: https://drive.google.com/uc?export=download&id=1prOuF16AaqKrP_tEsXRAthnUdpPSbAYT
         filename: scfix_0_1.zip
@@ -59,10 +61,7 @@ script:
         file: controller
         dst:  $GAMEDIR/drive_c/Games/Splinter Cell Chaos Theory/System/
 
-
-
   wine:
-    Desktop: true
     overrides:
         d3d9.dll: n,b
         msacm32.dll: n,b
