@@ -1,0 +1,28 @@
+name:  Quake 4
+game_slug: quake-4
+version: Installer
+slug: installer
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Quake 4/Quake4.exe
+    prefix: $GAMEDIR
+    args: +set r_mode -1 +set r_customheight 768 +set r_customwidth 1366 +set r_aspectRatio 2
+
+
+
+  files:
+    - setup: N/A:Select Setup
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
