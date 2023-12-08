@@ -5,44 +5,41 @@ slug: witcher-2-installer
 runner: wine
 
 script:
-    files:
+  files:
     - setup: N/A:Select the game's setup file from GOG
 
-    game:
-        arch: win32
-        exe: "$GAMEDIR/drive_c/GOG Games/The Witcher 2 Enhanced Edition/bin/witcher2.exe"
-        #exe: "$GAMEDIR/drive_c/GOG Games/The Witcher 2 Enhanced Edition/Launcher.exe"
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/The Witcher 2 Enhanced Edition/bin/witcher2.exe"
+    #exe: "$GAMEDIR/drive_c/GOG Games/The Witcher 2 Enhanced Edition/Launcher.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
-    installer:
-        - task:
-            arch: win32
-            name: create_prefix
-            install_mono: false
-            prefix: $GAMEDIR
+    - task:
+        app: d3dcompiler_47 vcrun2010 dotnet40
+        name: winetricks
+        prefix: $GAMEDIR
 
-        - task:
-            app: gdiplus d3dx9_36 d3dx9_39 vcrun2010 win7 dotnet40
-            arch: win32
-            name: winetricks
-            prefix: $GAMEDIR
+    - task:
+        description: Installing Witcher 2
+        args: /nogui
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
 
-        - task:
-            description: Installing Witcher 2
-            args: /nogui
-            executable: $setup
-            name: wineexec
-            prefix: $GAMEDIR
+    - task:
+        description: Installing Witcher 2
+        executable: "$GAMEDIR/drive_c/GOG Games/The Witcher 2 Enhanced Edition/bin/Configurator.exe"
+        name: wineexec
+        prefix: $GAMEDIR
 
-        - task:
-            description: Installing Witcher 2
-            executable: "$GAMEDIR/drive_c/GOG Games/The Witcher 2 Enhanced Edition/bin/Configurator.exe"
-            name: wineexec
-            prefix: $GAMEDIR
-
-    wine:
-        Desktop: true
-
-    system:
-        env:
-            __GL_THREADED_OPTIMIZATIONS: '1'
+  system:
+    env:
+      __GL_THREADED_OPTIMIZATIONS: '1'
+      __GL_SHADER_DISK_CACHE: 1
+      __GL_SHADER_DISK_CACHE_PATH: $GAMEDIR
