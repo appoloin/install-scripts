@@ -49,7 +49,6 @@ script:
 
      
   wine:
-    Desktop: true
     dxvk: false
 
 
