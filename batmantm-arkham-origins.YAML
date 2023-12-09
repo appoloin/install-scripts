@@ -1,5 +1,5 @@
 name: Batman Arkham Origins
-game_slug: batmantm-arkham-origins
+game_slug: batman-arkham-origins
 version: Installer
 slug: INSTALLER
 runner: wine
@@ -24,8 +24,8 @@ script:
         prefix: $GAMEDIR
     
     - task:
-        app: vcrun2012 win7 d3dx10 d3dcompiler_43 xact
-        description: 'winetricks: Win7, Direct X9, MDX'
+        app: vcrun2012 win7 d3dx10 d3dcompiler_43 xact mdx
+        description: 'winetricks: Win7, Direct X10, MDX'
         name: winetricks
         prefix: $GAMEDIR
 
@@ -38,8 +38,3 @@ script:
         executable: $DLC
         name: wineexec
         prefix: $GAMEDIR
-
-
-  wine:
-    Desktop: true
-
