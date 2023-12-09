@@ -1,0 +1,38 @@
+name: The Wither 3 - Wild Hunt
+game_slug: the-witcher-3-wild-hunt-game-of-the-year-edition
+version: Installer
+slug: witcher-3-installer
+runner: wine
+
+script:
+  files:
+    - setup: N/A:Select the game's setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/The Witcher 3 Wild Hunt GOTY/bin/x64/witcher3.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: d3dcompiler_47 vcrun2010 d3dx10 xact_x64 physx
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        description: Installing Witcher 3
+        args: /nogui
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  system:
+    env:
+      __GL_THREADED_OPTIMIZATIONS: '1'
+      __GL_SHADER_DISK_CACHE: 1
+      __GL_SHADER_DISK_CACHE_PATH: $GAMEDIR
