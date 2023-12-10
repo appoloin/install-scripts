@@ -22,7 +22,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx9 ole32 xact
+        app: d3dx9 xact ole32 
         description: Installing D3DX9, ole32, xact
         name: winetricks
         prefix: $GAMEDIR
@@ -37,6 +37,3 @@ script:
         name: wineexec
         args: /SILENT
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
