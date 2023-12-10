@@ -6,15 +6,33 @@ runner: linux
 
 
 script:
-    files:
-        - darkplaces-engine: http://icculus.org/twilight/darkplaces/files/darkplacesengine20140513.zip
-        - game: N/A:Select GOG installer.
+  files:
+    - game: N/A:Select GOG installer.
+    - engine:        
+        url: https://drive.google.com/uc?export=download&id=1PHk-swOdDHpsQEtnl5CsTNrY44VbMiMc
+        filename: quakespasm.zip
+    - Id1Music:        
+        url: https://drive.google.com/uc?export=download&id=1eQ4JuPLrL_jq8KP2vnvTux61CGrohFLd
+        filename: Quake_Music.7z
+    - RogueMusic:        
+        url: https://drive.google.com/uc?export=download&id=1I4fSbHxEFmmDe0ut4_FkEd_tXjCMd7iN
+        filename: Mission_Pack_1_Music.7z
+    - HipMusic:        
+        url: https://drive.google.com/uc?export=download&id=1wfC07l3oacISVWzZMEUoISrZDab3EwZR
+        filename: Mission_Pack_2_Music.7z
 
-    game:
-        exe: darkplaces-linux-x86_64-glx
-        args: -quake
 
-    installer:
+  game:
+    exe: $GAMEDIR/quakespasm-sdl2
+    launch_configs:
+      - exe: $GAMEDIR/quakespasm-sdl2
+        args: -hipnotic
+        name: Quake Mission Pack 1 Scourge of Armagon
+      - exe: $GAMEDIR/quakespasm-sdl2
+        args: -rogue
+        name: Quake Mission Pack 2 Dissolution of Eternity
+
+  installer:
     - write_file:
         content: '#!/bin/bash
 
@@ -29,20 +47,52 @@ script:
     - extract:
         format: gog
         file: $game
-        args: --gog --include "app/id1" 
+        args: --gog --include "app" 
         dst: $CACHE/id1
         description: Extracting game files
-     
+      
     - execute:
-        args: $GAMEDIR/id1
         file: mkdir
+        args: $GAMEDIR/id1 $GAMEDIR/id1/music $GAMEDIR/rogue $GAMEDIR/rogue/music $GAMEDIR/hipnotic $GAMEDIR/hipnotic/music
 
     - execute:
-        args: $CACHE/id1/id1 $GAMEDIR/id1 *.pak
         file: $CACHE/selectcopy.sh
+        args: $CACHE/id1/id1 $GAMEDIR/id1 
+
+    - execute:
+        file: mv
+        args: $GAMEDIR/id1/PAK0.PAK  $GAMEDIR/id1/pak0.pak 
+
+    - execute:
+        file: mv
+        args: $GAMEDIR/id1/PAK1.PAK  $GAMEDIR/id1/pak1.pak 
 
     - extract:
-        dst: $GAMEDIR
-        file: darkplaces-engine
+        file: $Id1Music
+        dst: $GAMEDIR/id1/music
+
+    - execute:
+        file: $CACHE/selectcopy.sh
+        args: $CACHE/id1/hipnotic $GAMEDIR/hipnotic
+
+    - extract:
+        file: $HipMusic
+        dst: $GAMEDIR/hipnotic/music
+
+    - execute:
+        file: $CACHE/selectcopy.sh
+        args: $CACHE/id1/rogue $GAMEDIR/rogue
+
+    - extract:
+        file: $RogueMusic
+        dst: $GAMEDIR/rogue/music
+
+    - execute:
+        file: 7z
+        args: x $engine -o"$GAMEDIR"
                 
-    - chmodx: $GAMEDIR/darkplaces-linux-x86_64-glx
+    - chmodx: $GAMEDIR/quakespasm-sdl2
+
+
+  system:
+    reset_desktop: true
