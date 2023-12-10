@@ -40,8 +40,3 @@ script:
     - copy:
         src: "$GAMEDIR/drive_c/tmp/patch/"
         dst: "$GAMEDIR/drive_c/Program Files/Electronic Arts/Medal of Honor/"
-
-  wine:
-    Desktop: true
-
-
