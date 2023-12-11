@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/Program Files (x86)/Activision/Prototype 2/prototype2.exe
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Activision/Prototype 2/prototype2.exe
     prefix: $GAMEDIR
 
   files:
@@ -34,9 +34,4 @@ script:
 
     - execute:
         file: 7z
-        args: e $patch -o"$GAMEDIR/Program Files (x86)/Activision/Prototype 2/" -ppassword -y
-
-  wine:
-    Desktop: true
-
-
+        args: e $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Activision/Prototype 2/" -ppassword -y
