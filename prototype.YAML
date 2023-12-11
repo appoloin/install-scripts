@@ -39,8 +39,3 @@ script:
     - extract:  
         file: $patch
         dst:  $GAMEDIR/drive_c/Games/Prototype/
-
-  wine:
-    Desktop: true
-
-
