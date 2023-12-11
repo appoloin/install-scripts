@@ -6,58 +6,51 @@ runner: linux
 
 
 script:
-    files:
-        - game: N/A:Select Setup.exe
-        - engine: https://lutris.nyc3.digitaloceanspaces.com/games/quake-2/yamagi-yquake2-7.30-x86_64.tar.gz
-        - quakepatch: https://deponie.yamagi.org/quake2/idstuff/q2-3.20-x86-full-ctf.exe   
+  files:
+    - game: N/A:Select Setup.exe
+    - engine:        
+        url: https://drive.google.com/uc?export=download&id=1hjEhtecpLmETPQCYYS9GS2xlvnATyiuu
+        filename: yamagi-yquake2-7.30-x86_64.7z
+    - quakepatch:        
+        url: https://drive.google.com/uc?export=download&id=1Pdce0uxCJB8NpevxDh6UmgOLz3tj3b4s
+        filename: q2-3.20-x86-full-ctf.7z 
+    - mapfixes:        
+        url: https://drive.google.com/uc?export=download&id=1OxMBTJ15RFdlRCi91bdgMDpPGq1MFQMQ
+        filename: mapfixes.7z
 
-    game:
-        exe: quake2
+  game:
+    exe: $GAMEDIR/quake2
+    args: -portable -datadir $GAMEDIR +set r_mode -1 +set r_customheight 768 +set r_customwidth 1366 
+    launch_configs:
+      - exe: $GAMEDIR/quake2
+        args: -portable -datadir $GAMEDIR +set r_mode -1 +set r_customheight 768 +set r_customwidth 1366  +set game rogue
+        name: Ground Zero
+      - exe: $GAMEDIR/quake2
+        args: -portable -datadir $GAMEDIR +set r_mode -1 +set r_customheight 768 +set r_customwidth 1366  +set game xatrix
+        name: The Recking
 
-    installer:        
-        - write_file:
-            content: '#!/bin/bash
+  installer:        
+    - execute:
+        file: flatpak
+        args: install flathub -y --noninteractive org.yamagi.YamagiQ2
+        description: Installing with flatpak
+        disable_runtime: true
 
-              src=$1
-      
-              dst=$2
+    - extract:
+        format: gog
+        file: $game
+        args: --gog
+        dst: $GAMEDIR
+        description: Extracting game files
 
-              echo $dst
+    - execute:
+        file: 7z
+        args: x $engine -o"$GAMEDIR" -ppassword -y
 
-              find "$src" -maxdepth 1 -type f -iname "*.ogg" -print0 | 
-
-                  while IFS="" read -r -d "" FILENAME; 
-
-                      do mv "$FILENAME" "${dst}""/""${FILENAME##*/*[Tt][Rr][Aa][cC][kK]}";
-
-                  done'
-            file: $CACHE/copyrename.sh
-        - chmodx: $CACHE/copyrename.sh        
-        
-        - extract:
-            format: gog
-            file: $game
-            args: --gog
-            dst: $GAMEDIR
-            description: Extracting game files
-
-        - execute:
-            args: $CACHE/patch 
-            file: mkdir
-
-        - extract:
-            dst:  $CACHE/patch
-            file: $quakepatch
-            format: zip
-        
-        - merge:
-            src: "$CACHE/patch/baseq2"
-            dst: "$GAMEDIR/baseq2"
-
-        - merge:
-            src: "$CACHE/patch/ctf"
-            dst: "$GAMEDIR/ctf"
-
-        - extract:
-            file: $engine
-            dst: $GAMEDIR
+    - execute:
+        file: 7z
+        args: x $quakepatch -o"$GAMEDIR" -ppassword -y
+    
+    - execute:
+        file: 7z
+        args: x $mapfixes -o"$GAMEDIR/baseq2/maps" -y
