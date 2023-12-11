@@ -34,6 +34,5 @@ script:
         prefix: $GAMEDIR
 
   wine:
-    Desktop: true
     esync: false
-
+    fsync: false
