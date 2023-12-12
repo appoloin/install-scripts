@@ -1,0 +1,24 @@
+name: Spec Ops - The Line
+game_slug: spec-ops-the-line
+version: Installer
+slug: INSTALLER
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Spec Ops The Line/Binaries/Win32/SpecOpsTheLine.exe
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+        
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
