@@ -50,7 +50,7 @@ script:
     - execute:
         command: 'rm -Rf "$HOME/.var/app/org.yamagi.YamagiQ2/.yq2";
 
-                  rmlink "$HOME/.var/app/org.yamagi.YamagiQ2/.yq2"; 
+                  mkdir "$HOME/.var/app/org.yamagi.YamagiQ2/";
 
                   ln -s -f -n "$GAMEDIR" "$HOME/.var/app/org.yamagi.YamagiQ2/.yq2" 
                   '
