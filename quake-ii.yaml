@@ -8,32 +8,32 @@ runner: linux
 script:
   files:
     - game: N/A:Select Setup.exe
-    - engine:        
-        url: https://drive.google.com/uc?export=download&id=1hjEhtecpLmETPQCYYS9GS2xlvnATyiuu
-        filename: yamagi-yquake2-7.30-x86_64.7z
     - quakepatch:        
         url: https://drive.google.com/uc?export=download&id=1Pdce0uxCJB8NpevxDh6UmgOLz3tj3b4s
         filename: q2-3.20-x86-full-ctf.7z 
-    - mapfixes:        
-        url: https://drive.google.com/uc?export=download&id=1OxMBTJ15RFdlRCi91bdgMDpPGq1MFQMQ
-        filename: mapfixes.7z
 
   game:
-    exe: $GAMEDIR/quake2
-    args: -portable -datadir $GAMEDIR +set r_mode -1 +set r_customheight 768 +set r_customwidth 1366 
-    launch_configs:
-      - exe: $GAMEDIR/quake2
-        args: -portable -datadir $GAMEDIR +set r_mode -1 +set r_customheight 768 +set r_customwidth 1366  +set game rogue
+     exe: /usr/bin/flatpak
+     args: run  org.yamagi.YamagiQ2 "-portable -datadir $GAMEDIR" 
+     launch_configs:
+      - exe: /usr/bin/flatpak
+        args: run  org.yamagi.YamagiQ2 "-portable -datadir $GAMEDIR +set game rogue"
         name: Ground Zero
-      - exe: $GAMEDIR/quake2
-        args: -portable -datadir $GAMEDIR +set r_mode -1 +set r_customheight 768 +set r_customwidth 1366  +set game xatrix
+      - exe: /usr/bin/flatpak
+        args: run  org.yamagi.YamagiQ2 "-portable -datadir $GAMEDIR +set game xatrix"
         name: The Recking
 
   installer:        
     - execute:
-        file: flatpak
+        file: /usr/bin/flatpak
         args: install flathub -y --noninteractive org.yamagi.YamagiQ2
         description: Installing with flatpak
+        disable_runtime: true
+
+    - execute:
+        file: /usr/bin/flatpak
+        args: override org.yamagi.YamagiQ2 --user --filesystem=$GAMEDIR
+        description: Added GAMEDIR to flatpak permissions
         disable_runtime: true
 
     - extract:
@@ -45,12 +45,12 @@ script:
 
     - execute:
         file: 7z
-        args: x $engine -o"$GAMEDIR" -ppassword -y
-
-    - execute:
-        file: 7z
         args: x $quakepatch -o"$GAMEDIR" -ppassword -y
-    
+  
     - execute:
-        file: 7z
-        args: x $mapfixes -o"$GAMEDIR/baseq2/maps" -y
+        command: 'rm -Rf "$HOME/.var/app/org.yamagi.YamagiQ2/.yq2";
+
+                  rmlink "$HOME/.var/app/org.yamagi.YamagiQ2/.yq2"; 
+
+                  ln -s -f -n "$GAMEDIR" "$HOME/.var/app/org.yamagi.YamagiQ2/.yq2" 
+                  '
