@@ -2,25 +2,47 @@ name: Heretic - Shadow of the Serpent Riders
 game_slug: heretic-shadow-of-the-serpent-riders 
 version: Installer
 slug: installer
-runner: zdoom
+runner: linux
 
 
 script:
-    files:
-      - game: N/A:Select GOG installer.
+  files:
+    - game: N/A:Select GOG installer.
 
-    game:
-      main_file: $GAMEDIR/HERETIC.WAD
-      savedir: $GAMEDIR/saves
+  game:
+    exe: /usr/bin/flatpak
+    args: run org.zdoom.GZDoom -config $GAMEDIR/gzdoom.ini -file HERETIC.WAD -savedir $GAMEDIR/saves
 
-    installer:
-      - extract:
-          format: gog
-          file: $game
-          args: --gog
-          dst: $CACHE
-          description: Extracting game files
+  installer:
+    - execute:
+        file: /usr/bin/flatpak
+        args: install flathub -y --noninteractive org.zdoom.GZDoom
+        description: Installing with flatpak
+        disable_runtime: true
 
-      - copy:
-          src: $CACHE/HERETIC.WAD 
-          dst: $GAMEDIR
+    - execute:
+        file: /usr/bin/flatpak
+        args: override org.zdoom.GZDoom --user --filesystem=$GAMEDIR
+        description: Added GAMEDIR to flatpak permissions
+        disable_runtime: true
+
+    - extract:
+        format: gog
+        file: $game
+        args: --gog
+        dst: $CACHE
+        description: Extracting game files
+
+    - copy:
+        src: $CACHE/HERETIC.WAD 
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[IWADSearch.Directories]
+
+          Path=$DOOMWADDIR
+
+          Path=$GAMEDIR
+
+          '
+        file: $GAMEDIR/gzdoom.ini
