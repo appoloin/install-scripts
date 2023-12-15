@@ -16,12 +16,12 @@ script:
      exe: /usr/bin/flatpak
      args: run  org.yamagi.YamagiQ2 "-portable -datadir $GAMEDIR" 
      launch_configs:
-      - exe: /usr/bin/flatpak
-        args: run  org.yamagi.YamagiQ2 "-portable -datadir $GAMEDIR +set game rogue"
-        name: Ground Zero
-      - exe: /usr/bin/flatpak
-        args: run  org.yamagi.YamagiQ2 "-portable -datadir $GAMEDIR +set game xatrix"
-        name: The Recking
+        - exe: /usr/bin/flatpak
+          args: run  org.yamagi.YamagiQ2 "-portable -datadir $GAMEDIR +set game rogue"
+          name: Ground Zero
+        - exe: /usr/bin/flatpak
+          args: run  org.yamagi.YamagiQ2 "-portable -datadir $GAMEDIR +set game xatrix"
+          name: The Recking
 
   installer:        
     - execute:

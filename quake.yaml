@@ -23,12 +23,12 @@ script:
      exe: /usr/bin/flatpak
      args: run  net.sourceforge.quakespasm.Quakespasm 
      launch_configs:
-      - exe: /usr/bin/flatpak
-        args: run  net.sourceforge.quakespasm.Quakespasm "-hipnotic"
-        name: Quake Mission Pack 1 Scourge of Armagon
-      - exe: /usr/bin/flatpak
-        args: run  net.sourceforge.quakespasm.Quakespasm "-rogue"
-        name: Quake Mission Pack 2 Dissolution of Eternity
+        - exe: /usr/bin/flatpak
+          args: run  net.sourceforge.quakespasm.Quakespasm "-hipnotic"
+          name: Quake Mission Pack 1 Scourge of Armagon
+        - exe: /usr/bin/flatpak
+          args: run  net.sourceforge.quakespasm.Quakespasm "-rogue"
+          name: Quake Mission Pack 2 Dissolution of Eternity
 
   installer:
     - write_file:
