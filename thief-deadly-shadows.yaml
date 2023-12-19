@@ -1,0 +1,90 @@
+name: Thief 3 - Deadly Shadows
+game_slug: thief-deadly-shadows
+version: Installer
+slug: thief-3-installer
+runner: wine
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/GOG.com/Thief - Deadly Shadows/System/Thief3.exe"
+    prefix: $GAMEDIR
+    launch_configs:
+      - exe: "$GAMEDIR/drive_c/Program Files (x86)/GOG.com/Thief - Deadly Shadows/System/SneakyTweaker.exe"
+        name: Sneaky Launcher
+        prefix: $GAMEDIR
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: vcrun2008 win7
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        description: Installing Thief 
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1CQNxf3BebT_67GDxduElkVShAnSPDgPo "$CACHE/settings.7z" 
+        description: Downloading Settings
+
+    - execute:
+        file: 7z
+        args: x  "$CACHE/settings.7z" -o"$GAMEDIR/drive_c/Program Files (x86)/GOG.com/Thief - Deadly Shadows/" -y
+
+    #Download new dark
+    - execute:
+        file: $CACHE/download.sh
+        args: 1nmwqT3KiONrgwxYYqEnsw61TJtXB45NO "$CACHE/Setup_T3SneakyUpgrade_Full_1.1.11.7z" 
+        description: Downloading Sneaky patch
+
+    - execute:
+        file: 7z
+        args: x  "$CACHE/Setup_T3SneakyUpgrade_Full_1.1.11.7z" -o"$CACHE" -ppassword -y
+
+    - task:
+        description: Installing NewDark
+        prefix: $GAMEDIR
+        name: wineexec
+        executable: $CACHE/Setup_T3SneakyUpgrade_Full_1.1.11.exe
+
+  wine:
+    esync: false
+    fsync: false
+
+
+  system:
+    single_cpu: true
