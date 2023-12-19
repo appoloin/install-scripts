@@ -134,7 +134,7 @@ script:
                   '
     - merge:
         src: "$CACHE/ME1Controller/Mass Effect" 
-        dst: "$GAMEDIR/drive_c/users/$USER/Documents/BioWare/Mass Effect"
+        dst: "$GAMEDIR/drive_c/Program Files (x86)/Mass Effect Ultimate Edition"
              
   wine:
     overrides:
