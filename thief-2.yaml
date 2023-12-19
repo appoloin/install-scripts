@@ -1,5 +1,3 @@
-#Check patch install path. If the gog installer has used "program files" the patch installer will complane, you can ignore it.
-#https://www.ttlg.com/forums/showthread.php?t=149669
 name: Thief 2 - The Metal Age
 game_slug: thief-2
 version: Installer
@@ -9,7 +7,6 @@ runner: wine
 script:
   files:
     - setup: N/A:Select setup file from GOG
-    - patch: N/A:Select Patch EXE
 
   game:
     arch: win32
@@ -17,6 +14,28 @@ script:
     prefix: $GAMEDIR
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
 
     - task:
         arch: win32
@@ -37,9 +56,20 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+    #https://www.ttlg.com/forums/showthread.php?t=134733
+    #Download new dark
+    - execute:
+        file: $CACHE/download.sh
+        args: 1O2q8TqN80oPAtn5cN3HwQcOoFJpLvdoA "$CACHE/T2Fix_1.27e.7z" 
+        description: Downloading New Dark
+
+    - execute:
+        file: 7z
+        args: x  "$CACHE/T2Fix_1.27e.7z" -o"$CACHE" -ppassword -y
+
     - task:
-        description: Installing NewDark
-        executable: $patch
+        description: Installing NewDark - GOG uses "program files" the installer will complain, ignore it.
+        executable: $CACHE/T2Fix_1.27e.exe
         name: wineexec
         prefix: $GAMEDIR
 
