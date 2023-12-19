@@ -8,9 +8,22 @@ script:
   game:
     exe: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition/skse64_loader.exe
     prefix: $GAMEDIR
+    launch_configs:
+      - exe: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition/Mopy/Wrye Bash.exe
+        name: Wrye Bash
+        prefix: $GAMEDIR
+      - exe: $GAMEDIR/drive_c/Program Files/LOOT/LOOT.exe
+        name: Loot
+        prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
+
+
+  install_complete_text: "Installation finished!\n\n\n\nRun Wyre Bash to install mods. \ 
+        (Right Click on Mod -> Archive -> Unpack to Project, then install). \n\n\n \ 
+        Run Loot to fix load order"
+
 
   installer:
     - write_file:
