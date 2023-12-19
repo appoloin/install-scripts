@@ -129,17 +129,17 @@ script:
         command: 'mv "$GAMEDIR/drive_c/users/$USER/Documents/BioWare/Mass Effect/Config"  
                       "$GAMEDIR/drive_c/users/$USER/Documents/BioWare/Mass Effect/Config_BAK" 
 
-                  mv "$CACHE/Config" 
+                  mv "$CACHE/ME1Controller/Config" 
                      "$GAMEDIR/drive_c/users/$USER/Documents/BioWare/Mass Effect/Config"
                   '
     - merge:
-        src: "$CACHE/Mass Effect" 
+        src: "$CACHE/ME1Controller/Mass Effect" 
         dst: "$GAMEDIR/drive_c/users/$USER/Documents/BioWare/Mass Effect"
              
   wine:
-      overrides:
-          dxgi: disable
-          nvcuda: disable
-          d3dx9: n
+    overrides:
+      dxgi: disable
+      nvcuda: disable
+      d3dx9: n
 
 
