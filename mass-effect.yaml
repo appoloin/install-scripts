@@ -6,16 +6,39 @@ runner: wine
 
 script:
   game:
-      exe: $GAMEDIR/drive_c/Program Files (x86)/Mass Effect Ultimate Edition/Binaries/MassEffect.exe
-      prefix: $GAMEDIR
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Mass Effect Ultimate Edition/Binaries/MassEffect.exe
+    prefix: $GAMEDIR
+    launch_configs:
+      - exe: "$GAMEDIR/drive_c/Program Files (x86)/Mass Effect Ultimate Edition/Binaries/MassEffectConfig.exe"
+        name: Configure
+        prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select Setup.exe
-    - patch: 
-        url: https://drive.google.com/uc?export=download&id=1Xg6Go8_egR7rVSS8VK7lWpzG94xYYCc9
-        filename: SilentPatchME.zip
 
   installer:    
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - task:
         name: create_prefix
         install_mono: false
@@ -72,14 +95,47 @@ script:
         name: winekill
         prefix: $GAMEDIR
 
+    #Download and installing patch
+    - execute:
+        file: $CACHE/download.sh
+        args: 1Xg6Go8_egR7rVSS8VK7lWpzG94xYYCc9 "$CACHE/SilentPatchME.zip" 
+        description: Downloading Patch
+
     - extract:
+        file: "$CACHE/SilentPatchME.zip" 
         dst: $CACHE
-        file: $patch
 
     - merge:
         src: "$CACHE/Binaries"
         dst: "$GAMEDIR/drive_c/Program Files/Mass Effect Ultimate Edition/Binaries"
     
+    - task:
+        description: Creating Settings
+        executable: $GAMEDIR/drive_c/Program Files (x86)/Mass Effect Ultimate Edition/Binaries/MassEffect.exe
+        name: wineexec
+        prefix: $GAMEDIR
+
+    #Downloading and install controller mod
+    - execute:
+        file: $CACHE/download.sh
+        args: 11afBsUtM7bJLg9fPlqlEmEBVM1f_mQa5A9 "$CACHE/ME1Controller-60-1-2-2.7z" 
+        description: Downloading Controller MOD
+
+    - execute:
+        file: 7z
+        args: x "$CACHE/ME1Controller-60-1-2-2.7z"  -o"$CACHE" -y
+
+    - execute:
+        command: 'mv "$GAMEDIR/drive_c/users/$USER/Documents/BioWare/Mass Effect/Config"  
+                      "$GAMEDIR/drive_c/users/$USER/Documents/BioWare/Mass Effect/Config_BAK" 
+
+                  mv "$CACHE/Config" 
+                     "$GAMEDIR/drive_c/users/$USER/Documents/BioWare/Mass Effect/Config"
+                  '
+    - merge:
+        src: "$CACHE/Mass Effect" 
+        dst: "$GAMEDIR/drive_c/users/$USER/Documents/BioWare/Mass Effect"
+             
   wine:
       overrides:
           dxgi: disable
