@@ -1,0 +1,32 @@
+name: Space Invaders
+game_slug: space-invaders
+version: arcade
+slug:  space-invaders
+runner: mame
+
+
+script:
+  files:
+    - game:  N/A:Select the invaders.zip
+
+  game:
+    main_file: $GAMEDIR/invaders.zip
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          
+          dst=$2
+
+          file=$3
+
+          find "$src" -maxdepth 1 -type f \( -iname $file \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy2.sh
+    - chmodx: $CACHE/selectcopy2.sh
+    
+    - execute:
+        args: $game $GAMEDIR "*.zip"
+        file: $CACHE/selectcopy2.sh
+
