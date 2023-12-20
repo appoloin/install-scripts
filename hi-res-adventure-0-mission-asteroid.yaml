@@ -1,4 +1,4 @@
-name: Hi-Res Adventure 0 Mission Asteroid
+name: Hi-Res Adventure 0 - Mission Asteroid
 game_slug: hi-res-adventure-0-mission-asteroid
 version: Installer
 slug: hi-res-adventure-0-mission-asteroid
@@ -14,7 +14,20 @@ script:
     path: $GAMEDIR
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+          dst=$2
+          
+          cp -avr "$src/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
+
     - execute:
-        args:  $game $GAMEDIR
-        file: /bin/cp 
-        
+        args: $game $GAMEDIR
+        file: $CACHE/bulkcopy.sh
+
+  scummvm:
+    fullscreen: false
