@@ -1,0 +1,32 @@
+name: Donkey Kong 3
+game_slug: donkey-kong-3
+version: arcade
+slug: donkey-kong-3
+runner: mame
+
+
+script:
+  files:
+    - game:  N/A:Select the dkong3.zip
+
+  game:
+    main_file: $GAMEDIR/dkong3.zip
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          
+          dst=$2
+
+          file=$3
+
+          find "$src" -maxdepth 1 -type f \( -iname $file \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy2.sh
+    - chmodx: $CACHE/selectcopy2.sh
+    
+    - execute:
+        args: $game $GAMEDIR "*.zip"
+        file: $CACHE/selectcopy2.sh
+

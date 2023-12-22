@@ -1,0 +1,55 @@
+name: The Hobbit
+game_slug: the-hobbit
+version: Installer
+slug:   installer
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select hobbit.com.
+
+  game:
+    main_file: $GAMEDIR/play.conf
+
+  installer:
+    - execute:
+        args: $GAMEDIR/HDD  $GAMEDIR/HDD/hobbit
+        file: mkdir
+
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+          dst=$2
+          
+          cp -avr "$src/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR/HDD/hobbit
+
+    - write_file:
+        content: '[mouse]
+
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 15
+
+          [autoexec]
+
+            mount C "$GAMEDIR/HDD" -t dir
+
+            cls 
+
+            c: 
+
+            cd hobbit
+
+            hobbit.com
+
+            exit'
+        file: $GAMEDIR/play.conf
+
