@@ -1,0 +1,33 @@
+name: Hi-Res Adventure 5 - Time Zone
+game_slug: hi-res-adventure-5-time-zone
+version: Installer
+slug: hi-res-adventure-5-time-zone
+runner: scummvm
+
+
+script:
+  files:
+    - game: N/A:Select the game file
+    
+  game:
+    game_id: hires5
+    path: $GAMEDIR
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+          dst=$2
+          
+          cp -avr "$src/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: $game $GAMEDIR
+        file: $CACHE/bulkcopy.sh
+
+  scummvm:
+    fullscreen: false

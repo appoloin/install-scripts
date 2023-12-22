@@ -1,0 +1,33 @@
+name: Hi-Res Adventure 6 - The Dark Crystal
+game_slug: hi-res-adventure-6-the-dark-crystal
+version: Installer
+slug: hi-res-adventure-6-the-dark-crystal
+runner: scummvm
+
+
+script:
+  files:
+    - game: N/A:Select the game file
+    
+  game:
+    game_id: hires6
+    path: $GAMEDIR
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+          dst=$2
+          
+          cp -avr "$src/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        args: $game $GAMEDIR
+        file: $CACHE/bulkcopy.sh
+
+  scummvm:
+    fullscreen: false
