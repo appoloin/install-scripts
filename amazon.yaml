@@ -13,8 +13,8 @@ script:
 
   installer:
     - execute:
-        args: $GAMEDIR/drive_c  $GAMEDIR/drive_c/amazon
         file: mkdir
+        args: $GAMEDIR/drive_c  $GAMEDIR/drive_c/amazon
 
     - write_file:
         content: '#!/bin/bash
@@ -28,8 +28,8 @@ script:
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
-        args: $game $GAMEDIR/drive_c/amazon
         file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR/drive_c/amazon
 
     - write_file:
         content: '[mouse]

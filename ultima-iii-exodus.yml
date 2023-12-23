@@ -41,8 +41,8 @@ script:
         dst: "$GAMEDIR"
       
     - execute:
-        args: $GAMEDIR
         file: $CACHE/remove.sh
+        args: $GAMEDIR
 
     - write_file:
         content: '[mouse]

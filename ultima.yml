@@ -37,8 +37,8 @@ script:
         description: Extracting game files
 
     - execute:
-        args: $GAMEDIR
         file: $CACHE/remove.sh
+        args: $GAMEDIR
 
     - write_file:
         content: '[mouse]

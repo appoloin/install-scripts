@@ -28,8 +28,8 @@ script:
     - chmodx: $CACHE/bulkcopy-alt.sh
   
     - execute:
-        args: $GAMEDIR/drive_c $GAMEDIR/drive_d $GAMEDIR/drive_e $GAMEDIR/drive_f $GAMEDIR/drive_g $GAMEDIR/drive_h $GAMEDIR/drive_i
         file: mkdir
+        args: $GAMEDIR/drive_c $GAMEDIR/drive_d $GAMEDIR/drive_e $GAMEDIR/drive_f $GAMEDIR/drive_g $GAMEDIR/drive_h $GAMEDIR/drive_i
 
     - extract:
         file: $GUS
@@ -39,63 +39,62 @@ script:
         description: Please insert disc 1
         requires: data0
     - execute:
-        args: $DISC "$GAMEDIR/drive_d"
         file: $CACHE/bulkcopy-alt.sh
+        args: $DISC "$GAMEDIR/drive_d"
     - execute:
-        args: -R 775  "$GAMEDIR/drive_d"
         file: chmod
+        args: -R 775  "$GAMEDIR/drive_d"
 
     - insert-disc:
         description: Please insert disc 2
         requires: data01
     - execute:
-        args: $DISC "$GAMEDIR/drive_e"
         file: $CACHE/bulkcopy-alt.sh
+        args: $DISC "$GAMEDIR/drive_e"
     - execute:
-        args: -R 775  "$GAMEDIR/drive_e"
         file: chmod
+        args: -R 775  "$GAMEDIR/drive_e"
 
     - insert-disc:
         description: Please insert disc 3
         requires: data01
     - execute:
-        args: $DISC "$GAMEDIR/drive_f"
         file: $CACHE/bulkcopy-alt.sh
-
+        args: $DISC "$GAMEDIR/drive_f"
     - execute:
-        args: -R 775  "$GAMEDIR/drive_f"
         file: chmod
+        args: -R 775  "$GAMEDIR/drive_f"
 
     - insert-disc:
         description: Please insert disc 4
         requires: data01
     - execute:
-        args: $DISC "$GAMEDIR/drive_g"
         file: $CACHE/bulkcopy-alt.sh
+        args: $DISC "$GAMEDIR/drive_g"
     - execute:
-        args: -R 775  "$GAMEDIR/drive_g"
         file: chmod
+        args: -R 775  "$GAMEDIR/drive_g"
 
 
     - insert-disc:
         description: Please insert disc 5
         requires: data01
     - execute:
-        args: $DISC "$GAMEDIR/drive_h"
         file: $CACHE/bulkcopy-alt.sh
+        args: $DISC "$GAMEDIR/drive_h"
     - execute:
-        args: -R 775  "$GAMEDIR/drive_h"
         file: chmod
+        args: -R 775  "$GAMEDIR/drive_h"
 
     - insert-disc:
         description: Please insert disc 6
         requires: data01
     - execute:
-        args: $DISC "$GAMEDIR/drive_i"
         file: $CACHE/bulkcopy-alt.sh
+        args: $DISC "$GAMEDIR/drive_i"
     - execute:
-        args: -R 775  "$GAMEDIR/drive_i"
         file: chmod
+        args: -R 775  "$GAMEDIR/drive_i"
 
 
     - write_file:

@@ -28,8 +28,8 @@ script:
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
-        args: $game $GAMEDIR/drive_c/dragon
         file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR/drive_c/dragon
 
     - write_file:
         content: '[mouse]
