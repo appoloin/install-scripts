@@ -1,6 +1,6 @@
 name: Dig Dug
 game_slug: dig-dug
-version: arcade
+verision:  Arcade
 slug: dig-dug
 runner: mame
 

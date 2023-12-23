@@ -1,6 +1,6 @@
 name: Asteroids
 game_slug: asteroids
-version: arcade
+verision:  Arcade
 slug:  asteroids
 runner: mame
 

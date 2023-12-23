@@ -1,6 +1,6 @@
 name: Space Invaders
 game_slug: space-invaders
-version: arcade
+verision:  Arcade
 slug:  space-invaders
 runner: mame
 

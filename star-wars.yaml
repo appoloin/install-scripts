@@ -1,6 +1,6 @@
 name: Star Wars
 game_slug: star-wars
-version: arcade
+verision:  Arcade
 slug: star-wars
 runner: mame
 

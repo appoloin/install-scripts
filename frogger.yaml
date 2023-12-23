@@ -1,6 +1,6 @@
 name: Frogger
 game_slug: frogger
-version: arcade
+verision:  Arcade
 slug: frogger
 runner: mame
 

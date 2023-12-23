@@ -1,6 +1,6 @@
 name: Missle Comand
 game_slug: missile-command
-version: arcade
+verision:  Arcade
 slug: missile-command
 runner: mame
 

@@ -1,6 +1,6 @@
 name: Donkey Kong Jr
 game_slug: donkey-kong-jr
-version: arcade
+verision:  Arcade
 slug: donkey-kong-jr
 runner: mame
 

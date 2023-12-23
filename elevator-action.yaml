@@ -1,6 +1,6 @@
 name: Elevator Action
 game_slug: elevator-action
-version: arcade
+verision:  Arcade
 slug: elevator-action 
 runner: mame
 
