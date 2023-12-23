@@ -1,6 +1,6 @@
 name:  Return to astle Wolfenstein
 game_slug:  return-to-castle-wolfenstein
-version: Installer
+version: GOG-Installer
 slug:  installer
 runner: linux
 

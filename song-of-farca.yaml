@@ -1,6 +1,6 @@
 name: Song of Farca
 game_slug: song-of-farca
-version: Installer
+version: GOG-Installer
 slug:  installer
 runner: wine
 

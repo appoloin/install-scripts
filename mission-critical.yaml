@@ -1,6 +1,6 @@
 name: Mission Critical
 game_slug: mission-critical
-version: Installer
+version: DOS
 slug:  Mission-Critical-installer
 runner: dosbox
 

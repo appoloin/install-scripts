@@ -1,6 +1,6 @@
 name: Hi-Res Adventure 1 - Mystery House
 game_slug: mystery-house
-version: Installer
+version: AppleII
 slug: mystery-house
 runner: scummvm
 

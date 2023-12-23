@@ -1,6 +1,6 @@
 name:  Blackwel Deception
 game_slug: the-blackwell-deception
-version: Installer
+version: GOG_Installer
 slug: blackwell-deception-installer
 runner: scummvm
 

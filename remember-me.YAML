@@ -1,6 +1,6 @@
 name: Remember Me
 game_slug: remember-me
-version: Installer
+version: Windows-Installer
 slug: INSTALLER
 runner: wine
 

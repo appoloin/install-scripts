@@ -1,7 +1,7 @@
 name: Ultima
 game_slug: ultima
 version: Installer
-slug: Installer
+slug: GOG_Installer
 runner: dosbox
 
 script:

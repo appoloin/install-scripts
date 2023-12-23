@@ -1,6 +1,6 @@
 name: Subnatica
 game_slug: subnautica
-version: Installer
+version: Windows-Installer
 slug:  NSTALLER
 runner: wine
 

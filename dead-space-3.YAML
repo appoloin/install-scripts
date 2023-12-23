@@ -1,6 +1,6 @@
 name: Dead Space 3
 game_slug: dead-space-3
-version: Installer
+version: Windows-Installer
 slug: INSTALLER
 runner: wine
 

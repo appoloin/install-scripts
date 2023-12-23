@@ -1,6 +1,6 @@
 name: Need for Speed - Most Wanted
 game_slug: need-for-speed-most-wanted
-version: Installer
+version: Windows-Installer
 slug: INSTALLER
 runner: wine
 

@@ -1,6 +1,6 @@
 name: Spellcasting Collection
 game_slug: spellcasting-collection
-version: Installer
+version: GOG-Installer
 slug: spellcasting-collection
 runner: dosbox
 

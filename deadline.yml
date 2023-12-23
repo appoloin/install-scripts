@@ -1,6 +1,6 @@
 name: Deadline
 game_slug: deadline
-version: Installer
+version: DOS
 slug: installer
 runner: scummvm
 
@@ -15,13 +15,11 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
           dst=$2
 
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          find "$src_path" -type f \( -iname "deadline.DAT"  \) -exec cp {} "$dst" \;'
+          find "$src" -type f \( -iname "deadline.DAT"  \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
 
     - chmodx: $CACHE/selectcopy.sh
@@ -31,9 +29,9 @@ script:
         requires: PC
 
     - execute:
-        args: $DISC "$GAMEDIR"
         file: $CACHE/selectcopy.sh
+        args: $DISC "$GAMEDIR"
 
     - execute:
-        args: -R 775  "$GAMEDIR"
         file: chmod
+        args: -R 775  "$GAMEDIR"

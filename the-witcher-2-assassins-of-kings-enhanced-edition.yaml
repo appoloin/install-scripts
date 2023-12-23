@@ -1,6 +1,6 @@
 name: The Wither 2 - Assassins of Kings
 game_slug: the-witcher-2-assassins-of-kings-enhanced-edition
-version: Installer
+version: GOG-Installer
 slug: witcher-2-installer
 runner: wine
 

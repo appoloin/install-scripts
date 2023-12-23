@@ -1,6 +1,6 @@
 name: Ultima II - The Revenge of the Enchantress
 game_slug: ultima-ii-the-revenge-of-the-enchantress
-version: Installer
+version: GOG_Installer
 slug: Installer
 runner: dosbox
 

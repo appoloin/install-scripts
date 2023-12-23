@@ -1,6 +1,6 @@
 name:  Blackwell Convergence
 game_slug: blackwell-convergence
-version: Installer
+version: GOG_Installer
 slug: blackwell-convergence-installer
 runner: scummvm
 

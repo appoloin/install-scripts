@@ -1,6 +1,6 @@
 name: Return to Mysterious Island 
 game_slug: return-to-mysterious-island
-version: Installer
+version: GOG-Installer
 slug: return-to-mysterious-island
 runner: wine
 

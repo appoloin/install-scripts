@@ -1,6 +1,6 @@
 name: Broken Sword 3 - The Sleeping Dragon
 game_slug: broken-sword-3-the-sleeping-dragon
-version: Installer
+version: Windows-Installer
 slug: Broken Sword 3-installer
 runner: wine
  

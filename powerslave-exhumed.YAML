@@ -1,6 +1,6 @@
 name: Powerslave Exhumed
 game_slug: powerslave-exhumed
-version: Installer
+version: GOG-Installer
 slug: powerslave-exhumed
 runner: wine
 

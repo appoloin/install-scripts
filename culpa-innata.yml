@@ -1,6 +1,6 @@
 name: Culpa Innata
 game_slug: culpa-innata
-version: Installer
+version: Windows-Installer
 slug: Culpa-Innata-installer
 runner: wine
 

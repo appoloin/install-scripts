@@ -1,6 +1,6 @@
 name: Runaway A Road Adventure
 game_slug: runaway-a-road-adventure
-version: Installer
+version: GOG-Installer
 slug:  installer
 runner: wine
 

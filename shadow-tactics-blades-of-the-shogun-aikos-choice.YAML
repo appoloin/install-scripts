@@ -1,6 +1,6 @@
 name: Shadow Tactics Blades of the Shogun - Aikos Choice
 game_slug: shadow-tactics-blades-of-the-shogun-aikos-choice
-version: Installer
+version: GOG-Installer
 slug: shadow-tactics-blades-of-the-shogun-aikos-choice
 runner: wine
 

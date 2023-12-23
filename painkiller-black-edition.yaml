@@ -1,6 +1,6 @@
 name: Painkiller
 game_slug: painkiller-black-edition
-version: Installer
+version: GOG-Installer
 slug: painkiller-black-edition
 runner: wine
 

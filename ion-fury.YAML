@@ -1,6 +1,6 @@
 name: Ion Fury
 game_slug: ion-fury
-version: Installer
+version: GOG-Installer
 slug: ion-fury
 runner: wine
 

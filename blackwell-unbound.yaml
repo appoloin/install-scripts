@@ -1,6 +1,6 @@
 name:  Blackwell Unbound
 game_slug: blackwell-unbound
-version: Installer
+version: GOG_Installer
 slug: blackwell-Unbound-installer
 runner: scummvm
 

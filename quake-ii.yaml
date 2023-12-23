@@ -1,6 +1,6 @@
 name: Quake II
 game_slug: quake-ii
-version: Installer
+version: GOG-Installer
 slug:  installer
 runner: linux
 

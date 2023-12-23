@@ -1,6 +1,6 @@
 name: Half-Life
 game_slug:  half-life
-version: Installer
+version: Windows-Installer
 slug: half-life
 runner: wine
 

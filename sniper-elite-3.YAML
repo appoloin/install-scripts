@@ -1,6 +1,6 @@
 name: Sniper Elite 3
 game_slug: sniper-elite-3
-version: Installer
+version: GOG-nstaller
 slug: INSTALLER
 runner: wine
 

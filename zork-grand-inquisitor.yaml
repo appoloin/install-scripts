@@ -1,6 +1,6 @@
 name: Zork Grand Inquisitor
 game_slug: zork-grand-inquisitor
-version: Installer
+version: Windows_Installer
 slug:  zork_grand_inquisitor-installer
 runner: scummvm
 

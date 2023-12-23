@@ -1,6 +1,6 @@
 name: Arctico
 game_slug: Arctico
-version: Installer
+version: GOG-Installer
 slug: INSTALLER
 runner: wine
 
@@ -23,8 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-

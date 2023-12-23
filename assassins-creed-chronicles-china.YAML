@@ -1,6 +1,6 @@
 name: Assassin's Creed Chronicles Chine
 game_slug: assassins-creed-chronicles-china--1
-version: Installer
+version: Windows-Installer
 slug: INSTALLER
 runner: wine
 

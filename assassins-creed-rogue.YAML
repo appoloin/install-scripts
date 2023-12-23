@@ -1,6 +1,6 @@
 name: Assassin's Creed Rogue
 game_slug: assassins-creed-rogue
-version: Installer
+version: Windows-Installer
 slug: INSTALLER
 runner: wine
 

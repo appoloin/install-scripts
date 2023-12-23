@@ -1,6 +1,6 @@
 name:  Doom II - Hell on Earth
 game_slug:  doom-ii-hell-on-earth
-version: Installer
+version: GOG_Installer
 slug:  doom-ii-hell-on-earth-installer
 runner: linux
 

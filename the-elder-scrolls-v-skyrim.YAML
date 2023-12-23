@@ -1,6 +1,6 @@
 name: The Elder Scrolls V - Skyrim
 game_slug:  the-elder-scrolls-v-skyrim
-version: Installer
+version: GOG-Installer
 slug: skyrim
 runner: wine
 

@@ -1,6 +1,6 @@
 name: Tex Murphy - Under a Killing Moon
 game_slug: tex-murphy-under-a-killing-moon
-version: Installer
+version: DOS
 slug:  installer
 runner: dosbox
 

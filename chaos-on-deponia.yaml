@@ -1,6 +1,6 @@
 name: Chaos on Deponia 
 game_slug: chaos-on-deponia
-version: Installer
+version: GOG_Installer
 slug: deponia-installer
 runner: wine
 

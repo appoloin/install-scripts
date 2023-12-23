@@ -1,6 +1,6 @@
 name: Thimbleweed Park
 game_slug:  thimbleweed-park
-version: Installer
+version: GOG-Installer
 slug: thimbleweed-park_INSTALLER
 runner: wine
 

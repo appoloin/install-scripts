@@ -1,6 +1,6 @@
 name: Return to Zork
 game_slug: return-to-zork
-version: Installer
+version: DOS
 slug:  return_to_zork-installer
 runner: scummvm
 

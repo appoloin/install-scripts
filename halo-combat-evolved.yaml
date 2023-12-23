@@ -1,6 +1,6 @@
 name: Halo Combat Evolved
 game_slug: halo-combat-evolved
-version: Installer
+version: Windows-Installer
 slug:  installer
 runner: wine
 

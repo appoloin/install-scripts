@@ -1,6 +1,6 @@
 name: Sniper Elite V2
 game_slug: sniper-elite-v2
-version: Installer
+version: GOG-Installer
 slug: INSTALLER
 runner: wine
 

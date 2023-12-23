@@ -1,6 +1,6 @@
 name: Hollywood Hijinx
 game_slug: hollywood-hijinx
-version: Installer
+version: DOS
 slug:  installer
 runner: scummvm
 

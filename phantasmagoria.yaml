@@ -1,6 +1,6 @@
 name:  Phantasmagoria
 game_slug:  phantasmagoria
-version: Installer
+version: DOS
 slug:   phantasmagoria-installer
 runner: scummvm
 
@@ -23,13 +23,11 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-            src=$1
+            src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
             dst=$2
             
-            src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-            cp -avr "$src_path/."  "$dst"'
+            cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy.sh
     - chmodx: $CACHE/bulkcopy.sh
         
@@ -47,117 +45,117 @@ script:
     - chmodx: $CACHE/selectcopy.sh
 
     - execute:
-        args: $DISC1 $GAMEDIR
         file: $CACHE/bulkcopy.sh
+        args: $DISC1 $GAMEDIR
 
     - execute:
-        args: -R 775  "$GAMEDIR"
         file: chmod
+        args: -R 775  "$GAMEDIR"
 
     - execute:
+        file: mv
         args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.001
-        file: mv
 
     - execute:
-        args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.001
         file: mv
+        args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.001
     
     - execute:
-        args: $DISC2 $GAMEDIR
         file: $CACHE/bulkcopy.sh
+        args: $DISC2 $GAMEDIR
 
     - execute:
-        args: -R 775  "$GAMEDIR"
         file: chmod
+        args: -R 775  "$GAMEDIR"
 
     - execute:
         args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.002
         file: mv
 
     - execute:
+        file: mv
         args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.002
-        file: mv
     
     - execute:
+        file: $CACHE/bulkcopy.sh
         args: $DISC3 $GAMEDIR
-        file: $CACHE/bulkcopy.sh
 
     - execute:
-        args: -R 775  "$GAMEDIR"
         file: chmod
+        args: -R 775  "$GAMEDIR"
 
     - execute:
+        file: mv
         args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.003
-        file: mv
 
     - execute:
+        file: mv
         args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.003
-        file: mv
 
     - execute:
+        file: $CACHE/bulkcopy.sh
         args: $DISC4 $GAMEDIR
-        file: $CACHE/bulkcopy.sh
 
     - execute:
-        args: -R 775  "$GAMEDIR"
         file: chmod
+        args: -R 775  "$GAMEDIR"
 
     - execute:
+        file: mv
         args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.004
-        file: mv
 
     - execute:
+        file: mv
         args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.004
-        file: mv
     
     - execute:
+        file: $CACHE/bulkcopy.sh
         args: $DISC5 $GAMEDIR
-        file: $CACHE/bulkcopy.sh
 
     - execute:
-        args: -R 775  "$GAMEDIR"
         file: chmod
+        args: -R 775  "$GAMEDIR"
 
     - execute:
+        file: mv
         args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.005
-        file: mv
 
     - execute:
+        file: mv
         args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.005
-        file: mv
     
     - execute:
+        file: $CACHE/bulkcopy.sh
         args: $DISC6 $GAMEDIR
-        file: $CACHE/bulkcopy.sh
 
     - execute:
-        args: -R 775  "$GAMEDIR"
         file: chmod
+        args: -R 775  "$GAMEDIR"
 
     - execute:
+        file: mv
         args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.006
-        file: mv
 
     - execute:
-        args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.006
         file: mv
+        args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.006
     
     - execute:
-        args: $DISC7 $GAMEDIR
         file: $CACHE/bulkcopy.sh
+        args: $DISC7 $GAMEDIR
 
     - execute:
-        args: -R 775  "$GAMEDIR"
         file: chmod
+        args: -R 775  "$GAMEDIR"
 
     - execute:
+        file: mv
         args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.007
-        file: mv
 
     - execute:
+        file: mv
         args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.007
-        file: mv
 
     - execute:
-        args: $DISC1 $GAMEDIR
         file: $CACHE/selectcopy.sh
+        args: $DISC1 $GAMEDIR

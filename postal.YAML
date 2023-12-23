@@ -1,6 +1,6 @@
 name: Postal
 game_slug: postal
-version: Installer
+version: GOG-Installer
 slug: postal
 runner: wine
 

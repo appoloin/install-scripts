@@ -1,6 +1,6 @@
 name:  Quake 4
 game_slug: quake-4
-version: Installer
+version: GOG-Installer
 slug: installer
 runner: wine
 

@@ -1,6 +1,6 @@
 name: Gemini-Rue
 game_slug: gemini-rue
-version: Installer
+version: GOG-Installer
 slug: Gemini-Rue-installer
 runner: scummvm
 

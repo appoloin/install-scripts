@@ -1,6 +1,6 @@
 name: Portal
 game_slug: portal 
-version: Installer
+version: Windows-Installer
 slug: portal
 runner: wine
 

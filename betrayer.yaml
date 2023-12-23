@@ -1,6 +1,6 @@
 name: Betrayer
 game_slug: betrayer
-version: Installer
+version: Windows-Installer
 slug: betrayer
 runner: wine
 

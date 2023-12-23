@@ -1,6 +1,6 @@
 name: The Talos Principle
 game_slug: the-talos-principle
-version: Installer
+version: GOG-Installer
 slug: INSTALLER
 runner: wine
 

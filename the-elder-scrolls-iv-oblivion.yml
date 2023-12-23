@@ -1,6 +1,6 @@
 name:  The Elder Scrolls IV - Oblivion
 game_slug:  the-elder-scrolls-iv-oblivion
-version: Installer
+version: GOG-Installer
 slug:  installer
 runner: wine
 

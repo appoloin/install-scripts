@@ -1,6 +1,6 @@
 name: Crysis
 game_slug: crysis
-version: Installer
+version: GOG_Installer
 slug: crysis
 runner: wine
 

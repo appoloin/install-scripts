@@ -1,6 +1,6 @@
 name: Bioshock 2
 game_slug: bioshock-2
-version: Installer
+version: Windows-Installer
 slug: INSTALLER
 runner: wine
 

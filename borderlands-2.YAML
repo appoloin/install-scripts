@@ -1,6 +1,6 @@
 name: Borderlands 2
 game_slug: borderlands-2
-version: Installer
+version: Windows-Installer
 slug: borderlands-2_INSTALLER
 runner: wine
 

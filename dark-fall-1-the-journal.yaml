@@ -1,6 +1,6 @@
 name: Dark Fall 1 - The Journal
 game_slug: dark-fall-1-the-journal
-version: Installer
+version: GOG_Installer
 slug: Dark-Fall-installer
 runner: wine
 

@@ -1,6 +1,6 @@
 name: Thief - GOLD
 game_slug: thief-gold
-version: Installer
+version: GOG-Installer
 slug: thief-1-installer
 runner: wine
 

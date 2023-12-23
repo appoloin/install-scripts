@@ -1,6 +1,6 @@
 name: Wildfire
 game_slug: wildfire
-version: Installer
+version: GOG-Installer
 slug: installer
 runner: wine
 

@@ -1,6 +1,6 @@
 name: The Wither 3 - Wild Hunt
 game_slug: the-witcher-3-wild-hunt-game-of-the-year-edition
-version: Installer
+version: GOG-Installer
 slug: witcher-3-installer
 runner: wine
 

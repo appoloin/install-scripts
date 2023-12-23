@@ -1,6 +1,6 @@
 name: Journeyman Project 1 
 game_slug: the-journeyman-project-1-pegasus-prime
-version: Installer
+version: GOG-Installer
 slug:  the-journeyman-project-1-pegasus-prime
 runner: scummvm
 
@@ -39,12 +39,12 @@ script:
         description: Extracting game files
 
     - merge:
-        dst: $GAMEDIR
         src: $GAMEDIR/app/PP Data
+        dst: $GAMEDIR
     
     - execute:
-        args: $GAMEDIR
         file: $CACHE/remove.sh
+        args: $GAMEDIR
 
   scummvm:
     fullscreen: true

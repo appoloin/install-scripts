@@ -1,6 +1,6 @@
 name: Battlefield Bad Company 2
 game_slug: battlefield-bad-company-2
-version: Installer
+version: Windows-Installer
 slug: battlefield-bad-company-2
 runner: wine
 

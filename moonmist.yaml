@@ -1,6 +1,6 @@
 name: Moonmist
 game_slug: moonmist
-version:  infocom
+version:  DOS
 slug:  installer
 runner: scummvm
 

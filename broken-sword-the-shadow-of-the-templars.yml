@@ -1,6 +1,6 @@
 name:  Broken Sword 1 - The Shadow of the Templars
 game_slug: broken-sword-the-shadow-of-the-templars
-version: Installer
+version: GOG_Installer
 slug: installer
 runner: scummvm
 

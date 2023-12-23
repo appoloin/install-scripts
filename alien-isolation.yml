@@ -1,6 +1,6 @@
 name: Alien - Isolation
 game_slug: alien-isolation
-version: Installer
+version: GOG-Installer
 slug:  installer
 runner: wine
 

@@ -1,6 +1,6 @@
 name: Hacknet
 game_slug:  hacknet
-version: Installer
+version: GOG-Installer
 slug: WINE_TEMP_INSTALLER
 runner: wine
 

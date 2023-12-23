@@ -1,6 +1,6 @@
 name: In Other Waters
 game_slug: in-other-waters
-version: Installer
+version: GOG-Installer
 slug:  installer
 runner: wine
 

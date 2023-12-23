@@ -1,6 +1,6 @@
 name: Tom Clancy's Splinter Cell Chaos Theory
 game_slug:  tom-clancys-splinter-cell-chaos-theory
-version: Installer
+version: Windows-Installer
 slug: tom-clancys-splinter-cell-chaos-theory
 runner: wine
 

@@ -1,6 +1,6 @@
 name: Runaway 2 - The Dream of the Turtle
 game_slug: runaway-2-the-dream-of-the-turtle
-version: Installer
+version: GOG-Installer
 slug:  installer
 runner: wine
 

@@ -1,6 +1,6 @@
 name: To the Moon
 game_slug: to-the-moon
-version: Installer
+version: GOG-Installer
 slug: moon-installer
 runner: wine
 

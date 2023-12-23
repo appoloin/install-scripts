@@ -1,6 +1,6 @@
 name: Heretic - Shadow of the Serpent Riders
 game_slug: heretic-shadow-of-the-serpent-riders 
-version: Installer
+version: GOG-Installer
 slug: installer
 runner: linux
 

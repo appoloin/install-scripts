@@ -1,6 +1,6 @@
 name: Crysis Warhead
 game_slug: crysis-warhead
-version: Installer
+version: GOG_Installer
 slug: crysis-warhead
 runner: wine
 

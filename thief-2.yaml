@@ -1,6 +1,6 @@
 name: Thief 2 - The Metal Age
 game_slug: thief-2
-version: Installer
+version: GOG-Installer
 slug: thief-2-installer
 runner: wine
 

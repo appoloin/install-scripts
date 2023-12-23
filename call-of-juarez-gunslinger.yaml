@@ -1,6 +1,6 @@
 name: Call of Juarez - Gunslinger
 game_slug: call-of-juarez-gunslinger
-version: Installer
+version: GOG-Installer
 slug: install
 runner: wine
 

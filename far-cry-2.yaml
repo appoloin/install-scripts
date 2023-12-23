@@ -1,6 +1,6 @@
 name: Far Cry 2
 game_slug: far-cry-2
-version: Installer
+version: GOG_Installer
 slug: FarCry2
 runner: wine
 

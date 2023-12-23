@@ -1,6 +1,6 @@
 name: Discworld II Missing Presumed
 game_slug: discworld-ii-missing-presumed
-version: Installer
+version: Windows_Installer
 slug:  discworld2-installer
 runner: scummvm
 

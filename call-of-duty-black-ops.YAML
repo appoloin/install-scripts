@@ -1,6 +1,6 @@
 name: Call of Duty - Black Ops
 game_slug:  call-of-duty-black-ops
-version: Installer
+version: Windows-Installer
 slug: call-of-duty-black-ops
 runner: wine
 

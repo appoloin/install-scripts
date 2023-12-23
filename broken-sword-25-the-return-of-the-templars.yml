@@ -1,6 +1,6 @@
 name:  Broken Sword 2.5 - The Return of the Templars
 game_slug: broken-sword-25-the-return-of-the-templars
-version: Installer
+version: Windows_Installer
 slug: installer
 runner: scummvm
 

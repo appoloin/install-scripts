@@ -1,6 +1,6 @@
 name: LEGO Batman 2 - DC Super Heroes
 game_slug: lego-batman-2-dc-super-heroes
-version: Installer
+version: Windows-Installer
 slug: INSTALLER
 runner: wine
 

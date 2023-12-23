@@ -1,6 +1,6 @@
 name: Gorogoa
 game_slug: gorogoa
-version: Installer
+version: GOG-Installer
 slug: installer
 runner: wine
 

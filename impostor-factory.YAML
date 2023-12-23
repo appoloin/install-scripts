@@ -1,6 +1,6 @@
 name: Impostor Factory
 game_slug: impostor-factory
-version: Installer
+version: Windows-Installer
 slug: impostor-factory
 runner: wine
 

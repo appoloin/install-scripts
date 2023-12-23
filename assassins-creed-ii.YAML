@@ -1,6 +1,6 @@
 name: Assassin's Creed II
 game_slug: assassins-creed-ii
-version: Installer
+version: Windows-Installer
 slug: assassins-creed-ii_INSTALLER
 runner: wine
 

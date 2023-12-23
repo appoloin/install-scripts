@@ -1,6 +1,6 @@
 name: The Darkside Detective
 game_slug: the-darkside-detective
-version: Installer
+version: GOG-Installer
 slug: INSTALLER
 runner: wine
 

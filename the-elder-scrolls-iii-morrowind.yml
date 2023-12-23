@@ -1,6 +1,6 @@
 name:  The Elder Scrolls III - Morrowind
 game_slug:  the-elder-scrolls-iii-morrowind
-version: Installer
+version: GOG-Installer
 slug:  installer
 runner: linux
 

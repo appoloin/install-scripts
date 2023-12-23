@@ -1,6 +1,6 @@
 name: Quake
 game_slug: quake 
-version: Installer
+version: GOG-Installer
 slug:  installer
 runner: linux
 

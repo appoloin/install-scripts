@@ -1,6 +1,6 @@
 name: Overboard!
 game_slug: overboard
-version: Installer
+version: GOG-Installer
 slug: installer
 runner: wine
 

@@ -1,6 +1,6 @@
 name: Discworld 
 game_slug: discworld
-version: Installer
+version: Windows_Installer
 slug:  discworld-installer
 runner: scummvm
  

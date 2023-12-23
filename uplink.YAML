@@ -1,6 +1,6 @@
 name: Uplink
 game_slug: uplink
-version: Installer
+version: GOG-Installer
 slug: INSTALLER
 runner: wine
 

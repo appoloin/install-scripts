@@ -1,6 +1,6 @@
 name: Dead Space
 game_slug: dead-space
-version: Installer
+version: GOG_Installer
 slug: INSTALLER
 runner: wine
 

@@ -1,6 +1,6 @@
 name: Unepic
 game_slug: unepic
-version: Installer
+version: GOG-Installer
 slug:  unepic-installer
 runner: wine
 

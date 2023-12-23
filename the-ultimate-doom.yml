@@ -1,6 +1,6 @@
 name:  The Ultimate Doom
 game_slug:  the-ultimate-doom
-version: Installer
+version: GOG-Installer
 slug:  the-ultimate-doom-installer
 runner: zdoom
 

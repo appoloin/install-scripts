@@ -1,6 +1,6 @@
 name: Far Cry 4
 game_slug: far-cry-4
-version: Installer
+version: Windows-Installer
 slug: installer
 runner: wine
 

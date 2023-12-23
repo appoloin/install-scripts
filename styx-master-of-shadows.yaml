@@ -1,6 +1,6 @@
 name: Styx Master of Shadows
 game_slug: styx-master-of-shadows
-version: Installer
+version: GOG-Installer
 slug: styx-master-of-shadows
 runner: wine
 

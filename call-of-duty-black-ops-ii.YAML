@@ -1,6 +1,6 @@
 name: Call of Duty - Black Ops II
 game_slug: call-of-duty-black-ops-ii
-version: Installer
+version: Windows-Installer
 slug: call-of-duty-black-ops-ii
 runner: wine
 

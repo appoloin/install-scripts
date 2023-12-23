@@ -1,6 +1,6 @@
 name: Infidel
 game_slug: infidel
-version: Installer
+version: DOS
 slug: installer
 runner: scummvm
 

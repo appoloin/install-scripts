@@ -1,6 +1,6 @@
 name: Tomb Raider
 game_slug: tomb-raider
-version: Installer
+version: Windows-Installer
 slug: tombraider-installer
 runner: wine
 

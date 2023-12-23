@@ -1,6 +1,6 @@
 name: Gone Home
 game_slug: gone-home
-version: Installer
+version: GOG-Installer
 slug: gone-home
 runner: wine
 

@@ -1,6 +1,6 @@
 name: Assassin's Creed IV
 game_slug: assassins-creed-iv-black-flag
-version: Installer
+version: Windows-Installer
 slug: INSTALLER
 runner: wine
 

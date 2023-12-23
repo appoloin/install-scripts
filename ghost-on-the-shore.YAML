@@ -1,6 +1,6 @@
 name: Ghost on the Shore
 game_slug: ghost-on-the-shore
-version: Installer
+version: GOG-Installer
 slug: ghost-on-the-shore
 runner: wine
 

@@ -1,6 +1,6 @@
 name: Amazon
 game_slug: amazon
-version: Installer
+version: DOS
 slug:   installer
 runner: dosbox
 

@@ -1,6 +1,6 @@
 name: The Witcher
 game_slug: the-witcher-enhanced-edition
-version: Installer
+version: GOG-Installer
 slug: installer
 runner: wine
 

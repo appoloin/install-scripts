@@ -1,6 +1,6 @@
 name: Metro 2033 Redux
 game_slug: metro-2033-redux
-version: Installer
+version: GOG-Installer
 slug: INSTALLER
 runner: wine
 

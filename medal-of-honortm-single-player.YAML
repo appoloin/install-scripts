@@ -1,6 +1,6 @@
 name: Medal of Honor
 game_slug:  medal-of-honortm-single-player
-version: Installer
+version: Windows-Installer
 slug: medal-of-honortm-single-player-INSTALLER
 runner: wine
 

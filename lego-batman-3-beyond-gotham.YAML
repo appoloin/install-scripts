@@ -1,6 +1,6 @@
 name: LEGO Batman 3 - Beyond Gotham
 game_slug: lego-batman-3-beyond-gotham
-version: Installer
+version: GOG-Installer
 slug: INSTALLER
 runner: wine
 

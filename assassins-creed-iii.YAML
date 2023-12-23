@@ -1,6 +1,6 @@
 name: Assassin's Creed III
 game_slug: assassins-creed-iii
-version: Installer
+version: Windows-Installer
 slug: assassins-creed-iiiINSTALLER
 runner: wine
 

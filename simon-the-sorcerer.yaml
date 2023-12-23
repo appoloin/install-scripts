@@ -1,6 +1,6 @@
 name: Simon the Sorcerer
 game_slug: simon-the-sorcerer
-version: Installer
+version: Windows-Installer
 slug:  simon_the_sorcerer-installer
 runner: scummvm
 
@@ -17,19 +17,17 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
           dst=$2
           
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy.sh
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
-        args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR
 
   scummvm:
     fullscreen: true

@@ -1,6 +1,6 @@
 name: Call of Duty
 game_slug: call-of-duty
-version: Installer
+version: Windows-Installer
 slug:  installer
 runner: wine
 

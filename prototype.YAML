@@ -1,6 +1,6 @@
 name: Prototype
 game_slug: prototype
-version: Installer
+version: Windows-Installer
 slug: prototype
 runner: wine
 

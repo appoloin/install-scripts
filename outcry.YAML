@@ -1,6 +1,6 @@
 name: Outcry
 game_slug: outcry
-version: Installer
+version: Windows-Installer
 slug: INSTALLER
 runner: wine
 

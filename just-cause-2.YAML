@@ -1,6 +1,6 @@
 name: Just Cause 2
 game_slug: just-cause-2
-version: Installer
+version: GOG-Installer
 slug: INSTALLER
 runner: wine
 

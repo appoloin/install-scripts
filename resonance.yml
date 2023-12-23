@@ -1,6 +1,6 @@
 name:  Resonance
 game_slug: resonance
-version: Installer
+version: GOG-Installer
 slug: installer
 runner: scummvm
 

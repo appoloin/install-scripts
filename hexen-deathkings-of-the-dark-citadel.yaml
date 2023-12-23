@@ -1,6 +1,6 @@
 name: Hexen - Deathkings of the Dark Citadel
 game_slug: hexen-deathkings-of-the-dark-citadel
-version: Installer
+version: GOG-Installer
 slug: hexen-deathkings-of-the-dark-citadel
 runner: zdoom
 
