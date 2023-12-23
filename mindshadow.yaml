@@ -1,19 +1,19 @@
-name: Sherwood Forest
-game_slug: sherwood-forest
+name: Mindshadow
+game_slug: mindshadow
 version: Apple-II
-slug: sherwood-forest
+slug: mindshadow
 runner: mame
 
 
 script:
   files:
-    - game:  N/A:Select the sherwood.zip
+    - game:  N/A:Select the mndshadw.zip
 
   game:
-    main_file: $GAMEDIR/sherwood.zip
-    machine: apple2e
+    main_file: "$GAMEDIR/mindshadow side a.woz"  
+    machine: apple2gs
     device: flop1
-    args: -flop2 "$GAMEDIR/BLANKP.DSK"  
+    args: -flop2 "$GAMEDIR/BLANKD.DSK"  
 
   installer:
     - write_file:
@@ -50,8 +50,12 @@ script:
     - chmodx: $CACHE/download.sh
 
     - execute:
-        args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR
+
+    - extract:
+        file: $GAMEDIR/mndshadw.zip
+        dst:  $GAMEDIR
 
     - execute:
         file: $CACHE/download.sh

@@ -1,19 +1,20 @@
-name: Sherwood Forest
-game_slug: sherwood-forest
-version: Apple-II
-slug: sherwood-forest
+name: Roland on the Run
+game_slug: roland-on-the-run
+version: cpc464
+slug: roland-on-the-run
 runner: mame
 
 
 script:
   files:
-    - game:  N/A:Select the sherwood.zip
+    - game:  N/A:Select the DSK file
 
   game:
-    main_file: $GAMEDIR/sherwood.zip
-    machine: apple2e
+    main_file: "$GAMEDIR/Roland on the Run (1984)(Amsoft).dsk"
+    machine: cpc6128
     device: flop1
-    args: -flop2 "$GAMEDIR/BLANKP.DSK"  
+    autoboot_command: run"rolrun
+    autoboot_delay: 3
 
   installer:
     - write_file:
@@ -55,21 +56,13 @@ script:
 
     - execute:
         file: $CACHE/download.sh
-        args: 1f0C_0T-hIgJfwAu0VyRzJCcTrdg5CHlm $CACHE/apple_roms.7z
+        args: 19ITHhQU5Qw54cfeqLLtx-VoTXpeSzub4 $CACHE/amstard_roms.7z
 
     - extract:
-        file: $CACHE/apple_roms.7z
-        dst:  $GAMEDIR/apple_roms
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1Ydi2IgUL2Y5vkikpSk3pK0s9o5gwMM3r $CACHE/blankdsk.zip
-
-    - extract:
-        file: $CACHE/blankdsk.zip
-        dst:  $GAMEDIR
+        file: $CACHE/amstard_roms.7z
+        dst:  $GAMEDIR/amstard_roms
 
 
   mame:
-    rompath: $GAMEDIR/apple_roms
+    rompath: $GAMEDIR/amstard_roms
     fullscreen: false
