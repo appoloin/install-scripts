@@ -7,7 +7,7 @@ runner: dosbox
 
 script:
   game:
-    main_file: $GAMEDIR/pandora.conf
+    main_file: $GAMEDIR/play.conf
 
   files:
     - GUS: 
@@ -28,84 +28,73 @@ script:
     - chmodx: $CACHE/bulkcopy-alt.sh
   
     - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/CDD $GAMEDIR/CDD/DISC1 $GAMEDIR/CDD/DISC2 $GAMEDIR/CDD/DISC3 $GAMEDIR/CDD/DISC4 $GAMEDIR/CDD/DISC5 $GAMEDIR/CDD/DISC6
+        args: $GAMEDIR/drive_c $GAMEDIR/drive_d $GAMEDIR/drive_e $GAMEDIR/drive_f $GAMEDIR/drive_g $GAMEDIR/drive_h $GAMEDIR/drive_i
         file: mkdir
 
     - extract:
         file: $GUS
-        dst: $GAMEDIR/HDD/ULTRASND
+        dst: $GAMEDIR/drive_c/ULTRASND
 
     - insert-disc:
         description: Please insert disc 1
-        requires: data01
-
+        requires: data0
     - execute:
-        args: $DISC "$GAMEDIR/CDD/DISC1"
+        args: $DISC "$GAMEDIR/drive_d"
         file: $CACHE/bulkcopy-alt.sh
-
     - execute:
-        args: -R 775  "$GAMEDIR/CDD/DISC1"
+        args: -R 775  "$GAMEDIR/drive_d"
         file: chmod
 
     - insert-disc:
         description: Please insert disc 2
         requires: data01
-
     - execute:
-        args: $DISC "$GAMEDIR/CDD/DISC2"
+        args: $DISC "$GAMEDIR/drive_e"
         file: $CACHE/bulkcopy-alt.sh
-
     - execute:
-        args: -R 775  "$GAMEDIR/CDD/DISC2"
+        args: -R 775  "$GAMEDIR/drive_e"
         file: chmod
 
     - insert-disc:
         description: Please insert disc 3
         requires: data01
-
     - execute:
-        args: $DISC "$GAMEDIR/CDD/DISC3"
+        args: $DISC "$GAMEDIR/drive_f"
         file: $CACHE/bulkcopy-alt.sh
 
     - execute:
-        args: -R 775  "$GAMEDIR/CDD/DISC3"
+        args: -R 775  "$GAMEDIR/drive_f"
         file: chmod
 
     - insert-disc:
         description: Please insert disc 4
         requires: data01
-
     - execute:
-        args: $DISC "$GAMEDIR/CDD/DISC4"
+        args: $DISC "$GAMEDIR/drive_g"
         file: $CACHE/bulkcopy-alt.sh
-
     - execute:
-        args: -R 775  "$GAMEDIR/CDD/DISC4"
+        args: -R 775  "$GAMEDIR/drive_g"
         file: chmod
 
 
     - insert-disc:
         description: Please insert disc 5
         requires: data01
-
     - execute:
-        args: $DISC "$GAMEDIR/CDD/DISC5"
+        args: $DISC "$GAMEDIR/drive_h"
         file: $CACHE/bulkcopy-alt.sh
-
     - execute:
-        args: -R 775  "$GAMEDIR/CDD/DISC5"
+        args: -R 775  "$GAMEDIR/drive_h"
         file: chmod
 
     - insert-disc:
         description: Please insert disc 6
         requires: data01
-
     - execute:
-        args: $DISC "$GAMEDIR/CDD/DISC6"
+        args: $DISC "$GAMEDIR/drive_i"
         file: $CACHE/bulkcopy-alt.sh
-
     - execute:
-        args: -R 775  "$GAMEDIR/CDD/DISC6"
+        args: -R 775  "$GAMEDIR/drive_i"
         file: chmod
 
 
@@ -118,30 +107,30 @@ script:
 
           [autoexec]
           
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
-            mount D "$GAMEDIR/CDD/DISC1" -label PANDORA1 -t cdrom
+            mount D "$GAMEDIR/drive_d" -label PANDORA1 -t cdrom
 
-            mount E "$GAMEDIR/CDD/DISC2" -label PANDORA2 -t cdrom
+            mount E "$GAMEDIR/drive_e" -label PANDORA2 -t cdrom
 
-            mount F "$GAMEDIR/CDD/DISC3" -label PANDORA3 -t cdrom
+            mount F "$GAMEDIR/drive_f" -label PANDORA3 -t cdrom
 
-            mount G "$GAMEDIR/CDD/DISC4" -label PANDORA4 -t cdrom
+            mount G "$GAMEDIR/drive_g" -label PANDORA4 -t cdrom
 
-            mount H "$GAMEDIR/CDD/DISC5" -label PANDORA5 -t cdrom
+            mount H "$GAMEDIR/drive_h" -label PANDORA5 -t cdrom
 
-            mount I "$GAMEDIR/CDD/DISC6" -label PANDORA5 -t cdrom
+            mount I "$GAMEDIR/drive_i" -label PANDORA5 -t cdrom
 
             D:
 
             install
           
             exit'
-        file: $GAMEDIR/pandora_setup.conf
+        file: $GAMEDIR/setup.conf
     - task:
-        config_file: $GAMEDIR/pandora_setup.conf
+        config_file: $GAMEDIR/setup.conf
         name: dosexec
-        working_dir: $GAMEDIR/HDD/
+        working_dir: $GAMEDIR/drive_c/
     
     - write_file:
         content: '[midi]
@@ -182,19 +171,19 @@ script:
       
           [autoexec]
           
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
-            mount D "$GAMEDIR/CDD/DISC1"  -label PANDORA1 -t cdrom
+            mount D "$GAMEDIR/drive_d"  -label PANDORA1 -t cdrom
 
-            mount E "$GAMEDIR/CDD/DISC2"  -label PANDORA2 -t cdrom
+            mount E "$GAMEDIR/drive_e"  -label PANDORA2 -t cdrom
 
-            mount F "$GAMEDIR/CDD/DISC3"  -label PANDORA3 -t cdrom
+            mount F "$GAMEDIR/drive_f"  -label PANDORA3 -t cdrom
 
-            mount G "$GAMEDIR/CDD/DISC4"  -label PANDORA4 -t cdrom
+            mount G "$GAMEDIR/drive_g"  -label PANDORA4 -t cdrom
 
-            mount H "$GAMEDIR/CDD/DISC5"  -label PANDORA5 -t cdrom
+            mount H "$GAMEDIR/drive_h"  -label PANDORA5 -t cdrom
 
-            mount I "$GAMEDIR/CDD/DISC6"  -label PANDORA6 -t cdrom
+            mount I "$GAMEDIR/drive_i"  -label PANDORA6 -t cdrom
 
             ECHO OFF
 
@@ -256,4 +245,4 @@ script:
             :exit
             
             exit'
-        file: $GAMEDIR/pandora.conf
+        file: $GAMEDIR/play.conf
