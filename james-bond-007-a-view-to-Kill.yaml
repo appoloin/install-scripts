@@ -1,6 +1,6 @@
 name: James Bond 007 - A View to Kill
 game_slug: james-bond-007-a-view-to-kill
-version: Installer
+version: DOS
 slug: installer
 runner: dosbox
 
@@ -13,29 +13,27 @@ script:
 
   installer:
     - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/FDD 
         file: mkdir
+        args: $GAMEDIR/drive_c $GAMEDIR/drive_a 
 
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
           dst=$2
           
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy.sh
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
-        args: $game $GAMEDIR/FDD
         file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR/drive_a
 
     - execute:
-        args: -R 775  "$GAMEDIR"
         file: chmod
+        args: -R 775  "$GAMEDIR"
 
 
     - write_file:
@@ -52,9 +50,9 @@ script:
 
           [autoexec]
 
-            mount C "$GAMEDIR/HDD" -t dir 
+            mount C "$GAMEDIR/drive_c" -t dir 
 
-            mount A "$GAMEDIR/FDD" -t floppy
+            mount A "$GAMEDIR/drive_a" -t floppy
 
             cls 
 
