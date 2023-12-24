@@ -1,6 +1,6 @@
 name: Lunar Lander
 game_slug: lunar-lander
-verision:  Arcade
+version:  Arcade
 slug:  lunar-lander
 runner: mame
 

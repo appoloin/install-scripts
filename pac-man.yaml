@@ -1,6 +1,6 @@
 name: Pac-Man
 game_slug: pac-man
-verision:  Arcade
+version:  Arcade
 slug: pac-man
 runner: mame
 

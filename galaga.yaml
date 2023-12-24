@@ -1,6 +1,6 @@
 name: Galaga
 game_slug: galaga
-verision:  Arcade
+version:  Arcade
 slug: galaga
 runner: mame
 

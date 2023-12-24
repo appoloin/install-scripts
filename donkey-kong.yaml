@@ -1,6 +1,6 @@
 name: Donkey Kong
 game_slug: donkey-kong
-verision:  Arcade
+version:  Arcade
 slug: donkey-kong
 runner: mame
 
