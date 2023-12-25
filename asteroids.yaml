@@ -25,7 +25,8 @@ script:
           find "$src" -maxdepth 1 -type f \( -iname $file \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy2.sh
     - chmodx: $CACHE/selectcopy2.sh
+    
     - execute:
-        args: $game $GAMEDIR "*.zip"
         file: $CACHE/selectcopy2.sh
+        args: $game $GAMEDIR "*.zip"
 
