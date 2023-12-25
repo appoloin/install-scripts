@@ -1,6 +1,6 @@
 name: Dark Fall 2 - Lights Out
 game_slug: dark-fall-2-lights-out
-version: GOG_Installer
+version: Good Old Games Installer_Installer
 slug: Dark-Fall-installer
 runner: wine
 

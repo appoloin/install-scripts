@@ -1,6 +1,6 @@
 name: Metal Gear Solid
 game_slug: metal-gear-solid
-version: GOG-Installer
+version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
 

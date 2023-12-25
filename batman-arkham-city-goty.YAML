@@ -1,6 +1,6 @@
 name: Batman Arkham City
 game_slug: batman-arkham-city-goty
-version: GOG-Installer
+version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
 

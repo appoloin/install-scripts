@@ -1,6 +1,6 @@
 name: LEGO Batman - The Videogame
 game_slug: lego-batman-the-videogame
-version: GOG-Installer
+version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
 

@@ -1,6 +1,6 @@
 name: Surviving Mars
 game_slug: surviving-mars
-version: GOG-Installer
+version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
 

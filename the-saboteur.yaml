@@ -1,6 +1,6 @@
 name: The Saboteur
 game_slug: the-saboteur
-version: GOG-Installer
+version: Good Old Games Installer
 slug: installer
 runner: wine
 

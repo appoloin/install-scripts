@@ -1,6 +1,6 @@
 name: Strangeland
 game_slug: strangeland
-version: GOG-Installer
+version: Good Old Games Installer
 slug: strangeland_INSTALLER
 runner: scummvm
 

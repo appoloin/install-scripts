@@ -1,6 +1,6 @@
 name: Ghost 1.0
 game_slug: ghost-10
-version: GOG-Installer
+version: Good Old Games Installer
 slug: ghost-10
 runner: wine
 

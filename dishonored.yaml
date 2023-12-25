@@ -1,6 +1,6 @@
 name: Dishonored
 game_slug: dishonored
-version: GOG_Installer
+version: Good Old Games Installer_Installer
 slug:  dishonored-installer
 runner: wine
 

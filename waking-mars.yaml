@@ -1,6 +1,6 @@
 name: Waking Mars
 game_slug: waking-mars
-version: GOG-Installer
+version: Good Old Games Installer
 slug: installer
 runner: wine
 

@@ -1,6 +1,6 @@
 name: Duskers
 game_slug:  duskers
-version: GOG_Installer
+version: Good Old Games Installer_Installer
 slug: duskers_INSTALLER
 runner: wine
 

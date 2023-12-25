@@ -1,6 +1,6 @@
 name: The Fall
 game_slug: the-fall
-version: GOG-Installer
+version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
 

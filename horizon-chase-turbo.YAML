@@ -1,6 +1,6 @@
 name: Horizon Chase Turbo
 game_slug: horizon-chase-turbo
-version: GOG-Installer
+version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
 

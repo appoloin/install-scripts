@@ -1,6 +1,6 @@
 name: Sherlock Holmes - Another Bow
 game_slug: sherlock-holmes-another-bow
-version: Installer
+version: DOS
 slug:   installer
 runner: dosbox
 
@@ -13,25 +13,23 @@ script:
 
   installer:
     - execute:
-        args: $GAMEDIR/HDD  $GAMEDIR/HDD/bow
         file: mkdir
+        args: $GAMEDIR/drive_c  $GAMEDIR/drive_c/bow
 
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
           dst=$2
           
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy.sh
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
-        args: $game $GAMEDIR/HDD/bow
         file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR/drive_c/bow
 
     - write_file:
         content: '[mouse]
@@ -42,7 +40,7 @@ script:
 
           [autoexec]
 
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
             cls 
 

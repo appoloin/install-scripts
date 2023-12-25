@@ -1,6 +1,6 @@
 name: F.E.A.R. 3
 game_slug: fear-3
-version: GOG-Installer
+version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
 

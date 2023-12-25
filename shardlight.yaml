@@ -1,6 +1,6 @@
 name:  Shardlight
 game_slug: shardlight
-version: GOG-Installer
+version: Good Old Games Installer
 slug: installer
 runner: scummvm
 

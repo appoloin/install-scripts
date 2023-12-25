@@ -1,6 +1,6 @@
 name: The Dig
 game_slug: the-dig
-version: GOG-Installer
+version: Good Old Games Installer
 slug:  the-dig-installer
 runner: scummvm
 

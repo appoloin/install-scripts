@@ -1,6 +1,6 @@
 name: Out There Omega
 game_slug:  out-there-omega
-version: GOG-Installer
+version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
 

@@ -1,6 +1,6 @@
 name: Tesla Effect - A Text Murphy Adventure
 game_slug: tesla-effect-a-tex-murphy-adventure
-version: GOG-Installer
+version: Good Old Games Installer
 slug: tesla-effect-a-tex-murphy-adventure
 runner: wine
 

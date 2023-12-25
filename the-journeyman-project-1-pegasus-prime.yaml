@@ -1,6 +1,6 @@
 name: Journeyman Project 1 
 game_slug: the-journeyman-project-1-pegasus-prime
-version: GOG-Installer
+version: Good Old Games Installer
 slug:  the-journeyman-project-1-pegasus-prime
 runner: scummvm
 

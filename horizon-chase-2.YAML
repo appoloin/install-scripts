@@ -1,6 +1,6 @@
 name: Horizon Chase 2
 game_slug: horizon-chase-2
-version: GOG-Installer
+version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
 

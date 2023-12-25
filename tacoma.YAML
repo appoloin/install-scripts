@@ -1,6 +1,6 @@
 name: Tacoma
 game_slug:  tacoma
-version: GOG-Installer
+version: Good Old Games Installer
 slug: tacoma
 runner: wine
 

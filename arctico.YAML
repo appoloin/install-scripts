@@ -1,6 +1,6 @@
 name: Arctico
 game_slug: Arctico
-version: GOG-Installer
+version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
 

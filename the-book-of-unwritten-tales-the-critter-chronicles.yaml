@@ -1,6 +1,6 @@
 name: The Book Of Unwritten Tales - The Critter Chronicles
 game_slug: the-book-of-unwritten-tales-the-critter-chronicles
-version: GOG-Installer
+version: Good Old Games Installer
 slug: unwritten-installer
 runner: wine
 

@@ -1,6 +1,6 @@
 name: Ankh 2 - Hearth of Osiris
 game_slug: ankh-2-heart-of-osiris
-version: GOG
+version: Good Old Games Installer
 slug: install
 runner: wine
 

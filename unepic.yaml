@@ -1,6 +1,6 @@
 name: Unepic
 game_slug: unepic
-version: GOG-Installer
+version: Good Old Games Installer
 slug:  unepic-installer
 runner: wine
 

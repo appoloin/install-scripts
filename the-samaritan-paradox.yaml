@@ -1,6 +1,6 @@
 name:  The Samaritan Paradox
 game_slug: the-samaritan-paradox
-version: GOG-Installer
+version: Good Old Games Installer
 slug: installer
 runner: scummvm
 

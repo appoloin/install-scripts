@@ -1,6 +1,6 @@
 name: Return of the Obra Dinn
 game_slug: return-of-the-obra-dinn
-version: GOG-Installer
+version: Good Old Games Installer
 slug: installer
 runner: wine
 

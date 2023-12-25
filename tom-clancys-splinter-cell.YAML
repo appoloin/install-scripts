@@ -1,6 +1,6 @@
 name: Tom Clancys Splinter Cell
 game_slug:  tom-clancys-splinter-cell
-version: GOG-Installer
+version: Good Old Games Installer
 slug: tom-clancys-splinter-cell
 runner: wine
 

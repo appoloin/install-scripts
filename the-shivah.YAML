@@ -1,6 +1,6 @@
 name: The Shivah
 game_slug: the-shivah
-version: GOG-Installer
+version: Good Old Games Installer
 slug: INSTALLER
 runner: scummvm
 

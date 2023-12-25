@@ -1,6 +1,6 @@
 name:  Kathy Rain
 game_slug: kathy-rain
-version: GOG-Installer
+version: Good Old Games Installer
 slug: kathy-rain-installer
 runner: scummvm
 

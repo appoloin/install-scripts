@@ -1,6 +1,6 @@
 name: Deponia III - Goodbye Deponia
 game_slug:  goodbye-deponia
-version: GOG-Installer
+version: Good Old Games Installer
 slug: Deponia III - Goodbye Deponia
 runner: wine
 

@@ -1,6 +1,6 @@
 name: Carrion
 game_slug: carrion
-version: GOG_Installer
+version: Good Old Games Installer_Installer
 slug:  installer
 runner: wine
 

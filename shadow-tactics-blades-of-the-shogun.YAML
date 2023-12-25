@@ -1,6 +1,6 @@
 name: Shadow Tactics Blades of the Shogun
 game_slug: shadow-tactics-blades-of-the-shogun
-version: GOG-Installer
+version: Good Old Games Installer
 slug: shadow-tactics-blades-of-the-shogun
 runner: wine
 

@@ -1,6 +1,6 @@
 name: Styx Shards of Darkness
 game_slug:  styx-shards-of-darkness
-version: GOG-Installer
+version: Good Old Games Installer
 slug: styx-shards-of-darkness_INSTALLER
 runner: wine
 

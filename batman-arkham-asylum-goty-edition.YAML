@@ -1,6 +1,6 @@
 name: Batman Arkham Asylum
 game_slug: batman-arkham-asylum-goty-edition
-version: GOG-Installer
+version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
 

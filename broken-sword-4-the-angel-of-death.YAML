@@ -1,6 +1,6 @@
 name: Broken Sword 4 - The Angel of Death
 game_slug:  broken-sword-4-the-angel-of-death
-version: GOG-Installer
+version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
 

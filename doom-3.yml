@@ -1,6 +1,6 @@
 name:  Doom 3
 game_slug:  doom-3
-version: GOG_Installer
+version: Good Old Games Installer_Installer
 slug:  installer
 runner: linux
 

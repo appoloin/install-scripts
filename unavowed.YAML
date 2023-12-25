@@ -1,6 +1,6 @@
 name: Unavowed
 game_slug: unavowed
-version: GOG-Installer
+version: Good Old Games Installer
 slug: INSTALLER
 runner: scummvm
 

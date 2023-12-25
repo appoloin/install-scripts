@@ -1,6 +1,6 @@
 name:  Blackwell Legacy
 game_slug: the-blackwell-legacy
-version: GOG_Installer
+version: Good Old Games Installer_Installer
 slug: blackwell-legacy-installer
 runner: scummvm
 

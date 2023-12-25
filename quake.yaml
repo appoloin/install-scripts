@@ -1,6 +1,6 @@
 name: Quake
 game_slug: quake 
-version: GOG-Installer
+version: Good Old Games Installer
 slug:  installer
 runner: linux
 

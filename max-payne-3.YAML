@@ -1,6 +1,6 @@
 name: Max Payne 3
 game_slug: max-payne-3
-version: GOG-Installer
+version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
 

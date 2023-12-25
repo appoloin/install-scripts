@@ -1,6 +1,6 @@
 name: Far Cry
 game_slug: far-cry
-version: GOG_Installer
+version: Good Old Games Installer_Installer
 slug: installer
 runner: wine
 

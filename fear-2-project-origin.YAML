@@ -1,6 +1,6 @@
 name: F.E.A.R. 2 - Project Orgin
 game_slug:  fear-2-project-origin
-version: GOG-Installer
+version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
 

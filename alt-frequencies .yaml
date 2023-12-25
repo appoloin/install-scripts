@@ -1,6 +1,6 @@
 name: Alt-Frequencies 
 game_slug: alt-frequencies 
-version: GOG-Installer
+version: Good Old Games Installer
 slug: installer
 runner: wine
  

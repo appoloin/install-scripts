@@ -1,6 +1,6 @@
 name: Finding Paradise
 game_slug: finding-paradise
-version: GOG-Installer
+version: Good Old Games Installer
 slug: installer
 runner: wine
 

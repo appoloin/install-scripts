@@ -1,6 +1,6 @@
 name: The Darkside Detective - A Fumble in the Dark
 game_slug:  the-darkside-detective-a-fumble-in-the-dark
-version: GOG-Installer
+version: Good Old Games Installer
 slug: NSTALLER
 runner: wine
 

@@ -1,6 +1,6 @@
 name: Whispers of a Machine
 game_slug: whispers-of-a-machine
-version: GOG-Installer
+version: Good Old Games Installer
 slug:  whispers-of-a-machine
 runner: scummvm
 

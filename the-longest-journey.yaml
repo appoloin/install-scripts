@@ -1,6 +1,6 @@
 name: The Longest Journey
 game_slug: the-longest-journey
-version: GOG-Installer
+version: Good Old Games Installer
 slug:  The-Longest-Journey-installer
 runner: scummvm
 

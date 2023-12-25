@@ -1,6 +1,6 @@
 name: Broken Sword 5 - The Serpents Curse
 game_slug:  broken-sword-5-the-serpents-curse
-version: GOG-Installer
+version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
 

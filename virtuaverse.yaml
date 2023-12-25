@@ -1,6 +1,6 @@
 name: Virtuaverse
 game_slug: virtuaverse
-version: GOG-Installer
+version: Good Old Games Installer
 slug: virtuaverse
 runner: wine
 
