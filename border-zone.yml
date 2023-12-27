@@ -18,13 +18,13 @@ script:
 
           dst=$2
 
-          find "$src_path" -type f \( -iname "BORDERZO.DAT"  \) -exec cp {} "$dst" \;'
+          find "$src" -type f \( -iname "BORDERZO.DAT"  \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
     - chmodx: $CACHE/selectcopy.sh
 
     - insert-disc:
         description: Please insert Lost Treasures of Infocom I CD
-        requires: PC
+        requires: DOS
 
     - execute:
         file: $CACHE/selectcopy.sh
@@ -33,3 +33,6 @@ script:
     - execute:
         file: chmod        
         args: -R 775  "$GAMEDIR"
+
+  scummvm:
+    fullscreen: false
