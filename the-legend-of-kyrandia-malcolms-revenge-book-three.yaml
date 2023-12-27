@@ -28,8 +28,9 @@ script:
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
-        args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR
+
         
     - execute:
         args: -R 775  "$GAMEDIR"

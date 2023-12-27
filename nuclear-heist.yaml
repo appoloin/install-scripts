@@ -51,8 +51,8 @@ script:
     - chmodx: $CACHE/download.sh
 
     - execute:
-        args: $game $GAMEDIR
         file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR
 
     - execute:
         file: $CACHE/download.sh
