@@ -11,18 +11,24 @@ script:
   game:
     game_id: lancelot  
     path: $GAMEDIR
+    name: Part 1
+    launch_configs:
+      - game_id: lancelot-1
+        path: $GAMEDIR
+        name: Part 2
+      - game_id: lancelot-2
+        path: $GAMEDIR
+        name: Part 3
 
   installer:
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
           dst=$2
           
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy.sh
     - chmodx: $CACHE/bulkcopy.sh
 
@@ -30,4 +36,5 @@ script:
         file: $CACHE/bulkcopy.sh
         args: $game $GAMEDIR
 
-    
+  scummvm:
+    fullscreen: false     

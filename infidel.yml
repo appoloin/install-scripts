@@ -15,15 +15,12 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
           dst=$2
 
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          find "$src_path" -type f \( -iname "infidel.DAT"  \) -exec cp {} "$dst" \;'
+          find "$src" -type f \( -iname "infidel.DAT"  \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
-
     - chmodx: $CACHE/selectcopy.sh
 
     - insert-disc:
@@ -31,9 +28,12 @@ script:
         requires: PC
 
     - execute:
-        args: $DISC "$GAMEDIR"
         file: $CACHE/selectcopy.sh
+        args: $DISC "$GAMEDIR"
 
     - execute:
-        args: -R 775  "$GAMEDIR"
         file: chmod
+        args: -R 775  "$GAMEDIR"
+
+  scummvm:
+    fullscreen: false

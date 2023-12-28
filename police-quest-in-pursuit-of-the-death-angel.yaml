@@ -1,6 +1,6 @@
 name: Police Quest I
 game_slug: police-quest-in-pursuit-of-the-death-angel
-version: Installer
+version: Good Old Games Installer
 slug:   police-quest-in-pursuit-of-the-death-angel
 runner: scummvm
 
@@ -45,4 +45,4 @@ script:
         file: $CACHE/remove.sh
 
   scummvm:
-    fullscreen: true
+    fullscreen: false

@@ -12,6 +12,14 @@ script:
   game:
     game_id: gnomeranger  
     path: $GAMEDIR
+    name: Part 1
+    launch_configs:
+      - game_id: gnomeranger-1
+        path: $GAMEDIR
+        name: Part 2
+      - game_id: gnomeranger-2
+        path: $GAMEDIR
+        name: Part 3
 
   installer:
     - write_file:
