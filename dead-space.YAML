@@ -1,6 +1,6 @@
 name: Dead Space
 game_slug: dead-space
-version: Good Old Games Installer_Installer
+version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
 

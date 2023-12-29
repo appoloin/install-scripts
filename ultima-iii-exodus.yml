@@ -1,6 +1,6 @@
 name: Ultima III - Exodus
 game_slug: ultima-iii-exodus
-version: Good Old Games Installer_Installer
+version: Good Old Games Installer
 slug: Installer
 runner: dosbox
 

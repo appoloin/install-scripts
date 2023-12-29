@@ -1,6 +1,6 @@
 name: deponia 
 game_slug: deponia
-version: Good Old Games Installer_Installer
+version: Good Old Games Installer
 slug: deponia-installer
 runner: wine
 

@@ -1,6 +1,6 @@
 name: Beyond Good and Evil
 game_slug:  beyond-good-evil
-version: Good Old Games Installer_Installer
+version: Good Old Games Installer
 slug: beyond-good-evil
 runner: wine
 

@@ -1,7 +1,7 @@
 name: Venom
 game_slug: venom
-version: Installer
-slug:   installer
+version: DOS
+slug:   venom
 runner: dosbox
 
 script:
@@ -12,26 +12,24 @@ script:
     main_file: $GAMEDIR/play.conf
 
   installer:
-    - execute:
-        args: $GAMEDIR/HDD  $GAMEDIR/HDD/venom
-        file: mkdir
-
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
           dst=$2
           
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy.sh
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
-        args: $game $GAMEDIR/HDD/venom
+        file: mkdir
+        args: $GAMEDIR/drive_c  $GAMEDIR/drive_c/venom
+
+    - execute:
         file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR/drive_c/venom
 
     - write_file:
         content: '[mouse]
@@ -42,7 +40,7 @@ script:
 
           [autoexec]
 
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
             cls 
 

@@ -1,6 +1,6 @@
 name: Fallout - New Vegas
 game_slug: fallout-new-vegas
-version: Good Old Games Installer_Installer
+version: Good Old Games Installer
 slug:  fallout-new-vegas
 runner: wine
 

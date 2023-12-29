@@ -63,7 +63,7 @@ script:
 
     - execute:
         file: $CACHE/download.sh
-        args: 1Duq5j6U8fELHdGgk4sZu7ho0_po3q4gH $GAMEDIR/blank.adf
+        args: 1DSAs9XRL9QkjDXEvzGvRQBeDtRmosTJ- $GAMEDIR/blank.adf
 
 
   fsuae:
