@@ -49,7 +49,7 @@ script:
 
             C:
 
-            cd zorkzero
+            cd ZORK0
 
             zorkzero.exe
             
