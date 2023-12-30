@@ -28,7 +28,7 @@ script:
 
     - execute:
         file: mkdir
-        args: $GAMEDIR/drive_C
+        args: $GAMEDIR/drive_c
 
     - execute:
         file: $CACHE/selectcopy.sh

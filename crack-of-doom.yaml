@@ -1,7 +1,7 @@
 name: Crack of Doom
 game_slug: crack-of-doom
-version: Installer
-slug:   installer
+version: DOS
+slug:   crack-of-doom
 runner: dosbox
 
 script:
@@ -13,25 +13,23 @@ script:
 
   installer:
     - execute:
-        args: $GAMEDIR/HDD  $GAMEDIR/HDD/doom
         file: mkdir
+        args: $GAMEDIR/drive_c  $GAMEDIR/drive_c/doom
 
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
           dst=$2
           
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy.sh
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
-        args: $game $GAMEDIR/HDD/doom
         file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR/drive_c/doom
 
     - write_file:
         content: '[mouse]
@@ -42,7 +40,7 @@ script:
 
           [autoexec]
 
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
             cls 
 

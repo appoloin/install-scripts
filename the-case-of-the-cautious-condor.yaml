@@ -1,6 +1,6 @@
 name:  The Case of the Cautious Condor
 game_slug: the-case-of-the-cautious-condor
-version: Installer
+version: DOS
 slug: the-case-of-the-cautious-condor
 runner: dosbox
 
@@ -9,26 +9,62 @@ script:
     - game: N/A:Select CD ISO
 
   game:
-    main_file: $GAMEDIR/condor.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/CDD 
         file: mkdir
+        args: $GAMEDIR/drive_c $GAMEDIR/drive_d
 
     - execute:
-        args:  $game  $GAMEDIR/CDD/cd.iso
-        file: cp 
+        file: cp
+        args:  $game  $GAMEDIR/drive_d/cd.iso
 
     - execute:
-        args: -R 775  "$GAMEDIR"
         file: chmod
+        args: -R 775  "$GAMEDIR"
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
+
+    - extract:
+        file: $CACHE/MT32-ROMS.7z
+        dst:  $GAMEDIR/MT32-ROMS
 
 
     - write_file:
         content: '[midi]
 
            mididevice = mt32
+
+
+          [mt32]
+
+            romdir = $GAMEDIR/MT32-ROMS
+
 
            [mouse]
 
@@ -39,9 +75,9 @@ script:
 
           [autoexec]
 
-            imgmount D "$GAMEDIR/CDD/cd.iso" -t cdrom
+            imgmount D "$GAMEDIR/drive_d/cd.iso" -t cdrom
 
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
             cls 
 
@@ -50,5 +86,5 @@ script:
             condor
             
             exit'
-        file: $GAMEDIR/condor.conf
+        file: $GAMEDIR/play.conf
 
