@@ -68,7 +68,7 @@ script:
 
 
   fsuae:
-    model: A500+
-    kickstart_file: "$GAMEDIR/amiga_roms/Kickstart v2.04 r37.175 (1991)(Commodore)(A500+)[!].rom"
+    model: A500
+    kickstart_file: "$GAMEDIR/amiga_roms/Kickstart v1.3 r34.5 (1987)(Commodore)(A500-A1000-A2000-CDTV)[!].rom"
     fullscreen: false
     fdspeed: 800
