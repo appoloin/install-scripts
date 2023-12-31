@@ -1,6 +1,6 @@
 name: Tom Clancys Splinter Cell Pandora Tomorrow
 game_slug:  tom-clancys-splinter-cell-pandora-tomorrow
-version: Windows-Installer
+version: Windows Installer
 slug: tom-clancys-splinter-cell-pandora-tomorrow
 runner: wine
 

@@ -1,6 +1,6 @@
 name: Mass effect 3
 game_slug: mass-effect-3
-version: Windows-Installer
+version: Windows Installer
 slug:  Mass-Effect-3-installer
 runner: wine
 

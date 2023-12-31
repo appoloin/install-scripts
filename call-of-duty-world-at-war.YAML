@@ -1,6 +1,6 @@
 name: Call of Duty - World at War
 game_slug:  call-of-duty-world-at-war
-version: Windows-Installer
+version: Windows Installer
 slug: call-of-duty-world-at-war
 runner: wine
 

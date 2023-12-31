@@ -1,6 +1,6 @@
 name: Subnatica Below Zero
 game_slug: subnautica-below-zero
-version: Windows-Installer
+version: Windows Installer
 slug:  INSTALLER
 runner: wine
 

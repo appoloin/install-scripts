@@ -1,6 +1,6 @@
 name: Assassin's Creed Brotherhood
 game_slug: assassins-creed-brotherhood
-version: Windows-Installer
+version: Windows Installer
 slug: INSTALLER
 runner: wine
 

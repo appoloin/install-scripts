@@ -1,6 +1,6 @@
 name: Max Payne 2 The Fall of Max Payne
 game_slug: max-payne-2-the-fall-of-max-payne
-version: Windows-Installer
+version: Windows Installer
 slug:  installer
 runner: wine
 

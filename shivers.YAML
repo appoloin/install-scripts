@@ -1,6 +1,6 @@
 name: Shivers
 game_slug:  shivers
-version: Windows-Installer
+version: DOS
 slug: INSTALLER
 runner: scummvm
 

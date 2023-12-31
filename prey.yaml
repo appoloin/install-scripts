@@ -1,6 +1,6 @@
 name: Prey
 game_slug: prey
-version: Windows-Installer
+version: Windows Installer
 slug:  installer
 runner: wine
 

@@ -1,6 +1,6 @@
 name: Next Life
 game_slug: next-life
-version: Windows-Installer
+version: Windows Installer
 slug: next-life
 runner: wine
 

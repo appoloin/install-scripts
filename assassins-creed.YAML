@@ -1,6 +1,6 @@
 name: Assassin's Creed
 game_slug: assassins-creed
-version: Windows-Installer
+version: Windows Installer
 slug: INSTALLER
 runner: wine
 

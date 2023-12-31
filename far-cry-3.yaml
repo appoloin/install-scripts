@@ -1,6 +1,6 @@
 name: Far Cry 3 
 game_slug: far-cry-3
-version: Windows-Installer
+version: Windows Installer
 slug: installer
 runner: wine
 

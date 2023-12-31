@@ -1,6 +1,6 @@
 name: Call of Duty 4 - Modern Warfare
 game_slug:  call-of-duty-4-modern-warfare
-version: Windows-Installer
+version: Windows Installer
 slug: call-of-duty-4-modern-warfare
 runner: wine
 

@@ -1,6 +1,6 @@
 name: Crysis 3
 game_slug: crysis-3
-version: Windows-Installer
+version: Windows Installer
 slug: crysis-3
 runner: wine
 

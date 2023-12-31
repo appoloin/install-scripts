@@ -1,6 +1,6 @@
 name: Assassin's Creed Revelations
 game_slug: assassins-creed-revelations
-version: Windows-Installer
+version: Windows Installer
 slug: INSTALLER
 runner: wine
 

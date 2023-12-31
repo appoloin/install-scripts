@@ -1,6 +1,6 @@
 name: Need for Speed - Underground 2
 game_slug: need-for-speed-underground-2
-version: Windows-Installer
+version: Windows Installer
 slug: INSTALLER
 runner: wine
 

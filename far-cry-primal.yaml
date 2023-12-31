@@ -1,6 +1,6 @@
 name: Far Cry Primal
 game_slug: far-cry-primal
-version: Windows-Installer
+version: Windows Installer
 slug: installer
 runner: wine
 

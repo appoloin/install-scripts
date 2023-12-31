@@ -1,6 +1,6 @@
 name: Borderlands The pre-sequal
 game_slug: borderlands-the-pre-sequel
-version: Windows-Installer
+version: Windows Installer
 slug: borderlands_INSTALLER
 runner: wine
 
