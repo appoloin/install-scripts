@@ -1,6 +1,6 @@
 name: Teenage Mutant Ninja Turtles
 game_slug: teenage-mutant-ninja-turtles
-version: Installer
+version: DOS
 slug:  teenage-mutant-ninja-turtles-installer
 runner: dosbox
 
@@ -9,34 +9,31 @@ script:
     - game: N/A:Select Install.exe.
 
   game:
-    main_file: $GAMEDIR/tmnt-play.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
     - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/FDD $GAMEDIR/FDD/A
         file: mkdir
+        args: $GAMEDIR/drive_c $GAMEDIR/drive_a 
 
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
           dst=$2
-          
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          cp -avr "$src_path/."  "$dst"'
+        
+          cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy.sh
-
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
-        args: $game $GAMEDIR/FDD/A
         file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR/drive_a
 
     - execute:
+        file: chmod
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
 
 
     - write_file:
@@ -52,9 +49,9 @@ script:
         
           [autoexec]
 
-            mount A "$GAMEDIR/FDD/A" -t floppy 
+            mount A "$GAMEDIR/drive_a" -t floppy 
 
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
             A:
 
@@ -63,12 +60,12 @@ script:
             install
             
           exit'
-        file: $GAMEDIR/tmnt-setup.conf
+        file: $GAMEDIR/setup.conf
 
     - task:
-        config_file: $GAMEDIR/tmnt-setup.conf
+        config_file: $GAMEDIR/setup.conf
         name: dosexec
-        working_dir: $GAMEDIR/HDD
+        working_dir: $GAMEDIR/drive_c
 
 
 
@@ -86,9 +83,9 @@ script:
 
           [autoexec]
 
-            mount A "$GAMEDIR/FDD/A" -t floppy 
+            mount A "$GAMEDIR/drive_a" -t floppy 
 
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
             cls 
 
@@ -156,5 +153,5 @@ script:
             :exit
 
             exit'
-        file: $GAMEDIR/tmnt-play.conf
+        file: $GAMEDIR/play.conf
 

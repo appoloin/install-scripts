@@ -16,13 +16,11 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
           dst=$2
           
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy.sh
     - chmodx: $CACHE/bulkcopy.sh
 
@@ -30,4 +28,6 @@ script:
         file: $CACHE/bulkcopy.sh
         args: $game $GAMEDIR
 
-    
+  Scummvm:
+    fullscreen: false
+   
