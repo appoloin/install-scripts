@@ -18,7 +18,7 @@ script:
 
     - copy:
         src: $game
-        dst: $GAMEDIR/HDD/dizzy
+        dst: $GAMEDIR/drive_c/dizzy
 
     - write_file:
         content: '[autoexec]
@@ -32,4 +32,4 @@ script:
           MAGIC.EXE
           
           exit'
-        file: $GAMEDIR/.conf
+        file: $GAMEDIR/play.conf

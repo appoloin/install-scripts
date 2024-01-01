@@ -1,7 +1,7 @@
 name: Bubble Dizzy
 game_slug: bubble-dizzy
-version: Installer
-slug:  bubble-dizzy-installer
+version: DOS
+slug:  bubble-dizzy
 runner: dosbox
 
 script:
@@ -9,34 +9,31 @@ script:
     - game: N/A:Select Bubble.exe.
 
   game:
-    main_file: $GAMEDIR/dizzy-play.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
     - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/FDD $GAMEDIR/FDD/A
         file: mkdir
+        args: $GAMEDIR/drive_c $GAMEDIR/drive_a 
 
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
           dst=$2
           
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy.sh
-
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
-        args: $game $GAMEDIR/FDD/A
         file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR/drive_a
 
     - execute:
-        args: -R 775  "$GAMEDIR"
         file: chmod
+        args: -R 775  "$GAMEDIR"
 
 
     - write_file:
@@ -53,14 +50,14 @@ script:
 
           [autoexec]
 
-            mount a "$GAMEDIR/FDD/A" -t floppy 
+            mount a "$GAMEDIR/drive_a" -t floppy 
 
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
             a:
 
             bubble.exe
 
             exit'
-        file: $GAMEDIR/dizzy-play.conf
+        file: $GAMEDIR/play.conf
 

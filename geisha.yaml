@@ -1,7 +1,7 @@
 name: Geisha
 game_slug: geisha
-version: Installer
-slug:  geisha-installer
+version: DOS
+slug:  geisha
 runner: scummvm
 
 
@@ -17,20 +17,17 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
           dst=$2
 
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          find "$src_path" -type f \( -name "*.STK" \) -exec cp {} "$dst" \;'
+          find "$src" -type f \( -name "*.STK" \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
-
     - chmodx: $CACHE/selectcopy.sh
 
     - execute:
-        args: $game $GAMEDIR
         file: $CACHE/selectcopy.sh
+        args: $game $GAMEDIR
 
     scummvm:
         fullscreen: true

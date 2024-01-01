@@ -1,42 +1,45 @@
 name: Cadaver
 game_slug: cadaver
-version: Installer
+version: DOS
 slug: cadaver
 runner: dosbox
 
 script:
   files:
-    - game: N/A:Select file CAD.exe.
+    - game: N/A:Select file CAD.exe from Cadaver
+    - game2: N/A:Select file CADAVER.EXE from Cadaver 2 - Payoff
 
   game:
-    main_file: $GAMEDIR/cadaver.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
     - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/FDD 
         file: mkdir
+        args: $GAMEDIR/drive_c $GAMEDIR/drive_a  $GAMEDIR/drive_b 
 
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
           dst=$2
           
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy.sh
-
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
-        args: $game $GAMEDIR/FDD
         file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR/drive_a
 
     - execute:
-        args: -R 775  "$GAMEDIR"
+        file: $CACHE/bulkcopy.sh
+        args: $game2 $GAMEDIR/drive_b
+
+
+    - execute:
         file: chmod
+        args: -R 775  "$GAMEDIR"
 
 
     - write_file:
@@ -52,16 +55,72 @@ script:
 
           [autoexec]
 
-            mount A "$GAMEDIR" -t dir 
+            mount c "$GAMEDIR/drive_c" -t dir 
 
-            mount B "$GAMEDIR/FDD" -t floppy
+            mount a "$GAMEDIR/drive_a" -t floppy
+
+            mount b "$GAMEDIR/drive_b" -t floppy
 
             cls 
 
-            B:
+            ECHO OFF
+
+            goto launcher
+
+            :launcher
+
+            cls 
+
+            ECHO  -------------------------------------------  
+            
+            ECHO                 Cadaver 
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Play Cadaver   
+            
+            ECHO   2) Play Cadaver 2 - Payoof      
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   3) Exit Program                             
+            
+            ECHO  -------------------------------------------  
+
+            choice /c123 /s Which program do you want to run? [1-3]: /n 
+            
+            if errorlevel 3 goto exit
+
+            if errorlevel 2 goto setup
+            
+            if errorlevel 1 goto game
+
+
+            :game
+
+            cls
+
+            a:
 
             cad
 
+
+            goto exit
+
+
+            :gamw2
+
+            cls
+
+            b:
+
+            cadaver
+
+            goto exit
+
+
+            :exit
+            
             exit'
-        file: $GAMEDIR/cadaver.conf
+        file: $GAMEDIR/play.conf
 
