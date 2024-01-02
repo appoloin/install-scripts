@@ -1,7 +1,7 @@
 name: Wonderland
 game_slug: wonderland
 version: DOS
-slug: Wonderland-installer
+slug: Wonderland
 runner: scummvm
 
 
@@ -29,3 +29,5 @@ script:
         file: $CACHE/bulkcopy.sh
         args: $game $GAMEDIR
 
+  scummvm:
+    fullscreen: false

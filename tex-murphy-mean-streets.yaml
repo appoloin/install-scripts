@@ -1,6 +1,6 @@
 name: Tex Murphy Mean Streets
 game_slug: tex-murphy-mean-streets
-version: Installer
+version: Good Old Games Installer
 slug:  tex-murphy-mean-streets
 runner: dosbox
 
@@ -10,54 +10,86 @@ script:
     - game: N/A:Select GOG installer
 
   game:
-    main_file: $GAMEDIR/mean-streets.conf
+    main_file: $GAMEDIR/play.conf
 
-  installer:
+  installer:  
     - write_file:
         content: '#!/bin/bash
 
           src=$1
+          
+          find "$src" -maxdepth 1 -type d \( -iname app -o
+                                            -iname commonappdata -o
+                                            -iname *redist -o
+                                            -iname scummvm -o
+                                            -iname dosbox -o
+                                            -iname *support -o
+                                            -iname tmp \) -exec rm -r {}  \;
+                                            
+          find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
+        file: $CACHE/remove.sh
+    - chmodx: $CACHE/remove.sh
 
-          dst=$2
+    - write_file:
+        content: '#!/bin/bash
 
-          find "$src" -type f \( -iname "*.ACC"  -o 
-                                -iname "MS.EXE" -o 
-                                -iname "MS._XE"  \) -exec cp {} "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
-    
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - extract:
         format: gog
         file: $game
         args: --gog --include app 
         dst: $CACHE
         description: Extracting game files
-            
-    - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/HDD/mean
-        file: mkdir
+
+    - merge:
+        src: "$CACHE/app"
+        dst: "$GAMEDIR"
+
+    - merge:
+        src: "$GAMEDIR/__support/Save"
+        dst: "$GAMEDIR/Save"
 
     - execute:
-        args: $CACHE/app $GAMEDIR/HDD/mean
-        file: $CACHE/selectcopy.sh
+        file: $CACHE/remove.sh
+        args: $GAMEDIR
 
-    - copy:
-        src: $CACHE/app/manual.pdf
-        dst: $GAMEDIR
+    - execute:
+        file: $CACHE/download.sh
+        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
 
-    - copy:
-        src: $CACHE/app/mean_streets_detective_information_chart.pdf
-        dst: $GAMEDIR
+    - extract:
+        file: $CACHE/MT32-ROMS.7z
+        dst:  $GAMEDIR/MT32-ROMS
 
-    - copy:
-        src: $CACHE/app/mean_streets_map.pdf
-        dst: $GAMEDIR
-
+ 
     - write_file:
         content: '[midi]
 
          mididevice = mt32
          
+         [mt32]
+
+            romdir = $GAMEDIR/MT32-ROMS
+
+
          [mouse]
 
             capture_mouse = onstart middlerelease  
@@ -78,7 +110,7 @@ script:
 
           [autoexec]
 
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR" -t dir
 
             C:
 
@@ -89,4 +121,4 @@ script:
             ms.exe
             
             exit'
-        file: $GAMEDIR/mean-streets.conf
+        file: $GAMEDIR/play.conf

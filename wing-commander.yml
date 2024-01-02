@@ -9,7 +9,7 @@ script:
     - game: N/A:Select GOG installer
 
   game:
-    main_file: $GAMEDIR/wing.conf
+    main_file: $GAMEDIR/play.conf
   
   installer:
     - write_file:
@@ -24,16 +24,34 @@ script:
         file: $CACHE/selectcopy.sh
     - chmodx: $CACHE/selectcopy.sh
 
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - extract:
         format: gog
         file: $game
         args: --gog 
         dst: $CACHE
         description: Extracting game files
-
-    - execute:
-        args: $GAMEDIR/wing 
-        file: mkdir
 
     - copy:
         src: $CACHE/__support/save
@@ -42,7 +60,6 @@ script:
     - copy:
         src: $CACHE/GAMEDAT
         dst: $GAMEDIR/wing/GAMEDAT
-
 
     - copy:
         src: $CACHE/manual.pdf
@@ -64,11 +81,25 @@ script:
         args: $CACHE/  $GAMEDIR/wing
         file: $CACHE/selectcopy.sh
 
+    - execute:
+        file: $CACHE/download.sh
+        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
+
+    - extract:
+        file: $CACHE/MT32-ROMS.7z
+        dst:  $GAMEDIR/MT32-ROMS
+
+ 
     - write_file:
         content: '[midi]
 
           mididevice = mt32
           
+         [mt32]
+
+            romdir = $GAMEDIR/MT32-ROMS
+
+
           [cpu]
 
          cycles=3000
@@ -163,4 +194,4 @@ script:
             exit
 
             exit'
-        file: $GAMEDIR/wing.conf
+        file: $GAMEDIR/play.conf

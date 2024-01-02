@@ -1,6 +1,6 @@
 name: Wings
 game_slug: wings-remastered-edition
-version: Installer
+version: Good Old Games Installer
 slug: wings-remastered-edition
 runner: wine
 
@@ -11,6 +11,7 @@ script:
     prefix: $GAMEDIR
   files:
     - setup: N/A:Select the Setup file
+
   installer:
     - task:
         name: create_prefix
@@ -22,7 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 
