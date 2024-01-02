@@ -1,6 +1,6 @@
 name:  Alien Breed
 game_slug:  alien-breed
-version: Installer
+version: Good Old Games Installer
 slug:  Alien-breed-installer
 runner: dosbox
 
@@ -9,9 +9,48 @@ script:
     - game: N/A:Select GOG installer
 
   game:
-    main_file: $GAMEDIR/alien.conf
+    main_file: $GAMEDIR/play.conf
   
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$1
+          
+          find "$src" -maxdepth 1 -type d \( -iname app -o
+                                            -iname commonappdata -o
+                                            -iname *redist -o
+                                            -iname scummvm -o
+                                            -iname dosbox -o
+                                            -iname *support -o
+                                            -iname tmp \) -exec rm -r {}  \;
+                                            
+          find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
+        file: $CACHE/remove.sh
+    - chmodx: $CACHE/remove.sh
+
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - extract:
         format: gog
         file: $game
@@ -19,24 +58,46 @@ script:
         dst: $CACHE
         description: Extracting game files
 
-    - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/HDD/alien
-        file: mkdir
-
     - merge:
-        dst: "$GAMEDIR/HDD/alien"
         src: "$CACHE/app"
+        dst: "$GAMEDIR"
 
     - execute:
-        args: -R $GAMEDIR/HDD/alien/DOSBOX
-        file: rm
+        file: $CACHE/remove.sh
+        args: $GAMEDIR
 
     - execute:
-        args: -R $GAMEDIR/HDD/alien/__support
-        file: rm
+        file: $CACHE/download.sh
+        args: 1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6 $CACHE/GUS.zip
+
+    - extract:
+        file: $CACHE/GUS.zip
+        dst: $GAMEDIR/ULTRASND
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
+
+    - extract:
+        file: $CACHE/MT32-ROMS.7z
+        dst:  $GAMEDIR/MT32-ROMS
 
     - write_file:
-        content: '[mouse]
+        content: '[midi]
+
+          mididevice = mt32
+
+          [gus]
+
+            gus= true
+
+            ultradir = C:\ULTRASND
+
+          [mt32]
+
+            romdir = $GAMEDIR/MT32-ROMS
+
+          [mouse]
 
             capture_mouse = onstart middlerelease  
 
@@ -44,7 +105,7 @@ script:
 
          [autoexec]
 
-          mount C "$GAMEDIR/HDD" -t dir
+          mount C "$GAMEDIR" -t dir
 
           C:
 
@@ -53,12 +114,12 @@ script:
           config.EXE
           
           exit'
-        file: $GAMEDIR/alien-setup.conf
+        file: $GAMEDIR/setup.conf
 
     - task:
-        config_file: $GAMEDIR/alien-setup.conf
+        config_file: $GAMEDIR/setup.conf
         name: dosexec
-        working_dir: $GAMEDIR/HDD
+        working_dir: $GAMEDIR
 
     - write_file:
         content: '[mouse]
@@ -70,7 +131,7 @@ script:
 
           [autoexec]
 
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR" -t dir
             
             cls 
 
@@ -134,4 +195,4 @@ script:
             :exit
             
             exit'
-        file: $GAMEDIR/alien.conf
+        file: $GAMEDIR/play.conf
