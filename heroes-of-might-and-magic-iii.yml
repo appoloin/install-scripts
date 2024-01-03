@@ -1,6 +1,6 @@
 name: Heroes of Might & Magic III
 game_slug: heroes-of-might-and-magic-iii
-version:  GOG
+version:  Good Old Games Installer
 slug: heroes-of-might-and-magic-iii
 runner: wine
 

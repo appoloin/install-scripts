@@ -1,50 +1,87 @@
 name:  Eye of the Beholder
 game_slug: eye-of-the-beholder
-version: Installer
+version: Good Old Games Installer
 slug:  eye-of-the-beholder
 runner: scummvm
 
 
 script:
-    files:
-      - game:  N/A:Select GOG installer
+  files:
+    - game:  N/A:Select GOG installer
 
-    game:
-        game_id: eob
-        path: $GAMEDIR
+  game:
+    game_id: eob
+    path: $GAMEDIR
 
-    installer:
-      - write_file:
-          content: '#!/bin/bash
+  installer:
+    - write_file:
+        content: '#!/bin/bash
 
-            src=$1
-            
-            find "$src" -maxdepth 1 -type d \( -iname app -o
-                                              -iname commonappdata -o
-                                              -iname *redist -o
-                                              -iname scummvm -o
-                                              -iname *support -o
-                                              -iname dosbox -o
-                                              -iname tmp \) -exec rm -r {}  \;
-                                              
-            find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
-          file: $CACHE/remove.sh
-      - chmodx: $CACHE/remove.sh
+          src=$1
+          
+          find "$src" -maxdepth 1 -type d \( -iname app -o
+                                            -iname commonappdata -o
+                                            -iname *redist -o
+                                            -iname scummvm -o
+                                            -iname *support -o
+                                            -iname dosbox -o
+                                            -iname tmp \) -exec rm -r {}  \;
+                                            
+          find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
+        file: $CACHE/remove.sh
+    - chmodx: $CACHE/remove.sh
 
-      - extract:
-          format: gog
-          file: $game
-          args: --gog --language "en-US"
-          dst: $GAMEDIR
-          description: Extracting game files
+    - write_file:
+        content: '#!/bin/bash
 
-      - merge:
-          dst: "$GAMEDIR"
-          src: "$GAMEDIR/__support"
-      - merge:
-          dst: "$GAMEDIR"
-          src: "$GAMEDIR/app"
+          fileID=$1
 
-      - execute:
-          args: $GAMEDIR
-          file: $CACHE/remove.sh
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                        -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                        -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
+    - extract:
+        format: gog
+        file: $game
+        args: --gog --language "en-US"
+        dst: $GAMEDIR
+        description: Extracting game files
+
+    - merge:
+        src: "$GAMEDIR/__support"
+        dst: "$GAMEDIR"
+
+    - merge:
+        src: "$GAMEDIR/app"
+        dst: "$GAMEDIR"
+
+    - execute:
+        file: $CACHE/remove.sh
+        args: $GAMEDIR
+        
+    - execute:
+        file: $CACHE/download.sh
+        args: 1e6PIw82-HLpFn27GIjhBskgnWdFijpWg $CACHE/ScummVm-Data-MT32.7z
+
+    - extract:
+        file: $CACHE/ScummVm-Data-MT32.7z
+        dst:  $GAMEDIR/ScummVm-Data-MT32
+
+
+  scummvm:
+    fullscreen: true
+    datadir: $GAMEDIR/ScummVm-Data-MT32
+    music-driver: mt32

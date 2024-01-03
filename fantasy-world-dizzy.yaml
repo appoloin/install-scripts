@@ -14,12 +14,12 @@ script:
 
   installer:
     - execute:
-        file: mkdir
         args: $GAMEDIR/drive_c $GAMEDIR/drive_c/fwdizzy
+        file: mkdir
 
     - copy:
-        src: $game
         dst: $GAMEDIR/drive_c/fwdizzy
+        src: $game
 
     - write_file:
         content: '[autoexec]
