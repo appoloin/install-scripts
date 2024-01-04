@@ -1,145 +1,181 @@
 name: Alone in the Dark
 game_slug: alone-in-the-dark-1
-version: Installer
+version: Good Old Games Installer
 slug: installer
 runner: dosbox
 
 script:
-    files:
-      - game:  N/A:Select GOG installer
+  files:
+    - game:  N/A:Select GOG installer
 
-    game:
-      main_file: $GAMEDIR/play.conf
+  game:
+    main_file: $GAMEDIR/play.conf
 
-    installer:
-      - write_file:
-          content: '#!/bin/bash
+  installer:
+    - write_file:
+        content: '#!/bin/bash
 
-            src=$1
+          src=$1
+          
+          find "$src" -maxdepth 1 -type d \( -iname app -o
+                                            -iname commonappdata -o
+                                            -iname *redist -o
+                                            -iname scummvm -o
+                                            -iname dosbox -o
+                                            -iname *support -o
+                                            -iname tmp \) -exec rm -r {}  \;
+                                            
+          find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
+        file: $CACHE/remove.sh
+    - chmodx: $CACHE/remove.sh
+
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
+    - extract:
+        format: gog
+        file: $game
+        args: --gog --include "app"
+        dst: $GAMEDIR
+        description: Extracting game files
+
+    - merge:
+        dst: "$GAMEDIR"
+        src: "$GAMEDIR/__support"
+
+    - execute:
+        args: $GAMEDIR
+        file: $CACHE/remove.sh
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
+
+    - extract:
+        file: $CACHE/MT32-ROMS.7z
+        dst:  $GAMEDIR/MT32-ROMS
+
+
+    - write_file:
+        content: '[midi]
+
+          mididevice = mt32
+
+          [mt32]
+
+            romdir = $GAMEDIR/MT32-ROMS
+
+
+          [mouse]
+
+          capture_mouse = onstart middlerelease  
+
+          mouse_sensitivity= 15
+
+          [sdl]
+              
+            fullresolution=desktop
+
+            windowresolution=original
+
+            fullscreen=true
+
+            output=opengl
+
+          [render]
+
+            aspect=true
+
+            scaler=normal2x
+
+
+            [autoexec]
             
-            find "$src" -maxdepth 1 -type d \( -iname app -o
-                                              -iname commonappdata -o
-                                              -iname *redist -o
-                                              -iname scummvm -o
-                                              -iname dosbox -o
-                                              -iname *support -o
-                                              -iname tmp \) -exec rm -r {}  \;
-                                              
-            find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
-          file: $CACHE/remove.sh
-      - chmodx: $CACHE/remove.sh
+            mount C "$GAMEDIR" -t dir
 
-      - extract:
-          format: gog
-          file: $game
-          args: --gog --include "app"
-          dst: $GAMEDIR
-          description: Extracting game files
+            imgmount D "$GAMEDIR/GAME.INS" -t iso -fs iso
 
-      - merge:
-          dst: "$GAMEDIR"
-          src: "$GAMEDIR/__support"
+            cls 
 
-      - execute:
-          args: $GAMEDIR
-          file: $CACHE/remove.sh
+            ECHO OFF
 
-      - write_file:
-          content: '[midi]
+            goto launcher
 
-            mididevice = mt32
+            :launcher
 
-            [mouse]
+            cls 
 
-            capture_mouse = onstart middlerelease  
-
-            mouse_sensitivity= 15
-
-            [sdl]
-                
-              fullresolution=desktop
-
-              windowresolution=original
-
-              fullscreen=true
-
-              output=opengl
-
-            [render]
-
-              aspect=true
-
-              scaler=normal2x
-
-
-              [autoexec]
-              
-              mount C "$GAMEDIR" -t dir
-
-              imgmount D "$GAMEDIR/GAME.INS" -t iso -fs iso
-
-              cls 
-
-              ECHO OFF
-
-              goto launcher
-
-              :launcher
-
-              cls 
-
-              ECHO  -------------------------------------------  
-              
-              ECHO             Alone in the Dark
-              
-              ECHO  -------------------------------------------  
-              
-              ECHO   1) Play        
-              
-              ECHO   2) Setup    
-              
-              ECHO  -------------------------------------------  
-              
-              ECHO   3) Exit Program                             
-              
-              ECHO  -------------------------------------------  
-
-              choice /c123 /s Which program do you want to run? [1-3]: /n 
-              
-              if errorlevel 3 goto exit
-
-              if errorlevel 2 goto setup
-              
-              if errorlevel 1 goto game
-
-
-              :game
-
-              cls
-
-              c:
-
-              cd INDARK
-
-              INDARK.exe
-
-              goto exit
-
-
-              :setup
-
-              cls
-
-              c:
-
-              cd INDARK
-
-              install.exe
-              
-              goto launcher
-
+            ECHO  -------------------------------------------  
             
-              :exit
-              
-              exit'
-          file: $GAMEDIR/play.conf
+            ECHO             Alone in the Dark
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Play        
+            
+            ECHO   2) Setup    
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   3) Exit Program                             
+            
+            ECHO  -------------------------------------------  
+
+            choice /c123 /s Which program do you want to run? [1-3]: /n 
+            
+            if errorlevel 3 goto exit
+
+            if errorlevel 2 goto setup
+            
+            if errorlevel 1 goto game
+
+
+            :game
+
+            cls
+
+            c:
+
+            cd INDARK
+
+            INDARK.exe
+
+            goto exit
+
+
+            :setup
+
+            cls
+
+            c:
+
+            cd INDARK
+
+            install.exe
+            
+            goto launcher
+
+          
+            :exit
+            
+            exit'
+        file: $GAMEDIR/play.conf

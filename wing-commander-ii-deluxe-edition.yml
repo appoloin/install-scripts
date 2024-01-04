@@ -1,7 +1,7 @@
 name: Wing Commander II
 game_slug: wing-commander-ii-deluxe-edition
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: wing-commander-ii-deluxe-edition
 runner: dosbox
 
 script:
@@ -9,7 +9,7 @@ script:
     - game: N/A:Select GOG installer
 
   game:
-    main_file: $GAMEDIR/wing.conf
+    main_file: $GAMEDIR/play.conf
   
   installer:
     - write_file:
@@ -27,6 +27,28 @@ script:
         file: $CACHE/selectcopy.sh
     - chmodx: $CACHE/selectcopy.sh
 
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - extract:
         format: gog
         file: $game
@@ -35,22 +57,34 @@ script:
         description: Extracting game files
 
     - execute:
-        args: $GAMEDIR/wing 
         file: mkdir
+        args: $GAMEDIR/wing 
 
     - copy:
-        src: $CACHE/manual.pdf
         dst: $GAMEDIR
+        src: $CACHE/manual.pdf
 
     - execute:
-        args: $CACHE/  $GAMEDIR/wing
         file: $CACHE/selectcopy.sh
+        args: $CACHE  $GAMEDIR/wing
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
+
+    - extract:
+        file: $CACHE/MT32-ROMS.7z
+        dst:  $GAMEDIR/MT32-ROMS
 
     - write_file:
         content: '[midi]
 
           mididevice = mt32
           
+         [mt32]
+
+            romdir = $GAMEDIR/MT32-ROMS
+
           [cpu]
 
           core=auto
@@ -164,4 +198,4 @@ script:
             exit
 
             exit'
-        file: $GAMEDIR/wing.conf
+        file: $GAMEDIR/play.conf
