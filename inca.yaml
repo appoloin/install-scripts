@@ -1,6 +1,6 @@
 name: Inca
 game_slug: inca
-version: Installer
+version: DOS 
 slug: inca
 runner: dosbox
 
@@ -9,30 +9,27 @@ script:
       - DISC1: N/A:Select CD ISO/CUE/MP3
 
     game:
-      main_file: $GAMEDIR/inca.conf
+      main_file: $GAMEDIR/play.conf
 
     installer:
       - write_file:
           content: '#!/bin/bash
 
-            src=$1
+            src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
             dst=$2
             
-            src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-            cp -avr "$src_path/."  "$dst"'
+            cp -avr "$src/."  "$dst"'
           file: $CACHE/bulkcopy.sh
-
       - chmodx: $CACHE/bulkcopy.sh
 
       - execute:
-          args: $GAMEDIR/CDD $GAMEDIR/HDD
           file: mkdir
+          args: $GAMEDIR/drive_d $GAMEDIR/drive_c
 
       - execute:
-          args: $DISC1 $GAMEDIR/CDD
           file: $CACHE/bulkcopy.sh
+          args: $DISC1 $GAMEDIR/drive_d
 
 
       - write_file:
@@ -48,9 +45,9 @@ script:
           
             [autoexec]
 
-              mount C "$GAMEDIR/HDD" -t dir
+              mount C "$GAMEDIR/drive_c" -t dir
 
-              imgmount d "$GAMEDIR/CDD/track01.cue" -t iso
+              imgmount d "$GAMEDIR/drive_d/track01.cue" -t iso
 
               D:
 
@@ -62,7 +59,7 @@ script:
       - task:
           config_file: $GAMEDIR/setup.conf
           name: dosexec
-          working_dir: $GAMEDIR/HDD
+          working_dir: $GAMEDIR/drive_c
 
 
 
@@ -97,9 +94,9 @@ script:
 
             [autoexec]
             
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
-            imgmount d "$GAMEDIR/CDD/track01.cue" -t iso
+            imgmount d "$GAMEDIR/drive_d/track01.cue" -t iso
 
             cls 
 
@@ -182,4 +179,4 @@ script:
             :exit
             
             exit'
-          file: $GAMEDIR/inca.conf
+          file: $GAMEDIR/play.conf

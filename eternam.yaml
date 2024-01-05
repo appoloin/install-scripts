@@ -1,6 +1,6 @@
 name: Eternam
 game_slug: eternam
-version: Installer
+version: Good Old Games Installer
 slug: eternam
 runner: dosbox
 
@@ -9,7 +9,7 @@ script:
       - game:  N/A:Select GOG installer
 
     game:
-      main_file: $GAMEDIR/eternam.conf
+      main_file: $GAMEDIR/play.conf
 
     installer:
       - write_file:
@@ -80,4 +80,4 @@ script:
             eternam
             
             exit'
-          file: $GAMEDIR/eternam.conf
+          file: $GAMEDIR/play.conf

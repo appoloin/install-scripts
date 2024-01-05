@@ -1,6 +1,6 @@
 name: The Lost Files of Sherlock Holmes - Case of Rose Tattoo
 game_slug: the-lost-files-of-sherlock-holmes-case-of-the-rose
-version: Installer
+version: DOS
 slug: the-lost-files-of-sherlock-holmes-case-of-the-rose
 runner: scummvm
 
@@ -38,8 +38,8 @@ script:
     - chmodx: $CACHE/selectcopy.sh
 
     - execute:
-        args: $game $GAMEDIR
         file: $CACHE/selectcopy.sh
+        args: $game $GAMEDIR
 
   scummvm:
     fullscreen: true

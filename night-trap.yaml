@@ -1,157 +1,197 @@
 name: Night Trap
 game_slug: night-trap
-version: Installer
+version: DOS
 slug: night-trap
 runner: dosbox
 
 script:
-    files:
-      - DISC1: N/A:Select CD1 ISO
-      - DISC2: N/A:Select CD2 ISO
+  files:
+    - DISC1: N/A:Select CD1 ISO
+    - DISC2: N/A:Select CD2 ISO
 
-    game:
-      main_file: $GAMEDIR/night-trap.conf
+  game:
+    main_file: $GAMEDIR/play.conf
 
-    installer:
-      - execute:
-          args: $GAMEDIR/CDD $GAMEDIR/HDD
-          file: mkdir
+  installer:
+    - write_file:
+        content: '#!/bin/bash
 
-      - execute:
-          args: $DISC1 $GAMEDIR/CDD/CD1.ISO
-          file: cp 
-      - execute:
-          args: $DISC2 $GAMEDIR/CDD/CD2.ISO
-          file: cp 
+          fileID=$1
 
-      - write_file:
-          content: '[midi]
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
 
-            mididevice = mt32
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_d $GAMEDIR/drive_c
 
-            [mouse]
+    - execute:
+        file: cp 
+        args: $DISC1 $GAMEDIR/drive_d/CD1.ISO
 
-              capture_mouse = onstart middlerelease  
+    - execute:
+        file: cp 
+        args: $DISC2 $GAMEDIR/drive_d/CD2.ISO
 
-              mouse_sensitivity= 15
-            
-            [autoexec]
+    - execute:
+        file: $CACHE/download.sh
+        args: 1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6 $CACHE/GUS.zip
 
-              mount C "$GAMEDIR/HDD" -t dir
-
-              imgmount d "$GAMEDIR/CDD/CD1.ISO" -t iso
-
-              imgmount e "$GAMEDIR/CDD/CD2.ISO" -t iso
-
-              D:
-
-              setup
-              
-              exit'
-          file: $GAMEDIR/setup.conf
-
-      - task:
-          config_file: $GAMEDIR/setup.conf
-          name: dosexec
-          working_dir: $GAMEDIR/HDD
+    - extract:
+        file: $CACHE/GUS.zip
+        dst: $GAMEDIR/drive_c/ULTRASND
 
 
 
-      - write_file:
-          content: '[midi]
+    - write_file:
+        content: '[midi]
 
-            mididevice = mt32
-          
-            [mouse]
+          mididevice = mt32
+
+          [mt32]
+
+          romdir = $GAMEDIR/MT32-ROMS
+
+          [mouse]
 
             capture_mouse = onstart middlerelease  
 
             mouse_sensitivity= 15
+          
+          [autoexec]
 
-              [sdl]
-                
-                fullresolution=desktop
+            mount C "$GAMEDIR/drive_c" -t dir
 
-              windowresolution=original
+            imgmount d "$GAMEDIR/CDD/CD1.ISO" -t iso
 
-              fullscreen=true
+            imgmount e "$GAMEDIR/CDD/CD2.ISO" -t iso
 
-              output=opengl
+            D:
 
-            [render]
-
-              aspect=true
-
-              scaler=normal2x
-
-
-              [autoexec]
-              
-              mount C "$GAMEDIR/HDD" -t dir
-
-              imgmount d "$GAMEDIR/CDD/CD1.ISO" -t iso
-
-              imgmount e "$GAMEDIR/CDD/CD2.ISO" -t iso
-
-
-              cls 
-
-              ECHO OFF
-
-              goto launcher
-
-              :launcher
-
-              cls 
-
-              ECHO  -------------------------------------------  
-              
-              ECHO                  Night Trap
-              
-              ECHO  -------------------------------------------  
-              
-              ECHO   1) Play        
-              
-              ECHO   2) Setup    
-              
-              ECHO  -------------------------------------------  
-              
-              ECHO   3) Exit Program                             
-              
-              ECHO  -------------------------------------------  
-
-              choice /c123 /s Which program do you want to run? [1-3]: /n 
-              
-              if errorlevel 3 goto exit
-
-              if errorlevel 2 goto setup
-              
-              if errorlevel 1 goto game
-
-
-              :game
-
-              cls
-
-              D:
-
-              nt
-
-              goto exit
-
-
-              :setup
-
-              cls
-
-              d:
-
-              setup
-              
-              goto launcher
-
+            setup
             
-              :exit
+            exit'
+        file: $GAMEDIR/setup.conf
+
+    - task:
+        config_file: $GAMEDIR/setup.conf
+        name: dosexec
+        working_dir: $GAMEDIR/drive_c
+
+
+
+    - write_file:
+        content: '[gus]
+
+            gus= true
+
+            ultradir = C:\ULTRASND
+
+        
+          [mouse]
+
+          capture_mouse = onstart middlerelease  
+
+          mouse_sensitivity= 15
+
+            [sdl]
               
-              exit'
-          file: $GAMEDIR/night-trap.conf
+              fullresolution=desktop
+
+            windowresolution=original
+
+            fullscreen=true
+
+            output=opengl
+
+          [render]
+
+            aspect=true
+
+            scaler=normal2x
+
+
+            [autoexec]
+            
+            mount C "$GAMEDIR/drive_c" -t dir
+
+            imgmount d "$GAMEDIR/drive_d/CD1.ISO" -t iso
+
+            imgmount e "$GAMEDIR/drive_d/CD2.ISO" -t iso
+
+
+            cls 
+
+            ECHO OFF
+
+            goto launcher
+
+            :launcher
+
+            cls 
+
+            ECHO  -------------------------------------------  
+            
+            ECHO                  Night Trap
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Play        
+            
+            ECHO   2) Setup    
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   3) Exit Program                             
+            
+            ECHO  -------------------------------------------  
+
+            choice /c123 /s Which program do you want to run? [1-3]: /n 
+            
+            if errorlevel 3 goto exit
+
+            if errorlevel 2 goto setup
+            
+            if errorlevel 1 goto game
+
+
+            :game
+
+            cls
+
+            D:
+
+            nt
+
+            goto exit
+
+
+            :setup
+
+            cls
+
+            d:
+
+            setup
+            
+            goto launcher
+
+          
+            :exit
+            
+            exit'
+        file: $GAMEDIR/play.conf

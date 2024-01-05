@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Games/Sniper Elite 4/Launcher/SniperElite4.exe
+    exe: $GAMEDIR/drive_c/Games/Sniper Elite 4/stp-se4dx11.exe
     prefix: $GAMEDIR
 
   files:

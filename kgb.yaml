@@ -1,6 +1,6 @@
 name: KGB
 game_slug: kgb
-version: Installer
+version: DOS
 slug: kgb
 runner: dosbox
 
@@ -9,33 +9,31 @@ script:
     - game: N/A:Select file Install.exe.
 
   game:
-    main_file: $GAMEDIR/kgb.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
     - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/CDD 
         file: mkdir
+        args: $GAMEDIR/drive_c $GAMEDIR/drive_d 
 
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
           dst=$2
           
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy.sh
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
-        args: $game $GAMEDIR/CDD
         file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR/drive_d
 
     - execute:
+        file: chmod
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
 
     - write_file:
           content: '[midi]
@@ -50,9 +48,9 @@ script:
             
             [autoexec]
 
-              mount C "$GAMEDIR/HDD" -t dir
+              mount C "$GAMEDIR/drive_c" -t dir
 
-              mount d "$GAMEDIR/CDD" -t cdrom
+              mount d "$GAMEDIR/drive_d" -t cdrom
 
 
               D:
@@ -65,10 +63,7 @@ script:
     - task:
         config_file: $GAMEDIR/setup.conf
         name: dosexec
-        working_dir: $GAMEDIR/HDD
-
-
-
+        working_dir: $GAMEDIR/drive_c
 
 
     - write_file:
@@ -84,9 +79,9 @@ script:
 
           [autoexec]
 
-            mount D "$GAMEDIR/CDD" -t cdrom 
+            mount D "$GAMEDIR/drive_d" -t cdrom 
 
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
             cls 
 
@@ -149,5 +144,5 @@ script:
             :exit
             
             exit'
-        file: $GAMEDIR/kgb.conf
+        file: $GAMEDIR/play.conf
 
