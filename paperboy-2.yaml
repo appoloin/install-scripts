@@ -1,0 +1,34 @@
+name: Paperboy 2
+game_slug: paperboy-2
+version:  Genesis
+slug: paperboy-2
+runner: mame
+
+
+script:
+  files:
+    - game:  N/A:Select the PaperBoy-2_Genesis_EN.zip
+
+  game:
+    main_file: $GAMEDIR/PaperBoy-2_Genesis_EN.zip
+    machine: genesis
+    device: cart1
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          
+          dst=$2
+
+          file=$3
+
+          find "$src" -maxdepth 1 -type f \( -iname $file \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy2.sh
+    - chmodx: $CACHE/selectcopy2.sh
+    
+    - execute:
+        args: $game $GAMEDIR "*.zip"
+        file: $CACHE/selectcopy2.sh
+
