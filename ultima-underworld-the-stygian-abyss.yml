@@ -1,7 +1,7 @@
 name: Ultima Underworld - The Stygian Abyss
 game_slug: ultima-underworld-the-stygian-abyss
-version: Installer
-slug: Installer
+version: Good Old Games Installer
+slug: ultima-underworld-the-stygian-abyss
 runner: dosbox
 
 script:
@@ -9,7 +9,7 @@ script:
     - game: N/A:Select GOG installer.
 
   game:
-    main_file: $GAMEDIR/Ultima.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:  
     - extract:
@@ -33,7 +33,7 @@ script:
     - chmodx: $CACHE/selectcopy2.sh
     
     - execute:
-        args: $GAMEDIR/CDD
+        args: $GAMEDIR/drive_d
         file: mkdir
 
     - execute:
@@ -41,7 +41,7 @@ script:
         file: $CACHE/selectcopy2.sh
 
     - execute:
-        args: $CACHE $GAMEDIR/CDD *.gog
+        args: $CACHE $GAMEDIR/drive_d *.gog
         file: $CACHE/selectcopy2.sh
     
     - copy:
@@ -80,7 +80,7 @@ script:
           
             mount C "$GAMEDIR" -t dir
 
-            imgmount D "$GAMEDIR/CDD/game.gog" -t iso -fs iso
+            imgmount D "$GAMEDIR/drive_d/game.gog" -t iso -fs iso
 
             D:
 
@@ -136,4 +136,4 @@ script:
             :exit
 
             exit'
-        file: $GAMEDIR/Ultima.conf
+        file: $GAMEDIR/play.conf
