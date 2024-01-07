@@ -1,6 +1,6 @@
 name: Bio Menace
 game_slug: bio-menace
-version: Installer
+version: Good Old Games Installer
 slug: bio-menace-installer
 runner: dosbox
 
@@ -11,7 +11,7 @@ script:
     - game: N/A:Select GOG installer.
 
   game:
-    main_file: $GAMEDIR/bio-menace.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
     - write_file:
@@ -42,17 +42,17 @@ script:
         description: Extracting game files
         
     - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/HDD/bmenace
         file: mkdir
+        args: $GAMEDIR/bmenace
 
     - execute:
-        args: $CACHE $GAMEDIR/HDD/bmenace
         file: $CACHE/selectcopy.sh
+        args: $CACHE $GAMEDIR/bmenace
 
     - write_file:
         content: '[autoexec]
         
-          mount C "$GAMEDIR/HDD" -t dir
+          mount C "$GAMEDIR" -t dir
 
           cls 
 
@@ -136,4 +136,4 @@ script:
           :exit
           
           exit'
-        file: $GAMEDIR/bio-menace.conf
+        file: $GAMEDIR/play.conf

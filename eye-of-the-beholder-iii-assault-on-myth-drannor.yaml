@@ -1,158 +1,192 @@
 name:  Eye of the Beholder 3 - Assaullt on Myth Drannor
 game_slug: eye-of-the-beholder-iii-assault-on-myth-drannor
-version: Installer
+version: Good Old Games Installer
 slug: eye-of-the-beholder-iii-assault-on-myth-drannor
 runner: dosbox
 
 script:
-    files:
-      - game:  N/A:Select GOG installer
+  files:
+    - game:  N/A:Select GOG installer
 
-    game:
-      main_file: $GAMEDIR/eye3.conf
+  game:
+    main_file: $GAMEDIR/play.conf
 
-    installer:
-      - write_file:
-          content: '#!/bin/bash
+  installer:
+    - write_file:
+        content: '#!/bin/bash
 
-            src=$1
+          src=$1
+          
+          find "$src" -maxdepth 1 -type d \( -iname app -o
+                                            -iname commonappdata -o
+                                            -iname *redist -o
+                                            -iname scummvm -o
+                                            -iname *support -o
+                                            -iname tmp \) -exec rm -r {}  \;
+                                            
+          find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
+        file: $CACHE/remove.sh
+    - chmodx: $CACHE/remove.sh
+
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
+    - extract:
+        format: gog
+        file: $game
+        args: --gog --include "app"
+        dst: $GAMEDIR
+        description: Extracting game files
+
+    - merge:
+        src: "$GAMEDIR/__support/save"
+        dst: "$GAMEDIR"
+
+    - execute:
+        file: $CACHE/remove.sh
+        args: $GAMEDIR
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
+
+    - extract:
+        file: $CACHE/MT32-ROMS.7z
+        dst:  $GAMEDIR/MT32-ROMS
+
+
+    - write_file:
+        content: '[midi]
+
+          mididevice = mt32
+
+          [mt32]
+
+          romdir = $GAMEDIR/MT32-ROMS
+
+          [mouse]
+
+          capture_mouse = onstart middlerelease  
+
+          mouse_sensitivity= 15
+
+            [sdl]
+              
+              fullresolution=desktop
+
+            windowresolution=original
+
+            fullscreen=true
+
+            output=opengl
+
+
+          [render]
+
+            aspect=true
+
+            scaler=normal2x
+
+
+            [autoexec]
             
-            find "$src" -maxdepth 1 -type d \( -iname app -o
-                                              -iname commonappdata -o
-                                              -iname *redist -o
-                                              -iname scummvm -o
-                                              -iname *support -o
-                                              -iname tmp \) -exec rm -r {}  \;
-                                              
-            find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
-          file: $CACHE/remove.sh
-      - chmodx: $CACHE/remove.sh
+            mount C "$GAMEDIR" -t dir
 
-      - extract:
-          format: gog
-          file: $game
-          args: --gog --include "app"
-          dst: $GAMEDIR
-          description: Extracting game files
+            cls 
 
-      - merge:
-          dst: "$GAMEDIR"
-          src: "$GAMEDIR/__support/save"
+            ECHO OFF
 
+            goto launcher
 
-      - execute:
-          args: $GAMEDIR
-          file: $CACHE/remove.sh
+            :launcher
 
-      - write_file:
-          content: '[midi]
+            cls 
 
-            mididevice = mt32
+            ECHO  -------------------------------------------  
+            
+            ECHO          Eye of the Beholder III
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Play        
+            
+            ECHO   2) Setup    
 
-            [mouse]
+            ECHO   3) Import Character                            
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   4) Exit Program                             
+            
+            ECHO  -------------------------------------------  
 
-            capture_mouse = onstart middlerelease  
+            choice /c1234 /s Which program do you want to run? [1-3]: /n 
+            
+            if errorlevel 4 goto exit
 
-            mouse_sensitivity= 15
+            if errorlevel 3 goto import
 
-              [sdl]
-                
-                fullresolution=desktop
-
-              windowresolution=original
-
-              fullscreen=true
-
-              output=opengl
+            if errorlevel 2 goto setup
+            
+            if errorlevel 1 goto game
 
 
-            [render]
+            :game
 
-              aspect=true
+            cls
 
-              scaler=normal2x
+            c:
 
+            eye.bat                  
 
-              [autoexec]
-              
-              mount C "$GAMEDIR" -t dir
-
-              cls 
-
-              ECHO OFF
-
-              goto launcher
-
-              :launcher
-
-              cls 
-
-              ECHO  -------------------------------------------  
-              
-              ECHO          Eye of the Beholder III
-              
-              ECHO  -------------------------------------------  
-              
-              ECHO   1) Play        
-              
-              ECHO   2) Setup    
-
-              ECHO   3) Import Character                            
-              
-              ECHO  -------------------------------------------  
-              
-              ECHO   4) Exit Program                             
-              
-              ECHO  -------------------------------------------  
-
-              choice /c1234 /s Which program do you want to run? [1-3]: /n 
-              
-              if errorlevel 4 goto exit
-
-              if errorlevel 3 goto import
-
-              if errorlevel 2 goto setup
-              
-              if errorlevel 1 goto game
+            goto exit
 
 
-              :game
+            :setup
 
-              cls
+            cls
 
-              c:
+            c:
 
-              eye.bat                  
+            sound.exe
+            
+            goto launcher
 
-              goto exit
+            
+            :import
+            
+            cls
 
+            c:
 
-              :setup
+            charcopy.exe
 
-              cls
-
-              c:
-
-              sound.exe
-              
-              goto launcher
-
-              
-              :import
-              
-              cls
-
-              c:
-
-              charcopy.exe
-
-              goto launcher 
+            goto launcher 
 
 
-              :exit
-              
-              exit'
-          file: $GAMEDIR/eye3.conf
+            :exit
+            
+            exit'
+        file: $GAMEDIR/play.conf
 
 
 

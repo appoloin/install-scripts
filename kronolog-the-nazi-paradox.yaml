@@ -1,6 +1,6 @@
 name: Kronolog - The Nazi Paradox
 game_slug: kronolog-the-nazi-paradox
-version: Installer
+version: DOS
 slug: kronolog-the-nazi-paradox
 runner: dosbox
 
@@ -9,34 +9,64 @@ script:
     - game: N/A:Select file Install.exe.
 
   game:
-    main_file: $GAMEDIR/kronolog.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
-    - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/CDD 
-        file: mkdir
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+          dst=$2
+          
+          cp -avr "$src/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
 
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
+          fileID=$1
 
-          dst=$2
-          
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          cp -avr "$src_path/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
 
     - execute:
-        args: $game $GAMEDIR/CDD
+        file: mkdir
+        args: $GAMEDIR/drive_c $GAMEDIR/drive_d 
+
+    - execute:
         file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR/drive_d
 
     - write_file:
         content: '[midi]
 
           mididevice = mt32
+          
+          [mt32]
+
+            romdir = $GAMEDIR/MT32-ROMS
+          
+          [cpu]
+
+          core=dynamic
+
+          cycles=9000
           
           [mouse]
 
@@ -46,9 +76,9 @@ script:
           
           [autoexec]
 
-            mount D "$GAMEDIR/CDD" -t cdrom
+            mount D "$GAMEDIR/drive_d" -t cdrom
 
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
             d:
 
@@ -60,17 +90,29 @@ script:
     - task:
         config_file: $GAMEDIR/setup.conf
         name: dosexec
-        working_dir: $GAMEDIR/HDD
+        working_dir: $GAMEDIR/drive_c
 
     - execute:
-        args: -R 775  "$GAMEDIR"
         file: chmod
+        args: -R 775  "$GAMEDIR"
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
+
+    - extract:
+        file: $CACHE/MT32-ROMS.7z
+        dst:  $GAMEDIR/MT32-ROMS
 
 
     - write_file:
         content: '[midi]
 
            mididevice = mt32
+
+          [mt32]
+
+            romdir = $GAMEDIR/MT32-ROMS
 
           [mouse]
 
@@ -80,9 +122,9 @@ script:
 
           [autoexec]
 
-            mount D "$GAMEDIR/CDD" -t cdrom
+            mount D "$GAMEDIR/drive_d" -t cdrom
 
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
             cls 
 
@@ -164,5 +206,5 @@ script:
             :exit
             
             exit'
-        file: $GAMEDIR/kronolog.conf
+        file: $GAMEDIR/play.conf
 

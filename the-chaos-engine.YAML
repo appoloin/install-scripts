@@ -1,6 +1,6 @@
 name: The Chaos Engine
 game_slug: the-chaos-engine
-version: Installer
+version: Good Old Games Installer
 slug: the-chaos-engine
 runner: wine
 
@@ -23,8 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 
