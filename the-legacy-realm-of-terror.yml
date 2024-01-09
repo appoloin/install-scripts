@@ -1,6 +1,6 @@
 name: The Legacy Realm of Terror
 game_slug: the-legacy-realm-of-terror
-version: Installer
+version: Good Old Games Installer
 slug: INSTALLER
 runner: dosbox
 
@@ -9,7 +9,7 @@ script:
     - game: N/A:Select GOG installer
 
   game:
-    main_file: $GAMEDIR/terror.conf
+    main_file: $GAMEDIR/play.conf
   
   installer:
     - write_file:
@@ -55,16 +55,16 @@ script:
         description: Extracting game files
 
     - execute:
-        args: $GAMEDIR/terror
         file: mkdir
+        args: $GAMEDIR/terror
 
     - copy:
-        src: $CACHE/MANUAL.PDF
         dst: $GAMEDIR
+        src: $CACHE/MANUAL.PDF
 
     - execute:
-        args: $CACHE $GAMEDIR/terror
         file: $CACHE/selectcopy.sh
+        args: $CACHE $GAMEDIR/terror
 
     - write_file:
         content: '[sdl]
@@ -175,4 +175,4 @@ script:
               :exit
               
               exit'
-        file: $GAMEDIR/terror.conf
+        file: $GAMEDIR/play.conf

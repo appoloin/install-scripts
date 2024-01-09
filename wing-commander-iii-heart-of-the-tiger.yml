@@ -1,7 +1,7 @@
 name: Wing Commander III - Heart of the Tiger
 game_slug: wing-commander-iii-heart-of-the-tiger
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: wing-commander-iii-heart-of-the-tiger
 runner: dosbox
 
 script:
@@ -9,7 +9,7 @@ script:
     - game: N/A:Select GOG installer
 
   game:
-    main_file: $GAMEDIR/wing.conf
+    main_file: $GAMEDIR/play.conf
   
   installer:
     - write_file:
@@ -24,6 +24,28 @@ script:
         file: $CACHE/selectcopy.sh
     - chmodx: $CACHE/selectcopy.sh
 
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - extract:
         format: gog
         file: $game
@@ -32,8 +54,8 @@ script:
         description: Extracting game files
 
     - execute:
-        args: $GAMEDIR/wing  $GAMEDIR/CDD
         file: mkdir
+        args: $GAMEDIR/wing  $GAMEDIR/drive_d
 
     - copy:
         src: $CACHE/manual.pdf
@@ -41,11 +63,20 @@ script:
 
     - copy:
         src: $CACHE/DATA.DAT
-        dst: $GAMEDIR/CDD
+        dst: $GAMEDIR/drive_d
 
     - execute:
-        args: $CACHE/  $GAMEDIR/wing
         file: $CACHE/selectcopy.sh
+        args: $CACHE/  $GAMEDIR/wing
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
+
+    - extract:
+        file: $CACHE/MT32-ROMS.7z
+        dst:  $GAMEDIR/MT32-ROMS
+
 
     - write_file:
         content: '[mouse]
@@ -53,6 +84,10 @@ script:
             capture_mouse = onstart middlerelease  
 
             mouse_sensitivity= 15
+          
+         [mt32]
+
+            romdir = $GAMEDIR/MT32-ROMS
 
           [midi]
 
@@ -90,7 +125,7 @@ script:
 
             mount C "$GAMEDIR" -t dir
 
-            imgmount D "$GAMEDIR/CDD/DATA.DAT" -t iso
+            imgmount D "$GAMEDIR/drive_d/DATA.DAT" -t iso
 
             D:
             
@@ -152,4 +187,4 @@ script:
             exit
 
             exit'
-        file: $GAMEDIR/wing.conf
+        file: $GAMEDIR/play.conf

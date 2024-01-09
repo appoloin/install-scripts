@@ -1,6 +1,6 @@
 name:  The Labyrinth of Time
 game_slug: the-labyrinth-of-time
-version: Installer
+version: Good Old Games Installer
 slug: installer
 runner: scummvm
 
@@ -36,3 +36,6 @@ script:
     - execute:
         args: $GAMEDIR
         file: $CACHE/remove.sh
+
+  scummvm:
+    fullscreen: true

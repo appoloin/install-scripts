@@ -1,6 +1,6 @@
 name: Jazz Jackrabbit
 game_slug: jazz-jackrabbit
-version: Installer
+version: Good Old Games Installer
 slug: jazz-jackrabbit
 runner: dosbox
 
@@ -10,7 +10,7 @@ script:
     - helper: https://gist.github.com/daniel-j/8b6c04df599fec82958b8bc4d1d69473/archive/master.zip
 
   game:
-    main_file: $GAMEDIR/JackRabbit.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
     - write_file:
@@ -38,12 +38,12 @@ script:
         description: Extracting game files
 
     - rename:
-        dst: $GAMEDIR/LEVEL1.005.bak
         src: $GAMEDIR/LEVEL1.005
+        dst: $GAMEDIR/LEVEL1.005.bak
 
     - extract:
-        dst: $GAMEDIR
         file: helper
+        dst: $GAMEDIR
 
     - write_file:
         content: '[sdl]
@@ -142,7 +142,7 @@ script:
             :exit
 
             exit'
-        file: $GAMEDIR/JackRabbit.conf
+        file: $GAMEDIR/play.conf
 
     - execute:
         args: $GAMEDIR

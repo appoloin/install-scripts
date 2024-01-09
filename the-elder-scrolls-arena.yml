@@ -1,6 +1,6 @@
 name: The Elder Scrolls - Arena
 game_slug: the-elder-scrolls-arena
-version: Installer
+version: Good Old Games Installer
 slug: the-elder-scrolls-arena
 runner: dosbox
 
@@ -9,7 +9,7 @@ script:
     - game: N/A:Select GOG installer.
 
   game:
-    main_file: $GAMEDIR/arena.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
     - write_file:
@@ -86,7 +86,7 @@ script:
             ACD -Ssbpdig.adv -IOS220 -IRQS7 -DMAS1 -Mgenmidi.adv -IOM330 -IRQM2 -DMAM1
             
             exit'
-        file: $GAMEDIR/arena.conf
+        file: $GAMEDIR/play.conf
 
     - execute:
         args: $GAMEDIR

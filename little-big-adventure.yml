@@ -1,6 +1,6 @@
 name:  Little Big Adventure
 game_slug: little-big-adventure
-version: Installer
+version: Good Old Games Installer
 slug: installer
 runner: scummvm
 
@@ -38,8 +38,8 @@ script:
         description: Extracting game files
 
     - execute:
-        args: $GAMEDIR
         file: $CACHE/remove.sh
+        args: $GAMEDIR
 
   scummvm:
     fullscreen: true

@@ -1,7 +1,7 @@
 name: Might and Magic - World of Xeen
 game_slug: might-and-magic-world-of-xeen
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: might-and-magic-world-of-xeen
 runner: scummvm
 
 script:
@@ -59,12 +59,12 @@ script:
           description: Extracting game files
        
       - execute:
-          args: $CACHE $GAMEDIR
           file: $CACHE/selectcopy.sh
+          args: $CACHE $GAMEDIR
 
       - execute:
-          args: $CACHE/MUSIC $GAMEDIR
           file: $CACHE/copyrename.sh
+          args: $CACHE/MUSIC $GAMEDIR
 
     scummvm:
         fullscreen: true

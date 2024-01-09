@@ -1,7 +1,7 @@
 name: Goblins Quest 3
 game_slug: goblins-quest-3
-version: Installer
-slug:  goblins-quest-3-installer
+version: Good Old Games Installer
+slug:  goblins-quest-3
 runner: scummvm
 
 
@@ -39,8 +39,8 @@ script:
         description: Extracting game files
 
     - execute:
-        args: $GAMEDIR
         file: $CACHE/remove.sh
+        args: $GAMEDIR
 
   scummvm:
     fullscreen: true

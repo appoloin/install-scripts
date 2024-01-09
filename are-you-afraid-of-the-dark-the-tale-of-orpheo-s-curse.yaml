@@ -1,6 +1,6 @@
 name: Are You Afraid of the Dark ? The Tales of Orpheos Curse
 game_slug:  are-you-afraid-of-the-dark-the-tale-of-orpheo-s-curse
-version: Installer
+version: DOS
 slug:   are-you-afraid-of-the-dark-the-tale-of-orpheo-s-curse
 runner: dosbox
 
@@ -10,13 +10,9 @@ script:
     - game:  N/A:Select Install.exe
 
   game:
-    main_file: $GAMEDIR/Dark.conf
+    main_file: $GAMEDIR/play.conf
   
   installer:
-    - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/CDD $GAMEDIR/CDD/DISK1
-        file: mkdir
-
     - write_file:
         content: '#!/bin/bash
 
@@ -28,13 +24,15 @@ script:
 
           cp -avr "$src_path/."  "$dst"'
         file: $CACHE/bulkcopy.sh
-
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
-        args: $game $GAMEDIR/CDD/DISK1
-        file: $CACHE/bulkcopy.sh
+        file: mkdir
+        args: $GAMEDIR/drive_ $GAMEDIR/drive_d
 
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR/drive_d
 
     - write_file:
         content: '[mouse]
@@ -45,9 +43,9 @@ script:
      
           [autoexec]
 
-            mount D "$GAMEDIR/CDD/DISK1" -t cdrom
+            mount D "$GAMEDIR/drive_d" -t cdrom
 
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
             D:
             
@@ -59,11 +57,11 @@ script:
     - task:
         config_file: $GAMEDIR/setup.conf
         name: dosexec
-        working_dir: $GAMEDIR/HDD
+        working_dir: $GAMEDIR/drive_c
 
     - execute:
-        args: -R 775  "$GAMEDIR"
         file: chmod
+        args: -R 775  "$GAMEDIR"
 
 
     - write_file:
@@ -80,9 +78,9 @@ script:
 
           [autoexec]
 
-            mount D "$GAMEDIR/CDD/DISK1" -t cdrom
+            mount D "$GAMEDIR/drive_d" -t cdrom
 
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
             cls 
 
@@ -148,6 +146,6 @@ script:
             :exit
             
             exit'
-        file: $GAMEDIR/Dark.conf
+        file: $GAMEDIR/play.conf
 
 

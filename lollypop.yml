@@ -1,6 +1,6 @@
 name:  Lollypop
 game_slug: lollypop
-version: Installer
+version: Good Old Games Installer
 slug: lollypop
 runner: dosbox
 
@@ -21,11 +21,11 @@ script:
 
     - copy:
         src: $CACHE/GameData/C
-        dst: $GAMEDIR/HDD
+        dst: $GAMEDIR/drive_c
 
     - copy:
         src: $CACHE/GameData/CD
-        dst: $GAMEDIR/CDD
+        dst: $GAMEDIR/drive_d
 
     - copy:
         src: $CACHE/GameData/Manuals
@@ -57,9 +57,9 @@ script:
 
           [autoexec]
 
-            mount C -t dir "$GAMEDIR/HDD" 
+            mount C -t dir "$GAMEDIR/drive_c" 
 
-            imgmount D -t iso -fs iso "$GAMEDIR/CDD/LOLLYPOP.cue" 
+            imgmount D -t iso -fs iso "$GAMEDIR/drive_d/LOLLYPOP.cue" 
 
             C:
 

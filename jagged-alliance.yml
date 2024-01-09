@@ -1,6 +1,6 @@
 name: Jagged Alliance
 game_slug: jagged-alliance
-version: Installer
+version: Good Old Games Installer
 slug: jagged-alliance
 runner: dosbox
 
@@ -9,7 +9,7 @@ script:
     - game: N/A:Select GOG installer
 
   game:
-    main_file: $GAMEDIR/jagged.conf
+    main_file: $GAMEDIR/play.conf
   
   installer:
     - write_file:
@@ -137,7 +137,7 @@ script:
             :exit
                       
             exit'
-        file: $GAMEDIR/jagged.conf
+        file: $GAMEDIR/play.conf
 
     - execute:
         args: $GAMEDIR

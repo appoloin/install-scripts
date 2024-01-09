@@ -1,18 +1,15 @@
 name:  Alien Breed Tower Assault
 game_slug:  alien-breed-tower-assault
-version: Installer
+version: Good Old Games Installer
 slug:  alien-breed-tower-assault
 runner: dosbox
 
 script:
   files:
     - game: N/A:Select GOG installer
-    - GUS: 
-        url: https://drive.google.com/uc?export=download&id=1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6
-        filename: gus.zip
 
   game:
-    main_file: $GAMEDIR/alien.conf
+    main_file: $GAMEDIR/play.conf
   
   installer:
     - write_file:
@@ -32,6 +29,28 @@ script:
         file: $CACHE/remove.sh
     - chmodx: $CACHE/remove.sh
 
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - extract:
         format: gog
         file: $game
@@ -40,20 +59,37 @@ script:
         description: Extracting game files
 
     - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/HDD/alien
         file: mkdir
-
-    - extract:
-        file: $GUS
-        dst: $GAMEDIR/HDD/ULTRASND
+        args: $GAMEDIR/alien
 
     - merge:
         src: "$CACHE/app"
-        dst: "$GAMEDIR/HDD/alien"
+        dst: "$GAMEDIR/alien"
         
     - copy:
-        src: $GAMEDIR/HDD/alien/TOWER/TA.CFG
-        dst: $GAMEDIR/HDD/alien
+        src: $GAMEDIR/alien/TOWER/TA.CFG
+        dst: $GAMEDIR/alien
+
+    - execute:
+        args: $GAMEDIR
+        file: $CACHE/remove.sh
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6 $CACHE/GUS.zip
+
+    - extract:
+        file: $CACHE/GUS.zip
+        dst: $GAMEDIR/ULTRASND
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
+
+    - extract:
+        file: $CACHE/MT32-ROMS.7z
+        dst:  $GAMEDIR/MT32-ROMS
+
 
     - write_file:
         content: '[gus]
@@ -62,6 +98,14 @@ script:
 
           ultradir = C:\ULTRASND
    
+          [midi]
+
+          mididevice = mt32
+
+          [mt32]
+
+            romdir = $GAMEDIR/MT32-ROMS
+
           [mouse]
 
             capture_mouse = onstart middlerelease  
@@ -71,7 +115,7 @@ script:
 
           [autoexec]
 
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR" -t dir
 
             cls 
 
@@ -137,8 +181,4 @@ script:
             :exit
             
             exit'
-        file: $GAMEDIR/alien.conf
-
-    - execute:
-        args: $GAMEDIR
-        file: $CACHE/remove.sh
+        file: $GAMEDIR/play.conf

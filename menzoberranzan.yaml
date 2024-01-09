@@ -1,6 +1,6 @@
 name: Menzoberranzan
 game_slug: menzoberranzan
-version: Installer
+version: Good Old Games Installer
 slug: menzoberranzan
 runner: dosbox
 
@@ -11,7 +11,7 @@ script:
     - game: N/A:Select GOG installer
 
   game:
-    main_file: $GAMEDIR/menzoberranzan.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
     - write_file:
@@ -40,9 +40,12 @@ script:
         description: Extracting game files
 
     - merge:
-        dst: "$GAMEDIR"
         src: "$GAMEDIR/__support/save"
+        dst: "$GAMEDIR"
 
+    - execute:
+        file: $CACHE/remove.sh
+        args: $GAMEDIR
 
     - write_file:
         content: '[midi]
@@ -137,8 +140,5 @@ script:
               :exit
               
               exit'
-        file: $GAMEDIR/menzoberranzan.conf
+        file: $GAMEDIR/play.conf
 
-    - execute:
-        args: $GAMEDIR
-        file: $CACHE/remove.sh

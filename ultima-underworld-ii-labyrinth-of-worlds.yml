@@ -1,6 +1,6 @@
 name: Ultima Underworld II Labyrinth of Worlds
 game_slug: ultima-underworld-ii-labyrinth-of-worlds
-version: Installer
+version: Good Old Games Installer
 slug: Installer
 runner: dosbox
 
@@ -9,7 +9,7 @@ script:
     - game: N/A:Select GOG installer.
 
   game:
-    main_file: $GAMEDIR/Ultima.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
     - extract:
@@ -33,16 +33,16 @@ script:
     - chmodx: $CACHE/selectcopy2.sh
     
     - execute:
-        args: $GAMEDIR/CDD
         file: mkdir
+        args: $GAMEDIR/drive_d
 
     - execute:
+        file: $CACHE/selectcopy2.sh
         args: $CACHE $GAMEDIR *.pdf
-        file: $CACHE/selectcopy2.sh
 
     - execute:
-        args: $CACHE $GAMEDIR/CDD *.gog
         file: $CACHE/selectcopy2.sh
+        args: $CACHE $GAMEDIR/drive_d *.gog
     
     - copy:
         src: $CACHE/UNDEROM2
@@ -84,7 +84,7 @@ script:
           
             mount C "$GAMEDIR" -t dir
 
-            imgmount D "$GAMEDIR/CDD/game.gog" -t iso -fs iso
+            imgmount D "$GAMEDIR/drive_d/game.gog" -t iso -fs iso
 
             D:
 
@@ -140,4 +140,4 @@ script:
             :exit
 
             exit'
-        file: $GAMEDIR/Ultima.conf
+        file: $GAMEDIR/play.conf

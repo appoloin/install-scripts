@@ -1,7 +1,7 @@
 name:  Inherit the Earth Quest for the Orb
 game_slug: inherit-the-earth-quest-for-the-orb
-version: Installer
-slug:  installer
+version: Good Old Games Installer
+slug:  inherit-the-earth-quest-for-the-orb
 runner: scummvm
 
 script:
@@ -35,6 +35,30 @@ script:
         file: $CACHE/selectcopy.sh
     - chmodx: $CACHE/selectcopy.sh
 
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
+
+
     - extract:
         format: gog
         file: $game
@@ -43,8 +67,19 @@ script:
         description: Extracting game files
 
     - execute:
-        args: $CACHE $GAMEDIR
         file: $CACHE/selectcopy.sh
+        args: $CACHE $GAMEDIR
+        
+    - execute:
+        file: $CACHE/download.sh
+        args: 1e6PIw82-HLpFn27GIjhBskgnWdFijpWg $CACHE/ScummVm-Data-MT32.7z
+
+    - extract:
+        file: $CACHE/ScummVm-Data-MT32.7z
+        dst:  $GAMEDIR/ScummVm-Data-MT32
+
 
   scummvm:
     fullscreen: true
+    datadir: $GAMEDIR/ScummVm-Data-MT32
+    music-driver: mt32

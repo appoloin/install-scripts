@@ -1,7 +1,7 @@
 name: Disneys The Lion King
 game_slug: disney-the-lion-king
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: disney-the-lion-king
 runner: dosbox
 
 script:
@@ -9,7 +9,7 @@ script:
     - game: N/A:Select GOG installer.
 
   game:
-    main_file: $GAMEDIR/lionking.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
     - write_file:
@@ -131,7 +131,7 @@ script:
             :exit
 
             exit'
-        file: $GAMEDIR/lionking.conf
+        file: $GAMEDIR/play.conf
 
     - execute:
         args: $GAMEDIR

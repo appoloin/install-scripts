@@ -1,6 +1,6 @@
 name: Police Quest 4 - Open Season
 game_slug: police-quest-iv-open-season
-version: Installer
+version: Good Old Games Installer
 slug:  police-quest-iv-open-season
 runner: scummvm
 
@@ -15,20 +15,77 @@ script:
     path: $GAMEDIR
   
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$1
+          
+          find "$src" -maxdepth 1 -type d \( -iname app -o
+                                            -iname commonappdata -o
+                                            -iname *redist -o
+                                            -iname scummvm -o
+                                            -iname *support -o
+                                            -iname dosbox -o
+                                            -iname ega -o
+                                            -iname tmp \) -exec rm -r {}  \;
+                                            
+          find "$src" -maxdepth 1 -type f \( -iname "goggame*" -o
+                                            -iname "999.*" -o
+                                            -iname "994.*" \) -exec rm {}  \;'
+        file: $CACHE/remove.sh
+    - chmodx: $CACHE/remove.sh
+
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - extract:
         format: gog
         file: $game
         args: --gog 
-        dst: $CACHE
+        dst: $GAMEDIR
         description: Extracting game files
 
-    - copy:
-        src: $CACHE/manual.pdf
-        dst: $GAMEDIR
+    - execute:
+        file: $CACHE/remove.sh
+        args: $GAMEDIR
 
     - extract:
-        file: $CACHE/PQ4.gog
+        file: $GAMEDIR/PQ4.gog
         dst: $GAMEDIR
+
+    - execute:
+        file: rm
+        args: $GAMEDIR/PQ4.gog
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1e6PIw82-HLpFn27GIjhBskgnWdFijpWg $CACHE/ScummVm-Data-MT32.7z
+
+    - extract:
+        file: $CACHE/ScummVm-Data-MT32.7z
+        dst:  $GAMEDIR/ScummVm-Data-MT32
+
 
   scummvm:
     fullscreen: true
+    datadir: $GAMEDIR/ScummVm-Data-MT32
+    music-driver: mt32

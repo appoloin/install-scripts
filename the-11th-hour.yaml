@@ -1,6 +1,6 @@
 name: The 11th Hour 
 game_slug: the-11th-hour
-version: Installer
+version: Good Old Games Installer
 slug: the-11th-hour
 runner: scummvm
 
@@ -39,8 +39,8 @@ script:
         description: Extracting game files
 
     - execute:
-        args: $GAMEDIR
         file: $CACHE/remove.sh
+        args: $GAMEDIR
         
   scummvm:
       fullscreen: true

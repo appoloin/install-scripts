@@ -1,6 +1,6 @@
-name: King's Quest 7
+name: King's Quest 7 - The Princless Bride
 game_slug: kings-quest-vii-the-princeless-bride
-version: Installer
+version: DOS
 slug:  kings-quest-vii-the-princeless-bride
 runner: scummvm
 
@@ -18,20 +18,46 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
           dst=$2
           
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy.sh
     - chmodx: $CACHE/bulkcopy.sh
 
-    - execute:
-        args: $DISC $GAMEDIR
-        file: $CACHE/bulkcopy.sh
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
 
     - execute:
-        args: -R 775  $GAMEDIR
+        file: $CACHE/bulkcopy.sh
+        args: $DISC $GAMEDIR
+
+
+    - execute:
         file: chmod
+        args: -R 775  $GAMEDIR
+
+  scummvm:
+    fullscreen: true
+    datadir: $GAMEDIR/ScummVm-Data-MT32
+    music-driver: mt32

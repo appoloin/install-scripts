@@ -1,6 +1,6 @@
 name: Alone in the Dark 3
 game_slug: alone-in-the-dark-3
-version: Installer
+version: Good Old Games Installer
 slug: installer
 runner: dosbox
 
@@ -37,8 +37,8 @@ script:
           description: Extracting game files
 
       - execute:
-          args: $GAMEDIR
           file: $CACHE/remove.sh
+          args: $GAMEDIR
 
       - write_file:
           content: '[midi]

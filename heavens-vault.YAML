@@ -1,7 +1,7 @@
-name: Heaven Vault
+name: Heaven's Vault
 game_slug: heavens-vault
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: heavens-vault
 runner: wine
 
 script:

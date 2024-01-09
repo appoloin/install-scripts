@@ -1,6 +1,6 @@
 name:  Wing Commander - Privateer
 game_slug: wing-commander-privateer
-version: Installer
+version: Good Old Games Installer
 slug: wing-commander-privateer
 runner: dosbox
 
@@ -9,7 +9,7 @@ script:
     - game: N/A:Select GOG installer
 
   game:
-    main_file: $GAMEDIR/wing.conf
+    main_file: $GAMEDIR/play.conf
   
   installer:
     - write_file:
@@ -36,8 +36,8 @@ script:
         description: Extracting game files
 
     - execute:
-        args: $GAMEDIR/wing  $GAMEDIR/CDD
         file: mkdir
+        args: $GAMEDIR/wing  $GAMEDIR/drive_d
 
     - copy:
         src: $CACHE/manual.pdf
@@ -49,11 +49,11 @@ script:
 
     - copy:
         src: $CACHE/GAME.GOG
-        dst: $GAMEDIR/CDD
+        dst: $GAMEDIR/drive_d
 
     - execute:
-        args: $CACHE $GAMEDIR/wing
         file: $CACHE/selectcopy.sh
+        args: $CACHE $GAMEDIR/wing
 
     - write_file:
         content: '[sdl]
@@ -83,7 +83,7 @@ script:
 
             mount C "$GAMEDIR" -t dir
 
-            imgmount D "$GAMEDIR/CDD/GAME.GOG" -t iso -fs iso
+            imgmount D "$GAMEDIR/drive_d/GAME.GOG" -t iso -fs iso
 
             C:
 
@@ -156,4 +156,4 @@ script:
             :exit
 
             exit'
-        file: $GAMEDIR/wing.conf
+        file: $GAMEDIR/play.conf

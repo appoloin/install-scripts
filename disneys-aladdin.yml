@@ -1,6 +1,6 @@
-name: Disneys Aladdin
+name: Disney's Aladdin
 game_slug: disneys-aladdin
-version: Installer
+version: Good Old Games Installer
 slug: disneys-aladdin
 runner: dosbox
 
@@ -9,7 +9,7 @@ script:
     - game: N/A:Select GOG installer.
 
   game:
-    main_file: $GAMEDIR/aladdin.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
     - write_file:
@@ -81,7 +81,7 @@ script:
             aladdin.exe
 
             exit'
-        file: $GAMEDIR/aladdin.conf
+        file: $GAMEDIR/play.conf
 
     - execute:
         args: $GAMEDIR

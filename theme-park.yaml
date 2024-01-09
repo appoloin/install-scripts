@@ -1,6 +1,6 @@
 name: Theme Park
 game_slug: theme-park
-version: Installer
+version: Good Old Games Installer
 slug: theme-park-installer
 runner: dosbox
 
@@ -11,7 +11,7 @@ script:
     - game: N/A:Select GOG installer
 
   game:
-    main_file: $GAMEDIR/theme-park.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
     - write_file:
@@ -129,7 +129,7 @@ script:
               :exit
               
               exit'
-        file: $GAMEDIR/theme-park.conf
+        file: $GAMEDIR/play.conf
 
     - execute:
         args: $GAMEDIR
