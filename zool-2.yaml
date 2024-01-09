@@ -1,0 +1,74 @@
+name: Zool 2
+game_slug: zool-2
+version: Amiga
+slug: zool-2
+runner: fsuae
+
+
+script:
+  files:
+    - game:  N/A:Select the ADF a file.
+
+  game:
+    main_file: "Zool 2 (1993)(Gremlin)(AGA)[cr CLS](Disk 1 of 2).adf"
+    disks:
+      - "Zool 2 (1993)(Gremlin)(AGA)[cr CLS](Disk 1 of 2).adf"
+      - "blank.adf"
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+          dst=$2
+          
+          cp -avr "$src/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR
+
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 15tBs_hEQsWU1SP5BUvHoLdgaoEiTAqG1 $CACHE/amiga_roms.7z
+
+    - extract:
+        file: $CACHE/amiga_roms.7z
+        dst:  $GAMEDIR/amiga_roms
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1DSAs9XRL9QkjDXEvzGvRQBeDtRmosTJ- $GAMEDIR/blank.adf
+
+
+  fsuae:
+    model: A1200
+    kickstart_file: "$GAMEDIR/amiga_roms/Kickstart v3.1 r40.68 (1993)(Commodore)(A1200)[!].rom"
+    fullscreen: false
+    fdspeed: 800
