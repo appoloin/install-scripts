@@ -1,19 +1,19 @@
 name: 3 Skulls of the Toltecs 
 game_slug: 3-skulls-of-the-toltecs
-version: Installer
-slug:  3-skulls-of-the-toltecs-installer
+version: DOS
+slug:  3-skulls-of-the-toltecs
 runner: scummvm
 
 
 script:
-    files:
-      - game:  N/A:Select the file 3Skulls.ico
+  files:
+    - game:  N/A:Select the file 3Skulls.ico
 
-    game:
-        game_id: Toltecs
-        path: $GAMEDIR
+  game:
+    game_id: Toltecs
+    path: $GAMEDIR
 
-    installer:
+  installer:
     - write_file:
         content: '#!/bin/bash
 
@@ -37,3 +37,5 @@ script:
         args: -R 775  "$GAMEDIR"
         file: chmod
 
+  scummvm:
+    fullscreen: true

@@ -1,57 +1,38 @@
 name: The Dame was Loaded
 game_slug: the-dame-was-loaded
-version: Installer
+version: DOS
 slug: the-dame-was-loaded
 runner: dosbox
 
 
 script:
   game:
-    main_file: $GAMEDIR/Dame.conf
+    main_file: $GAMEDIR/play.conf
 
   files:
-    - DISC1: N/A:Select Setup.exe.
-    - DISC2: N/A:Select demo.bat.
+    - DISC1: N/A:Select DISC1 ISO.
+    - DISC2: N/A:Select DIsC2 ISO.
 
-  installer:  
-    - write_file:
-        content: '#!/bin/bash
-
-            src=$1
-
-            dst=$2
-        
-            src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-            cp -avr "$src_path/."  "$dst"'
-        file: $CACHE/bulkcopy-alt.sh
-
-    - chmodx: $CACHE/bulkcopy-alt.sh
-  
+  installer:   
     - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/CDD $GAMEDIR/CDD/DISC1
         file: mkdir
+        args: $GAMEDIR/drive_c $GAMEDIR/drive_d  $GAMEDIR/drive_e
 
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR/drive_d/
+
+    - extract:
+        file: $DISC2 
+        dst:  $GAMEDIR/drive_e/
 
     - execute:
-        args: $DISC1 "$GAMEDIR/CDD/DISC1"
-        file: $CACHE/bulkcopy-alt.sh
-
-    - execute:
-        args: -R 775  "$GAMEDIR/CDD/DISC1"
         file: chmod
-
-    - execute:
-        args: $DISC2 "$GAMEDIR/CDD/DISC1"
-        file: $CACHE/bulkcopy-alt.sh
-
-    - execute:
-        args: -R 775  "$GAMEDIR/CDD/DISC1"
-        file: chmod
+        args: -R 775  "$GAMEDIR"
 
 
     - write_file:
-        content: '          [mouse]
+        content: '[mouse]
 
             capture_mouse = onstart middlerelease  
 
@@ -59,22 +40,22 @@ script:
 
             [autoexec]
             
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
-            mount D "$GAMEDIR/CDD/DISC1" -label DAME_CD1 -t cdrom
+            mount D "$GAMEDIR/drive_d" -label DAME_CD1 -t cdrom
 
-            mount E "$GAMEDIR/CDD/DISC2" -label DAME_CD2 -t cdrom
+            mount E "$GAMEDIR/drive_e" -label DAME_CD2 -t cdrom
 
             D:
 
             install
             
             exit'
-        file: $GAMEDIR/Dame_setup.conf
+        file: $GAMEDIR/setup.conf
     - task:
-        config_file: $GAMEDIR/Dame_setup.conf
+        config_file: $GAMEDIR/setup.conf
         name: dosexec
-        working_dir: $GAMEDIR/HDD/
+        working_dir: $GAMEDIR/drive_c
         
     - write_file:
         content: '[mouse]
@@ -99,11 +80,11 @@ script:
         
             [autoexec]
             
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
-            mount D "$GAMEDIR/CDD/DISC1"  -label DAME_CD1 -t cdrom
+            mount D "$GAMEDIR/drive_d" -label DAME_CD1 -t cdrom
 
-            mount E "$GAMEDIR/CDD/DISC2"  -label DAME_CD2 -t cdrom
+            mount E "$GAMEDIR/drive_e" -label DAME_CD2 -t cdrom
 
             C:
 
@@ -183,4 +164,4 @@ script:
             :exit
             
             exit'
-        file: $GAMEDIR/Dame.conf
+        file: $GAMEDIR/play.conf

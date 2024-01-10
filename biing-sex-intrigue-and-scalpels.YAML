@@ -1,6 +1,6 @@
 name: Biing Sex Intrigue and Scalpels
 game_slug: biing-sex-intrigue-and-scalpels
-version: Installer
+version: Good Old Games Installer
 slug: biing-sex-intrigue-and-scalpels
 runner: dosbox
 
@@ -9,7 +9,7 @@ script:
     - game: N/A:Select GOG installer
 
   game:
-    main_file: $GAMEDIR/biing.conf
+    main_file: $GAMEDIR/play.conf
   
   installer:
     - write_file:
@@ -21,7 +21,6 @@ script:
 
           find "$src" -maxdepth 1  -type f \( -iname "game.*"  \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
-
     - chmodx: $CACHE/selectcopy.sh
 
     - extract:
@@ -36,12 +35,12 @@ script:
         dst: $GAMEDIR/BIING!
 
     - execute:
-        args: $GAMEDIR/BIING!/GAMES  $GAMEDIR/CDD
         file: mkdir
+        args: $GAMEDIR/BIING!/GAMES  $GAMEDIR/drive_d
 
     - execute:
-        args: $CACHE  $GAMEDIR/CDD
         file: $CACHE/selectcopy.sh
+        args: $CACHE  $GAMEDIR/drive_d
 
     - write_file:
         content: '[cpu]
@@ -76,11 +75,11 @@ script:
 
             mount C "$GAMEDIR" -t dir
 
-            imgmount D "$GAMEDIR/CDD/game.ins" -t iso -fs iso
+            imgmount D "$GAMEDIR/drive_d/game.ins" -t iso -fs iso
 
             D:
 
             b.exe
 
             exit'
-        file: $GAMEDIR/biing.conf
+        file: $GAMEDIR/play.conf

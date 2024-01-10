@@ -1,6 +1,6 @@
-name: psychic Detective
+name: Psychic Detective
 game_slug: psychic-detective
-version: Installer
+version: DOS
 slug: psychic-detective
 runner: dosbox
 
@@ -10,32 +10,55 @@ script:
     - DISC1: N/A:Select CD1 ISO
     - DISC2: N/A:Select CD2 ISO
     - DISC3: N/A:Select CD3 ISO
-    - GUS: 
-        url: https://drive.google.com/uc?export=download&id=1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6
-        filename: gus.zip
  
 
   game:
     main_file: $GAMEDIR/play.conf
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - execute:
-        args: $GAMEDIR/CDD $GAMEDIR/HDD  $GAMEDIR/HDD/ULTRASND
         file: mkdir
+        args: $GAMEDIR/drive_d $GAMEDIR/drive_c
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6 $CACHE/GUS.zip
 
     - extract:
-        dst: $GAMEDIR/HDD/ULTRASND
-        file: $GUS
+        file: $CACHE/GUS.zip
+        dst: $GAMEDIR/drive_c/ULTRASND
 
     - execute:
-        args: $DISC1 $GAMEDIR/CDD/CD1.ISO
         file: cp 
+        args: $DISC1 $GAMEDIR/drive_d/CD1.ISO
     - execute:
-        args: $DISC2 $GAMEDIR/CDD/CD2.ISO
         file: cp 
+        args: $DISC2 $GAMEDIR/drive_d/CD2.ISO
     - execute:
-        args: $DISC3 $GAMEDIR/CDD/CD3.ISO
         file: cp 
+        args: $DISC3 $GAMEDIR/drive_d/CD3.ISO
 
     - write_file:
         content: 'vesaMode  0x111
@@ -59,7 +82,7 @@ script:
           chapterInfo  60  2  E:\MOVIES\CH60.STR
           
           chapterInfo  69  3  F:\MOVIES\CH69.STR'
-        file: $GAMEDIR/HDD/PD.INI
+        file: $GAMEDIR/drive_c/PD.INI
    
     - write_file:
         content: '[mt32]
@@ -85,13 +108,13 @@ script:
 
           [autoexec]
           
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
-            imgmount d "$GAMEDIR/CDD/CD1.ISO" -t iso
+            imgmount d "$GAMEDIR/drive_d/CD1.ISO" -t iso
 
-            imgmount e "$GAMEDIR/CDD/CD2.ISO" -t iso
+            imgmount e "$GAMEDIR/drive_d/CD2.ISO" -t iso
 
-            imgmount f "$GAMEDIR/CDD/CD3.ISO" -t iso
+            imgmount f "$GAMEDIR/drive_d/CD3.ISO" -t iso
 
             cls
 
@@ -111,7 +134,7 @@ script:
     - task:
         config_file: $GAMEDIR/setup.conf
         name: dosexec
-        working_dir: $GAMEDIR/HDD
+        working_dir: $GAMEDIR/drive_c
 
     - write_file:
         content: '[mt32]
@@ -147,13 +170,13 @@ script:
 
           [autoexec]
           
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
-            imgmount d "$GAMEDIR/CDD/CD1.ISO" -t iso
+            imgmount d "$GAMEDIR/drive_d/CD1.ISO" -t iso
 
-            imgmount e "$GAMEDIR/CDD/CD2.ISO" -t iso
+            imgmount e "$GAMEDIR/drive_d/CD2.ISO" -t iso
 
-            imgmount f "$GAMEDIR/CDD/CD3.ISO" -t iso
+            imgmount f "$GAMEDIR/drive_d/CD3.ISO" -t iso
 
             cls 
 
@@ -173,7 +196,7 @@ script:
             
             ECHO   1) Play Game        
             
-            ECHO   2) Isstall                          
+            ECHO   2) Install                          
             
             ECHO  -----------------------------------------------------  
             

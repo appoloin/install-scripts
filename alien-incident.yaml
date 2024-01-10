@@ -1,6 +1,6 @@
 name: Alien Incident
 game_slug: alien-incident
-version: Installer
+version: DOS
 slug: alien-incident
 runner: dosbox
 
@@ -9,30 +9,27 @@ script:
     - game: N/A:Select file Install.exe.
 
   game:
-    main_file: $GAMEDIR/alien-incident-play.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
     - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/CDD $GAMEDIR/CDD/DISC1
         file: mkdir
+        args: $GAMEDIR/drive_c $GAMEDIR/drive_d
 
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
           dst=$2
           
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy.sh
-
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
-        args: $game $GAMEDIR/CDD/DISC1
         file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR/drive_d
 
     - write_file:
         content: '[gus]
@@ -47,9 +44,9 @@ script:
             
           [autoexec]
 
-          mount D "$GAMEDIR/CDD/DISC1" -t cdrom
+          mount D "$GAMEDIR/drive_d" -t cdrom
 
-          mount C "$GAMEDIR/HDD" -t dir
+          mount C "$GAMEDIR/drive_c" -t dir
 
           d:
 
@@ -67,16 +64,16 @@ script:
 
           
           exit'
-        file: $GAMEDIR/alien-incident-setup.conf
+        file: $GAMEDIR/setup.conf
 
     - task:
-        config_file: $GAMEDIR/alien-incident-setup.conf
+        config_file: $GAMEDIR/setup.conf
         name: dosexec
-        working_dir: $GAMEDIR/HDD
+        working_dir: $GAMEDIR/drive_c
 
     - execute:
-        args: -R 775  "$GAMEDIR"
         file: chmod
+        args: -R 775  "$GAMEDIR"
 
 
     - write_file:
@@ -92,9 +89,9 @@ script:
 
           [autoexec]
 
-            mount D "$GAMEDIR/CDD/DISC1" -t cdrom
+          mount D "$GAMEDIR/drive_d" -t cdrom
 
-            mount C "$GAMEDIR/HDD" -t dir
+          mount C "$GAMEDIR/drive_c" -t dir
 
             cls 
 
@@ -183,5 +180,5 @@ script:
             :exit
             
             exit'
-        file: $GAMEDIR/alien-incident-play.conf
+        file: $GAMEDIR/play.conf
 

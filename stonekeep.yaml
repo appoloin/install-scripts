@@ -1,6 +1,6 @@
 name: Stonekeep
 game_slug: stonekeep
-version: Installer
+version: Good Old Games Installer
 slug: stonekeep
 runner: dosbox
 

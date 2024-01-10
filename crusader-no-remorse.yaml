@@ -1,7 +1,7 @@
-name: Crusader - No Regret
+name: Crusader - No Remorse
 game_slug: crusader-no-remorse
-version: Installer
-slug:  installer
+version: Good Old Games Installer
+slug:  crusader-no-remorse
 runner: scummvm
 
 script:
@@ -40,3 +40,6 @@ script:
     - merge:
         src: $CACHE/iso/SOUND
         dst: $GAMEDIR/SOUND
+
+  scummvm:
+      fullscreen: true

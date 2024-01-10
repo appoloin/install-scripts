@@ -1,6 +1,6 @@
 name: Bioforge
 game_slug: bioforge
-version: Installer
+version: Good Old Games Installer
 slug: bioforge
 runner: dosbox
 
@@ -9,7 +9,7 @@ script:
     - game: N/A:Select GOG installer.
   
   game:
-    main_file: $GAMEDIR/Bioforge.conf
+    main_file: $GAMEDIR/play.conf
   
   installer:
     - write_file:
@@ -31,6 +31,28 @@ script:
         file: $CACHE/remove.sh
     - chmodx: $CACHE/remove.sh
 
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - extract:
         format: gog
         file: $game
@@ -42,10 +64,24 @@ script:
         dst: "$GAMEDIR"
         src: "$CACHE/app"
 
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
+
+    - extract:
+        file: $CACHE/MT32-ROMS.7z
+        dst:  $GAMEDIR/MT32-ROMS
+
+
     - write_file:
         content: '[midi]
 
           mididevice = mt32
+
+          [mt32]
+
+            romdir = $GAMEDIR/MT32-ROMS
 
           [mouse]
 
@@ -137,7 +173,7 @@ script:
             :exit
                       
             exit'
-        file: $GAMEDIR/Bioforge.conf
+        file: $GAMEDIR/play.conf
 
     - execute:
         args: $GAMEDIR

@@ -1,6 +1,6 @@
 name:  Witchheaven
 game_slug: witchaven
-version: Installer
+version: Good Old Games Installer
 slug: witchaven
 runner: dosbox
 
@@ -9,7 +9,7 @@ script:
     - game: N/A:Select GOG installer
 
   game:
-    main_file: $GAMEDIR/witchheaven.conf
+    main_file: $GAMEDIR/play.conf
   
   installer:
     - write_file:
@@ -30,8 +30,8 @@ script:
         description: Extracting game files
         
     - execute:
-        args: $GAMEDIR
         file: $CACHE/remove.sh
+        args: $GAMEDIR
 
 
     - write_file:
@@ -114,4 +114,4 @@ script:
             :exit
             
             exit'
-        file: $GAMEDIR/witchheaven.conf
+        file: $GAMEDIR/play.conf

@@ -1,18 +1,15 @@
 name: Call of Cthulhu - Prisoner of Ice
 game_slug: call-of-cthulhu-prisoner-of-ice
-version: Installer
+version: Good Old Games Installer
 slug: cthulhu-installer
 runner: dosbox
 
 script:
   files:
     - game: N/A:Select GOG setup.
-    - GUS: 
-        url: https://drive.google.com/uc?export=download&id=1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6
-        filename: gus.zip
 
   game:
-    main_file: $GAMEDIR/cthulhu.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
     - write_file:
@@ -32,6 +29,28 @@ script:
         file: $CACHE/remove.sh
     - chmodx: $CACHE/remove.sh
 
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - extract:
         format: gog
         file: $game
@@ -39,8 +58,12 @@ script:
         dst: $GAMEDIR
         description: Extracting game files
 
+    - execute:
+        file: $CACHE/download.sh
+        args: 1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6 $CACHE/GUS.zip
+
     - extract:
-        file: $GUS
+        file: $CACHE/GUS.zip
         dst: $GAMEDIR/ULTRASND
 
     - write_file:
@@ -50,6 +73,13 @@ script:
 
           ultradir= C:\ULTRASND
           
+            gusbase  = 220
+            
+            gusirq   = 5
+
+            gusdma   = 1
+
+
           [midi]
 
           mididevice = mt32
@@ -127,7 +157,7 @@ script:
             :exit
             
             exit'
-        file: $GAMEDIR/cthulhu.conf
+        file: $GAMEDIR/play.conf
 
     - execute:
         args: $GAMEDIR

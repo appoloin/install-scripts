@@ -1,7 +1,7 @@
 name: Alien Rampage
 game_slug: alien-rampage
-version: Installer
-slug: alien-rampage-installer
+version: Good Old Games Installer
+slug: alien-rampage
 runner: dosbox
 
 script:
@@ -9,7 +9,7 @@ script:
     - game: N/A:Select file INSTALL.exe.
 
   game:
-    main_file: $GAMEDIR/alien.conf
+    main_file: $GAMEDIR/play.conf
   installer:
     - write_file:
         content: '#!/bin/bash
@@ -58,7 +58,7 @@ script:
             RAMPAGE.EXE
             
             exit'
-        file: $GAMEDIR/alien.conf
+        file: $GAMEDIR/play.conf
 
     - execute:
         args: $GAMEDIR

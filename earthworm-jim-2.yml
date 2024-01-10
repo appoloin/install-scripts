@@ -1,7 +1,7 @@
 name: Earthworn Jim 2
 game_slug: earthworm-jim-2
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: earthworm-jim-2
 runner: dosbox
 
 script:
@@ -9,7 +9,7 @@ script:
     - game: N/A:Select GOG installer.
 
   game:
-    main_file: $GAMEDIR/EarthwormJim.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
     - write_file:
@@ -36,20 +36,20 @@ script:
         description: Extracting game files
         
     - execute:
-        args: $GAMEDIR/EWJ $GAMEDIR/CDD    
         file: mkdir
+        args: $GAMEDIR/EWJ $GAMEDIR/drie_d    
     
     - execute:
-        args: $CACHE/app $GAMEDIR/EWJ
         file: $CACHE/selectcopy.sh
+        args: $CACHE/app $GAMEDIR/EWJ
 
     - copy:
         src: $CACHE/app/EWJ2.inst
-        dst: $GAMEDIR/CDD
+        dst: $GAMEDIR/drive_d
 
     - copy: 
         src: $CACHE/app/EWJ2.gog
-        dst: $GAMEDIR/CDD
+        dst: $GAMEDIR/drive_d
 
     - write_file:
         content: '[midi]
@@ -84,7 +84,7 @@ script:
           
             mount C "$GAMEDIR" -t dir
 
-            imgmount D "$GAMEDIR/CDD/EWJ2.inst" -t iso -fs fat
+            imgmount D "$GAMEDIR/drive_d/EWJ2.inst" -t iso -fs fat
 
             C: 
 
@@ -144,4 +144,4 @@ script:
             :exit
 
             exit'
-        file: $GAMEDIR/EarthwormJim.conf
+        file: $GAMEDIR/play.conf

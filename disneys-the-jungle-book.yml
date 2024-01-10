@@ -1,6 +1,6 @@
-name: Disneys The Jungle Book
+name: Disney's The Jungle Book
 game_slug: disneys-the-jungle-book
-version: Installer
+version: Good Old Games Installer
 slug: disneys-the-jungle-book
 runner: dosbox
 
@@ -9,7 +9,7 @@ script:
     - game: N/A:Select GOG installer.
 
   game:
-    main_file: $GAMEDIR/junglebook.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
     - write_file:
@@ -78,7 +78,7 @@ script:
             jungle.exe
 
           exit'
-        file: $GAMEDIR/junglebook.conf
+        file: $GAMEDIR/play.conf
 
     - execute:
         args: $GAMEDIR

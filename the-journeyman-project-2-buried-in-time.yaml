@@ -1,7 +1,7 @@
-name:  Journeyman Project 2
+name:  Journeyman Project 2 - Buried in Time
 game_slug: the-journeyman-project-2-buried-in-time
-version: Installer
-slug: Journeyman-Project-2-installer
+version: Good Old Games Installer
+slug: the-journeyman-project-2-buried-in-time
 runner: scummvm
  
 script:
@@ -35,22 +35,22 @@ script:
         description: Extracting game files
 
     - execute:
-        args: $GAMEDIR/BITDATA
         file: mkdir
+        args: $GAMEDIR/BITDATA
 
     - execute:
+        file: cp 
         args: -r $GAMEDIR/data1/BITDATA $GAMEDIR
-        file: cp 
     - execute:
+        file: cp 
         args: -r $GAMEDIR/data2/BITDATA $GAMEDIR
-        file: cp 
     - execute:
-        args: -r $GAMEDIR/data3/BITDATA $GAMEDIR
         file: cp 
+        args: -r $GAMEDIR/data3/BITDATA $GAMEDIR
 
     - execute:
-        args: $GAMEDIR
         file: $CACHE/remove.sh
+        args: $GAMEDIR
 
   scummvm:
     fullscreen: true

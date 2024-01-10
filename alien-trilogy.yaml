@@ -1,35 +1,33 @@
 name: Alien Trilogy
 game_slug: alien-trilogy
-version: Installer
-slug: alien-trilogy-installer
+version: DOS
+slug: alien-trilogy
 runner: dosbox
 
 script:
   files:
     - game: N/A:Select file track01.cue.
   game:
-    main_file: $GAMEDIR/alien.conf
+    main_file: $GAMEDIR/play.conf
   installer:
     - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/CDD $GAMEDIR/CDD/DISC
         file: mkdir
+        args: $GAMEDIR/drive_c $GAMEDIR/drive_d
 
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
           dst=$2
           
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          cp -avr "$src_path/."  "$dst"'
+          cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy.sh
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
-        args: $game $GAMEDIR/CDD/DISC
         file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR/drive_d
 
     - write_file:
         content: '[gus]
@@ -44,21 +42,21 @@ script:
 
           [autoexec]
 
-          mount C "$GAMEDIR/HDD" -t dir
+          mount C "$GAMEDIR/drive_c" -t dir
 
-          imgmount D "$GAMEDIR/CDD/DISC/track01.cue" -t cdrom
+          imgmount D "$GAMEDIR/drive_d/track01.cue" -t cdrom
         
           D:
 
           install
 
           exit'
-        file: $GAMEDIR/alien-setup.conf
+        file: $GAMEDIR/setup.conf
 
     - task:
         config_file: $GAMEDIR/alien-setup.conf
         name: dosexec
-        working_dir: $GAMEDIR/HDD
+        working_dir: $GAMEDIR/drive_c
 
 
     - write_file:
@@ -74,9 +72,9 @@ script:
 
             [autoexec]
 
-              imgmount D "$GAMEDIR/CDD/DISC/track01.cue" -t cdrom
+            mount C "$GAMEDIR/drive_c" -t dir
 
-              mount C "$GAMEDIR/HDD" -t dir
+            imgmount D "$GAMEDIR/drive_d/track01.cue" -t cdrom
 
               cls 
 
@@ -157,5 +155,5 @@ script:
               :exit
               
               exit'
-        file: $GAMEDIR/alien.conf
+        file: $GAMEDIR/play.conf
 

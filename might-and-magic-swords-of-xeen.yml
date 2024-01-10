@@ -1,7 +1,7 @@
 name: Might and Magic - Swords of Xeen
 game_slug: might-and-magic-swords-of-xeen
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: might-and-magic-swords-of-xeen
 runner: scummvm
 
 script:

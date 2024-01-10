@@ -1,6 +1,6 @@
 name: Blown Away
 game_slug: blown-away
-version: DOS
+version: DOS/Win311
 slug: blown-away
 runner: dosbox
 

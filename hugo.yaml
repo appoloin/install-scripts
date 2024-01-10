@@ -1,33 +1,33 @@
 name: Hugo
 game_slug: hugo
-version: Installer
+version: DOS
 slug: hugo
 runner: scummvm
 
 
 script:
-    files:
-      - game:  N/A:Select file HHH.exe
+  files:
+    - game:  N/A:Select file HHH.exe
 
-    game:
-        game_id: hugo1
-        path: $GAMEDIR
+  game:
+      game_id: hugo1
+      path: $GAMEDIR
 
-    installer:
-      - write_file:
-          content: '#!/bin/bash
+  installer:
+    - write_file:
+        content: '#!/bin/bash
 
-            src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-            dst=$2
-            
-            src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          dst=$2
+          
+          cp -avr "$src/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
 
-            cp -avr "$src_path/."  "$dst"'
-          file: $CACHE/bulkcopy.sh
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR
 
-      - chmodx: $CACHE/bulkcopy.sh
-
-      - execute:
-          args: $game $GAMEDIR
-          file: $CACHE/bulkcopy.sh
+  scummvm:
+      fullscreen: false

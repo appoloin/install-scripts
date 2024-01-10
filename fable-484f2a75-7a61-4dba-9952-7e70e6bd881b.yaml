@@ -1,33 +1,55 @@
 name: Fable
 game_slug: fable-484f2a75-7a61-4dba-9952-7e70e6bd881b
-version: Installer
+version: DOS
 slug: fable-484f2a75-7a61-4dba-9952-7e70e6bd881b
 runner: dosbox
 
 script:
   files:
     - DISC1: N/A:Select Disc 1 iso
-    - GUS: 
-        url: https://drive.google.com/uc?export=download&id=1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6
-        filename: gus.zip
-
 
   game:
     main_file: $GAMEDIR/play.conf
 
 
   installer:
-    - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/CDD   
-        file: mkdir
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
 
     - execute:
-        args: $DISC1 $GAMEDIR/CDD/CD1.iso
+        file: mkdir
+        args: $GAMEDIR/drive_c $GAMEDIR/drive_d   
+
+    - execute:
         file: cp 
+        args: $DISC1 $GAMEDIR/drive_d/CD1.iso
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6 $CACHE/GUS.zip
 
     - extract:
-        dst: $GAMEDIR/HDD/ULTRASND
-        file: $GUS
+        file: $CACHE/GUS.zip
+        dst: $GAMEDIR/drive_c/ULTRASND
 
     - write_file:
         content: '[gus]
@@ -49,9 +71,9 @@ script:
           
           [autoexec]
 
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
-            imgmount D "$GAMEDIR/CDD/CD1.iso"  -t cdrom
+            imgmount D "$GAMEDIR/drive_d/CD1.iso"  -t cdrom
 
             D:
 
@@ -62,7 +84,7 @@ script:
     - task:
         config_file: $GAMEDIR/setup.conf
         name: dosexec
-        working_dir: $GAMEDIR/HDD
+        working_dir: $GAMEDIR/drive_c
 
     - write_file:
         content: '[gus]
@@ -83,9 +105,9 @@ script:
               
           [autoexec]
 
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
-            imgmount D "$GAMEDIR/CDD/CD1.iso"  -t cdrom
+            imgmount D "$GAMEDIR/drive_d/CD1.iso"  -t cdrom
 
             C:
 
