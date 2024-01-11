@@ -1,0 +1,34 @@
+name: Warlock
+game_slug: warlock--1
+version:  Genesis
+slug: warlock--1
+runner: mame
+
+
+script:
+  files:
+    - game:  N/A:Select the Warlock_Genesis_EN.zip
+
+  game:
+    main_file: $GAMEDIR/Warlock_Genesis_EN.zip
+    machine: genesis
+    device: cart1
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          
+          dst=$2
+
+          file=$3
+
+          find "$src" -maxdepth 1 -type f \( -iname $file \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy2.sh
+    - chmodx: $CACHE/selectcopy2.sh
+    
+    - execute:
+        args: $game $GAMEDIR "*.zip"
+        file: $CACHE/selectcopy2.sh
+
