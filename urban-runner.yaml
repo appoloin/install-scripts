@@ -1,64 +1,41 @@
 name: Urban Runner
 game_slug: urban-runner
-version: Installer
+version: DOS
 slug:  urban-runner
 runner: scummvm
 
 
 script:
   files:
-    - DISC1: N/A:Select cd1.itk from Disc1.
-    - DISC2: N/A:Select cd2.itk from Disc2.
-    - DISC3: N/A:Select cd3.itk from Disc3.
-    - DISC4: N/A:Select cd4.itk from Disc4.
+    - DISC1: N/A:Select Disc1 ISO.
+    - DISC2: N/A:Select Disc2 ISO.
+    - DISC3: N/A:Select Disc3 ISO.
+    - DISC4: N/A:Select Disc4 ISO.
 
   game:
       game_id: urban
       path: $GAMEDIR
 
-  installer:
-  - write_file:
-      content: '#!/bin/bash
-
-        src=$1
-
-        dst=$2
-
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-        find "$src_path" -type f \( -name "*.stk" -o 
-                                    -name "*.itk" \) -exec cp {} "$dst" \;'
-      file: $CACHE/selectcopy.sh
-  - chmodx: $CACHE/selectcopy.sh
-  
-  - execute:
-      args: $DISC1 $GAMEDIR
-      file: $CACHE/selectcopy.sh
-
-  - execute:
-      args: -R 775  "$GAMEDIR"
-      file: chmod
-
-  - execute:
-      args: $DISC2 $GAMEDIR
-      file: $CACHE/selectcopy.sh
-
-  - execute:
-      args: -R 775  "$GAMEDIR"
-      file: chmod
-
-  - execute:
-      args: $DISC3 $GAMEDIR
-      file: $CACHE/selectcopy.sh
-
-  - execute:
-      args: -R 775  "$GAMEDIR"
-      file: chmod
+  installer:   
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR
  
-  - execute:
-      args: $DISC4 $GAMEDIR
-      file: $CACHE/selectcopy.sh
-
-  - execute:
-      args: -R 775  "$GAMEDIR"
-      file: chmod
+    - extract:
+        file: $DISC2
+        dst:  $GAMEDIR
+ 
+    - extract:
+        file: $DISC3
+        dst:  $GAMEDIR
+  
+    - extract:
+        file: $DISC4
+        dst:  $GAMEDIR
+ 
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+        
+  scummvm:
+    fullscreen: true

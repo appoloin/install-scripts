@@ -1,6 +1,6 @@
 name: Realms of the Haunting
 game_slug: realms-of-the-haunting 
-version: Installer
+version: Good Old Games Installer
 slug:  realms-of-the-haunting
 runner: dosbox
 
@@ -10,7 +10,7 @@ script:
     - game: N/A:Select GOG installer.
 
   game:
-    main_file: $GAMEDIR/haunting.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
     - write_file:
@@ -110,7 +110,7 @@ script:
             :exit
 
             exit'
-        file: $GAMEDIR/haunting.conf
+        file: $GAMEDIR/play.conf
 
     - execute:
         args: $GAMEDIR

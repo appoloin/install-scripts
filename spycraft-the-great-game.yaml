@@ -1,7 +1,7 @@
-name: Codename - Iceman
+name: Spycraft - The Great Game
 game_slug: spycraft-the-great-game
-version: Installer
-slug:  installer
+version: Good Old Games Installer
+slug: spycraft-the-great-game
 runner: dosbox
 
 
@@ -33,15 +33,17 @@ script:
     - extract:
         format: gog
         file: $game
-        args: --gog
+        args: --gog --include app --include support
         dst: $GAMEDIR
         description: Extracting game files
-        
-    - write_file:
-        content: '[midi]
-
-          mididevice = mt32
     
+
+    
+    - write_file:
+        content: '[cpu]
+
+            cycles = 25000
+      
          [mouse]
 
             capture_mouse = onstart middlerelease  
@@ -120,6 +122,6 @@ script:
             exit'
         file: $GAMEDIR/play.conf
 
-    - execute:
-        args: $GAMEDIR
-        file: $CACHE/remove.sh
+#    - execute:
+#        args: $GAMEDIR
+#        file: $CACHE/remove.sh

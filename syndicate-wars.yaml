@@ -1,6 +1,6 @@
 name: Syndicate Wars
 game_slug: syndicate-wars
-version: Installer
+version: Good Old Games Installer
 slug: installer
 runner: dosbox
 
@@ -10,9 +10,6 @@ script:
 
   files:
     - game:  N/A:Select GOG installer
-    - GUS: 
-        url: https://drive.google.com/uc?export=download&id=1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6
-        filename: gus.zip
 
   installer:
     - write_file:
@@ -32,6 +29,28 @@ script:
         file: $CACHE/remove.sh
     - chmodx: $CACHE/remove.sh
 
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - extract:
         format: gog
         file: $game
@@ -43,9 +62,21 @@ script:
         args: $GAMEDIR
         file: $CACHE/remove.sh
 
+    - execute:
+        file: $CACHE/download.sh
+        args: 1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6 $CACHE/GUS.zip
+
     - extract:
-        file: $GUS
+        file: $CACHE/GUS.zip
         dst: $GAMEDIR/ULTRASND
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
+
+    - extract:
+        file: $CACHE/MT32-ROMS.7z
+        dst:  $GAMEDIR/MT32-ROMS
 
     - write_file:
         content: '[mouse]
@@ -56,7 +87,7 @@ script:
 
           [cpu]
 
-          cycles=max limit 35000
+            cycles = 25000
 
           [gus]
 
@@ -75,6 +106,10 @@ script:
           [midi]
 
           mididevice = mt32
+
+          [mt32]
+
+            romdir = $GAMEDIR/MT32-ROMS
 
           [sdl]
             
@@ -100,7 +135,40 @@ script:
 
           imgmount d -t iso -fs iso "$GAMEDIR/SWARS/swars.inst"
 
+          ECHO OFF
+
+          goto launcher
+
+          :launcher
+
           cls 
+
+          ECHO  -------------------------------------------  
+          
+          ECHO                Syndicate Wars
+          
+          ECHO  -------------------------------------------  
+          
+          ECHO   1) Play        
+          
+          ECHO   2) Setup                                
+          
+          ECHO  -------------------------------------------  
+          
+          ECHO   3) Exit                              
+          
+          ECHO  -------------------------------------------  
+
+          choice /c123 /s Which program do you want to run? [1-3]: /n 
+          
+          if errorlevel 3 goto exit
+                    
+          if errorlevel 2 goto setup
+          
+          if errorlevel 1 goto game
+
+
+          :game
 
           c:
 
@@ -109,7 +177,25 @@ script:
           cls
           
           call play.bat
+
+          goto launcher
+
+
+          :setup
+
+          cls
+
+          C:
+
+          cd SWARS
           
+          setsound
+
+          goto launcher
+
+
+          :exit
+
           exit'
         file: $GAMEDIR/play.conf    
 

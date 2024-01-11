@@ -1,19 +1,15 @@
 name: Titanic - Adventure Out of Time
 game_slug: titanic-adventure-out-of-time
-version: Installer
+version: DOS/Win311
 slug:  Titanic-installer
 runner: dosbox
 
 script:
   files:
     - discs: N/A:Select first cue file .
-    - setup: 
-        url: https://drive.google.com/uc?export=download&id=12xs1EbZLNzgiICr6AJZboLHCCLYXyD4X
-        filename: win311.7z
 
   game:
-    main_file: $GAMEDIR/Titanic.conf
-    args: -userconf
+    main_file: $GAMEDIR/play.conf
 
 
   installer:
@@ -30,9 +26,37 @@ script:
         file: $CACHE/bulkcopy.sh
     - chmodx: $CACHE/bulkcopy.sh
 
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 12xs1EbZLNzgiICr6AJZboLHCCLYXyD4X $CACHE/win311.7z
+
     - execute:
         file: 7z
-        args: x $setup -o"$GAMEDIR" -ppassword -y
+        args: x  $CACHE/win311.7z -o"$GAMEDIR" -ppassword -y
+
+
     
     - execute:
         file: $CACHE/bulkcopy.sh
@@ -51,7 +75,7 @@ script:
           
           [cpu]
 
-            cputype = pentium_slow
+          cycles=35000
           
           [autoexec]
 
@@ -165,4 +189,4 @@ script:
             :exit
             
             exit'
-        file: $GAMEDIR/Titanic.conf
+        file: $GAMEDIR/play.conf

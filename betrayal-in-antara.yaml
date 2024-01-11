@@ -1,12 +1,12 @@
 name: Betrayal in Antara
 game_slug: betrayal-in-antara
-version: Installer
+version: Good Old Games Installer
 slug: betrayal-in-antara
 runner: wine
 
 script:
   game:
-    exe: drive_c/GOG Games/Betrayal in Antara/ANTARAR.EXE
+    exe: $GAMEDIR/drive_c/GOG Games/Betrayal in Antara/ANTARAR.EXE
     prefix: $GAMEDIR
 
   files:
@@ -22,7 +22,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-

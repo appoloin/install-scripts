@@ -1,6 +1,6 @@
 name: Leisure Suit Larry - Love for Sail
 game_slug: leisure-suit-larry-love-for-sail
-version: Installer
+version: Good Old Games Installer
 slug: leisure-suit-larry-love-for-sail
 runner: scummvm
 
@@ -14,9 +14,46 @@ script:
     path: $GAMEDIR
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
+
     - extract:
         format: gog
         file: $game
         args: --gog --include "app" 
         dst: $GAMEDIR
         description: Extracting game files
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1e6PIw82-HLpFn27GIjhBskgnWdFijpWg $CACHE/ScummVm-Data-MT32.7z
+
+    - extract:
+        file: $CACHE/ScummVm-Data-MT32.7z
+        dst:  $GAMEDIR/ScummVm-Data-MT32
+
+
+  scummvm:
+    fullscreen: true
+    datadir: $GAMEDIR/ScummVm-Data-MT32
+    music-driver: mt32

@@ -1,6 +1,6 @@
 name:  Time Commando
 game_slug:  time-commando
-version: Installer
+version: Good Old Games Installer
 slug:  time-commando
 runner: dosbox
 
@@ -9,16 +9,9 @@ script:
     - game: N/A:Select GOG installer
 
   game:
-    main_file: $GAMEDIR/time.conf
+    main_file: $GAMEDIR/play.conf
   
   installer:
-    - extract:
-        format: gog
-        file: $game
-        args: --gog --include app
-        dst: $GAMEDIR
-        description: Extracting game files
-
     - write_file:
         content: '#!/bin/bash
 
@@ -34,11 +27,56 @@ script:
           find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
         file: $CACHE/remove.sh
     - chmodx: $CACHE/remove.sh
+    
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
+    - extract:
+        format: gog
+        file: $game
+        args: --gog --include app
+        dst: $GAMEDIR
+        description: Extracting game files
 
     - execute:
-        args: $GAMEDIR
         file: $CACHE/remove.sh
+        args: $GAMEDIR
  
+    - execute:
+        file: $CACHE/download.sh
+        args: 1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6 $CACHE/GUS.zip
+
+    - extract:
+        file: $CACHE/GUS.zip
+        dst: $GAMEDIR/ULTRASND
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
+
+    - extract:
+        file: $CACHE/MT32-ROMS.7z
+        dst:  $GAMEDIR/MT32-ROMS
+
 
     - write_file:
         content: '[mouse]
@@ -46,7 +84,20 @@ script:
             capture_mouse = onstart middlerelease  
 
             mouse_sensitivity= 15
+          
+          [midi]
 
+          mididevice = mt32
+
+          [gus]
+
+            gus= true
+
+            ultradir = C:\ULTRASND
+
+          [mt32]
+
+            romdir = $GAMEDIR/MT32-ROMS
 
           [autoexec]
 
@@ -115,4 +166,4 @@ script:
           :exit
           
           exit'
-        file: $GAMEDIR/time.conf
+        file: $GAMEDIR/play.conf

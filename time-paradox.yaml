@@ -1,6 +1,6 @@
 name: Time Paradox 
 game_slug: time-paradox
-version: Installer
+version: DOS
 slug: time-paradox
 runner: dosbox
 
@@ -10,33 +10,53 @@ script:
     - DISC1: N/A:Select Install.bat from Disc1.
 
   game:
-    main_file: $GAMEDIR/time-paradox.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
           dst=$2
-          
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          cp -avr "$src_path/."  "$dst"'
+        
+          cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy.sh
     - chmodx: $CACHE/bulkcopy.sh
 
-    - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/CDD $GAMEDIR/CDD/DISC1
-        file: mkdir
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
 
     - execute:
-        args: $DISC1 "$GAMEDIR/CDD/DISC1"
+        file: mkdir
+        args: $GAMEDIR/drive_c $GAMEDIR/drive_d 
+
+    - execute:
         file: $CACHE/bulkcopy.sh
+        args: $DISC1 "$GAMEDIR/drive_d"
     
     - execute:
-        args: -R 775  "$GAMEDIR/CDD/DISC1"
         file: chmod
+        args: -R 775  "$GAMEDIR/drive_d"
 
     - write_file:
         content: '[mouse]
@@ -47,25 +67,55 @@ script:
 
           [midi]
 
-           mididevice = mt32
+          mididevice = mt32
+
+          [gus]
+
+            gus= true
+
+            ultradir = C:\ULTRASND
+
+          [mt32]
+
+            romdir = $GAMEDIR/MT32-ROMS 
   
           [autoexec]
           
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
-            mount D "$GAMEDIR/CDD/DISC1" -t dir
+            mount D "$GAMEDIR/drive_d" -t dir
 
             D:
 
             install.bat
         
           exit'
-        file: $GAMEDIR/time-paradox_setup.conf
+        file: $GAMEDIR/setup.conf
+
     - task:
-        config_file: $GAMEDIR/time-paradox_setup.conf
+        config_file: $GAMEDIR/setup.conf
         name: dosexec
-        working_dir: $GAMEDIR/HDD/
-    
+        working_dir: $GAMEDIR/drive_c
+
+
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6 $CACHE/GUS.zip
+
+    - extract:
+        file: $CACHE/GUS.zip
+        dst: $GAMEDIR/drive_c/ULTRASND
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
+
+    - extract:
+        file: $CACHE/MT32-ROMS.7z
+        dst:  $GAMEDIR/MT32-ROMS
+
+
     - write_file:
         content: '[mouse]
 
@@ -75,13 +125,23 @@ script:
 
           [midi]
 
-           mididevice = mt32
-  
+          mididevice = mt32
+
+          [gus]
+
+            gus= true
+
+            ultradir = C:\ULTRASND
+
+          [mt32]
+
+            romdir = $GAMEDIR/MT32-ROMS 
+
           [autoexec]
           
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
-            mount D "$GAMEDIR/CDD/DISC1" -t dir
+            mount D "$GAMEDIR/drive_d" -t dir
 
             ECHO OFF
 
@@ -141,4 +201,4 @@ script:
           :exit
 
           exit'
-        file: $GAMEDIR/time-paradox.conf
+        file: $GAMEDIR/play.conf

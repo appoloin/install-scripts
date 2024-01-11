@@ -1,6 +1,6 @@
 name: Nemesis - The Wizardry Adventure
 game_slug: nemesis-the-wizardry-adventure
-version: Installer
+version: DOS
 slug: nemesis-the-wizardry-adventure
 runner: dosbox
 
@@ -15,35 +15,67 @@ script:
     - DISC3:  N/A:Select DISC3 iso
     - DISC4:  N/A:Select DISC4 iso
     - DISC5:  N/A:Select DISC5 iso
-    - GUS: 
-        url: https://drive.google.com/uc?export=download&id=1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6
-        filename: gus.zip
 
 
   installer:
-    - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/CDD
-        file: mkdir
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
 
     - execute:
-        args: $DISC1 $GAMEDIR/CDD/CD1.iso
-        file: cp 
+        file: mkdir
+        args: $GAMEDIR/drive_c $GAMEDIR/drive_d
+
     - execute:
-        args: $DISC2 $GAMEDIR/CDD/CD2.iso
         file: cp 
+        args: $DISC1 $GAMEDIR/drive_d/CD1.iso
     - execute:
-        args: $DISC3 $GAMEDIR/CDD/CD3.iso
         file: cp 
+        args: $DISC2 $GAMEDIR/drive_d/CD2.iso
     - execute:
-        args: $DISC4 $GAMEDIR/CDD/CD4.iso
         file: cp 
+        args: $DISC3 $GAMEDIR/drive_d/CD3.iso
     - execute:
-        args: $DISC5 $GAMEDIR/CDD/CD5.iso
         file: cp 
+        args: $DISC4 $GAMEDIR/drive_d/CD4.iso
+    - execute:
+        file: cp 
+        args: $DISC5 $GAMEDIR/drive_d/CD5.iso
+
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6 $CACHE/GUS.zip
 
     - extract:
-        file: $GUS
-        dst: $GAMEDIR/HDD/ULTRASND
+        file: $CACHE/GUS.zip
+        dst: $GAMEDIR/drive_c/ULTRASND
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
+
+    - extract:
+        file: $CACHE/MT32-ROMS.7z
+        dst:  $GAMEDIR/MT32-ROMS
 
 
     - write_file:
@@ -57,7 +89,12 @@ script:
           [midi]
 
           mididevice = mt32
-        
+
+          [mt32]
+
+            romdir = $GAMEDIR/MT32-ROMS
+
+
             [mouse]
 
               capture_mouse = onstart middlerelease  
@@ -67,9 +104,9 @@ script:
         
           [autoexec]
 
-            imgmount D -t iso -fs iso "$GAMEDIR/CDD/CD1.iso" "$GAMEDIR/CDD/CD2.iso" "$GAMEDIR/CDD/CD3.iso" "$GAMEDIR/CDD/CD4.iso" "$GAMEDIR/CDD/CD5.iso"   
+            imgmount D -t iso -fs iso "$GAMEDIR/drive_d/CD1.iso" "$GAMEDIR/drive_d/CD2.iso" "$GAMEDIR/drive_d/CD3.iso" "$GAMEDIR/drive_d/CD4.iso" "$GAMEDIR/drive_d/CD5.iso"   
 
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
             
             d:
             
@@ -81,7 +118,7 @@ script:
     - task:
         config_file: $GAMEDIR/setup.conf
         name: dosexec
-        working_dir: $GAMEDIR/HDD
+        working_dir: $GAMEDIR/drive_c
 
 
     - write_file:
@@ -104,9 +141,9 @@ script:
             
           [autoexec]
           
-            mount C "$GAMEDIR/HDD" -t dir
+            imgmount D -t iso -fs iso "$GAMEDIR/drive_d/CD1.iso" "$GAMEDIR/drive_d/CD2.iso" "$GAMEDIR/drive_d/CD3.iso" "$GAMEDIR/drive_d/CD4.iso" "$GAMEDIR/drive_d/CD5.iso"   
 
-            imgmount D -t iso -fs iso "$GAMEDIR/CDD/CD1.iso" "$GAMEDIR/CDD/CD2.iso" "$GAMEDIR/CDD/CD3.iso" "$GAMEDIR/CDD/CD4.iso" "$GAMEDIR/CDD/CD5.iso"   
+            mount C "$GAMEDIR/drive_c" -t dir
 
 
             C:

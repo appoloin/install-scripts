@@ -1,6 +1,6 @@
 name: Mummy - Tomb of the Pharaoh
 game_slug: mummy-tomb-of-the-pharaoh
-version: Installer
+version: DOs/Win311
 slug: mummy-tomb-of-the-pharaoh
 runner: dosbox
 
@@ -11,18 +11,41 @@ script:
 
   files:
     - DISC1: N/A:Select Disc 1 iso.
-    - setup: 
-        url: https://drive.google.com/uc?export=download&id=12xs1EbZLNzgiICr6AJZboLHCCLYXyD4X
-        filename: win311.7z
 
   installer:  
-    - execute:
-        file: 7z
-        args: x $setup -o"$GAMEDIR" -ppassword -y
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
 
     - execute:
+        file: $CACHE/download.sh
+        args: 12xs1EbZLNzgiICr6AJZboLHCCLYXyD4X $CACHE/win311.7z
+
+    - execute:
+        file: 7z
+        args: x  $CACHE/win311.7z -o"$GAMEDIR" -ppassword -y
+
+    - execute:
+        file: cp 
         args: $DISC1 $GAMEDIR/CDD/CD1.iso
-        file: /bin/cp 
 
     - write_file:
         content: '[midi]

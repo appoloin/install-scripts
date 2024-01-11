@@ -1,6 +1,6 @@
 name: Down in the Dumps
 game_slug: down-in-the-dumps
-version: Installer
+version: DOS
 slug: down-in-the-dumps
 runner: dosbox
 
@@ -9,30 +9,61 @@ script:
     - DISC1: N/A:Select Disc 1 iso
     - DISC2: N/A:Select Disc 2 iso
     - DISC3: N/A:Select Disc 3 iso
-    - xcopy: https://github.com/appoloin/WfW/raw/master/XCOPY.EXE
 
 
   game:
     main_file: $GAMEDIR/play.conf
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - execute:
-        args: $GAMEDIR/HDD  $GAMEDIR/HDD/DOWN  $GAMEDIR/HDD/DOWN/FONT $GAMEDIR/HDD/DOWN/CHANGECD $GAMEDIR/HDD/DOWN/ITOON $GAMEDIR/CDD
         file: mkdir
-
-    - copy:
-        src: $xcopy 
-        dst: $GAMEDIR/HDD
+        args: $GAMEDIR/drive_c  $GAMEDIR/drive_c/DOWN  $GAMEDIR/drive_c/DOWN/FONT 
 
     - execute:
-        args: $DISC1 $GAMEDIR/CDD/CD1.iso
-        file: /bin/cp 
+        file: mkdir
+        args: $GAMEDIR/drive_c/DOWN/CHANGECD $GAMEDIR/drive_c/DOWN/ITOON $GAMEDIR/drive_d
+
     - execute:
-        args: $DISC2 $GAMEDIR/CDD/CD2.iso
-        file: /bin/cp 
+        file: $CACHE/download.sh
+        args: 1V0jo7DXyHAwU3mp3ZCWVv0RciHXpAEEj $CACHE/xcopy.7z
+
     - execute:
-        args: $DISC3 $GAMEDIR/CDD/CD3.iso
-        file: /bin/cp 
+        file: 7z
+        args: x $CACHE/xcopy.7z -o"$GAMEDIR/drive_c" -ppassword -y
+
+
+
+    - execute:
+        file: cp 
+        args: $DISC1 $GAMEDIR/drive_d/CD1.iso
+    - execute:
+        file: cp 
+        args: $DISC2 $GAMEDIR/drive_d/CD2.iso
+    - execute:
+        file: cp 
+        args: $DISC3 $GAMEDIR/drive_d/CD3.iso
 
     - write_file:
         content: '[gus]
@@ -43,13 +74,15 @@ script:
 
             capture_mouse=onclick middlerelease
           
+            mouse_sensitivity= 15
+
           [autoexec]
 
             ver set 6 22
 
-            imgmount D "$GAMEDIR/CDD/CD1.iso"   "$GAMEDIR/CDD/CD2.iso"   "$GAMEDIR/CDD/CD3.iso"  -t cdrom
+            imgmount D "$GAMEDIR/drive_d/CD1.iso"   "$GAMEDIR/drive_d/CD2.iso"   "$GAMEDIR/drive_d/CD3.iso"  -t cdrom
 
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
             C:\
 
@@ -75,7 +108,7 @@ script:
     - task:
         config_file: $GAMEDIR/setup.conf
         name: dosexec
-        working_dir: $GAMEDIR/HDD
+        working_dir: $GAMEDIR/drive_c
 
     - write_file:
         content: '[gus]
@@ -86,11 +119,14 @@ script:
 
             capture_mouse=onclick middlerelease
 
+           mouse_sensitivity= 15
+
+
           [autoexec]
 
-            imgmount D "$GAMEDIR/CDD/CD1.iso"   "$GAMEDIR/CDD/CD2.iso"   "$GAMEDIR/CDD/CD3.iso"  -t cdrom
+            imgmount D "$GAMEDIR/drive_d/CD1.iso"   "$GAMEDIR/drive_d/CD2.iso"   "$GAMEDIR/drive_d/CD3.iso"  -t cdrom
 
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
             cls 
 
@@ -109,12 +145,12 @@ script:
             ECHO  -------------------------------------------  
             
             ECHO   1) Play        
-            
-            ECHO   2) Setup                                
-            
+                        
+            ECHO   2) Install
+
             ECHO  -------------------------------------------  
             
-            ECHO   3) exit program                             
+            ECHO   3) Exit                             
             
             ECHO  -------------------------------------------  
 
@@ -122,7 +158,7 @@ script:
             
             if errorlevel 3 goto exit
                       
-            if errorlevel 2 goto setup
+            if errorlevel 2 goto install
             
             if errorlevel 1 goto game
 
@@ -140,15 +176,32 @@ script:
             goto exit
 
 
-            :setup
-
+            :install
+            
             cls
 
-            D:
-    
-            setup
+            ver set 6 22
+
+            C:\
+
+            xcopy.exe D:\ITOON c:\down\itoon
+          
+            xcopy.exe D:\CHANGECD c:\down\changecd
+
+            xcopy.exe D:\FONT c:\down\font
+
+            xcopy.exe D:\DID.EXE c:\down\
+            
+            xcopy.exe D:\DOS4GW.EXE c:\down\
+          
+            xcopy.exe D:\HMIDET.386 c:\down\
+
+            xcopy.exe D:\HMIDRV.386 c:\down\
+
+            xcopy.exe  D:\PLAYDID.BAT c:\down\
 
             goto launcher
+
 
 
             :exit

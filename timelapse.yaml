@@ -1,6 +1,6 @@
 name: Timelaspe
 game_slug: timelapse
-version: Installer
+version: DOS/Win311
 slug: timelapse
 runner: dosbox
 
@@ -10,31 +10,53 @@ script:
     - DISC2: N/A:Select Disc 2 iso
     - DISC3: N/A:Select Disc 3 iso
     - DISC4: N/A:Select Disc 4 iso
-    - setup: 
-        url: https://drive.google.com/uc?export=download&id=12xs1EbZLNzgiICr6AJZboLHCCLYXyD4X
-        filename: win311.7z
-
 
   game:
     main_file: $GAMEDIR/play.conf
 
   installer:
-    - execute:
-        file: 7z
-        args: x $setup -o"$GAMEDIR" -ppassword -y
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
 
     - execute:
+        file: $CACHE/download.sh
+        args: 12xs1EbZLNzgiICr6AJZboLHCCLYXyD4X $CACHE/win311.7z
+
+    - execute:
+        file: 7z
+        args: x  $CACHE/win311.7z -o"$GAMEDIR" -ppassword -y
+
+    - execute:
+        file: cp 
         args: $DISC1 $GAMEDIR/CDD/CD1.iso
-        file: cp 
     - execute:
+        file: cp 
         args: $DISC2 $GAMEDIR/CDD/CD2.iso
-        file: cp 
     - execute:
+        file: cp 
         args: $DISC3 $GAMEDIR/CDD/CD3.iso
-        file: cp 
     - execute:
-        args: $DISC4 $GAMEDIR/CDD/CD4.iso
         file: cp 
+        args: $DISC4 $GAMEDIR/CDD/CD4.iso
 
     - write_file:
         content: '[midi]
@@ -59,7 +81,7 @@ script:
 
             mount C "$GAMEDIR/HDD" -t dir
 
-            mount D -t cdrom "$GAMEDIR/CDD/CD1.iso"   "$GAMEDIR/CDD/CD2.iso"   "$GAMEDIR/CDD/CD3.iso"   "$GAMEDIR/CDD/CD4.iso" 
+            imgmount D -t cdrom "$GAMEDIR/CDD/CD1.iso"   "$GAMEDIR/CDD/CD2.iso"   "$GAMEDIR/CDD/CD3.iso"   "$GAMEDIR/CDD/CD4.iso" 
 
             C:
 
@@ -67,7 +89,7 @@ script:
 
             SET TEMP=C:\WINDOWS\TEMP
             
-            win runexit D:\setup
+            win D:\setup
               
             exit'
         file: $GAMEDIR/setup.conf
@@ -99,7 +121,7 @@ script:
 
             mount C "$GAMEDIR/HDD" -t dir
 
-            mount D -t cdrom "$GAMEDIR/CDD/CD1.iso"   "$GAMEDIR/CDD/CD2.iso"   "$GAMEDIR/CDD/CD3.iso"   "$GAMEDIR/CDD/CD4.iso" 
+            imgmount D -t cdrom "$GAMEDIR/CDD/CD1.iso"   "$GAMEDIR/CDD/CD2.iso"   "$GAMEDIR/CDD/CD3.iso"   "$GAMEDIR/CDD/CD4.iso" 
             
             SET PATH=%PATH%;C:\WINDOWS;C:\;
 
@@ -186,7 +208,7 @@ script:
 
             C:
 
-            win runexit D:\setup
+            win D:\setup
 
             goto setup
 

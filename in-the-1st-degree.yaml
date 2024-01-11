@@ -45,12 +45,12 @@ script:
         args: x  $CACHE/win311.7z -o"$GAMEDIR" -ppassword -y
 
     - execute:
-        args: $DISC1 $GAMEDIR/CDD/CD1.iso
         file: cp 
+        args: $DISC1 $GAMEDIR/CDD/CD1.iso
 
     - execute:
-        args: $DISC2 $GAMEDIR/CDD/CD2.iso
         file: cp 
+        args: $DISC2 $GAMEDIR/CDD/CD2.iso
 
 
     - write_file:

@@ -1,7 +1,7 @@
 name:  Phantasmagoria
 game_slug:  phantasmagoria
 version: DOS
-slug:   phantasmagoria-installer
+slug:   phantasmagoria
 runner: scummvm
 
 
@@ -11,42 +11,40 @@ script:
     path: $GAMEDIR
 
   files:
-    - DISC1: N/A:Please select resmap.001
-    - DISC2: N/A:Please select resmap.002
-    - DISC3: N/A:Please select resmap.003
-    - DISC4: N/A:Please select resmap.004
-    - DISC5: N/A:Please select resmap.005
-    - DISC6: N/A:Please select resmap.006
-    - DISC7: N/A:Please select resmap.007
+    - DISC1: N/A:Select Disc 1 iso
+    - DISC2: N/A:Select Disc 2 iso
+    - DISC3: N/A:Select Disc 3 iso
+    - DISC4: N/A:Select Disc 4 iso
+    - DISC5: N/A:Select Disc 5 iso
+    - DISC6: N/A:Select Disc 6 iso
+    - DISC7: N/A:Select Disc 7 iso
 
   installer:
     - write_file:
         content: '#!/bin/bash
 
-            src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          fileID=$1
 
-            dst=$2
-            
-            cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
+          output=$2
         
-    - write_file:
-        content: '#!/bin/bash
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
 
-            src=$1
-
-            dst=$2
-
-            src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-            find "$src_path" -type f \( -iname "PDOCO.TXT"  \) -exec cp -r {} "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
-
-    - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $DISC1 $GAMEDIR
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR
 
     - execute:
         file: chmod
@@ -54,31 +52,35 @@ script:
 
     - execute:
         file: mv
-        args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.001
+        args: $GAMEDIR/PDOCO.TXT  $GAMEDIR/PDOCO.TXT.tmp
 
     - execute:
         file: mv
-        args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.001
+        args: $GAMEDIR/RESOURCE.AUD  $GAMEDIR/RESAUD.001
+
+    - execute:
+        file: mv
+        args: $GAMEDIR/RESOURCE.SFX  $GAMEDIR/RESSFX.001
     
-    - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $DISC2 $GAMEDIR
+    - extract:
+        file: $DISC2 
+        dst:  $GAMEDIR
 
     - execute:
         file: chmod
         args: -R 775  "$GAMEDIR"
 
     - execute:
-        args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.002
+        args: $GAMEDIR/RESOURCE.AUD  $GAMEDIR/RESAUD.002
         file: mv
 
     - execute:
         file: mv
-        args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.002
+        args: $GAMEDIR/RESOURCE.SFX  $GAMEDIR/RESSFX.002
     
-    - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $DISC3 $GAMEDIR
+    - extract:
+        file: $DISC3
+        dst:  $GAMEDIR
 
     - execute:
         file: chmod
@@ -86,15 +88,15 @@ script:
 
     - execute:
         file: mv
-        args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.003
+        args: $GAMEDIR/RESOURCE.AUD  $GAMEDIR/RESAUD.003
 
     - execute:
         file: mv
-        args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.003
+        args: $GAMEDIR/RESOURCE.SFX  $GAMEDIR/RESSFX.003
 
-    - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $DISC4 $GAMEDIR
+    - extract:
+        file: $DISC4 
+        dst:  $GAMEDIR
 
     - execute:
         file: chmod
@@ -102,15 +104,15 @@ script:
 
     - execute:
         file: mv
-        args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.004
+        args: $GAMEDIR/RESOURCE.AUD  $GAMEDIR/RESAUD.004
 
     - execute:
         file: mv
-        args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.004
+        args: $GAMEDIR/RESOURCE.SFX  $GAMEDIR/RESSFX.004
     
-    - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $DISC5 $GAMEDIR
+    - extract:
+        file: $DISC5 
+        dst:  $GAMEDIR
 
     - execute:
         file: chmod
@@ -118,15 +120,15 @@ script:
 
     - execute:
         file: mv
-        args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.005
+        args: $GAMEDIR/RESOURCE.AUD  $GAMEDIR/RESAUD.005
 
     - execute:
         file: mv
-        args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.005
+        args: $GAMEDIR/RESOURCE.SFX  $GAMEDIR/RESSFX.005
     
-    - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $DISC6 $GAMEDIR
+    - extract:
+        file: $DISC6 
+        dst:  $GAMEDIR
 
     - execute:
         file: chmod
@@ -134,15 +136,15 @@ script:
 
     - execute:
         file: mv
-        args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.006
+        args: $GAMEDIR/RESOURCE.AUD  $GAMEDIR/RESAUD.006
 
     - execute:
         file: mv
-        args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.006
+        args: $GAMEDIR/RESOURCE.SFX  $GAMEDIR/RESSFX.006
     
-    - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $DISC7 $GAMEDIR
+    - extract:
+        file: $DISC7
+        dst:  $GAMEDIR
 
     - execute:
         file: chmod
@@ -150,12 +152,30 @@ script:
 
     - execute:
         file: mv
-        args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.007
+        args: $GAMEDIR/RESOURCE.AUD  $GAMEDIR/RESAUD.007
 
     - execute:
         file: mv
-        args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.007
+        args: $GAMEDIR/RESOURCE.SFX  $GAMEDIR/RESSFX.007
+
+    - extract:
+        file: $DISC1 
+        dst:  $CACHE/DISC1
 
     - execute:
-        file: $CACHE/selectcopy.sh
-        args: $DISC1 $GAMEDIR
+        file: mv
+        args: $GAMEDIR/PDOCO.TXT.tmp $GAMEDIR/PDOCO.TXT  
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1e6PIw82-HLpFn27GIjhBskgnWdFijpWg $CACHE/ScummVm-Data-MT32.7z
+
+    - extract:
+        file: $CACHE/ScummVm-Data-MT32.7z
+        dst:  $GAMEDIR/ScummVm-Data-MT32
+
+
+  scummvm:
+    fullscreen: true
+    datadir: $GAMEDIR/ScummVm-Data-MT32
+    music-driver: mt32

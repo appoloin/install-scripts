@@ -1,6 +1,6 @@
 name: Realms of Arkanis 3 - Shadows over Riva
 game_slug: realms-of-arkania-3-shadows-over-riva-classic
-version: Installer
+version: Good Old Games Installer
 slug: realms-of-arkania-3-shadows-over-riva-classic
 runner: dosbox
 
@@ -9,7 +9,7 @@ script:
     - game: N/A:Select GOG installer
 
   game:
-    main_file: $GAMEDIR/arkania.conf
+    main_file: $GAMEDIR/play.conf
   
   installer:
     - write_file:
@@ -52,6 +52,28 @@ script:
         file: $CACHE/copyrename.sh
     - chmodx: $CACHE/copyrename.sh     
 
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - extract:
         format: gog
         file: $game
@@ -60,7 +82,7 @@ script:
         description: Extracting game files
 
     - execute:
-        args: $GAMEDIR/arkania  $GAMEDIR/CDD $GAMEDIR/CDD/Music
+        args: $GAMEDIR/arkania  $GAMEDIR/drive_d $GAMEDIR/drive_d/Music
         file: mkdir
 
     - copy:
@@ -69,22 +91,36 @@ script:
 
     - copy:
         src: $CACHE/game.gog
-        dst: $GAMEDIR/CDD
+        dst: $GAMEDIR/drive_d
 
     - copy:
         src: $CACHE/game.ins
-        dst: $GAMEDIR/CDD
+        dst: $GAMEDIR/drive_d
 
     - execute:
-        args: $CACHE/MUSIC $GAMEDIR/CDD/Music
+        args: $CACHE/MUSIC $GAMEDIR/drive_d/Music
         file: $CACHE/copyrename.sh
 
     - execute:
-        args: $CACHE $GAMEDIR/arkania
         file: $CACHE/selectcopy.sh
+        args: $CACHE $GAMEDIR/arkania
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6 $CACHE/GUS.zip
+
+    - extract:
+        file: $CACHE/GUS.zip
+        dst: $GAMEDIR/ULTRASND
 
     - write_file:
-        content: '[mouse]
+        content: '[gus]
+
+          gus= true
+
+          ultradir = C:\ULTRASND
+
+         [mouse]
 
             capture_mouse = onstart middlerelease  
 
@@ -110,7 +146,7 @@ script:
 
             mount C "$GAMEDIR" -t dir
 
-            imgmount D "$GAMEDIR/CDD/game.ins" -t iso -fs iso
+            imgmount D "$GAMEDIR/drive_d/game.ins" -t iso -fs iso
 
             C:
 
@@ -199,4 +235,4 @@ script:
             :exit
             
             exit'
-        file: $GAMEDIR/arkania.conf
+        file: $GAMEDIR/play.conf

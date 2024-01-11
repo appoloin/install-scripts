@@ -1,7 +1,7 @@
 name:  Worms United
 game_slug: worms-united
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: worms-united
 runner: dosbox
 
 script:
@@ -9,7 +9,7 @@ script:
     - game: N/A:Select GOG installer
 
   game:
-    main_file: $GAMEDIR/worms.conf
+    main_file: $GAMEDIR/play.conf
   
   installer:
     - write_file:
@@ -56,20 +56,20 @@ script:
 
 
     - execute:
-        args: $GAMEDIR/worms  $GAMEDIR/CDD
         file: mkdir
+        args: $GAMEDIR/worms  $GAMEDIR/drive_d
 
     - copy:
         src: $CACHE/manual.pdf
         dst: $GAMEDIR
 
     - execute:
-        args: $CACHE $GAMEDIR/worms
         file: $CACHE/selectcopy.sh
+        args: $CACHE $GAMEDIR/worms
 
     - execute:
-        args: $CACHE $GAMEDIR/CDD
         file: $CACHE/selectcopy2.sh
+        args: $CACHE $GAMEDIR/drive_d
 
 
     - write_file:
@@ -106,11 +106,11 @@ script:
 
             mount C "$GAMEDIR/worms" -t dir
 
-            imgmount D "$GAMEDIR/CDD/WORMS.DAT" -t iso
+            imgmount D "$GAMEDIR/drive_d/WORMS.DAT" -t iso
 
             C:
 
             call worms
             
             exit'
-        file: $GAMEDIR/worms.conf
+        file: $GAMEDIR/play.conf
