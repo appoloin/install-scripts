@@ -1,6 +1,6 @@
 name: Fallout 2
 game_slug: fallout-2
-version: Installer
+version: Good Old Games Installer
 slug: fallout
 runner: wine
 
@@ -22,7 +22,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-

@@ -1,13 +1,12 @@
 name: Might and Magic VI - The Madate of Heaven
 game_slug: might-and-magic-vi-the-mandate-of-heaven
-version: Installer
+version: Good Old Games Installer
 slug: might-and-magic-vi-the-mandate-of-heaven
 runner: wine
 
 script:
   game: 
     exe: $GAMEDIR/drive_c/GOG Games/Might and Magic 6/MM6.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -18,15 +17,10 @@ script:
         name: create_prefix
         install_mono: false
         install_gecko: false
-        arch: win32
         prefix: $GAMEDIR
 
     - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

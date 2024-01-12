@@ -1,13 +1,15 @@
 name: Spycraft - The Great Game
 game_slug: spycraft-the-great-game
-version: Good Old Games Installer
+version: DOS 
 slug: spycraft-the-great-game
 runner: dosbox
 
 
 script:
   files:
-    - game:  N/A:Select the GOG installer
+    - DISC1: N/A:Select Disc 1 iso
+    - DISC2: N/A:Select Disc 2 iso
+    - DISC3: N/A:Select Disc 3 iso
 
   game:
     main_file: $GAMEDIR/play.conf
@@ -16,31 +18,73 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
-          
-          find "$src" -maxdepth 1 -type d \( -iname app -o
-                                            -iname commonappdata -o
-                                            -iname *redist -o
-                                            -iname scummvm -o
-                                            -iname dosbox -o
-                                            -iname *support -o
-                                            -iname tmp \) -exec rm -r {}  \;
-                                            
-          find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
-        file: $CACHE/remove.sh
-    - chmodx: $CACHE/remove.sh
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_c $GAMEDIR/drive_d 
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6 $CACHE/GUS.zip
 
     - extract:
-        format: gog
-        file: $game
-        args: --gog --include app --include support
-        dst: $GAMEDIR
-        description: Extracting game files
-    
+        file: $CACHE/GUS.zip
+        dst: $GAMEDIR/drive_c/ULTRASND
 
-    
+    - execute:
+        file: $CACHE/download.sh
+        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
+
+    - extract:
+        file: $CACHE/MT32-ROMS.7z
+        dst:  $GAMEDIR/MT32-ROMS
+
+    - execute:
+        file: cp 
+        args: $DISC1 $GAMEDIR/drive_d/CD1.iso
+    - execute:
+        file: cp 
+        args: $DISC2 $GAMEDIR/drive_d/CD2.iso
+    - execute:
+        file: cp 
+        args: $DISC3 $GAMEDIR/drive_d/CD3.iso
+
+
+
     - write_file:
-        content: '[cpu]
+        content: '[midi]
+
+          mididevice = mt32
+
+          [gus]
+
+            gus= true
+
+            ultradir = C:\ULTRASND
+
+          [mt32]
+
+            romdir = $GAMEDIR/MT32-ROMS
+
+         [cpu]
 
             cycles = 25000
       
@@ -53,9 +97,57 @@ script:
           
           [autoexec]
 
-            mount D "$GAMEDIR/DATA/" -t -cdrom 
+            imgmount D "$GAMEDIR/drive_d/CD1.iso"  "$GAMEDIR/drive_d/CD2.iso"  "$GAMEDIR/drive_d/CD3.iso" -t cdrom
 
-            mount C "$GAMEDIR" -t dir -freesize 1024
+            mount C "$GAMEDIR/drive_c" -t dir -freesize 1024
+
+            d:
+
+            cd dos
+
+            install
+
+            exit'
+        file: $GAMEDIR/setup.conf
+
+    - task:
+        config_file: $GAMEDIR/setup.conf
+        name: dosexec
+        working_dir: $GAMEDIR/drive_c
+
+
+
+    - write_file:
+        content: '[midi]
+
+          mididevice = mt32
+
+          [gus]
+
+            gus= true
+
+            ultradir = C:\ULTRASND
+
+          [mt32]
+
+            romdir = $GAMEDIR/MT32-ROMS
+
+         [cpu]
+
+            cycles = 25000
+      
+         [mouse]
+
+            capture_mouse = onstart middlerelease  
+
+            mouse_sensitivity= 10
+
+          
+          [autoexec]
+
+            imgmount D "$GAMEDIR/drive_d/CD1.iso"  "$GAMEDIR/drive_d/CD2.iso"  "$GAMEDIR/drive_d/CD3.iso" -t cdrom
+
+            mount C "$GAMEDIR/drive_c" -t dir -freesize 1024
              
             c:
 
@@ -75,21 +167,24 @@ script:
             
             ECHO  -------------------------------------------  
             
-            ECHO   1) Play        
+            ECHO   1) Play    (NB use CTRL-F4 to swap CD)
             
             ECHO   2) Setup                                
            
+            ECHO   3) Install
 
             ECHO  -------------------------------------------  
             
-            ECHO   3) exit program                             
+            ECHO   4) exit program                             
             
             ECHO  -------------------------------------------  
 
-            choice /c123 /s Which program do you want to run? [1-3]: /n 
+            choice /c1234 /s Which program do you want to run? [1-4]: /n 
             
-            if errorlevel 3 goto exit
-                      
+            if errorlevel 4 goto exit
+
+            if errorlevel 3 goto install
+
             if errorlevel 2 goto setup
             
             if errorlevel 1 goto game
@@ -100,6 +195,8 @@ script:
             cls
 
             c:
+
+            cd spycraft
 
             spydos
 
@@ -112,7 +209,22 @@ script:
 
             C:
 
+            cd spycraft
+            
             setsound
+
+            goto launcher
+
+
+          :install
+
+            cls
+
+            D:
+
+            cd dos
+
+            install
 
             goto launcher
 
@@ -121,7 +233,3 @@ script:
                       
             exit'
         file: $GAMEDIR/play.conf
-
-#    - execute:
-#        args: $GAMEDIR
-#        file: $CACHE/remove.sh

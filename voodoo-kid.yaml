@@ -1,6 +1,6 @@
 name: Voodoo Kid
 game_slug: voodoo-kid
-version: Installer
+version: Windows Installer
 slug: voodoo-kid
 runner: wine
 
@@ -8,34 +8,21 @@ runner: wine
 script:
   game:
     arch: win32
-    exe: $GAMEDIR/drive_d/voodoo95.exe
+    exe: $GAMEDIR/drive_d/VOODOO95.EXE
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Voodoo95.exe
+    - DISC1: N/A:Select Disc1 ISO.
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$1
-
-          dst=$2
-          
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          cp -avr "$src_path/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
-
     - execute:
-        args: $GAMEDIR/dirve_d
         file: mkdir
+        args: $GAMEDIR/drive_d
 
-    - execute:
-        args: $setup $GAMEDIR/drive_d
-        file: $CACHE/bulkcopy.sh
-  
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR/drive_d
+
     - execute:
         file: chmod
         args: -R 775  "$GAMEDIR/drive_d"
@@ -44,11 +31,5 @@ script:
         name: create_prefix
         install_mono: false
         install_gecko: false
-        arch: win32
         prefix: $GAMEDIR
-
-
-  wine:
-    Desktop: true
-
 

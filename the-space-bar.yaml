@@ -1,15 +1,25 @@
 name: The Space Bar
 game_slug: the-space-bar
-version: Installer
-slug:  installer
+version: Windows Installer
+slug:  the-space-bar
 runner: wine
 
 
 script:
   game:
     exe: $GAMEDIR/drive_c/thespacebar/SPACEBAR.EXE
-    arch: win32
     prefix: $GAMEDIR
+
+
+  files:
+    - DISC1: N/A:Select Disc 1 iso
+    - DISC2: N/A:Select Disc 2 iso
+    - DISC3: N/A:Select Disc 3 iso
+
+
+  install_complete_text: "Installation finished!\n\n\n\nIMPORTANT!\n============\nPlease\
+    \ change the wine version in the game\xB4s settings to \"lutris-GE-Proton 8-8\"\
+    \ ,this is last of 8 series with a working virtual desktop."
 
   installer:
     - write_file:
@@ -49,48 +59,47 @@ script:
         name: create_prefix
         install_mono: false
         install_gecko: false
-        arch: win32
         prefix: $GAMEDIR
 
     - execute:
-        file: mkdir
         args: $GAMEDIR/drive_c/thespacebar
-
-    - insert-disc:
-        description: Please insert disc 1
-        requires: DISK1
+        file: mkdir
     
+    - extract:
+        file: $DISC1 
+        dst:  $CACHE/DISC1
+
     - execute:
-        args: $DISC $GAMEDIR/drive_c/thespacebar
         file: $CACHE/selectcopy.sh
+        args: $CACHE/DISC1 $GAMEDIR/drive_c/thespacebar
 
     - execute:
+        file: chmod
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
 
-    - insert-disc:
-        description: Please insert disc 2
-        requires: DISK2
+    - extract:
+        file: $DISC2
+        dst:  $CACHE/DISC2
 
     - execute:
-        args: $DISC $GAMEDIR/drive_c/thespacebar
         file: $CACHE/selectcopy.sh
+        args: $CACHE/DISC2 $GAMEDIR/drive_c/thespacebar
 
     - execute:
+        file: chmod
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
 
-    - insert-disc:
-        description: Please insert disc 3
-        requires: DISK3
+    - extract:
+        file: $DISC3
+        dst:  $CACHE/DISC3
 
     - execute:
-        args: $DISC $GAMEDIR/drive_c/thespacebar
         file: $CACHE/selectcopy.sh
+        args: $CACHE/DISC3 $GAMEDIR/drive_c/thespacebar
 
     - execute:
+        file: chmod
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
 
   wine:
     Desktop: true
@@ -99,6 +108,3 @@ script:
   system:
     resolution:  640x480
     reset_desktop: true
-
-
-

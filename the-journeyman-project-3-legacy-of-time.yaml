@@ -1,13 +1,12 @@
 name: Journeyman Project 3
 game_slug: the-journeyman-project-3-legacy-of-time
-version: Installer
+version: Good Old Games Installer
 slug: the-journeyman-project-3-legacy-of-time
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/drive_c/GOG Games/Journeyman Project 3 - Legacy of Time/Legacy.exe
-    arch: win32
+    exe: $GAMEDIR/drive_c/GOG Games/Journeyman Project 3 - Legacy of Time/Legacy.exe
     prefix: $GAMEDIR
 
   files:
@@ -16,14 +15,12 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
     - task:
         app: corefonts
-        arch: win32
         name: winetricks
         prefix: $GAMEDIR
 
@@ -32,14 +29,9 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-    - execute:
-        args: "$GAMEDIR/dosdevices/d:" "$GAMEDIR/dosdevices/d::"
-        file: /bin/rm
 
     - execute:
-        args: -s "~/.wine/dosdevices/d:" "$GAMEDIR/drive_c/GOG Games/Journeyman Project 3 - Legacy of Time/data"
-        file: /bin/ln
+        command: 'rm -Rf "$GAMEDIR/dosdevices/d:*";
 
-  wine:
-    Desktop: true
-
+            ln -s -f -n "$GAMEDIR/drive_c/GOG Games/Journeyman Project 3 - Legacy of Time/data" "$GAMEDIR/dosdevices/d:" 
+                  '

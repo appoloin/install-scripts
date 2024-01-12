@@ -1,31 +1,39 @@
 name: Heretic-ii
 game_slug: heretic-ii
-version: Installer
+version: Windows Installer
 slug: heretic-ii
 runner: wine
 
 script:
   game:
     args: c:\\heretic2.bat
-    exe: drive_c/windows/syswow64/wineconsole.exe
+    exe: $GAMEDIR/drive_c/windows/syswow64/wineconsole.exe
     prefix: $GAMEDIR
 
-  files:
-    - dxwnd: https://freefr.dl.sourceforge.net/project/dxwnd/Latest%20build/v2_05_28_build.rar
-    - ppatch107w:  
-        url: https://drive.google.com/uc?export=download&id=1nim8Y_XEvFM7pH5p9xY9lH5NmKJZvuq6
-        filename: patch107w.7z
-    - maps: 
-        url: https://drive.google.com/uc?export=download&id=1fQvbg35j_7eOI9enFqKezIEjJRgwpXlP
-        filename: dm-maps.tar.xz
-    - scripts: 
-        url: https://drive.google.com/uc?export=download&id=1nJiNy4kx5JVomISygBKr7AlRV_T8oKVr
-        filename: scripts.7z
-   
-
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - task:
-        arch: win64
         description: Preparing Heretic II Windows CD wineprefix...
         install_gecko: false
         install_mono: false
@@ -39,8 +47,12 @@ script:
         src: $DISC/Setup/zip/h2.zip
         dst: $GAMEDIR/drive_c/Program Files (x86)/Heretic II
 
+    - execute:
+        file: $CACHE/download.sh
+        args: 1aFnFpmxU8T6IAP4kNCT2xgXU1NybxTey $CACHE/DXwND.rar
+
     - extract:
-        file: $dxwnd
+        file: $CACHE/DXwND.rar
         dst: $GAMEDIR/drive_c/dxwnd
 
     - write_config:
@@ -93,19 +105,31 @@ script:
             winver0: 0
         file: $GAMEDIR/drive_c/dxwnd/dxwnd.ini
 
-    - extract:
-        src: $maps
-        dst: $GAMEDIR/drive_c/tmp/
+    - execute:
+        file: $CACHE/download.sh
+        args: 1fQvbg35j_7eOI9enFqKezIEjJRgwpXlP $CACHE/dm-maps.tar.xz
 
     - extract:
-        src: $patch107w
+        src: $CACHE/dm-maps.tar.xz
         dst: $GAMEDIR/drive_c/tmp/
+
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1nim8Y_XEvFM7pH5p9xY9lH5NmKJZvuq6 $CACHE/patch107w.7z
+
+    - extract:
+        src: $CACHE/patch107w.7z
+        dst: $GAMEDIR/drive_c/tmp/
+
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1nJiNy4kx5JVomISygBKr7AlRV_T8oKVr $CACHE/scripts.7z
 
     - extract:
         src: $scripts
         dst: $GAMEDIR/drive_c/tmp/
-
-
     - chmodx: $GAMEDIR/drive_c/tmp/changecase.sh
     - execute:
         file: $GAMEDIR/drive_c/tmp/changecase.sh
@@ -114,7 +138,6 @@ script:
     - merge:
         src: $GAMEDIR/drive_c/tmp
         dst: $GAMEDIR/drive_c/Program Files (x86)/Heretic II
-
     - chmodx: $GAMEDIR/drive_c/tmp/h2defconf.sh
     - execute:
         file:  $GAMEDIR/drive_c/tmp/h2defconf.sh
@@ -123,11 +146,11 @@ script:
         description: 'Please choose which language you would like to install this game:'
         id: LANG
         options:
-        - keep: I prefer to use default install language
-        - french: French
-        - german: German
-        - italian: Italian
-        - spanish: Spanish
+          - keep: I prefer to use default install language
+          - french: French
+          - german: German
+          - italian: Italian
+          - spanish: Spanish
         preselect: keep
 
     - chmodx: $GAMEDIR/drive_c/tmp/h2local.sh
@@ -166,7 +189,6 @@ script:
         dst: $GAMEDIR/drive_c/Program Files (x86)/Heretic II/gamepad profiles
     
     - task:
-        arch: win64
         key: csmt
         name: set_regedit
         path: HKEY_CURRENT_USER\Software\Wine\Direct3D\
@@ -179,7 +201,6 @@ script:
         dst: $GAMEDIR/drive_c/
     
     - task:
-        arch: win64
         key: wallpaper
         name: set_regedit
         path: HKEY_CURRENT_USER\Control Panel\Desktop\
@@ -188,7 +209,6 @@ script:
         value: c:\\heretic2.bmp
     
     - task:
-        arch: win64
         key: background
         name: set_regedit
         path: HKEY_CURRENT_USER\Control Panel\Colors\
@@ -197,7 +217,6 @@ script:
         value: 0 0 0
     
     - task:
-        arch: win64
         key: ActiveTitle
         name: set_regedit
         path: HKEY_CURRENT_USER\Control Panel\Colors\
@@ -206,7 +225,6 @@ script:
         value: 0 0 0
     
     - task:
-        arch: win64
         key: GradientActiveTitle
         name: set_regedit
         path: HKEY_CURRENT_USER\Control Panel\Colors\
@@ -218,6 +236,3 @@ script:
         file: rm 
         args: -r $GAMEDIR/drive_c/tmp
 
-
-  wine:
-    Desktop: true

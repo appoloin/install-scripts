@@ -1,6 +1,6 @@
 name: Unreal Gold
 game_slug: unreal-gold
-version: Installer
+version: Good Old Games Installer
 slug: unreal-gold
 runner: wine
 
@@ -23,8 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-

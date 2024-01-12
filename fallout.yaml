@@ -1,12 +1,12 @@
 name: Fallout
 game_slug: fallout
-version: Installer
+version: Good Old Games Installer
 slug: fallout
 runner: wine
 
 script:
   game:
-    exe: drive_c/GOG Games/Fallout/falloutw.exe
+    exe:  $GAMEDIR/drive_c/GOG Games/Fallout/falloutw.exe
     prefix: $GAMEDIR
 
   files:
@@ -22,7 +22,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-

@@ -1,12 +1,12 @@
 name: Grand Theft Auto
 game_slug: grand-theft-auto
-version: Installer
-slug: installer
+version: Windows Installer
+slug: grand-theft-auto
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/Rockstar Games/GTA2/gta2.exe
+    exe: "$GAMEDIR/drive_c/Program Files/Rockstar Games/Grand Theft Auto/WINO/Grand Theft Auto.exe"
     arch: win32
     prefix: $GAMEDIR
 
@@ -15,6 +15,28 @@ script:
 
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - task:
         name: create_prefix
         arch: win32
@@ -23,12 +45,40 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        executable: $setup
-        arch: win32
-        name: wineexec
+        app: mfc42
+        name: winetricks
         prefix: $GAMEDIR
 
+    - extract:
+        file: $setup
+        dst:  $CACHE
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6 $CACHE/GTA1.WidescreenFix.zip
+
+    - task:
+        args: /desktop=GTA1,1024x780 '$CACHE/SETUP.EXE'
+        description: Installing GTA...
+        executable: $GAMEDIR/drive_c/windows/explorer.exe
+        include_processes: explorer.exe
+        name: wineexec
+
+    - task:
+        args: /desktop=GTA1,1024x780 '$GAMEDIR/drive_c/Program Files/Rockstar Games/Grand Theft Auto/GTA Settings.exe'
+        description: Settings
+        executable: $GAMEDIR/drive_c/windows/explorer.exe
+        include_processes: explorer.exe
+        name: wineexec
+
+    - extract:
+        file: $CACHE/GTA1.WidescreenFix.zip
+        dst:  $GAMEDIR/drive_c/Program Files/Rockstar Games/Grand Theft Auto/
+
   wine:
-    Desktop: true
-
-
+    dgvoodoo2: true
+    overrides:
+      ddraw: native
+      d3d8: native
+      d3d9: native
+      winmm: native

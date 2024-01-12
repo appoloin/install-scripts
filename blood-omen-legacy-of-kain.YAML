@@ -1,6 +1,6 @@
 name: Blood Omen Legacy of Kain
 game_slug: blood-omen-legacy-of-kain
-version: Installer
+version: Windows Installer
 slug: blood-omen-legacy-of-kain
 runner: wine
 
@@ -25,6 +25,12 @@ script:
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
+        
+    - task:
+        app: mfc42
+        name: winetricks
+        prefix: $GAMEDIR
+
 
     - task:
         description: Installing Legacy of Kain
@@ -32,9 +38,7 @@ script:
         name: wineexec
         return_code: 256
 
-
   wine:
-    Desktop: true
     overrides:
         ddraw.dll: n,b
 

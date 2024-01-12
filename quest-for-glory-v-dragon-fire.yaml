@@ -1,6 +1,6 @@
 name: Quest for Glory 5 - Dragon Fire
 game_slug: quest-for-glory-v-dragon-fire
-version: Installer
+version: Good Old Games Installer
 slug: quest-for-glory-v-dragon-fire
 runner: wine
 
@@ -23,8 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

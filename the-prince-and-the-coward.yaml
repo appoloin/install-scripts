@@ -1,6 +1,6 @@
 name: The Prince and the Coward
 game_slug: the-prince-and-the-coward
-version: Installer
+version: Good Old Games Installer
 slug:  the-prince-and-the-coward
 runner: scummvm
 
@@ -39,8 +39,8 @@ script:
         description: Extracting game files
 
     - execute:
-        args: $GAMEDIR
         file: $CACHE/remove.sh
+        args: $GAMEDIR
 
   scummvm:
     fullscreen: true

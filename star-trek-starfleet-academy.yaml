@@ -1,6 +1,6 @@
 name: Star Trek - Starfleet Academy
 game_slug: star-trek-starfleet-academy
-version: Installer
+version: Good Old Games Installer
 slug: star-trek-starfleet-academy
 runner: wine
  
@@ -23,7 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 

@@ -1,7 +1,7 @@
 name: Fantasy World Dizzy 
 game_slug: fantasy-world-dizzy
 version: DOS
-slug: fantasy-world-dizzy-installer
+slug: fantasy-world-dizzy
 runner: dosbox
 
 
@@ -14,12 +14,12 @@ script:
 
   installer:
     - execute:
-        args: $GAMEDIR/drive_c $GAMEDIR/drive_c/fwdizzy
         file: mkdir
+        args: $GAMEDIR/drive_c $GAMEDIR/drive_c/fwdizzy
 
     - copy:
-        dst: $GAMEDIR/drive_c/fwdizzy
         src: $game
+        dst: $GAMEDIR/drive_c/fwdizzy
 
     - write_file:
         content: '[autoexec]
@@ -29,6 +29,8 @@ script:
           C:
 
           cd fwdizzy
+          
+          autotype -w 1.5  1 enter p
           
           FANTASY.EXE
           

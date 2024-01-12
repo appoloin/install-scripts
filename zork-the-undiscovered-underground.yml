@@ -21,7 +21,7 @@ script:
 
           dst=$2
 
-          find "$src_path" -type f \( -iname "ztuu.*"  \) -exec cp {} "$dst" \;'
+          find "$src" -type f \( -iname "ztuu.*"  \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
     - chmodx: $CACHE/selectcopy.sh
 
@@ -32,3 +32,6 @@ script:
     - execute:
         file: chmod
         args: -R 775  "$GAMEDIR"
+        
+  scummvm:
+    fullscreen: false

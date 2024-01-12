@@ -1,6 +1,6 @@
 name:  Rayman Forever
 game_slug: rayman-forever
-version: Installer
+version: Good Old Games Installer
 slug: rayman-forever
 runner: dosbox
 

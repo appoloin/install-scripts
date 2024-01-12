@@ -1,136 +1,152 @@
 name: The Feeble Files 
 game_slug: the-feeble-files
-version: Installer
+version: Windows Installer
 slug:  the-feeble-files
 runner: scummvm
 
 
  
 script:
-    game:
-        game_id: feeble  
-        path: $GAMEDIR
+  game:
+    game_id: feeble  
+    path: $GAMEDIR
 
-    files:
-        - DISC: N/A:Select SETUP.exe from Disc 1
-        - DISC2: N/A:Select Voices.wav from Disc 2
-        - DISC3: N/A:Select Voices.wav from Disc 3
-        - DISC4: N/A:Select Voices.wav from Disc 4
+  files:
+    - DISC1: N/A:Select Disc 1 iso
+    - DISC2: N/A:Select Disc 2 iso
+    - DISC3: N/A:Select Disc 3 iso
+    - DISC4: N/A:Select Disc 4 iso
 
 
-    installer:
-        - write_file:
-            content: '#!/bin/bash
+  installer:
+    - write_file:
+        content: '#!/bin/bash
 
-                src="$1"
+            src="$(echo "$1" | sed -r "s/(.+)\/.+/\1/")"
 
-                dst="$2"
-                
-                src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-                find "$src_path" -type f \( -iname "*.SMK" -o 
-                                            -iname "*.VGA" -o 
-                                            -iname "TABLES*" \) -exec cp {} "$dst" \;'
-            file: $CACHE/selectcopy.sh
-        - chmodx: $CACHE/selectcopy.sh
-
-        - write_file:
-            content: '#!/bin/bash
-
-                src="$1"
-
-                scr_file="S2"
-
-                dst="$3"
-
-                dst_file="$4"
-
-                src_path=$(echo "$src" | sed -r "s/(.+)\/.+/\1/")
-
-                find "$src_path" -type f \( -iname "scr_file" \) -exec cp {} "$dst/$dst_file" \;'
-            file: $CACHE/copy&rename.sh
-        - chmodx: $CACHE/copy&rename.sh
-
-        - write_file:
-            content: '#!/bin/bash
-
-                src=$1
-                
-                find "$src" -maxdepth 1 -type d \( -iname drive_c -o
-                                                -iname dosdevices \) -exec rm -r {}  \;
-                                                
-                find "$src" -maxdepth 1 -type f \( -iname "system.reg" -o
-                                                -iname "user.reg" -o 
-                                                -iname "userdef.reg" \) -exec rm {}  \;'
-            file: $CACHE/remove.sh
-        - chmodx: $CACHE/remove.sh
-
-        - execute:
-            args: $DISC Voices.wav $GAMEDIR Voices1.wav
-            file: $CACHE/copy&rename.sh             
-        - execute:
-            args: $DISC $GAMEDIR
-            file: $CACHE/selectcopy.sh  
-        - execute:
-            args: -R 775  $GAMEDIR
-            file: /bin/chmod      
-        - execute:
-            args: $DISC2 Voices.wav $GAMEDIR Voices2.wav
-            file: $CACHE/copy&rename.sh             
-        - execute:
-            args: $DISC2 $GAMEDIR
-            file: $CACHE/selectcopy.sh
-        - execute:
-            args: -R 775  $GAMEDIR
-            file: /bin/chmod
-        - execute:
-            args: $DISC3 Voices.wav $GAMEDIR Voices3.wav
-            file: $CACHE/copy&rename.sh             
-        - execute:
-            args: $DISC3 $GAMEDIR
-            file: $CACHE/selectcopy.sh
-        - execute:
-            args: -R 775  $GAMEDIR
-            file: /bin/chmod
-        - execute:
-            args: $DISC4 Voices.wav $GAMEDIR Voices4.wav
-            file: $CACHE/copy&rename.sh             
-        - execute:
-            args: $DISC4 $GAMEDIR
-            file: $CACHE/selectcopy.sh
-        - execute:
-            args: -R 775  $GAMEDIR
-            file: /bin/chmod
-
-        - task:
-            name: wine.create_prefix
-            arch: win32
-            install_mono: false
-            install_gecko: false
-            prefix: $GAMEDIR
-
-        - task:
-            name: wine.wineexec
-            executable: $DISC
-            arch: win32
-            prefix: $GAMEDIR
-
-        - execute:
-            args: "'$GAMEDIR/drive_c/Program Files/AdventureSoft (UK) Ltd/The Feeble Files' '$GAMEDIR'"
-            file: $CACHE/selectcopy.sh
+            dst="$2"
             
-        - copy:
-            dst: $GAMEDIR
-            src: $GAMEDIR/drive_c/Program Files/AdventureSoft (UK) Ltd/The Feeble Files/TBLLIST
+            find "$src" -type f \( -iname "*.SMK" -o 
+                                   -iname "*.VGA" -o 
+                                   -iname "TABLES*" \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+    - chmodx: $CACHE/selectcopy.sh
 
-        - copy:
-            dst: $GAMEDIR
-            src: $GAMEDIR/drive_c/Program Files/AdventureSoft (UK) Ltd/The Feeble Files/GAME22
+    - write_file:
+        content: '#!/bin/bash
 
-        - copy:
-            dst: $GAMEDIR
-            src: $GAMEDIR/drive_c/Program Files/AdventureSoft (UK) Ltd/The Feeble Files/save.999
+            src="$1"
 
-        - execute:
-            args: $GAMEDIR
-            file: $CACHE/remove.sh
+            scr_file="$2"
+
+            dst_path="$3"
+
+            dst_file="$4"
+
+            dst=$dst_path"/"$dst_file
+
+            find "$src" -type f \( -iname "$scr_file" \) -exec cp {} "$dst" \;'
+        file: $CACHE/copy&rename.sh
+    - chmodx: $CACHE/copy&rename.sh
+
+    - write_file:
+        content: '#!/bin/bash
+
+            src=$1
+            
+            find "$src" -maxdepth 1 -type d \( -iname drive_c -o
+                                            -iname dosdevices \) -exec rm -r {}  \;
+                                            
+            find "$src" -maxdepth 1 -type f \( -iname "system.reg" -o
+                                            -iname "user.reg" -o 
+                                            -iname "userdef.reg" \) -exec rm {}  \;'
+        file: $CACHE/remove.sh
+    - chmodx: $CACHE/remove.sh
+
+    - extract:
+        file: $DISC1 
+        dst:  $CACHE/DISC1
+    - execute:
+        file: $CACHE/copy&rename.sh             
+        args: $CACHE/DISC1 Voices.wav $GAMEDIR Voices1.wav
+    - execute:
+        file: $CACHE/selectcopy.sh  
+        args: $CACHE/DISC1 $GAMEDIR
+    - execute:
+        file: chmod      
+        args: -R 775  $GAMEDIR
+
+    - extract:
+        file: $DISC2
+        dst:  $CACHE/DISC2  
+    - execute:
+        file: $CACHE/copy&rename.sh             
+        args: $CACHE/DISC2 Voices.wav $GAMEDIR Voices2.wav
+    - execute:
+        file: $CACHE/selectcopy.sh
+        args: $CACHE/DISC2 $GAMEDIR
+    - execute:
+        file: chmod
+        args: -R 775  $GAMEDIR
+
+    - extract:
+        file: $DISC3
+        dst:  $CACHE/DISC3      
+    - execute:
+        file: $CACHE/copy&rename.sh             
+        args: $CACHE/DISC3  Voices.wav $GAMEDIR Voices3.wav
+    - execute:
+        file: $CACHE/selectcopy.sh
+        args: $CACHE/DISC3 $GAMEDIR
+    - execute:
+        file: chmod
+        args: -R 775  $GAMEDIR
+
+    - extract:
+        file: $DISC4
+        dst:  $CACHE/DISC4     
+    - execute:
+        file: $CACHE/copy&rename.sh             
+        args: $CACHE/DISC4  Voices.wav $GAMEDIR Voices4.wav
+    - execute:
+        file: $CACHE/selectcopy.sh
+        args: $CACHE/DISC4 $GAMEDIR
+    - execute:
+        file: chmod
+        args: -R 775  $GAMEDIR
+
+    - task:
+        name: wine.create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        name: wine.wineexec
+        executable: $CACHE/DISC1/SETUP.EXE
+        arch: win32
+        prefix: $GAMEDIR
+
+    - execute:
+        file: $CACHE/selectcopy.sh
+        args: "'$GAMEDIR/drive_c/Program Files/AdventureSoft (UK) Ltd/The Feeble Files' '$GAMEDIR'"
+          
+    - copy:
+        src: $GAMEDIR/drive_c/Program Files/AdventureSoft (UK) Ltd/The Feeble Files/TBLLIST
+        dst: $GAMEDIR
+
+    - copy:
+        src: $GAMEDIR/drive_c/Program Files/AdventureSoft (UK) Ltd/The Feeble Files/GAME22
+        dst: $GAMEDIR
+
+    - copy:
+        src: $GAMEDIR/drive_c/Program Files/AdventureSoft (UK) Ltd/The Feeble Files/save.999
+        dst: $GAMEDIR
+
+    - execute:
+        file: $CACHE/remove.sh
+        args: $GAMEDIR
+
+  scummvm:
+    fullscreen: true

@@ -1,12 +1,12 @@
 name: Worms 2 - Armageddon
 game_slug: worms-2-armageddon
-version: Installer
+version: Good Old Games Installer
 slug: worms-2-armageddon
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Worms Armageddon/WA.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Worms 2/frontend.exe
     prefix: $GAMEDIR
 
   files:
@@ -23,7 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 
