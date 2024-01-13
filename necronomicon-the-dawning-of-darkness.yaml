@@ -1,13 +1,12 @@
 name: Necronmicon - The Dawning of Darkness
 game_slug: necronomicon-the-dawning-of-darkness
-version: Installer
+version: Good Old Games Installer
 slug: necronomicon-the-dawning-of-darkness
 runner: wine
 
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Necronomicon/Necrono.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -16,7 +15,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
@@ -26,6 +24,3 @@ script:
         name: wineexec
         prefix: $GAMEDIR
  
-  wine:
-    Desktop: true
-    

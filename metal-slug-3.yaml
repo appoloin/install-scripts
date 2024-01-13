@@ -1,13 +1,12 @@
 name: Metal Slug - 3
 game_slug: metal-slug-3
-version: Installer
-slug: virtumetal-slug-3averse
+version: Good Old Games Installer
+slug: metal-slug-3
 runner: wine
 
 script:
   game: 
     exe: $GAMEDIR/drive_c/GOG Games/Metal Slug 3/mslug3.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -18,15 +17,10 @@ script:
         name: create_prefix
         install_mono: false
         install_gecko: false
-        arch: win32
         prefix: $GAMEDIR
 
     - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

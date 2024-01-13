@@ -1,12 +1,12 @@
 name: Might and Magic VII - For Blood and Honor
 game_slug: might-and-magic-vii-for-blood-and-honor
-version: Installer
+version: Good Old Games Installer
 slug: might-and-magic-vii-for-blood-and-honor
 runner: wine
 
 script:
   game: 
-    exe: $GAMEDIR/drive_c/Program Files/GOG.com/Might and Magic VII/MM7.exe
+    exe: $GAMEDIR/drive_c/Program Files (x86)/GOG.com/Might and Magic VII/MM7.exe
     prefix: $GAMEDIR
 
   files:
@@ -23,8 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

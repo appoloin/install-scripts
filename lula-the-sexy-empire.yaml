@@ -11,7 +11,7 @@ script:
 
   files:
     - setup: N/A:Select the Setup file
-    
+  
   installer:
     - task:
         name: create_prefix
@@ -19,13 +19,13 @@ script:
         install_gecko: false
         prefix: $GAMEDIR
 
-  #  - task:
-  #      app: icodecs quartz
-  #      name: winetricks
-  #      prefix: $GAMEDIR
-
     - task:
         executable: $setup
         name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        app: icodecs quartz
+        name: winetricks
         prefix: $GAMEDIR
 

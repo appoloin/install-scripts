@@ -1,7 +1,7 @@
 name: Hitman - Codename 47
 game_slug: hitman-codename-47
-version: Installer
-slug: installer
+version: Good Old Gams Installer
+slug: hitman-codename-47
 runner: wine
 
 script:
@@ -19,11 +19,14 @@ script:
         install_gecko: false
         prefix: $GAMEDIR
 
+    - task: 
+        app: directmusic
+        name: winetricks
+        prefix: $GAMEDIR
+
+
     - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
 
-
-  wine:
-    Desktop: true

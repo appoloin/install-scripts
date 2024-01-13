@@ -1,12 +1,12 @@
 name: Unreal - Tournament 2003
 game_slug: unreal-tournament-2003
-version: Installer
+version: Good Old Games Installer
 slug: unreal-tournament-2003
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Unreal Tournament 2004/System/UT2004.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Unreal Tournament GOTY/System/UnrealTournament.exe
     prefix: $GAMEDIR
 
   files:
@@ -23,8 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-

@@ -1,6 +1,6 @@
 name: Shadow Ma
 game_slug: shadow-man
-version: Installer
+version: Good Old Games Installer
 slug: shadow-man
 runner: wine
 
@@ -23,8 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

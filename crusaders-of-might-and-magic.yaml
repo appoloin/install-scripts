@@ -1,30 +1,26 @@
 name: Crusader of Might and Magic
 game_slug: crusaders-of-might-and-magic
-version: Installer
+version: Good Old Games Installer
 slug:  crusaders-of-might-and-magic
 runner: wine
 
 script:
-    game:
-        exe: drive_c/GOG Games/Crusaders of Might and Magic/crusaders.exe
-        arch: win32
+  game:
+    exe: drive_c/GOG Games/Crusaders of Might and Magic/crusaders.exe
+    prefix: $GAMEDIR
+
+  files:
+    - game: N/A:Select Setup.exe
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
-    files:
-        - game: N/A:Select Setup.exe
+    - task:
+        executable: $game
+        name: wineexec
+        prefix: $GAMEDIR
 
-    installer:
-        - task:
-            name: create_prefix
-            arch: win32
-            install_mono: false
-            install_gecko: false
-            prefix: $GAMEDIR
-
-        - task:
-            executable: $game
-            name: wineexec
-            prefix: $GAMEDIR
-
-    wine:
-        Desktop: true

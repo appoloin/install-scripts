@@ -1,6 +1,6 @@
 name: Simcity 3000
 game_slug: simcity-3000
-version: Installer
+version: Good Old Games Installer
 slug: simcity-3000
 runner: wine
 
@@ -23,8 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-

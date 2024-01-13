@@ -1,6 +1,6 @@
 name: Commandos - Beyond the Call of Duty
 game_slug: commandos-beyond-the-call-of-duty
-version: Installer
+version: Good Old Games Installer
 slug: commandos-beyond-the-call-of-duty
 runner: wine
 
@@ -18,14 +18,12 @@ script:
         name: create_prefix
         arch: win32
         install_mono: false
+        install_gecko: false 
         prefix: $GAMEDIR
 
     - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 
 

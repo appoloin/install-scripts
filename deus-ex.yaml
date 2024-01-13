@@ -1,6 +1,6 @@
 name: Deus Ex
 game_slug:  deus-ex
-version: Installer
+version: Good Old Games Installer
 slug:  deus-ex
 runner: wine
 
@@ -8,18 +8,37 @@ runner: wine
 script:
   game:
     exe: drive_c/GOG Games/Deus Ex GOTY/System/DeusEx.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select the Setup file
-    - d3d9renderer: https://lutris.net/files/games/deus-ex/dxd3d9r13.zip
 
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
@@ -35,9 +54,13 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+    - execute:
+        file: $CACHE/download.sh
+        args: 1qELSwKSpRt4R42MTRygXLjckzfVGRFJ2 $CACHE/dxd3d9r13.zip
+
     - extract:
+        file: $CACHE/dxd3d9r13.zip
         dst: $GAMEDIR/drive_c/GOG Games/Deus Ex GOTY/System/
-        file: d3d9renderer
 
     - write_config:
         file: $GAMEDIR/drive_c/GOG Games/Deus Ex GOTY/System/DeusEx.ini
@@ -66,8 +89,6 @@ script:
         section: WinDrv.WindowsClient
         value: $RESOLUTION_HEIGHT
 
-  wine:
-    Desktop: true
 
   system:
     single_cpu: true

@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Worms 2/frontend.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Worms Armageddon/WA.exe
     prefix: $GAMEDIR
 
   files:

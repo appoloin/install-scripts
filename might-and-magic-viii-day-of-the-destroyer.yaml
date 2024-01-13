@@ -1,13 +1,12 @@
 name: Might and Magic VIII - Day of the Destroyer
 game_slug: might-and-magic-viii-day-of-the-destroyer
-version: Installer
+version: Good Old Games Installer
 slug: might-and-magic-viii-day-of-the-destroyer
 runner: wine
 
 script:
   game: 
     exe: $GAMEDIR/drive_c/GOG Games/Might and Magic 8/MM8.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -18,15 +17,9 @@ script:
         name: create_prefix
         install_mono: false
         install_gecko: false
-        arch: win32
         prefix: $GAMEDIR
 
     - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-

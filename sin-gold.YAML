@@ -1,7 +1,7 @@
 name: SiN Gold
 game_slug: sin-gold
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: sin-gold
 runner: wine
 
 script:

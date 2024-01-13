@@ -1,14 +1,13 @@
 name:  Freespace 2
 game_slug: freespace-2
-version: Installer
-slug: Freespace-2-installer
+version: Good Old Games Installer
+slug: freespace-2
 runner: wine
 
 
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Freespace 2/FreeSpace2.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -17,15 +16,11 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
     - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-

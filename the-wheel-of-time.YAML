@@ -1,6 +1,6 @@
 name: The Wheel of Time
 game_slug: the-wheel-of-time
-version: Installer
+version: Good Old Games Installer
 slug: the-wheel-of-time
 runner: wine
 
@@ -26,6 +26,5 @@ script:
         prefix: $GAMEDIR
 
   wine:
-    Desktop: true
     esync: false
-
+    fsync: false
