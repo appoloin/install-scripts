@@ -1,0 +1,25 @@
+name: Desperados - Wanted Dead or Alive
+game_slug: desperados-wanted-dead-or-alive
+version: Good Old Games Installer
+slug: desperados-wanted-dead-or-alive
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Desperados Wanted Dead or Alive/desperados.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
