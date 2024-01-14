@@ -1,7 +1,7 @@
 name: Metal Gear Solid 2 - Substance
 game_slug: metal-gear-solid-2-substance
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: metal-gear-solid-2-substance
 runner: wine
 
 script:
@@ -46,7 +46,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: directmusic dsdmo 
+        app: directmusic dsdmo dsound quartz directshow
         description: Install components with Winetricks
         name: winetricks
 
@@ -65,6 +65,5 @@ script:
       d3d8.dll: n,b
       d3d9.dll: n,b
       dsound_x64.dll: n,b
-    Desktop: true
 
 

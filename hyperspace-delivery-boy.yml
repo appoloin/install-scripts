@@ -1,32 +1,33 @@
 name: Hyperspace Delivery Boy
 game_slug: hyperspace-delivery-boy
-version: Installer
+version: Windows Installer
 slug: hyperspace-delivery-boy
 runner: scummvm
 
 
 script:
-    files:
+  files:
     - game:  N/A:Select the file hyperspace.mpc
 
-    game:
-        game_id: HDB
-        path: $GAMEDIR
+  game:
+    game_id: HDB
+    path: $GAMEDIR
 
-    installer:
+  installer:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        dst=$2
-        
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-        cp -avr "$src_path/."  "$dst"'
+          dst=$2
+          
+          cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy.sh
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
         file: $CACHE/bulkcopy.sh
         args: $game $GAMEDIR
+
+  scummvm:
+      fullscreen: true

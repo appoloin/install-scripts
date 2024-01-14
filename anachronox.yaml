@@ -1,7 +1,7 @@
 name: Anachronox
 game_slug: anachronox
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: anachronox
 runner: wine
  
 script:
@@ -23,7 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-

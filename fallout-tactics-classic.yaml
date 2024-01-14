@@ -1,7 +1,7 @@
 name: Fallout Tactics
 game_slug: fallout-tactics-classic
-version: Installer
-slug: fallout
+version: Good Old Games Installer
+slug: fallout-tactics-classic
 runner: wine
 
 script:
@@ -22,7 +22,12 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
+        
   wine:
-    Desktop: true
+    dgvoodoo2: true
+    overrides:
+      ddraw: native
+      d3d8: native
+      d3d9: native
+      D3DImm: native
 

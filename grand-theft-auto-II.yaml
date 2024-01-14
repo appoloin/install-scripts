@@ -1,7 +1,7 @@
 name: Grand Theft Auto 2
 game_slug: grand-theft-auto-2
-version: Installer
-slug: installer
+version: Windows Installer
+slug: grand-theft-auto-2
 runner: wine
 
 script:
@@ -34,8 +34,3 @@ script:
         arch: win32
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-

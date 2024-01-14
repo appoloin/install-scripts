@@ -1,6 +1,6 @@
 name: Icewind Dale II
 game_slug: icewind-dale-ii
-version: Installer
+version: Good Old  Games Installer
 slug: icewind-dale-ii
 runner: wine
 
@@ -23,8 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

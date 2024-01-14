@@ -1,6 +1,6 @@
 name: Tony Tough and the Night of Roasted Moths
 game_slug: tony-tough-and-the-night-of-roasted-moths
-version: Installer
+version: Windows Installer
 slug:  tony-tough-and-the-night-of-roasted-moths
 runner: scummvm
 
@@ -16,18 +16,17 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
           dst=$2
-          
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          cp -avr "$src_path/."  "$dst"'
+        
+          cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy.sh
-
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
         file: $CACHE/bulkcopy.sh
         args: $game $GAMEDIR
 
+  scummvm:
+      fullscreen: true

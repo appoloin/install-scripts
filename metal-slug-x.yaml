@@ -1,13 +1,12 @@
 name: Metal Slug - X
 game_slug: metal-slug-x
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: metal-slug-x
 runner: wine
 
 script:
   game: 
     exe: $GAMEDIR/drive_c/GOG Games/Metal Slug X/mslugx.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -18,15 +17,9 @@ script:
         name: create_prefix
         install_mono: false
         install_gecko: false
-        arch: win32
         prefix: $GAMEDIR
 
     - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-

@@ -1,6 +1,6 @@
-name: Star Trek Fleet Command III
+name: Star Trek - Fleet Command III
 game_slug: star-trek-fleet-command-iii
-version: Installer
+version: Good Old Games Installer
 slug: star-trek-fleet-command-iii
 runner: wine
  
@@ -23,7 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-

@@ -1,13 +1,12 @@
 name: Dungeon Siege
 game_slug: dungeon-siege
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: dungeon-siege
 runner: wine
 
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Dungeon Siege/DungeonSiege.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -16,7 +15,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
@@ -42,8 +40,6 @@ script:
 
   wine:
     dgvoodoo2: true
-    Desktop: true
-    dxvk: true
     overrides:
       ddraw: native
       d3d8: native

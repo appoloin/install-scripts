@@ -1,7 +1,7 @@
 name: Enclave
 game_slug: enclave
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: enclave
 runner: wine
 
 script:

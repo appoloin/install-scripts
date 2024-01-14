@@ -1,7 +1,7 @@
 name: Harry Potter and the Philosophers Stone
 game_slug: harry-potter-and-the-philosophers-stone
-version: Installer
-slug: installer
+version: Windows Installer
+slug: harry-potter-and-the-philosophers-stone
 runner: wine
  
 script:
@@ -11,11 +11,30 @@ script:
 
   files:
     - setup: N/A:Select the installer
-    - patch:  
-        url: https://drive.google.com/uc?export=download&id=1OWbBAR6WAt6_b3MNSDkcmDFXBmeDCqC8
-        filename: patch.7z
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - task:
         name: create_prefix
         install_mono: false
@@ -28,8 +47,12 @@ script:
         prefix: $GAMEDIR
 
     - execute:
+        file: $CACHE/download.sh
+        args: 1OWbBAR6WAt6_b3MNSDkcmDFXBmeDCqC8 $CACHE/patch.7z
+
+    - execute:
         file: 7z
-        args: e $patch -o"$GAMEDIR/drive_c/Program Files (x86)/EA Games/Harry Potter/System/" -ppassword -y
+        args: e $CACHE/patch.7z -o"$GAMEDIR/drive_c/Program Files (x86)/EA Games/Harry Potter/System/" -ppassword -y
 
   wine:
     Desktop: true

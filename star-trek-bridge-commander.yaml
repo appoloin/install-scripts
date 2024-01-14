@@ -1,12 +1,12 @@
 name: Star Trek - Bridge Commander
 game_slug: star-trek-bridge-commander
-version: Installer
+version: Good Old Games Installer
 slug: star-trek-bridge-commander
 runner: wine
  
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Star Trek - Starfleet Command/Starfleet.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Star Trek Bridge Commander/stbc.exe
     prefix: $GAMEDIR
 
   files:
@@ -23,7 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-

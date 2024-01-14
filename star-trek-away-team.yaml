@@ -1,13 +1,12 @@
 name: Star Trek - Away Team
 game_slug: star-trek-away-team
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: star-trek-away-team
 runner: wine
 
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Star Trek Away Team/Star Trek.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -16,7 +15,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
@@ -26,6 +24,3 @@ script:
         name: wineexec
         prefix: $GAMEDIR
  
-  wine:
-    Desktop: true
-    

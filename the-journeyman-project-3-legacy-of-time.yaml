@@ -12,6 +12,7 @@ script:
   files:
     - setup: N/A:Select Setup
 
+
   installer:
     - task:
         name: create_prefix
@@ -29,9 +30,18 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-
     - execute:
-        command: 'rm -Rf "$GAMEDIR/dosdevices/d:*";
+        command: 'rm -Rf "$GAMEDIR/dosdevices/d:";
+
+            rm -Rf "$GAMEDIR/dosdevices/d::";
 
             ln -s -f -n "$GAMEDIR/drive_c/GOG Games/Journeyman Project 3 - Legacy of Time/data" "$GAMEDIR/dosdevices/d:" 
-                  '
+            '
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+    ddraw: native
+    d3d8: native
+    d3d9: native
+    D3DImm: native
