@@ -1,6 +1,6 @@
 name: The Lord of the Rings - The Return of the King
 game_slug: the-lord-of-the-rings-the-return-of-the-king
-version: Installer
+version: Windows Installer
 slug: the-lord-of-the-rings-the-return-of-the-king
 runner: wine
 
@@ -33,10 +33,8 @@ script:
 
 
   wine:
-    Desktop: true
     dgvoodoo2: true
     overrides:
-      d3d8: native
       d3d9: native
 
 

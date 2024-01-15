@@ -1,7 +1,7 @@
 name: Unreal 2 - The Awakening
 game_slug: unreal-2-the-awakening-special-edition
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: unreal-2-the-awakening-special-edition
 runner: wine
 
 script:
@@ -23,8 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-

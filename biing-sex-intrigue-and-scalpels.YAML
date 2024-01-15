@@ -53,7 +53,9 @@ script:
 
            mouse_sensitivity= 30
 
-           capture_mouse=onclick middlerelease
+           mouse_capture=onclick   
+            
+            mouse_middle_release=true 
 
           [sdl]
 

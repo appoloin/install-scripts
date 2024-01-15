@@ -54,7 +54,9 @@ script:
 
           output=opengl
 
-          capture_mouse = onstart middlerelease
+          mouse_capture = onstart   
+            
+            mouse_middle_release=true 
 
         [render]
 

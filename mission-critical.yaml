@@ -10,56 +10,70 @@ script:
     main_file: $GAMEDIR/play.conf
 
   files:
-    - GUS: 
-        url: https://drive.google.com/uc?export=download&id=1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6
-        filename: gus.zip
+    - DISC1: N/A:Select Disc1 ISO
+    - DISC2: N/A:Select Disc2 ISO
+    - DISC3: N/A:Select Disc3 ISO
 
   installer:
     - write_file:
         content: '#!/bin/bash
 
-            src=$1
+          fileID=$1
 
-            dst=$2
+          output=$2
         
-            cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy-alt.sh
-    - chmodx: $CACHE/bulkcopy-alt.sh
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
 
     - execute:
         file: mkdir
         args: $GAMEDIR/drive_c $GAMEDIR/drive_d
 
+    - execute:
+        file: $CACHE/download.sh
+        args: 1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6 $CACHE/gus.zip
+
     - extract:
-        file: $GUS
+        file: $CACHE/gus.zip
         dst: $GAMEDIR/drive_c/ULTRASND
 
-    - insert-disc:
-        description: Please insert disc 1
-        requires: MISSION  
     - execute:
-        file: $CACHE/bulkcopy-alt.sh
-        args: $DISC $GAMEDIR/drive_d
+        file: $CACHE/download.sh
+        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
+
+    - extract:
+        file: $CACHE/MT32-ROMS.7z
+        dst:  $GAMEDIR/MT32-ROMS
+
+    - extract:
+        file: $DISC1 
+        dst:  "$GAMEDIR/drive_d"
     - execute:
         file: chmod
         args: -R 775  $GAMEDIR/drive_d"
 
-    - insert-disc:
-        description: Please insert disc 2
-        requires: MISSION   
-    - execute:
-        file: $CACHE/bulkcopy-alt.sh
-        args: $DISC $GAMEDIR/drive_d
+    - extract:
+        file: $DISC2 
+        dst:  "$GAMEDIR/drive_d"
     - execute:
         file: chmod
         args: -R 775  $GAMEDIR/drive_d"
 
-    - insert-disc:
-        description: Please insert disc 3
-        requires: MISSION
-    - execute:
-        file: $CACHE/bulkcopy-alt.sh
-        args: $DISC $GAMEDIR/drive_d
+    - extract:
+        file: $DISC3 
+        dst:  "$GAMEDIR/drive_d"
     - execute:
         file: chmod
         args: -R 775  "$GAMEDIR/drive_d"
@@ -74,10 +88,16 @@ script:
             gus= true
 
             ultradir = C:\ULTRASND
-   
+          
+          [mt32]
+
+          romdir = $GAMEDIR/MT32-ROMS
+
           [mouse]
 
-            capture_mouse = onstart middlerelease  
+            mouse_capture = onstart   
+            
+            mouse_middle_release=true   
 
             mouse_sensitivity= 15
 
@@ -110,9 +130,15 @@ script:
 
             ultradir = C:\ULTRASND
    
+          [mt32]
+
+          romdir = $GAMEDIR/MT32-ROMS
+
           [mouse]
 
-            capture_mouse = onstart middlerelease  
+            mouse_capture = onstart   
+            
+            mouse_middle_release=true   
 
             mouse_sensitivity= 15
 

@@ -36,7 +36,9 @@ script:
 
           [mouse]
 
-            capture_mouse = onstart middlerelease  
+            mouse_capture = onstart   
+            
+            mouse_middle_release=true   
 
             mouse_sensitivity= 15
 
@@ -66,7 +68,9 @@ script:
             
             [mouse]
 
-            capture_mouse = onstart middlerelease  
+            mouse_capture = onstart   
+            
+            mouse_middle_release=true   
 
             mouse_sensitivity= 15
 

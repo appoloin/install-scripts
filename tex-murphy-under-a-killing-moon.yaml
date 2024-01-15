@@ -9,18 +9,13 @@ script:
   game:
     main_file: $GAMEDIR/play.conf
 
+  files:
+    - DISC1: N/A:Select Disc1 ISO
+    - DISC2: N/A:Select Disc2 ISO
+    - DISC3: N/A:Select Disc3 ISO
+    - DISC4: N/A:Select Disc4 ISO
+
   installer:  
-    - write_file:
-        content: '#!/bin/bash
-
-            src=$1
-
-            dst=$2
-        
-            cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy-alt.sh
-    - chmodx: $CACHE/bulkcopy-alt.sh
-
     - write_file:
         content: '#!/bin/bash
 
@@ -47,42 +42,30 @@ script:
         file: mkdir
         args: $GAMEDIR/drive_c $GAMEDIR/drive_d $GAMEDIR/drive_e $GAMEDIR/drive_f $GAMEDIR/drive_g
 
-    - insert-disc:
-        description: Please insert disc 1
-        requires: mastertx
-    - execute:
-        file: $CACHE/bulkcopy-alt.sh
-        args: $DISC "$GAMEDIR/drive_d"
+    - extract:
+        file: $DISC1 
+        dst:  "$GAMEDIR/drive_d"
     - execute:
         file: chmod
         args: -R 775  "$GAMEDIR/drive_d"
 
-    - insert-disc:
-        description: Please insert disc 2
-        requires: mastertx
-    - execute:
-        file: $CACHE/bulkcopy-alt.sh
-        args: $DISC "$GAMEDIR/drive_e"
+    - extract:
+        file: $DISC2
+        dst:  "$GAMEDIR/drive_e"
     - execute:
         file: chmod
         args: -R 775  "$GAMEDIR/drive_e"
 
-    - insert-disc:
-        description: Please insert disc 3
-        requires: mastertx
-    - execute:
-        file: $CACHE/bulkcopy-alt.sh
-        args: $DISC "$GAMEDIR/drive_f"
+    - extract:
+        file: $DISC3
+        dst:  "$GAMEDIR/drive_f"
     - execute:
         file: chmod
         args: -R 775  "$GAMEDIR/drive_f"
 
-    - insert-disc:
-        description: Please insert disc 4
-        requires: mastertx
-    - execute:
-        file: $CACHE/bulkcopy-alt.sh
-        args: $DISC "$GAMEDIR/drive_g"
+    - extract:
+        file: $DISC3
+        dst:  "$GAMEDIR/drive_g"
     - execute:
         file: chmod
         args: -R 775  "$GAMEDIR/drive_g"
@@ -111,7 +94,9 @@ script:
 
           [mouse]
 
-            capture_mouse = onstart middlerelease  
+            mouse_capture = onstart   
+            
+            mouse_middle_release=true   
 
             mouse_sensitivity= 15
 
@@ -154,7 +139,9 @@ script:
           
           [mouse]
 
-            capture_mouse = onstart middlerelease  
+            mouse_capture = onstart   
+            
+            mouse_middle_release=true   
 
             mouse_sensitivity= 15
 

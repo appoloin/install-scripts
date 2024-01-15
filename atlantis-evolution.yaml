@@ -1,6 +1,6 @@
 name: Atlantis Evolution
 game_slug: atlantis-evolution
-version: Installer
+version: Windows Installer
 slug: atlantis-evolution-installer
 runner: wine
 
@@ -26,8 +26,6 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true
 
   system:
     single_cpu: true

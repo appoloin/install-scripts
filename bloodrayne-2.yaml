@@ -1,6 +1,6 @@
 name: Bloodrayne 2
 game_slug: bloodrayne-2
-version: Installer
+version: Good Old Games Installer
 slug: bloodrayne-2
 runner: wine
 

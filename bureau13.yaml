@@ -39,7 +39,9 @@ script:
     - write_file:
         content: '[sdl]
 
-          capture_mouse=onclick middlerelease
+          mouse_capture=onclick   
+            
+            mouse_middle_release=true 
         
         [autoexec]
 
@@ -68,7 +70,9 @@ script:
 
         [autoexec]
         
-          capture_mouse=onclick middlerelease
+          mouse_capture=onclick   
+            
+            mouse_middle_release=true 
 
           C:
 

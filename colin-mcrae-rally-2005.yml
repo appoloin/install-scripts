@@ -1,7 +1,7 @@
 name: Colin McRae Rally 2005
 game_slug: colin-mcrae-rally-2005
-version: Installer
-slug:  installer
+version: Good Old Games Installer
+slug:  colin-mcrae-rally-2005
 runner: wine
 
 
@@ -26,6 +26,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true

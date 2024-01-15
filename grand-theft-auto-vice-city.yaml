@@ -1,7 +1,7 @@
 name: Grand Theft Auto - Vice City
 game_slug: grand-theft-auto-vice-city
-version: Installer
-slug: installer
+version: Windows Installer
+slug: grand-theft-auto-vice-city
 runner: wine
 
 script:
@@ -10,25 +10,31 @@ script:
     prefix: $GAMEDIR
 
   files:
-    - Disc1: N/A:Select setup.exe from Disc1
-    - Disc2: N/A:Select data3.cab from Disc2
-    - Engine: 
-        url: https://drive.google.com/uc?export=download&id=1xy8kft9fDTbqnBt-kmmPW_LppO3ivIfj
-        filename: patch.7z
+    - DISC1: N/A:Select Disc1 ISO
+    - DISC2: N/A:Select Disc2 ISO
 
   installer:
     - write_file:
         content: '#!/bin/bash
 
-         src=$1
+          fileID=$1
 
-         dst=$2
+          output=$2
         
-         src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-         cp -avr "$src_path/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
 
     - task:
         name: create_prefix
@@ -40,25 +46,26 @@ script:
         args: $GAMEDIR/drive_c/Game
         file: mkdir
 
-    - execute:
-        args: $Disc1 $GAMEDIR/drive_c/Game
-        file: $CACHE/bulkcopy.sh
-    - execute:
-        args: -R 775  "$GAMEDIR/drive_c/Game"
-        file: /bin/chmod
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR/drive_c/Game
 
     - execute:
-        args: $Disc2 $GAMEDIR/drive_c/Game
-        file: $CACHE/bulkcopy.sh
-    - execute:
+        file: chmod
         args: -R 775  "$GAMEDIR/drive_c/Game"
-        file: /bin/chmod
+
+    - extract:
+        file: $DISC2
+        dst:  $GAMEDIR/drive_c/Game
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR/drive_c/Game"
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1xy8kft9fDTbqnBt-kmmPW_LppO3ivIfj $CACHE/patch.7z
 
     - execute:
         file: 7z
-        args: x $Engine -o"$GAMEDIR/drive_c/Game" -ppassword -y
-
-  wine:
-    Desktop: true
-
-
+        args: x $CACHE/patch.7z -o"$GAMEDIR/drive_c/Game" -ppassword -y

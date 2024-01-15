@@ -11,22 +11,42 @@ script:
 
   files:
     - setup: N/A:Select installer
-    - patch: 
-        url: https://drive.google.com/uc?export=download&id=1uzUU1rtcGPgw3DagNO_-sFNHEEfyTb6q
-        filename: NFSUnderground-WidescreenFix.zip
-    - patch1: 
-        url: https://drive.google.com/uc?export=download&id=14rhMnzQcuaL5H-eJj1vNJ8S8-ZDd8Mr4
-        filename: Release-UG-Pack.zip
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - task:
         name: create_prefix
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
     
+    - execute:
+        file: $CACHE/download.sh
+        args: 1uzUU1rtcGPgw3DagNO_-sFNHEEfyTb6q $CACHE/NFSUnderground-WidescreenFix.zip
+
     - extract:  
-        file: patch
+        file: $CACHE/NFSUnderground-WidescreenFix.zip
         dst:  $CACHE 
 
     - task:
@@ -38,8 +58,12 @@ script:
         src: $CACHE/dinput8.dll
         dst: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground/
 
+    - execute:
+        file: $CACHE/download.sh
+        args: 14rhMnzQcuaL5H-eJj1vNJ8S8-ZDd8Mr4 $CACHE/Release-UG-Pack.zip
+
     - extract:  
-        file: patch1
+        file: $CACHE/Release-UG-Pack.zip
         dst:  $CACHE 
 
     - copy:
@@ -50,65 +74,11 @@ script:
         src: "$CACHE/Global"
         dst: "$GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground/Global"
 
-    - input_menu:
-        description: Please choose your main desktop width for the widescreen patch
-        id: RESX
-        options:
-        - '256': '256'
-        - '426': '426'
-        - '640': '640'
-        - '768': '768'
-        - '800': '800'
-        - '848': '848'
-        - '854': '854'
-        - '960': '960'
-        - '1024': '1024'
-        - '1280': '1280'
-        - '1366': '1366'
-        - '1600': '1600'
-        - '1920': '1920'
-        - '2048': '2048'
-        - '2560': '2560'
-        - '2880': '2880'
-        - '3200': '3200'
-        - '3840': '3840'
-        - '4096': '4096'
-        - '5120': '5120'
-        - '7680': '7680'
-        - '15360': '15360'
-        preselect: '1366'
-
-    - input_menu:
-        description: Please choose your main desktop height for the widescreen patch
-        id: RESY
-        options:
-        - '144': '144'
-        - '240': '240'
-        - '360': '360'
-        - '432': '432'
-        - '450': '450'
-        - '480': '480'
-        - '540': '540'
-        - '576': '576'
-        - '720': '720'
-        - '768': '768'
-        - '900': '900'
-        - '1080': '1080'
-        - '1152': '1152'
-        - '1440': '1440'
-        - '1620': '1620'
-        - '1800': '1800'
-        - '2160': '2160'
-        - '2304': '2304'
-        - '2880': '2880'
-        - '4320': '4320'
-        - '8640': '8640'
-        preselect: '768'
     - write_config:
         data:
           MAIN:
-            ResX: $INPUT_RESX
-            ResY: $INPUT_RESY
+            ResX: $RESOLUTION_WIDTH
+            ResY: $RESOLUTION_HEIGHT
         file: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground/Scripts/NFSUnderground.WidescreenFix.ini
 
 

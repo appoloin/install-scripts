@@ -1,13 +1,12 @@
 name: Mysterious Journey II - Chameleon
 game_slug: mysterious-journey-ii-chameleon
-version: Installer
-slug: Mysterious Journey II-installer
+version: Windows Installer
+slug: mysterious-journey-ii-chameleon
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/Mysterious Journey II/MJ2.exe
-    arch: win32
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Mysterious Journey II/MJ2.exe
     prefix: $GAMEDIR
 
   files:
@@ -16,7 +15,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
@@ -26,10 +24,3 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true
-    WineDesktop: 1024x768
-
-  system:
-    resolution: 1024x768
-    reset_desktop: true

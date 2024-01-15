@@ -1,13 +1,12 @@
 name: Contract J.A.C.K.
 game_slug: contract-jack
-version: Installer
+version: Windows Installer
 slug: contract-jack
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/drive_c/Games/Contract Jack/ContractJack.exe
-    arch: win32
+    exe: $GAMEDIR/drive_c/Games/Contract Jack/ContractJack.exe
     prefix: $GAMEDIR
 
   files:
@@ -16,14 +15,12 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
     - task:
         app: winxp
-        arch: win32
         description: Setting Windows version to XP
         name: winetricks
         prefix: $GAMEDIR
@@ -32,7 +29,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-

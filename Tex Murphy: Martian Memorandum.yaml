@@ -85,7 +85,9 @@ script:
 
           fullresolution=orginal
 
-          capture_mouse=onstart middlerelease
+          mouse_capture=onstart   
+            
+            mouse_middle_release=true 
 
         [autoexec]
 
