@@ -1,13 +1,12 @@
 name: Return to Mysterious Island 2
 game_slug:  return-to-mysterious-island-2
-version: Installer
+version: Good Old Games Installer
 slug:  return-to-mysterious-island-2-installer
 runner: wine
 
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Return to Mysterious Island 2/RTMI2.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -16,7 +15,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
@@ -27,12 +25,5 @@ script:
         prefix: $GAMEDIR
  
   wine:
-    Desktop: true
-    WineDesktop: 1024x768
     dxvk: false
     
-  system:
-    resolution: 1024x768
-    reset_desktop: true
-
-

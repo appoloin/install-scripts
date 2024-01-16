@@ -12,11 +12,30 @@ script:
 
   files:
     - setup: N/A:Select Setup
-    - patch:  
-        url: https://drive.google.com/uc?export=download&id=1vWcnoqZZhLwHIRru3fk8M4RjBnyj1tcW
-        filename: halopc-patch-1.0.10.7z
         
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - task:
         name: create_prefix
         arch: win32
@@ -37,8 +56,12 @@ script:
         prefix: $GAMEDIR
         return_code: 256
 
+    - execute:
+        file: $CACHE/download.sh
+        args: 1vWcnoqZZhLwHIRru3fk8M4RjBnyj1tcW $CACHE/patch.7z
+
     - extract:
-        file: $patch
+        file: $CACHE/patch.7z
         dst: $GAMEDIR/drive_c
 
     - task:

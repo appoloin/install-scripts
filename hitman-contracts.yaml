@@ -1,12 +1,12 @@
 name: Hitman 2 - Contracts
 game_slug: hitman-contracts
-version: Installer
+version: Good Old Games Installer
 slug: hitman-contracts
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/GOG Games/Hitman - Contracts/HitmanContracts.exe
+    exe: "$GAMEDIR/GOG Games/Hitman - Contracts/HitmanContracts.exe"
     prefix: $GAMEDIR
 
   files:
@@ -24,6 +24,10 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+    - write_file:
+        content: 'UseDirectInputMouse
 
-  wine:
-    Desktop: true
+          UseDirectInputKeyboard '
+        description: Fix mouse issues
+        mode: a
+        file: $GAMEDIR/drive_c/GOG Games/Hitman - Contracts/HitmanContracts.ini

@@ -1,7 +1,7 @@
 name: Star Wars - Battlefront
 game_slug: star-wars-battlefront-classic-2004
-version: Installer
-slug: Starwars-installer
+version: Good Old Games Installer
+slug: star-wars-battlefront-classic-2004
 runner: wine
 
 script:
@@ -9,26 +9,26 @@ script:
       - installer: N/A:Select the game's setup file
 
     game:
-      arch: win32
       exe:  $GAMEDIR/drive_c/GOG Games/Star Wars - Battlefront/LaunchBF.exe
+      arch: win32
       prefix: $GAMEDIR
 
     installer:
       - task:
-          arch: win32
           name: create_prefix
+          arch: win32
           install_mono: false
           install_gecko: false
           prefix: $GAMEDIR
+
       - task:
-          app: xact d3dx9
+          app: xact 
           arch: win32
           name: winetricks
           prefix: $GAMEDIR
+          
       - task:
           executable: $installer
           name: wineexec
           prefix: $GAMEDIR
 
-    wine:
-      Desktop: true

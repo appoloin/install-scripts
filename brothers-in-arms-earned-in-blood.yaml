@@ -1,7 +1,7 @@
 name: Brothers in Arms - Earned in Blood
 game_slug: brothers-in-arms-earned-in-blood
-version: Installer
-slug: abzu
+version: Good Old Games Installer
+slug:  brothers-in-arms-earned-in-blood
 runner: wine
  
 script:
@@ -23,7 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 

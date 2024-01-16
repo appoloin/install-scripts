@@ -1,7 +1,7 @@
 name: Harry Potter and the Prisoner of Azkaban
 game_slug: harry-potter-and-the-prisoner-of-azkaban
-version: Installer
-slug: installer
+version: Windows Installer
+slug: harry-potter-and-the-prisoner-of-azkaban
 runner: wine
  
 script:
@@ -23,9 +23,6 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 
   system:
     single_cpu: true

@@ -1,13 +1,12 @@
 name: Geneforge 3
 game_slug:  geneforge-3
-version: Installer
-slug: geneforge-3_INSTALLER
+version: Good Old Games Installer
+slug: geneforge-3
 runner: wine
 
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Geneforge 3/Geneforge 3.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -16,7 +15,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
@@ -25,13 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-    WineDesktop: 800x600
-
-  system:
-    resolution: 800x600
-    reset_desktop: true
-
-

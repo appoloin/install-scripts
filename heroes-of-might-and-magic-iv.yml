@@ -1,22 +1,24 @@
 name: Heroes of Might & Magic IV
 game_slug: heroes-of-might-and-magic-iv
-version:  GOG
+version: Good Old Games Installer
 slug: heroes-of-might-and-magic-iv
 runner: wine
 
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/HoMM 4 Complete/heroes4.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
 
+  install_complete_text: "Installation finished!\n\n\n\nIMPORTANT!\n============\nPlease\
+    \ change the wine version in the game\xB4s settings to \"lutris-GE-Proton 8-8\"\
+    \ ,this is last of 8 series with a working virtual desktop."
+
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
@@ -26,7 +28,7 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+
   wine:
     Desktop: true
-
 

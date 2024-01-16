@@ -1,7 +1,7 @@
 name: Jade Empire
 game_slug: jade-empire-special-edition
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: jade-empire-special-edition
 runner: wine
 
 script:
@@ -22,16 +22,14 @@ script:
         prefix: $GAMEDIR
 
     - task:
+        arch: win32
         app: win7
         name: winetricks
         prefix: $GAMEDIR
 
     - task:
+        arch: win32
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

@@ -1,7 +1,7 @@
 name: Brothers in Arms - Road to Hill 30
 game_slug: brothers-in-arms-road-to-hill-30
-version: Installer
-slug: abzu
+version: Good Old Games Installer
+slug: brothers-in-arms-road-to-hill-30
 runner: wine
  
 script:
@@ -23,7 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 

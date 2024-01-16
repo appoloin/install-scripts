@@ -1,7 +1,7 @@
 name: Halo 2
 game_slug: halo-2
-version: Installer
-slug:  installer
+version: Windows Installer
+slug:  halo-2
 runner: wine
 
 script:
@@ -22,12 +22,14 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: mfc42 dotnet452 wmp10
+        arch: win32
+        app: mfc42 wmp9 wmp10 mf
         description: Installing additional components
         name: winetricks
         prefix: $GAMEDIR
 
     - task:
+        arch: win32
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
