@@ -1,0 +1,85 @@
+name: Mafia
+game_slug: mafia
+version: Good Old Games Installer
+slug: mafia
+runner: wine
+ 
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Mafia/Game.exe"
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID=$1
+
+          output=$2
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O $output && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 18aC2HtbDmb79qWTqGDclf-aw9DlrVaYK $CACHE/patch.zip
+
+    - extract:
+        file: $CACHE/patch.zip
+        dst: $GAMEDIR/drive_c/GOG Games/Mafia/
+
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 10Uhr0miQEvl3tq9Li6nMMFfIEHTe6qem $CACHE/SOUNDS.7z.001
+    - execute:
+        file: $CACHE/download.sh
+        args: 1S5vLsiw04Xluh8xlWijoVsf_2r-LRG_d $CACHE/SOUNDS.7z.002
+    - execute:
+        file: $CACHE/download.sh
+        args: 1WlycusUW6ZUCpkcVkRnfVFTacWSEAQzU $CACHE/SOUNDS.7z.003
+    - execute:
+        file: 7z
+        args: x $CACHE/SOUNDS.7z.001 -o"$CACHE" -ppassword -y
+
+    - merge:
+        src: "$CACHE/SOUNDS"      
+        dst: $GAMEDIR/drive_c/GOG Games/Mafia/sounds
+
+    - task:
+        executable: "$GAMEDIR/drive_c/GOG Games/Mafia/setup.exe"
+        name: wineexec
+        prefix: $GAMEDIR
+
+
+  wine:
+    overrides:
+      d3d8: native
+
+
