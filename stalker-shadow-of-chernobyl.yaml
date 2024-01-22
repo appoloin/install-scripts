@@ -1,0 +1,30 @@
+name: S.t.a.l.k.e.r. - Shadow of Chernobyl
+game_slug: stalker-shadow-of-chernobyl
+version: Good Old Games Installer
+slug: stalker-shadow-of-chernobyl
+runner: wine
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/S.T.A.L.K.E.R. Shadow of Chernobyl/bin/XR_3DA.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task: 
+        app: vcrun2003 vcrun2005 directplay
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

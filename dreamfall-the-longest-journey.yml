@@ -1,0 +1,26 @@
+name: Dreamfall - The Longest Journey
+game_slug: dreamfall-the-longest-journey
+version:  Good Old Games Installer
+slug: dreamfall-the-longest-journey
+runner: wine
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/GOG.com/Dreamfall/dreamfall.exe"
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

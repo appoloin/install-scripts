@@ -1,0 +1,36 @@
+name: Saints Row - The Third
+game_slug: saints-row-the-third
+version: Good Old Games Installer
+slug: saints-row-the-third
+runner: wine
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Saints Row 3/game_launcher.exe"
+    args: -noChunkedDownload -DX11
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: vcrun2005 win7 xact_x64 xact arial
+        name: winetricks
+        prefix: $GAMEDIR
+       
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  system:
+    env:
+      DXVK_HUD: 0
+      DXVK_STATE_CACHE_PATH: $GAMEDIR
+      __GL_SHADER_DISK_CACHE: 1
+      __GL_SHADER_DISK_CACHE_PATH: $GAMEDIR

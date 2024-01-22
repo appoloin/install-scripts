@@ -1,0 +1,52 @@
+name:  Back to the Future - The Game
+game_slug: back-to-the-future-the-game
+version: Good Old Games Installer
+slug: back-to-the-future-the-game
+runner: wine
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/GOG/Episode 1 - It's About Time!/BackToTheFuture101.exe"
+    arch: win32
+    prefix: $GAMEDIR
+    name: Episode 1 - It's About Time!
+    launch_configs:
+      - exe:  "$GAMEDIR/drive_c/GOG/Episode 2 - Get Tannen!/BackToTheFuture102.exe"
+        prefix: $GAMEDIR
+        arch: win32
+        name: Episode 2 - Get Tannen!
+      - exe: "$GAMEDIR/drive_c/GOG/Episode 3 - Citizen Brown/BackToTheFuture103.exe"
+        prefix: $GAMEDIR
+        arch: win32
+        name:  Episode 3 - Citizen Brown
+      - exe: "$GAMEDIR/drive_c/GOG/Episode 4 - Double Visions/BackToTheFuture104.exe"
+        prefix: $GAMEDIR
+        arch: win32
+        name: Episode 4 - Double Visions
+      - exe: "$GAMEDIR/drive_c/GOG/Episode 5 - OUTATIME/BackToTheFuture105.exe"
+        prefix: $GAMEDIR
+        arch: win32
+        name: Episode 5 - OUTATIME
+
+  files:
+    - game: N/A:Select GOG installer.
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_c/GOG 
+    
+    - extract:
+        format: gog
+        file: $game
+        args: --gog --include "app" 
+        dst:  "$GAMEDIR/drive_c/GOG"
+        description: Extracting game files
+
