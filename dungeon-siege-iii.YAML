@@ -6,12 +6,14 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Dungeon Siege 2/DungeonSiege2.exe
+    exe: "$GAMEDIR/drive_c/GOG Games/Dungeon Siege III/Dungeon Siege III.exe"
     arch: win32
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
+    - DLC: N/A:Select DLC installer
+
 
   installer:
     - task:
@@ -31,7 +33,8 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true
-
+    - task:
+        executable: $DLC
+        name: wineexec
+        prefix: $GAMEDIR
 

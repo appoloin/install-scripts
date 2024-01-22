@@ -1,7 +1,7 @@
 #DVD version
 name: Amnesia - The Dark Descent
 game_slug: amnesia-the-dark-descent
-version: Installer
+version: Widnows Installer
 slug: amnesia-the-dark-descent-installer
 runner: wine
 
@@ -13,7 +13,7 @@ script:
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select the GOG installer
+    - setup: N/A:Select installer
 
   installer:
     - task:
@@ -27,7 +27,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 

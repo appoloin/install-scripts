@@ -1,12 +1,12 @@
 name: Need for Speed - Hot Pursuit
 game_slug: need-for-speed-hot-pursuit
-version: Installer
+version: Windows Installer
 slug: need-for-speed-hot-pursuit
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Games/Need for Speed Hot Pursuit 2010/NFS11.exe
+    exe: "$GAMEDIR/drive_c/Games/Need for Speed Hot Pursuit 2010/NFS11.exe"
     prefix: $GAMEDIR
 
   files:

@@ -34,9 +34,9 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-          fileID=$1
+          fileID="$1"
 
-          output=$2
+          output="$2"
         
           wget --load-cookies /tmp/cookies.txt 
                 "https://docs.google.com/uc?export=download&confirm=
@@ -47,7 +47,7 @@ script:
                       --no-check-certificate 
                       "https://docs.google.com/uc?export=download&id=$fileID" 
                        -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O $output && 
+                       -O "$output" && 
                       rm -rf /tmp/cookies.txt          
           '
         file: $CACHE/download.sh

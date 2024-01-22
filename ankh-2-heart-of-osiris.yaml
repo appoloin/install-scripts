@@ -6,8 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/c_drive/GOG Games/Ankh 2 Heart of Osiris/bin/release/StartGame.exe
-    arch: win32
+    exe: "$GAMEDIR/c_drive/GOG Games/Ankh 2 Heart of Osiris/bin/release/Ankh-OsirisHeart.exe"
     prefix: $GAMEDIR
 
   files:
@@ -16,7 +15,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
@@ -25,8 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

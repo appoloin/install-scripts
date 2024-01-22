@@ -1,13 +1,12 @@
-name: Grid
-game_slug: grid
-version: Installer
-slug: orwell
+name: Of Orcs and Men
+game_slug: of-orcs-and-men
+version: Good Old Games Installer
+slug: of-orcs-and-men
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Race Driver GRID/GRID.exe
-    arch: win32
+    exe: $GAMEDIR/drive_c/GOG Games/Of Orcs And Men/OfOrcsAndMen.exe
     prefix: $GAMEDIR
 
   files:
@@ -16,7 +15,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
@@ -25,8 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-

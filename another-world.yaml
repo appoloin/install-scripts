@@ -1,6 +1,6 @@
 name: Another World
 game_slug: another-world
-version: Installer
+version: Good Old Games Installer
 slug: another-world
 runner: wine
 
@@ -25,7 +25,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 

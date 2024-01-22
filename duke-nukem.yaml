@@ -1,7 +1,7 @@
 name: Duke Nukem
 game_slug: duke-nukem
-version: Installer
-slug: Duke-Nukem-1-installer
+version: Good Old Games Installer
+slug: Duke-Nukem-1
 runner: dosbox
 
 
@@ -11,7 +11,7 @@ script:
     - game: N/A:Select GOG installer.
 
   game:
-    main_file: $GAMEDIR/duke-nukem.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
     - extract:
@@ -93,4 +93,4 @@ script:
             :exit
             
             exit'
-        file: $GAMEDIR/duke-nukem.conf
+        file: $GAMEDIR/play.conf

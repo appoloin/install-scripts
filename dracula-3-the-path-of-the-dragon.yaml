@@ -1,7 +1,7 @@
 name: Dracula 3 - The Path of the Dragon
 game_slug: dracula-3-the-path-of-the-dragon
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: dracula-3-the-path-of-the-dragon
 runner: wine
 
 
@@ -11,40 +11,35 @@ script:
     arch: win32
     prefix: $GAMEDIR
 
+
+  install_complete_text: "Installation finished!\n\n\n\nIMPORTANT!\n============\nPlease\
+    \ change the wine version in the game\xB4s settings to \"System\"\
+    \ ,this game needs working virtual desktop."
+
   files:
     - game: N/A:Select GOG installer.
-    - inno: https://lutris.nyc3.digitaloceanspaces.com/tools/innoextract/innoextract-1.8-dev-2019-01-13-linux.tar.xz
 
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
-    - task:
-        app: d3dx9 d3dcompiler_42
-        arch: win32
-        name: winetricks
-        prefix: $GAMEDIR
-
     - execute:
-        args: $GAMEDIR/drive_c/GOG  "$GAMEDIR/drive_c/GOG/Dracula 3 - The Path of the Dragon"
         file: mkdir
+        args: $GAMEDIR/drive_c/GOG  "$GAMEDIR/drive_c/GOG/Dracula 3 - The Path of the Dragon"
     
     - extract:
+        format: gog
+        file: $game
+        args: --gog --include "app/Dracula 3 - The Path of the Dragon" 
         dst: $CACHE
-        file: $inno
-
-    - execute:
-        args: -I "app/Dracula 3 - The Path of the Dragon" -d "$CACHE" "$game"
-        file: $CACHE/innoextract
+        description: Extracting game files
 
     - merge:
+        src: "$CACHE/Dracula 3 - The Path of the Dragon"
         dst: "$GAMEDIR/drive_c/GOG/Dracula 3 - The Path of the Dragon"
-        src: "$CACHE/app/Dracula 3 - The Path of the Dragon"
 
   wine:
     Desktop: true
-    dxvk: true

@@ -1,7 +1,7 @@
 name: Just Cause
 game_slug: just-cause
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: just-cause
 runner: wine
 
 script:
@@ -11,18 +11,43 @@ script:
 
   files:
     - setup: N/A:Select installer
-    - patch: https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/justcause/JustCause.WidescreenFix.zip
 
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID="$1"
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - task:
         name: create_prefix
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
+    - execute:
+        file: $CACHE/download.sh
+        args: 1ff1fDN_avOtze-i_U2XJvOo3lZe8exQ7 $CACHE/JustCause.WidescreenFix.zip
+
     - extract:  
-        file: patch
+        file: $CACHE/JustCause.WidescreenFix.zip
         dst:  $CACHE 
 
     - task:
@@ -41,7 +66,6 @@ script:
 
 
   wine:
-    Desktop: true
     overrides:
       dinput8.dll: n,b
 

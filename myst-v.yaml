@@ -1,13 +1,13 @@
-name: Myst V
-game_slug: myst-v
-version: Installer
-slug: Myst5-installer
+name: Myst V - End of Ages
+game_slug: myst-v-end-of-ages
+version: Good Old Games Installer
+slug: myst-v-end-of-ages
 runner: wine
 
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/GOG.com/Myst V End Of Ages/eoa.exe
+    exe: "$GAMEDIR/drive_c/Program Files/GOG.com/Myst V End Of Ages/eoa.exe"
     arch: win32
     prefix: $GAMEDIR
 
@@ -23,7 +23,7 @@ script:
         prefix: $GAMEDIR
     
     - task:
-        app: d3dx9 d3dcompiler_42 dsound directmusic corefonts tahoma
+        app: dsound directmusic corefonts tahoma
         arch: win32
         name: winetricks
         prefix: $GAMEDIR
@@ -32,11 +32,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-    WineDesktop: 1024x768
-
-  system:
-    resolution: 1024x768
-    reset_desktop: true

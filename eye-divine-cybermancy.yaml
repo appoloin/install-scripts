@@ -1,6 +1,6 @@
 name: E.Y.E - Divine Cybermancy
 game_slug: eye-divine-cybermancy
-version: Installer
+version: Good Old Games Installer
 slug: eye-divine-cybermancy
 runner: wine
 
@@ -23,8 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

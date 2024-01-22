@@ -1,22 +1,39 @@
 name: Resident Evil 4
 game_slug: resident-evil-4
-version: Installer
-slug: INSTALLER
+version: Windows Installer
+slug: resident-evil-4
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files (x86)/Capcom/Resident Evil 4 - Ultimate HD Edition/Bin32/bio4.exe
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Capcom/Resident Evil 4 - Ultimate HD Edition/Bin32/bio4.exe"
     prefix: $GAMEDIR
 
   files:
     - game: N/A:Select installer.
-    - fix:  
-        url: https://drive.google.com/uc?export=download&id=1WPKpYyZE3sNCSKawmccsjrrO5zvgoFIr
-        filename: patch.z7
-
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID="$1"
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
 
     - task:
         name: create_prefix
@@ -31,10 +48,10 @@ script:
         prefix: $GAMEDIR
 
     - execute:
+        file: $CACHE/download.sh
+        args: 1WPKpYyZE3sNCSKawmccsjrrO5zvgoFIr $CACHE/patch.z7
+
+    - execute:
         file: 7z
-        args: e $fix -o"$GAMEDIR/drive_c/Program Files (x86)/Capcom/Resident Evil 4 - Ultimate HD Edition/Bin32/" -ppassword -y
-
-  wine:
-    Desktop: true
-
+        args: e $CACHE/patch.z7 -o"$GAMEDIR/drive_c/Program Files (x86)/Capcom/Resident Evil 4 - Ultimate HD Edition/Bin32/" -ppassword -y
 

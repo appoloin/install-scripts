@@ -1,12 +1,12 @@
 name: The Cave
 game_slug: the-cave
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: the-cave
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/GOG Games/The Cave/Cave.exe
+    exe: $GAMEDIR/drive_c/GOG Games/The Cave/Cave.exe
     prefix: $GAMEDIR
 
   files:

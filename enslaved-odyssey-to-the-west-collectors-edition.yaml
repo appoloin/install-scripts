@@ -1,35 +1,33 @@
 name: Enslaved Odyssey to the West
 game_slug: enslaved-odyssey-to-the-west-collectors-edition
-version: Installer
-slug:  installer
+version: Windows Installer
+slug:  enslaved-odyssey-to-the-west-collectors-edition
 runner: wine
 
 script:
-    game:
-        exe: $GAMEDIR/drive_c/Program Files/Enslaved Odyssey to the West Premium Edition/Binaries/Win32/Enslaved.exe
+  game:
+    exe: $GAMEDIR/drive_c/Program Files/Enslaved Odyssey to the West Premium Edition/Binaries/Win32/Enslaved.exe
+    arch: win32
+    prefix: $GAMEDIR
+
+  files:
+    - game: N/A:Select Setup.exe
+
+  installer:
+    - task:
+        name: create_prefix
         arch: win32
+        install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
-  
-    files:
-        - game: N/A:Select Setup.exe
 
-    installer:
-        - task:
-            name: create_prefix
-            arch: win32
-            install_mono: false
-            install_gecko: false
-            prefix: $GAMEDIR
+    - task:
+        app: vcrun2008 dotnet40
+        name: winetricks
+        prefix: $GAMEDIR
 
-        - task:
-            app: vcrun2008 dotnet40
-            name: winetricks
-            prefix: $GAMEDIR
+    - task:
+        executable: $game
+        name: wineexec
+        prefix: $GAMEDIR
 
-        - task:
-            executable: $game
-            name: wineexec
-            prefix: $GAMEDIR
-
-    wine:
-      Desktop: true

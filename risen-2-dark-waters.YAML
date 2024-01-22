@@ -1,7 +1,7 @@
-name: Risen 2
+name: Risen 2 - Darks Waters
 game_slug: risen-2-dark-waters
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: risen-2-dark-waters
 runner: wine
 
 script:
@@ -19,6 +19,12 @@ script:
         install_gecko: false
         prefix: $GAMEDIR
 
+
+    - task:
+        app: physx
+        name: winetricks
+        prefix: $GAMEDIR
+        
     - task:
         executable: $setup
         name: wineexec
@@ -28,7 +34,4 @@ script:
         executable: $update
         name: wineexec
         prefix: $GAMEDIR
-  wine:
-    Desktop: true
-
 

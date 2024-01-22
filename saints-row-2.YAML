@@ -1,12 +1,12 @@
 name: Saints Row 2
 game_slug: saints-row-2
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: saints-row-2
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Saints Row - Gat Out of Hell/Saints Row Gat Out of Hell.exe
+    exe: "$GAMEDIR/drive_c/GOG Games/Saints Row 2/SR2_pc.exe"
   files:
     - setup: N/A:Select installer
 
@@ -18,7 +18,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx10 vcrun2005 win7 xact_x64 xact
+        app: vcrun2005 win7 xact_x64 xact
         name: winetricks
         prefix: $GAMEDIR
        
@@ -26,8 +26,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-
-  wine:
-    Desktop: true
-

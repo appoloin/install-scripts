@@ -17,15 +17,13 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-            src=$1
+            src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
             dst=$2
 
-            src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-            find "$src_path" -type f \( -iname "SAMPLE.AD" -o 
-                                        -iname "SAMPLE.OPL" -o 
-                                        -iname "WESTERN" \) -exec cp {} "$dst" \;'
+            find "$src" -type f \( -iname "SAMPLE.AD" -o 
+                                    -iname "SAMPLE.OPL" -o 
+                                    -iname "WESTERN" \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
     - chmodx: $CACHE/selectcopy.sh
 
@@ -34,8 +32,8 @@ script:
         file: $CACHE/selectcopy.sh
 
     - execute:
-        args: -R 775  "$GAMEDIR"
         file: chmod
+        args: -R 775  "$GAMEDIR"
 
   scummvm:
     fullscreen: true

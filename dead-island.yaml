@@ -1,18 +1,41 @@
 name: Dead Island
 game_slug: dead-island
-version: Installer
+version: Windows Installer
 slug: dead-island
 runner: wine
  
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files (x86)/Games/Dead.Island.Game.of.The.Year.Edition/DeadIslandGame.exe
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Games/Dead.Island.Game.of.The.Year.Edition/DeadIslandGame.exe"
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select the GOG installer
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID="$1"
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
+
     - task:
         name: create_prefix
         install_mono: false
@@ -24,6 +47,10 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true
-
+    - execute:
+        file: $CACHE/download.sh
+        args: 1F6o_OkQI7OkWtXCVrsCSQ_iWxGMBV5oP $CACHE/patch.7z
+    
+    - execute:
+        file: 7z
+        args: x $CACHE/patch.7z -ppassword -o"$GAMEDIR/drive_c/Program Files (x86)/Games/Dead.Island.Game.of.The.Year.Edition/" -y

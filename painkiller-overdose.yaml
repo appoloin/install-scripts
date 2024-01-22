@@ -1,21 +1,22 @@
 name: Painkiller - Overdose
 game_slug: painkiller-overdose
-version: Installer
+version: Good Old Games Installer
 slug: painkiller-overdose
 runner: wine
 
 
 script:
   game:
-    exe:  drive_c/GOG Games/Painkiller - Overdose/Bin/Overdose.exe
-    arch: win32
+    exe: "$GAMEDIR/drive_c/GOG Games/Painkiller - Overdose/Bin/Overdose.exe"
     prefix: $GAMEDIR
+
   files:
     - setup: N/A:Select the Setup.exe
+
+
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
@@ -26,5 +27,5 @@ script:
         prefix: $GAMEDIR
 
   wine:
-    Desktop: true
-
+    dxvk: false
+    

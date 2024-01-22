@@ -1,6 +1,6 @@
 name: Blades of Time
 game_slug: blades-of-time
-version: Installer
+version: Good Old Games Installer
 slug: blades-of-time
 runner: wine
 
@@ -11,6 +11,8 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - DLC: N/A:Select DLC installer
+
 
   installer:
     - task:
@@ -24,7 +26,7 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true
-
-
+    - task:
+        executable: $DLC
+        name: wineexec
+        prefix: $GAMEDIR

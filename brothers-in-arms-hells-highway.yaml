@@ -1,7 +1,7 @@
 name: Brothers in Arms - Hells Highway
 game_slug: brothers-in-arms-hells-highway
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: brothers-in-arms-hells-highway
 runner: wine
 
 script:
@@ -24,9 +24,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-
-  wine:
-    Desktop: true
-
-

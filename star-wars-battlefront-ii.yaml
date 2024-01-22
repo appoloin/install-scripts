@@ -1,7 +1,7 @@
 name: Star Wars - Battlefront II
 game_slug: star-wars-battlefront-ii
-version: Installer
-slug: Starwars-installer
+version: Good Old Games Installer
+slug: star-wars-battlefront-ii
 runner: wine
 
 script:
@@ -10,23 +10,24 @@ script:
 
     game:
       arch: win32
-      exe:  $GAMEDIR/drive_c/GOG Games/Star Wars - Battlefront 2/GameData/BattlefrontII.exe
+      exe:  "$GAMEDIR/drive_c/GOG Games/Star Wars - Battlefront 2/GameData/BattlefrontII.exe"
       prefix: $GAMEDIR
 
     installer:
       - task:
           name: create_prefix
+          arch: win32
           install_mono: false
           install_gecko: false
           prefix: $GAMEDIR
+
       - task:
           app: xact
           name: winetricks
           prefix: $GAMEDIR
+
       - task:
           executable: $installer
           name: wineexec
           prefix: $GAMEDIR
 
-    wine:
-      Desktop: true

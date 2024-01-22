@@ -1,6 +1,6 @@
 name: Top Gun
 game_slug: top-gun--3
-version: Installer
+version: Windows Installer
 slug: top-gun--3
 runner: wine
 
@@ -17,35 +17,34 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-         src=$1
+         src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
          dst=$2
         
-         src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-         cp -avr "$src_path/."  "$dst"'
+         cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy.sh
     - chmodx: $CACHE/bulkcopy.sh
 
     - task:
         name: create_prefix
         arch: win32
-        install_mono: false
+        install_mono: true
         install_gecko: false
         prefix: $GAMEDIR
 
+#dotnet35
+ 
     - task:
-        app: winxp d3dcompiler_43 d3dx9 vcrun2008 dotnet35
+        app: vcrun2008 
         description: Installing additional components
         name: winetricks
         prefix: $GAMEDIR
 
-
     - execute:
-        args: $GAMEDIR/drive_c/game 
         file: mkdir
+        args: $GAMEDIR/drive_c/game 
 
     - execute:
-        args: $game $GAMEDIR/drive_c/game
         file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR/drive_c/game
 

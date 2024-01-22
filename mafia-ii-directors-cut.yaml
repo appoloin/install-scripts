@@ -1,12 +1,12 @@
 name: Mafia II - Directors cut
 game_slug: mafia-ii-directors-cut
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: mafia-ii-directors-cut
 runner: wine
  
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Hitman Absolution/retail/HMA.exe
+    exe: "$GAMEDIR/drive_c/GOG Games/Mafia II/pc/mafia2.exe"
     prefix: $GAMEDIR
 
   files:
@@ -23,7 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-

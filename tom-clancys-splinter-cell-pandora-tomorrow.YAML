@@ -13,14 +13,30 @@ script:
 
   files:
     - setup: N/A:Select installer
-    - scws: 
-        url: https://drive.google.com/uc?export=download&id=10Kz0GXsZYFKidMLtDP-x51TFiiFCoFuL
-        filename: SplinterCellPandoraTomorrow.WidescreenFix.zip
-    - dgv: 
-        url: https://drive.google.com/uc?export=download&id=1HyNnnCuOCrvlWxv0UU_rvNvjEKSOKJiT
-        filename: DgVoodoo_2_8.zip
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID="$1"
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - task:
         arch: win32
         name: create_prefix
@@ -38,8 +54,12 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+    - execute:
+        file: $CACHE/download.sh
+        args: 1HyNnnCuOCrvlWxv0UU_rvNvjEKSOKJiT $CACHE/DgVoodoo_2_8.zip
+
     - extract:
-        file: $dgv
+        file: $CACHE/DgVoodoo_2_8.zip
         dst: $CACHE
 
     - copy:
@@ -49,8 +69,12 @@ script:
         src: $CACHE/MS/x86/D3D9.dll
         dst: $GAMEDIR/drive_c/Games/Splinter Cell Pandora Tomorrow/offline/
 
+    - execute:
+        file: $CACHE/download.sh
+        args: 10Kz0GXsZYFKidMLtDP-x51TFiiFCoFuL $CACHE/WidescreenFix.zip
+
     - extract:
-        file: scws
+        file: $CACHE/WidescreenFix.zip
         dst: $GAMEDIR/drive_c/Games/Splinter Cell Pandora Tomorrow/offline/
        
   wine:

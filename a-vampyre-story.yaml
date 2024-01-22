@@ -1,12 +1,12 @@
 name: A Vampyre Story
 game_slug: a-vampyre-story
-version: Installer
+version: Good Old Games Installer
 slug: a-vampyre-story
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Game/A Vampyre Story/game/main.exe
+    exe: "$GAMEDIR/drive_c/GOG Games/A Vampyre Story/game/main.exe"
     prefix: $GAMEDIR
 
   files:
@@ -20,7 +20,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: winxp
+        app: dotnet35
         name: winetricks
         prefix: $GAMEDIR
 
@@ -30,6 +30,10 @@ script:
         prefix: $GAMEDIR
 
   wine:
-    Desktop: true
-
-
+    dgvoodoo2: true
+    overrides:
+      ddraw: native
+      d3d8: native
+      d3d9: native
+      D3DImm: native
+      binkw32: native

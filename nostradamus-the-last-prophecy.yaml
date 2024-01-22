@@ -1,13 +1,12 @@
 name: Nostradamus The Last prophecy
 game_slug: nostradamus-the-last-prophecy
-version: Installer
-slug: Nostradamus-installer
+version: Good Old Games Installer
+slug: nostradamus-the-last-prophecy
 runner: wine
 
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Nostradamus/Nostradamus.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -16,7 +15,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
@@ -27,12 +25,6 @@ script:
         prefix: $GAMEDIR
 
   wine:
-    Desktop: true
-    WineDesktop: 1024x768
     dxvk: false
-
-  system:
-    resolution: 1024x768
-    reset_desktop: true
     
 

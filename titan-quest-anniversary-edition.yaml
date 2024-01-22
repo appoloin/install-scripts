@@ -1,0 +1,45 @@
+name: Titan Quest
+game_slug: titan-quest-anniversary-edition
+version: Good Old Games Installer
+slug: titan-quest-anniversary-edition
+runner: wine
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+    - DLC1: N/A:Select setup file for DLC Atlantis
+    - DLC2: N/A:Select setup file for DLC Ragnarok
+
+  game:
+    arch: win32
+    exe: "$GAMEDIR/drive_c/GOG Games/Titan Quest - Anniversary Edition/TQ.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        arch: win32
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: vcrun2010 vcrun2012 vcrun2013 vcrun2015 vcrun6sp6 win7
+        description: Installing dependencies
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC1
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC2
+        name: wineexec
+        prefix: $GAMEDIR

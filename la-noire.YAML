@@ -1,6 +1,6 @@
 name: L.A. Noire
 game_slug: la-noire
-version: Installer
+version: Windows Installer
 slug: la-noire
 runner: wine
 
@@ -20,7 +20,7 @@ script:
         prefix: $GAMEDIR
 
     - task: 
-        app: dotnet35 d3dx9_43 d3dcompiler_43 d3dx11_43 d3dcompiler_47
+        app: dotnet35
         name: winetricks
         prefix: $GAMEDIR
 
@@ -28,8 +28,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

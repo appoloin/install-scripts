@@ -1,13 +1,12 @@
 name: Still Life 2
 game_slug: still-life-2
-version: Installer
-slug:  installer
+version: Good Old Games Installer
+slug:  still-life-2
 runner: wine
 
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Still Life 2/SL2.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -16,16 +15,12 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
     - task:
-        arch: win32
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true

@@ -17,9 +17,9 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-          fileID=$1
+          fileID="$1"
 
-          output=$2
+          output="$2"
         
           wget --load-cookies /tmp/cookies.txt 
                 "https://docs.google.com/uc?export=download&confirm=
@@ -30,7 +30,7 @@ script:
                       --no-check-certificate 
                       "https://docs.google.com/uc?export=download&id=$fileID" 
                        -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O $output && 
+                       -O "$output" && 
                       rm -rf /tmp/cookies.txt          
           '
         file: $CACHE/download.sh
@@ -42,25 +42,15 @@ script:
         install_gecko: false
         prefix: $GAMEDIR
 
-    - execute:
-        args: $GAMEDIR/drive_c/Game
-        file: mkdir
+    - insert-disc:
+        description: Please insert Disc 1
+        requires: Setup.exe
 
-    - extract:
-        file: $DISC1 
-        dst:  $GAMEDIR/drive_c/Game
-
-    - execute:
-        file: chmod
-        args: -R 775  "$GAMEDIR/drive_c/Game"
-
-    - extract:
-        file: $DISC2
-        dst:  $GAMEDIR/drive_c/Game
-
-    - execute:
-        file: chmod
-        args: -R 775  "$GAMEDIR/drive_c/Game"
+    - task:
+        description: Installing
+        executable: $DISC/Setup.exe
+        name: wineexec
+        prefix: $GAMEDIR
 
     - execute:
         file: $CACHE/download.sh

@@ -31,8 +31,8 @@ script:
         args: $game $GAMEDIR
         
     - execute:
-        args: -R 775  "$GAMEDIR"
         file: chmod
+        args: -R 775  "$GAMEDIR"
 
 
   scummvm:

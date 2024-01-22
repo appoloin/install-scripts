@@ -1,16 +1,17 @@
 name: Risen
 game_slug: risen
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: risen
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Risen/bin/Risen.exe
+    exe: "$GAMEDIR/drive_c/GOG Games/Risen/bin/Risen.exe"
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
+
   installer:
     - task:
         name: create_prefix
@@ -22,8 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

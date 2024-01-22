@@ -1,22 +1,41 @@
 name: Gothic 3
 game_slug: gothic-3
-version: Installer
-slug: installer
+version: Windows Installer
+slug:  gothic-3
 runner: wine
 
 script:
   game: 
-    exe: $GAMEDIR/drive_c/Program Files/Nordic Games/Gothic 3 Forsaken Gods - Enhanced Edition/Gothic III Forsaken Gods.exe
+    exe: "$GAMEDIR/drive_c/Program Files/Nordic Games/Gothic 3 Forsaken Gods - Enhanced Edition/Gothic III Forsaken Gods.exe"
     arch: win32
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
-    - patch: 
-        url: https://drive.google.com/uc?export=download&id=1EiVeTCD-MbNYWD3icNqEkUZpTYRWO7Am
-        filename: patch.zip
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID="$1"
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - task:
         name: create_prefix
         install_mono: false
@@ -30,11 +49,11 @@ script:
         prefix: $GAMEDIR
 
     - execute:
+        file: $CACHE/download.sh
+        args: 1EiVeTCD-MbNYWD3icNqEkUZpTYRWO7Am $CACHE/patch.zip
+
+    - execute:
         file: 7z
-        args: e  $patch -o"$GAMEDIR/drive_c/Program Files/Nordic Games/Gothic 3 Forsaken Gods - Enhanced Edition/" -ppassword -y
-
-
-  wine:
-    Desktop: true
+        args: e  $CACHE/patch.zip -o"$GAMEDIR/drive_c/Program Files/Nordic Games/Gothic 3 Forsaken Gods - Enhanced Edition/" -ppassword -y
 
 

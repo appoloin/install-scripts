@@ -1,7 +1,7 @@
-name: Alien Shooter 2
-game_slug: alien-shooter-2
-version: Installer
-slug: installer
+name: Alien Shooter 2 - Reloaded
+game_slug: alien-shooter-2-reloaded
+version: Good Old Games Installer
+slug: alien-shooter-2-reloaded
 runner: wine
  
 script:
@@ -23,7 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 

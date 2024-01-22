@@ -1,12 +1,12 @@
 name: Legend of Grimrock
 game_slug: legend-of-grimrock
-version: Installer
+version: Good Old Games Installer
 slug: legend-of-grimrock
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/c_drive/GOG Games/Legend of Grimrock/grimrock.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Legend of Grimrock/grimrock.exe
     prefix: $GAMEDIR
 
   files:
@@ -23,8 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-

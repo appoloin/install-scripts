@@ -1,7 +1,7 @@
 name: Call of call-of-juarez
 game_slug: call-of-juarez
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: call-of-juarez
 runner: wine
  
 script:
@@ -23,7 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-

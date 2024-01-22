@@ -1,7 +1,7 @@
 name: Stubbs the Zombie in Rebel without a Pulse
 game_slug: stubbs-the-zombie-in-rebel-without-a-pulse
-version: Installer
-slug: abzu
+version: Good Old Games Installer
+slug: stubbs-the-zombie-in-rebel-without-a-pulse
 runner: wine
  
 script:
@@ -23,7 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 

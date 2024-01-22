@@ -1,7 +1,7 @@
 name: The Darkness II
 game_slug: the-darkness-ii
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: the-darkness-ii
 runner: wine
  
 script:
@@ -11,13 +11,31 @@ script:
 
   files:
     - setup: N/A:Select the installer
-    - patch:  
-        url: https://drive.google.com/uc?export=download&id=1RzhdV-7ZO2srZmR8bWPuN1jPM7fqWFh4
-        filename: patch.7z
-
 
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID="$1"
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - task:
         name: create_prefix
         install_mono: false
@@ -35,11 +53,10 @@ script:
         prefix: $GAMEDIR
 
     - execute:
+        file: $CACHE/download.sh
+        args: 1RzhdV-7ZO2srZmR8bWPuN1jPM7fqWFh4 "$CACHE/patch.7z"
+
+    - execute:
         file: 7z
-        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/2K Games/The Darkness II - Limited Edition/" -ppassword -y
-
-
-
-  wine:
-    Desktop: true
+        args: x "$CACHE/patch.7z" -o"$GAMEDIR/drive_c/Program Files (x86)/2K Games/The Darkness II - Limited Edition/" -ppassword -y
 

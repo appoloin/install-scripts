@@ -1,7 +1,7 @@
 name: Skydrift Infinity
 game_slug: skydrift-infinity
-version: Installer
-slug: skydrift-infinity_INSTALLER
+version: Good Old Games Installer
+slug:  skydrift-infinity
 runner: wine
 
 script:
@@ -25,7 +25,3 @@ script:
         prefix: $GAMEDIR
 
      
-  wine:
-    Desktop: true
-
-

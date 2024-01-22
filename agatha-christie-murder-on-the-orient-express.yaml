@@ -1,25 +1,41 @@
 name: Agatha Christe - Murder on the Orient Express
 game_slug: agatha-christie-murder-on-the-orient-express
-version: Installer
-slug:  installer
+version: Windows Installer
+slug:  agatha-christie-murder-on-the-orient-express
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/The Adventure Company/Murder on the Orient Express/motoe.exe
+    exe: "$GAMEDIR/drive_c/Program Files/The Adventure Company/Murder on the Orient Express/motoe.exe"
     arch: win32
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select Setup
-    - patch1: 
-        url: https://drive.google.com/uc?export=download&id=17F_Gq4KxA3Wc2Fk5G-ZEO_E-poQptmIS
-        filename: motoe_patch1.7z
-    - nocd: 
-        url: https://drive.google.com/uc?export=download&id=195ZKhiWJUPdcfYbPb-mQp0tu7FkvEdi2
-        filename: motoe-NoCD.7z.001
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID="$1"
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - task:
         name: create_prefix
         arch: win32
@@ -36,13 +52,23 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
     - execute:
+        file: chmod
         args: -R 775  "$GAMEDIR"
-        file: /bin/chmod
+
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 17F_Gq4KxA3Wc2Fk5G-ZEO_E-poQptmIS $CACHE/motoe_patch1.7z
 
     - extract:  
-        file: $patch1
+        file: $CACHE/motoe_patch1.7z
         dst:  $GAMEDIR/drive_c/Program Files/The Adventure Company/Murder on the Orient Express/
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
 
     - task:
         executable: $GAMEDIR/drive_c/Program Files/The Adventure Company/Murder on the Orient Express/motoe_patch1.exe
@@ -50,16 +76,10 @@ script:
         prefix: $GAMEDIR
 
     - execute:
+        file: $CACHE/download.sh
+        args: 195ZKhiWJUPdcfYbPb-mQp0tu7FkvEdi2 $CACHE/motoe-NoCD.7z.001
+
+    - execute:
         file: 7z
-        args: e $nocd -o$GAMEDIR/drive_c/Program Files/The Adventure Company/Murder on the Orient Express/ -ppassword -y
+        args: e $CACHE/motoe-NoCD.7z.001 -o$GAMEDIR/drive_c/Program Files/The Adventure Company/Murder on the Orient Express/ -ppassword -y
         
-  wine:
-    Desktop: true
-    WineDesktop: 1024x768
-
-  system:
-    resolution: 1024x768
-    reset_desktop: true
-
- 
- 

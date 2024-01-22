@@ -1,7 +1,7 @@
 name: Hitman - Absoulution
 game_slug: hitman-absolution
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: hitman-absolution
 runner: wine
  
 script:
@@ -23,7 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-

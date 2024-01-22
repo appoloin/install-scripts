@@ -1,13 +1,12 @@
 name: Tomb Raider - Anniversary
 game_slug: tomb-raider-anniversary
-version: Installer
-slug: Nostradamus-installer
+version: Good Old Games Installer
+slug: tomb-raider-anniversary
 runner: wine
 
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Tomb Raider Anniversary/tra.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -16,7 +15,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
@@ -25,6 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true

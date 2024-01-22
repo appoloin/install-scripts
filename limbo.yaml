@@ -1,12 +1,12 @@
-name: F1 2010
-game_slug: f1-2010
-version: Installer
-slug: f1-2010
+name: Limbo
+game_slug: limob
+version: Good Old Games Installer
+slug: limbo
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Games/F1 2010/f1_2010.exe
+    exe: "$GAMEDIR/GOG Games/LIMBO/limbo.exe"
     prefix: $GAMEDIR
 
   files:
@@ -23,8 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-

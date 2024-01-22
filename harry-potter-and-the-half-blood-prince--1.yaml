@@ -1,15 +1,12 @@
 name: Harry Potter and the Half Blood Prince
 game_slug: harry-potter-and-the-half-blood-prince--1
-version: Installer
-slug: installer
+version: Windows Installer
+slug: harry-potter-and-the-half-blood-prince--1
 runner: wine
 
 script:
   files:
     - setup: N/A:Select setup file from GOG
-    - patch: 
-        url: https://drive.google.com/uc?export=download&id=15mDr-Rmus8eH-XLnoHJdLqHYBsnnWB3f
-        filename: patch.7z
 
   game:
     arch: win32
@@ -17,6 +14,28 @@ script:
     prefix: $GAMEDIR
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID="$1"
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - task:
         arch: win32
         name: create_prefix
@@ -30,9 +49,12 @@ script:
         prefix: $GAMEDIR
 
     - execute:
+        file: $CACHE/download.sh
+        args: 15mDr-Rmus8eH-XLnoHJdLqHYBsnnWB3f $CACHE/patch.7z
+
+
+    - execute:
         file: 7z
-        args: e $patch -o"$GAMEDIR/drive_c/Program Files/Electronic Arts/Harry Potter and the Half-Blood Prince™/pc/"  -y
+        args: e  $CACHE/patch.7z -o"$GAMEDIR/drive_c/Program Files/Electronic Arts/Harry Potter and the Half-Blood Prince™/pc/"  -y -ppassword
 
 
-  wine:
-    Desktop: true

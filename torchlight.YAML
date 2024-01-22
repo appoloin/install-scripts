@@ -1,12 +1,12 @@
 name: Torchlight
 game_slug: torchlight
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: torchlight
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Torchlight/Torchlight.exe
+    exe: "$GAMEDIR/drive_c/GOG Games/Torchlight/Torchlight.exe"
     prefix: $GAMEDIR
 
   files:
@@ -24,9 +24,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-
-  wine:
-    Desktop: true
-
 

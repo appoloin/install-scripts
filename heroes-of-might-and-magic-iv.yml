@@ -13,8 +13,8 @@ script:
     - setup: N/A:Select installer
 
   install_complete_text: "Installation finished!\n\n\n\nIMPORTANT!\n============\nPlease\
-    \ change the wine version in the game\xB4s settings to \"lutris-GE-Proton 8-8\"\
-    \ ,this is last of 8 series with a working virtual desktop."
+    \ change the wine version in the game\xB4s settings to \"System\"\
+    \ ,this game needs working virtual desktop."
 
   installer:
     - task:

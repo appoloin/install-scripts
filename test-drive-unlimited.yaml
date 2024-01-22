@@ -1,6 +1,6 @@
 name: Test Drive - Unlimited
 game_slug: test-drive-unlimited
-version: Installer
+version: Windows Installer
 slug: test-drive-unlimited
 runner: wine
 
@@ -24,7 +24,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 

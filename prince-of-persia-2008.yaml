@@ -1,7 +1,7 @@
 name: Prince of Persia
 game_slug: prince-of-persia-2008
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: prince-of-persia-2008
 runner: wine
  
 script:
@@ -23,7 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 

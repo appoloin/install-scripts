@@ -1,24 +1,40 @@
 name: Commandos - Strike Force
 game_slug: commandos-strike-force
-version: Installer
+version: Windows Installer
 slug: commandos-strike-force
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files (x86)/Eidos/Pyro Studios/Commandos Strike Force/CommXPC.exe
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Eidos/Pyro Studios/Commandos Strike Force/CommXPC.exe"
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
-    - patch: 
-        url: https://drive.google.com/uc?export=download&id=1iDXv8dq4_bxN0m-sdOjUBXR7E4XfODEg
-        filename: patch.7z
-    - fix: 
-        url: https://drive.google.com/uc?export=download&id=1Bx1q5alcpOX88ryRV4Mmz3SqHHniroGt
-        filename: fix.7z
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID="$1"
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - task:
         name: create_prefix
         install_mono: false
@@ -30,9 +46,14 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1iDXv8dq4_bxN0m-sdOjUBXR7E4XfODEg $CACHE/patch.7z
+
     - execute:
         file: 7z
-        args: e $patch -o$GAMEDIR/drive_c/tmp -ppassword -y
+        args: e $CACHE/patch.7z -o$GAMEDIR/drive_c/tmp -ppassword -y
 
     - task:
         executable: "$GAMEDIR/drive_c/tmp/csf_patch_v1.2s.exe"
@@ -43,15 +64,15 @@ script:
         src: "$GAMEDIR/drive_c/Program Files (x86)/Eidos/Pyro Studios/Commandos Strike Force/CommXPC.exe"
         dst: "$GAMEDIR/drive_c/Program Files (x86)/Eidos/Pyro Studios/Commandos Strike Force/CommXPC.exe.old"
 
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1Bx1q5alcpOX88ryRV4Mmz3SqHHniroGt $CACHE/fix.7z
+
     - execute:
         file: 7z
-        args: e $fix -o$CACHE -ppassword -y
+        args: e $CACHE/fix.7z -o$CACHE -ppassword -y
 
     - copy:
         src: $CACHE/CommXPC.exe
         dst: "$GAMEDIR/drive_c/Program Files (x86)/Eidos/Pyro Studios/Commandos Strike Force/"
-
-  wine:
-    Desktop: true
-
-

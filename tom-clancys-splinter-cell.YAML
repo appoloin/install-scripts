@@ -12,15 +12,30 @@ script:
 
   files:
     - setup: N/A:Select installer
-    - patch: 
-        url: https://drive.google.com/uc?export=download&id=10uInQUDL7FTy5M7U9Q5ulB9yI7EFWB6o
-        filename: SplinterCell.WidescreenFix.zip
-    - dgv: 
-        url: https://drive.google.com/uc?export=download&id=1HyNnnCuOCrvlWxv0UU_rvNvjEKSOKJiT
-        filename: DgVoodoo_2_8.zip
-
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID="$1"
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - task:
         name: create_prefix
         install_mono: false
@@ -37,16 +52,25 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+    - execute:
+        file: $CACHE/download.sh
+        args: 10uInQUDL7FTy5M7U9Q5ulB9yI7EFWB6o $CACHE/DgVoodoo_2_6.zip
+
     - extract:
-        file: $dgv
+        file: $CACHE/DgVoodoo_2_6.zip
         dst: $CACHE
 
     - copy:
         src: $CACHE/MS/x86/D3D8.dll
         dst: $GAMEDIR/drive_c/GOG Games/Splinter Cell/system/
 
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 10uInQUDL7FTy5M7U9Q5ulB9yI7EFWB6o $CACHE/WidescreenFix.zip
+
     - extract:
-        file: $patch
+        file: $CACHE/WidescreenFix.zip
         dst: $GAMEDIR/drive_c/GOG Games/Splinter Cell/system/
        
 

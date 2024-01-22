@@ -1,21 +1,38 @@
 name: Harry Potter and the Deathly Hallows - Part 2
 game_slug: harry-potter-and-the-deathly-hallows-part-2
-version: Installer
-slug: installer
+version: Windows Installer
+slug: harry-potter-and-the-deathly-hallows-part-2
 runner: wine
 
 script:
-  files:
-    - patch:  
-        url: https://drive.google.com/uc?export=download&id=1OTPz2P_wG6PIv6fUdtMa5pwVOywtuWTk
-        filename: patch.7z
-
   game:
     arch: win32
     exe: $GAMEDIR/drive_c/Program Files/Electronic Arts/Harry Potter and the Deathly Hallows(TM) - Part 2/pc/hp8.exe
     prefix: $GAMEDIR
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID="$1"
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - insert-disc:
         description: Select game folder
         requires: AutoRun.exe
@@ -28,13 +45,14 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        executable: $setup
+        executable: $DISC/AutoRun.exe
         name: wineexec
         prefix: $GAMEDIR
 
     - execute:
-        file: 7z
-        args: e $patch -o"$GAMEDIR/drive_c/Program Files/Electronic Arts/Harry Potter and the Deathly Hallows(TM) - Part 2/pc/" -ppassword -y
+        file: $CACHE/download.sh
+        args: 1OTPz2P_wG6PIv6fUdtMa5pwVOywtuWTk $CACHE/patch.7z
 
-  wine:
-    Desktop: true
+    - execute:
+        file: 7z
+        args: e $CACHE/patch.7z -o"$GAMEDIR/drive_c/Program Files/Electronic Arts/Harry Potter and the Deathly Hallows(TM) - Part 2/pc/" -ppassword -y
