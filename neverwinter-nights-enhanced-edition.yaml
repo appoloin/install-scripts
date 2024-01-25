@@ -1,0 +1,56 @@
+name: Neverwinter Nights - Enhanced Editions
+game_slug: neverwinter-nights-enhanced-edition
+version: Good Old Games Installer
+slug: neverwinter-nights-enhanced-edition
+runner: wine
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Neverwinter Nights Enhanced Edition/bin/win32/nwmain.exe"
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+    - DLC1: N/A:Select DLC installer Darkness Over Daggerford
+    - DLC2: N/A:Select installer Heroes of Neverwinter
+    - DLC3: N/A:Select installer Infinite Dungeon
+    - DLC4: N/A:Select installer Pirates of the Sword Coast
+    - DLC5: N/A:Select installer Wyvern Crown of Cormyr
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC1
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC2
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC3
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC4
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC5
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR

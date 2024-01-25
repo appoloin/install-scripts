@@ -1,0 +1,63 @@
+name: Grim Dawn
+game_slug: grim-dawn
+version: Good Old Games Installer
+slug: grim-dawn
+runner: wine
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Grim Dawn/Grim Dawn.exe"
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+    - DLC1: N/A:Select Ashes of Malmouth installer
+    - DLC2: N/A:Select Crucible installer
+    - DLC3: N/A:Select Forgotten Gods installer
+    - DLC4: N/A:Select Loyalist Item Pack installer
+    - DLC5: N/A:Select Loyalist Item Pack 2 installer
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: vcrun2010 vcrun2012 vcrun2013 vcrun2015 win7
+        description: Installing dependencies
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC1
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC2
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC3
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC4
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC5
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR

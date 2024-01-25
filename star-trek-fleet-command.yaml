@@ -1,0 +1,25 @@
+name: Star Trek - Fleet Command
+game_slug: star-trek-fleet-command
+version: Good Old Games Installer
+slug: star-trek-fleet-command
+runner: wine
+ 
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Star Trek - Starfleet Command/sfc.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
