@@ -1,6 +1,6 @@
 name: Spaceship Warlock
 game_slug: spaceship-warlock
-version: Installer
+version: Windows Installer
 slug: spaceship-warlock
 runner: scummvm
 
@@ -10,22 +10,19 @@ script:
     - game:  N/A:Select the file SSWARLOCK
 
   game:
-    game_id: warlock  
+    game_id: warlock-win  
     path: $GAMEDIR
   
   installer:
     - write_file:
         content: '#!/bin/bash
 
-        src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
-        dst=$2
-        
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-        cp -avr "$src_path/."  "$dst"'
+          dst=$2
+          
+          cp -avr "$src/."  "$dst"'
         file: $CACHE/bulkcopy.sh
-
     - chmodx: $CACHE/bulkcopy.sh
 
     - execute:

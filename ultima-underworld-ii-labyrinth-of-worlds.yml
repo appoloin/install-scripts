@@ -1,7 +1,7 @@
 name: Ultima Underworld II Labyrinth of Worlds
 game_slug: ultima-underworld-ii-labyrinth-of-worlds
 version: Good Old Games Installer
-slug: Installer
+slug: ultima-underworld-ii-labyrinth-of-worlds
 runner: dosbox
 
 script:

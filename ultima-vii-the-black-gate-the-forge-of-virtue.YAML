@@ -1,38 +1,46 @@
-name:  Ultima VIII
+name:  Ultima VIII 
 game_slug:  ultima-viitm-the-black-gate-the-forge-of-virtue
-version: Installer
-slug:  installer
-runner: dosbox
+version: Good Old Games Installer
+slug:  ultima-viitm-the-black-gate-the-forge-of-virtue
+runner: linux
 
 
 
 script:
   files:
+    - game: N/A:Select Serpent Isle Installer
+    - game2: N/A:Select Blackgate Installer
     - exult_engine: https://lutris.nyc3.digitaloceanspaces.com/games/exult/exult-1.6-x86_64.tar.xz
     - exult_cfg: https://lutris.nyc3.digitaloceanspaces.com/games/exult/exult.cfg
     - exult_audio: https://lutris.nyc3.digitaloceanspaces.com/games/exult/exult_audio.zip
-    - game: N/A:Select the file Install.EXE
 
   game:
-    args: -c $GAMEDIR/exult.cfg
     exe: exult  
+    args: -c $GAMEDIR/exult.cfg
   
   installer:
     - extract:
         format: gog
         file: $game
         args: --gog 
+        dst: $GAMEDIR/serpent
+        description: Extracting game files
+
+    - extract:
+        format: gog
+        file: $game2
+        args: --gog 
         dst: $GAMEDIR/blackgate
         description: Extracting game files
 
     - extract:
-        dst: $GAMEDIR
         file: exult_engine
+        dst: $GAMEDIR
 
     - extract:
-        dst: $GAMEDIR/data
         file: exult_audio
+        dst: $GAMEDIR/data
 
     - move:
-        dst: $GAMEDIR
         src: exult_cfg
+        dst: $GAMEDIR
