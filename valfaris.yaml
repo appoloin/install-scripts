@@ -1,0 +1,25 @@
+name: Valfaris
+game_slug: valfaris
+version: Good Old Games Installer
+slug: valfaris
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Valfaris/Valfaris.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select Setup
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

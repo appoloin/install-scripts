@@ -1,0 +1,38 @@
+name: Shortest Trip to Earth
+game_slug: shortest-trip-to-earth
+version: Good Old Games Installer
+slug: shortest-trip-to-earth
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Shortest Trip to Earth/ST Earth.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+    - DLC: N/A:Select DLC installer
+    - DLC2: N/A:Select DLC2 installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+       
+    - task:
+        executable: $DLC
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC2
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
