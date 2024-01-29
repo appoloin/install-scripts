@@ -1,0 +1,41 @@
+name: The Pink Panther - Passport to Peril
+game_slug: the-pink-panther-passport-to-peril
+version: DOS
+slug: the-pink-panther-passport-to-peril
+runner: scummvm
+
+script:
+  files:
+    - DISC1:  N/A:Select ISO
+
+  game:
+    game_id: peril
+    path: $GAMEDIR
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+            src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+            dst=$2
+
+            find "$src" -type f \( -iname "PPTP.*" \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+    - chmodx: $CACHE/selectcopy.sh
+
+    - extract:
+        file: $DISC1 
+        dst:  $CAHCE/DISC1
+
+
+    - execute:
+        args: $CAHCE/DISC1 $GAMEDIR
+        file: $CACHE/selectcopy.sh
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+  scummvm:
+    fullscreen: true

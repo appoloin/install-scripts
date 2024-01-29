@@ -1,0 +1,136 @@
+name: The Adventures of Willy Beamish
+game_slug: the-adventures-of-willy-beamish
+version: Good Old Games Installer
+slug: the-adventures-of-willy-beamish
+runner: dosbox
+
+script:
+  files:
+    - setup: N/A:Select installer
+
+  game:
+    main_file: $GAMEDIR/play.conf
+  
+  installer:
+    - extract:
+        format: gog
+        file: $setup
+        args: --gog 
+        dst: $GAMEDIR
+        description: Extracting game files
+
+    #remove
+    - execute:
+        command: 'find "$GAMEDIR" -maxdepth 1  -type d \( -iname app -o
+                                                          -iname commonappdata -o
+                                                          -iname *redist -o
+                                                          -iname scummvm -o
+                                                          -iname dosbox -o
+                                                          -iname *support -o
+                                                          -iname tmp \) -exec rm -r {} \;
+                                            
+          find "$GAMEDIR" -type f \( -iname "goggame*" \) -exec rm {} \;
+          '
+
+
+    - write_file:
+        content: '[mouse]
+
+          mouse_capture = onstart   
+            
+          mouse_middle_release=true   
+
+          mouse_sensitivity= 15
+
+         [cpu]
+
+          core=auto
+
+          cputype=auto
+
+          cycles=fixed 6000
+        
+      
+        
+         [autoexec]
+
+          mount A "$GAMEDIR" -t floppy
+
+          mount C "$GAMEDIR" -t dir
+          
+
+          c: 
+
+          @echo off
+
+          cls
+
+          ECHO  ------------------------------------------ 
+
+          ECHO  THE ADVENTURES OF WILLY BEAMISH            
+          
+          ECHO  ------------------------------------------ 
+
+          ECHO   1) CD version                             
+
+          ECHO   2) Floppy version 
+
+          ECHO  ------------------------------------------ 
+
+          ECHO   3) Sound settings (Floppy)                
+
+          ECHO  ------------------------------------------ 
+
+          ECHO   4) exit program                           
+
+          ECHO  ------------------------------------------ 
+          
+
+          choice /c1234 /s Choose version to run [1-3]: /n 
+
+          if errorlevel 4 goto exit
+
+          if errorlevel 3 goto sound
+
+          if errorlevel 2 goto fdd
+
+          if errorlevel 1 goto cd
+
+
+          :cd
+
+          cls
+
+          cd willy
+
+          willy resource.cfg
+
+          exit
+
+          :fdd
+
+          cls
+
+          a:
+
+          willy.exe
+
+          exit
+
+
+          :sound
+
+          cls
+
+          a:
+
+          install
+
+          exit
+
+          :exit
+
+          exit'
+        file: $GAMEDIR/play.conf
+
+

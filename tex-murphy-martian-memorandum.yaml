@@ -1,0 +1,113 @@
+name: Tex Murphy Martian Memorandum
+game_slug: tex-murphy-martian-memorandum
+version: Good Old Games Installer
+slug:  tex-murphy-martian-memorandum
+runner: dosbox
+
+
+script:
+  files:
+    - setup: N/A:Select GOG installer
+
+  game:
+    main_file: $GAMEDIR/play.conf
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID="$1"
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
+    - extract:
+        format: gog
+        file: $setup
+        args: --gog 
+        dst: $GAMEDIR
+        description: Extracting game files
+    
+    - merge:
+        src: "$GAMEDIR/app"
+        dst: "$GAMEDIR"
+      
+    - execute:
+        file: $CACHE/download.sh
+        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
+
+    - extract:
+        file: $CACHE/MT32-ROMS.7z
+        dst:  $GAMEDIR/MT32-ROMS
+
+    #remove
+    - execute:
+       command: 'find "$GAMEDIR" -maxdepth 1  -type d \( -iname app -o
+  
+                                                          -iname commonappdata -o
+                                                          -iname *redist -o
+                                                          -iname scummvm -o
+                                                          -iname dosbox -o
+                                                          -iname *support -o
+                                                          -iname tmp \) -exec rm -r {} \;
+                                            
+          find "$GAMEDIR" -type f \( -iname "goggame*" \) -exec rm {} \;
+          '
+
+    - write_file:
+        file: $GAMEDIR/MM.CFG
+        content: '11232'
+
+    - write_file:
+        content: '[mouse]
+
+          mouse_capture = onstart   
+            
+          mouse_middle_release=true   
+
+          mouse_sensitivity= 15
+
+         [cpu]
+      
+         cycles=fixed 4000
+
+         [midi]
+
+         mididevice = mt32
+        
+         [mixer]
+
+         rate=22050
+
+         blocksize=2048
+
+         prebuffer=80
+
+         [speaker]
+
+         pcrate=22050
+
+         [autoexec]
+
+          mount C "$GAMEDIR" -t dir
+
+          C:
+          
+          mm.exe
+          
+          exit'
+        file: $GAMEDIR/play.conf

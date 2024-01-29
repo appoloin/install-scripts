@@ -1,0 +1,184 @@
+name: Companions of Xanth
+game_slug: companions-of-xanth
+version: DOS
+slug: companions-of-xanth
+runner: dosbox
+
+script:
+  files:
+    - DISC1: N/A:Select Disc 1 iso
+
+  game:
+    main_file: $GAMEDIR/play.conf
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID="$1"
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_c $GAMEDIR/drive_d 
+
+    - execute:
+        file: cp 
+        args: $DISC1 $GAMEDIR/drive_d/CD1.iso
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
+
+    - extract:
+        file: $CACHE/MT32-ROMS.7z
+        dst:  $GAMEDIR/MT32-ROMS
+
+
+    - write_file:
+        content: '[midi]
+
+          mididevice = mt32
+
+          [mt32]
+
+          romdir = $GAMEDIR/MT32-ROMS
+
+         [mouse]
+
+          mouse_capture = onstart   
+            
+          mouse_middle_release=true   
+
+          mouse_sensitivity= 15
+
+
+
+         [autoexec]
+
+          imgmount D "$GAMEDIR/drive_d/CD1.iso" -t cdrom
+
+          mount C "$GAMEDIR/drive_c" -t dir
+
+          D:
+
+          install
+          
+          exit'
+        file: $GAMEDIR/setup.conf
+
+    - task:
+        config_file: $GAMEDIR/setup.conf
+        name: dosexec
+        working_dir: $GAMEDIR/drive_c/
+    
+
+    - write_file:
+        content: '[midi]
+
+          mididevice = mt32
+
+          [mt32]
+
+          romdir = $GAMEDIR/MT32-ROMS
+
+         [dosbox]
+
+          machine = svga_et4000
+
+          [mouse]
+
+          mouse_capture = onstart   
+            
+          mouse_middle_release=true   
+
+          mouse_sensitivity= 15
+
+         [autoexec]
+
+          imgmount D "$GAMEDIR/drive_d/CD1.iso" -t cdrom
+
+          mount C "$GAMEDIR/drive_c" -t dir
+
+          C:
+
+          cls 
+
+          ECHO OFF
+
+          goto launcher
+
+          :launcher
+
+          cls 
+
+          ECHO  -------------------------------------------  
+          
+          ECHO             Companions of Xanth 
+          
+          ECHO  -------------------------------------------  
+          
+          ECHO   1) Play Game        
+          
+          ECHO   2) Setup                               
+          
+          ECHO  -------------------------------------------  
+                    
+          ECHO   3) Exit Program                             
+          
+          ECHO  -------------------------------------------  
+
+
+          choice /c123 /s Which program do you want to run? [1-3]: /n 
+          
+          if errorlevel 3 goto exit
+          
+          if errorlevel 2 goto setup
+          
+          if errorlevel 1 goto game
+
+
+          :game
+
+          C:
+
+          cd Xanth
+
+          Xanth.exe
+
+          goto exit
+
+
+          :setup
+
+          cls
+
+          D:
+
+          install
+
+          goto launcher
+
+
+
+          :exit
+          
+          exit'
+        file: $GAMEDIR/play.conf
