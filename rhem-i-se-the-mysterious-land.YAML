@@ -1,7 +1,7 @@
-name: Rhem 1
+name: Rhem 1 - The Msyterious Land
 game_slug: rhem-i-se-the-mysterious-land
-version: Installer
-slug: install
+version: Windows Installer
+slug: rhem-i-se-the-mysterious-land
 runner: wine
 
 script:
@@ -12,6 +12,10 @@ script:
 
   files:
     - setup: N/A:Select 
+
+  install_complete_text: "Installation finished!\n\n\n\nIMPORTANT!\n============\nPlease\
+    \ change the wine version in the game\xB4s settings to \"System\"\
+    \ ,this game needs working virtual desktop."
 
   installer:
     - task:
@@ -31,5 +35,3 @@ script:
 
   wine:
     Desktop: true
-
-

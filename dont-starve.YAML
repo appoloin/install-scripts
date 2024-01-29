@@ -1,7 +1,7 @@
 name: Don't Strave
 game_slug:  dont-starve
-version: Installer
-slug:  INSTALLER
+version: Good Old Games Installer
+slug:  dont-starve
 runner: wine
 
 script:
@@ -12,6 +12,8 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - DLC1: N/A:Select DLC Installer Reign of Giants
+    - DLC2: N/A:Select DLC Installer Shipwrecked
 
   installer:
     - task:
@@ -26,7 +28,13 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true
+    - task:
+        executable: $DLC1
+        name: wineexec
+        prefix: $GAMEDIR
 
+    - task:
+        executable: $DLC2
+        name: wineexec
+        prefix: $GAMEDIR
 

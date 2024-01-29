@@ -1,7 +1,7 @@
 name: The Witness
 game_slug: the-witness
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: the-witness
 runner: wine
  
 script:
@@ -23,7 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 

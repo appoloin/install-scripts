@@ -6,12 +6,9 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Game/reVC.exe
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Rockstar Games/Grand Theft Auto Vice City/reVC.exe"
     prefix: $GAMEDIR
 
-  files:
-    - DISC1: N/A:Select Disc1 ISO
-    - DISC2: N/A:Select Disc2 ISO
 
   installer:
     - write_file:
@@ -42,20 +39,24 @@ script:
         install_gecko: false
         prefix: $GAMEDIR
 
+    - task:
+        app: winxp
+        name: winetricks
+        prefix: $GAMEDIR
+
     - insert-disc:
         description: Please insert Disc 1
         requires: Setup.exe
 
     - task:
-        description: Installing
-        executable: $DISC/Setup.exe
+        executable: $DISC/setup.exe
         name: wineexec
         prefix: $GAMEDIR
 
     - execute:
         file: $CACHE/download.sh
         args: 1xy8kft9fDTbqnBt-kmmPW_LppO3ivIfj $CACHE/patch.7z
-
+        
     - execute:
         file: 7z
-        args: x $CACHE/patch.7z -o"$GAMEDIR/drive_c/Game" -ppassword -y
+        args: x $CACHE/patch.7z -o"$GAMEDIR/drive_c/Program Files (x86)/Rockstar Games/Grand Theft Auto Vice City" -ppassword -y

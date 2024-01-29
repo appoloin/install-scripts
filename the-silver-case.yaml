@@ -1,6 +1,6 @@
 name: The Silver Case
 game_slug: the-silver-case
-version: Installer
+version: Good Old Games Installer
 slug: the-silver-case
 runner: wine
 
@@ -23,8 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

@@ -1,7 +1,7 @@
 name: Crying Suns
 game_slug: crying-suns
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: crying-suns
 runner: wine
 
 script:
@@ -23,8 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

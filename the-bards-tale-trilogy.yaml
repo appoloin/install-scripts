@@ -1,6 +1,6 @@
 name: The Bards Tales
 game_slug: the-bards-tale-trilogy
-version: Installer
+version: Good Old Gamses Installer
 slug: the-bards-tale-trilogy
 runner: wine
 
@@ -23,8 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

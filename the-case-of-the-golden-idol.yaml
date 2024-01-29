@@ -1,7 +1,7 @@
 name: The Case of the Golden Idol
 game_slug: the-case-of-the-golden-idol
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: the-case-of-the-golden-idol
 runner: wine
  
 script:

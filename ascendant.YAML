@@ -1,6 +1,6 @@
 name: Ascendant
 game_slug: ascendant
-version: Installer
+version: Good Old Games Installer
 slug: ascendant
 runner: wine
 
@@ -23,8 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

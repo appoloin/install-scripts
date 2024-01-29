@@ -1,12 +1,12 @@
-name: Scrapland - Remastered
+name: Scrapland
 game_slug: scrapland-remastered
-version: Installer
+version: Good Old Games Installer
 slug: scrapland-remastered
 runner: wine
  
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Scrapland Remastered/Scrap.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Scrapland Remastered/Bin/Scrap.exe
     prefix: $GAMEDIR
 
   files:
@@ -23,7 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 

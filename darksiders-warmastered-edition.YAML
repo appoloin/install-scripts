@@ -1,7 +1,7 @@
 name: Darksider
 game_slug: darksiders-warmastered-edition
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: darksiders-warmastered-edition
 runner: wine
 
 script:
@@ -12,9 +12,30 @@ script:
 
   files:
     - setup: N/A:Select installer
-    - mfplatdll: https://github.com/legluondunet/MyLittleLutrisScripts/raw/master/Darksiders%20-%20Warmastered%20Edition/mfplat.7z
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID="$1"
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - task:
         name: create_prefix
         arch: win32
@@ -45,9 +66,14 @@ script:
         cabfile: $HOME/.cache/winetricks/win7sp1/windows6.1-KB976932-X86.exe
         component: wmvdecod
         name: install_cab_component
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1uysqSXE_Fay-Eul56jHrVhFxvUmCjt_i "$CACHE/mfplat.7z"
+
     - extract:
+        file: $CACHE/mfplat.7z
         dst: $GAMEDIR/drive_c/GOG Games/Darksiders
-        file: mfplatdll
 
     - task:
         executable: $setup
@@ -56,10 +82,3 @@ script:
 
   system:
     pulse_latency: true
-    resolution: 1024x768
-    reset_desktop: true
-
-
-  wine:
-    Desktop: true
-    WineDesktop: 1024x768

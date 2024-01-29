@@ -6,7 +6,7 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Game/re3.exe
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Rockstar Games/GTAIII/re3.exe"
     prefix: $GAMEDIR
 
   files:
@@ -43,31 +43,33 @@ script:
         install_gecko: false
         prefix: $GAMEDIR
 
-    - execute:
-        file: mkdir
-        args: $GAMEDIR/drive_c/Game
+    - task:
+        app: winxp
+        name: winetricks
+        prefix: $GAMEDIR
 
     - extract:
         file: $DISC1 
-        dst:  $GAMEDIR/drive_c/Game
+        dst:  $CACHE/DISC1
 
-    - execute:
-        file: chmod
-        args: -R 775  "$GAMEDIR/drive_c/Game"
+    - task:
+        executable: $CACHE/DISC1/setup.exe
+        name: wineexec
+        prefix: $GAMEDIR
 
     - extract:
         file: $DISC2
-        dst:  $GAMEDIR/drive_c/Game
+        dst:  "$GAMEDIR/drive_c/Program Files (x86)/Rockstar Games/GTAIII"
 
     - execute:
         file: chmod
-        args: -R 775  "$GAMEDIR/drive_c/Game"
+        args: -R 775  "$GAMEDIR/drive_c/Program Files (x86)/Rockstar Games/GTAIII"
 
     - execute:
         file: $CACHE/download.sh
-        args: 17kXk2BcA6NsI8BK7kQZc27ma6X04I1Tn $CACHE/patch.7z
+        args: 1I9bPV3_YdfXESahtpTsXWzZuU85YmXZ2 $CACHE/patch.7z
 
     - execute:
         file: 7z
-        args: x $CACHE/patch.7z -o"$GAMEDIR/drive_c/Game" -ppassword -y
+        args: x $CACHE/patch.7z -o"$GAMEDIR/drive_c/Program Files (x86)/Rockstar Games/GTAIII" -ppassword -y
 

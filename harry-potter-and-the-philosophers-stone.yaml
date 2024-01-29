@@ -54,6 +54,3 @@ script:
         file: 7z
         args: e $CACHE/patch.7z -o"$GAMEDIR/drive_c/Program Files (x86)/EA Games/Harry Potter/System/" -ppassword -y
 
-  wine:
-    Desktop: true
-

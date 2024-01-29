@@ -1,7 +1,7 @@
 name: System Shock - Enhanced Edition
 game_slug: system-shock-enhanced-edition
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: system-shock-enhanced-edition
 runner: wine
  
 script:
@@ -23,7 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 

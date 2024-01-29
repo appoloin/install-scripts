@@ -1,7 +1,7 @@
 name: Blood Fresh Supply
 game_slug: blood-fresh-supply
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: blood-fresh-supply
 runner: wine
 
 script:
@@ -24,6 +24,3 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-
-  wine:
-    Desktop: true

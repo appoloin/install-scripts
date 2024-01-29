@@ -1,7 +1,7 @@
 name: Stranger Things 3 - The Game
 game_slug: stranger-things-3-the-game
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: stranger-things-3-the-game
 runner: wine
 
 script:

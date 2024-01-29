@@ -1,7 +1,7 @@
 name: Orphan
 game_slug:  orphan
-version: Installer
-slug: orphan_INSTALLER
+version: Good Old Games Installer
+slug: orphan
 runner: wine
 
 script:
@@ -25,8 +25,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

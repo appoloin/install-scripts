@@ -1,12 +1,12 @@
 name: Hauma - A Detective Noir Story
 game_slug: hauma-a-detective-noir-story
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: hauma-a-detective-noir-story
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/GOG Games/Hauma - A Detective Noir Story/hauma.exe
+    exe: "$GAMEDIR/drive_c/GOG Games/Hauma - A Detective Noir Story/hauma.exe"
     prefix: $GAMEDIR
 
   files:

@@ -1,7 +1,7 @@
 name: Ziggurat 2
 game_slug: ziggurat-2
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: ziggurat-2
 runner: wine
 
 script:
@@ -11,6 +11,7 @@ script:
 
   files:
     - setup: N/A:Select the GOG installer
+    - DLC1: N/A:Select DLC installer
 
   installer:
     - task:
@@ -22,4 +23,10 @@ script:
     - task:
         executable: $setup
         name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC1
+        name: wineexec
+        args: /SILENT 
         prefix: $GAMEDIR

@@ -1,7 +1,7 @@
 name:  Saboteur 2
 game_slug: saboteur-ii
-version: Installer
-slug: saboteur-installer
+version: Good Old Games Installer
+slug: saboteur-ii
 runner: wine
 
 script:
@@ -24,9 +24,6 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-
-  wine:
-    Desktop: true
 
 
 

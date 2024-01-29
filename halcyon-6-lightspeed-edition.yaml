@@ -1,6 +1,6 @@
 name: Halcyon 6 - Lightspeed Edition
 game_slug: halcyon-6-lightspeed-edition
-version: Installer
+version: Good Old Games Installer
 slug: halcyon-6-lightspeed-edition
 runner: wine
 
@@ -11,6 +11,7 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - DLC: N/A:Select DLC The Precursor Legacy
 
   installer:
     - task:
@@ -24,7 +25,7 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true
-
-
+    - task:
+        executable: $DLC
+        name: wineexec
+        prefix: $GAMEDIR

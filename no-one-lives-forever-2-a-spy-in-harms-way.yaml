@@ -10,7 +10,7 @@ script:
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select the GOG installer
+    - setup: N/A:Select the installer
 
   installer:
     - task:

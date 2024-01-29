@@ -1,7 +1,7 @@
 name: Unmetal
 game_slug: unmetal
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: unmetal
 runner: wine
 
 script:
@@ -11,6 +11,7 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - DLC1: N/A:Select DLC installer
 
   installer:
     - task:
@@ -23,8 +24,9 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-
+        
+    - task:
+        executable: $DLC1
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR

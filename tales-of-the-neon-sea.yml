@@ -1,7 +1,7 @@
 name: Tales of the Neon Sea
 game_slug: tales-of-the-neon-sea
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: tales-of-the-neon-sea
 runner: wine
 
 script:
@@ -23,8 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-

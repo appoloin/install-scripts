@@ -1,7 +1,7 @@
 name: Battlestar Galactica - Deadlock
 game_slug: battlestar-galactica-deadlock
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: battlestar-galactica-deadlock
 runner: wine
  
 script:
@@ -74,8 +74,3 @@ script:
         name: wineexec
         args: /SILENT 
         prefix: $GAMEDIR
-
-
-  wine:
-    Desktop: true
-

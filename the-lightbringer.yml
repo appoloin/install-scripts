@@ -1,31 +1,27 @@
 name: The Lightbringer
 game_slug: the-lightbringer
-version: Installer
-slug:  installer
+version: Good Old Games Installer
+slug:  the-lightbringer
 runner: wine
 
 script:
-    game:
-        exe: drive_c/GOG Games/The Lightbringer/Lightbringer.exe
+  game:
+    exe:  $GAMEDIR/drive_c/GOG Games/The Lightbringer/Lightbringer.exe
+    prefix: $GAMEDIR
+
+  files:
+    - game: N/A:Select Setup.exe
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
-  
-    files:
-        - game: N/A:Select Setup.exe
 
-
-    installer:
-        - task:
-            name: create_prefix
-            install_mono: false
-            install_gecko: false
-            prefix: $GAMEDIR
-
-        - task:
-            executable: $game
-            name: wineexec
-            prefix: $GAMEDIR
-
-
-    wine:
-        Desktop: true
+    - task:
+        executable: $game
+        name: wineexec
+        prefix: $GAMEDIR
 

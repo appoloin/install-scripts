@@ -1,6 +1,6 @@
 name: Guns Gore and Cannoli
 game_slug: guns-gore-and-cannoli
-version: Installer
+version: Good Old Games Installer
 slug: guns-gore-and-cannoli
 runner: wine
 
@@ -23,9 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-
-  wine:
-    Desktop: true
-
 

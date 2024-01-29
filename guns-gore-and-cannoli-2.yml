@@ -1,12 +1,12 @@
 name: Guns Gore and Cannoli 2
 game_slug: guns-gore-and-cannoli-2
-version: Installer
+version: Good Old Games Installer
 slug: guns-gore-and-cannoli-2
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/CrossCode/CrossCode.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Guns, Gore & Cannoli 2/ggc2.exe
     prefix: $GAMEDIR
 
   files:
@@ -23,9 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-
-  wine:
-    Desktop: true
-
 

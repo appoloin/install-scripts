@@ -1,12 +1,12 @@
 name: Iron Dungeon
 game_slug: iron-dungeon
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug:  iron-dungeon
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Iron Dungeon/Iron Dungeon.exe
+    exe: "$GAMEDIR/drive_c/GOG Games/Iron Dungeon/Iron Dungeon.exe"
     prefix: $GAMEDIR
 
   files:

@@ -1,12 +1,12 @@
 name: Scarlet Hood and the Wicked Wood
 game_slug: scarlet-hood-and-the-wicked-wood
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: scarlet-hood-and-the-wicked-wood
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/GOG Games/Scarlet Hood and the Wicked Wood/ScarletHood.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Scarlet Hood and the Wicked Wood/ScarletHood.exeexe
     prefix: $GAMEDIR
 
   files:

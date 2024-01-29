@@ -1,12 +1,12 @@
 name: Norco
 game_slug: norco-special-edition
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: norco-special-edition
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/NORCO/norco.exe
+    exe: "$GAMEDIR/drive_c/GOG Games/NORCO/norco.exe"
     prefix: $GAMEDIR
 
   files:
@@ -24,7 +24,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 

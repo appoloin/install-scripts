@@ -1,7 +1,7 @@
 name: Art of Rally
 game_slug: art-of-rally
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: art-of-rally
 runner: wine
 
 script:

@@ -1,6 +1,6 @@
 name: Test Drive - Ferrari Racing Legends
 game_slug: test-drive-ferrari-racing-legends
-version: Installer
+version: Windows Installer
 slug: test-drive-ferrari-racing-legends
 runner: wine
 
@@ -26,7 +26,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 

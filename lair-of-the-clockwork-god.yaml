@@ -1,13 +1,12 @@
 name: lair-of-the-clockwork-god
 game_slug:  lair-of-the-clockwork-god
-version: Installer
+version: Good Old Games Installer
 slug: lair-of-the-clockwork-god_INSTALLER
 runner: wine
 
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Lair of the Clockwork God/LotCG.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -16,7 +15,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
@@ -25,8 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

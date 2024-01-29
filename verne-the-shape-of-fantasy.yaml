@@ -1,12 +1,12 @@
 name: Verne The Shape of Fantasy
 game_slug: verne-the-shape-of-fantasy
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: verne-the-shape-of-fantasy
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/GOG Games/Verne The Shape of Fantasy/Verne.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Verne The Shape of Fantasy/Verne.exe
     prefix: $GAMEDIR
 
   files:

@@ -1,12 +1,12 @@
 name: The Blind Prophet
 game_slug: the-blind-prophet
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: the-blind-prophet
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/GOG Games/The Blind Prophet/The Blind Prophet.exe
+    exe: $GAMEDIR/drive_c/GOG Games/The Blind Prophet/The Blind Prophet.exe
     prefix: $GAMEDIR
 
   files:

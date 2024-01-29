@@ -1,17 +1,21 @@
 name: Rhem 4 The Golden Fragments
 game_slug: rhem-4-the-golden-fragments
-version: Installer
-slug: install
+version: Windows Installer
+slug: rhem-4-the-golden-fragments
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/steam/steamapps/common/
+    exe: $GAMEDIR/drive_c/steam/common/RHEM IV The Golden Fragments/RHEM_IV_SE.exe
     arch: win32
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select 
+    - setup: N/A:Select EXE
+
+  install_complete_text: "Installation finished!\n\n\n\nIMPORTANT!\n============\nPlease\
+    \ change the wine version in the game\xB4s settings to \"System\"\
+    \ ,this game needs working virtual desktop."
 
   installer:
     - task:
@@ -19,6 +23,11 @@ script:
         arch: win32
         install_mono: false
         install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: quicktime72
+        name: winetricks
         prefix: $GAMEDIR
 
     - execute:
@@ -31,5 +40,3 @@ script:
 
   wine:
     Desktop: true
-
-

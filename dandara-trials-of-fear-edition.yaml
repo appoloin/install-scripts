@@ -1,12 +1,12 @@
 name: Dandara - Trials of Fear Edition
 game_slug: dandara-trials-of-fear-edition
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug:  dandara-trials-of-fear-edition
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR//GOG Games/Dandara/Dandara.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Dandara/Dandara.exe
     prefix: $GAMEDIR
 
   files:
@@ -23,8 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-

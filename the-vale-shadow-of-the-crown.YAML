@@ -1,6 +1,6 @@
 name: The Vale - Shadow of the Crown
 game_slug: the-vale-shadow-of-the-crown
-version: Installer
+version: Good Old Games Installer
 slug: the-vale-shadow-of-the-crown
 runner: wine
 
@@ -27,7 +27,5 @@ script:
         file: $setup
         dst: $GAMEDIR/drive_c/steam
 
-  wine:
-    Desktop: true
 
 

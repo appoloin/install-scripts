@@ -1,6 +1,6 @@
 name: Oxygen Not Included
 game_slug: oxygen-not-included
-version: Installer
+version: Good Old Games Installer
 slug: oxygen-not-included
 runner: wine
 
@@ -23,8 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

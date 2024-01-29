@@ -1,7 +1,7 @@
 name: 80 Days
 game_slug: 80-days
-version: Installer
-slug: moon-installer
+version: Good Old Games Installer
+slug: 80-days
 runner: wine
 
 script:
@@ -15,7 +15,6 @@ script:
 
   installer:
     - task:
-        arch: win32
         name: create_prefix
         install_mono: false
         install_gecko: false
@@ -26,5 +25,3 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true

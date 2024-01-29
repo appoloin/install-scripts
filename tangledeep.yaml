@@ -1,6 +1,6 @@
 name: tangledeep
 game_slug: tangledeep 
-version: Installer
+version: Good Old Games Installer
 slug: tangledeep
 runner: wine
 
@@ -12,6 +12,8 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - DLC1: N/A:Select DLC1 installer
+    - DLC2: N/A:Select DLC2 installer
 
   installer:
     - task:
@@ -26,7 +28,14 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true
-
-
+    - task:
+        executable: $DLC1
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+        
+    - task:
+        executable: $DLC2
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR

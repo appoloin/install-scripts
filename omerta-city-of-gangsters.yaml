@@ -1,22 +1,22 @@
 name: Omerta - City of Gangsters
 game_slug: omerta-city-of-gangsters
-version: Installer
+version: Good Old Games Installer
 slug: omerta-city-of-gangsters
 runner: wine
 
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Omerta - City of Gangsters/Omerta.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select Setup
+    - patch: N/A:Select patch
+    - dlc: N/A:Select dlc
 
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko:  false
         prefix: $GAMEDIR
@@ -26,6 +26,12 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true
+    - task:
+        executable: $patch
+        name: wineexec
+        prefix: $GAMEDIR
 
+    - task:
+        executable: $dlc
+        name: wineexec
+        prefix: $GAMEDIR

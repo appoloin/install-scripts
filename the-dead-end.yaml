@@ -1,6 +1,6 @@
 name: The Dead End
 game_slug: the-dead-end
-version: Installer
+version: Good Old Games Installer
 slug: the-dead-end
 runner: wine
 
@@ -23,8 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-

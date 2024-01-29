@@ -1,7 +1,7 @@
 name: The Excavation of the Hobs Barrow
 game_slug: the-excavation-of-hobs-barrow
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: the-excavation-of-hobs-barrow
 runner: wine
 
 script:
@@ -23,8 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

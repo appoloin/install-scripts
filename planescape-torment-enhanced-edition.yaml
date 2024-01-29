@@ -1,6 +1,6 @@
 name: Planescape Torment - Enhanced Edition
 game_slug: planescape-torment-enhanced-edition
-version: Installer
+version: Good Old Games Installer
 slug: planescape-torment-enhanced-edition
 runner: wine
 
@@ -23,8 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-

@@ -1,12 +1,12 @@
 name: Abzu
 game_slug: abzu
-version: Installer
+version: Good Old Games Installer
 slug: abzu
 runner: wine
  
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/GOG Games/ABZU/AbzuGame.exe
+    exe: $GAMEDIR/drive_c/GOG Games/ABZU/AbzuGame.exe
     prefix: $GAMEDIR
 
   files:
@@ -23,7 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-

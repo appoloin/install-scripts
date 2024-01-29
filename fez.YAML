@@ -1,7 +1,7 @@
 name: Fez
 game_slug: fez
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: fez
 runner: wine
 
 script:
@@ -30,6 +30,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true

@@ -1,12 +1,12 @@
 name: American Hero Unrated
 game_slug: american-hero-unrated
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: american-hero-unrated
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/American Hero Unrated/AH.EXE
+    exe: "$GAMEDIR/drive_c/GOG Games/American Hero Unrated/AH.EXE"
     prefix: $GAMEDIR
 
   files:

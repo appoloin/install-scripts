@@ -1,7 +1,7 @@
 name: Hand of Fate
 game_slug: hand-of-fate
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: hand-of-fate
 runner: wine
 
 script:
@@ -33,8 +33,6 @@ script:
         args: /SILENT
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true
 
   system:
     pulse_latency: true

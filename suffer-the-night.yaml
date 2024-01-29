@@ -1,12 +1,12 @@
 name: Suffer the Night
 game_slug: suffer-the-night
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: suffer-the-night
 runner: wine
  
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Suffer The Night/Suffer_The_Night/Binaries/Win64/Suffer_The_Night-Win64-Shipping.exe
+    exe: "$GAMEDIR/drive_c/GOG Games/Suffer The Night/Suffer_The_Night/Binaries/Win64/Suffer_The_Night-Win64-Shipping.exe"
     prefix: $GAMEDIR
 
   files:
@@ -23,7 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 

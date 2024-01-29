@@ -1,6 +1,6 @@
 name: The Journey Down - Chapter Two
 game_slug: the-journey-down-chapter-two
-version: Installer
+version: Good Old Games Installer
 slug: the-journey-down-chapter-two
 runner: wine
 
@@ -23,8 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-

@@ -1,7 +1,7 @@
 name: The Book of Unwritten tales 2
 game_slug: the-book-of-unwritten-tales-2
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: the-book-of-unwritten-tales-2
 runner: wine
 
 script:
@@ -23,8 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

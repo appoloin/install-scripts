@@ -1,6 +1,6 @@
 name: Dark Matter
 game_slug: dark-matter
-version: Installer
+version: Good Old Games Installer
 slug: dark-matter
 runner: wine
 
@@ -29,9 +29,3 @@ script:
         executable: $patch
         name: wineexec
         prefix: $GAMEDIR
-
-
-  wine:
-    Desktop: true
-
-

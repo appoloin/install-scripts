@@ -1,6 +1,6 @@
 name: The 7th Circle - Endless Nightmare
 game_slug: the-7th-circle-endless-nightmare
-version: Installer
+version: Good Old Games Installer
 slug: the-7th-circle-endless-nightmare
 runner: wine
 
@@ -25,8 +25,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

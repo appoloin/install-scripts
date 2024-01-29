@@ -1,14 +1,15 @@
 name: Saints Row - Get out of Hell
 game_slug: saints-row-gat-out-of-hell
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug:  saints-row-gat-out-of-hell
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/
+    exe: $GAMEDIR/drive_c/GOG Games/Saints Row - Gat Out of Hell/SR4HLauncher.exe
   files:
     - setup: N/A:Select installer
+    - dlc: N/A:Select DLC
 
   installer:
     - task:
@@ -18,7 +19,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx10 vcrun2005 win7 xact_x64 xact
+        app: vcrun2005 win7 xact_x64 xact
         name: winetricks
         prefix: $GAMEDIR
        
@@ -27,7 +28,10 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+    - task:
+        executable: $dlc
+        name: wineexec
+        prefix: $GAMEDIR
 
-  wine:
-    Desktop: true
+
 

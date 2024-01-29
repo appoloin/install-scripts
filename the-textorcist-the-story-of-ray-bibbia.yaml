@@ -1,7 +1,7 @@
 name: The Textorcist - The Story of Ray Bibbia
 game_slug: the-textorcist-the-story-of-ray-bibbia
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: the-textorcist-the-story-of-ray-bibbia
 runner: wine
 
 script:

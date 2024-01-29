@@ -1,12 +1,12 @@
 name: Serial Cleaners
 game_slug: serial-cleaners
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: serial-cleaners
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/Serial Cleaners/Cleaner.exe
+    exe: "$GAMEDIR/drive_c/GOG Games/Serial Cleaners/SerialCleaners.exe"
     prefix: $GAMEDIR
 
   files:
@@ -23,8 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

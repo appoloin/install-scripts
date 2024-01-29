@@ -13,6 +13,11 @@ script:
   files:
     - setup: N/A:Select setup.exe
 
+
+  install_complete_text: "Installation finished!\n\n\n\nIMPORTANT!\n============\nPlease\
+    \ change the wine version in the game\xB4s settings to \"System\"\
+    \ ,this game needs working virtual desktop."
+
   installer:
     - write_file:
         content: '#!/bin/bash
@@ -100,3 +105,7 @@ script:
     - copy:
         src: $CACHE/gta_sa.exe
         dst:  $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas/
+
+  wine:
+    Desktop: true
+

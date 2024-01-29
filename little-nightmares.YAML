@@ -1,7 +1,7 @@
 name: Little Nightmares
 game_slug: little-nightmares
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: little-nightmares
 runner: wine
 
 script:
@@ -72,5 +72,3 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true

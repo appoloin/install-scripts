@@ -1,7 +1,7 @@
 name: Torchlight II
 game_slug: torchlight-ii
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: torchlight-ii
 runner: wine
 
 script:
@@ -24,9 +24,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-
-  wine:
-    Desktop: true
-
 

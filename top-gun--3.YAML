@@ -31,11 +31,9 @@ script:
         install_mono: true
         install_gecko: false
         prefix: $GAMEDIR
-
-#dotnet35
  
     - task:
-        app: vcrun2008 
+        app: vcrun2008 dotnet35
         description: Installing additional components
         name: winetricks
         prefix: $GAMEDIR

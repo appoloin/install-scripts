@@ -1,7 +1,7 @@
 name: Turok 2 - Seeds of Evil
 game_slug: turok-2-seeds-of-evil
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: turok-2-seeds-of-evil
 runner: wine
 
 script:
@@ -23,8 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

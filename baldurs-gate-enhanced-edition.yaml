@@ -1,7 +1,7 @@
-name: Baldurs Gate
+name: Baldurs Gate Enhanced Edition
 game_slug: baldurs-gate-enhanced-edition
-version: Installer
-slug:  baldurs-gate-installer
+version: Good Old Games Installer
+slug:  baldurs-gate-enhanced-edition
 runner: wine
 
 script:
@@ -12,6 +12,7 @@ script:
 
   files:
     - setup: N/A:Select the GOG installer
+
 
   installer:
     - task:
@@ -24,8 +25,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-
-  wine:
-    Desktop: true
 

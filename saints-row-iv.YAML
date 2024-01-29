@@ -1,6 +1,6 @@
 name: Saints Row IV
 game_slug: saints-row-iv
-version: Installer
+version: Good Old Games Installer
 slug: saints-row-iv
 runner: wine
 
@@ -23,8 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

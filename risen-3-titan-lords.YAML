@@ -1,17 +1,17 @@
 name: Risen 3
 game_slug: risen-3-titan-lords
-version: Installer
-slug: risen-3-titan-lords-INSTALLER
+version: Good Old Games Installer
+slug: risen-3-titan-lords
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files (x86)/Deep Silver/Risen 3 - Titan Lords/system/Risen3.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Risen 3 Titan Lords/system/Risen3.exe
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select installer
-
+    - setup: N/A:Select Installer
+    - patch: N/A:Select Patch
   installer:
     - task:
         name: create_prefix
@@ -24,7 +24,10 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true
+    - task:
+        executable: $patch
+        name: wineexec
+        prefix: $GAMEDIR
+
 
 

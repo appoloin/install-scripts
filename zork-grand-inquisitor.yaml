@@ -1,136 +1,162 @@
 name: Zork Grand Inquisitor
 game_slug: zork-grand-inquisitor
-version: Windows_Installer
-slug:  zork_grand_inquisitor-installer
+version: Windows Installer
+slug:  zork_grand_inquisitor
 runner: scummvm
 
 
 script:
   files:
-    - patch: 
-        url: https://drive.google.com/uc?export=download&id=1gfchx-coCOQhxlRL-WSdmoj6j5DgfRGX
-        filename: patch.7z
+    - DISC1: N/A:Select Disc1 ISO.
+    - DISC2: N/A:Select Disc2 ISO.
 
   game:
-      game_id: zgi-win
-      path: $GAMEDIR
+    game_id: ZGI-win
+    path: $GAMEDIR
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID="$1"
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                        -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                        -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
       #setup wine and run installer, installer only uses disc1
-      - task:
-          name: wine.create_prefix
-          prefix: $GAMEDIR
-          arch: win32
-          install_mono: false
-          install_gecko: false
+    - task:
+        name: wine.create_prefix
+        prefix: $GAMEDIR
+        arch: win32
+        install_mono: false
+        install_gecko: false
       
-      - insert-disc:
-          description: Please insert disc 1
-          requires: setup.exe
-
       #set scummvm target and copy folders and files from disc 1,2
-      - execute:
-          args: $GAMEDIR/zassets1 $GAMEDIR/zassets2  $GAMEDIR/zgi_mx
-          file: mkdir
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/zassets1 $GAMEDIR/zassets2  $GAMEDIR/zgi_mx
 
-      - copy:
-          dst: $GAMEDIR/zassets1
-          src: $DISC/zassets1
-      - copy:
-          dst: $GAMEDIR/zgi_mx
-          src: $DISC/zgi/zgi_mx
-      - copy:
-          dst: $GAMEDIR
-          src: $DISC/zgi/cursor.zfs
-      - copy:
-          dst: $GAMEDIR
-          src: $DISC/zgi/death.zfs
-      - copy:
-          dst: $GAMEDIR
-          src: $DISC/zgi/inquis.str
-      - copy:
-          dst: $GAMEDIR
-          src: $DISC/zgi/inquis.zix
-      - copy:
-          dst: $GAMEDIR
-          src: $DISC/zgi/r.svr
-      - copy:
-          dst: $GAMEDIR
-          src: $DISC/zgi/scripts.zfs
-      - copy:
-          dst: $GAMEDIR
-          src: $DISC/zgi/subtitle.zfs
+    - extract:
+        file: $DISC1 
+        dst:  $CACHE/DISC1
 
-      #remove readonly permission
-      - execute:
-          args: -R 775  "$GAMEDIR"
-          file: chmod
+    - copy:
+        src: $CACHE/DISC1/ZASSETS1
+        dst: $GAMEDIR/zassets1
+    - copy:
+        src: $CACHE/DISC1/ZGI/ZGI_MX
+        dst: $GAMEDIR/zgi_mx
+    - copy:
+        src: $CACHE/DISC1/ZGI/CURSOR.ZFS
+        dst: $GAMEDIR
+    - copy:
+        src: $CACHE/DISC1/ZGI/DEATH.ZFS
+        dst: $GAMEDIR
+    - copy:
+        src: $CACHE/DISC1/ZGI/INQUIS.STR
+        dst: $GAMEDIR
+    - copy:
+        src: $CACHE/DISC1/ZGI/INQUIS.ZIX
+        dst: $GAMEDIR
+    - copy:
+        src: $CACHE/DISC1/ZGI/R.SVR
+        dst: $GAMEDIR
+    - copy:
+        src: $CACHE/DISC1/ZGI/SCRIPTS.ZFS
+        dst: $GAMEDIR
+    - copy:
+        src: $CACHE/DISC1/ZGI/SUBTITLE.ZFS
+        dst: $GAMEDIR
 
-      # execute install via wine
-      - task:
-          executable: $DISC/setup.exe
-          arch: win32
-          name: wine.wineexec
-          prefix: $GAMEDIR
-
-      # copy remaining files from disc 2
-      - insert-disc:
-          description: Please insert disc 2
-          requires: zassets2
-
-      - copy:
-          dst: $GAMEDIR/zassets2
-          src: $DISC/zassets2
-
-      - execute:
-          args: -R 775  "$GAMEDIR/zassets2"
-          file: chmod
-
-      # execute patch via wine
-      - execute:
-          file: 7z
-          args: x $patch -o"$CACHE" -ppassword -y
+    #remove readonly permission
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
 
 
-      - task:
-          executable: $CACHE/Zpatch.exe
-          name: wine.wineexec
-          arch: win32
-          prefix: $GAMEDIR
+    # execute install via wine
+    - task:
+        executable: $CACHE/DISC1/SETUP.EXE
+        arch: win32
+        name: wine.wineexec
+        prefix: $GAMEDIR
 
-      #copy patched files to scummvm target
-      - copy:
-          dst: $GAMEDIR/zgi_mx
-          src: $GAMEDIR/drive_c/Program Files/Activision/ZGI/zgi_mx
+    # copy remaining files from disc 2
+    - extract:
+        file: $DISC2
+        dst:  $CACHE/DISC2
 
-      #working with case insentive on case senitive, great!
-      - execute:
-          args:  -r $GAMEDIR/inquis.str
-          file: rm 
-      - copy:
-          dst: $GAMEDIR
-          src: $GAMEDIR/drive_c/Program Files/Activision/ZGI/INQUIS.STR
+    - copy:
+        src: $CACHE/DISC2/ZASSETS2
+        dst: $GAMEDIR/zassets2
 
-      # folder and file clean up
-      - execute:
-          args: -rf $GAMEDIR/drive_c
-          file: rm 
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR/zassets2"
 
-      - execute:
-          args:  -r $GAMEDIR/dosdevices
-          file: rm 
+    # execute patch via wine
+    - execute:
+        file: $CACHE/download.sh
+        args: 1gfchx-coCOQhxlRL-WSdmoj6j5DgfRGX $CACHE/patch.7z
 
-      - execute:
-          args:  -r $GAMEDIR/system.reg
-          file: rm 
+    - execute:
+        file: 7z
+        args: x $CACHE/patch.7z -o"$CACHE" -ppassword -y
 
-      - execute:
-          args:  -r $GAMEDIR/user.reg
-          file: rm 
 
-      - execute:
-          args:  -r $GAMEDIR/userdef.reg
-          file: rm 
+    - task:
+        executable: $CACHE/Zpatch.exe
+        name: wine.wineexec
+        arch: win32
+        prefix: $GAMEDIR
+
+    #copy patched files to scummvm target
+    - copy:
+        src: $GAMEDIR/drive_c/Program Files/Activision/ZGI/zgi_mx
+        dst: $GAMEDIR/zgi_mx
+
+    #working with case insentive on case senitive, great!
+    - execute:
+        file: rm 
+        args:  -r $GAMEDIR/INQUIS.STR
+    - copy:
+        src: $GAMEDIR/drive_c/Program Files/Activision/ZGI/INQUIS.STR
+        dst: $GAMEDIR
+
+    # folder and file clean up
+    - execute:
+        file: rm 
+        args: -rf $GAMEDIR/drive_c
+
+    - execute:
+        file: rm 
+        args:  -r $GAMEDIR/dosdevices
+
+    - execute:
+        file: rm 
+        args:  -r $GAMEDIR/system.reg
+
+    - execute:
+        file: rm 
+        args:  -r $GAMEDIR/user.reg
+
+    - execute:
+        file: rm 
+        args:  -r $GAMEDIR/userdef.reg
           
   scummvm:
     fullscreen: true

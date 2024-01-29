@@ -1,7 +1,7 @@
 name: Fell Seal Arbiter's Mark
 game_slug: fell-seal-arbiters-mark
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: fell-seal-arbiters-mark
 runner: wine
 
 script:
@@ -11,6 +11,7 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - DLC: N/A:Select DLC installer
 
   installer:
     - task:
@@ -24,7 +25,8 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true
-
-
+    - task:
+        executable: $DLC
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR

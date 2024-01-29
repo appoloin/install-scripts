@@ -1,12 +1,12 @@
 name: Unbound - Worlds Apart
 game_slug: unbound-worlds-apart
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: unbound-worlds-apart
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/GOG Games/Unbound Worlds Apart/Unbound.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Unbound Worlds Apart/Unbound.exe
     prefix: $GAMEDIR
 
   files:

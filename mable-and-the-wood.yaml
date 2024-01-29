@@ -1,12 +1,12 @@
 name: Mable and the Wood
 game_slug: mable-and-the-wood
-version: Installer
+version: Good Old Games Installer
 slug: mable-and-the-wood
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/GOG Games/Mable & The Wood/Mable.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Mable & The Wood/Mable.exe
     prefix: $GAMEDIR
 
   files:

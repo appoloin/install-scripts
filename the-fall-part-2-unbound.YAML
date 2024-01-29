@@ -1,7 +1,7 @@
 name: The Fall Part 2 - Unbound
 game_slug: the-fall-part-2-unbound
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: the-fall-part-2-unbound
 runner: wine
 
 script:
@@ -24,5 +24,3 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true

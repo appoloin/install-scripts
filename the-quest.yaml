@@ -1,6 +1,6 @@
 name: The Quest
 game_slug: the-quest
-version: Installer
+version: Good Old Games Installer
 slug: the-quest
 runner: wine
 
@@ -11,6 +11,8 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - DLC1: N/A:Select Island of Ice and Fire installer
+
 
   installer:
     - task:
@@ -24,7 +26,8 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true
-
-
+    - task:
+        executable: $DLC1
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR

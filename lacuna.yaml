@@ -1,12 +1,12 @@
 name: Lacuna
 game_slug: lacuna
-version: Installer
-slug: installer
+version: Windows Installer
+slug: lacuna
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/Games/Lacuna - A Sci-Fi Noir Adventure/Lacuna.exe
+    exe: $GAMEDIR/drive_c/Games/Lacuna - A Sci-Fi Noir Adventure/Lacuna.exe
     prefix: $GAMEDIR
 
   files:

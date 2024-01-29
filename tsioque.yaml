@@ -1,6 +1,6 @@
 name: Tsioque
 game_slug: tsioque
-version: Installer
+version: Good Old Games Installer
 slug: tsioque
 runner: wine
 
@@ -25,8 +25,5 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 
 

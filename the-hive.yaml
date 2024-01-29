@@ -1,7 +1,7 @@
 name: The Hive
 game_slug: the-hive
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: the-hive
 runner: wine
  
 script:
@@ -23,3 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+

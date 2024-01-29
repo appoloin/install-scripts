@@ -1,13 +1,13 @@
 name: Yesterday
 game_slug:  yesterday
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: yesterday
 runner: wine
 
 
 script:
   game:
-    exe: drive_c/GOG Games/Yesterday/Yesterday.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Yesterday/Yesterday.exe
     prefix: $GAMEDIR
   files:
     - setup: N/A:Select the Setup file
@@ -22,7 +22,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 

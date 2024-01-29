@@ -1,7 +1,7 @@
 name: Legends of Murder Collection
 game_slug: legends-of-murder-collection
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: legends-of-murder-collection
 runner: dosbox
 
 script:
@@ -9,7 +9,7 @@ script:
     - game: N/A:Select GOG installer.
 
   game:
-    main_file: $GAMEDIR/Legends.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
     - extract:
@@ -20,25 +20,15 @@ script:
         description: Extracting game files
         
     - execute:
-        args: $GAMEDIR/HDD   
         file: mkdir
+        args: $GAMEDIR/drive_c   
     
     - copy:
         src: $CACHE/C
-        dst: $GAMEDIR/HDD
+        dst: $GAMEDIR/drive_c
 
     - write_file:
-        content: '[sdl]
-
-            fullresolution=desktop
-
-            windowresolution=original
-
-            fullscreen=true
-
-            output=opengl
-
-          [mouse]
+        content: '[mouse]
 
            mouse_sensitivity= 30
 
@@ -56,7 +46,7 @@ script:
 
             @echo off
           
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
             C: 
 
@@ -124,4 +114,4 @@ script:
             :exit
 
             exit'
-        file: $GAMEDIR/Legends.conf
+        file: $GAMEDIR/play.conf

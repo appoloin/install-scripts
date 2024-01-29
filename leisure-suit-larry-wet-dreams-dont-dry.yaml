@@ -1,6 +1,6 @@
-name: leisure-suit-larry-wet-dreams-dont-dry
+name: Leisure Suit Larry - Wet Dreams Dont Dry
 game_slug: leisure-suit-larry-wet-dreams-dont-dry
-version: Installer
+version: Good Old Games Installer
 slug: leisure-suit-larry-wet-dreams-dont-dry_INSTALLER
 runner: wine
 
@@ -17,7 +17,7 @@ script:
     - task:
         name: create_prefix
         arch: win32
-        install_mono: false
+        install_mono: true
         install_gecko: false
         prefix: $GAMEDIR
 
@@ -25,8 +25,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-

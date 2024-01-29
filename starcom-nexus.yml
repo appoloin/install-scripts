@@ -1,7 +1,7 @@
 name: Starcom Nexus
 game_slug: starcom-nexus
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: starcom-nexus
 runner: wine
 
 script:
@@ -23,8 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

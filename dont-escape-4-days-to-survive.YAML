@@ -1,7 +1,7 @@
 name: Don't Escape 4 Days to Survive
 game_slug: dont-escape-4-days-to-survive
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: dont-escape-4-days-to-survive
 runner: wine
 
 script:
@@ -23,8 +23,5 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 
 

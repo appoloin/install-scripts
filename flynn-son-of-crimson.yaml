@@ -1,12 +1,12 @@
 name: Flynn - Son of Crimson
 game_slug: flynn-son-of-crimson
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: flynn-son-of-crimson
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/GOG Games
+    exe: $GAMEDIR/drive_c/GOG Games/Flynn Son of Crimson/Flynn Son of Crimson.exe
     prefix: $GAMEDIR
 
   files:

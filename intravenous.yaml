@@ -1,12 +1,12 @@
 name: Intravenous
 game_slug: intravenous
-version: Installer
-slug: installer
+version: Good Old Game Installer
+slug: intravenous
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/GOG Games/Intravenous/intravenous.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Intravenous/intravenous.exe
     prefix: $GAMEDIR
 
   files:

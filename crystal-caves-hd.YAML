@@ -1,6 +1,6 @@
 name: Crystal Caves
 game_slug: crystal-caves-hd
-version: Installer
+version: Good Old Games Installer
 slug: crystal-caves-hd
 runner: wine
 
@@ -22,7 +22,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-
-  wine:
-    Desktop: true

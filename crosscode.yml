@@ -1,6 +1,6 @@
 name: CrossCode
 game_slug: crosscode
-version: Installer
+version: Good Old Games Installer
 slug: crosscode
 runner: wine
 
@@ -42,9 +42,4 @@ script:
         name: wineexec
         args: /SILENT 
         prefix: $GAMEDIR
-
-
-  wine:
-    Desktop: true
-
 

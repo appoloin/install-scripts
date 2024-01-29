@@ -1,13 +1,12 @@
 name: Loop Hero
 game_slug:  loop-hero
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: loop-hero
 runner: wine
 
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Loop Hero/Loop Hero.exe
-    arch: win64
     prefix: $GAMEDIR
 
   files:
@@ -16,7 +15,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win64
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
@@ -25,8 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-

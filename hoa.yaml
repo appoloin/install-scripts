@@ -1,12 +1,12 @@
 name: Hoa
 game_slug: hoa
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: hoa
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/GOG Games/Hoa/Hoa.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Hoa/Hoa.exe
     prefix: $GAMEDIR
 
   files:

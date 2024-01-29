@@ -1,7 +1,7 @@
 name: Undetected
 game_slug: undetected
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: undetected
 runner: wine
 
 script:
@@ -24,7 +24,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 

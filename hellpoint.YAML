@@ -1,6 +1,6 @@
 name: Helllpoint
 game_slug:  hellpoint
-version: Installer
+version: Good Old Games Installer
 slug: hellpoint
 runner: wine
 
@@ -30,8 +30,4 @@ script:
         executable: $DLC
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-
+        args: /SILENT 

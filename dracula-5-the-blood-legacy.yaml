@@ -1,7 +1,7 @@
 name: Dracula 5 - The Blood Legacy
 game_slug: dracula-5-the-blood-legacy
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: dracula-5-the-blood-legacy
 runner: wine
 
 script:
@@ -25,8 +25,5 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 
 
