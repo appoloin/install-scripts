@@ -1,35 +1,68 @@
 name: Descent 2
 game_slug: descent-2
-version: Installer
+version: Good Old Games Installer
 slug: descent-2
 runner: linux
 
 
 script:
-    files:
-      - game: N/A:Select GOG installer.
-      - engine: https://github.com/luxtorpeda-dev/packages/releases/download/dxx-rebirth-8/dxx-rebirth-273580-8.tar.xz
-      - sound: https://www.dxx-rebirth.com/download/dxx/res/d2xr-sc55-music.dxa
+  files:
+    - game: N/A:Select GOG installer.
 
-    game:
-      args: -hogdir .
-      exe: $GAMEDIR/d2x-rebirth
+  game:
+    args: -hogdir .
+    exe: $GAMEDIR/d2x-rebirth
 
-    installer:
-      - extract:
-          format: gog
-          file: $game
-          args: --gog --include "app/Descent 2" 
-          dst: $CACHE
-          description: Extracting game files
+  installer:
+    - write_file:
+        content: '#!/bin/bash
 
-      - merge:
-          dst: $GAMEDIR
-          src: $CACHE/Descent 2
+          fileID="$1"
 
-      - extract:
-          dst: $GAMEDIR
-          file: engine
-      - merge:
-          dst: $GAMEDIR
-          src: sound
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
+    - extract:
+        format: gog
+        file: $game
+        args: --gog --include "app/Descent 2" 
+        dst: $CACHE
+        description: Extracting game files
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1LedfzzyEENDIm1fbJeMSBb7jNZzeU57Q $CACHE/dxx-rebirth-273580-8.tar.xz
+        #https://github.com/luxtorpeda-dev/packages/releases/download/dxx-rebirth-8/dxx-rebirth-273580-8.tar.xz
+
+    - merge:
+        src: $CACHE/Descent 2
+        dst: $GAMEDIR
+
+    - extract:
+        file: $CACHE/dxx-rebirth-273580-8.tar.xz
+        dst: $GAMEDIR
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1tOOom4OZzWFj-XKIwV63YUiyXyqW6K93 $CACHE/addons.7z
+    - extract:
+        file: $CACHE/addons.7z
+        dst: $CACHE
+
+    - merge:
+        src: $CACHE/d2xr-sc55-music.dxa
+        dst: $GAMEDIR

@@ -1,6 +1,6 @@
 name: Hell - A Cyberpunk Thriller
 game_slug: hell-a-cyberpunk-thriller
-version: Installer
+version: DOS Installer
 slug: hell-a-cyberpunk-thriller
 runner: dosbox
 
@@ -11,48 +11,68 @@ script:
 
   files:
     - DISC1:  N/A:Select DISC iso
-    - GUS: https://raw.githubusercontent.com/appoloin/WfW/master/GUS_external_files.zip
-
-
 
   installer:
-    - execute:
-        args: $GAMEDIR/HDD $GAMEDIR/CDD
-        file: mkdir
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID="$1"
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
 
     - execute:
-        args: $DISC1 $GAMEDIR/CDD/CD1.iso
-        file: /bin/cp 
+        file: mkdir
+        args: $GAMEDIR/drive_c $GAMEDIR/drive_d
+
+    - execute:
+        file: cp 
+        args: $DISC1 $GAMEDIR/drive_d/CD1.iso
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6 $CACHE/GUS.zip
 
     - extract:
-        dst: $GAMEDIR/HDD/ULTRASND
-        file: $GUS
-
+        file: $CACHE/GUS.zip
+        dst: $GAMEDIR/drive_c/ULTRASND
 
 
     - write_file:
-        content: '[gus]
+        content: '[mouse]
+
+           mouse_sensitivity= 30
+
+           mouse_capture=onclick   
+            
+           mouse_middle_release=true 
+
+         [gus]
 
           gus      = true
 
           ultradir = C:\ULTRASND
 
         
-        [midi]
+         [autoexec]
 
-         mididevice = mt32
-        
-        [sdl]
+          imgmount D -t iso -fs iso "$GAMEDIR/drive_d/CD1.iso" 
 
-          mouse_capture=onclick   
-            
-            mouse_middle_release=true 
-        
-        [autoexec]
-
-          imgmount D -t iso -fs iso "$GAMEDIR/CDD/CD1.iso" 
-
-          mount C "$GAMEDIR/HDD" -t dir
+          mount C "$GAMEDIR/drive_c" -t dir
           
           d:
           
@@ -64,31 +84,38 @@ script:
     - task:
         config_file: $GAMEDIR/setup.conf
         name: dosexec
-        working_dir: $GAMEDIR/HDD
+        working_dir: $GAMEDIR/drive_c
 
 
     - write_file:
-        content: '[gus]
+        content: '[cpu]
+
+          core=dynamic
+
+          cputype=dynamic
+
+          cycles=35000
+
+         [mouse]
+
+           mouse_sensitivity= 30
+
+           mouse_capture=onclick   
+            
+            mouse_middle_release=true 
+
+         [gus]
 
           gus      = true
 
           ultradir = C:\ULTRASND
 
-        [midi]
-
-         mididevice = mt32
-
-        [sdl]
-
-            mouse_capture=onclick   
-            
-            mouse_middle_release=true 
-          
-        [autoexec]
+ 
+         [autoexec]
         
-          mount C "$GAMEDIR/HDD" -t dir
+          mount C "$GAMEDIR/drive_c" -t dir
 
-          imgmount D -t iso -fs iso "$GAMEDIR/CDD/CD1.iso" 
+          imgmount D -t iso -fs iso "$GAMEDIR/drive_d/CD1.iso" 
 
 
           C:
@@ -113,19 +140,24 @@ script:
           
           ECHO   2) Setup                                
           
+          ECHO   3) Install
+
           ECHO  -------------------------------------------  
           
-          ECHO   3) Exit                              
+          ECHO   4) Exit                              
           
           ECHO  -------------------------------------------  
 
-          choice /c123 /s Which program do you want to run? [1-3]: /n 
+          choice /c1234 /s Which program do you want to run? [1-4]: /n 
           
-          if errorlevel 3 goto exit
+          if errorlevel 4 goto exit
                     
+          if errorlevel 3 goto install
+
           if errorlevel 2 goto setup
           
           if errorlevel 1 goto game
+
 
 
           :game
@@ -140,8 +172,8 @@ script:
 
           hell
 
-          
           goto exit
+
 
 
           :setup
@@ -155,6 +187,18 @@ script:
           setup
 
           goto launcher
+
+
+
+          :install 
+
+          d:
+          
+          install
+
+          goto launcher
+
+
 
           :exit
           
