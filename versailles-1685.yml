@@ -1,56 +1,51 @@
 name: Versailles 1685
 game_slug: versailles-1685
-version: Installer
+version: Windows Installer
 slug: versailles-1685
 runner: scummvm
 
 
 script:
   files:
-    - DISC1: N/A:Select install.exe from Disc1.
-    - DISC2: N/A:Select autorun.exe from Disc2.
+    - DISC1: N/A:Select DISC1 iso.
+    - DISC2: N/A:Select DISC2 iso.
 
   game:
     game_id: versailles
     path: $GAMEDIR
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-        src=$1
-
-        dst=$2
-
-        src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-        find "$src_path" -maxdepth 1 -type d \( -iname "DATAS_V" \) -exec cp -r {} "$dst" \;
-
-        find "$src_path" -type f \( -iname "versaill.pgm" \) -exec cp {} "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh 
+    - extract:
+        file: $DISC1 
+        dst:  $CACHE/DISC1
 
     - copy:
-        src: dat
+        src: "$CACHE/DISC1/DATAS_V"
+        dst: $GAMEDIR/DATAS_V
+    - merge:
+        src: "$CACHE/DISC1/INSTALL/DATA"
+        dst: "$GAMEDIR/DATAS_V"
+
+    - copy:
+        src: "$CACHE/DISC1/INSTALL/WIN/PROGRAM.Z"
         dst: $GAMEDIR
 
     - execute:
-        args: $DISC1 $GAMEDIR
-        file: $CACHE/selectcopy.sh
-
-    - execute:
+        file: chmod
         args: -R 775  $GAMEDIR
-        file: /bin/chmod
 
-    - execute:
-        args: $DISC2 $GAMEDIR
-        file: $CACHE/selectcopy.sh
-
-    - execute:
-        args: -R 775  $GAMEDIR
-        file: /bin/chmod
+    - extract:
+        file: $DISC2
+        dst:  $CACHE/DISC2
 
     - merge:
-        src: "$GAMEDIR/data_v"
-        dst: "$GAMEDIR"
+        src: "$CACHE/DISC2"
+        dst: "$GAMEDIR/DATAS_V"
 
+    - execute:
+        file: chmod
+        args: -R 775  $GAMEDIR
+
+
+  scummvm:
+    fullscreen: true
