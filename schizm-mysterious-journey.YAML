@@ -1,12 +1,12 @@
-name: Reah - Face the Unknown
-game_slug: reah-face-the-unknown
+name: Schizm - Mysterious Journey
+game_slug:  schizm-mysterious-journey
 version: Good Old Games Installer
-slug: reah-face-the-unknown
+slug: schizm-mysterious-journey
 runner: scummvm
 
 script:
   game:
-    game_id: reah
+    game_id: schizm
     path: $GAMEDIR
 
   files:
