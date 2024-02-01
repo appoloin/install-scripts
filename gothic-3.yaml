@@ -1,5 +1,5 @@
 name: Gothic 3
-game_slug: gothic-3
+game_slug: rc-3
 version: Windows Installer
 slug:  gothic-3
 runner: wine
@@ -56,4 +56,11 @@ script:
         file: 7z
         args: e  $CACHE/patch.zip -o"$GAMEDIR/drive_c/Program Files/Nordic Games/Gothic 3 Forsaken Gods - Enhanced Edition/" -ppassword -y
 
+    - execute:
+        file: $CACHE/download.sh
+        args: 1XDym4R48ONkdibDzwNJoqbpb6AuK_brv $CACHE/Gothic_3_Parallel_Universe_Patch_v1.0.5.exe
 
+    - task:
+        executable: $CACHE/Gothic_3_Parallel_Universe_Patch_v1.0.5.exe
+        name: wineexec
+        prefix: $GAMEDIR

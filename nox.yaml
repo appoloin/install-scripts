@@ -1,7 +1,7 @@
 name: Nox
 game_slug: nox
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: nox
 runner: wine
 
 script:
@@ -22,7 +22,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 

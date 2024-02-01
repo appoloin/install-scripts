@@ -1,6 +1,6 @@
 name: Jagged Alliance - 2
 game_slug: jagged-alliance-2
-version: Installer
+version: Good Old Games Installer
 slug: jagged-alliance-2
 runner: wine
 
@@ -23,7 +23,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-

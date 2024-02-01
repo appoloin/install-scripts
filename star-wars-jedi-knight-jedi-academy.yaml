@@ -1,32 +1,57 @@
 name: Star Wars - Jedi knight - Jedi Academy
 game_slug: star-wars-jedi-knight-jedi-academy
-version: Installer
-slug: installer
-runner: wine
+version: Good Old Games Installer
+slug:  star-wars-jedi-knight-jedi-academy
+runner: linux
 
 script:
   game: 
-    exe: $GAMEDIR/drive_c/GOG Games/Star Wars Jedi Knight - Jedi Academy/JediAcademy.exe
-    arch: win32
-    prefix: $GAMEDIR
+    exe: $GAMEDIR/openjk_sp.x86_64
+    args: +set fs_homepath . +set r_customheight 768 +set r_customwidth 1366 +set r_mode -2 +set r_fullscreen 1 +set r_noborder 1 +set r_centerWindow 1 +set s_kHz 44 +set cg_fovAspectAdjust 1 +set g_subtitles 1 +set se_language English
+
 
   files:
     - setup: N/A:Select installer
 
   installer:
-    - task:
-        name: create_prefix
-        install_mono: false
-        install_gecko: false
-        arch: win32
-        prefix: $GAMEDIR
+    - write_file:
+        content: '#!/bin/bash
 
-    - task:
-        executable: $setup
-        name: wineexec
-        prefix: $GAMEDIR
+          fileID="$1"
 
-  wine:
-    Desktop: true
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
 
+    - extract:
+        format: gog
+        file: $setup
+        args: --gog 
+        dst: $CACHE
+        description: Extracting game files
 
+    - merge:
+        src: $CACHE/app/GameData
+        dst: $GAMEDIR
+        
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1wFccihDW2UJ-uXTySQE5ltrgcniUDEHn $CACHE/OpenJk.7z
+
+    - execute:
+        file: 7z
+        args: x  $CACHE/OpenJk.7z -o"$GAMEDIR" -y

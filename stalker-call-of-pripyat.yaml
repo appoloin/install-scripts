@@ -1,7 +1,7 @@
 name: S.t.a.l.k.e.r. - Call of Pripyat
 game_slug: stalker-call-of-pripyat
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: stalker-call-of-pripyat
 runner: wine
 
 script:
@@ -26,5 +26,3 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true

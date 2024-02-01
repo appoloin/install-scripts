@@ -1,7 +1,7 @@
 name: S.t.a.l.k.e.r. - Clear Sky
 game_slug: stalker-clear-sky
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug:  stalker-clear-sky
 runner: wine
 
 script:
@@ -10,13 +10,14 @@ script:
 
   game:
     arch: win32
-    exe: $GAMEDIR/drive_c/GOG Games/S.T.A.L.K.E.R. Clear Sky/bin/xrEngine.exe
+    exe: "$GAMEDIR/drive_c/GOG Games/S.T.A.L.K.E.R. Clear Sky/bin/xrEngine.exe"
     prefix: $GAMEDIR
+    working_dir: "$GAMEDIR/drive_c/GOG Games/S.T.A.L.K.E.R. Clear Sky"
 
   installer:
     - task:
-        arch: win32
         name: create_prefix
+        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
@@ -26,5 +27,3 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true

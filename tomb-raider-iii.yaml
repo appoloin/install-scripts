@@ -1,6 +1,6 @@
-name: Tomb Raider II
+name: Tomb Raider III
 game_slug: tomb-raider-iii
-version: Installer
+version: Good Old Games Installer
 slug: tomb-raider-ii
 runner: wine
 
@@ -13,6 +13,28 @@ script:
     - setup: N/A:Select installer
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID="$1"
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - task:
         name: create_prefix
         install_mono: false
@@ -24,7 +46,16 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+    - execute:
+        file: $CACHE/download.sh
+        args: 1Yjk4BZWGPYGakjwRHqPqU2Vjds_Vddhp $CACHE/tomb3.zip
+
+    - execute:
+        file: 7z
+        args: x  $CACHE/tomb3.zip -o"$GAMEDIR/drive_c/GOG Games/Tomb Raider 3/"  -y
+
+
   wine:
-    Desktop: true
-
-
+    dgvoodoo2: true
+    overrides:
+      ddraw: native

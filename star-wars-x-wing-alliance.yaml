@@ -1,12 +1,12 @@
 name: Star Wars - X Wing Alliance
 game_slug: star-wars-x-wing-alliance
-version: Installer
+version: Good Old Games Installer
 slug: star-wars-x-wing-alliance
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Star Wars - X-Wing Alliance/SysCheck.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Star Wars - X-Wing Alliance/XWingAlliance.EXE
     prefix: $GAMEDIR
 
   files:
@@ -23,7 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 

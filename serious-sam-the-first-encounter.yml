@@ -1,7 +1,7 @@
 name: Serious Sam - The First Encounter
 game_slug: serious-sam-the-first-encounter
-version: installer
-slug: installer
+version: Good Old Games installer
+slug: serious-sam-the-first-encounter
 runner: linux
 
 
