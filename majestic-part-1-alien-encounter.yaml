@@ -1,0 +1,26 @@
+name: Majestic Part 1 - Alien Encounter
+game_slug: majestic-part-1-alien-encounter
+version: Windows Installer
+slug: majestic-part-1-alien-encounter
+runner: scummvm
+
+
+script:
+  files:
+    - DISC1:  N/A:Select ISO
+
+  game:
+    game_id: majestic  
+    path: $GAMEDIR
+  
+  installer:
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+  scummvm:
+    fullscreen: true

@@ -1,0 +1,36 @@
+name: Clandestiny
+game_slug: clandestiny
+version: Windows Installer
+slug: clandestiny
+runner: scummvm
+
+
+script:
+  files:
+    - DISC1:  N/A:Select Disc 1 ISO
+    - DISC2:  N/A:Select Disc 2 ISO
+
+  game:
+    game_id: clandestiny  
+    path: $GAMEDIR
+  
+  installer:
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+    - extract:
+        file: $DISC2 
+        dst:  $GAMEDIR
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+
+  scummvm:
+    fullscreen: true

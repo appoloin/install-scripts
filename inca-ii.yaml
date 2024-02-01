@@ -1,0 +1,169 @@
+name: Inca II 
+game_slug: inca-ii
+version: DOS Installer 
+slug: inca-ii
+runner: dosbox
+
+script:
+    files:
+      - DISC1: N/A:Select CD ISO/CUE/MP3
+
+    game:
+      main_file: $GAMEDIR/play.conf
+
+    installer:
+      - write_file:
+          content: '#!/bin/bash
+
+            src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+            dst=$2
+            
+            cp -avr "$src/."  "$dst"'
+          file: $CACHE/bulkcopy.sh
+      - chmodx: $CACHE/bulkcopy.sh
+
+      - execute:
+          file: mkdir
+          args: $GAMEDIR/drive_d $GAMEDIR/drive_c
+
+      - execute:
+          file: $CACHE/bulkcopy.sh
+          args: $DISC1 $GAMEDIR/drive_d
+
+
+      - write_file:
+          content: '[midi]
+
+            mididevice = mt32
+
+           [mouse]
+
+            mouse_capture = onstart   
+            
+            mouse_middle_release=true   
+
+            mouse_sensitivity= 15
+          
+            [autoexec]
+
+              mount C "$GAMEDIR/drive_c" -t dir
+
+              imgmount d "$GAMEDIR/drive_d/track01.cue" -t iso
+
+              D:
+
+              install
+              
+              exit'
+          file: $GAMEDIR/setup.conf
+
+      - task:
+          config_file: $GAMEDIR/setup.conf
+          name: dosexec
+          working_dir: $GAMEDIR/drive_c
+
+
+
+      - write_file:
+          content: '[midi]
+
+            mididevice = mt32
+
+           [mouse]
+
+            mouse_capture = onstart   
+            
+            mouse_middle_release=true   
+
+            mouse_sensitivity= 15
+
+
+            [autoexec]
+            
+            mount C "$GAMEDIR/drive_c" -t dir
+
+            imgmount d "$GAMEDIR/drive_d/track01.cue" -t iso
+
+            cls 
+
+            ECHO OFF
+
+            goto launcher
+
+            :launcher
+
+            cls 
+
+            ECHO  -------------------------------------------  
+            
+            ECHO                  Inca II
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Play        
+            
+            ECHO   2) Setup    
+            
+            ECHO   3) Install
+
+            ECHO  -------------------------------------------  
+            
+            ECHO   4) Exit Program                             
+            
+            ECHO  -------------------------------------------  
+
+            choice /c1234 /s Which program do you want to run? [1-4]: /n 
+            
+            if errorlevel 4 goto exit
+
+            if errorlevel 3 goto install
+
+            if errorlevel 2 goto setup
+            
+            if errorlevel 1 goto game
+
+
+            :game
+
+            cls
+
+            C:
+
+            cd inca
+
+            run
+
+            goto exit
+
+
+            :setup
+
+            cls
+
+            c:
+
+            cd inca 
+            
+            setup
+            
+            goto launcher
+
+
+
+            :install
+
+            cls
+
+            D:
+
+            install
+            
+            goto launcher
+
+
+
+            :exit
+            
+            exit'
+          file: $GAMEDIR/play.conf

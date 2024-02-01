@@ -1,0 +1,60 @@
+name: Gothic
+game_slug: gothic
+version: Good Old Games Installer
+slug: gothic
+runner: wine
+
+script:
+  game: 
+    exe: $GAMEDIR/drive_c/GOG Games/Gothic/Gothic2Notr.exe
+    prefix: $GAMEDIR
+    args: -g "C:/GOG Games/Gothic/"
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID="$1"
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1lSEwBwPPj7BFkyFtv7teoLVs3dPF6qzq $CACHE/opengothic_win.7z.001
+    - execute:
+        file: $CACHE/download.sh
+        args: 1KpVvCdEfhZiHOiK_4mLjJM8XLbb8J8Y1 $CACHE/opengothic_win.7z.002
+
+    - extract:
+        file: $CACHE/opengothic_win.7z.001
+        dst:  $GAMEDIR/drive_c/GOG Games/Gothic/

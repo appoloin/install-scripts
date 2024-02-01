@@ -1,0 +1,47 @@
+name: Muppet Treasure Island 
+game_slug: muppet-treasure-island 
+version: Windows Installer
+slug: muppet-treasure-island 
+runner: scummvm
+
+
+script:
+  files:
+    - DISC1:  N/A:Select Disc 1 ISO
+    - DISC2:  N/A:Select Disc 2 ISO
+    - DISC3:  N/A:Select Disc 3 ISO
+
+  game:
+    game_id: mti-win  
+    path: $GAMEDIR
+  
+  installer:
+    - extract:
+        file: $DISC1 
+        dst:  $CACHE/DISC1
+    - merge:
+        src: "$CACHE/DISC1/DATA_MTI"
+        dst: "$GAMEDIR"
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+
+    - extract:
+        file: $DISC2 
+        dst: "$GAMEDIR"
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+
+
+    - extract:
+        file: $DISC3 
+        dst: "$GAMEDIR"
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+  scummvm:
+    fullscreen: true

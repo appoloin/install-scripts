@@ -1,0 +1,42 @@
+name: The Vampire Diaries
+game_slug: the-vampire-diaries
+version: Windows Installer
+slug:  the-vampire-diaries
+runner: scummvm
+
+
+script:
+  files:
+    - DISC1:  N/A:Select Disc 1 ISO
+    - DISC2:  N/A:Select Disc 2 ISO
+    - DISC3:  N/A:Select Disc 3 ISO
+
+  game:
+    game_id: vampirediaries 
+    path: $GAMEDIR
+  
+  installer:
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+    - extract:
+        file: $DISC2 
+        dst:  $GAMEDIR
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+    - extract:
+        file: $DISC3 
+        dst:  $GAMEDIR
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+
+  scummvm:
+    fullscreen: true

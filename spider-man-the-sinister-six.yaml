@@ -1,0 +1,35 @@
+name: Spider-Man - The Sinister Six
+game_slug:  spider-man-the-sinister-six
+version: Windows Installer
+slug: spider-man-the-sinister-six
+runner: scummvm
+
+
+script:
+  files:
+    - DISC1:  N/A:Select Disc 1 ISO
+
+  game:
+    game_id: sinistersix 
+    path: $GAMEDIR
+  
+  installer:
+    - extract:
+        file: $DISC1 
+        dst:  $CACHE/DISC1
+
+    - copy:
+        src: "$CACHE/DISC1/SPIDER"
+        dst: $GAMEDIR/SPIDER
+
+    - copy:
+        src: "$CACHE/DISC1/DATA.Z"
+        dst: $GAMEDIR/
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+
+  scummvm:
+    fullscreen: true

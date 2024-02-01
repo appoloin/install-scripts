@@ -1,0 +1,27 @@
+name: Nancy Drew - Treasure in the Royal Tower
+game_slug: nancy-drew-treasure-in-the-royal-tower
+version: Windows Installer
+slug: nancy-drew-treasure-in-the-royal-tower
+runner: scummvm
+
+
+script:
+  files:
+    - DISC1:  N/A:Select Disc 1 ISO
+
+  game:
+    game_id: nancy4 
+    path: $GAMEDIR
+  
+  installer:
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+
+
+  scummvm:
+    fullscreen: true

@@ -1,0 +1,57 @@
+name: Dragonsphere
+game_slug: dragonsphere
+version: Good Old Games Installer
+slug: dragonsphere
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select GOG installer
+
+  game:
+    main_file: $GAMEDIR/play.conf
+  
+  installer:
+    - extract:
+        format: gog
+        file: $game
+        args: --gog 
+        dst: $GAMEDIR
+        description: Extracting game files
+        
+    #remove
+    - execute:
+        command: 'find "$GAMEDIR" -maxdepth 1  -type d \( -iname app -o
+                                                          -iname commonappdata -o
+                                                          -iname *redist -o
+                                                          -iname scummvm -o
+                                                          -iname dosbox -o
+                                                          -iname *support -o
+                                                          -iname tmp \) -exec rm -r {} \;
+                                            
+          find "$GAMEDIR" -type f \( -iname "goggame*" \) -exec rm {} \;
+          '
+
+    - write_file:
+        content: '[mouse]
+
+           mouse_sensitivity= 30
+
+           mouse_capture=onclick   
+            
+            mouse_middle_release=true 
+
+          [autoexec]
+
+            mount C "$GAMEDIR" -t dir
+
+            imgmount D "$GAMEDIR/GAME.INS" -t iso
+
+            c: 
+
+            cd dragon
+
+            dragon
+            
+            exit'
+        file: $GAMEDIR/play.conf

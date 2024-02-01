@@ -1,0 +1,25 @@
+name: Sanitarium
+game_slug: sanitarium
+version: Good Old Games Installer
+slug: sanitarium
+runner: scummvm
+
+script:
+  game:
+    game_id: asylum
+    path: $GAMEDIR/Data
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - extract:
+        format: gog
+        file: $setup
+        args: --gog 
+        dst: $GAMEDIR
+        description: Extracting game files
+
+
+  scummvm:
+    fullscreen: true

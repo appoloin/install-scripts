@@ -1,0 +1,54 @@
+name: Tender Loving Care
+game_slug: tender-loving-care
+version: Windows Installer
+slug: tender-loving-care
+runner: scummvm
+
+
+script:
+  files:
+    - DISC1:  N/A:Select Disc 1 ISO
+    - DISC2:  N/A:Select Disc 2 ISO
+    - DISC3:  N/A:Select Disc 3 ISO
+    - DISC4:  N/A:Select Disc 4 ISO
+
+  game:
+    game_id: tlc-cd-win  
+    path: $GAMEDIR
+  
+  installer:
+    - extract:
+        file: $DISC4 
+        dst:  $GAMEDIR
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+    - extract:
+        file: $DISC3 
+        dst:  $GAMEDIR
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+    - extract:
+        file: $DISC2
+        dst:  $GAMEDIR
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+    
+    - extract:
+        file: $DISC1
+        dst:  $GAMEDIR
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+
+  scummvm:
+    fullscreen: true

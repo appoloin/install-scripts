@@ -1,0 +1,27 @@
+name: Nancy Drew - The Final Scene
+game_slug: nancy-drew-the-final-scene
+version: Windows Installer
+slug: nancy-drew-the-final-scene
+runner: scummvm
+
+
+script:
+  files:
+    - DISC1:  N/A:Select Disc 1 ISO
+
+  game:
+    game_id: nancy5
+    path: $GAMEDIR
+  
+  installer:
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+
+
+  scummvm:
+    fullscreen: true

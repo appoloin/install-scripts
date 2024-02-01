@@ -1,0 +1,26 @@
+name: Eastern Mind - The Lost Souls of Tong Nou
+game_slug: eastern-mind-the-lost-souls-of-tong-nou
+version: Win3.11 Installer
+slug: eastern-mind-the-lost-souls-of-tong-nou
+runner: scummvm
+
+script:
+  files:
+    - DISC1: N/A:Select Disc iso
+
+  game:
+    game_id: easternmind
+    path: $GAMEDIR
+
+
+  installer:
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+  scummvm:
+    fullscreen: true

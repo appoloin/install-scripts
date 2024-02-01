@@ -1,0 +1,26 @@
+name: Wetlands
+game_slug: wetlands
+version: Windows Installer
+slug: wetlands
+runner: scummvm
+
+
+script:
+  files:
+    - DISC1:  N/A:Select ISO
+
+  game:
+    game_id: wetlands  
+    path: $GAMEDIR/WETLANDS
+  
+  installer:
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+  scummvm:
+    fullscreen: true

@@ -1,0 +1,169 @@
+name: The Clue
+game_slug: the-clue
+version: DOS
+slug: the-clue
+runner: dosbox
+
+
+script:
+  game:
+    main_file: $GAMEDIR/play.conf
+
+  files:
+    - $DISC1: N/A:Select CUE file.
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+          
+          dst=$2
+
+          find "$src" -maxdepth 1 -type f \( -iname "*.bin" -o 
+                                             -iname "*.cue" \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+    - chmodx: $CACHE/selectcopy.sh
+
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_c  $GAMEDIR/drive_d
+
+    - execute:
+        file: $CACHE/selectcopy.sh
+        args: $DISC1 $GAMEDIR/drive_d 
+
+
+    - write_file: 
+        contents: '[mouse]
+
+            mouse_capture = onstart   
+            
+            mouse_middle_release=true   
+
+            mouse_sensitivity= 15
+          
+          [cpu]
+
+            cputype = pentium_slow
+          
+          [autoexec]
+
+            mount C "$GAMEDIR/drive_c" -t dir
+
+            imgmount D -t iso -fs iso "$GAMEDIR/drive_d/THE_CLUE.cue"
+
+            D:
+
+            CLUEINST.EXE
+
+            exit'
+        file: $GAMEDIR/setup.conf
+
+    - task:
+        config_file: $GAMEDIR/setup.conf
+        name: dosexec
+        working_dir: $GAMEDIR/drive_c
+
+
+
+    - write_file:
+        content: '[mouse]
+
+            mouse_capture = onstart   
+            
+            mouse_middle_release=true   
+
+            mouse_sensitivity= 15
+          
+          [autoexec]
+          
+            mount C "$GAMEDIR/drive_c" -t dir
+
+            imgmount D -t iso -fs iso "$GAMEDIR/drive_d/THE_CLUE.cue"
+
+            C:
+
+            cls 
+
+            ECHO OFF
+
+            goto launcher
+
+            :launcher
+
+            cls 
+
+            ECHO  -------------------------------------------  
+            
+            ECHO                 The Clue 
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Play Game        
+            
+            ECHO   2) Setup                               
+            
+            ECHO   3) Install
+
+            ECHO  -------------------------------------------  
+                      
+            ECHO   4) Exit Program                             
+            
+            ECHO  -------------------------------------------  
+
+
+            choice /c1234 /s Which program do you want to run? [1-4]: /n 
+            
+            if errorlevel 4 goto exit
+            
+            if errorlevel 3 goto install
+
+            if errorlevel 2 goto setup
+            
+            if errorlevel 1 goto game
+
+
+            :game
+
+            cls
+
+            C:
+
+            cd theclue 
+
+            theclue 
+            
+            goto exit
+
+
+            :setup
+
+            cls
+
+            c:
+            
+            cd theclue 
+
+            setup
+
+            goto launcher
+
+
+            :install
+
+            cls
+
+            D:
+
+            install.EXE
+
+            goto launcher
+
+
+
+            :exit
+            
+            exit'
+        file: $GAMEDIR/play.conf

@@ -1,0 +1,41 @@
+name: The Pink Panther - Hokus Pokus Pink
+game_slug: the-pink-panther-hokus-pokus-pink
+version: Windows Installer
+slug: the-pink-panther-hokus-pokus-pink
+runner: scummvm
+
+script:
+  files:
+    - DISC1:  N/A:Select ISO
+
+  game:
+    game_id: pokus
+    path: $GAMEDIR
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+            src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+            dst=$2
+
+            find "$src" -type f \( -iname "HPP.*" \) -exec cp {} "$dst" \;'
+        file: $CACHE/selectcopy.sh
+    - chmodx: $CACHE/selectcopy.sh
+
+    - extract:
+        file: $DISC1 
+        dst:  $CAHCE/DISC1
+
+
+    - execute:
+        args: $CAHCE/DISC1 $GAMEDIR
+        file: $CACHE/selectcopy.sh
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+  scummvm:
+    fullscreen: true

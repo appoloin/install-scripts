@@ -1,0 +1,26 @@
+name: Alice - An Interactive Museum
+game_slug: alice-an-interactive-museum
+version: Windows Installer
+slug: alice-an-interactive-museum
+runner: scummvm
+
+
+script:
+  files:
+    - DISC1:  N/A:Select ISO
+
+  game:
+    game_id: alice-win  
+    path: $GAMEDIR
+  
+  installer:
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+  scummvm:
+    fullscreen: true

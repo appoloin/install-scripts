@@ -1,0 +1,26 @@
+name: Gadget - Invention, Travel & Adventure
+game_slug: gadget-invention-travel-&-adventure
+version: Windows Installer
+slug: gadget-invention-travel-&-adventure
+runner: scummvm
+
+
+script:
+  files:
+    - DISC1:  N/A:Select ISO
+
+  game:
+    game_id: gadget-win  
+    path: $GAMEDIR
+  
+  installer:
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+  scummvm:
+    fullscreen: true

@@ -1,0 +1,27 @@
+name: Nancy Drew - Stay Tuned for Danger
+game_slug: nancy-drew-stay-tuned-for-danger
+version: Windows Installer
+slug: nancy-drew-stay-tuned-for-danger
+runner: scummvm
+
+
+script:
+  files:
+    - DISC1:  N/A:Select Disc 1 ISO
+
+  game:
+    game_id: nancy2 
+    path: $GAMEDIR
+  
+  installer:
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+
+
+  scummvm:
+    fullscreen: true

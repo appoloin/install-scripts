@@ -1,0 +1,50 @@
+name: The Dark Eye
+game_slug: the-dark-eye
+version: Windows Installer
+slug:  the-dark-eye
+runner: scummvm
+
+
+script:
+  files:
+    - DISC1: N/A:Select Disc1 ISO.
+
+  game:
+    game_id: darkeye-win
+    path: $GAMEDIR/drive_c/DARKEYE
+
+  installer:
+      #setup wine and run installer
+    - task:
+        name: wine.create_prefix
+        prefix: $GAMEDIR
+        arch: win32
+        install_mono: false
+        install_gecko: false
+      
+    - extract:
+        file: $DISC1 
+        dst:  $CACHE/DISC1
+
+    # execute install via wine
+    - task:
+        executable: $CACHE/DISC1/SETUP/DKYINSTL.EXE
+        arch: win32
+        name: wine.wineexec
+        prefix: $GAMEDIR
+
+    - merge:
+        src: $CACHE/DISC1
+        dst: "$GAMEDIR/drive_c/DARKEYE"
+      
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+    - execute:
+        file: rm 
+        args:  -r "$GAMEDIR/drive_c/DARKEYE/INCOMING.EXE"
+
+
+  scummvm:
+    fullscreen: true

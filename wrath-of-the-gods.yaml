@@ -1,0 +1,26 @@
+name: Wrath of the Gods
+game_slug: wrath-of-the-gods
+version: Windows Installer
+slug:  wrath-of-the-gods
+runner: scummvm
+
+
+script:
+  files:
+    - DISC1:  N/A:Select ISO
+
+  game:
+    game_id: wrath-win  
+    path: $GAMEDIR/WRATH
+  
+  installer:
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+  scummvm:
+    fullscreen: true

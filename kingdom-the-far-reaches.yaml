@@ -1,0 +1,26 @@
+name: Kingdom - The Far Reaches
+game_slug: Kingdom-the-far-reaches
+version: Windows Installer
+slug: Kingdom-the-far-reaches
+runner: scummvm
+
+
+script:
+  files:
+    - DISC1:  N/A:Select ISO
+
+  game:
+    game_id: kingdom  
+    path: $GAMEDIR
+  
+  installer:
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+  scummvm:
+    fullscreen: true

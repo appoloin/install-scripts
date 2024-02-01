@@ -1,0 +1,57 @@
+name: Lord Avalot d'Argent
+game_slug: lord-avalot-d'argent
+version: DOS Installer
+slug:   lord-avalot-d'argent
+runner: dosbox
+
+script:
+  files:
+    - game: N/A:Select *.AVD
+
+  game:
+    main_file: $GAMEDIR/play.conf
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+          dst=$2
+          
+          cp -avr "$src/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_c  $GAMEDIR/drive_c/lord
+
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR/drive_c/lord
+
+    - write_file:
+        content: '[mouse]
+
+            mouse_capture = onstart   
+            
+            mouse_middle_release=true   
+
+            mouse_sensitivity= 15
+
+          [autoexec]
+
+            mount C "$GAMEDIR/drive_c" -t dir
+
+            cls 
+
+            c: 
+
+            cd lord
+
+            AVALOT
+
+            exit'
+        file: $GAMEDIR/play.conf
+

@@ -1,0 +1,38 @@
+name: Faery Tale Adventure II - Halls of the Dead
+game_slug: faery-tale-adventure-ii-halls-of-the-dead
+version: Windows Installer
+slug: faery-tale-adventure-ii-halls-of-the-dead
+runner: scummvm
+
+script:
+  files:
+    - DISC1:  N/A:Select ISO
+
+  game:
+    game_id: fta2
+    path: $GAMEDIR
+
+  installer:
+    - extract:
+        file: $DISC1 
+        dst:  $CACHE/DISC1
+
+    - merge:
+        src: "$CACHE/DISC1/RES"
+        dst: "$GAMEDIR/RES"
+
+    - merge:
+        src: "$CACHE/DISC1/VIDEO"
+        dst: "$GAMEDIR/VIDEO"
+
+    - copy:
+        src: $CACHE/DISC1/WIN/FTA2WIN.EXE
+        dst: $GAMEDIR
+
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+  scummvm:
+    fullscreen: true
