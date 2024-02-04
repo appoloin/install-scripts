@@ -1,42 +1,38 @@
 name: Blood - One Unit Whole Blood
 game_slug: blood-one-unit-whole-blood
-version: Installer
+version: Good Old Games Installer
 slug: blood-one-unit-whole-blood
 runner: linux
 
 script:
   game:
-      exe: nblood
+    exe: nblood
 
   files:
     - game: N/A:Select Setup
     - nblood_engine: https://lutris.nyc3.digitaloceanspaces.com/games/blood/nblood-20190216-x86_64.tar.gz
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$1
-          
-          find "$src" -maxdepth 1 -type d \( -iname app -o
-                                            -iname commonappdata -o
-                                            -iname *redist -o
-                                            -iname scummvm -o
-                                            -iname dosbox -o
-                                            -iname *support -o
-                                            -iname tmp \) -exec rm -r {}  \;
-                                            
-          find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
-        file: $CACHE/remove.sh
-    - chmodx: $CACHE/remove.sh
-
     - extract:
         format: gog
         file: $game
         args: --gog --include "app"
         dst: $GAMEDIR
         description: Extracting game files
-        
+
+    #remove
+    - execute:
+        command: 'find "$GAMEDIR" -maxdepth 1  -type d \( -iname app -o
+                                                          -iname commonappdata -o
+                                                          -iname *redist -o
+                                                          -iname scummvm -o
+                                                          -iname dosbox -o
+                                                          -iname *support -o
+                                                          -iname tmp \) -exec rm -r {} \;
+                                            
+          find "$GAMEDIR" -type f \( -iname "goggame*" \) -exec rm {} \;
+          '
+    
     - extract:
         file: $nblood_engine
         dst: $GAMEDIR
@@ -44,7 +40,3 @@ script:
         src: $CACHE/nblood_engine
         dst: $GAMEDIR
 
-
-    - execute:
-        args: $GAMEDIR
-        file: $CACHE/remove.sh

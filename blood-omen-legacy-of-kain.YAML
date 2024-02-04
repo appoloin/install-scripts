@@ -1,45 +1,29 @@
 name: Blood Omen Legacy of Kain
 game_slug: blood-omen-legacy-of-kain
-version: Windows Installer
+version: Good Old Games  Installer
 slug: blood-omen-legacy-of-kain
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/KAIN/KAIN.EXE
-    arch: win32
+    exe: $GAMEDIR/drive_c/GOG Games/Blood Omen/Kain.exe
     prefix: $GAMEDIR
 
   files:
-    #https://verokster.blogspot.com/2018/05/legacy-of-kain-blood-omen-gl-wrapper.html
-    - setup:  N/A:Insert CD and select "Legacy of Kain - Blood Omen - Verok's GL Wrapper/Patch" 
+    - setup:  N/A:Select Installer
 
   installer:
-    - extract:
-        dst: $CACHE
-        file: $setup
-
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
         
     - task:
-        app: mfc42
-        name: winetricks
-        prefix: $GAMEDIR
-
-
-    - task:
         description: Installing Legacy of Kain
-        executable: $CACHE/SETUP.EXE
+        executable: $setup
         name: wineexec
-        return_code: 256
 
   wine:
     overrides:
-        ddraw.dll: n,b
-
-
+      ddraw: native,builtin

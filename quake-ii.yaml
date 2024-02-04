@@ -1,7 +1,7 @@
 name: Quake II
 game_slug: quake-ii
 version: Good Old Games Installer
-slug:  installer
+slug:  quake-ii
 runner: linux
 
 

@@ -1,38 +1,62 @@
 name: Strife
 game_slug: strife
-version: Installer
+version: Windows Installer
 slug: strife
-runner: zdoom
+runner: linux
 
 
 script:
-    files:
-      - game: N/A:Select setup.exe
+  files:
+    - DISC: N/A:Select ISO 
 
-    game:
-      main_file: $GAMEDIR/strife1.wad
-      savedir: $GAMEDIR/saves
-
-    installer:
-      - write_file:
-          content: '#!/bin/bash
-
-            src=$1
-
-            dst=$2
-
-            src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-            find "$src_path" -type f \( -iname "*.wad" \) -exec cp {} "$dst" \;'
-            
-          file: $CACHE/selectcopy.sh
-      - chmodx: $CACHE/selectcopy.sh
-
-      - execute:
-          args: $game $GAMEDIR
-          file: $CACHE/selectcopy.sh
+  game:
+    exe: /usr/bin/flatpak
+    args: run org.zdoom.GZDoom -config $GAMEDIR/gzdoom.ini -file strife1.wad -savedir $GAMEDIR/saves
 
 
-      - execute:
-          args: -R 775  "$GAMEDIR"
-          file: chmod
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+          dst=$2
+
+          find "$src" -type f \( -iname "*.wad" \) -exec cp {} "$dst" \;'
+          
+        file: $CACHE/selectcopy.sh
+    - chmodx: $CACHE/selectcopy.sh
+
+    - execute:
+        file: /usr/bin/flatpak
+        args: install flathub -y --noninteractive org.zdoom.GZDoom
+        description: Installing with flatpak
+        disable_runtime: true
+
+    - execute:
+        file: /usr/bin/flatpak
+        args: override org.zdoom.GZDoom --user --filesystem=$GAMEDIR
+        description: Added GAMEDIR to flatpak permissions
+        disable_runtime: true
+
+    - extract:
+        file: $DISC
+        dst:  $CACHE
+
+    - execute:
+        file: $CACHE/selectcopy.sh
+        args: $CACHE $GAMEDIR
+
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: chmod
+
+    - write_file:
+        content: '[IWADSearch.Directories]
+
+          Path=$DOOMWADDIR
+
+          Path=$GAMEDIR
+
+          '
+        file: $GAMEDIR/gzdoom.ini

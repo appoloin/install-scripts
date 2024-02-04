@@ -1,6 +1,6 @@
 name: Tomb Raider II
 game_slug: tomb-raider-ii
-version: Installer
+version: Good Old Games Installer
 slug: tomb-raider-ii
 runner: wine
 
@@ -13,6 +13,28 @@ script:
     - setup: N/A:Select installer
 
   installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID="$1"
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
     - task:
         name: create_prefix
         install_mono: false
@@ -24,7 +46,26 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+    - execute:
+        file: $CACHE/download.sh
+        args: 1cSrmR7_JE89Lik9tzAfYeGE15_aSxJQT $CACHE/TR2Main_v0.9.0.7z.001
+    - execute:
+        file: $CACHE/download.sh
+        args: 1_YfKyQq5ZXXv0yt2Iqa68u_F-HaCZDCy $CACHE/TR2Main_v0.9.0.7z.002
+    - execute:
+        file: $CACHE/download.sh
+        args: 1abrELz6SLz8B5sKUF8pb-n0w-5FyUbSz $CACHE/TR2Main_v0.9.0.7z.003
+    - execute:
+        file: $CACHE/download.sh
+        args: 1x9OYKGCF60o8TciiUzyt5w9Op1cK4RUe $CACHE/TR2Main_v0.9.0.7z.004
+
+    - execute:
+        file: 7z
+        args: x  $CACHE/TR2Main_v0.9.0.7z.001 -o"$GAMEDIR/drive_c/GOG Games/Tomb Raider 2/"  -y
+
+
   wine:
-    Desktop: true
-
-
+    dgvoodoo2: true
+    overrides:
+      ddraw: native,builtin
+      winmm: native,builtin

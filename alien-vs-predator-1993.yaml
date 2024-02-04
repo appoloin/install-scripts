@@ -1,6 +1,6 @@
 name: Alien vs Predator
 game_slug: alien-vs-predator-1993
-version: Installer
+version: Good Old Games Installer
 slug:  alien-vs-predator-1993
 runner: wine
 
@@ -16,7 +16,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
@@ -25,8 +24,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

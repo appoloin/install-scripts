@@ -43,22 +43,17 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: d3dcompiler_47
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
 
     - execute:
         file: $CACHE/download.sh
-        args: 10uInQUDL7FTy5M7U9Q5ulB9yI7EFWB6o $CACHE/DgVoodoo_2_6.zip
+        args: 1O-XCcWeweke2Dh5FJ3ZqyNfe9EBPRPlR $CACHE/DgVoodoo_2_6.7z
 
-    - extract:
-        file: $CACHE/DgVoodoo_2_6.zip
-        dst: $CACHE
+    - execute:
+        file: 7z
+        args: x $CACHE/DgVoodoo_2_6.7z -o"$CACHE" -ppassword -y
 
     - copy:
         src: $CACHE/MS/x86/D3D8.dll

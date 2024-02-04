@@ -1,6 +1,6 @@
 name: Hexen II
 game_slug: hexen-ii
-version: Installer
+version: Good Old Games Installer
 slug: hexen-ii
 runner: linux
 
@@ -12,7 +12,6 @@ script:
   game:
     args: -vsync
     exe: glhexen2
-
 
   installer:
     - write_file:
@@ -37,7 +36,6 @@ script:
         file: $CACHE/download.sh
     - chmodx: $CACHE/download.sh
 
-
     - extract:
         format: gog
         file: $game
@@ -45,11 +43,7 @@ script:
         dst: $GAMEDIR
         description: Extracting game files
 
-    - execute:
-        args: $GAMEDIR
-        file: $CACHE/remove.sh
-
-     #remove
+    #remove
     - execute:
         command: 'find "$GAMEDIR" -maxdepth 1  -type d \( -iname app -o
                                                           -iname commonappdata -o
@@ -61,6 +55,7 @@ script:
                                             
           find "$GAMEDIR" -type f \( -iname "goggame*" \) -exec rm {} \;
           '
+    
     - execute:
         file: $CACHE/download.sh
         args: 1dKWw6qIy1upHL_Gcub_XKaFVgDQsiF-k $CACHE/engine.tgz
@@ -68,10 +63,6 @@ script:
     - extract:
         src: $CACHE/engine.tgz
         dst: $GAMEDIR
-
-    - execute:
-      args: $GAMEDIR/music
-      file: mkdir
 
     - move:
         dst: $GAMEDIR/data1/music/casa1.ogg
@@ -121,17 +112,3 @@ script:
     - move:
         dst: $GAMEDIR/data1/music/casb3.ogg
         src: $GAMEDIR/music/Track17.ogg
-    - write_file:
-        content: 'bgmtype "midi"
-
-          vid_config_glx "$RESOLUTION_WIDTH"
-
-          vid_config_gly "$RESOLUTION_HEIGHT"
-
-          vid_config_fscr "1"
-
-          '
-        file: $GAMEDIR/config.cfg
-    - merge:
-        dst: $HOME/.hexen2/data1/
-        src: $GAMEDIR/config.cfg

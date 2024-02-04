@@ -1,7 +1,7 @@
 name: Star Wars - Jedi knight  II - Jedi Outcast
 game_slug: star-wars-jedi-knight-ii-jedi-outcast
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: star-wars-jedi-knight-ii-jedi-outcast
 runner: wine
 
 script:

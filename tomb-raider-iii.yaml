@@ -59,3 +59,4 @@ script:
     dgvoodoo2: true
     overrides:
       ddraw: native
+      winmm: native,builtin

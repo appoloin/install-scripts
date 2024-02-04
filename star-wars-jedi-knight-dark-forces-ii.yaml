@@ -1,6 +1,6 @@
 name: Star Wars - Jedi Knight - Dark Forces II
 game_slug: star-wars-jedi-knight-dark-forces-ii
-version: Installer
+version: Good Old Games Installer
 slug: star-wars-jedi-knight-dark-forces-ii
 runner: wine
 
@@ -23,7 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 

@@ -1,141 +1,57 @@
 name: Star Wars Dark Forces
 game_slug: star-wars-dark-forces
-version: Installer
-slug: star-wars-dark-forces-installer
-runner: dosbox
+version: Good Old Games Installer
+slug: star-wars-dark-forces
+runner: wine
 
 
 script:
   files:
-    - game: N/A:Select GOG installer.
+    - setup: N/A:Select GOG installer.
 
   game:
-    main_file: $GAMEDIR/star_wars_dark_forces_play.conf
+    exe: $GAMEDIR/drive_c/GOG Games/Dark/TheForceEngine.exe
+    prefix: $GAMEDIR
+
 
   installer:
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
-          
-          find "$src" -maxdepth 1 -type d \( -iname app -o
-                                            -iname commonappdata -o
-                                            -iname *redist -o
-                                            -iname scummvm -o
-                                            -iname dosbox -o
-                                            -iname *support -o
-                                            -iname tmp \) -exec rm -r {}  \;
-                                            
-          find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
-        file: $CACHE/remove.sh
-    - chmodx: $CACHE/remove.sh
+          fileID="$1"
 
-    - extract:
-        format: gog
-        file: $game
-        args: --gog --include "app"
-        dst: $CACHE
-        description: Extracting game files
+          output="$2"
         
-    - execute:
-        args: $GAMEDIR/HDD
-        file: mkdir
-
-    - execute:
-        args: $GAMEDIR/HDD/dark
-        file: mkdir
-
-    - merge:
-        dst: $GAMEDIR/HDD/dark
-        src: $CACHE/app
-
-    - write_file:
-        content: '[mouse]
-
-            mouse_capture = onstart   
-            
-            mouse_middle_release=true   
-
-            mouse_sensitivity= 15
-
-          [sdl]
-
-          fullscreen=false
-
-          [autoexec]
-          
-            mount C "$GAMEDIR/HDD" -t dir
-
-            C:
-
-            cd dark
-            
-            setup.exe
-            
-            exit'
-        file: $GAMEDIR/star_wars_dark_forces_setup.conf
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
 
     - task:
-        config_file: $GAMEDIR/star_wars_dark_forces_setup.conf
-        name: dosexec
-        working_dir: $GAMEDIR/HDD/dark
+        name: create_prefix
+        install_mono: false
+        install_gecko: true
+        prefix: $GAMEDIR
 
-    - copy:
-        src: $GAMEDIR/HDD/dark/CD.ID
-        dst: $GAMEDIR/HDD
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
 
     - execute:
-        args: $GAMEDIR
-        file: $CACHE/remove.sh
+        file: $CACHE/download.sh
+        args: 1fGHF1XgGm4A_c3VczpqQPuqoL63VTccW $CACHE/TheForceEngine-v1.09.540.zip
+    - extract:
+        file: $CACHE/TheForceEngine-v1.09.540.zip
+        dst:  $GAMEDIR/drive_c/GOG Games/Dark
 
-    - write_file:
-        content: '[mouse]
-
-            mouse_capture = onstart   
-            
-            mouse_middle_release=true   
-
-            mouse_sensitivity= 15
-
-          [cpu]
-            
-            core=auto
-          
-            cycles=auto
-
-          [sdl]
-
-            fullscreen=true
-
-            fulldouble = true
-          
-            output=opengl
-
-          [render]
-
-            aspect=true
-
-            scaler=hq3x
-
-          [dosbox]
-          
-            memsize=32
-          
-          [ipx]
-          
-            ipx=false
-
-          [autoexec]
-          
-            mount C "$GAMEDIR/HDD" -t dir
-
-            C:
-
-            cd dark
-            
-            cls
-
-            dark.exe
-            
-            exit'
-        file: $GAMEDIR/star_wars_dark_forces_play.conf
