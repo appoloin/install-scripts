@@ -1,0 +1,32 @@
+name: Door Kickers Actions Squad
+game_slug: door-kickers-actions-squad
+version: Good Old Games Installer
+slug: door-kickers
+runner: wine
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+    - DLC1: N/A:Select DLC1 installer
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/ActionSquad/ActionSquad.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC1
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR

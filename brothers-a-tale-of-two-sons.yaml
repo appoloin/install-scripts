@@ -1,0 +1,26 @@
+name: Brothers a Tale of Two Sons
+game_slug: brothers-a-tale-of-two-sons
+version: Good Old Games Installer
+slug: brothers-a-tale-of-two-sons
+runner: wine
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Brothers - A Tale of Two Sons/Binaries/Win32/Brothers.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
