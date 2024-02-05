@@ -1,6 +1,6 @@
 name: Duke Nukem - 3D
 game_slug: duke-nukem-3d
-version: Installer
+version: Good Old Games Installer
 slug: duke-nukem-3d
 runner: linux
 
@@ -13,7 +13,7 @@ script:
 
 
   game:
-    exe: $GAMEDIR/eduke32.sh
+    exe: $GAMEDIR/eduke32
 
   installer:    
     - extract:
@@ -31,13 +31,11 @@ script:
     - write_file:
         content: '#!/bin/bash
 
-          src=$1
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
 
           dst=$2
 
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          find "$src_path" -type f \( -iname "DUKE3D.GRP"  \) -exec cp {} "$dst" \;'
+          find "$src" -type f \( -iname "DUKE3D.GRP"  \) -exec cp {} "$dst" \;'
         file: $CACHE/selectcopy.sh
     - chmodx: $CACHE/selectcopy.sh
 

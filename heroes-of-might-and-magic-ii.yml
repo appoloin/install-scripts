@@ -1,7 +1,7 @@
 name: Heroes of Might and Magic II
 game_slug: heroes-of-might-and-magic-ii
-version: Installer
-slug: heroes-of-might-and-magic-ii-installer
+version: Good Old Games Installer
+slug: heroes-of-might-and-magic-ii
 runner: dosbox
 
 script:
@@ -9,7 +9,7 @@ script:
     - game: N/A:Select GOG installer.
 
   game:
-    main_file: $GAMEDIR/MightAndMagic.conf
+    main_file: $GAMEDIR/play.conf
 
   installer:
     - write_file:
@@ -33,32 +33,29 @@ script:
         description: Extracting game files
 
     - execute:
-        args: $GAMEDIR/HoMM $GAMEDIR/CDD   
         file: mkdir
+        args: $GAMEDIR/HoMM $GAMEDIR/drive_d   
     
     - execute:
+        file: $CACHE/selectcopy2.sh
         args: $CACHE $GAMEDIR *.pdf
-        file: $CACHE/selectcopy2.sh
 
     - execute:
+        file: $CACHE/selectcopy2.sh
         args: $CACHE $GAMEDIR/HoMM HEROES2.*
-        file: $CACHE/selectcopy2.sh
 
     - execute:
+        file: $CACHE/selectcopy2.sh
         args: $CACHE $GAMEDIR/HoMM *.EXE 
-        file: $CACHE/selectcopy2.sh
 
     - execute:
+        file: $CACHE/selectcopy2.sh
         args: $CACHE $GAMEDIR/HoMM *.TXT
-        file: $CACHE/selectcopy2.sh
 
     - execute:
-        args: $CACHE $GAMEDIR/CDD homm2.*
         file: $CACHE/selectcopy2.sh
+        args: $CACHE $GAMEDIR/drive_d homm2.*
 
-    - execute:
-        args: $GAMEDIR/HoMM/cloud_saves  
-        file: mkdir
 
     - copy:
         src: $CACHE/DATA
@@ -82,7 +79,7 @@ script:
 
     - copy: 
         src: $CACHE/MUSIC
-        dst: $GAMEDIR/CDD/music
+        dst: $GAMEDIR/drive_c/music
 
     - copy: 
         src: $CACHE/SOUND
@@ -119,9 +116,7 @@ script:
           
             mount C "$GAMEDIR/" -t dir
 
-            mount C "$GAMEDIR/HoMM/cloud_saves" -t overlay
-
-            imgmount D "$GAMEDIR/CDD/homm2.ins" -t iso -fs iso
+            imgmount D "$GAMEDIR/drive_d/homm2.ins" -t iso -fs iso
 
             C: 
 
@@ -205,7 +200,7 @@ script:
 
             ECHO  ------------------------------------------- 
 
-            ECHO  HoMM II Track Selector                      
+            ECHO            HoMM II Track Selector                      
 
             ECHO  ------------------------------------------- 
 
@@ -232,7 +227,7 @@ script:
 
             mount -u D
 
-            mount D "$GAMEDIR/CDD/" -t dir
+            mount D "$GAMEDIR/drive_d/" -t dir
             
             cls
 
@@ -246,7 +241,7 @@ script:
 
             mount -u D
 
-            imgmount D "$GAMEDIR/CDD/homm2.ins" -t iso -fs iso
+            imgmount D "$GAMEDIR/drive_d/homm2.ins" -t iso -fs iso
 
             cls
 
@@ -258,7 +253,7 @@ script:
 
             mount -u D
 
-            mount D "$GAMEDIR/CDD/" -t dir
+            mount D "$GAMEDIR/drive_d/" -t dir
 
             COPY D:\music\pol\*.* D:\music\*.*
 
@@ -272,7 +267,7 @@ script:
 
             mount -u D
 
-            imgmount D "$GAMEDIR/CDD/homm2.ins" -t iso -fs iso
+            imgmount D "$GAMEDIR/drive_d/homm2.ins" -t iso -fs iso
 
             cls
 
@@ -281,4 +276,4 @@ script:
             :exit
             
             exit'
-        file: $GAMEDIR/MightAndMagic.conf
+        file: $GAMEDIR/play.conf
