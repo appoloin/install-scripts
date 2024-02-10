@@ -67,13 +67,18 @@ script:
     - extract:
         file: $CACHE/WidescreenFix.zip
         dst: $GAMEDIR/drive_c/GOG Games/Splinter Cell/system/
-       
+  
+    - execute:
+        file: $CACHE/download.sh
+        args: 1QW-mIANMUmYGCONnMLvLtMIlCj_oYyWp  $GAMEDIR/drive_c/GOG Games/Splinter Cell/system/dsound.dll
+
 
   wine:
     overrides:
-        d3d8.dll: native
-        msacm32: native
-        msvfw32: native
+      d3d8.dll: native
+      msacm32: native
+      msvfw32: native
+      dsound: native
 
   system:
     single_cpu: true
