@@ -1,0 +1,27 @@
+name: Aquanox 2
+game_slug: aquanox-2-revelation
+version: Good Old Games Installer
+slug: aquanox-2-revelation
+runner: wine
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    arch: win32
+    exe: "$GAMEDIR/drive_c/GOG Games/AquaNox 2 Revelation/AquaNox 2 Revelation.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

@@ -1,0 +1,27 @@
+name: F1 Race Stars
+game_slug: f1-race-stars
+version: Windows Installer
+slug: f1-race-stars
+runner: wine
+
+script:
+  files:
+    - setup: N/A:Select setup file 
+
+  game:
+    exe: "$GAMEDIR/drive_c/Games/F1 Race Stars/F1RaceStars.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

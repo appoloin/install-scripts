@@ -1,0 +1,35 @@
+name: Ceasar 3
+game_slug: caesar-iii
+version: Good Old Games Installer
+slug: caesar-iii
+runner: linux
+
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: /usr/bin/flatpak
+    args: run com.github.bvschaik.julius
+
+
+  installer:
+    - execute:
+        file: /usr/bin/flatpak
+        args: install flathub -y --noninteractive com.github.bvschaik.julius
+        description: Installing with flatpak
+        disable_runtime: true
+
+    - execute:
+        file: /usr/bin/flatpak
+        args: override com.github.bvschaik.julius --user --filesystem=$GAMEDIR
+        description: Added GAMEDIR to flatpak permissions
+        disable_runtime: true
+
+    - extract:
+        format: gog
+        file: $setup
+        args: --gog
+        dst: $GAMEDIR
+        description: Extracting game files

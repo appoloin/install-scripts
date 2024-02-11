@@ -1,0 +1,25 @@
+name: Rise of the Triad
+game_slug: rise-of-the-triad
+version: Good Old Games Installer
+slug: rise-of-the-triad
+runner: wine
+
+script:
+  files:
+    - setup: N/A:Select setup files
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Rise of the Triad - Ludicrous Edition/RottEX"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

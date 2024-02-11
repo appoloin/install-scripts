@@ -1,0 +1,32 @@
+name: The Lord of the Rings - The Battle for Middle Earth
+game_slug: the-lord-of-the-rings-the-battle-for-middle-earth
+version: Good Old Games Installer
+slug: the-lord-of-the-rings-the-battle-for-middle-earth
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Games/The Lord of the Rings The Battle for Middle-Earth Collection/TLotR The Battle for Middle-Earth/lotrbfme.exe
+    prefix: $GAMEDIR
+    launch_configs:
+      - exe: $GAMEDIR/drive_c/Games/The Lord of the Rings The Battle for Middle-Earth Collection/TLotR The Battle for Middle-Earth II/lotrbfme2.exe
+        name: The Battle for Middle Earth 2
+        prefix: $GAMEDIR
+      - exe: $GAMEDIR/drive_c/Games/The Lord of the Rings The Battle for Middle-Earth Collection/TLotR The Battle for Middle-Earth II The Rise of the Witch-king/LotRIcon.exe
+        name: The Rise of the Witch-king
+        prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
