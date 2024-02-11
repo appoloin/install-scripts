@@ -1,7 +1,7 @@
 name: Penumbra - Overture
 game_slug: penumbra-overture
-version: Installer
-slug: install
+version: Good Old Games Installer
+slug: penumbra-overture
 runner: wine
 
 script:
@@ -23,8 +23,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

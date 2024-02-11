@@ -1,7 +1,7 @@
 name: Penumbra - Blaack Plague
 game_slug: penumbra-black-plague
-version: Installer
-slug: install
+version: Good Old Games Installer
+slug:  penumbra-black-plague
 runner: wine
 
 script:
@@ -30,10 +30,4 @@ script:
         executable: $DLC
         name: wineexec
         prefix: $GAMEDIR
-
-
-
-  wine:
-    Desktop: true
-
 

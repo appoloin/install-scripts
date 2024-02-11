@@ -1,7 +1,7 @@
 name: Majestic Part 1 - Alien Encounter
-game_slug: majestic-part-1-alien-encounter
+game_slug: majestic-part-i-alien-encounter
 version: Windows Installer
-slug: majestic-part-1-alien-encounter
+slug: majestic-part-i-alien-encounter
 runner: scummvm
 
 
