@@ -15,28 +15,6 @@ script:
     - setup: N/A:Select installer
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
         arch: win32
         name: create_prefix
@@ -45,44 +23,36 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: d3dcompiler_47
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
 
     - execute:
-        file: $CACHE/download.sh
-        args: 1HyNnnCuOCrvlWxv0UU_rvNvjEKSOKJiT $CACHE/DgVoodoo_2_8.zip
+        command: 'rclone copy 
+            "Google-1:Game Patches/TomClancysSplinterCellPandoraTomorrow/SplinterCellPandoraTomorrow.WidescreenFix.zip" 
+            "$CACHE"'
 
     - extract:
-        file: $CACHE/DgVoodoo_2_8.zip
-        dst: $CACHE
-
-    - copy:
-        src: $CACHE/MS/x86/D3D8.dll
-        dst: $GAMEDIR/drive_c/Games/Splinter Cell Pandora Tomorrow/offline/
-    - copy:
-        src: $CACHE/MS/x86/D3D9.dll
+        file: $CACHE/SplinterCellPandoraTomorrow.WidescreenFix.zip
         dst: $GAMEDIR/drive_c/Games/Splinter Cell Pandora Tomorrow/offline/
 
     - execute:
-        file: $CACHE/download.sh
-        args: 10Kz0GXsZYFKidMLtDP-x51TFiiFCoFuL $CACHE/WidescreenFix.zip
+        command: 'rclone copy "Google-1:Systems/Software/dgVoodoo2_61.7z" "$CACHE"'
 
-    - extract:
-        file: $CACHE/WidescreenFix.zip
-        dst: $GAMEDIR/drive_c/Games/Splinter Cell Pandora Tomorrow/offline/
-       
+    - execute:
+        file: 7z
+        args: x $CACHE/dgVoodoo2_61.7z -o"$CACHE" -ppassword -y
+
+    - copy:
+        src: $CACHE/MS/x86/D3D8.dll
+        dst: $GAMEDIR/drive_c/Games/Splinter Cell Pandora Tomorrow/offline/system
+
+ 
   wine:
     overrides:
-        d3d8.dll: n,b
-        d3d9.dll: n,b
-        msacm32: n,b
-        msvfw32: n,b
+      d3d8.dll: n,b
+      msacm32: n,b
+      msvfw32: n,b
 
   system:
     single_cpu: true
