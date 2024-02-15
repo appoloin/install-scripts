@@ -49,7 +49,7 @@ script:
 
     - execute:
         file: $CACHE/download.sh
-        args: 1O-XCcWeweke2Dh5FJ3ZqyNfe9EBPRPlR $CACHE/DgVoodoo_2_6.7z
+        args: 1MRusXFfuTzaFXEjSYyLTssfrFlaV1Z23 $CACHE/DgVoodoo_2_6.7z
 
     - execute:
         file: 7z
