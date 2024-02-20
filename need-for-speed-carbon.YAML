@@ -6,51 +6,21 @@ runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Games/Need for Speed Carbon/NFSC.exe
+    exe: $GAMEDIR/drive_c/MagiPacks/Need for Speed - Carbon/NFSC.exe
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
  
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
         name: create_prefix
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
     
-    - execute:
-        file: $CACHE/download.sh
-        args: 1uzUU1rtcGPgw3DagNO_-sFNHEEfyTb6q $CACHE/NFSCarbon-WidescreenFix.zip
-
-    - extract:  
-        file: $CACHE/NFSCarbon-WidescreenFix.zip
-        dst:  $CACHE 
-
     - task:
-        app: mfc42 d3dcompiler_43 d3dx9 vcrun2005 dotnet20
+        app: mfc42 vcrun2005 dotnet20
         description: Installing dependencies...
         name: winetricks
         prefix: $GAMEDIR
@@ -60,32 +30,21 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-    - copy:
-        src: $CACHE/scripts
-        dst: $GAMEDIR/drive_c/Games/Need for Speed Carbon/Scripts
-
-    - copy:
-        src: $CACHE/dinput8.dll
-        dst: $GAMEDIR/drive_c/Games/Need for Speed Carbon/
-
     - write_config:
         data:
           MAIN:
             ResX: $RESOLUTION_WIDTH
             ResY: $RESOLUTION_HEIGHT 
-        file: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Most Wanted 2005/Scripts/NFSCarbon.WidescreenFix.ini
+        file: $GAMEDIR/drive_c/MagiPacks/Need for Speed - Carbon/scripts/NFSCarbon.WidescreenFix.ini
 
     - write_config:
         data:
           MISC:
             ImproveGamepadSupport: 1 
-        file: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Most Wanted 2005/Scripts/NFSCarbon.WidescreenFix.ini
+            ExpandControllerOptions: 1
+        file: $GAMEDIR/drive_c/MagiPacks/Need for Speed - Carbon/scripts/NFSCarbon.WidescreenFix.ini
 
 
   wine:
     overrides:
       dinput8.dll: n,b
-
-  system:
-    single_cpu: true
-
