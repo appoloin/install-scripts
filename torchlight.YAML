@@ -3,6 +3,7 @@ game_slug: torchlight
 version: Good Old Games Installer
 slug: torchlight
 runner: wine
+year: 2009
 
 script:
   game:
