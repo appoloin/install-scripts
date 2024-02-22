@@ -3,6 +3,7 @@ game_slug:  tom-clancys-splinter-cell-pandora-tomorrow
 version: Windows Installer
 slug: tom-clancys-splinter-cell-pandora-tomorrow
 runner: wine
+year: 2004
 
 script:
   game:
@@ -29,15 +30,15 @@ script:
 
     - execute:
         command: 'rclone copy 
-            "Google-1:Game Patches/TomClancysSplinterCellPandoraTomorrow/SplinterCellPandoraTomorrow.WidescreenFix.zip" 
-            "$CACHE"'
+            "Google-1:Patches/TomClancysSplinterCellPandoraTomorrow/SplinterCellPandoraTomorrow.WidescreenFix.zip" 
+            "$CACHE"
+            
+            rclone copy "Google-1:Systems/Software/dgVoodoo2_61.7z" "$CACHE"
+            '
 
     - extract:
         file: $CACHE/SplinterCellPandoraTomorrow.WidescreenFix.zip
         dst: $GAMEDIR/drive_c/Games/Splinter Cell Pandora Tomorrow/offline/
-
-    - execute:
-        command: 'rclone copy "Google-1:Systems/Software/dgVoodoo2_61.7z" "$CACHE"'
 
     - execute:
         file: 7z
