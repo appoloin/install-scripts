@@ -60,11 +60,13 @@ script:
         file: $CACHE/NFSPro-Fix.zip
         dst:  "$GAMEDIR/drive_c/Program Files (x86)/Need for Speed ProStreet/"
 
-    - write_config:
-        data:
-          MISC:
-            ImproveGamepadSupport: 1 
-        file: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed ProStreet/scripts/NFSMostWanted.WidescreenFix.ini
+    - execute:
+        file: $CACHE/download.sh
+        args: 12_hQMGdOGdjxa6uWCI6gAYbVd_dwxD-i $CACHE/Release-ProStreet-Pack.zip
+
+    - extract:  
+        file: $CACHE/Release-ProStreet-Pack.zip
+        dst:  "$GAMEDIR/drive_c/Program Files (x86)/Need for Speed ProStreet/"
 
 
   wine:
