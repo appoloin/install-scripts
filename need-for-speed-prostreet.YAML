@@ -1,14 +1,13 @@
-name: Need for Speed - Underground 2
-game_slug: need-for-speed-underground-2
+name: Need for Speed - Prostreet
+game_slug: need-for-speed-prostreet
 version: Windows Installer
-slug: INSTALLER
+slug: need-for-speed-prostreet
 runner: wine
-year: 2004
-
+year: 2007
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground 2/SPEED2.EXE
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Need for Speed ProStreet/nfs.exe"
     prefix: $GAMEDIR
 
   files:
@@ -42,45 +41,35 @@ script:
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
-    
-    - execute:
-        file: $CACHE/download.sh
-        args: 1Og-WmKKBR8-JyqL90BIckJKo61lmi-6v $CACHE/NFSUnderground2-WidescreenFix.zip
 
-    - extract:  
-        file: $CACHE/NFSUnderground2-WidescreenFix.zip
-        dst:  $CACHE 
+    - task:
+        app: xact_x64 xact
+        name: winetricks
+        prefix: $GAMEDIR
 
     - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
 
-    - copy:
-        src: $CACHE/dinput8.dll
-        dst: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground 2/
-
     - execute:
         file: $CACHE/download.sh
-        args: 19N1mC-UV8cluCMb5d8HJ62aH1im0AkBy $CACHE/Release-UG2-Pack.zip
+        args: 1Z_YGp9Za_tr7aVBqCZLoSQggK6Ci6cGu $CACHE/NFSPro-Fix.zip
 
     - extract:  
-        file: $CACHE/Release-UG2-Pack.zip
-        dst:  $CACHE 
-
-    - copy:
-        src: $CACHE/scripts
-        dst: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground 2/Scripts
+        file: $CACHE/NFSPro-Fix.zip
+        dst:  "$GAMEDIR/drive_c/Program Files (x86)/Need for Speed ProStreet/"
 
     - write_config:
         data:
-          MAIN:
-            ResX: $RESOLUTION_WIDTH
-            ResY: $RESOLUTION_HEIGHT 
-        file: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground 2/Scripts/NFSUnderground2.WidescreenFix.ini
+          MISC:
+            ImproveGamepadSupport: 1 
+        file: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed ProStreet/scripts/NFSMostWanted.WidescreenFix.ini
+
 
   wine:
     overrides:
       dinput8.dll: n,b
 
-
+  system:
+    pulse_latency: true

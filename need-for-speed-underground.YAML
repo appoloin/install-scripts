@@ -3,6 +3,7 @@ game_slug: need-for-speed-underground
 version: Windows Installer
 slug: INSTALLER
 runner: wine
+year: 2003
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: need-for-speed-carbon
 version: Windows Installer
 slug: INSTALLER
 runner: wine
+year: 2006
 
 script:
   game:

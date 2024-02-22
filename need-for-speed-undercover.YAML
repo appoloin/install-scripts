@@ -1,14 +1,13 @@
-name: Need for Speed - Underground 2
-game_slug: need-for-speed-underground-2
+name: Need for Speed - Undercover
+game_slug: need-for-speed-undercover
 version: Windows Installer
-slug: INSTALLER
+slug: need-for-speed-undercover
 runner: wine
-year: 2004
-
+year: 2008
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground 2/SPEED2.EXE
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/Need For Speed - Undercover/nfs.exe"
     prefix: $GAMEDIR
 
   files:
@@ -42,45 +41,44 @@ script:
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
-    
-    - execute:
-        file: $CACHE/download.sh
-        args: 1Og-WmKKBR8-JyqL90BIckJKo61lmi-6v $CACHE/NFSUnderground2-WidescreenFix.zip
 
-    - extract:  
-        file: $CACHE/NFSUnderground2-WidescreenFix.zip
-        dst:  $CACHE 
+    - task:
+        app: xact_x64 xact
+        name: winetricks
+        prefix: $GAMEDIR
 
     - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
 
-    - copy:
-        src: $CACHE/dinput8.dll
-        dst: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground 2/
+    - execute:
+        file: $CACHE/download.sh
+        args: 1Zh8bWd9DgT-ekaOVnj6R4lF6eMMAra15 $CACHE/NFS-Fix.zip
+
+    - extract:  
+        file: $CACHE/NFS-Fix.zip
+        dst:  "$GAMEDIR/drive_c/Program Files (x86)/"
 
     - execute:
         file: $CACHE/download.sh
-        args: 19N1mC-UV8cluCMb5d8HJ62aH1im0AkBy $CACHE/Release-UG2-Pack.zip
+        args: 1VRWlu5PNG53GRY8wwhPM1Yvpv_d-K1U_ $CACHE/patch.7z
 
-    - extract:  
-        file: $CACHE/Release-UG2-Pack.zip
-        dst:  $CACHE 
-
-    - copy:
-        src: $CACHE/scripts
-        dst: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground 2/Scripts
+    - execute:
+        file: 7z
+        args: x $CACHE/patch.7z -o"$GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/Need For Speed - Undercover/" -ppassword -y
 
     - write_config:
         data:
-          MAIN:
-            ResX: $RESOLUTION_WIDTH
-            ResY: $RESOLUTION_HEIGHT 
-        file: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground 2/Scripts/NFSUnderground2.WidescreenFix.ini
+          MISC:
+            ImproveGamepadSupport: 1 
+        file: $GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/Need For Speed - Undercover/scripts/NFSMostWanted.WidescreenFix.ini
+
+
 
   wine:
     overrides:
       dinput8.dll: n,b
 
-
+  system:
+    pulse_latency: true

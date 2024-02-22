@@ -3,6 +3,7 @@ game_slug: need-for-speed-hot-pursuit
 version: Windows Installer
 slug: need-for-speed-hot-pursuit
 runner: wine
+year: 2010
 
 script:
   game:
