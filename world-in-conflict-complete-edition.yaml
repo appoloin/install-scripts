@@ -1,0 +1,26 @@
+name: World in Conflict
+game_slug: world-in-conflict-complete-edition
+version: Good Old Games Installer
+slug: world-in-conflict-complete-edition
+runner: wine
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/World in Conflict - Complete Edition/wic.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

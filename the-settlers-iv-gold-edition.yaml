@@ -1,0 +1,27 @@
+name: The Settlers IV
+game_slug: the-settlers-iv-gold-edition
+version: Good Old Games Installer
+slug: the-settlers-iv-gold-edition
+runner: wine
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    arch: win32
+    exe:  "$GAMEDIR/drive_c/GOG Games/Settlers 4 Gold/S4.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

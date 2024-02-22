@@ -1,0 +1,70 @@
+name: Wing Commander - Prophecy
+game_slug: wing-commander-5-prophecy-gold-edition
+version: Good Old Games Installer
+slug: wing-commander-5-prophecy-gold-edition
+runner: wine
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+    - wcpep: http://download.wcnews.com/files/wcp/wcpep_release.zip
+    - opengl: http://download.wcnews.com/files/wcp/OpenGL-WCP_setup.exe
+    - fpsutil: http://download.wcnews.com/files/wcp/wcp_fps_utility.zip
+
+  game:
+    arch: win32
+    exe: "$GAMEDIR/drive_c/GOG Games/Zeus and Poseidon/Zeus.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        command: mv -i "$GAMEDIR/drive_c/GOG Games/Wing Commander Prophecy/prophecy.exe"
+          "$GAMEDIR/drive_c/GOG Games/Wing Commander Prophecy/prophecy.exe.bak"
+        description: Rename prophecy.exe
+    - extract:
+        description: Extract WCP Enhancement Pack
+        dst: $GAMEDIR/drive_c/GOG Games/Wing Commander Prophecy
+        file: wcpep
+    - execute:
+        command: mv -i "$GAMEDIR/drive_c/GOG Games/Wing Commander Prophecy/prophecy.exe"
+          "$GAMEDIR/drive_c/GOG Games/Wing Commander Prophecy/prophecy.exe.pep"
+        description: Rename WCPEP prophecy.exe
+    - execute:
+        command: mv -i "$GAMEDIR/drive_c/GOG Games/Wing Commander Prophecy/prophecy.exe.bak"
+          "$GAMEDIR/drive_c/GOG Games/Wing Commander Prophecy/prophecy.exe"
+        description: Rename prophecy.exe.bak
+    - task:
+        app: arial
+        description: Install arial for OpenGL patch
+        name: winetricks
+    - task:
+        arch: win32
+        description: Installing OpenGL patch
+        executable: opengl
+        name: wineexec
+        prefix: $GAMEDIR
+    - extract:
+        description: Extract Prophecy FPS utility
+        dst: $GAMEDIR/drive_c/GOG Games/Wing Commander Prophecy/
+        file: fpsutil
+    - task:
+        arch: win32
+        description: Launch Prophecy FPS utility
+        executable: $GAMEDIR/drive_c/GOG Games/Wing Commander Prophecy/WCP FPS Utility.exe
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    esync: false
+    fsync: false

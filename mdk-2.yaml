@@ -1,0 +1,35 @@
+name: MDK 2
+game_slug: mdk-2
+version: Good Old Games Installer
+slug: mdk-2
+runner: wine
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/MDK 2/MDK2.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - write_file:
+        content: 'chSetVideoMode(1024, 768, 32, 16, 60, 0, 2, 1, 0, 1, 0, 1) '
+        description: Disable Use of DirectX for settings video modes
+        file: $GAMEDIR/drive_c/GOG Games/MDK 2/save/config.lua
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      ddraw: native,builtin

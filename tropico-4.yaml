@@ -1,0 +1,33 @@
+name: Tropico 4
+game_slug: tropico-4
+version: Good Old Games Installer
+slug: tropico-4
+runner: wine
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+    - DLC1: N/A:Select DLC1 installer
+
+  game:
+    arch: win32
+    exe: "$GAMEDIR/drive_c/GOG Games/Tropico 4/Tropico4.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC1
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR

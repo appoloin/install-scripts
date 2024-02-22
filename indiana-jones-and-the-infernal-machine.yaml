@@ -1,0 +1,27 @@
+name: Indiana Jones and the Infernal Machine
+game_slug: indiana-jones-and-the-infernal-machine
+version: Good Old Games Installer
+slug: indiana-jones-and-the-infernal-machine
+runner: wine
+
+script:
+  files:
+    - setup: N/A:Select setup files
+
+  game:
+    arch: win32
+    exe: "$GAMEDIR/drive_c/GOG Games/Infernal Machine/Jones3D.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

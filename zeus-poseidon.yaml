@@ -1,0 +1,27 @@
+name: Zeus + Poseidon
+game_slug: zeus-poseidon
+version: Good Old Games Installer
+slug: zeus-poseidon
+runner: wine
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    arch: win32
+    exe: "$GAMEDIR/drive_c/GOG Games/Zeus and Poseidon/Zeus.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
