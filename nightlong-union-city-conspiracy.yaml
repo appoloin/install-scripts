@@ -3,7 +3,7 @@ game_slug: nightlong-union-city-conspiracy
 version: Installer
 slug: nightlong-union-city-conspiracy
 runner: scummvm
-
+year: 1998
 
 script:
   files:

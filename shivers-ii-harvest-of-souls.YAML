@@ -3,6 +3,7 @@ game_slug:  shivers-ii-harvest-of-souls
 version: Good Old Games Installer
 slug: shivers-ii-harvest-of-souls
 runner: wine
+year: 1997
 
 script:
   game:
