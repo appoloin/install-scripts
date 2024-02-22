@@ -3,6 +3,7 @@ game_slug:  tom-clancys-splinter-cell
 version: Good Old Games Installer
 slug: tom-clancys-splinter-cell
 runner: wine
+year: 2003
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug:  tom-clancys-splinter-cell-chaos-theory
 version: Windows Installer
 slug: tom-clancys-splinter-cell-chaos-theory
 runner: wine
+year: 2005
 
 script:
   game:
