@@ -1,16 +1,20 @@
 name: The Elder Scrolls V - Skyrim
 game_slug:  the-elder-scrolls-v-skyrim
 version: Good Old Games Installer
-slug: skyrim
+slug: the-elder-scrolls-v-skyrim
 runner: wine
+year: 2016
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition/skse64_loader.exe
+    exe:  $GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/skse64_loader.exe
     prefix: $GAMEDIR
     launch_configs:
-      - exe: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition/Mopy/Wrye Bash.exe
+      - exe: $GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Mopy/Wrye Bash.exe
         name: Wrye Bash
+        prefix: $GAMEDIR
+      - exe:  $GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data/Nemesis_Engine/start.bat
+        name: Nemesis
         prefix: $GAMEDIR
       - exe: $GAMEDIR/drive_c/Program Files/LOOT/LOOT.exe
         name: Loot
@@ -18,41 +22,34 @@ script:
 
   files:
     - setup: N/A:Select installer
-
+    - DLC1: N/A:Select Update
 
   install_complete_text: "Installation finished!\n\n\n\nRun Wyre Bash to install mods. \ 
-        (Right Click on Mod -> Archive -> Unpack to Project, then install). \n\n\n \ 
+        (Right Click on Mod -> Archive -> Unpack to Project, then install).\n\n\n\
         Run Loot to fix load order"
 
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
         name: create_prefix
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
+
+    #download 
+    - execute:
+        command: 'rclone copy 
+            "Mega - 1:Patches/TES-Morrowind-Oblivion-Skyrim/Wrye Bash 312.1 - Installer-591-312-1-1704633269.exe" 
+            "$CACHE" 
+            
+            rclone copy 
+            "Mega - 1:Patches/TES-Morrowind-Oblivion-Skyrim/loot_0.19.1-win64.zip" 
+            "$CACHE" 
+            
+            rclone copy 
+            "Mega - 1:Patches/TES-Morrowind-Oblivion-Skyrim/Skyrim Mods" 
+            "$CACHE/Skyrim Mods" 
+            '
 
     - task:
         app: xact xact_x64 corefonts tahoma vcrun2019
@@ -63,148 +60,101 @@ script:
     - task:
         executable: $setup
         description: Installing Game
+        args: /SILENT 
         name: wineexec
         prefix: $GAMEDIR
 
     - task:
-        executable: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition/SkyrimSELauncher.exe
+        executable: $DLC1
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/SkyrimSELauncher.exe
         description: Running game to create ini files
         name: wineexec
         prefix: $GAMEDIR
 
+    - write_config:
+        file: "$GAMEDIR/drive_c/users/$USER/Documents/My Games/Skyrim Special Edition GOG/SkyrimPrefs.ini"
+        section: MAIN
+        key: bGamepadEnable
+        value: 1
 
-    - execute:
-        file: $CACHE/download.sh
-        args: 1zuPNXIsgvpYV8VD5n4xZ20KEgkVbHwKR $CACHE/patchs.zip
-
-    - execute:
-        file: 7z
-        args: e  $CACHE/patchs.zip -o"$GAMEDIR/drive_c/Games/" -ppassword -y
 
     - task:
-        executable: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition update 1.6.138 - 1.6.323.exe
-        description: Installing Patch 1
-        name: wineexec
-        prefix: $GAMEDIR
-
-    - task:
-        executable: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition update 1.6.323 - 1.6.342.exe
-        description: Installing Patch 2
-        name: wineexec
-        prefix: $GAMEDIR
-
-    - task:
-        executable: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition update 1.6.342 - 1.6.353.exe
-        description: Installing Patch 3
-        name: wineexec
-        prefix: $GAMEDIR
-
-    - task:
-        executable: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition update 1.6.353 - 1.6.629.exe
-        description: Installing Patch 4
-        name: wineexec
-        prefix: $GAMEDIR
-
-    - task:
-        executable: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition update 1.6.629 - 1.6.640.exe
-        description: Installing Patch 5
-        name: wineexec
-        prefix: $GAMEDIR
-
-    - task:
-        executable: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition/SkyrimSELauncher.exe
-        description: Running game to create ini files
-        name: wineexec
-        prefix: $GAMEDIR
-
-    - task:
-        key: Installed Path
-        name: set_regedit
-        path: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Bethesda Softworks\Skyrim Special Edition
-        prefix: $GAMEDIR
-        type: REG_SZ
-        value: c:\\Games\\The Elder Scrolls V Skyrim Special Edition
-        
-    - task:
-        key: Installed Path
-        name: set_regedit
-        path: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Valve\Steam\Apps\489830
-        prefix: $GAMEDIR
-        type: REG_SZ
-        value: c:\\Games\\The Elder Scrolls V Skyrim Special Edition
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 12s7oQdduWkskbbWWvJC5j03TkRax_3zv $CACHE/wyre_bash.7z
-
-    - execute:
-        file: 7z
-        args: e  $CACHE/wyre_bash.7z -o"$GAMEDIR/drive_c/Games/" -ppassword -y
-
-    - task:
-        executable: $GAMEDIR/drive_c/Games/Wrye Bash 310 - Installer-1840-310-1658670684.exe
+        executable: $CACHE/Wrye Bash 312.1 - Installer-591-312-1-1704633269.exe
         description: Installing Wyre Bash NB Install mods as project not archive
         name: wineexec
         prefix: $GAMEDIR
 
+    - extract:
+        file: "$CACHE/Skyrim Mods/skse64_2_02_03_gog.7z" 
+       # file: "$CACHE/Skyrim Mods/Skyrim Script Extender (SKSE64) GOG-30379-2-2-6-1707977381.7z"
+        dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/" 
 
-    - execute:
-        file: $CACHE/download.sh
-        args: 18vLZhP-SoxAfY7F4FmTmPfcnHITf3I9N $CACHE/loot.7z
+    - extract:
+        file: "$CACHE/Skyrim Mods/SKSE64 INI PRE DOWNLOAD v1.2-1651-1-2.7z"
+        dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data"
+
+    - extract:
+        file: "$CACHE/Skyrim Mods/All in one Address Library (Anniversary Edition)-32444-11-1707902394.zip"
+        dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data/SKSE"
+
+    - extract:
+        file: "$CACHE/Skyrim Mods/PapyrusUtil GOG - Scripting Utility Functions-13048-4-4-1667962205.zip"
+      #  file: "$CACHE/Skyrim Mods/PapyrusUtil GOG - Scripting Utility Functions-13048-4-6-1708985698.zip"
+        dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data"
+
+    - extract:
+        file: "$CACHE/Skyrim Mods/(Part 1) SSE Engine Fixes for 1.6.629 and newer-17230-6-1-1-1664974106.7z"
+        dst:  "$CACHE"
+    - merge:
+        src: "$CACHE/skse/plugins"
+        dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data/SKSE/Plugins"
+
+    - extract:
+        file: "$CACHE/Skyrim Mods/(Part 2) Engine Fixes - skse64 Preloader and TBB Lib-17230-2020-3-1611367474.7z"
+        dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/"
+
+ #   - extract:
+ #       file: "$CACHE/Skyrim Mods/Modififed TOML File v3-108069-6-1-1-3-1705235175.7z"
+ #       dst:  "$CACHE"
+ #   - merge:
+ #       src: "$CACHE/skse/plugins"
+ #       dst: "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data/SKSE/Plugins"
+
+
+    - extract:
+        file: "$CACHE/Skyrim Mods/Nemesis Unlimited Behavior Engine-60033-v0-84-beta-1639426722.7z"
+        dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data"
+
+    - write_file:
+        content: 'start "Nemesis" /D "c:\GOG Games\Skyrim Anniversary Edition\Data\Nemesis_Engine" "Nemesis Unlimited Behavior Engine.exe"'
+        file: $GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data/Nemesis_Engine/start.bat
+
+    - move:
+        src: $CACHE/Skyrim Mods
+        dst: $GAMEDIR/drive_c/GOG Games/Skyrim Mods
 
     - execute:
         file: 7z
-        args: e  $CACHE/loot.7z -o"$GAMEDIR/drive_c/Games/" -ppassword -y
+        args: e  $CACHE/loot_0.19.1-win64.zip -o"$GAMEDIR/drive_c/GOG Games/" -ppassword -y
 
     - task:
-        executable: $GAMEDIR/drive_c/Games/loot_0.19.1-win64.exe
+        executable: $GAMEDIR/drive_c/GOG Games/loot_0.19.1-win64.exe
         description: Installing Loot
         name: wineexec
         prefix: $GAMEDIR
 
-    - task:
-        executable: $GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition/Mopy/Wrye Bash.exe
-        description: Running Wyre Bash
-        name: wineexec
-        prefix: $GAMEDIR
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1KItSyOne8nK5RvmgfqeCMklxV1_DmwI_ $CACHE/skse.zip
-
-    - execute:
-        file: 7z
-        args: x  $CACHE/skse.zip -o"$GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition/"  -y
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1YzkHP9oFRfhaKxCMbbB1UPHiHDk11NSl $CACHE/AllInOne.zip
-
-    - execute:
-        file: 7z
-        args: x $CACHE/AllInOne.zip -o"$GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition/Data"  -y
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 17Yw4ZT3httjF-MH243EETZE2o-e61nw3 $CACHE/SKSEini.zip
-
-    - execute:
-        file: 7z
-        args: x $CACHE/SKSEini.zip -o"$GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition/" -y
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1ewc5LdmlrXk3WvgNWKIgnr3gxppr-TCv $CACHE/PapyrusUtil.zip
-
-    - execute:
-        file: 7z
-        args: x $CACHE/PapyrusUtil.zip -o"$GAMEDIR/drive_c/Games/The Elder Scrolls V Skyrim Special Edition/Data"  -y
+  wine: 
+    overrides:
+      d3dx9_42: native
 
   system:
     env:
-        PULSE_LATENCY_MSEC: '90'
+      PULSE_LATENCY_MSEC: '90'
 
-  wine:
-    Desktop: true
 
 
