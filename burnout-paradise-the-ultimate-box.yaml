@@ -1,0 +1,61 @@
+name: Burnout Paradise - The Ultimate Box
+game_slug: burnout-paradise-the-ultimate-box
+version: Windows Installer
+slug: burnout-paradise-the-ultimate-box
+runner: wine
+year: 2009
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/Burnout Paradise - The Ultimate Box/BurnoutParadise.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID="$1"
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $game $GAMEDIR
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 17A5r3w41T5Kyf6vqIloaEwJyNCDGjRQP $CACHE/patch.7z
+
+    - execute:
+        file: 7z
+        args: e $CACHE/patch.7z -o"$GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/Burnout Paradise - The Ultimate Box/" -ppassword -y
+        
