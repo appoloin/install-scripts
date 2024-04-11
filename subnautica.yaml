@@ -3,6 +3,7 @@ game_slug: subnautica
 version: Windows Installer
 slug:  NSTALLER
 runner: wine
+year: 2018
 
 script:
   game:

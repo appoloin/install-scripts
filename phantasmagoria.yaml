@@ -3,7 +3,7 @@ game_slug:  phantasmagoria
 version: DOS
 slug:   phantasmagoria
 runner: scummvm
-
+year: 1995
 
 script:
   game:

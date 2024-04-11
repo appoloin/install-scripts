@@ -3,7 +3,8 @@ game_slug: unheard-voices-of-crime
 version: Installer
 slug: installer
 runner: wine
- 
+year: 2023
+
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Unheard - Voices of Crime/Unheard.exe

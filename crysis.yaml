@@ -3,6 +3,7 @@ game_slug: crysis
 version: Good Old Games Installer
 slug: crysis
 runner: wine
+year: 2007
 
 script:
   game: 

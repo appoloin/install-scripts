@@ -3,6 +3,7 @@ game_slug: max-payne-2-the-fall-of-max-payne
 version: Windows Installer
 slug:  installer
 runner: wine
+year: 2003
 
 script:
   game:

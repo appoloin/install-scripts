@@ -3,6 +3,7 @@ game_slug: subnautica-below-zero
 version: Windows Installer
 slug:  INSTALLER
 runner: wine
+year: 2019
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: dead-space
 version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
+year: 2008
 
 script:
   game:

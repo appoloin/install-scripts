@@ -3,6 +3,7 @@ game_slug: crysis-3
 version: Windows Installer
 slug: crysis-3
 runner: wine
+year: 2013
 
 script:
   game: 

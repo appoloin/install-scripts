@@ -3,6 +3,7 @@ game_slug: crysis-warhead
 version: Good Old Games Installer
 slug: crysis-warhead
 runner: wine
+year: 2008
 
 script:
   game:

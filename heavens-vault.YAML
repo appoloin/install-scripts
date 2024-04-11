@@ -3,6 +3,7 @@ game_slug: heavens-vault
 version: Good Old Games Installer
 slug: heavens-vault
 runner: wine
+year: 2019
 
 script:
   game:

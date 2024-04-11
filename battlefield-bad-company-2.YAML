@@ -3,6 +3,7 @@ game_slug: battlefield-bad-company-2
 version: Windows Installer
 slug: battlefield-bad-company-2
 runner: wine
+year: 2010
 
 script:
   game:

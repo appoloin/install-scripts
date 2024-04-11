@@ -3,6 +3,7 @@ game_slug: borderlands-2
 version: Windows Installer
 slug: borderlands-2_INSTALLER
 runner: wine
+year: 2012
 
 script:
   game:

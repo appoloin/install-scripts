@@ -3,6 +3,7 @@ game_slug:  half-life
 version: Windows Installer
 slug: half-life
 runner: wine
+year: 1998
 
 script:
   game:

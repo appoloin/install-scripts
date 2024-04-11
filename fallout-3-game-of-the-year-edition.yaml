@@ -3,7 +3,7 @@ game_slug: fallout-3-game-of-the-year-edition
 version: Good Old Games Installer
 slug:  fallout-3-game-of-the-year-edition
 runner: wine
-
+year: 2008
 
 script:
   files:

@@ -3,7 +3,7 @@ game_slug: far-cry-2
 version: Good Old Games Installer
 slug: FarCry2
 runner: wine
-
+year: 2008
 
 script:
   game:

@@ -3,7 +3,7 @@ game_slug: tex-murphy-under-a-killing-moon
 version: DOS
 slug:  installer
 runner: dosbox
-
+year: 1994
 
 script:
   game:

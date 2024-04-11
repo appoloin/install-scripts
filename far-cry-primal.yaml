@@ -3,6 +3,7 @@ game_slug: far-cry-primal
 version: Windows Installer
 slug: installer
 runner: wine
+year: 2016
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: desperados-iii
 version: Installer
 slug: desperados-iii
 runner: wine
+year: 2020
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: batman-arkham-asylum-goty-edition
 version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
+year: 2009
 
 script:
   game:

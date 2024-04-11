@@ -3,7 +3,7 @@ game_slug: heretic-shadow-of-the-serpent-riders
 version: Good Old Games Installer
 slug: installer
 runner: linux
-
+year: 1996
 
 script:
   files:

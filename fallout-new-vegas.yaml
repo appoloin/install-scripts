@@ -3,7 +3,7 @@ game_slug: fallout-new-vegas
 version: Good Old Games Installer
 slug:  fallout-new-vegas
 runner: wine
-
+year: 2010
 
 script:
   files:

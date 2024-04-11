@@ -3,6 +3,7 @@ game_slug: portal
 version: Windows Installer
 slug: portal
 runner: wine
+year: 2007
 
 script:
   game: 

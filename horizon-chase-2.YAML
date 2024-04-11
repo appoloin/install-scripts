@@ -3,6 +3,7 @@ game_slug: horizon-chase-2
 version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
+year: 2023
 
 script:
   game:

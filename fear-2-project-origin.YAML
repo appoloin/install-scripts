@@ -3,6 +3,7 @@ game_slug:  fear-2-project-origin
 version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
+year: 2009 
 
 script:
   game:

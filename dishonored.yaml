@@ -3,6 +3,7 @@ game_slug: dishonored
 version: Good Old Games Installer
 slug:  dishonored-installer
 runner: wine
+year: 2012
 
 script:
   game:

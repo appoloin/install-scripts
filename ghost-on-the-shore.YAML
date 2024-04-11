@@ -3,6 +3,7 @@ game_slug: ghost-on-the-shore
 version: Good Old Games Installer
 slug: ghost-on-the-shore
 runner: wine
+year: 2022 
 
 script:
   game:

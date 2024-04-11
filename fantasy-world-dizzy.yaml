@@ -3,7 +3,7 @@ game_slug: fantasy-world-dizzy
 version: DOS
 slug: fantasy-world-dizzy
 runner: dosbox
-
+year: 1989
 
 script:
   files:

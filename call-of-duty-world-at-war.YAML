@@ -3,6 +3,7 @@ game_slug:  call-of-duty-world-at-war
 version: Windows Installer
 slug: call-of-duty-world-at-war
 runner: wine
+year: 2008
 
 script:
   game:

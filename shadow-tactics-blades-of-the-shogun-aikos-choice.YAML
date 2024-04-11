@@ -3,6 +3,7 @@ game_slug: shadow-tactics-blades-of-the-shogun-aikos-choice
 version: Good Old Games Installer
 slug: shadow-tactics-blades-of-the-shogun-aikos-choice
 runner: wine
+year: 2021
 
 script:
   game:

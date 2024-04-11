@@ -3,6 +3,7 @@ game_slug: dear-esther-landmark-edition
 version: Installer
 slug: dear-esther-landmark-edition
 runner: wine
+year: 2016
 
 script:
   game:

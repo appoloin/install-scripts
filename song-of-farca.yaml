@@ -3,6 +3,7 @@ game_slug: song-of-farca
 version: Good Old Games Installer
 slug:  installer
 runner: wine
+year: 2021
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: shadow-tactics-blades-of-the-shogun
 version: Good Old Games Installer
 slug: shadow-tactics-blades-of-the-shogun
 runner: wine
+year: 2016
 
 script:
   game:

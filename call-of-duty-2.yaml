@@ -3,6 +3,7 @@ game_slug: call-of-duty-2
 version: Windows Installer
 slug:  installer
 runner: wine
+year: 2005
 
 script:
   game:

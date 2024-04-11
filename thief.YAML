@@ -3,6 +3,7 @@ game_slug: thief
 version: Good Old Games Installer
 slug: thief_INSTALLER
 runner: wine
+year: 2014
 
 script:
   game:
