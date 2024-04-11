@@ -3,6 +3,7 @@ game_slug: mass-effect
 version: Windows Installer
 slug:  Mass-Effect-installer
 runner: wine
+year: 2007
 
 script:
   game:

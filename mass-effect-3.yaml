@@ -3,6 +3,7 @@ game_slug: mass-effect-3
 version: Windows Installer
 slug:  Mass-Effect-3-installer
 runner: wine
+year: 2012
 
 script:
   game:
