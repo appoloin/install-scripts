@@ -3,7 +3,7 @@ game_slug: zork-ii
 version: DOS
 slug: installer
 runner: scummvm
-
+year: 1981
 
 script:
   game:

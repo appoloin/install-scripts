@@ -3,7 +3,7 @@ game_slug: starcross
 version: DOS
 slug: Zork1-installer
 runner: scummvm
-
+year: 1982
 
 script:
   game:
