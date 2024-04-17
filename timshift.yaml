@@ -3,6 +3,7 @@ game_slug: timeshift
 version: Good Old Games Installer
 slug: timeshift
 runner: wine
+year: 2007
 
 script:
   files:

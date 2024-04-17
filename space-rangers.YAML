@@ -3,6 +3,7 @@ game_slug:  space-rangers
 version: Good Old Games Installer
 slug: space-rangers
 runner: wine
+year: 2002
 
 script:
   game:

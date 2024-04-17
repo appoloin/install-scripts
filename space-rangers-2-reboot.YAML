@@ -3,6 +3,7 @@ game_slug:  space-rangers-2-reboot
 version: Good Old Games Installer
 slug: space-rangers-2-reboot
 runner: wine
+year: 2004
 
 script:
   game:

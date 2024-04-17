@@ -3,6 +3,7 @@ game_slug: wing-commander-5-prophecy-gold-edition
 version: Good Old Games Installer
 slug: wing-commander-5-prophecy-gold-edition
 runner: wine
+year: 1997
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug: zeus-poseidon
 version: Good Old Games Installer
 slug: zeus-poseidon
 runner: wine
+year: 2016
 
 script:
   files:
