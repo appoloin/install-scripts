@@ -3,6 +3,7 @@ game_slug: Arctico
 version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
+year: 2014
 
 script:
   game:

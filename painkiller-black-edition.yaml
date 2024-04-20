@@ -3,7 +3,7 @@ game_slug: painkiller-black-edition
 version: Good Old Games Installer
 slug: painkiller-black-edition
 runner: wine
-
+year: 2002
 
 script:
   game:

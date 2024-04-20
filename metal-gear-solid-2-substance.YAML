@@ -3,6 +3,7 @@ game_slug: metal-gear-solid-2-substance
 version: Good Old Games Installer
 slug: metal-gear-solid-2-substance
 runner: wine
+year: 2002
 
 script:
   game:

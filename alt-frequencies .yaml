@@ -3,7 +3,9 @@ game_slug: alt-frequencies
 version: Good Old Games Installer
 slug: installer
 runner: wine
- 
+year: 2019
+
+
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Alt-Frequencies/Alt-Frequencies.exe

@@ -3,7 +3,7 @@ game_slug: painkiller-overdose
 version: Good Old Games Installer
 slug: painkiller-overdose
 runner: wine
-
+year: 2007
 
 script:
   game:

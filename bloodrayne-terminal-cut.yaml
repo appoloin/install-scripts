@@ -3,7 +3,9 @@ game_slug: bloodrayne-terminal-cut
 version: Installer
 slug: bloodrayne-terminal-cut
 runner: wine
- 
+year: 2002
+
+
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/BloodRayne Terminal Cut/rayne1.exe

@@ -3,6 +3,7 @@ game_slug: mdk
 version: Good Old Games Installer
 slug: mdk
 runner: wine
+year: 1997
 
 script:
   files:
