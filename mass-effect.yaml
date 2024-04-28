@@ -108,7 +108,7 @@ script:
 
     - merge:
         src: "$CACHE/Binaries"
-        dst: "$GAMEDIR/drive_c/Program Files/Mass Effect Ultimate Edition/Binaries"
+        dst: "$GAMEDIR/drive_c/Program Files (x86)/Mass Effect Ultimate Edition/Binaries"
     
     - task:
         description: Creating Settings
@@ -119,7 +119,7 @@ script:
     #Downloading and install controller mod
     - execute:
         file: $CACHE/download.sh
-        args: 11afBsUtM7bJLg9fPlqlEmEBVM1f_mQa5A9 "$CACHE/ME1Controller-60-1-2-2.7z" 
+        args: 1afBsUtM7bJLg9fPlqlEmEBVM1f_mQa5A "$CACHE/ME1Controller-60-1-2-2.7z" 
         description: Downloading Controller MOD
 
     - execute:
