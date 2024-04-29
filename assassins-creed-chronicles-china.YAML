@@ -3,6 +3,7 @@ game_slug: assassins-creed-chronicles-china--1
 version: Windows Installer
 slug: INSTALLER
 runner: wine
+year: 2015
 
 script:
   game:

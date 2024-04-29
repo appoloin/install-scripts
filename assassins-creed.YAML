@@ -3,6 +3,7 @@ game_slug: assassins-creed
 version: Windows Installer
 slug: INSTALLER
 runner: wine
+year: 2008
 
 script:
   game:
