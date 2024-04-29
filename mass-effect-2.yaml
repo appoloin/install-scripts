@@ -10,7 +10,7 @@ script:
     exe: $GAMEDIR/drive_c/Program Files (x86)/Mass Effect 2 Ultimate Edition/Binaries/MassEffect2.exe
     prefix: $GAMEDIR
     launch_configs:
-      - exe: "$GAMEDIR/drive_c/Program Files (x86)/Mass Effect 2 Ultimate Edition/Binaries/MassEffectConfig.exe"
+      - exe: "$GAMEDIR/drive_c/Program Files (x86)/Mass Effect 2 Ultimate Edition/Binaries/MassEffect2Config.exe"
         name: Configure
         prefix: $GAMEDIR
 
@@ -93,6 +93,7 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR  
+        return_code: 9
 
     - task:
         name: winekill
@@ -116,7 +117,7 @@ script:
         args: x "$CACHE/ME2Controller-62-1-7-2.7z"  -o"$CACHE" -y
 
     - merge:
-        src: "$CACHE/ME2Controller/BioWare" 
+        src: "$CACHE/ME2Controller/" 
         dst: "$GAMEDIR/drive_c/Program Files (x86)/Mass Effect 2 Ultimate Edition/"
              
 
