@@ -3,7 +3,7 @@ game_slug: the-witness--1
 version: DOS
 slug: installer
 runner: scummvm
-
+year: 1983
 
 script:
   game:

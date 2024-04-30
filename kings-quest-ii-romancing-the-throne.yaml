@@ -3,7 +3,7 @@ game_slug: kings-quest-ii-romancing-the-throne
 version: Good Old Games Installer
 slug:  kings-quest-ii-romancing-the-throne-installer
 runner: scummvm
-
+year: 1985
 
 
 script:

@@ -3,7 +3,7 @@ game_slug: kings-quest-i-quest-for-the-crown
 version: Good Old Games Installer
 slug:  kings-quest-i-quest-for-the-crown-installer
 runner: scummvm
-
+year: 1984
 
 
 script:
