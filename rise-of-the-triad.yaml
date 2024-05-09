@@ -3,6 +3,8 @@ game_slug: rise-of-the-triad
 version: Good Old Games Installer
 slug: rise-of-the-triad
 runner: wine
+year: 2023
+
 
 script:
   files:

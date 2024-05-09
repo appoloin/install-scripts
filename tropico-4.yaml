@@ -3,6 +3,7 @@ game_slug: tropico-4
 version: Good Old Games Installer
 slug: tropico-4
 runner: wine
+year: 2011
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug: indiana-jones-and-the-infernal-machine
 version: Good Old Games Installer
 slug: indiana-jones-and-the-infernal-machine
 runner: wine
+year: 1999
 
 script:
   files:

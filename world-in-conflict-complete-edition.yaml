@@ -3,6 +3,7 @@ game_slug: world-in-conflict-complete-edition
 version: Good Old Games Installer
 slug: world-in-conflict-complete-edition
 runner: wine
+year: 2007
 
 script:
   files:

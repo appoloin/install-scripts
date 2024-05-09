@@ -3,6 +3,7 @@ game_slug: silent-hill-2-directors-cut
 version: Windows Installer
 slug: silent-hill-2-directors-cut
 runner: wine
+year: 2001
 
 script:
   game:

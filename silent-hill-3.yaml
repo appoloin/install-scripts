@@ -3,6 +3,7 @@ game_slug: silent-hill-3
 version: Windows Installer
 slug: silent-hill-3
 runner: wine
+year: 2003
 
 script:
   game:

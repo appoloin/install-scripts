@@ -3,6 +3,7 @@ game_slug: victor-vran
 version: Good Old Games Installer
 slug: victor-vran
 runner: wine
+year: 2015
 
 script:
   game:

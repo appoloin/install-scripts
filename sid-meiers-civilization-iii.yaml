@@ -3,6 +3,7 @@ game_slug: sid-meiers-civilization-iii
 version: Good Old Games Installer
 slug: sid-meiers-civilization-iii
 runner: wine
+year: 2001
 
 script:
   files:

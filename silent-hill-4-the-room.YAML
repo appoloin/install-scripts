@@ -3,6 +3,7 @@ game_slug: silent-hill-4-the-room
 version: Good Old Games Installer
 slug: silent-hill-4-the-room
 runner: wine
+year: 2004
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: sid-meiers-civilization-v
 version: Good Old Games Installer
 slug: sid-meiers-civilization-v
 runner: wine
+year: 2010
 
 script:
   files:

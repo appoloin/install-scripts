@@ -3,6 +3,7 @@ game_slug: f-117a-nighthawk-stealth-fighter-20
 version: Good Old Games Installer
 slug: f-117a-nighthawk-stealth-fighter-20
 runner: dosbox
+year: 1991
 
 script:
   files:

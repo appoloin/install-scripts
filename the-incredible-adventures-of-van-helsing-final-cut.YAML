@@ -3,6 +3,7 @@ game_slug: the-incredible-adventures-of-van-helsing-final-cut
 version: Good Old Games Installer
 slug: the-incredible-adventures-of-van-helsing-final-cut
 runner: wine
+year: 2015
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: sid-meier-s-pirates
 version: Good Old Games Installer
 slug: sid-meier-s-pirates
 runner: wine
+year: 2004
 
 script:
   files:

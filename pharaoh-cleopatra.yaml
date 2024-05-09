@@ -3,6 +3,7 @@ game_slug: pharaoh-cleopatra
 version: Good Old Games Installer
 slug: pharaoh-cleopatra
 runner: wine
+year: 2001
 
 script:
   files:

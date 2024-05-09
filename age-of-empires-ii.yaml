@@ -3,6 +3,7 @@ game_slug: age-of-empires-ii
 version: Good Old Games Installer
 slug: age-of-empires-ii
 runner: wine
+year: 2015
 
 script:
   files:

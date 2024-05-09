@@ -3,6 +3,7 @@ game_slug: f19-stealth-fighter
 version: Good Old Games Installer
 slug: f19-stealth-fighter
 runner: dosbox
+year: 1988
 
 script:
   files:
