@@ -10,8 +10,12 @@ script:
     exe: $GAMEDIR/drive_c/Program Files (x86)/Mass Effect 3/Binaries/Win32/MassEffect3.exe
     prefix: $GAMEDIR
     launch_configs:
+      - exe: "$GAMEDIR/drive_c/Program Files (x86)/Mass Effect 3/Binaries/MassEffect3Config.exe"
+        name: Configure
+        prefix: $GAMEDIR
       - exe: $GAMEDIR/drive_c/users/$USER/Documents/ME3TweaksModManager/ME3TweaksModManager.exe
         name: Mod Manager
+        prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select Setup.exe
@@ -23,19 +27,19 @@ script:
         install_gecko: false
         prefix: $GAMEDIR
     
-    - task:
-        app: dotnet6
-        description: Runnig Winetricks.
-        name: winetricks
-        prefix: $GAMEDIR
-
-    #download 
+    #download MODS
     - execute:
         command: 'rclone copy 
-                 "Mega - 1:Patches/Mass Effect 3" 
+                 "Google-1:Patches/MassEffect/Mass Effect 3" 
                  "$GAMEDIR/drive_c/users/$USER/Documents/MODS" 
                 '
 
+    - task:
+        app: dotnet6 physx vcrun2012
+        description: Runnig Winetricks.
+        name: winetricks
+        prefix: $GAMEDIR
+        
     - task:
         description: Allow DirectX apps to stop the mouse leaving their window.
         key: GrabFullScreen
@@ -73,11 +77,6 @@ script:
         value: va
 
     - task:
-        app:  physx vcrun2012
-        name: winetricks
-        prefix: $GAMEDIR
-
-    - task:
         description: 'Installing Mass Effect 3.
 
           The installating folder MUST BE ''C:\Program Files\Mass Effect 3''
@@ -86,7 +85,41 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-      
+
+    - task:
+        description: 'Installing Mod Manager'
+        executable: "$GAMEDIR/drive_c/users/$USER/Documents/MODS/ME3Tweaks Mod Manager Build 8.2.4 (Build 133)-373-8-2-4-133-1704685494.exe" 
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x "$GAMEDIR/drive_c/users/$USER/Documents/MODS/CEM Full-2-1-4-1.zip"  -o"$GAMEDIR/drive_c/users/$USER/Documents/MODS/CEM Full-2-1-4-1" -y
+
+    - task:
+        description: 'Installing Mod Manager'
+        executable: "$GAMEDIR/drive_c/users/$USER/Documents/MODS/CEM Full-2-1-4-1/CEM_Full_ver_1_4_1.exe" 
+        name: wineexec
+        prefix: $GAMEDIR
+
+
+    - execute:
+        file: 7z
+        args: x "$GAMEDIR/drive_c/users/$USER/Documents/MODS/CEM Goodbye-2-1-1572802363.zip"  -o"$GAMEDIR/drive_c/users/$USER/Documents/MODS/CEM Goodbye-2-1-1572802363" -y
+
+    - task:
+        description: 'Installing Mod Manager'
+        executable: "$GAMEDIR/drive_c/users/$USER/Documents/MODS/CEM Goodbye-2-1-1572802363/CEMG_ver_1.exe" 
+        name: wineexec
+        prefix: $GAMEDIR
+
+
+    - execute:
+        file: 7z
+        args: x "$GAMEDIR/drive_c/users/$USER/Documents/MODS/MEHEMv0.5 to CEM-2-1-4-1.zip"  -o"$GAMEDIR/drive_c/users/$USER/Documents/MODS/MEHEMv0.5 to CEM-2-1-4-1" -y
+
+
+
   wine:
     overrides:
       dxgi: disable
