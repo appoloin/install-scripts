@@ -3,6 +3,7 @@ game_slug: quake-4
 version: Good Old Games Installer
 slug: installer
 runner: wine
+year: 2005
 
 script:
   game:

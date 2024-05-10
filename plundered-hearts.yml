@@ -3,7 +3,7 @@ game_slug:  plundered-hearts
 version: DOS
 slug: installer
 runner: scummvm
-
+year: 1987
 
 script:
   game:

@@ -3,7 +3,7 @@ game_slug: dark-fall-2-lights-out
 version: Good Old Games Installer
 slug: Dark-Fall-installer
 runner: wine
-
+year: 2004
 
 script:
   game:

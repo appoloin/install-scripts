@@ -3,6 +3,7 @@ game_slug: james-bond-007-a-view-to-kill
 version: DOS
 slug: installer
 runner: dosbox
+year: 1985
 
 script:
   files:

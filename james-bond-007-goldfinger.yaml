@@ -3,6 +3,7 @@ game_slug: james-bond-007-goldfinger
 version: DOS
 slug: installer
 runner: dosbox
+year: 1986
 
 script:
   files:

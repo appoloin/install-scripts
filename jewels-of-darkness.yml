@@ -3,7 +3,7 @@ game_slug: jewels-of-darkness
 version: jewels-of-darkness
 slug: jewels-of-darkness
 runner: scummvm
-
+year: 1986
 
 script:
   files:

@@ -3,6 +3,8 @@ game_slug: the-samaritan-paradox
 version: Good Old Games Installer
 slug: installer
 runner: scummvm
+year: 2014
+
 
 script:
   game:

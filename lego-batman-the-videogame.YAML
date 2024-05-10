@@ -3,6 +3,7 @@ game_slug: lego-batman-the-videogame
 version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
+year: 2008
 
 script:
   game:

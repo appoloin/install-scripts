@@ -3,6 +3,7 @@ game_slug: portal-2
 version: Windows Installer
 slug: portal-2
 runner: wine
+year: 2011
 
 script:
   game: 

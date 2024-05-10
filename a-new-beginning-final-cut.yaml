@@ -3,6 +3,7 @@ game_slug: a-new-beginning-final-cut
 version: Installer
 slug: a-new-beginning-final-cut
 runner: wine
+year: 2012
 
 script:
   game:

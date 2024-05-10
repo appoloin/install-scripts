@@ -3,7 +3,7 @@ game_slug: mystery-house
 version: AppleII
 slug: mystery-house
 runner: scummvm
-
+year: 1983
 
 script:
   files:

@@ -3,7 +3,7 @@ game_slug: gnome-ranger
 version: DOS
 slug:  gnome-ranger
 runner: scummvm
-
+year: 1987
 
 script:
   files:

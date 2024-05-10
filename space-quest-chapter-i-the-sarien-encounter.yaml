@@ -3,7 +3,7 @@ game_slug: space-quest-chapter-i-the-sarien-encounter
 version: DOS
 slug:  space-quest-installer
 runner: scummvm
-
+year: 1987
 
 script:
   files:

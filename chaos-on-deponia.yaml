@@ -3,7 +3,7 @@ game_slug: chaos-on-deponia
 version: Good Old Games Installer
 slug: deponia-installer
 runner: wine
-
+year: 2012
 
 script:
   game:

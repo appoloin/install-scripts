@@ -3,7 +3,7 @@ game_slug: the-crimson-crown
 version: DOS
 slug: the-crimson-crown
 runner: scummvm
-
+year: 1985
 
 script:
   game:

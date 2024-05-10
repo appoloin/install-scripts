@@ -3,7 +3,7 @@ game_slug:  doom-ii-hell-on-earth
 version: Good Old Games Installer
 slug:  doom-ii-hell-on-earth-installer
 runner: linux
-
+year: 2018
 
 script:
   files:

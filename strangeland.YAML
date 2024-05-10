@@ -3,6 +3,7 @@ game_slug: strangeland
 version: Good Old Games Installer
 slug: strangeland_INSTALLER
 runner: scummvm
+year: 2021
 
 script:
   game:

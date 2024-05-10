@@ -3,6 +3,7 @@ game_slug: shardlight
 version: Good Old Games Installer
 slug: installer
 runner: scummvm
+year: 2016
 
 script:
   game:

@@ -3,7 +3,7 @@ game_slug: the-island-of-dr-brain
 version: DOS
 slug:  Dr-Brain-Island-installer
 runner: scummvm
-
+year: 1992
 
 script:
   files:

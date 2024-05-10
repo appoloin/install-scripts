@@ -3,6 +3,7 @@ game_slug: sherlock-holmes-another-bow
 version: DOS
 slug:   installer
 runner: dosbox
+year: 1985
 
 script:
   files:

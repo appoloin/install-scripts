@@ -3,7 +3,7 @@ game_slug: day-of-the-tentacle
 version: DOS
 slug:  day_of_the_tentacle-installer
 runner: scummvm
-
+year: 1993
  
 script:
   files:

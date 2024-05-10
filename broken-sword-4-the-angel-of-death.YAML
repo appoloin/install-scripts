@@ -3,6 +3,7 @@ game_slug:  broken-sword-4-the-angel-of-death
 version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
+year: 2006
 
 script:
   game:

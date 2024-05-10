@@ -3,7 +3,7 @@ game_slug:  return-to-castle-wolfenstein
 version: Good Old Games Installer
 slug:  installer
 runner: linux
-
+year: 2001
 
 script:
   files:

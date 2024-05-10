@@ -3,6 +3,7 @@ game_slug: zork-nemesis-the-forbidden-lands
 version: Good Old Games Installer
 slug:  installer
 runner: scummvm
+year: 1996
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug:  star-wars-knights-of-the-old-republic-ii
 version: Installer
 slug: star-wars-knights-of-the-old-republic-ii
 runner: wine
+year: 2005
 
 script:
   game:

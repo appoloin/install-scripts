@@ -3,6 +3,7 @@ game_slug: mata-hari
 version: Good Old Games Installer
 slug: mata-hari
 runner: wine
+year: 2008
 
 script:
   files:

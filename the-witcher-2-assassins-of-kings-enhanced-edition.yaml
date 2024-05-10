@@ -3,6 +3,7 @@ game_slug: the-witcher-2-assassins-of-kings-enhanced-edition
 version: Good Old Games Installer
 slug: witcher-2-installer
 runner: wine
+yer: 2011
 
 script:
   files:

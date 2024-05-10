@@ -3,7 +3,7 @@ game_slug: the-hitchhikers-guide-to-the-galaxy
 version: DOS
 slug: installer
 runner: scummvm
-
+year: 1986
 
 script:
   game:

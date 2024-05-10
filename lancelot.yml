@@ -3,7 +3,7 @@ game_slug: lancelot
 version: Installer
 slug: lancelot
 runner: scummvm
-
+year: 1988
 
 script:
   files:

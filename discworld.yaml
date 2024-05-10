@@ -3,7 +3,7 @@ game_slug: discworld
 version: Windows_Installer
 slug:  discworld-installer
 runner: scummvm
- 
+year: 1995 
 
 script:
   game:

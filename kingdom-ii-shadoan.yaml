@@ -3,6 +3,7 @@ game_slug: kingdom-ii-shadoan
 version: DOS Installer
 slug: kingdom-ii-shadoan
 runner: dosbox
+year: 1996
 
 script:
   game:

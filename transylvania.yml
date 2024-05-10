@@ -3,7 +3,7 @@ game_slug: transylvania
 version: DOS
 slug:  transylvania
 runner: scummvm
-
+year: 1986
 
 script:
   game:

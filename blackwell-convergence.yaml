@@ -3,6 +3,8 @@ game_slug: blackwell-convergence
 version: Good Old Games Installer
 slug: blackwell-convergence-installer
 runner: scummvm
+year: 2012
+
 
 script:
   game:

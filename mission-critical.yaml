@@ -3,7 +3,7 @@ game_slug: mission-critical
 version: DOS
 slug:  Mission-Critical-installer
 runner: dosbox
-
+year: 1995
 
 script:
   game:

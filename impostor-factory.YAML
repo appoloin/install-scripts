@@ -3,6 +3,7 @@ game_slug: impostor-factory
 version: Windows Installer
 slug: impostor-factory
 runner: wine
+year: 2021
 
 script:
   game:

@@ -3,7 +3,7 @@ game_slug: gold-rush
 version: DOS
 slug:  gold-rush
 runner: scummvm
-
+year: 1988
 
 script:
   files:

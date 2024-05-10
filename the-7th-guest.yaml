@@ -3,7 +3,7 @@ game_slug: the-7th-guest
 version: Installer
 slug:  7th Guest-installer
 runner: scummvm
-
+year: 1993
 
 script:
   game:

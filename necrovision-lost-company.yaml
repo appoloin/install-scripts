@@ -3,6 +3,7 @@ game_slug: necrovision-lost-company
 version: Good Old Games Installer
 slug: necrovision-lost-company
 runner: wine
+year: 2010
 
 script:
   files:

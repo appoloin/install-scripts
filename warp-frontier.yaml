@@ -3,7 +3,7 @@ game_slug: warp-frontier
 version: Installer
 slug: warp-frontier-installer
 runner: wine
-
+year: 2021
 
 script:
   game:

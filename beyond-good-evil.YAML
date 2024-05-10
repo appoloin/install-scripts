@@ -3,6 +3,7 @@ game_slug:  beyond-good-evil
 version: Good Old Games Installer
 slug: beyond-good-evil
 runner: wine
+year: 2003
 
 script:
   game:

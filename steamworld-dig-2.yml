@@ -3,6 +3,7 @@ game_slug:  steamworld-dig-2
 version: Installer
 slug: steamworld-dig-2
 runner: wine
+year: 2017
 
 script:
   game:

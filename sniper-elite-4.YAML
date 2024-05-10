@@ -3,6 +3,7 @@ game_slug: sniper-elite-4
 version: Windows Installer
 slug: INSTALLER
 runner: wine
+year: 2017
 
 script:
   game:

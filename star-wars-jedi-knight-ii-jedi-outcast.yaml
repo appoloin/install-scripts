@@ -3,6 +3,7 @@ game_slug: star-wars-jedi-knight-ii-jedi-outcast
 version: Good Old Games Installer
 slug: star-wars-jedi-knight-ii-jedi-outcast
 runner: wine
+year: 2002
 
 script:
   game:

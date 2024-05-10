@@ -3,7 +3,7 @@ game_slug:  manhunter-new-york
 version: DOS
 slug: manhunter-new-york
 runner: scummvm
-
+year: 1988
 
 script:
   files:

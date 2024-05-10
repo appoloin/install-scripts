@@ -3,6 +3,7 @@ game_slug: journey
 version: Installer
 slug: journey
 runner: wine
+year: 2012
 
 script:
   game:

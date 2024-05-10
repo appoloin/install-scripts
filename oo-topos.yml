@@ -3,6 +3,7 @@ game_slug: oo-topos
 version: DOS
 slug: oo-topos
 runner: scummvm
+year: 1981
 
 
 script:

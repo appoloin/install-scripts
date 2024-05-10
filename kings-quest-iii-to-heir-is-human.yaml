@@ -3,7 +3,7 @@ game_slug: kings-quest-iii-to-heir-is-human
 version: Good Old Games Installer
 slug:  kings-quest-iii-to-heir-is-human-installer
 runner: scummvm
-
+year: 1986
 
 
 script:

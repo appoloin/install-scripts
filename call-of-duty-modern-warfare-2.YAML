@@ -3,6 +3,7 @@ game_slug: call-of-duty-modern-warfare-2
 version: Windows Installer
 slug: call-of-duty-modern-warfare-2
 runner: wine
+year: 2009
 
 script:
   game:

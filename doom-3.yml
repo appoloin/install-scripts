@@ -3,7 +3,7 @@ game_slug:  doom-3
 version: Good Old Games Installer
 slug:  installer
 runner: linux
-
+year: 2004
 
 script:
   files:

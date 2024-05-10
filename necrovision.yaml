@@ -3,6 +3,7 @@ game_slug: necrovision
 version: Good Old Games Installer
 slug: necrovision
 runner: wine
+year: 2009
 
 script:
   files:

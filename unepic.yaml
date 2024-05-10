@@ -3,6 +3,7 @@ game_slug: unepic
 version: Good Old Games Installer
 slug:  unepic-installer
 runner: wine
+year: 2014
 
 script:
   game:

@@ -3,7 +3,7 @@ game_slug: simon-the-sorcerer
 version: DOS
 slug:  simon_the_sorcerer-installer
 runner: scummvm
-
+year: 1993
  
 script:
   files:

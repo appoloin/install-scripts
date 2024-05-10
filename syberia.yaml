@@ -3,6 +3,7 @@ game_slug: syberia
 version: Installer
 slug: syberia-installer
 runner: wine
+year: 2002
 
 script:
   game:

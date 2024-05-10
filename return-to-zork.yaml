@@ -3,7 +3,7 @@ game_slug: return-to-zork
 version: DOS
 slug:  return_to_zork-installer
 runner: scummvm
-
+year: 1993
 
 
 script:

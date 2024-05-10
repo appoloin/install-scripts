@@ -3,6 +3,7 @@ game_slug:  midnight-protocol
 version: Installer
 slug: midnight-protocol
 runner: wine
+year: 2021
 
 script:
   game:

@@ -3,7 +3,7 @@ game_slug:  leather-goddesses-of-phobos
 version:  infocom
 slug:  installer
 runner: scummvm
-
+year: 1986
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: thief-gold
 version: Good Old Games Installer
 slug: thief-1-installer
 runner: wine
+year: 1999
 
 script:
   files:

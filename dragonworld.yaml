@@ -3,6 +3,7 @@ game_slug: dragonworld
 version: DOS
 slug:   installer
 runner: dosbox
+year: 1984
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug:  goodbye-deponia
 version: Good Old Games Installer
 slug: Deponia III - Goodbye Deponia
 runner: wine
+year: 2013
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: fantasy-wars
 version: Good Old Games Installer
 slug: fantasy-wars
 runner: wine
+year: 2007
 
 script:
   files:

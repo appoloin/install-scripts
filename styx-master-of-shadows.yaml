@@ -3,6 +3,7 @@ game_slug: styx-master-of-shadows
 version: Good Old Games Installer
 slug: styx-master-of-shadows
 runner: wine
+year: 2014
 
 script:
   game:

@@ -3,7 +3,7 @@ game_slug: myst
 version: Installer
 slug:  Myst-installer
 runner: scummvm
-
+year: 2000
 
 script:
   files:

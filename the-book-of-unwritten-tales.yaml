@@ -3,6 +3,8 @@ game_slug: the-book-of-unwritten-tales
 version: Good Old Games Installer
 slug: unwritten-installer
 runner: wine
+year: 2011
+
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug:  dark-fall-3-lost-souls
 version: Installer
 slug: dark-fall-3-lost-souls
 runner: wine
+year: 2010
 
 script:
   game:

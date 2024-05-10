@@ -3,7 +3,7 @@ game_slug: ingrids-back
 version: DOS
 slug: ingrids-back
 runner: scummvm
-
+year: 1988
 
 script:
   files:

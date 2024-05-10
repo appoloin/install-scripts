@@ -3,6 +3,7 @@ game_slug: finding-paradise
 version: Good Old Games Installer
 slug: installer
 runner: wine
+year: 2017
 
 script:
   files:

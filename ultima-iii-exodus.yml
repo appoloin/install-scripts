@@ -3,6 +3,7 @@ game_slug: ultima-iii-exodus
 version: Good Old Games Installer
 slug: Installer
 runner: dosbox
+year: 1983
 
 script:
   files:

@@ -3,7 +3,7 @@ game_slug: the-longest-journey
 version: Good Old Games Installer
 slug:  The-Longest-Journey-installer
 runner: scummvm
-
+year: 2000
 
 script:
   game:

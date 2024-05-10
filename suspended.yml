@@ -3,7 +3,7 @@ game_slug: suspended
 version: DOS
 slug: installer
 runner: scummvm
-
+year: 1986
 
 script:
   game:

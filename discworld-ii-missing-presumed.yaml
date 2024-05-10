@@ -3,7 +3,7 @@ game_slug: discworld-ii-missing-presumed
 version: Windows_Installer
 slug:  discworld2-installer
 runner: scummvm
-
+year: 1996
 
 script:
   game:

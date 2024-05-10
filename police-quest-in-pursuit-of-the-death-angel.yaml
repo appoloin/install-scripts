@@ -3,6 +3,7 @@ game_slug: police-quest-in-pursuit-of-the-death-angel
 version: Good Old Games Installer
 slug:   police-quest-in-pursuit-of-the-death-angel
 runner: scummvm
+year: 1987
 
 script:
   files:

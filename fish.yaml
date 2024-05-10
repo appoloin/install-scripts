@@ -3,7 +3,7 @@ game_slug: fish
 version: DOS
 slug: fish
 runner: scummvm
-
+year: 1988
 
 script:
   files:

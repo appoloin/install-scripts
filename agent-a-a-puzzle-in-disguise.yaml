@@ -3,6 +3,7 @@ game_slug: agent-a-a-puzzle-in-disguise
 version: Installer
 slug: agent-a-a-puzzle-in-disguise
 runner: wine
+year: 2015
 
 script:
   game: 

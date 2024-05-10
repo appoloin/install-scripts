@@ -3,7 +3,7 @@ game_slug: police-quest-ii-the-vengeance
 version: Installer
 slug:  police-quest-ii-the-vengeance
 runner: scummvm
- 
+year: 1988
 
 script:
   files:

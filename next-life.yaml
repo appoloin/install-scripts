@@ -3,6 +3,7 @@ game_slug: next-life
 version: Windows Installer
 slug: next-life
 runner: wine
+year: 2007
 
 script:
   game:

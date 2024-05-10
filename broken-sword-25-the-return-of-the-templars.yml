@@ -3,6 +3,7 @@ game_slug: broken-sword-25-the-return-of-the-templars
 version: Windows_Installer
 slug: installer
 runner: scummvm
+year: 2008
 
 script:
   game:

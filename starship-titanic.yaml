@@ -3,6 +3,7 @@ game_slug: starship-titanic
 version: Installer
 slug:  starship-installer
 runner: scummvm
+year: 1998
 
 script:
   game:

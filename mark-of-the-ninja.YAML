@@ -3,6 +3,7 @@ game_slug:  mark-of-the-ninja
 version: Good Old Games Installer
 slug:  INSTALLER
 runner: wine
+year: 2012
 
 script:
   game:

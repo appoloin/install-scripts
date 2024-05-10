@@ -3,7 +3,7 @@ game_slug: hi-res-adventure-2-the-wizard-and-the-princess
 version: AppleII
 slug: hi-res-adventure-2-the-wizard-and-the-princess
 runner: scummvm
-
+year: 1983
 
 script:
   files:

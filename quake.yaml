@@ -3,6 +3,7 @@ game_slug: quake
 version: Good Old Games Installer
 slug:  installer
 runner: linux
+year: 1996
 
 
 script:

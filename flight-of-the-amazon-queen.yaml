@@ -3,7 +3,7 @@ game_slug: flight-of-the-amazon-queen
 version: Good Old Games Installer
 slug:  flight-of-the-amazon-queen-installer
 runner: scummvm
-
+year: 1995
 
 
 script:

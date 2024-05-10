@@ -3,7 +3,7 @@ game_slug: monkey-island-2-lechucks-revenge
 version: DOS
 slug:  monkey_island_2_lechucks_revenge-installer
 runner: scummvm
-
+year: 1992
 
 
 script:

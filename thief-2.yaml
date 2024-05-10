@@ -3,6 +3,7 @@ game_slug: thief-2
 version: Good Old Games Installer
 slug: thief-2-installer
 runner: wine
+year: 2000
 
 script:
   files:

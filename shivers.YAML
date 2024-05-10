@@ -3,6 +3,7 @@ game_slug:  shivers
 version: DOS
 slug: INSTALLER
 runner: scummvm
+year: 1995
 
 script:
   game:

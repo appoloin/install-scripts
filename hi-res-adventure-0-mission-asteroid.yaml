@@ -3,7 +3,7 @@ game_slug: hi-res-adventure-0-mission-asteroid
 version: AppleII
 slug: hi-res-adventure-0-mission-asteroid
 runner: scummvm
-
+year: 1980
 
 script:
   files:

@@ -3,7 +3,7 @@ game_slug: indiana-jones-and-the-last-crusade
 version: DOS
 slug:  indiana_jones_and_the_last_crusade-installer
 runner: scummvm
-
+year: 1992
 
 
 script:

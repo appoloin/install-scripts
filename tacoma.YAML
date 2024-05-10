@@ -3,6 +3,7 @@ game_slug:  tacoma
 version: Good Old Games Installer
 slug: tacoma
 runner: wine
+year: 2017
 
 script:
   game:

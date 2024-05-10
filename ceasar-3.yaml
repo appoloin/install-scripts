@@ -3,7 +3,7 @@ game_slug: caesar-iii
 version: Good Old Games Installer
 slug: caesar-iii
 runner: linux
-
+year: 1998
 
 script:
   files:

@@ -3,7 +3,7 @@ game_slug: the-black-cauldron
 version: DOS
 slug: the-black-cauldron
 runner: scummvm
-
+year: 1986
 
 script:
   files:

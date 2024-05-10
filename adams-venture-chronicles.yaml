@@ -3,6 +3,7 @@ game_slug: adams-venture-chronicles
 version: Installer
 slug:  Adams-Veuture-installer
 runner: wine
+year: 2015
 
 script:
   game:

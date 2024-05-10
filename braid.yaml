@@ -1,8 +1,9 @@
 name: Braid
 game_slug: braid
-version: Installer
+version: Good Old Games Installer
 slug:  braid-installer
 runner: wine
+year: 2008
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: penumbra-overture
 version: Good Old Games Installer
 slug: penumbra-overture
 runner: wine
+year: 2007
 
 script:
   game: 

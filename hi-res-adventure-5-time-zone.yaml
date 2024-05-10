@@ -3,7 +3,7 @@ game_slug: hi-res-adventure-5-time-zone
 version: AppleII
 slug: hi-res-adventure-5-time-zone
 runner: scummvm
-
+year: 1983
 
 script:
   files:

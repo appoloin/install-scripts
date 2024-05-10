@@ -3,7 +3,7 @@ game_slug: jinxter
 version: DOS
 slug: jinxter
 runner: scummvm
-
+year: 1987
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug: prototype-2
 version: Installer
 slug: prototype-2
 runner: wine
+year: 2012
 
 script:
   game:

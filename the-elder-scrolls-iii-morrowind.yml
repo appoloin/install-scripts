@@ -3,7 +3,7 @@ game_slug:  the-elder-scrolls-iii-morrowind
 version: Good Old Games Installer
 slug:  installer
 runner: linux
-
+year: 2002
 
 script:
   files:

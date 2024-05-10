@@ -3,7 +3,7 @@ game_slug: kings-quest-iv-the-perils-of-rosella
 version: Good Old Games Installer
 slug:  kings-quest-iv-the-perils-of-rosella-installer
 runner: scummvm
-
+yer: 1988
 
 script:
   files:

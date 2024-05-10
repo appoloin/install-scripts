@@ -3,7 +3,7 @@ game_slug: tex-murphy-the-pandora-directive
 version: DOS
 slug:  Pandora-installer
 runner: dosbox
-
+year: 1996
 
 script:
   game:

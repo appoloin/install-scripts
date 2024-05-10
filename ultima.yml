@@ -3,6 +3,7 @@ game_slug: ultima
 version: Installer
 slug: GOG_Installer
 runner: dosbox
+year: 1981
 
 script:
   files:

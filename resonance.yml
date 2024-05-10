@@ -3,7 +3,7 @@ game_slug: resonance
 version: Good Old Games Installer
 slug: installer
 runner: scummvm
-
+year: 2012
 
 script:
   game:

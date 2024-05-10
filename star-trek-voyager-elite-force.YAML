@@ -3,6 +3,7 @@ game_slug: star-trek-voyager-elite-force
 version: Installer
 slug: INSTALLER
 runner: wine
+year: 2000
 
 script:
   game:

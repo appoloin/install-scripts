@@ -3,6 +3,7 @@ game_slug: broken-sword-the-shadow-of-the-templars
 version: Good Old Games Installer
 slug: installer
 runner: scummvm
+year: 1998
 
 script:
   game:

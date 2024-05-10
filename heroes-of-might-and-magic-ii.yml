@@ -3,6 +3,7 @@ game_slug: heroes-of-might-and-magic-ii
 version: Good Old Games Installer
 slug: heroes-of-might-and-magic-ii
 runner: dosbox
+year: 1988
 
 script:
   files:

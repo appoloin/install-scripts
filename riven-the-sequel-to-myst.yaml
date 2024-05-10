@@ -3,7 +3,7 @@ game_slug: riven-the-sequel-to-myst
 version: Installer
 slug:  Riven-installer
 runner: scummvm
-
+year: 1997
 
 script:
   files:

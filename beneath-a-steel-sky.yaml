@@ -3,7 +3,7 @@ game_slug: beneath-a-steel-sky
 version: DOS
 slug:  installer
 runner: scummvm
-
+year: 1994
 
 script:
   files:

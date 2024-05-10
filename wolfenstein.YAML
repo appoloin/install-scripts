@@ -3,6 +3,7 @@ game_slug: wolfenstein
 version: Installer
 slug: wolfenstein_INSTALLER
 runner: wine
+year: 2009
 
 script:
   game:

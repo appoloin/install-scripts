@@ -3,6 +3,7 @@ game_slug: whispers-of-a-machine
 version: Good Old Games Installer
 slug:  whispers-of-a-machine
 runner: scummvm
+year: 2019
 
 script:
   files:

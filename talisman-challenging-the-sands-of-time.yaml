@@ -3,6 +3,7 @@ game_slug: talisman-challenging-the-sands-of-time
 version: DOS
 slug:   installer
 runner: dosbox
+year: 1987
 
 script:
   files:

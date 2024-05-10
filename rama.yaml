@@ -3,6 +3,7 @@ game_slug: rama
 version: DOS
 slug:  rama-installer
 runner: scummvm
+year: 1995
 
 script:
   game:

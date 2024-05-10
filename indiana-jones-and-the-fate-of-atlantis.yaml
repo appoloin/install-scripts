@@ -3,7 +3,7 @@ game_slug: indiana-jones-and-the-fate-of-atlantis
 version: FM Towns
 slug:  indiana_jones_and_the_fate_of_atlantis-installer
 runner: scummvm
-
+year: 1992
 
 
 script:

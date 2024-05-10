@@ -3,7 +3,7 @@ game_slug:  lost-in-time
 version: Installer
 slug:   Lost-in-time-installer
 runner: scummvm
-
+year: 1993
 
 script:
   files:

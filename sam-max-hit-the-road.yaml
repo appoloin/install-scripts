@@ -3,7 +3,7 @@ game_slug: sam-max-hit-the-road
 version: Installer
 slug:  sam_&_max-installer
 runner: scummvm
-
+year: 1993
 
 script:
   game:

@@ -3,7 +3,7 @@ game_slug: tesla-effect-a-tex-murphy-adventure
 version: Good Old Games Installer
 slug: tesla-effect-a-tex-murphy-adventure
 runner: wine
-
+year: 2014
 
 script:
   game:

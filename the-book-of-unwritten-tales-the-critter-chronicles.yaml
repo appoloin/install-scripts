@@ -3,6 +3,7 @@ game_slug: the-book-of-unwritten-tales-the-critter-chronicles
 version: Good Old Games Installer
 slug: unwritten-installer
 runner: wine
+year: 2012
 
 script:
   game:

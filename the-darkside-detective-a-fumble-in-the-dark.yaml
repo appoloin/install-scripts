@@ -3,6 +3,7 @@ game_slug:  the-darkside-detective-a-fumble-in-the-dark
 version: Good Old Games Installer
 slug: NSTALLER
 runner: wine
+year: 2021
 
 script:
   game:

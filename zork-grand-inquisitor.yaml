@@ -3,7 +3,7 @@ game_slug: zork-grand-inquisitor
 version: Windows Installer
 slug:  zork_grand_inquisitor
 runner: scummvm
-
+year: 1997
 
 script:
   files:

@@ -3,7 +3,7 @@ game_slug: myst-iii-exile
 version: Installer
 slug:  myst3-installer
 runner: scummvm
-
+year: 2001
 
 script:
   game:

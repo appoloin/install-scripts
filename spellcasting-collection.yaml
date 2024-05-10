@@ -3,7 +3,7 @@ game_slug: spellcasting-collection
 version: Good Old Games Installer
 slug: spellcasting-collection
 runner: dosbox
-
+year: 1990
 
 script:
   files:

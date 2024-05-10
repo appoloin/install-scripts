@@ -3,6 +3,7 @@ game_slug: the-tracer-sanction
 version: DOS
 slug:   the-tracer-sanction
 runner: dosbox
+year: 1984
 
 script:
   files:

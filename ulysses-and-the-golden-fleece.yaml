@@ -3,7 +3,7 @@ game_slug: ulysses-and-the-golden-fleece
 version: AppleII
 slug: ulysses-and-the-golden-fleece
 runner: scummvm
-
+year: 1982
 
 script:
   files:

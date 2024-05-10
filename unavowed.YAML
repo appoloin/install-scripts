@@ -3,6 +3,7 @@ game_slug: unavowed
 version: Good Old Games Installer
 slug: INSTALLER
 runner: scummvm
+year: 2019
 
 script:
   game:

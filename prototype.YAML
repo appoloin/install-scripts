@@ -3,6 +3,7 @@ game_slug: prototype
 version: Windows Installer
 slug: prototype
 runner: wine
+year: 2009
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: the-blackwell-legacy
 version: Good Old Games Installer
 slug: blackwell-legacy-installer
 runner: scummvm
+year: 2012
 
 script:
   game:

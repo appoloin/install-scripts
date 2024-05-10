@@ -3,6 +3,7 @@ game_slug: bioshock
 version: Windows Installer
 slug: INSTALLER
 runner: wine
+year: 2007
 
 script:
   game:

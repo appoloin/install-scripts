@@ -3,7 +3,7 @@ game_slug: corruption
 version: DOS
 slug: corruption
 runner: scummvm
-
+year: 1988
 
 script:
   files:

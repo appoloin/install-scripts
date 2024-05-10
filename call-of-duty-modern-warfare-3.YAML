@@ -3,6 +3,7 @@ game_slug: call-of-duty-modern-warfare-3
 version: Windows Installer
 slug: call-of-duty-modern-warfare-3
 runner: wine
+year: 2011
 
 script:
   game:

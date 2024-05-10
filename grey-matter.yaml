@@ -3,6 +3,7 @@ game_slug: grey-matter
 version: Good Old Games Installer
 slug: grey-matter
 runner: wine
+year: 2010
 
 script:
   files:

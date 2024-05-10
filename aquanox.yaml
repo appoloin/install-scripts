@@ -3,6 +3,7 @@ game_slug: aquanox
 version: Good Old Games Installer
 slug: aquanox
 runner: wine
+year: 2001
 
 script:
   files:

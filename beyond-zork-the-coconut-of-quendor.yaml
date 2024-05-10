@@ -3,7 +3,7 @@ game_slug: beyond-zork-the-coconut-of-quendor
 version: Installer
 slug:  installer
 runner: scummvm
-
+year: 1987
 
 script:
  

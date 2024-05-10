@@ -3,6 +3,7 @@ game_slug:  styx-shards-of-darkness
 version: Good Old Games Installer
 slug: styx-shards-of-darkness_INSTALLER
 runner: wine
+year: 2017
 
 script:
   game:

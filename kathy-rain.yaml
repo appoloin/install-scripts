@@ -3,6 +3,7 @@ game_slug: kathy-rain
 version: Good Old Games Installer
 slug: kathy-rain-installer
 runner: scummvm
+year: 2016
 
 script:
   game:

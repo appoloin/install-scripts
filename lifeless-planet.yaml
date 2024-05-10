@@ -3,7 +3,7 @@ game_slug: lifeless-planet
 version: Installer
 slug: lifeless-planet-installer
 runner: wine
-
+year: 2015
 
 script:
   game:

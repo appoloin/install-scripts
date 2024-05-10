@@ -3,7 +3,7 @@ game_slug: silicon-dreams
 version: silicon-dreams
 slug: silicon-dreams
 runner: scummvm
-
+year: 1986
 
 script:
   files:

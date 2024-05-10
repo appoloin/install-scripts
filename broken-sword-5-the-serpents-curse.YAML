@@ -3,6 +3,7 @@ game_slug:  broken-sword-5-the-serpents-curse
 version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
+year: 2015
 
 script:
   game:

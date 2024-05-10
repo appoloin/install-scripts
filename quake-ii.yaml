@@ -3,7 +3,7 @@ game_slug: quake-ii
 version: Good Old Games Installer
 slug:  quake-ii
 runner: linux
-
+year: 1999
 
 script:
   files:

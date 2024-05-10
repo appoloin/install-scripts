@@ -3,6 +3,7 @@ game_slug: gemini-rue
 version: Good Old Games Installer
 slug: Gemini-Rue-installer
 runner: scummvm
+year: 2011
 
 script:
   game:

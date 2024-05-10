@@ -3,6 +3,7 @@ game_slug: assassins-creed-rogue
 version: Windows Installer
 slug: INSTALLER
 runner: wine
+year: 2014
 
 script:
   game:

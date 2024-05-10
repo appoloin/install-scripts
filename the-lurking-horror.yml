@@ -3,7 +3,7 @@ game_slug: the-lurking-horror
 version: DOS
 slug: the-lurking-horror
 runner: scummvm
-
+year: 1987
 
 script:
   game:

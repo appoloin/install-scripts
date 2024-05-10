@@ -3,6 +3,7 @@ game_slug: surviving-mars
 version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
+year: 2018
 
 script:
   game:

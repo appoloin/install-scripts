@@ -3,7 +3,7 @@ game_slug: maniac-mansion
 version: Installer
 slug: maniac_mansion-installer
 runner: scummvm
-
+year: 1987
 
 
 script:

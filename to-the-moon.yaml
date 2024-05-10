@@ -3,6 +3,7 @@ game_slug: to-the-moon
 version: Good Old Games Installer
 slug: moon-installer
 runner: wine
+year: 2011
 
 script:
   files:

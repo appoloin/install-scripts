@@ -3,6 +3,7 @@ game_slug: prey
 version: Windows Installer
 slug:  installer
 runner: wine
+year: 2006
 
 script:
   game:

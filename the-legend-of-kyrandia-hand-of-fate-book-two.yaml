@@ -3,7 +3,7 @@ game_slug:  the-legend-of-kyrandia-hand-of-fate-book-two
 version: Installer
 slug: the-legend-of-kyrandia-hand-of-fate-book-two
 runner: scummvm
-
+year: 1993
 
 script:
   files:

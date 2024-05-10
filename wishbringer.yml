@@ -3,7 +3,7 @@ game_slug: wishbringer
 version: DOS
 slug: installer
 runner: scummvm
-
+year: 1985
 
 script:
   game:

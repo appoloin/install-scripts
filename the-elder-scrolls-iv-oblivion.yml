@@ -3,7 +3,7 @@ game_slug:  the-elder-scrolls-iv-oblivion
 version: Good Old Games Installer
 slug:  installer
 runner: wine
-
+year: 2007
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug: star-trek-elite-force-ii
 version: Installer
 slug: INSTALLER
 runner: wine
+year: 2003
 
 script:
   game:

@@ -3,7 +3,7 @@ game_slug:  border-zone
 version: DOS
 slug:  install
 runner: scummvm
-
+year: 1987
 
 script:
   game:

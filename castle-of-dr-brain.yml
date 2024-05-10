@@ -3,7 +3,7 @@ game_slug: castle-of-dr-brain
 version: DOS
 slug:  installer
 runner: scummvm
-
+year: 1991
 
 script:
   files:

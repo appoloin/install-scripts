@@ -3,7 +3,7 @@ game_slug: the-dig
 version: Good Old Games Installer
 slug:  the-dig-installer
 runner: scummvm
-
+year: 1995
 
 
 script:

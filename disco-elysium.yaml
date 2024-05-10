@@ -3,6 +3,7 @@ game_slug: disco-elysium
 version: Installer
 slug: installer
 runner: wine
+year: 2019
 
 script:
   game:

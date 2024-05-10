@@ -3,7 +3,7 @@ game_slug: blade-runner
 version: Installer
 slug:  installer
 runner: scummvm
-
+year: 1997
 
 
 script:

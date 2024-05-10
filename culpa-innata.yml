@@ -3,6 +3,7 @@ game_slug: culpa-innata
 version: Windows Installer
 slug: Culpa-Innata-installer
 runner: wine
+year: 2007
 
 script:
   game:

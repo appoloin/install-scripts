@@ -3,7 +3,7 @@ game_slug: diablo
 version: Good Old Games Installer
 slug: diablo
 runner: linux
-
+year: 1996
 
 script:
   files:

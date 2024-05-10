@@ -3,6 +3,8 @@ game_slug: the-blackwell-deception
 version: Good Old Games Installer
 slug: blackwell-deception-installer
 runner: scummvm
+year: 2012
+
 
 script:
   game:

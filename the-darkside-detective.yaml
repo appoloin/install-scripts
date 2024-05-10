@@ -3,6 +3,7 @@ game_slug: the-darkside-detective
 version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
+year: 2017
 
 script:
   game:

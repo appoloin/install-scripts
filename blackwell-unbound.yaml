@@ -3,6 +3,7 @@ game_slug: blackwell-unbound
 version: Good Old Games Installer
 slug: blackwell-Unbound-installer
 runner: scummvm
+year: 2012
 
 script:
   game:

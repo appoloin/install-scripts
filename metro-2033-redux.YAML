@@ -3,6 +3,7 @@ game_slug: metro-2033-redux
 version: Good Old Games Installer
 slug: INSTALLER
 runner: wine
+year: 2014
 
 script:
   game:

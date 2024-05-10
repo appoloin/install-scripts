@@ -3,6 +3,7 @@ game_slug: ultima-ii-the-revenge-of-the-enchantress
 version: Good Old Games Installer
 slug: Installer
 runner: dosbox
+year: 1982
 
 script:
   files:

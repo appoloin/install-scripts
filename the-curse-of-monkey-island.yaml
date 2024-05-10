@@ -3,6 +3,7 @@ game_slug: the-curse-of-monkey-island
 version: DOS
 slug:  monkey3-installer
 runner: scummvm
+year: 1997
 
 script:
   game:

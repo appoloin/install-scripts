@@ -3,6 +3,7 @@ game_slug: thief-deadly-shadows
 version: Good Old Games Installer
 slug: thief-3-installer
 runner: wine
+year: 2004
 
 script:
   files:

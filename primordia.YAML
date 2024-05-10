@@ -3,6 +3,7 @@ game_slug: primordia
 version: Good Old Games Installer
 slug: INSTALLER
 runner: scummvm
+year: 2012
 
 script:
   game:

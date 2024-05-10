@@ -3,6 +3,7 @@ game_slug: virtuaverse
 version: Good Old Games Installer
 slug: virtuaverse
 runner: wine
+year: 2020
 
 script:
   game: 

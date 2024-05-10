@@ -3,6 +3,7 @@ game_slug:  thimbleweed-park
 version: Good Old Games Installer
 slug: thimbleweed-park_INSTALLER
 runner: wine
+year: 2017
 
 script:
   game:
