@@ -3,7 +3,7 @@ game_slug:  lure-of-the-temptress
 version: Good Old Games Installer
 slug: lure-of-the-temptress
 runner: scummvm
-
+year: 1992
 
 
 script:

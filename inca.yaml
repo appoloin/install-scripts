@@ -3,6 +3,7 @@ game_slug: inca
 version: DOS 
 slug: inca
 runner: dosbox
+year: 1992
 
 script:
     files:

@@ -3,7 +3,7 @@ game_slug: ringworld-revenge-of-the-patriarch
 version: Installer
 slug: ringworld-revenge-of-the-patriarch
 runner: scummvm
-
+year: 1992
 
 script:
   game:

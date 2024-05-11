@@ -3,6 +3,7 @@ game_slug: eternam
 version: Good Old Games Installer
 slug: eternam
 runner: dosbox
+year: 1992
 
 script:
     files:

@@ -3,7 +3,8 @@ game_slug: bargon-attack
 version: DOS
 slug: bargon-attack
 runner: scummvm
- 
+year: 1992
+
 
 script:
   files:

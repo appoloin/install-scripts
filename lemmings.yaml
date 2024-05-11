@@ -3,6 +3,7 @@ game_slug: lemmings
 version: DOS
 slug:  lemmings-installer
 runner: dosbox
+year: 1992
 
 script:
   files:

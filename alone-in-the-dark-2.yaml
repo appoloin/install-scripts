@@ -3,6 +3,7 @@ game_slug: alone-in-the-dark-2
 version: Good Old Games Installer
 slug: installer
 runner: dosbox
+year: 1993
 
 script:
   files:

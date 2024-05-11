@@ -3,6 +3,7 @@ game_slug: titus-the-fox
 version: Good Old Games Installer
 slug: titus-the-fox
 runner: dosbox
+year: 1992
 
 script:
     files:

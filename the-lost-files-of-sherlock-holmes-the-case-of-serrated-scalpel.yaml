@@ -3,7 +3,7 @@ game_slug: the-lost-files-of-sherlock-holmes-the-case-of-the-
 version: DOS
 slug:  the-lost-files-of-sherlock-holmes-the-case-of-the-
 runner: scummvm
-
+year: 1992
 
 script:
   files:

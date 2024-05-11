@@ -3,6 +3,7 @@ game_slug: town-with-no-name
 version: DOS
 slug: installer
 runner: dosbox
+year: 1992
 
 script:
   files:

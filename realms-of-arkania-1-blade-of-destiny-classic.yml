@@ -3,6 +3,7 @@ game_slug: realms-of-arkania-1-blade-of-destiny-classic
 version: Good Old Games Installer
 slug: realms-of-arkania-1-blade-of-destiny-classic
 runner: dosbox
+year: 1992
 
 script:
   files:

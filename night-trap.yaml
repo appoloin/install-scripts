@@ -3,6 +3,7 @@ game_slug: night-trap
 version: DOS
 slug: night-trap
 runner: dosbox
+year: 1992
 
 script:
   files:

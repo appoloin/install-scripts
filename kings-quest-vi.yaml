@@ -3,7 +3,7 @@ game_slug: kings-quest-vi
 version: Good Old Games Installer
 slug:  kings-quest-vi-installer
 runner: scummvm
-
+year: 1992
 
 script:
   files:

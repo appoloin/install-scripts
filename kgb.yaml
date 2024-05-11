@@ -3,6 +3,7 @@ game_slug: kgb
 version: DOS
 slug: kgb
 runner: dosbox
+year : 1992
 
 script:
   files:

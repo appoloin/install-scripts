@@ -3,7 +3,7 @@ game_slug: waxworks
 version: DOS
 slug: waxworks
 runner: scummvm
-
+year: 1992
 
 script:
   files:

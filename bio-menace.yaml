@@ -3,7 +3,7 @@ game_slug: bio-menace
 version: Good Old Games Installer
 slug: bio-menace-installer
 runner: dosbox
-
+year: 1993
 
 
 script:

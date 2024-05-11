@@ -3,7 +3,7 @@ game_slug: hook
 version: DOS
 slug:  hook
 runner: dosbox
-
+year: 1992
 
 script:
   files:

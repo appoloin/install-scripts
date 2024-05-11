@@ -3,6 +3,7 @@ game_slug: dark-seed
 version: DOS
 slug: dark-seed
 runner: dosbox
+year: 1992
 
 script:
   files:

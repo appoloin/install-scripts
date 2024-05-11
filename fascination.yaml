@@ -3,7 +3,7 @@ game_slug: fascination
 version: Installer
 slug:  installer
 runner: scummvm
-
+year: 1992
 
 
 script:

@@ -3,7 +3,7 @@ game_slug: elvira-ii-the-jaws-of-cerberus
 version: DOS
 slug: elvira-ii-the-jaws-of-cerberus
 runner: scummvm
-
+year: 1992
 
 script:
   files:

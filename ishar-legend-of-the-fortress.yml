@@ -3,6 +3,7 @@ game_slug: ishar-legend-of-the-fortress
 version: Good Old Games Installer
 slug: ishar-legend-of-the-fortress
 runner: dosbox
+year: 1992
 
 script:
   files:
