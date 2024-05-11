@@ -3,6 +3,7 @@ game_slug: might-and-magic-iii-isles-of-terra
 version: Good Old Games Installer
 slug: might-and-magic-iii-isles-of-terra
 runner: dosbox
+year: 1991
 
 script:
   files:

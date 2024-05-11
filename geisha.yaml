@@ -3,7 +3,7 @@ game_slug: geisha
 version: DOS
 slug:  geisha
 runner: scummvm
-
+year: 1990
 
 script:
     files:

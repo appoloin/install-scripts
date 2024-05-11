@@ -3,6 +3,7 @@ game_slug: venom
 version: DOS
 slug:   venom
 runner: dosbox
+year: 1988
 
 script:
   files:

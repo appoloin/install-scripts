@@ -3,7 +3,7 @@ game_slug:  manhunter-2-san-francisco
 version: DOS
 slug:   manhunter-2-san-francisco
 runner: scummvm
-
+year: 1989
 
 script:
   files:

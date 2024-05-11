@@ -3,7 +3,7 @@ game_slug: altered-destiny
 version: Good Old Games Installer
 slug: altered-destiny
 runner: dosbox
-
+year: 1990
 
 script:
   game:

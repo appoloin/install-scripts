@@ -3,7 +3,7 @@ game_slug: magicland-dizzy
 version: DOS
 slug: magicland-dizzy
 runner: dosbox
-
+year: 1990
 
 script:
   files:

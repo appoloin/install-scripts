@@ -3,6 +3,7 @@ game_slug: dick-tracy-the-crime-solving-adventure
 version: DOS
 slug:  installer
 runner: dosbox
+year: 1991
 
 script:
   files:

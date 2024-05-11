@@ -3,6 +3,7 @@ game_slug: the-case-of-the-cautious-condor
 version: DOS
 slug: the-case-of-the-cautious-condor
 runner: dosbox
+year: 1989
 
 script:
   files:

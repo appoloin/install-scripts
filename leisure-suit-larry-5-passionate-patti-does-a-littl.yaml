@@ -3,7 +3,7 @@ game_slug: leisure-suit-larry-5-passionate-patti-does-a-littl
 version: Good Old Games Installer
 slug:  leisure-suit-larry-5-passionate-patti-does-a-littl
 runner: scummvm
-
+year: 1991
 
 script:
   files:

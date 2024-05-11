@@ -3,6 +3,7 @@ game_slug: last-half-of-darkness
 version: Installer
 slug: last-half-of-darkness
 runner: dosbox
+year: 1989 
 
 script:
   files:

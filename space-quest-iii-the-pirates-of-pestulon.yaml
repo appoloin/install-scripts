@@ -3,6 +3,7 @@ game_slug: space-quest-iii-the-pirates-of-pestulon
 version: Good Old Games Installer
 slug: space-quest-iii-the-pirates-of-pestulon
 runner: scummvm
+year: 1989
 
 script:
   files:

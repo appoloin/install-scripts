@@ -3,6 +3,7 @@ game_slug: bubble-dizzy
 version: DOS
 slug:  bubble-dizzy
 runner: dosbox
+year: 1990
 
 script:
   files:

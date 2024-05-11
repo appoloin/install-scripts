@@ -3,6 +3,7 @@ game_slug: treasures-of-the-savage-frontier
 version: Good Old Games Installer
 slug: treasures-of-the-savage-frontier
 runner: dosbox
+year: 1992
 
 script:
   files:

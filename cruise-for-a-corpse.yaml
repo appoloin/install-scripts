@@ -3,6 +3,7 @@ game_slug: cruise-for-a-corpse
 version: DOS
 slug:  installer
 runner: scummvm
+year: 1991
 
 script:
   files:

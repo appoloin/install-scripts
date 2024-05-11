@@ -3,6 +3,7 @@ game_slug: cadaver
 version: DOS
 slug: cadaver
 runner: dosbox
+year: 1990
 
 script:
   files:

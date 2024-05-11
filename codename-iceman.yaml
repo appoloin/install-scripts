@@ -3,7 +3,7 @@ game_slug: codename-iceman
 version: Good Old Games Installer
 slug:  codename-iceman
 runner: scummvm
-
+year: 1989
 
 script:
   files:

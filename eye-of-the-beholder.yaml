@@ -3,7 +3,7 @@ game_slug: eye-of-the-beholder
 version: Good Old Games Installer
 slug:  eye-of-the-beholder
 runner: scummvm
-
+year: 1991
 
 script:
   files:

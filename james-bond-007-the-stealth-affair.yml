@@ -3,7 +3,7 @@ game_slug: james-bond-007-the-stealth-affair
 version: DOS
 slug:  james-bond-007-the-stealth-affair
 runner: scummvm
-
+year: 1990
 
 script:
   files:

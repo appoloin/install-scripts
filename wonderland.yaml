@@ -3,7 +3,7 @@ game_slug: wonderland
 version: DOS
 slug: Wonderland
 runner: scummvm
-
+year: 1990
 
 script:
   files:

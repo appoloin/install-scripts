@@ -3,6 +3,7 @@ game_slug: maupiti-island
 version: Installer
 slug: maupiti-island
 runner: dosbox
+year: 1990
 
 script:
   files:

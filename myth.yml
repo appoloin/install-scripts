@@ -3,7 +3,7 @@ game_slug: myth
 version: DOS
 slug: myth
 runner: scummvm
-
+year: 1989
 
 script:
   files:

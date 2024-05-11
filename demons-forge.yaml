@@ -3,6 +3,7 @@ game_slug: demons-forge
 version: DOS
 slug:   demons-forge
 runner: dosbox
+year: 1989
 
 script:
   files:

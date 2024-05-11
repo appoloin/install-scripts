@@ -3,7 +3,7 @@ game_slug: tex-murphy-mean-streets
 version: Good Old Games Installer
 slug:  tex-murphy-mean-streets
 runner: dosbox
-
+year: 1990
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug: circuits-edge
 version: DOS
 slug: circuits-edge
 runner: dosbox
+year: 1990
 
 script:
   files:

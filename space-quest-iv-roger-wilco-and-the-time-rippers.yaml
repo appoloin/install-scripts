@@ -3,7 +3,7 @@ game_slug: space-quest-iv-roger-wilco-and-the-time-rippers
 version: Good Old Games Installer
 slug: space-quest-iv-roger-wilco-and-the-time-rippers
 runner: scummvm
-
+year: 1991
  
 script:
   files:

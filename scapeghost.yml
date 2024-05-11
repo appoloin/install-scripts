@@ -3,7 +3,7 @@ game_slug: scapeghost
 version: DOS
 slug: scapeghost
 runner: scummvm
-
+year: 1989
 
 script:
   files:

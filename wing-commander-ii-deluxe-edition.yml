@@ -3,6 +3,7 @@ game_slug: wing-commander-ii-deluxe-edition
 version: Good Old Games Installer
 slug: wing-commander-ii-deluxe-edition
 runner: dosbox
+year: 1991
 
 script:
   files:

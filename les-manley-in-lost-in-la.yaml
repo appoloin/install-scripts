@@ -3,6 +3,7 @@ game_slug: les-manley-in-lost-in-la
 version: Good Old Games Installer
 slug: les-manley-in-lost-in-la
 runner: dosbox
+year: 1991
 
 script:
   files:

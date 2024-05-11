@@ -3,6 +3,7 @@ game_slug:  arthur-the-quest-for-excalibur
 version: DOS
 slug:  arthur-the-quest-for-excalibur
 runner: dosbox
+year: 1989
 
 script:
   game:

@@ -3,7 +3,7 @@ game_slug: zak_mckracken_and_the_alien_mindbenders
 version: FM Towns Rip
 slug:  zak_mckracken_and_the_alien_mindbenders-installer
 runner: scummvm
-
+year: 1988
  
 script:
   files:

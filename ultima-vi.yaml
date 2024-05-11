@@ -3,6 +3,7 @@ game_slug:  ultima-vi
 version: Good Old Games Installer
 slug: install
 runner: scummvm
+year: 1990
 
 script:
   files:

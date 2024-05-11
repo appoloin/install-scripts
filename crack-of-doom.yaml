@@ -3,6 +3,7 @@ game_slug: crack-of-doom
 version: DOS
 slug:   crack-of-doom
 runner: dosbox
+year: 1989
 
 script:
   files:

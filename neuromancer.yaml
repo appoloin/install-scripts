@@ -3,7 +3,7 @@ game_slug: neuromancer
 version: Installer
 slug: neuromancer
 runner: dosbox
-
+year: 1989
 
 
 script:

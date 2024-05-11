@@ -3,6 +3,7 @@ game_slug: teenage-mutant-ninja-turtles
 version: DOS
 slug:  teenage-mutant-ninja-turtles-installer
 runner: dosbox
+year: 1989
 
 script:
   files:

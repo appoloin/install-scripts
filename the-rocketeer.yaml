@@ -3,6 +3,7 @@ game_slug: the-rocketeer
 version: DOS
 slug:  installer
 runner: dosbox
+year: 1991
 
 script:
   files:

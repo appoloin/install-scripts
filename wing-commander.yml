@@ -3,6 +3,7 @@ game_slug: wing-commander
 version: Installer
 slug: wing-commander
 runner: dosbox
+year: 1990
 
 script:
   files:

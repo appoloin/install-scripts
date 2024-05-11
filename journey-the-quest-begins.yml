@@ -3,7 +3,7 @@ game_slug: journey-the-quest-begins
 version: DOS
 slug: journey-the-quest-begins
 runner: dosbox
-
+year: 1989
 
 
 script:

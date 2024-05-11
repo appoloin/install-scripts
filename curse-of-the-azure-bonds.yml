@@ -3,6 +3,7 @@ game_slug: curse-of-the-azure-bonds
 version: Good Old Games Installer
 slug: curse-of-the-azure-bonds
 runner: dosbox
+year: 1989
 
 script:
   files:

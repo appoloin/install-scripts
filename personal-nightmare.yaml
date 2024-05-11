@@ -3,7 +3,7 @@ game_slug: personal-nightmare
 version: Installer
 slug: personal-nightmare
 runner: scummvm
-
+year: 1989
 
 script:
   files:

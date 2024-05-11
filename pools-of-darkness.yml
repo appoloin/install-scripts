@@ -3,6 +3,7 @@ game_slug: pools-of-darkness
 version: Good Old Games Installer
 slug: pools-of-darkness
 runner: dosbox
+year: 1991
 
 script:
   files:

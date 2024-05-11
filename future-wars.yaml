@@ -3,7 +3,7 @@ game_slug: future-wars
 version: DOS
 slug:  future-wars-installer
 runner: scummvm
-
+year: 1989
 
 
 script:

@@ -3,6 +3,7 @@ game_slug:  zork-zero-the-revenge-of-megaboz
 version:  DOS
 slug:  zork-zero-the-revenge-of-megaboz
 runner: dosbox
+year: 1988 
 
 script:
   game:

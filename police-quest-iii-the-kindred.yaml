@@ -3,6 +3,7 @@ game_slug: police-quest-iii-the-kindred
 version: Good Old Games Installer
 slug: police-quest-iii-the-kindred
 runner: scummvm
+year: 1991
 
 
 script:

@@ -3,6 +3,7 @@ game_slug: rick-dangerous
 version: Installer
 slug:  installer
 runner: dosbox
+year: 1989
 
 script:
   files:

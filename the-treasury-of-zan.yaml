@@ -3,6 +3,7 @@ game_slug: the-treasure-of-zan
 version: DOS
 slug:   installer
 runner: dosbox
+year: 1989
 
 script:
   files:

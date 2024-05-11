@@ -3,6 +3,7 @@ game_slug: gateway-to-the-savage-frontier
 version: Good Old Games Installer
 slug: gateway-to-the-savage-frontier
 runner: dosbox
+year: 1991
 
 script:
   files:

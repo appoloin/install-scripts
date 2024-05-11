@@ -3,6 +3,7 @@ game_slug: blues-brothers
 version: DOS
 slug:   installer
 runner: dosbox
+year: 1991
 
 script:
   files:

@@ -3,7 +3,7 @@ game_slug: wings-remastered-edition
 version: Good Old Games Installer
 slug: wings-remastered-edition
 runner: wine
-
+year: 1990
 
 script:
   game:

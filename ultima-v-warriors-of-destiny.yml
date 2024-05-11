@@ -3,6 +3,7 @@ game_slug: ultima-v-warriors-of-destiny
 version: Good Old Games Installer
 slug: ultima-v-warriors-of-destiny
 runner: dosbox
+year: 1988
 
 script:
   files:

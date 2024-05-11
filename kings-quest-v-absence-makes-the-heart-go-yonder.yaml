@@ -3,7 +3,7 @@ game_slug: kings-quest-v-absence-makes-the-heart-go-yonder
 version: Good Old Games Installer
 slug:  kings-quest-v-absence-makes-the-heart-go-yonder-installer
 runner: scummvm
-
+year: 1990
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug: chamber-of-the-sci-mutant-priestess
 version: DOS
 slug: chamber-of-the-sci-mutant-priestess
 runner: dosbox
+year: 1989
 
 script:
   files:

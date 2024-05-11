@@ -3,7 +3,7 @@ game_slug: b-a-t
 version: DOS
 slug: bat
 runner: dosbox
-
+year: 1989
 
 script:
   game:

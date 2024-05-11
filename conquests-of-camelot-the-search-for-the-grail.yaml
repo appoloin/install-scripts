@@ -3,7 +3,7 @@ game_slug: conquests-of-camelot-the-search-for-the-grail
 version: Good Old Games Installer
 slug: conquests-of-camelot-the-search-for-the-grail
 runner: scummvm
-
+year: 1990
 
 script:
   files:
