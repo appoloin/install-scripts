@@ -3,6 +3,7 @@ game_slug: sleepwalker
 version: DOS
 slug: sleepwalker
 runner: dosbox
+year: 1993
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug: blue-force
 version: DOS
 slug: blue-force
 runner: scummvm
+year: 1993
 
 
 script:

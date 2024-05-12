@@ -3,6 +3,7 @@ game_slug: the-legacy-realm-of-terror
 version: Good Old Games Installer
 slug: INSTALLER
 runner: dosbox
+year: 1993
 
 script:
   files:

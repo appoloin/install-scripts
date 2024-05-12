@@ -3,7 +3,7 @@ game_slug: gobliins-2-the-prince-buffoon
 version: Good Old Games Installer
 slug:  gobliins-2-the-prince-buffoon-installer
 runner: scummvm
-
+year: 1993
 
 script:
   files:

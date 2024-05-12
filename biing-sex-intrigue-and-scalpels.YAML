@@ -3,6 +3,7 @@ game_slug: biing-sex-intrigue-and-scalpels
 version: Good Old Games Installer
 slug: biing-sex-intrigue-and-scalpels
 runner: dosbox
+year: 1995
 
 script:
   files:

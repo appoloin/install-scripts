@@ -3,7 +3,7 @@ game_slug: commander-blood
 version: DOS
 slug:  commander-blood
 runner: dosbox
-
+year: 1994
 
 
 script:

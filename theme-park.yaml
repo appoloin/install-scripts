@@ -3,6 +3,7 @@ game_slug: theme-park
 version: Good Old Games Installer
 slug: theme-park-installer
 runner: dosbox
+year: 1994
 
 
 

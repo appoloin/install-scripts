@@ -3,7 +3,7 @@ game_slug: the-11th-hour
 version: Good Old Games Installer
 slug: the-11th-hour
 runner: scummvm
-
+year: 1995
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug: bloodnet
 version: Good Old Games Installer
 slug: bloodnet
 runner: dosbox
+year: 1993
 
 script:
   files:

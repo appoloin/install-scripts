@@ -3,7 +3,7 @@ game_slug: menzoberranzan
 version: Good Old Games Installer
 slug: menzoberranzan
 runner: dosbox
-
+year: 1994
 
 
 script:

@@ -3,6 +3,7 @@ game_slug: the-chaos-engine
 version: Good Old Games Installer
 slug: the-chaos-engine
 runner: wine
+year: 1993
 
 script:
   game:

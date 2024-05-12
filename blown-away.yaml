@@ -3,6 +3,7 @@ game_slug: blown-away
 version: DOS/Win311
 slug: blown-away
 runner: dosbox
+year: 1994
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug: disneys-aladdin
 version: Good Old Games Installer
 slug: disneys-aladdin
 runner: dosbox
+year: 1994
 
 script:
   files:

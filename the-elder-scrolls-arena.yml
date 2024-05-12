@@ -3,6 +3,7 @@ game_slug: the-elder-scrolls-arena
 version: Good Old Games Installer
 slug: the-elder-scrolls-arena
 runner: dosbox
+year: 1994
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug: kronolog-the-nazi-paradox
 version: DOS
 slug: kronolog-the-nazi-paradox
 runner: dosbox
+year: 1993
 
 script:
   files:

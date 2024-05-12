@@ -3,7 +3,7 @@ game_slug: gabriel-knight-sins-of-the-fathers
 version: Good Old Games Installer
 slug: gabriel-knight-sins-of-the-fathers
 runner: scummvm
-
+year: 1993
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug: disney-the-lion-king
 version: Good Old Games Installer
 slug: disney-the-lion-king
 runner: dosbox
+year: 1994
 
 script:
   files:

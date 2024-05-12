@@ -3,7 +3,7 @@ game_slug: lands-of-lore-guardians-of-desitny
 version: Good Old Games Installer
 slug:  lands-of-lore-guardians-of-desitny 
 runner: dosbox
-
+year: 1997
 
 script:
   files:

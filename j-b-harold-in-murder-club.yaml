@@ -3,6 +3,7 @@ game_slug: j-b-harold-in-murder-club
 version: DOS
 slug:   installer
 runner: dosbox
+year: 1991
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug: bioforge
 version: Good Old Games Installer
 slug: bioforge
 runner: dosbox
+year: 1995
 
 script:
   files:

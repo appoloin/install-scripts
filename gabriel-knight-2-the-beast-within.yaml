@@ -3,7 +3,7 @@ game_slug: gabriel-knight-2-the-beast-within
 version: DOS
 slug: gabriel-knight-2-the-beast-within
 runner: scummvm
-
+year: 1995
 
 script:
   game:

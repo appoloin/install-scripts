@@ -3,6 +3,7 @@ game_slug: last-half-of-darkness-2
 version: DOS
 slug: last-half-of-darkness-2
 runner: dosbox
+year: 1992
 
 script:
   files:

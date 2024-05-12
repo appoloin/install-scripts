@@ -3,6 +3,7 @@ game_slug: leisure-suit-larry-6-shape-up-or-slip-out
 version: Good Old Games Installer
 slug:  leisure-suit-larry-6-shape-up-or-slip-out
 runner: scummvm
+year: 1993
 
 script:
   files:

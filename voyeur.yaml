@@ -3,7 +3,7 @@ game_slug: voyeur
 version: DOS
 slug:  voyeur
 runner: scummvm
-
+year: 1993
 
 script:
   files:

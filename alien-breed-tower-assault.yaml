@@ -3,6 +3,7 @@ game_slug:  alien-breed-tower-assault
 version: Good Old Games Installer
 slug:  alien-breed-tower-assault
 runner: dosbox
+year: 1993
 
 script:
   files:

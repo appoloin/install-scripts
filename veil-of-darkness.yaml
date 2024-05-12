@@ -3,7 +3,7 @@ game_slug: veil-of-darkness
 version: DOS
 slug: veil-of-darkness
 runner: dosbox
-
+year: 1993
 
 
 script:

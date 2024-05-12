@@ -3,7 +3,7 @@ game_slug: ween-the-prophecy
 version: DOS
 slug:  ween-the-prophecy
 runner: scummvm
-
+year: 1993
 
 script:
     files:

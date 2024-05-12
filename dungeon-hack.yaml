@@ -3,6 +3,7 @@ game_slug: dungeon-hack
 version: Good Old Games Installer
 slug: dungeon-hack
 runner: dosbox
+year: 1993
 
 script:
   files:

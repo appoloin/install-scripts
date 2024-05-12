@@ -3,6 +3,7 @@ game_slug: prince-of-persia-2-the-shadow-the-flame
 version: DOS
 slug:  prince-of-persia-installer
 runner: dosbox
+year: 1993
 
 script:
   files:

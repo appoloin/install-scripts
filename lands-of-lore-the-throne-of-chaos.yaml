@@ -3,7 +3,7 @@ game_slug: lands-of-lore-the-throne-of-chaos
 version: Good Old Games Installer
 slug: lands-of-lore-the-throne-of-chaos
 runner: scummvm
-
+year: 1993
 
 script:
   files:

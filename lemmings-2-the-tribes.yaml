@@ -3,6 +3,7 @@ game_slug: lemmings-2-the-tribes
 version: DOS
 slug:  lemmings-2-the-tribes
 runner: dosbox
+year: 1994
 
 script:
   files:

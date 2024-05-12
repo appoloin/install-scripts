@@ -3,6 +3,7 @@ game_slug: jagged-alliance
 version: Good Old Games Installer
 slug: jagged-alliance
 runner: dosbox
+year: 1994
 
 script:
   files:

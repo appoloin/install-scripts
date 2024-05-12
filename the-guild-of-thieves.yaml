@@ -3,7 +3,7 @@ game_slug: the-guild-of-thieves
 version: DOS
 slug: the-guild-of-thieves
 runner: scummvm
-
+year: 1987
 
 script:
   files:

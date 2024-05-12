@@ -3,6 +3,7 @@ game_slug: hocus-pocus
 version: DOS
 slug:  hocus-pocus
 runner: dosbox
+year: 1994
 
 script:
   files:

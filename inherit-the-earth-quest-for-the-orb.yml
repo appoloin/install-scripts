@@ -3,6 +3,7 @@ game_slug: inherit-the-earth-quest-for-the-orb
 version: Good Old Games Installer
 slug:  inherit-the-earth-quest-for-the-orb
 runner: scummvm
+year: 1994
 
 script:
   files:

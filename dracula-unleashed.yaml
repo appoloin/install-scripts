@@ -3,6 +3,7 @@ game_slug: dracula-unleashed
 version: DOS
 slug: installer
 runner: dosbox
+year: 1993
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug: wing-commander-iii-heart-of-the-tiger
 version: Good Old Games Installer
 slug: wing-commander-iii-heart-of-the-tiger
 runner: dosbox
+year: 1994
 
 script:
   files:

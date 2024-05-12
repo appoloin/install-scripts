@@ -3,6 +3,7 @@ game_slug: lollypop
 version: Good Old Games Installer
 slug: lollypop
 runner: dosbox
+year: 1994
 
 script:
   files:

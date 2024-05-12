@@ -3,7 +3,7 @@ game_slug: goblins-quest-3
 version: Good Old Games Installer
 slug:  goblins-quest-3
 runner: scummvm
-
+year: 1994
 
 
 script:

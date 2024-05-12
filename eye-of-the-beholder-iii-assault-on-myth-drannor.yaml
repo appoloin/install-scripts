@@ -3,6 +3,7 @@ game_slug: eye-of-the-beholder-iii-assault-on-myth-drannor
 version: Good Old Games Installer
 slug: eye-of-the-beholder-iii-assault-on-myth-drannor
 runner: dosbox
+year: 1993
 
 script:
   files:

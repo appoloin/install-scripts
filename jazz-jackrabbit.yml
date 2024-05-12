@@ -3,6 +3,7 @@ game_slug: jazz-jackrabbit
 version: Good Old Games Installer
 slug: jazz-jackrabbit
 runner: dosbox
+year: 1994
 
 script:
   files:

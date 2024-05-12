@@ -3,7 +3,7 @@ game_slug: the-bizarre-adventures-of-woodruff-and-the-schnibb
 version: DOS
 slug: the-bizarre-adventures-of-woodruff-and-the-schnibb
 runner: scummvm
-
+year: 1995
 
 script:
   files:

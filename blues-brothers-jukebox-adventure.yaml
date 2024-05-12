@@ -3,6 +3,7 @@ game_slug: blues-brothers-jukebox-adventure
 version: DOS
 slug:   blues-brothers-jukebox-adventure
 runner: dosbox
+year: 1993
 
 script:
   files:

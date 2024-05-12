@@ -3,6 +3,7 @@ game_slug: wing-commander-privateer
 version: Good Old Games Installer
 slug: wing-commander-privateer
 runner: dosbox
+year: 1993
 
 script:
   files:

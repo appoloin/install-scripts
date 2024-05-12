@@ -3,7 +3,7 @@ game_slug: dreamweb
 version: DOS
 slug: dreamweb
 runner: scummvm
-
+year: 1994
 
 script:
   game:

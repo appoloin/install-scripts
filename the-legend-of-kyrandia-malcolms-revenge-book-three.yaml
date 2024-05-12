@@ -3,7 +3,7 @@ game_slug: the-legend-of-kyrandia-malcolms-revenge-book-three
 version: DOS
 slug:  the-legend-of-kyrandia-malcolms-revenge-book-three
 runner: scummvm
-
+year: 1994
 
 script:
   files:

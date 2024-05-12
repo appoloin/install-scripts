@@ -3,6 +3,7 @@ game_slug: anvil-of-dawn
 version: Good Old Games Installer
 slug:  anvil-of-dawn
 runner: dosbox
+year: 1995
 
 script:
   files:

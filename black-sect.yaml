@@ -3,6 +3,7 @@ game_slug: black-sect
 version: DOS
 slug: black-sect
 runner: dosbox
+year: 1993
 
 script:
   files:

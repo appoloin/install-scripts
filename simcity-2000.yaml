@@ -3,7 +3,7 @@ game_slug: simcity-2000
 version: Good Old Games Installer
 slug: simcity-2000
 runner: dosbox
-
+year: 1993
 
 
 script:

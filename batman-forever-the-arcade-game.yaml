@@ -3,6 +3,7 @@ game_slug: batman-forever-the-arcade-game
 version: DOS
 slug:  batman-forever-the-arcade-game
 runner: dosbox
+year: 1995
 
 script:
   files:

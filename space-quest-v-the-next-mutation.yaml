@@ -3,7 +3,7 @@ game_slug: space-quest-v-the-next-mutation
 version: Good Old Games Installer
 slug:  space-quest-v-the-next-mutation
 runner: scummvm
-
+year: 1993
  
 script:
   files:
