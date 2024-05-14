@@ -3,6 +3,7 @@ game_slug: alien-incident
 version: DOS
 slug: alien-incident
 runner: dosbox
+year: 1996
 
 script:
   files:

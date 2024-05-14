@@ -3,6 +3,7 @@ game_slug: realms-of-arkania-3-shadows-over-riva-classic
 version: Good Old Games Installer
 slug: realms-of-arkania-3-shadows-over-riva-classic
 runner: dosbox
+year: 1996
 
 script:
   files:

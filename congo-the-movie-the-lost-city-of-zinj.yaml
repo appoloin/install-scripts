@@ -3,7 +3,7 @@ game_slug: congo-the-movie-the-lost-city-of-zinj
 version: DOS/Win311
 slug: congo-the-movie-the-lost-city-of-zinj
 runner: dosbox
-
+year: 1996
 
 script:
   game:

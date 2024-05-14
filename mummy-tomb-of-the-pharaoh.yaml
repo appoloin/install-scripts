@@ -3,7 +3,7 @@ game_slug: mummy-tomb-of-the-pharaoh
 version: DOs/Win311
 slug: mummy-tomb-of-the-pharaoh
 runner: dosbox
-
+year: 1996
 
 script:
   game:

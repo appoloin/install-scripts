@@ -3,6 +3,7 @@ game_slug: in-the-1st-degree
 version: DOS/Win311
 slug: in-the-1st-degree
 runner: dosbox
+year: 1995
 
 script:
   files:

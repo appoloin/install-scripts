@@ -3,6 +3,7 @@ game_slug: call-of-cthulhu-prisoner-of-ice
 version: Good Old Games Installer
 slug: cthulhu-installer
 runner: dosbox
+year: 1995
 
 script:
   files:

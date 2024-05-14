@@ -3,7 +3,7 @@ game_slug: evidence-the-last-report
 version: DOS
 slug: evidence-the-last-report
 runner: dosbox
-
+year: 1996
 
 script:
   files:

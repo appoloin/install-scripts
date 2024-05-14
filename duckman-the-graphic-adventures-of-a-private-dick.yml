@@ -3,7 +3,7 @@ game_slug: duckman-the-graphic-adventures-of-a-private-dick
 version: DOS
 slug: duckman-the-graphic-adventures-of-a-private-dick
 runner: scummvm
-
+year: 1997
 
 script:
   files:

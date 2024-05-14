@@ -3,7 +3,7 @@ game_slug: zork-the-undiscovered-underground
 version: DOS
 slug: zork-the-undiscovered-underground
 runner: scummvm
-
+year: 1997
 
 script:
   game:

@@ -3,7 +3,7 @@ game_slug: full-throttle
 version: DOS
 slug:  full-throttle-installer
 runner: scummvm
-
+year: 1995
 
 
 script:

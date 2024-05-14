@@ -3,7 +3,7 @@ game_slug: realms-of-the-haunting
 version: Good Old Games Installer
 slug:  realms-of-the-haunting
 runner: dosbox
-
+year: 1996
 
 script:
   files:

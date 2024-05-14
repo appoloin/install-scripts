@@ -3,7 +3,8 @@ game_slug: the-journeyman-project-2-buried-in-time
 version: Good Old Games Installer
 slug: the-journeyman-project-2-buried-in-time
 runner: scummvm
- 
+year: 1995
+
 script:
   game:
     game_id: buried  

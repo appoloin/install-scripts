@@ -3,6 +3,7 @@ game_slug: stonekeep
 version: Good Old Games Installer
 slug: stonekeep
 runner: dosbox
+year: 1995
 
 script:
   files:

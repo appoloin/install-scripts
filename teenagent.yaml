@@ -3,7 +3,7 @@ game_slug: teenagent
 version: Good Old Games Installer
 slug:  teenagent
 runner: scummvm
-
+year: 1995
 
 script:
   files:

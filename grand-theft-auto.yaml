@@ -3,6 +3,7 @@ game_slug: grand-theft-auto
 version: DOS Installer
 slug: grand-theft-auto
 runner: dosbox
+year: 1997
 
 script:
   game:

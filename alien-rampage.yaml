@@ -3,6 +3,7 @@ game_slug: alien-rampage
 version: Good Old Games Installer
 slug: alien-rampage
 runner: dosbox
+year: 1996
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug: toonstruck
 version: Installer
 slug:  toonstruck
 runner: scummvm
+year: 1996
 
 script:
   files:

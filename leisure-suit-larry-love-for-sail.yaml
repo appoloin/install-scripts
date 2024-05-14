@@ -3,7 +3,7 @@ game_slug: leisure-suit-larry-love-for-sail
 version: Good Old Games Installer
 slug: leisure-suit-larry-love-for-sail
 runner: scummvm
-
+year: 1996
 
 script:
   files:

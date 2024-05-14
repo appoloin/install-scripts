@@ -3,7 +3,7 @@ game_slug: hugo
 version: DOS
 slug: hugo
 runner: scummvm
-
+year: 1995
 
 script:
   files:

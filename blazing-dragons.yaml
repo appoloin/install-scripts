@@ -3,7 +3,7 @@ game_slug: blazing-dragons
 version: Installer
 slug:  blazing-dragons-installer
 runner: scummvm
-
+year: 1996
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug: amnesia
 version: DOS
 slug:   amnesia
 runner: dosbox
+year: 1986
 
 script:
   files:

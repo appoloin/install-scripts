@@ -3,7 +3,7 @@ game_slug: the-dame-was-loaded
 version: DOS
 slug: the-dame-was-loaded
 runner: dosbox
-
+year: 1996
 
 script:
   game:

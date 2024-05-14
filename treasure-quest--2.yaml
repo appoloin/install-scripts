@@ -3,6 +3,7 @@ game_slug: treasure-quest--2
 version: DOS/Win311
 slug: treasure-quest--2
 runner: dosbox
+year: 1996
 
 script:
   files:

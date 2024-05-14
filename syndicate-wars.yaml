@@ -3,6 +3,7 @@ game_slug: syndicate-wars
 version: Good Old Games Installer
 slug: installer
 runner: dosbox
+year: 1996
 
 script:
   game:

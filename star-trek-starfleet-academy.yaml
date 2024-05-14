@@ -3,7 +3,8 @@ game_slug: star-trek-starfleet-academy
 version: Good Old Games Installer
 slug: star-trek-starfleet-academy
 runner: wine
- 
+year: 1997
+
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Star Trek - Starfleet Academy/sfa.exe

@@ -3,6 +3,7 @@ game_slug: fable-484f2a75-7a61-4dba-9952-7e70e6bd881b
 version: DOS
 slug: fable-484f2a75-7a61-4dba-9952-7e70e6bd881b
 runner: dosbox
+year: 1996
 
 script:
   files:

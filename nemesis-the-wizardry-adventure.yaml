@@ -3,7 +3,7 @@ game_slug: nemesis-the-wizardry-adventure
 version: DOS
 slug: nemesis-the-wizardry-adventure
 runner: dosbox
-
+year: 1996
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: might-and-magic-swords-of-xeen
 version: Good Old Games Installer
 slug: might-and-magic-swords-of-xeen
 runner: scummvm
+year: 1994
 
 script:
   files:

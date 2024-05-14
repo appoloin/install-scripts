@@ -3,7 +3,7 @@ game_slug: brain-dead-13
 version: DOS
 slug: brain-dead-13
 runner: dosbox
-
+year: 1995
 
 script:
   game:

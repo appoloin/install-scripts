@@ -3,6 +3,7 @@ game_slug: heavens-dawn
 version: DOS
 slug: heavens-dawn
 runner: dosbox
+year: 1995
 
 script:
   files:

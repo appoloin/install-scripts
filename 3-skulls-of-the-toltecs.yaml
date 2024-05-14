@@ -3,7 +3,7 @@ game_slug: 3-skulls-of-the-toltecs
 version: DOS
 slug:  3-skulls-of-the-toltecs
 runner: scummvm
-
+year: 1996
 
 script:
   files:

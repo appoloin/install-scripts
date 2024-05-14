@@ -3,7 +3,7 @@ game_slug: torins-passage
 version: Good Old Games Installer
 slug:  torins-passage
 runner: scummvm
-
+year: 1995
 
 script:
   files:

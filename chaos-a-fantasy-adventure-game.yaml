@@ -3,7 +3,7 @@ game_slug: chaos-a-fantasy-adventure-game
 version: DOS\Win311
 slug: chaos-a-fantasy-adventure-game
 runner: dosbox
-
+year: 1996
 
 script:
   game:

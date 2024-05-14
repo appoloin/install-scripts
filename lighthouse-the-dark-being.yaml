@@ -3,6 +3,7 @@ game_slug: lighthouse-the-dark-being
 version: DOS
 slug:  lighthouse-installer
 runner: scummvm
+year: 1996
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: worms-2-armageddon
 version: Good Old Games Installer
 slug: worms-2-armageddon
 runner: wine
+year: 1999
 
 script:
   game:

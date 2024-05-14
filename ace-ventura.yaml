@@ -3,6 +3,7 @@ game_slug: ace-ventura
 version: DOS/Win311
 slug: ace-ventura
 runner: dosbox
+year: 1996
 
 script:
   files:

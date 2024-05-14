@@ -3,6 +3,7 @@ game_slug: timelapse
 version: DOS/Win311
 slug: timelapse
 runner: dosbox
+year: 1996
 
 script:
   files:

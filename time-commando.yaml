@@ -3,6 +3,7 @@ game_slug:  time-commando
 version: Good Old Games Installer
 slug:  time-commando
 runner: dosbox
+year: 1996
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug: earthworm-jim-2
 version: Good Old Games Installer
 slug: earthworm-jim-2
 runner: dosbox
+year: 1995
 
 script:
   files:

@@ -3,7 +3,7 @@ game_slug: private-eye
 version: DOS
 slug: private-eye
 runner: scummvm
-
+year: 1996
 
 script:
   files:

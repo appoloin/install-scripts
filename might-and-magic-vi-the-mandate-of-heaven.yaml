@@ -3,6 +3,7 @@ game_slug: might-and-magic-vi-the-mandate-of-heaven
 version: Good Old Games Installer
 slug: might-and-magic-vi-the-mandate-of-heaven
 runner: wine
+year: 1997
 
 script:
   game: 

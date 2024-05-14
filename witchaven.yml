@@ -3,6 +3,7 @@ game_slug: witchaven
 version: Good Old Games Installer
 slug: witchaven
 runner: dosbox
+year: 1995
 
 script:
   files:

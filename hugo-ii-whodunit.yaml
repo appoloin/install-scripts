@@ -3,7 +3,7 @@ game_slug: hugo-ii-whodunit
 version: DOS
 slug:  hugo-ii-whodunit
 runner: scummvm
-
+year: 1995
 
 script:
   files:

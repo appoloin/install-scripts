@@ -3,6 +3,7 @@ game_slug: harvester
 version: Good Old Games Installer
 slug: harvester
 runner: dosbox
+year: 1996
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: down-in-the-dumps
 version: DOS
 slug: down-in-the-dumps
 runner: dosbox
+year: 1997
 
 script:
   files:

@@ -3,7 +3,7 @@ game_slug: bud-tucker-in-double-trouble
 version: DOS
 slug:  bud-tucker-in-double-trouble
 runner: scummvm
-
+year: 1997
  
 script:
   files:

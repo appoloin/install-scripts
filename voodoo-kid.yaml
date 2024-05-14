@@ -3,7 +3,7 @@ game_slug: voodoo-kid
 version: Windows Installer
 slug: voodoo-kid
 runner: wine
-
+year: 1997
 
 script:
   game:

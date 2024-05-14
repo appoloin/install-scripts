@@ -3,7 +3,7 @@ game_slug: hugo-iii-jungle-of-doom
 version: DOS
 slug: hugo-iii-jungle-of-doom
 runner: scummvm
-
+year: 1995
 
 script:
   files:

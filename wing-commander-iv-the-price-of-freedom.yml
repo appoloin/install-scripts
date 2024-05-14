@@ -3,6 +3,7 @@ game_slug: wing-commander-iv-the-price-of-freedom
 version: Good Old Games Installer
 slug: wing-commander-iv-the-price-of-freedom
 runner: dosbox
+year: 1995
 
 script:
   files:

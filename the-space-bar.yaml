@@ -3,7 +3,7 @@ game_slug: the-space-bar
 version: Windows Installer
 slug:  the-space-bar
 runner: wine
-
+year: 1997
 
 script:
   game:

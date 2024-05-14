@@ -3,6 +3,7 @@ game_slug: titanic-adventure-out-of-time
 version: DOS/Win311
 slug:  Titanic-installer
 runner: dosbox
+year: 1996
 
 script:
   files:

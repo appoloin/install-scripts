@@ -3,6 +3,7 @@ game_slug: alien-trilogy
 version: DOS
 slug: alien-trilogy
 runner: dosbox
+year: 1996
 
 script:
   files:

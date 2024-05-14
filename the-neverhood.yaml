@@ -3,7 +3,7 @@ game_slug:  the-neverhood
 version: DOS
 slug:  the-neverhood
 runner: scummvm
-
+year: 1996
 
 script:
   game:

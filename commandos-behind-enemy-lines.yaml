@@ -3,6 +3,7 @@ game_slug: commandos-behind-enemy-lines
 version: Good Old Games Installer
 slug: commandos-behind-enemy-lines
 runner: wine
+year: 1998
 
 script:
   game:

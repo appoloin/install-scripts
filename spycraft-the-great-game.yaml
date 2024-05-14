@@ -3,7 +3,7 @@ game_slug: spycraft-the-great-game
 version: DOS 
 slug: spycraft-the-great-game
 runner: dosbox
-
+year: 1996
 
 script:
   files:

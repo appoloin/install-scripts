@@ -3,6 +3,7 @@ game_slug: blue-heat-the-case-of-the-cover-girl-murders
 version: DOS/Win311
 slug: blue-heat-the-case-of-the-cover-girl-murders
 runner: dosbox
+year: 1997
 
 script:
   files:

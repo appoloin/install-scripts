@@ -3,6 +3,7 @@ game_slug: witchaven-ii-blood-vengeance
 version: Good Old Games Installer
 slug: witchaven-ii-blood-vengeance
 runner: dosbox
+year: 1996
 
 script:
   files:

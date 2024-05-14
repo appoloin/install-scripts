@@ -3,7 +3,7 @@ game_slug: psychic-detective
 version: DOS
 slug: psychic-detective
 runner: dosbox
-
+year: 1995
 
 script:
   files:

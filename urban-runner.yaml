@@ -3,7 +3,7 @@ game_slug: urban-runner
 version: DOS
 slug:  urban-runner
 runner: scummvm
-
+year: 1996
 
 script:
   files:

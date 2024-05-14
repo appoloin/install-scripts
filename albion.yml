@@ -3,6 +3,7 @@ game_slug: albion
 version: Good Old Games Installer
 slug: albion
 runner: dosbox
+year: 1996
 
 script:
   files:

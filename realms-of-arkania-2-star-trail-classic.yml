@@ -3,6 +3,7 @@ game_slug: realms-of-arkania-2-star-trail-classic
 version: Good Old Games Installer
 slug: realms-of-arkania-2-star-trail-classic
 runner: dosbox
+year: 1994
 
 script:
   files:

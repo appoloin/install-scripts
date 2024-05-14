@@ -3,7 +3,7 @@ game_slug: callahans-crosstime-saloon
 version: DOS
 slug: callahans-crosstime-saloon
 runner: dosbox
-
+year: 1997
 
 script:
   files:

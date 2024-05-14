@@ -3,7 +3,7 @@ game_slug: time-gate-knights-chase
 version: DOS
 slug: time-gate-knights-chase
 runner: dosbox
-
+year: 1995
 
 script:
   game:

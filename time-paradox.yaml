@@ -3,7 +3,7 @@ game_slug: time-paradox
 version: DOS
 slug: time-paradox
 runner: dosbox
-
+year: 1996
 
 script:
   files:

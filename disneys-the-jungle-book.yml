@@ -3,6 +3,7 @@ game_slug: disneys-the-jungle-book
 version: Good Old Games Installer
 slug: disneys-the-jungle-book
 runner: dosbox
+year: 1995
 
 script:
   files:

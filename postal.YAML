@@ -3,6 +3,7 @@ game_slug: postal
 version: Good Old Games Installer
 slug: postal
 runner: wine
+year: 1997
 
 script:
   game:

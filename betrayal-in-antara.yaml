@@ -3,6 +3,7 @@ game_slug: betrayal-in-antara
 version: Good Old Games Installer
 slug: betrayal-in-antara
 runner: wine
+year: 1997
 
 script:
   game:

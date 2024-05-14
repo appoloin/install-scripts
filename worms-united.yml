@@ -3,6 +3,7 @@ game_slug: worms-united
 version: Good Old Games Installer
 slug: worms-united
 runner: dosbox
+year: 1996
 
 script:
   files:

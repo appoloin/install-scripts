@@ -3,7 +3,7 @@ game_slug: ufos
 version: Windows Installer
 slug:  ufos
 runner: scummvm
-
+year: 1997
 
 script:
   files:

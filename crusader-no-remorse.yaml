@@ -3,6 +3,7 @@ game_slug: crusader-no-remorse
 version: Good Old Games Installer
 slug:  crusader-no-remorse
 runner: scummvm
+year: 1995
 
 script:
   files:
