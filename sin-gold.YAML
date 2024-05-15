@@ -3,6 +3,7 @@ game_slug: sin-gold
 version: Good Old Games Installer
 slug: sin-gold
 runner: wine
+year: 1999
 
 script:
   game:

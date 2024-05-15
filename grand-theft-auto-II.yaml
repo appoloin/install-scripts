@@ -3,6 +3,7 @@ game_slug: grand-theft-auto-2
 version: Windows Installer
 slug: grand-theft-auto-2
 runner: wine
+year: 1999
 
 script:
   game:

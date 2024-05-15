@@ -3,6 +3,7 @@ game_slug: amerzone-the-explorers-legacy
 version: Good Old Games Installer
 slug: amerzone-the-explorers-legacy
 runner: wine
+year: 1999
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: simcity-3000
 version: Good Old Games Installer
 slug: simcity-3000
 runner: wine
+year: 1999
 
 script:
   game: 

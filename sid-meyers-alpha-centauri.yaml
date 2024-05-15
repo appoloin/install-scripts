@@ -3,6 +3,7 @@ game_slug: sid-meyers-alpha-centauri
 version: Good Old Games Installer
 slug: sid-meyers-alpha-centauri
 runner: wine
+year: 2000
 
 script:
   game:

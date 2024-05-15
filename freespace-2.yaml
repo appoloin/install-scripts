@@ -3,7 +3,7 @@ game_slug: freespace-2
 version: Good Old Games Installer
 slug: freespace-2
 runner: wine
-
+year: 1999
 
 script:
   game:

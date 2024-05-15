@@ -3,7 +3,7 @@ game_slug: the-feeble-files
 version: Windows Installer
 slug:  the-feeble-files
 runner: scummvm
-
+year: 1998
 
  
 script:

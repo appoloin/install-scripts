@@ -3,7 +3,7 @@ game_slug: hopkins-fbi
 version: Installer
 slug: hopkins-fbi
 runner: scummvm
-
+year: 1998
 
 
 script:

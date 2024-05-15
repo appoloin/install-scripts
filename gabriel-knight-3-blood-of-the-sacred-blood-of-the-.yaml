@@ -3,6 +3,7 @@ game_slug: gabriel-knight-3-blood-of-the-sacred-blood-of-the-
 version: Good Old Games Installer
 slug: gabriel-knight-3-blood-of-the-sacred-blood-of-the-
 runner: wine
+year: 1999
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: hitman-codename-47
 version: Good Old Gams Installer
 slug: hitman-codename-47
 runner: wine
+year: 2000
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: might-and-magic-vii-for-blood-and-honor
 version: Good Old Games Installer
 slug: might-and-magic-vii-for-blood-and-honor
 runner: wine
+year: 1999
 
 script:
   game: 

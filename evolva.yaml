@@ -3,6 +3,7 @@ game_slug: evolva
 version: Good Old Games Installer
 slug: evolva
 runner: wine
+year: 2000
 
 script:
   game:

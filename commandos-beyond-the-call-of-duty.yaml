@@ -3,6 +3,7 @@ game_slug: commandos-beyond-the-call-of-duty
 version: Good Old Games Installer
 slug: commandos-beyond-the-call-of-duty
 runner: wine
+year: 1999
 
 script:
   game:

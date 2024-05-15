@@ -3,7 +3,7 @@ game_slug: grim-fandango
 version: Windows Installer
 slug: grim-fandango
 runner: scummvm
-
+year: 1998
 
 script:
   files:

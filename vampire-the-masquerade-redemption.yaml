@@ -3,6 +3,7 @@ game_slug: vampire-the-masquerade-redemption
 version: Good Old Games Installer
 slug: vampire-the-masquerade-redemption
 runner: wine
+year: 2000
 
 script:
   game:

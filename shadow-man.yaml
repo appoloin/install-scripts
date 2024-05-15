@@ -3,6 +3,7 @@ game_slug: shadow-man
 version: Good Old Games Installer
 slug: shadow-man
 runner: wine
+year: 1999
 
 script:
   game: 

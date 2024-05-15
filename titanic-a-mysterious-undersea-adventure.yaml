@@ -3,6 +3,7 @@ game_slug: titanic-a-mysterious-undersea-adventure
 version: DOS/Win311
 slug: titanic-a-mysterious-undersea-adventure
 runner: dosbox
+year: 1998
 
 script:
   files:

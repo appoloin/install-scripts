@@ -3,6 +3,7 @@ game_slug: the-journeyman-project-3-legacy-of-time
 version: Good Old Games Installer
 slug: the-journeyman-project-3-legacy-of-time
 runner: wine
+year: 1998
 
 script:
   game:

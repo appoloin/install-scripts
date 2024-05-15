@@ -3,6 +3,7 @@ game_slug: necronomicon-the-dawning-of-darkness
 version: Good Old Games Installer
 slug: necronomicon-the-dawning-of-darkness
 runner: wine
+year: 2000
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: worms-2
 version: Good Old Games Installer
 slug: worms-2
 runner: wine
+year: 1997
 
 script:
   game:

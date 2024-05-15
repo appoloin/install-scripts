@@ -3,6 +3,7 @@ game_slug: fallout-2
 version: Good Old Games Installer
 slug: fallout
 runner: wine
+year: 1998
 
 script:
   game:

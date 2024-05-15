@@ -3,6 +3,7 @@ game_slug: crusaders-of-might-and-magic
 version: Good Old Games Installer
 slug:  crusaders-of-might-and-magic
 runner: wine
+year: 1999
 
 script:
   game:

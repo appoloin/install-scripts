@@ -3,6 +3,7 @@ game_slug: metal-slug-3
 version: Good Old Games Installer
 slug: metal-slug-3
 runner: wine
+year: 2000
 
 script:
   game: 

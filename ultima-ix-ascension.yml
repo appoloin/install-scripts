@@ -3,6 +3,7 @@ game_slug: ultima-ix-ascension
 version: Good Old Games Installer
 slug: ultima-ix-ascension
 runner: wine
+year: 1999
 
 script:
   game:

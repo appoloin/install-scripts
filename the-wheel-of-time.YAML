@@ -3,6 +3,7 @@ game_slug: the-wheel-of-time
 version: Good Old Games Installer
 slug: the-wheel-of-time
 runner: wine
+year: 1999
 
 script:
   game:

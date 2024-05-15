@@ -3,6 +3,7 @@ game_slug: quest-for-glory-v-dragon-fire
 version: Good Old Games Installer
 slug: quest-for-glory-v-dragon-fire
 runner: wine
+year: 1998
 
 script:
   game: 

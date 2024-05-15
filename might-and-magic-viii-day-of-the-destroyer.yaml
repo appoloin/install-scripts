@@ -3,6 +3,7 @@ game_slug: might-and-magic-viii-day-of-the-destroyer
 version: Good Old Games Installer
 slug: might-and-magic-viii-day-of-the-destroyer
 runner: wine
+year: 2000
 
 script:
   game: 

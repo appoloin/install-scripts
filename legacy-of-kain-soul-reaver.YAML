@@ -3,6 +3,7 @@ game_slug:  legacy-of-kain-soul-reaver
 version: Good Old Games Installer
 slug: legacy-of-kain-soul-reaver
 runner: wine
+year: 1999
 
 script:
   game:

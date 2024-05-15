@@ -3,6 +3,7 @@ game_slug: rayman-forever
 version: Good Old Games Installer
 slug: rayman-forever
 runner: dosbox
+year: 1998
 
 script:
   files:

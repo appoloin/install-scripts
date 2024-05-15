@@ -3,6 +3,7 @@ game_slug: unreal-gold
 version: Good Old Games Installer
 slug: unreal-gold
 runner: wine
+year: 1998
 
 script:
   game: 

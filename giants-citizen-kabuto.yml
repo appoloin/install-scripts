@@ -3,6 +3,7 @@ game_slug: giants-citizen-kabuto
 version: Good Old Games Installer
 slug:  giants-citizen-kabuto
 runner: wine
+year: 2000
 
 script:
   game:
