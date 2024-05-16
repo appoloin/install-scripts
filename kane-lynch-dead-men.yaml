@@ -3,6 +3,7 @@ game_slug: kane-lynch-dead-men
 version: Good Old Games Installer
 slug: kane-lynch-dead-men
 runner: wine
+year: 2007
  
 script:
   game:
