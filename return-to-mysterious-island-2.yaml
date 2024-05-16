@@ -3,6 +3,7 @@ game_slug:  return-to-mysterious-island-2
 version: Good Old Games Installer
 slug:  return-to-mysterious-island-2-installer
 runner: wine
+year: 2004
 
 script:
   game:

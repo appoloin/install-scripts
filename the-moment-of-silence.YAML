@@ -3,6 +3,7 @@ game_slug:  the-moment-of-silence
 version: Good Old Games Installer
 slug: the-moment-of-silence
 runner: wine
+year: 2004
 
 script:
   game:

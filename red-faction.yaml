@@ -3,6 +3,7 @@ game_slug: red-faction
 version: Good old Games Installer
 slug: red-faction
 runner: wine
+year: 2001
 
 script:
   game:

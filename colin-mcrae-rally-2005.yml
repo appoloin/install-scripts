@@ -3,7 +3,7 @@ game_slug: colin-mcrae-rally-2005
 version: Good Old Games Installer
 slug:  colin-mcrae-rally-2005
 runner: wine
-
+year: 2004
 
 script:
   game:

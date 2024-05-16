@@ -3,6 +3,7 @@ game_slug: outrun-2006-coast-2-coast
 version: Windows Installer
 slug: outrun-2006-coast-2-coast
 runner: wine
+year: 2006
 
 script:
   game:

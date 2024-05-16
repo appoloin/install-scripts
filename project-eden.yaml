@@ -3,6 +3,7 @@ game_slug:  project-eden
 version: Good Old GamesInstaller
 slug:  project-eden
 runner: wine
+year: 2001
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: tomb-raider-legend
 version: Good Old Games Installer
 slug: tomb-raider-legend
 runner: wine
+year: 2006
 
 script:
   game: 

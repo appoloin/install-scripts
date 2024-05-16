@@ -3,6 +3,7 @@ game_slug: hitman-contracts
 version: Good Old Games Installer
 slug: hitman-contracts
 runner: wine
+year: 2004
 
 script:
   game:

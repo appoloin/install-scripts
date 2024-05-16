@@ -3,6 +3,7 @@ game_slug: star-trek-away-team
 version: Good Old Games Installer
 slug: star-trek-away-team
 runner: wine
+year: 2001
 
 script:
   game:

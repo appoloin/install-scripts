@@ -3,6 +3,7 @@ game_slug: grand-theft-auto-iii
 version: Windows Installer
 slug: grand-theft-auto-iii
 runner: wine
+year: 2002
 
 script:
   game:

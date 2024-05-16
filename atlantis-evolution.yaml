@@ -3,6 +3,7 @@ game_slug: atlantis-evolution
 version: Windows Installer
 slug: atlantis-evolution-installer
 runner: wine
+year: 2004
 
 script:
   game:

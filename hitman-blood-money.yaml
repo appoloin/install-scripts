@@ -3,6 +3,7 @@ game_slug: hitman-blood-money
 version: Good Old Games Installer
 slug: hitman-blood-money
 runner: wine
+year: 2006
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug: harry-potter-and-the-prisoner-of-azkaban
 version: Windows Installer
 slug: harry-potter-and-the-prisoner-of-azkaban
 runner: wine
+year: 2004
  
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: xiii
 version: Good Old Games Installer
 slug: xiii
 runner: wine
+year: 2003
  
 script:
   game:

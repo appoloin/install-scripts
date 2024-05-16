@@ -3,6 +3,7 @@ game_slug: freedom-fighters
 version: Good Old Games Installer
 slug: freedom-fighters
 runner: wine
+year: 2003
 
 script:
   game: 

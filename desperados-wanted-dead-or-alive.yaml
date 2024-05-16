@@ -3,6 +3,7 @@ game_slug: desperados-wanted-dead-or-alive
 version: Good Old Games Installer
 slug: desperados-wanted-dead-or-alive
 runner: wine
+year: 2001
 
 script:
   game:

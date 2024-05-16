@@ -3,6 +3,7 @@ game_slug: just-cause
 version: Good Old Games Installer
 slug: just-cause
 runner: wine
+year: 2006
 
 script:
   game:

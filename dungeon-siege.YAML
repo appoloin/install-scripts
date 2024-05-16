@@ -3,6 +3,7 @@ game_slug: dungeon-siege
 version: Good Old Games Installer
 slug: dungeon-siege
 runner: wine
+year: 2002
 
 script:
   game:

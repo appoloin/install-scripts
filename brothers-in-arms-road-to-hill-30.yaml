@@ -3,6 +3,7 @@ game_slug: brothers-in-arms-road-to-hill-30
 version: Good Old Games Installer
 slug: brothers-in-arms-road-to-hill-30
 runner: wine
+year: 2005
  
 script:
   game:

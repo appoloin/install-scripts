@@ -3,7 +3,8 @@ game_slug: call-of-juarez
 version: Good Old Games Installer
 slug: call-of-juarez
 runner: wine
- 
+year: 2006
+
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Call of Juarez/CoJ.exe

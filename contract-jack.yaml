@@ -3,6 +3,7 @@ game_slug: contract-jack
 version: Windows Installer
 slug: contract-jack
 runner: wine
+year: 2003
 
 script:
   game:

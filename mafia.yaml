@@ -3,6 +3,7 @@ game_slug: mafia
 version: Good Old Games Installer
 slug: mafia
 runner: wine
+year: 2002
  
 script:
   game:

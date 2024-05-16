@@ -3,6 +3,7 @@ game_slug: heroes-of-might-and-magic-v
 version:  Good Old Games Installer
 slug: heroes-of-might-and-magic-v
 runner: wine
+year: 2006
 
 script:
   game:

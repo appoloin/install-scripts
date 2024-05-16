@@ -3,6 +3,7 @@ game_slug: commandos-3-destination-berlin
 version: Good Old Games Installer
 slug: commandos-3-destination-berlin
 runner: wine
+year: 2003
 
 script:
   game:

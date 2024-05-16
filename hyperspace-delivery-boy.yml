@@ -3,7 +3,7 @@ game_slug: hyperspace-delivery-boy
 version: Windows Installer
 slug: hyperspace-delivery-boy
 runner: scummvm
-
+year: 2001
 
 script:
   files:

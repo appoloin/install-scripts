@@ -3,6 +3,7 @@ game_slug: brothers-in-arms-earned-in-blood
 version: Good Old Games Installer
 slug:  brothers-in-arms-earned-in-blood
 runner: wine
+year: 2005
  
 script:
   game:

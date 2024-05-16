@@ -3,6 +3,7 @@ game_slug: star-wars-battlefront-classic-2004
 version: Good Old Games Installer
 slug: star-wars-battlefront-classic-2004
 runner: wine
+year: 2004
 
 script:
     files:

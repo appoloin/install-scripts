@@ -3,6 +3,7 @@ game_slug: clive-barkers-undying
 version: Good Old Games Installer
 slug: clive-barkers-undying
 runner: wine
+year: 2001
 
 script:
   game:

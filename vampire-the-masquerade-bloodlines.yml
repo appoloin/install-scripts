@@ -3,6 +3,7 @@ game_slug: vampire-the-masquerade-bloodlines
 version:  Good Old Games Installer
 slug: vampire-the-masquerade-bloodlines
 runner: wine
+year: 2004
 
 script:
   game:

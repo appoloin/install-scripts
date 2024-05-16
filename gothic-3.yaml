@@ -3,6 +3,7 @@ game_slug: rc-3
 version: Windows Installer
 slug:  gothic-3
 runner: wine
+year: 2006
 
 script:
   game: 

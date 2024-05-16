@@ -3,6 +3,7 @@ game_slug: stubbs-the-zombie-in-rebel-without-a-pulse
 version: Good Old Games Installer
 slug: stubbs-the-zombie-in-rebel-without-a-pulse
 runner: wine
+year: 2005
  
 script:
   game:

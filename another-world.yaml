@@ -3,6 +3,7 @@ game_slug: another-world
 version: Good Old Games Installer
 slug: another-world
 runner: wine
+year: 2007
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: bad-boys-miami-takedown
 version: Windows Installer
 slug: bad-boys-miami-takedown
 runner: wine
+year: 2004
 
 script:
   game:

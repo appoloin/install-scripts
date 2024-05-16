@@ -3,6 +3,7 @@ game_slug: unreal-tournament-2004
 version: Good Old Games Installer
 slug: unreal-tournament-2004
 runner: wine
+year: 2002
 
 script:
   game:

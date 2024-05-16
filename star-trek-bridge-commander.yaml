@@ -3,6 +3,7 @@ game_slug: star-trek-bridge-commander
 version: Good Old Games Installer
 slug: star-trek-bridge-commander
 runner: wine
+year: 2002
  
 script:
   game:

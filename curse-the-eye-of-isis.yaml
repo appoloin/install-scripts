@@ -3,6 +3,7 @@ game_slug: curse-the-eye-of-isis
 version: Good Old Games Installer
 slug: curse-the-eye-of-isis
 runner: wine
+year: 2003
  
 script:
   game:

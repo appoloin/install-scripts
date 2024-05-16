@@ -3,6 +3,7 @@ game_slug: psychonauts
 version: Good Old Games Installer
 slug: psychonauts
 runner: wine
+year: 2005
 
 script:
   game:

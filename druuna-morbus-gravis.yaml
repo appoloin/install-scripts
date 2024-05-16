@@ -3,6 +3,7 @@ game_slug: druuna-morbus-gravis
 version: Windows Installer
 slug:  druuna-morbus-gravis
 runner: wine
+year: 2001
 
 script:
   game:

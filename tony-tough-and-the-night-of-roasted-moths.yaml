@@ -3,6 +3,7 @@ game_slug: tony-tough-and-the-night-of-roasted-moths
 version: Windows Installer
 slug:  tony-tough-and-the-night-of-roasted-moths
 runner: scummvm
+year: 2002
 
 script:
   files:

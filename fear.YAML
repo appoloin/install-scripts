@@ -3,6 +3,7 @@ game_slug: fear
 version: Good Old Games Installer
 slug: fear
 runner: wine
+year: 2005
 
 script:
   game:

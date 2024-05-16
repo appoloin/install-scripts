@@ -3,6 +3,7 @@ game_slug: star-wars-battlefront-ii
 version: Good Old Games Installer
 slug: star-wars-battlefront-ii
 runner: wine
+year: 2005
 
 script:
     files:

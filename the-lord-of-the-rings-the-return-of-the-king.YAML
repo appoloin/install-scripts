@@ -3,6 +3,7 @@ game_slug: the-lord-of-the-rings-the-return-of-the-king
 version: Windows Installer
 slug: the-lord-of-the-rings-the-return-of-the-king
 runner: wine
+year: 2003
 
 script:
   game:

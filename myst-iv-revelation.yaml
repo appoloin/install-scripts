@@ -3,7 +3,7 @@ game_slug: myst-iv-revelation
 version: Good Old Games Installer
 slug: myst-iv-revelation
 runner: wine
-
+year: 2004
 
 script:
   game:

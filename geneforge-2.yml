@@ -3,6 +3,7 @@ game_slug:  geneforge-2
 version: Good Old Games Installer
 slug: geneforge-2
 runner: wine
+year: 2003
 
 script:
   game:

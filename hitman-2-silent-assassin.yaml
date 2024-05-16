@@ -3,6 +3,7 @@ game_slug: hitman-2-silent-assassin
 version: Good Old Games Installer
 slug: hitman-2-silent-assassin
 runner: wine
+year: 2002
 
 script:
   game:

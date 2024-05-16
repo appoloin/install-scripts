@@ -3,6 +3,7 @@ game_slug: grand-theft-auto-vice-city
 version: Windows Installer
 slug: grand-theft-auto-vice-city
 runner: wine
+year: 2003
 
 script:
   game:

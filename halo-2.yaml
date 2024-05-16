@@ -3,6 +3,7 @@ game_slug: halo-2
 version: Windows Installer
 slug:  halo-2
 runner: wine
+year: 2004
 
 script:
   game:

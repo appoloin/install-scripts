@@ -3,6 +3,7 @@ game_slug: agatha-christie-murder-on-the-orient-express
 version: Windows Installer
 slug:  agatha-christie-murder-on-the-orient-express
 runner: wine
+year: 2006
 
 script:
   game:

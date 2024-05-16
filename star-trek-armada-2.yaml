@@ -3,6 +3,7 @@ game_slug: star-trek-armada-2
 version: Good Old Games Installer
 slug: star-trek-armada-2
 runner: wine
+year: 2001
  
 script:
   game:

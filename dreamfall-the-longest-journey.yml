@@ -3,6 +3,7 @@ game_slug: dreamfall-the-longest-journey
 version:  Good Old Games Installer
 slug: dreamfall-the-longest-journey
 runner: wine
+year: 2006
 
 script:
   game:

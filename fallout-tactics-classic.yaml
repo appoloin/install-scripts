@@ -3,6 +3,7 @@ game_slug: fallout-tactics-classic
 version: Good Old Games Installer
 slug: fallout-tactics-classic
 runner: wine
+year: 2001
 
 script:
   game:

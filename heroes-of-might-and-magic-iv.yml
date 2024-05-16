@@ -3,6 +3,7 @@ game_slug: heroes-of-might-and-magic-iv
 version: Good Old Games Installer
 slug: heroes-of-might-and-magic-iv
 runner: wine
+year: 2002
 
 script:
   game:

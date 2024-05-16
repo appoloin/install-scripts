@@ -3,6 +3,7 @@ game_slug: mysterious-journey-ii-chameleon
 version: Windows Installer
 slug: mysterious-journey-ii-chameleon
 runner: wine
+year: 2003
 
 script:
   game:

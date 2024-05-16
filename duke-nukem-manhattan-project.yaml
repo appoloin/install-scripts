@@ -3,7 +3,7 @@ game_slug: duke-nukem-manhattan-project
 version: Good Old Games Installer
 slug: duke-nukem-manhattan-project
 runner: wine
-
+year: 2002
 
 script:
   game:
