@@ -3,6 +3,7 @@ game_slug: a-vampyre-story
 version: Good Old Games Installer
 slug: a-vampyre-story
 runner: wine
+year: 2008
 
 script:
   game:

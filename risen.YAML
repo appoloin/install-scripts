@@ -3,6 +3,7 @@ game_slug: risen
 version: Good Old Games Installer
 slug: risen
 runner: wine
+year: 2009
 
 script:
   game:

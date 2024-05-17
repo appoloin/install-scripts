@@ -3,6 +3,7 @@ game_slug: venetica
 version: Good Old Games Installer
 slug: venetica
 runner: wine
+year: 2010
  
 script:
   game:

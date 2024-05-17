@@ -3,6 +3,7 @@ game_slug: top-gun--3
 version: Windows Installer
 slug: top-gun--3
 runner: wine
+yer: 2010
 
 script:
   game:

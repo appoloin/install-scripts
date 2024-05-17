@@ -4,7 +4,7 @@ game_slug: amnesia-the-dark-descent
 version: Widnows Installer
 slug: amnesia-the-dark-descent-installer
 runner: wine
-
+year: 2010
 
 script:
   game:

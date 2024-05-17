@@ -3,6 +3,7 @@ game_slug: sam-max-beyond-time-and-space
 version: Good Old Games Installer
 slug: sam-max-beyond-time-and-space
 runner: wine
+year: 2007
 
 script:
   game:

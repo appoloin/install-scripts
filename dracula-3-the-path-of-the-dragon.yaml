@@ -3,7 +3,7 @@ game_slug: dracula-3-the-path-of-the-dragon
 version: Good Old Games Installer
 slug: dracula-3-the-path-of-the-dragon
 runner: wine
-
+year: 2009
 
 script:
   game:

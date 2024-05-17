@@ -3,6 +3,7 @@ game_slug: sam-max-save-the-world
 version: Good Old Games Installer
 slug: sam-max-save-the-world
 runner: wine
+year: 2009
 
 script:
   game:

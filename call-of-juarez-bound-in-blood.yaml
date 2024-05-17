@@ -3,6 +3,7 @@ game_slug: call-of-juarez-bound-in-blood
 version: Good Old Games Installer
 slug: call-of-juarez-bound-in-blood
 runner: wine
+year: 2009
 
 script:
   game: 

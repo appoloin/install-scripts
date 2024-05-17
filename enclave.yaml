@@ -3,6 +3,7 @@ game_slug: enclave
 version: Good Old Games Installer
 slug: enclave
 runner: wine
+year: 2002
 
 script:
   game: 

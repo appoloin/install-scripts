@@ -3,6 +3,7 @@ game_slug: runaway-3-a-twist-of-fate
 version: Good Old Games Installer
 slug:  runaway-3-a-twist-of-fate
 runner: wine
+year: 2009
 
 script:
   game:

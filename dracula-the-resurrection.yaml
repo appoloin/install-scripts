@@ -3,7 +3,7 @@ game_slug: dracula-the-resurrection
 version: Good Old Games Installer
 slug: dracula-the-resurrection
 runner: wine
-
+year: 2009
 
 script:
   game:

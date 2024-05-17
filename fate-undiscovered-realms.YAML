@@ -3,6 +3,7 @@ game_slug: fate-undiscovered-realms
 version: Good Old Games Installer
 slug: fate-undiscovered-realms
 runner: wine
+year: 2008
 
 script:
   game:

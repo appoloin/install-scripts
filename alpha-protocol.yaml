@@ -3,6 +3,7 @@ game_slug: alpha-protocol
 version: Widows Installer
 slug: alpha-protocol
 runner: wine
+year: 2010
  
 script:
   game:

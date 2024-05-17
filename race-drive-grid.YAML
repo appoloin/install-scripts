@@ -3,6 +3,7 @@ game_slug: race-drive-grid
 version: Good Old Games Installer
 slug:  race-drive-grid
 runner: wine
+year: 2008
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: nostradamus-the-last-prophecy
 version: Good Old Games Installer
 slug: nostradamus-the-last-prophecy
 runner: wine
+year: 2008
 
 script:
   game:

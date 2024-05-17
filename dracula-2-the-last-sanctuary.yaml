@@ -3,7 +3,7 @@ game_slug: dracula-2-the-last-sanctuary
 version: Good Old Games Installer
 slug: dracula-2-the-last-sanctuary
 runner: wine
-
+year: 2009
 
 script:
   game:

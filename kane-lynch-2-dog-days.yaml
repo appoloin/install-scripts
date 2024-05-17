@@ -3,6 +3,7 @@ game_slug: kane-lynch-2-dog-days
 version: Good Old Games Installer
 slug: kane-lynch-2-dog-days
 runner: wine
+year: 2010
  
 script:
   game:

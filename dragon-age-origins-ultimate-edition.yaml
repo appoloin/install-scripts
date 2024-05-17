@@ -3,6 +3,7 @@ game_slug: dragon-age-origins-ultimate-edition
 version: Good Old Games Installer
 slug: dragon-age-origins-ultimate-edition
 runner: wine
+year: 2009
  
 script:
   game:

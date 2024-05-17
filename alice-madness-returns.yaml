@@ -3,7 +3,7 @@ game_slug: alice-madness-returns
 version: Windows Installer
 slug: alice-madness-returns
 runner: wine
-
+year: 2011
 script:
   game:
     exe: $GAMEDIR/drive_c/Program Files/Electronic Arts/Alice Madness Returns - The Complete Collection/Game/Alice2/Binaries/Win32/AliceMadnessReturns.exe

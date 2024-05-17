@@ -3,7 +3,7 @@ game_slug: battle-chess
 version: Good Old Games Installer
 slug: battle-chess
 runner: dosbox
-
+year: 2008
  
 script:
   files:

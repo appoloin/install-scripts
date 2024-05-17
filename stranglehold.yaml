@@ -3,6 +3,7 @@ game_slug: stranglehold
 version: Good Old Games Installer
 slug: stranglehold
 runner: wine
+year: 2007
 
 script:
   game: 

@@ -3,6 +3,7 @@ game_slug: stalker-shadow-of-chernobyl
 version: Good Old Games Installer
 slug: stalker-shadow-of-chernobyl
 runner: wine
+year: 2007
 
 script:
   files:

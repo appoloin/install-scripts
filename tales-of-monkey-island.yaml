@@ -3,6 +3,7 @@ game_slug: tales-of-monkey-island
 version: Good Old Games Installer
 slug: tales-of-monkey-island
 runner: wine
+year: 2009
 
 script:
   game:

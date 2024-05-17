@@ -3,6 +3,7 @@ game_slug: sam-max-the-devils-playhouse
 version: Good Old Games Installer
 slug: sam-max-the-devils-playhouse
 runner: wine
+year: 2010
 
 script:
   game:

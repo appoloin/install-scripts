@@ -3,6 +3,7 @@ game_slug: back-to-the-future-the-game
 version: Good Old Games Installer
 slug: back-to-the-future-the-game
 runner: wine
+year: 2010
 
 script:
   game:

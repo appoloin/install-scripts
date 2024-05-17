@@ -3,6 +3,7 @@ game_slug: ankh-3-battle-of-the-gods
 version: Good Old Games Installer
 slug: ankh-3-battle-of-the-gods
 runner: wine
+year: 2009
 
 script:
   game:

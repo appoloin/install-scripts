@@ -3,6 +3,7 @@ game_slug: tomb-raider-anniversary
 version: Good Old Games Installer
 slug: tomb-raider-anniversary
 runner: wine
+year: 2007
 
 script:
   game:

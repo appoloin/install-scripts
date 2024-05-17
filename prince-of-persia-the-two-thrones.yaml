@@ -3,6 +3,7 @@ game_slug: prince-of-persia-the-two-thrones
 version: Good Old Games Installer
 slug:   prince-of-persia-the-two-thrones
 runner: wine
+year: 2009
 
 script:
   game:

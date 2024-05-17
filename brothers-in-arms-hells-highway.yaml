@@ -3,6 +3,7 @@ game_slug: brothers-in-arms-hells-highway
 version: Good Old Games Installer
 slug: brothers-in-arms-hells-highway
 runner: wine
+year: 2008
 
 script:
   game:

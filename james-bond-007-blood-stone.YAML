@@ -3,6 +3,7 @@ game_slug: james-bond-007-blood-stone
 version: Windows Installer
 slug: james-bond-007-blood-stone
 runner: wine
+year: 2010
 
 script:
   game:

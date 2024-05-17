@@ -3,6 +3,7 @@ game_slug: enslaved-odyssey-to-the-west-collectors-edition
 version: Windows Installer
 slug:  enslaved-odyssey-to-the-west-collectors-edition
 runner: wine
+year: 2010
 
 script:
   game:

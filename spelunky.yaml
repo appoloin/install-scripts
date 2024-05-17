@@ -3,7 +3,8 @@ game_slug: spelunky
 version: Good Old Games Installer
 slug: spelunky
 runner: wine
- 
+year: 2008
+
 script:
   game:
     exe: "$GAMEDIR/drive_c/GOG Games/Spelunky/Spelunky.exe"

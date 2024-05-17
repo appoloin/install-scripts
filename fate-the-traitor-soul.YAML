@@ -3,6 +3,7 @@ game_slug: fate-the-traitor-soul
 version: Good Old Games Installer
 slug: fate-the-traitor-soul
 runner: wine
+year: 2009
 
 script:
   game:
