@@ -3,6 +3,7 @@ game_slug: abzu
 version: Good Old Games Installer
 slug: abzu
 runner: wine
+year: 2016
  
 script:
   game:

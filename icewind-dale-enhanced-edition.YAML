@@ -3,6 +3,7 @@ game_slug: icewind-dale-enhanced-edition
 version: Good Old Games Installer
 slug: icewind-dale-enhanced-edition
 runner: wine
+year: 2014
 
 script:
   game:

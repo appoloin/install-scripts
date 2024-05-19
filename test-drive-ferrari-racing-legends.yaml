@@ -3,7 +3,7 @@ game_slug: test-drive-ferrari-racing-legends
 version: Windows Installer
 slug: test-drive-ferrari-racing-legends
 runner: wine
-
+year: 2012
 
 script:
   game:

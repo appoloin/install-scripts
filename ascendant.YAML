@@ -3,6 +3,7 @@ game_slug: ascendant
 version: Good Old Games Installer
 slug: ascendant
 runner: wine
+year: 2014
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: legend-of-grimrock
 version: Good Old Games Installer
 slug: legend-of-grimrock
 runner: wine
+year: 2012
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: stasis
 version: Good Old Games Installer
 slug: stasis
 runner: wine
+year: 2015
 
 script:
   game:

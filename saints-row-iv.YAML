@@ -3,6 +3,7 @@ game_slug: saints-row-iv
 version: Good Old Games Installer
 slug: saints-row-iv
 runner: wine
+year: 2015
 
 script:
   game:

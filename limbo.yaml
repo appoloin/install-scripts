@@ -3,6 +3,7 @@ game_slug: limob
 version: Good Old Games Installer
 slug: limbo
 runner: wine
+year: 2011
 
 script:
   game:

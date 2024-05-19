@@ -3,6 +3,7 @@ game_slug: neverwinter-nights-enhanced-edition
 version: Good Old Games Installer
 slug: neverwinter-nights-enhanced-edition
 runner: wine
+year: 2013
 
 script:
   game:

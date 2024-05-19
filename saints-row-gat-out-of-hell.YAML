@@ -3,6 +3,7 @@ game_slug: saints-row-gat-out-of-hell
 version: Good Old Games Installer
 slug:  saints-row-gat-out-of-hell
 runner: wine
+year: 2015
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: omerta-city-of-gangsters
 version: Good Old Games Installer
 slug: omerta-city-of-gangsters
 runner: wine
+year: 2013
 
 script:
   game:

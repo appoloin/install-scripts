@@ -3,7 +3,8 @@ game_slug: deus-ex-human-revolution
 version: Good Old Games Installer
 slug: deus-ex-human-revolution
 runner: wine
- 
+year: 2011
+
 script:
   game:
     exe: "$GAMEDIR/drive_c/GOG Games/Deus Ex HRDC/DXHRDC.exe"

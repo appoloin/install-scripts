@@ -3,6 +3,7 @@ game_slug: of-orcs-and-men
 version: Good Old Games Installer
 slug: of-orcs-and-men
 runner: wine
+year: 2012
 
 script:
   game:

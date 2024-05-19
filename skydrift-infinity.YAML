@@ -3,6 +3,7 @@ game_slug: skydrift-infinity
 version: Good Old Games Installer
 slug:  skydrift-infinity
 runner: wine
+year: 2011
 
 script:
   game:

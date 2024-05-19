@@ -3,6 +3,7 @@ game_slug: saints-row-the-third
 version: Good Old Games Installer
 slug: saints-row-the-third
 runner: wine
+year: 2011
 
 script:
   game:

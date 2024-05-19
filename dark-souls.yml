@@ -3,6 +3,7 @@ game_slug: dark-souls
 version: Windows Installer
 slug:  dark-souls
 runner: wine
+year: 2011
 
 script:
   game:

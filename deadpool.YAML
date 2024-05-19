@@ -3,6 +3,7 @@ game_slug: deadpool
 version: Good Old Games Installer
 slug: deadpool
 runner: wine
+year: 2013
 
 script:
   game:

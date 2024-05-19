@@ -3,6 +3,7 @@ game_slug: stacking
 version: Good Old Games Installer
 slug: stacking
 runner: wine
+year: 2011
 
 script:
   game:

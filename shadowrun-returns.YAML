@@ -3,6 +3,7 @@ game_slug: shadowrun-returns
 version: Good Old Games Installer
 slug:  shadowrun-returns
 runner: wine
+year: 2013
 
 script:
   game:

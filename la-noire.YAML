@@ -3,6 +3,7 @@ game_slug: la-noire
 version: Windows Installer
 slug: la-noire
 runner: wine
+year: 2011
 
 script:
   game:

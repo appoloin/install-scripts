@@ -3,6 +3,7 @@ game_slug: the-book-of-unwritten-tales-2
 version: Good Old Games Installer
 slug: the-book-of-unwritten-tales-2
 runner: wine
+year: 2015
 
 script:
   game: 

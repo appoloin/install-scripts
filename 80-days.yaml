@@ -3,6 +3,7 @@ game_slug: 80-days
 version: Good Old Games Installer
 slug: 80-days
 runner: wine
+year: 2015
 
 script:
   files:

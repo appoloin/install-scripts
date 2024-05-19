@@ -3,7 +3,8 @@ game_slug: system-shock-enhanced-edition
 version: Good Old Games Installer
 slug: system-shock-enhanced-edition
 runner: wine
- 
+year: 2015
+
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/System Shock Enhanced Edition/sshock.exe

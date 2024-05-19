@@ -3,6 +3,7 @@ game_slug: fate-the-cursed-king
 version: Good Old Games Installer
 slug: fate-the-cursed-king
 runner: wine
+year: 2011
 
 script:
   game:

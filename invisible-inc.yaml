@@ -3,6 +3,7 @@ game_slug:  invisible-inc
 version: Good Old Games Installer
 slug: invisible-inc_INSTALLER
 runner: wine
+year: 2015
 
 script:
   game:

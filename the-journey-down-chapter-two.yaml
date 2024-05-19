@@ -3,6 +3,7 @@ game_slug: the-journey-down-chapter-two
 version: Good Old Games Installer
 slug: the-journey-down-chapter-two
 runner: wine
+year: 2014
 
 script:
   game: 

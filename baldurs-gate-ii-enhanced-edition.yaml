@@ -3,6 +3,7 @@ game_slug: baldurs-gate-ii-enhanced-edition
 version: Good Old Games Installer
 slug:  baldurs-gate-ii-enhanced-edition
 runner: wine
+year: 2013
 
 script:
   game:

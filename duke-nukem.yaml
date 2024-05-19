@@ -3,7 +3,7 @@ game_slug: duke-nukem
 version: Good Old Games Installer
 slug: Duke-Nukem-1
 runner: dosbox
-
+year: 2012
 
 
 script:

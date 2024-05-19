@@ -3,6 +3,7 @@ game_slug:  dont-starve
 version: Good Old Games Installer
 slug:  dont-starve
 runner: wine
+year: 2013
 
 script:
   game:

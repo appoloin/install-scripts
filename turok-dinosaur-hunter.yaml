@@ -3,6 +3,7 @@ game_slug: turok-dinosaur-hunter
 version: Good Old Games Installer
 slug: turok-dinosaur-hunter
 runner: wine
+year: 2015
 
 script:
   game:

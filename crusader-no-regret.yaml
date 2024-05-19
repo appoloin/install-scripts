@@ -3,6 +3,7 @@ game_slug: crusader-no-regret
 version: Good Old Games Installer
 slug:  crusader-no-regret
 runner: dosbox
+year: 2011
 
 script:
   files:

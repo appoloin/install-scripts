@@ -3,6 +3,7 @@ game_slug: hand-of-fate
 version: Good Old Games Installer
 slug: hand-of-fate
 runner: wine
+year: 2015
 
 script:
   game:

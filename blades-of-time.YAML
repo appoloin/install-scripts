@@ -3,6 +3,7 @@ game_slug: blades-of-time
 version: Good Old Games Installer
 slug: blades-of-time
 runner: wine
+year: 2012
 
 script:
   game:

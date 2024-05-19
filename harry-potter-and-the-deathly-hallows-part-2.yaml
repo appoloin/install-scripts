@@ -3,6 +3,7 @@ game_slug: harry-potter-and-the-deathly-hallows-part-2
 version: Windows Installer
 slug: harry-potter-and-the-deathly-hallows-part-2
 runner: wine
+year: 2011
 
 script:
   game:

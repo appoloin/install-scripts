@@ -3,6 +3,7 @@ game_slug: ankh-anniversary-edition
 version: Good Old Games Installer
 slug: ankh-anniversary-edition
 runner: wine
+year: 2015
 
 script:
   game:

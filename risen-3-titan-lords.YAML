@@ -3,6 +3,7 @@ game_slug: risen-3-titan-lords
 version: Good Old Games Installer
 slug: risen-3-titan-lords
 runner: wine
+year: 2014
 
 script:
   game:

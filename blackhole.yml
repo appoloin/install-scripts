@@ -3,6 +3,7 @@ game_slug: blackhole
 version: Good Old Games Installer
 slug: blackhole
 runner: wine
+year: 2015
 
 script:
   game: 

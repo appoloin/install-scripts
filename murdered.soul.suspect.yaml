@@ -3,7 +3,8 @@ game_slug: murdered-soul-suspect
 version: Good Old Games Installer
 slug:  murdered-soul-suspect
 runner: wine
- 
+year: 2014
+
 script:
   game:
     exe: $GAMEDIR/drive_c/Program Files (x86)/Eidos Interactive/Murdered - Soul Suspect/Binaries/Win64/Murdered.exe

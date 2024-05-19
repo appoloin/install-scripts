@@ -3,7 +3,8 @@ game_slug: dead-island
 version: Windows Installer
 slug: dead-island
 runner: wine
- 
+year: 2011
+
 script:
   game:
     exe: "$GAMEDIR/drive_c/Program Files (x86)/Games/Dead.Island.Game.of.The.Year.Edition/DeadIslandGame.exe"

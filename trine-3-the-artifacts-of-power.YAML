@@ -3,6 +3,7 @@ game_slug:  trine-3-the-artifacts-of-power
 version: Good Old Games Installer
 slug: trine-3-the-artifacts-of-power
 runner: wine
+year: 2015
 
 script:
   game:
