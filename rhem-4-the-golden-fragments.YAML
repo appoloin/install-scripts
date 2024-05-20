@@ -3,6 +3,7 @@ game_slug: rhem-4-the-golden-fragments
 version: Windows Installer
 slug: rhem-4-the-golden-fragments
 runner: wine
+year: 2016
 
 script:
   game:

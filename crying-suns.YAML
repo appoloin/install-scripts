@@ -3,6 +3,7 @@ game_slug: crying-suns
 version: Good Old Games Installer
 slug: crying-suns
 runner: wine
+year: 2019
 
 script:
   game:

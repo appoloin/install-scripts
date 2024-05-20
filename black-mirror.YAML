@@ -3,7 +3,7 @@ game_slug: the-black-mirror
 version: Good Old Games Installer
 slug:  The_Black_Mirror
 runner: wine
-
+year: 2017
 
 script:
   game:

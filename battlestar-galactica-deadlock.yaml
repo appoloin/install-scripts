@@ -3,6 +3,7 @@ game_slug: battlestar-galactica-deadlock
 version: Good Old Games Installer
 slug: battlestar-galactica-deadlock
 runner: wine
+year: 2017
  
 script:
   game:

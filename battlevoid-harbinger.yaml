@@ -3,6 +3,7 @@ game_slug:  battlevoid-harbinger
 version: Good Old Games Installer
 slug: battlevoid-harbinger
 runner: wine
+year: 2016
 
 script:
   game:

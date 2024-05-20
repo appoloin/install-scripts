@@ -3,6 +3,7 @@ game_slug: hollow-knight
 version: Good Old Games Installer
 slug: hollow-knight
 runner: wine
+year: 2017
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: tangledeep
 version: Good Old Games Installer
 slug: tangledeep
 runner: wine
+year: 2018
 
 script:
   game: 

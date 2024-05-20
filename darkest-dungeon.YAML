@@ -3,6 +3,7 @@ game_slug:  darkest-dungeon
 version: Good Old Games Installer
 slug: darkest-dungeon
 runner: wine
+year: 2016
 
 script:
   game:

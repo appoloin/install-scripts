@@ -3,6 +3,7 @@ game_slug: deponia-doomsday
 version: Good Old Games Installer
 slug: deponia-doomsday
 runner: wine
+year: 2016
 
 script:
   game:

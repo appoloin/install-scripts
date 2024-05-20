@@ -3,6 +3,7 @@ game_slug: rhem-i-se-the-mysterious-land
 version: Windows Installer
 slug: rhem-i-se-the-mysterious-land
 runner: wine
+year: 2017
 
 script:
   game:

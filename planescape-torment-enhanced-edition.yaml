@@ -3,6 +3,7 @@ game_slug: planescape-torment-enhanced-edition
 version: Good Old Games Installer
 slug: planescape-torment-enhanced-edition
 runner: wine
+year: 2017
 
 script:
   game: 

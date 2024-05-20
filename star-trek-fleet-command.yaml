@@ -3,6 +3,7 @@ game_slug: star-trek-fleet-command
 version: Good Old Games Installer
 slug: star-trek-fleet-command
 runner: wine
+year: 2016
  
 script:
   game:

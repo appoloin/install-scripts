@@ -3,6 +3,7 @@ game_slug: everspacetm
 version: Good Old Games Installer
 slug: everspacetm
 runner: wine
+year: 2017
  
 script:
   game:

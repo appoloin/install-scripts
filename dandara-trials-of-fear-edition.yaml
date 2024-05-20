@@ -3,6 +3,7 @@ game_slug: dandara-trials-of-fear-edition
 version: Good Old Games Installer
 slug:  dandara-trials-of-fear-edition
 runner: wine
+year: 2018
 
 script:
   game:

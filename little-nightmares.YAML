@@ -3,6 +3,7 @@ game_slug: little-nightmares
 version: Good Old Games Installer
 slug: little-nightmares
 runner: wine
+year: 2017
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: saboteur
 version: Good Old Games Installer
 slug: saboteur
 runner: wine
+yar: 2018
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: the-bards-tale-trilogy
 version: Good Old Gamses Installer
 slug: the-bards-tale-trilogy
 runner: wine
+year: 2018
 
 script:
   game: 

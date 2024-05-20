@@ -3,6 +3,7 @@ game_slug: thronebreaker-the-witcher-tales
 version: Good Old Games Installer
 slug: thronebreaker-the-witcher-tales
 runner: wine
+year: 2018
 
 script:
   game: 

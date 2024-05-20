@@ -3,6 +3,7 @@ game_slug:  duskers
 version: Good Old Games Installer
 slug: duskers
 runner: wine
+year: 2016
 
 script:
   game:

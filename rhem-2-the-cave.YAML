@@ -3,6 +3,7 @@ game_slug: rhem-2-the-cave
 version: Windows Installer
 slug: rhem-2-the-cave
 runner: wine
+year: 2018
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: blood-fresh-supply
 version: Good Old Games Installer
 slug: blood-fresh-supply
 runner: wine
+year: 2019
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: serial-cleaner
 version: Windows Installer
 slug: serial-cleaner
 runner: wine
+year: 2017
 
 script:
   game:

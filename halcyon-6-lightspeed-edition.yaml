@@ -3,6 +3,7 @@ game_slug: halcyon-6-lightspeed-edition
 version: Good Old Games Installer
 slug: halcyon-6-lightspeed-edition
 runner: wine
+year: 2017
 
 script:
   game: 

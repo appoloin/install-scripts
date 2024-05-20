@@ -3,6 +3,7 @@ game_slug: oxygen-not-included
 version: Good Old Games Installer
 slug: oxygen-not-included
 runner: wine
+year: 2017
 
 script:
   game: 

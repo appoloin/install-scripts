@@ -3,6 +3,7 @@ game_slug: darksiders-warmastered-edition
 version: Good Old Games Installer
 slug: darksiders-warmastered-edition
 runner: wine
+year: 2016
 
 script:
   game:

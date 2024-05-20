@@ -3,6 +3,7 @@ game_slug: night-in-the-woods
 version: Good Old Games Installer
 slug: night-in-the-woods
 runner: wine
+year: 2017
 
 script:
   game: 

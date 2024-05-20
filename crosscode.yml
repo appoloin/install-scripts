@@ -3,6 +3,7 @@ game_slug: crosscode
 version: Good Old Games Installer
 slug: crosscode
 runner: wine
+year: 2018
 
 script:
   game:

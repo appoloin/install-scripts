@@ -3,6 +3,7 @@ game_slug: alwas-awakening
 version: Good Old Games Installer
 slug:  alwas-awakening
 runner: wine
+year: 2017
 
 script:
   game:

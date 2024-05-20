@@ -3,6 +3,7 @@ game_slug: starcrawlers
 version: Good Old Games Installer
 slug: starcrawlers
 runner: wine
+year: 2017
 
 script:
   game: 

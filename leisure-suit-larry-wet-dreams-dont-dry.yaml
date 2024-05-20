@@ -3,6 +3,7 @@ game_slug: leisure-suit-larry-wet-dreams-dont-dry
 version: Good Old Games Installer
 slug: leisure-suit-larry-wet-dreams-dont-dry_INSTALLER
 runner: wine
+year: 2018
 
 script:
   game:

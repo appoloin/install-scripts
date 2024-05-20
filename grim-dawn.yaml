@@ -3,6 +3,7 @@ game_slug: grim-dawn
 version: Good Old Games Installer
 slug: grim-dawn
 runner: wine
+year: 2016
 
 script:
   game:

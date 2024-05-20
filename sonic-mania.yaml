@@ -3,6 +3,7 @@ game_slug: sonic-mania
 version: Windows Installer
 slug: sonic-mania
 runner: wine
+year: 2017
 
 script:
   game: 

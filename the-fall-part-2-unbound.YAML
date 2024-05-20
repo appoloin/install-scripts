@@ -3,6 +3,7 @@ game_slug: the-fall-part-2-unbound
 version: Good Old Games Installer
 slug: the-fall-part-2-unbound
 runner: wine
+year: 2017
 
 script:
   game:
