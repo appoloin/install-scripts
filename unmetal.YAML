@@ -3,6 +3,7 @@ game_slug: unmetal
 version: Good Old Games Installer
 slug: unmetal
 runner: wine
+year: 2021
 
 script:
   game:

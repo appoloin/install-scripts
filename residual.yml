@@ -3,6 +3,7 @@ game_slug: residual
 version: Good Old Games Installer
 slug:  residual
 runner: wine
+year: 2021
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: neon-abyss
 version: Good Old Games Installer
 slug: neon-abyss
 runner: wine
+year: 2020
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: inferno-beyond-the-7th-circle
 version: Good Old Games Installer
 slug: inferno-beyond-the-7th-circle
 runner: wine
+year: 2021
 
 script:
   game:

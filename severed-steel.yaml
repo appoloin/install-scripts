@@ -3,6 +3,7 @@ game_slug: severed-steel
 version: Good Old Games Installer
 slug: severed-steel
 runner: wine
+year: 2021
 
 script:
   game:

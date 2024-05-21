@@ -3,6 +3,7 @@ game_slug: unbound-worlds-apart
 version: Good Old Games Installer
 slug: unbound-worlds-apart
 runner: wine
+year: 2021
 
 script:
   game:

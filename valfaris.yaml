@@ -3,6 +3,7 @@ game_slug: valfaris
 version: Good Old Games Installer
 slug: valfaris
 runner: wine
+year: 2019
 
 script:
   game:

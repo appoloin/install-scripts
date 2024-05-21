@@ -3,6 +3,7 @@ game_slug: south-of-the-circle
 version: Good Old Games Installer
 slug: south-of-the-circle
 runner: wine
+year: 2020
 
 script:
   files:

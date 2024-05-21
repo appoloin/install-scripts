@@ -3,6 +3,7 @@ game_slug: lacuna
 version: Windows Installer
 slug: lacuna
 runner: wine
+year: 2021
 
 script:
   game:

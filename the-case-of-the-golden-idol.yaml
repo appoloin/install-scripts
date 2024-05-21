@@ -3,7 +3,8 @@ game_slug: the-case-of-the-golden-idol
 version: Good Old Games Installer
 slug: the-case-of-the-golden-idol
 runner: wine
- 
+year: 2022
+
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/The Case of the Golden Idol/goldenidol.exe

@@ -3,6 +3,7 @@ game_slug: tales-of-the-neon-sea
 version: Good Old Games Installer
 slug: tales-of-the-neon-sea
 runner: wine
+year: 2019
 
 script:
   game:

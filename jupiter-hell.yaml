@@ -3,6 +3,7 @@ game_slug: jupiter-hell
 version: Good Old Games Installer
 slug: jupiter-hell
 runner: wine
+year: 2021
 
 script:
   game:

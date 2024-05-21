@@ -3,6 +3,7 @@ game_slug:  loop-hero
 version: Good Old Games Installer
 slug: loop-hero
 runner: wine
+year: 2021
 
 script:
   game:

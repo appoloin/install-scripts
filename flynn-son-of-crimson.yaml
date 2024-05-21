@@ -3,6 +3,7 @@ game_slug: flynn-son-of-crimson
 version: Good Old Games Installer
 slug: flynn-son-of-crimson
 runner: wine
+year: 2021
 
 script:
   game:

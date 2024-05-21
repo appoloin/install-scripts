@@ -3,6 +3,7 @@ game_slug: scarlet-hood-and-the-wicked-wood
 version: Good Old Games Installer
 slug: scarlet-hood-and-the-wicked-wood
 runner: wine
+year: 2021
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: paradise-killer
 version: Good Old Games Installer
 slug: paradise-killer
 runner: wine
+year: 2020
 
 script:
   files:

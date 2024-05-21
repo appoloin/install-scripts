@@ -3,6 +3,7 @@ game_slug: katana-zero
 version: Good Old Games Installer
 slug: katana-zero
 runner: wine
+year: 2019
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: saboteur-sio
 version: Good Old Games Installer
 slug: saboteur-sio
 runner: wine
+year: 2020
 
 script:
   game:

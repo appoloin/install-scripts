@@ -3,6 +3,7 @@ game_slug: windbound
 version: Good Old Games Installer
 slug: windbound
 runner: wine
+year: 2020
 
 script:
   game:

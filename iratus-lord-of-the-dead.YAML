@@ -3,6 +3,7 @@ game_slug: iratus-lord-of-the-dead
 version: Good Old Games Installer
 slug:  iratus-lord-of-the-dead
 runner: wine
+year: 2020
 
 script:
   game:

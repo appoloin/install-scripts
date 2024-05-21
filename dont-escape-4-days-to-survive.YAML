@@ -3,6 +3,7 @@ game_slug: dont-escape-4-days-to-survive
 version: Good Old Games Installer
 slug: dont-escape-4-days-to-survive
 runner: wine
+year: 2019
 
 script:
   game:

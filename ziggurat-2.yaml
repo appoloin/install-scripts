@@ -3,6 +3,7 @@ game_slug: ziggurat-2
 version: Good Old Games Installer
 slug: ziggurat-2
 runner: wine
+year: 2020
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: it-lurks-below
 version: Good Old Games Installer
 slug: it-lurks-below
 runner: wine
+year: 2019
 
 script:
   game:

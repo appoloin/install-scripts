@@ -3,6 +3,7 @@ game_slug: alwas-legacy
 version: Good Old Games  Installer
 slug:  alwas-legacy
 runner: wine
+year: 2020
 
 script:
   game:

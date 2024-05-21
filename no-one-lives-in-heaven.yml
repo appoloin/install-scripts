@@ -3,6 +3,7 @@ game_slug: no-one-lives-in-heaven
 version: Good Old Games Installer
 slug:  no-one-lives-in-heaven
 runner: wine
+year: 2021
 
 script:
   game:

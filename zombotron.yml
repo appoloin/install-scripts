@@ -3,6 +3,7 @@ game_slug: zombotron
 version: Good Old Games Installer
 slug: zombotron
 runner: wine
+year: 2019
 
 script:
   game:

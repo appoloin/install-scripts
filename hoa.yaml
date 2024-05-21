@@ -3,6 +3,7 @@ game_slug: hoa
 version: Good Old Games Installer
 slug: hoa
 runner: wine
+year: 2021
 
 script:
   game:

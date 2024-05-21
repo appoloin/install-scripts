@@ -3,6 +3,7 @@ game_slug: legends-of-murder-collection
 version: Good Old Games Installer
 slug: legends-of-murder-collection
 runner: dosbox
+year: 2021
 
 script:
   files:

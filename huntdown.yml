@@ -3,6 +3,7 @@ game_slug: huntdown
 version: Good Old Games Installer
 slug: huntdown
 runner: wine
+year: 2020
 
 script:
   game:

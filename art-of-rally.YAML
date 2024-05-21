@@ -3,6 +3,7 @@ game_slug: art-of-rally
 version: Good Old Games Installer
 slug: art-of-rally
 runner: wine
+year: 2020
 
 script:
   game:

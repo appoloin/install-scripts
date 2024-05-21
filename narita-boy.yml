@@ -3,6 +3,7 @@ game_slug: narita-boy
 version: Good Old Games Installer
 slug: narita-boy
 runner: wine
+year: 2021
 
 script:
   game:

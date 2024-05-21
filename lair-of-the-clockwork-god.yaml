@@ -3,6 +3,7 @@ game_slug:  lair-of-the-clockwork-god
 version: Good Old Games Installer
 slug: lair-of-the-clockwork-god_INSTALLER
 runner: wine
+year: 2020
 
 script:
   game:

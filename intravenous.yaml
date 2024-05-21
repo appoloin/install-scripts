@@ -3,6 +3,7 @@ game_slug: intravenous
 version: Good Old Game Installer
 slug: intravenous
 runner: wine
+year: 2021
 
 script:
   game:
