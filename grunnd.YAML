@@ -3,6 +3,7 @@ game_slug: grunnd
 version: Good Old Games Installer
 slug: grunnd
 runner: wine
+year: 2023
 
 script:
   game:

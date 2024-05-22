@@ -3,6 +3,7 @@ game_slug: norco-special-edition
 version: Good Old Games Installer
 slug: norco-special-edition
 runner: wine
+year: 2022
 
 script:
   game:

@@ -3,6 +3,7 @@ game_slug: countdown
 version: Good Old Games Installer
 slug: countdown
 runner: dosbox
+year: 1990
 
 script:
   files:

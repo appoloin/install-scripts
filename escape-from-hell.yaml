@@ -3,7 +3,7 @@ game_slug: escape-from-hell
 version: DOS Installer
 slug: escape-from-hell
 runner: scummvm
-
+year: 1990
  
 script:
   files:

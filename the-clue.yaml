@@ -3,7 +3,7 @@ game_slug: the-clue
 version: DOS
 slug: the-clue
 runner: dosbox
-
+year: 1994
 
 script:
   game:

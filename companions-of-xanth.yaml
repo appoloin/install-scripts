@@ -3,6 +3,7 @@ game_slug: companions-of-xanth
 version: DOS
 slug: companions-of-xanth
 runner: dosbox
+year: 1993
 
 script:
   files:

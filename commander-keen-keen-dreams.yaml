@@ -3,7 +3,7 @@ game_slug: commander-keen-keen-dreams
 version: DOS
 slug: commander-keen-keen-dreams
 runner: linux
-
+year: 1991
 
 script:
   files:

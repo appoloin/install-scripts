@@ -3,6 +3,7 @@ game_slug: eastern-mind-the-lost-souls-of-tong-nou
 version: Win3.11 Installer
 slug: eastern-mind-the-lost-souls-of-tong-nou
 runner: scummvm
+year: 1994
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug: the-adventures-of-willy-beamish
 version: Good Old Games Installer
 slug: the-adventures-of-willy-beamish
 runner: dosbox
+year: 1991
 
 script:
   files:

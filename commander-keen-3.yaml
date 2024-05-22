@@ -3,7 +3,7 @@ game_slug: commander-keen-3
 version: DOS
 slug: commander-keen-3
 runner: linux
-
+year: 1990
 
 script:
   files:

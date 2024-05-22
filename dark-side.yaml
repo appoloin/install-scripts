@@ -3,6 +3,7 @@ game_slug: dark-side
 version: DOS
 slug: dark-side
 runner: scummvm
+year: 1988
 
 script:
   files:

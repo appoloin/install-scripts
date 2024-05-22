@@ -3,6 +3,7 @@ game_slug: gateway-ii-homeworld
 version: DOS
 slug: gateway-ii-homeworld
 runner: dosbox
+year: 1993
 
 script:
   files:

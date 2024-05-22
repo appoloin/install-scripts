@@ -3,6 +3,7 @@ game_slug: rise-of-the-dragon
 version: Good Old Games Installer
 slug: rise-of-the-dragon
 runner: dosbox
+year: 1990
 
 script:
   files:

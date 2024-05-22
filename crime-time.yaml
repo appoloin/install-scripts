@@ -3,7 +3,7 @@ game_slug: crime-time
 version: DOS
 slug: crime-time
 runner: dosbox
-
+year: 1990
  
 script:
   files:

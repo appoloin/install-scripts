@@ -3,6 +3,7 @@ game_slug: castle-master-ii
 version: DOS
 slug:   castle-master-ii
 runner: dosbox
+year: 1990
 
 script:
   files:

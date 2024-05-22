@@ -3,6 +3,7 @@ game_slug: rome-pathway-to-power
 version: DOS
 slug:   rome-pathway-to-power
 runner: dosbox
+year: 1993
 
 script:
   files:

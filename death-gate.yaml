@@ -3,7 +3,7 @@ game_slug: death-gate
 version: DOS Installer
 slug: death-gate
 runner: dosbox
-
+year: 1994
 
 
 script:

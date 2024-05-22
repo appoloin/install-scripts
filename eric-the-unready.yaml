@@ -3,7 +3,7 @@ game_slug: eric-the-unready
 version: DOS
 slug: eric-the-unready
 runner: dosbox
-
+year: 1993
 
 script:
   files:

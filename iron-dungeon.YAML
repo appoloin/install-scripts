@@ -3,6 +3,7 @@ game_slug: iron-dungeon
 version: Good Old Games Installer
 slug:  iron-dungeon
 runner: wine
+year: 2022
 
 script:
   game:

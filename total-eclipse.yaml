@@ -3,6 +3,7 @@ game_slug: total-eclipse
 version: DOS
 slug:   total-eclipse
 runner: dosbox
+year: 1988
 
 script:
   files:

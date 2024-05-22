@@ -3,6 +3,7 @@ game_slug: call-of-cthulhu-shadow-of-the-comet
 version: Good Old Games Installer
 slug: call-of-cthulhu-shadow-of-the-comet
 runner: dosbox
+year: 1993
 
 script:
   files:

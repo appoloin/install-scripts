@@ -3,6 +3,7 @@ game_slug: curse-of-enchantia
 version: DOS
 slug: curse-of-enchantia
 runner: dosbox
+year: 1992
 
 script:
   files:

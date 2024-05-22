@@ -3,6 +3,7 @@ game_slug: return-of-the-phantom
 version: Good Old Games Installer 
 slug: return-of-the-phantom
 runner: dosbox
+year: 1993
 
 script:
   files:

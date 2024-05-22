@@ -3,6 +3,7 @@ game_slug: undetected
 version: Good Old Games Installer
 slug: undetected
 runner: wine
+year: 2022
 
 script:
   game:

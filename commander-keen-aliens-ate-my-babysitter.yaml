@@ -3,7 +3,7 @@ game_slug: commander-keen-aliens-ate-my-babysitter
 version: DOS
 slug: commander-keen-aliens-ate-my-babysitter
 runner: dosbox
-
+year: 1991
 
 script:
   files:

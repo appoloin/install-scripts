@@ -3,6 +3,7 @@ game_slug: lula-the-sexy-empire
 version: Good old Games Installer
 slug: lula-the-sexy-empire
 runner: wine
+year: 1998
 
 script:
   game:

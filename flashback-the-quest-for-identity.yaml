@@ -3,7 +3,7 @@ game_slug: flashback-the-quest-for-identity
 version: DOS
 slug:  flashback-the-quest-for-identity
 runner: linux
-
+year: 1992
  
 script:
   files:

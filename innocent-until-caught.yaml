@@ -3,7 +3,7 @@ game_slug: innocent-until-caught
 version: Dos Installer
 slug:  innocent-until-caught
 runner: dosbox
-
+year: 1994
 
 
 script:

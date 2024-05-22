@@ -3,7 +3,7 @@ game_slug: commander-keen-5-the-armageddon-machine
 version: DOS
 slug: commander-keen-5-the-armageddon-machine
 runner: linux
-
+year: 1991
 
 script:
   files:

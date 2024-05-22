@@ -3,6 +3,7 @@ game_slug: noctropolis
 version: Good Old Games Installer
 slug: noctropolis
 runner: wine
+year: 1994
 
 script:
   files:

@@ -3,7 +3,7 @@ game_slug: timequest
 version: DOS
 slug: timequest
 runner: dosbox
-
+year: 1991
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug: lord-avalot-d'argent
 version: DOS Installer
 slug:   lord-avalot-d'argent
 runner: dosbox
+year: 1994
 
 script:
   files:

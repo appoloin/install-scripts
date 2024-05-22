@@ -3,6 +3,7 @@ game_slug: inca-ii
 version: DOS Installer 
 slug: inca-ii
 runner: dosbox
+year: 1994
 
 script:
     files:

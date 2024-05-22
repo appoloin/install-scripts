@@ -3,6 +3,7 @@ game_slug:  ultima-viii-gold-edition
 version: Good Old Games Installer
 slug: ultima-viii-gold-edition
 runner: scummvm
+year: 1994
 
 script:
   files:

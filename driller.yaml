@@ -3,6 +3,7 @@ game_slug: driller
 version: DOS
 slug: driller
 runner: scummvm
+year: 1987
 
 script:
   files:

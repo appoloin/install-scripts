@@ -3,6 +3,7 @@ game_slug: the-last-dynasty
 version: DOS/Win311
 slug: the-last-dynasty
 runner: dosbox
+year: 1994
 
 script:
   files:

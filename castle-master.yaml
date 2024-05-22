@@ -3,6 +3,7 @@ game_slug: castle-master
 version: DOS
 slug:   castle-master
 runner: dosbox
+year: 1990
 
 script:
   files:

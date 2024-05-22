@@ -3,6 +3,7 @@ game_slug: residents-freak-show
 version: DOS/Win311
 slug: residents-freak-show
 runner: dosbox
+year: 1994
 
 script:
   files:

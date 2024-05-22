@@ -4,7 +4,7 @@ game_slug: the-big-red-adventure
 version: DOS Installer
 slug: the-big-red-adventure
 runner: dosbox
-
+year: 1995
 
 script:
   files:

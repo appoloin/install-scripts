@@ -3,6 +3,7 @@ game_slug: la-law
 version: DOS
 slug:  la-law
 runner: dosbox
+year: 1992
 
 script:
   files:

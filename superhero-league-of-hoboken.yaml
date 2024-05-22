@@ -3,7 +3,7 @@ game_slug: superhero-league-of-hoboken
 version: DOS Installer
 slug: superhero-league-of-hoboken
 runner: dosbox
-
+year: 1994
 
 
 script:

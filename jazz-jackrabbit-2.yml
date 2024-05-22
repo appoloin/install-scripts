@@ -3,6 +3,7 @@ game_slug: jazz-jackrabbit-2
 version: Good Old Games Installer
 slug: jazz-jackrabbit-2
 runner: linux
+year: 1994
 
 script:
   files:

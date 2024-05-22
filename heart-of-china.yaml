@@ -3,7 +3,7 @@ game_slug: heart-of-china
 version: Good Old Games Installer
 slug:  heart-of-china
 runner: dosbox
-
+year: 1991
 
 
 script:

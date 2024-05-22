@@ -3,7 +3,7 @@ game_slug: alice-an-interactive-museum
 version: Windows Installer
 slug: alice-an-interactive-museum
 runner: scummvm
-
+year: 1994
 
 script:
   files:

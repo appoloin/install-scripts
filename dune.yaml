@@ -3,6 +3,7 @@ game_slug: dune
 version: DOS
 slug: dune
 runner: dosbox
+year: 1992
 
 script:
   files:

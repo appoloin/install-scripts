@@ -3,6 +3,7 @@ game_slug: bad-mojo
 version: DOS/Win311
 slug: bad-mojo
 runner: dosbox
+year: 1996
 
 script:
   files:

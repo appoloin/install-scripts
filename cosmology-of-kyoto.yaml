@@ -3,6 +3,7 @@ game_slug: cosmology-of-kyoto
 version: DOS/Win311
 slug: cosmology-of-kyoto
 runner: dosbox
+year: 1993
 
 script:
   files:

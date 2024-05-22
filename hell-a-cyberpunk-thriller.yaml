@@ -3,7 +3,7 @@ game_slug: hell-a-cyberpunk-thriller
 version: DOS Installer
 slug: hell-a-cyberpunk-thriller
 runner: dosbox
-
+year: 1994
 
 script:
   game:

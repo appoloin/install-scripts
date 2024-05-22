@@ -3,6 +3,7 @@ game_slug: the-adventures-of-robin-hood
 version: DOS
 slug: the-adventures-of-robin-hood
 runner: dosbox
+year: 1991
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug: les-manley-in-search-for-the-king
 version: Good Old Games Installer
 slug: les-manley-in-search-for-the-king
 runner: dosbox
+year: 1990
 
 script:
   files:

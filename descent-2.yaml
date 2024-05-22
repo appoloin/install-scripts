@@ -3,7 +3,7 @@ game_slug: descent-2
 version: Good Old Games Installer
 slug: descent-2
 runner: linux
-
+year: 1996
 
 script:
   files:

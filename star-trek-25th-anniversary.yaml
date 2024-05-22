@@ -3,7 +3,7 @@ game_slug: star-trek-25th-anniversary
 version: DOS
 slug: star-trek-25th-anniversary
 runner: dosbox
-
+year: 1992
 
 
 script:

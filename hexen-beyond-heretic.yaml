@@ -3,7 +3,7 @@ game_slug: hexen-beyond-heretic
 version: Good Old Games Installer
 slug: hexen-beyond-heretic
 runner: linux
-
+year: 1994
 
 script:
   files:

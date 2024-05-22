@@ -3,7 +3,7 @@ game_slug: the-immortal
 version: DOS
 slug: the-immortal
 runner: dosbox
-
+year: 1993
 
 script:
   files:

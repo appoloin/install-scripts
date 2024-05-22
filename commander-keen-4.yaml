@@ -3,7 +3,7 @@ game_slug: commander-keen-4-secret-of-the-oracle
 version: DOS
 slug: commander-keen-4-secret-of-the-oracle
 runner: linux
-
+year: 1991
 
 script:
   files:

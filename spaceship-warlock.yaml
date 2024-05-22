@@ -3,7 +3,7 @@ game_slug: spaceship-warlock
 version: Windows Installer
 slug: spaceship-warlock
 runner: scummvm
-
+year: 1991
 
 script:
   files:

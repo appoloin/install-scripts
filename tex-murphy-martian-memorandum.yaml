@@ -3,7 +3,7 @@ game_slug: tex-murphy-martian-memorandum
 version: Good Old Games Installer
 slug:  tex-murphy-martian-memorandum
 runner: dosbox
-
+year: 1991
 
 script:
   files:

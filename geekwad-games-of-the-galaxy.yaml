@@ -3,6 +3,7 @@ game_slug: geekwad-games-of-the-galaxy
 version: DOS
 slug:   geekwad-games-of-the-galaxy
 runner: dosbox
+year: 1993
 
 script:
   files:

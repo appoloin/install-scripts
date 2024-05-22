@@ -3,7 +3,7 @@ game_slug: l-zone
 version: Windows Installer
 slug: l-zone
 runner: scummvm
-
+year: 1993
 
 script:
   files:

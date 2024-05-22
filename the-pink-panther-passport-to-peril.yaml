@@ -3,6 +3,7 @@ game_slug: the-pink-panther-passport-to-peril
 version: DOS
 slug: the-pink-panther-passport-to-peril
 runner: scummvm
+year: 1988
 
 script:
   files:

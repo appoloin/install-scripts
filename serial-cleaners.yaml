@@ -3,6 +3,7 @@ game_slug: serial-cleaners
 version: Good Old Games Installer
 slug: serial-cleaners
 runner: wine
+year: 2022
 
 script:
   game:

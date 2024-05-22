@@ -3,6 +3,7 @@ game_slug: the-chaos-continuum
 version: DOS/Win311
 slug: the-chaos-continuum
 runner: dosbox
+year: 1994
 
 script:
   files:

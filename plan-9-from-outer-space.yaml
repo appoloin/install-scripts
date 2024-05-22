@@ -3,7 +3,7 @@ game_slug: plan-9-from-outer-space
 version: DOS
 slug: plan-9-from-outer-space
 runner: dosbox
-
+year: 1992
 
 
 script:

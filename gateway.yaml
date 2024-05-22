@@ -3,6 +3,7 @@ game_slug: gateway
 version: DOS
 slug: gateway
 runner: dosbox
+year: 1992
 
 script:
   files:

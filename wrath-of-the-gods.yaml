@@ -3,7 +3,7 @@ game_slug: wrath-of-the-gods
 version: Windows Installer
 slug:  wrath-of-the-gods
 runner: scummvm
-
+year: 1994
 
 script:
   files:
