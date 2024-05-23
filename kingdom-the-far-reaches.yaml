@@ -3,7 +3,7 @@ game_slug: Kingdom-the-far-reaches
 version: Windows Installer
 slug: Kingdom-the-far-reaches
 runner: scummvm
-
+year: 1995
 
 script:
   files:

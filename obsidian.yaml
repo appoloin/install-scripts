@@ -3,7 +3,7 @@ game_slug: obsidian
 version: Windows Installer
 slug: obsidian
 runner: scummvm
-
+year: 1997
 
 script:
   files:

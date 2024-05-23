@@ -3,7 +3,7 @@ game_slug: the-dark-eye
 version: Windows Installer
 slug:  the-dark-eye
 runner: scummvm
-
+year: 1995
 
 script:
   files:

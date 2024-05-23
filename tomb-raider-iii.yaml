@@ -3,6 +3,7 @@ game_slug: tomb-raider-iii
 version: Good Old Games Installer
 slug: tomb-raider-ii
 runner: wine
+year: 1998
 
 script:
   game: 

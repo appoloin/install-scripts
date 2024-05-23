@@ -3,6 +3,7 @@ game_slug: gothic
 version: Good Old Games Installer
 slug: gothic
 runner: wine
+year: 2001
 
 script:
   game: 

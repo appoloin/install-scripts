@@ -3,6 +3,7 @@ game_slug: nox
 version: Good Old Games Installer
 slug: nox
 runner: wine
+year: 2000
 
 script:
   game:

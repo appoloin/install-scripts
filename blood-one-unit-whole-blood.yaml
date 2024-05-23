@@ -3,6 +3,7 @@ game_slug: blood-one-unit-whole-blood
 version: Good Old Games Installer
 slug: blood-one-unit-whole-blood
 runner: linux
+year: 1998
 
 script:
   game:

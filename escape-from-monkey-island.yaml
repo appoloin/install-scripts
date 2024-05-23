@@ -3,6 +3,7 @@ game_slug: escape-from-monkey-island
 version: Good Old Games Installer
 slug:  escape-from-monkey-island
 runner: wine
+year: 2000
 
 script:
   files:

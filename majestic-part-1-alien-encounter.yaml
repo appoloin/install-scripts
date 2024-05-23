@@ -3,7 +3,7 @@ game_slug: majestic-part-i-alien-encounter
 version: Windows Installer
 slug: majestic-part-i-alien-encounter
 runner: scummvm
-
+year: 1995
 
 script:
   files:

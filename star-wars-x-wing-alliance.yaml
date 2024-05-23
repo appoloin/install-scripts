@@ -3,6 +3,7 @@ game_slug: star-wars-x-wing-alliance
 version: Good Old Games Installer
 slug: star-wars-x-wing-alliance
 runner: wine
+year: 1999
 
 script:
   game:

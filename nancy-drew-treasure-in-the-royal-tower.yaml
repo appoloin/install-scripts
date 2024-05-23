@@ -3,7 +3,7 @@ game_slug: nancy-drew-treasure-in-the-royal-tower
 version: Windows Installer
 slug: nancy-drew-treasure-in-the-royal-tower
 runner: scummvm
-
+year: 2001
 
 script:
   files:

@@ -3,7 +3,7 @@ game_slug: hexen-ii
 version: Good Old Games Installer
 slug: hexen-ii
 runner: linux
-
+year: 1997
 
 script:
   files:

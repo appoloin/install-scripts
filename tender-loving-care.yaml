@@ -3,7 +3,7 @@ game_slug: tender-loving-care
 version: Windows Installer
 slug: tender-loving-care
 runner: scummvm
-
+year: 1998
 
 script:
   files:

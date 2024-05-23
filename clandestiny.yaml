@@ -3,7 +3,7 @@ game_slug: clandestiny
 version: Windows Installer
 slug: clandestiny
 runner: scummvm
-
+year: 1996
 
 script:
   files:

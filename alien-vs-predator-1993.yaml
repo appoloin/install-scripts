@@ -3,6 +3,7 @@ game_slug: alien-vs-predator-1993
 version: Good Old Games Installer
 slug:  alien-vs-predator-1993
 runner: wine
+year: 2000
 
 script:
   game:

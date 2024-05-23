@@ -3,6 +3,7 @@ game_slug: chronomaster
 version: DOS Installer
 slug: chronomaster
 runner: dosbox
+year: 1995
 
 script:
   files:

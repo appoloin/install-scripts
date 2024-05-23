@@ -3,6 +3,7 @@ game_slug: descent-3
 version:  Good Old Games Installer
 slug: descent-3
 runner: wine
+year: 1999
 
 script:
   game:

@@ -3,7 +3,7 @@ game_slug: strife
 version: Windows Installer
 slug: strife
 runner: linux
-
+year: 1996
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug: the-elder-scrolls-ii-daggerfall
 version: Good Old Games Installer
 slug: the-elder-scrolls-ii-daggerfall
 runner: linux
+year: 1996
 
 script:
   files:

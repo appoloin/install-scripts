@@ -3,7 +3,7 @@ game_slug: nancy-drew-stay-tuned-for-danger
 version: Windows Installer
 slug: nancy-drew-stay-tuned-for-danger
 runner: scummvm
-
+year: 1999
 
 script:
   files:

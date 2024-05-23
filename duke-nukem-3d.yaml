@@ -3,7 +3,7 @@ game_slug: duke-nukem-3d
 version: Good Old Games Installer
 slug: duke-nukem-3d
 runner: linux
-
+year: 1996
 
 
 script:

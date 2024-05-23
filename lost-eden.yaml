@@ -3,6 +3,7 @@ game_slug: lost-eden
 version: Good Old Games Installer
 slug: lost-eden
 runner: dosbox
+year: 1995
 
 script:
   files:

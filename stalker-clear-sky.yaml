@@ -3,6 +3,7 @@ game_slug: stalker-clear-sky
 version: Good Old Games Installer
 slug:  stalker-clear-sky
 runner: wine
+year: 2008
 
 script:
   files:

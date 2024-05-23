@@ -3,6 +3,7 @@ game_slug: star-wars-jedi-knight-dark-forces-ii
 version: Good Old Games Installer
 slug: star-wars-jedi-knight-dark-forces-ii
 runner: wine
+year: 1997
 
 script:
   game:

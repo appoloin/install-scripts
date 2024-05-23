@@ -3,6 +3,7 @@ game_slug: might-and-magic-ii-gates-to-another-world
 version: Good Old Games Installer
 slug: might-and-magic-ii-gates-to-another-world
 runner: dosbox
+year: 1988
 
 script:
   files:

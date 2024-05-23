@@ -3,6 +3,7 @@ game_slug: sanitarium
 version: Good Old Games Installer
 slug: sanitarium
 runner: scummvm
+year: 1998
 
 script:
   game:

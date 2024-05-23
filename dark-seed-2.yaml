@@ -3,6 +3,7 @@ game_slug: dark-seed-2
 version: DOS/Win311
 slug: dark-seed-2
 runner: dosbox
+year: 1995
 
 script:
   files:

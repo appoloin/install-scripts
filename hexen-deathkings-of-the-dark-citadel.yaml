@@ -3,7 +3,7 @@ game_slug: hexen-deathkings-of-the-dark-citadel
 version: Good Old Games Installer
 slug: hexen-deathkings-of-the-dark-citadel
 runner: linux
-
+year: 1996
 
 script:
   files:

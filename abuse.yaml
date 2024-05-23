@@ -3,6 +3,7 @@ game_slug: abuse
 version: DOS Installer
 slug: abuse
 runner: dosbox
+year: 1996
 
 script:
   files:

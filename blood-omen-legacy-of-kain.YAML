@@ -3,6 +3,7 @@ game_slug: blood-omen-legacy-of-kain
 version: Good Old Games  Installer
 slug: blood-omen-legacy-of-kain
 runner: wine
+year: 1997
 
 script:
   game:

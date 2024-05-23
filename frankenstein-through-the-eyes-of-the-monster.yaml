@@ -3,6 +3,7 @@ game_slug: frankenstein-through-the-eyes-of-the-monster
 version: DOS/Win311
 slug: frankenstein-through-the-eyes-of-the-monster
 runner: dosbox
+year: 1995
 
 script:
   files:

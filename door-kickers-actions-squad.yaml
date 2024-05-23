@@ -3,6 +3,7 @@ game_slug: door-kickers-actions-squad
 version: Good Old Games Installer
 slug: door-kickers
 runner: wine
+year: 2018
 
 script:
   files:

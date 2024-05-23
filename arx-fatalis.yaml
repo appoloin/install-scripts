@@ -3,6 +3,7 @@ game_slug: arx-fatalis
 version: Good Old Games Installer
 slug:  arx-fatalis
 runner: linux
+year: 2002
 
 script:
   game: 

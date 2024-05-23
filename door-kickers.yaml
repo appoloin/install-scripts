@@ -3,6 +3,7 @@ game_slug: door-kickers
 version: Good Old Games Installer
 slug: door-kickers
 runner: wine
+year: 2014
 
 script:
   files:

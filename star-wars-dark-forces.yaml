@@ -3,7 +3,7 @@ game_slug: star-wars-dark-forces
 version: Good Old Games Installer
 slug: star-wars-dark-forces
 runner: wine
-
+year: 1995
 
 script:
   files:

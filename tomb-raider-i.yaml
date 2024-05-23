@@ -1,9 +1,9 @@
-name: Tomb Raider 1
+name: Tomb Raider I
 game_slug: tomb-raider-i
 version: Good Old Games Installer
 slug:  tomb-raider-i
 runner: wine
-
+year: 1996
 
 script:
   game:

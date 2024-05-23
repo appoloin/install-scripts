@@ -3,6 +3,7 @@ game_slug: faery-tale-adventure-ii-halls-of-the-dead
 version: Windows Installer
 slug: faery-tale-adventure-ii-halls-of-the-dead
 runner: scummvm
+year: 1997
 
 script:
   files:

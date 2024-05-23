@@ -3,7 +3,7 @@ game_slug: muppet-treasure-island
 version: Windows Installer
 slug: muppet-treasure-island 
 runner: scummvm
-
+year: 1996
 
 script:
   files:

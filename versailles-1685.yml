@@ -3,7 +3,7 @@ game_slug: versailles-1685
 version: Windows Installer
 slug: versailles-1685
 runner: scummvm
-
+year: 1996
 
 script:
   files:

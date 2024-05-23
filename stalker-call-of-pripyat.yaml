@@ -3,6 +3,7 @@ game_slug: stalker-call-of-pripyat
 version: Good Old Games Installer
 slug: stalker-call-of-pripyat
 runner: wine
+year: 2009
 
 script:
   files:

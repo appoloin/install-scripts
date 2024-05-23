@@ -3,7 +3,7 @@ game_slug: the-vampire-diaries
 version: Windows Installer
 slug:  the-vampire-diaries
 runner: scummvm
-
+year: 1996
 
 script:
   files:

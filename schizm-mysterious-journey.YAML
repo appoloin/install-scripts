@@ -3,6 +3,7 @@ game_slug:  schizm-mysterious-journey
 version: Good Old Games Installer
 slug: schizm-mysterious-journey
 runner: scummvm
+year: 2001
 
 script:
   game:

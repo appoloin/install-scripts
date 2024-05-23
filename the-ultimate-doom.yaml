@@ -3,7 +3,7 @@ game_slug:  the-ultimate-doom
 version: Good Old Games Installer
 slug:  the-ultimate-doom-installer
 runner: linux
-
+year: 1995
 
 script:
   files:

@@ -3,6 +3,7 @@ game_slug: the-pink-panther-hokus-pokus-pink
 version: Windows Installer
 slug: the-pink-panther-hokus-pokus-pink
 runner: scummvm
+year: 1998
 
 script:
   files:

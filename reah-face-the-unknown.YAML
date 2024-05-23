@@ -3,6 +3,7 @@ game_slug: reah-face-the-unknown
 version: Good Old Games Installer
 slug: reah-face-the-unknown
 runner: scummvm
+year: 1998
 
 script:
   game:

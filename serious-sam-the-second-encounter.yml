@@ -3,7 +3,7 @@ game_slug: serious-sam-the-second-encounter
 version: Good Old Games installer
 slug:  serious-sam-the-second-encounter
 runner: linux
-
+year: 2002
 
 script:
   files:

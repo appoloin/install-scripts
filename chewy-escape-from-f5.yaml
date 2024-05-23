@@ -3,7 +3,7 @@ game_slug: chewy-escape-from-f5
 version: DOS Installer
 slug: chewy-escape-from-f5
 runner: dosbox
-
+year: 1995
 
 
 script:

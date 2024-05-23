@@ -3,7 +3,7 @@ game_slug: nancy-drew-message-in-a-haunted-mansion
 version: Windows Installer
 slug: nancy-drew-message-in-a-haunted-mansion
 runner: scummvm
-
+year: 2000
 
 script:
   files:

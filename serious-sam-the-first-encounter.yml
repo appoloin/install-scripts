@@ -3,7 +3,7 @@ game_slug: serious-sam-the-first-encounter
 version: Good Old Games installer
 slug: serious-sam-the-first-encounter
 runner: linux
-
+year: 2001
 
 script:
   files:
