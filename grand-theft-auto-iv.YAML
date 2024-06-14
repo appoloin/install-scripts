@@ -1,0 +1,28 @@
+name: Grand Theft Auto IV
+game_slug: grand-theft-auto-iv
+version: Windows Installer
+slug: grand-theft-auto-iv
+runner: wine
+year: 2008
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Games/Grand Theft Auto IV Complete Edition/GTAIV/GTAIV.exe
+    prefix: $GAMEDIR
+
+  files:
+    - game: N/A:Select installer.
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        description: Installing
+        executable: $game
+        name: wineexec
+        prefix: $GAMEDIR
+

@@ -1,0 +1,34 @@
+name: Rise of the Tomb Raider
+game_slug: rise-of-the-tomb-raider
+version: Good Old Games Installer
+slug: rise-of-the-tomb-raider
+runner: wine
+year: 2016
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Games/Rise of the Tomb Raider 20 Year Celebration/ROTTR.exe
+    prefix: $GAMEDIR
+
+  files:
+    - game: N/A:Select installer.
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: win7 xact xact_x64 vcrun2015 
+        description: 'winetricks: Win7 XAct Vcrun2015'
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        description: Installing
+        executable: $game
+        name: wineexec
+        prefix: $GAMEDIR
+
