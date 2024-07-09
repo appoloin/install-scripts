@@ -10,7 +10,6 @@ script:
     - setup: N/A:Select setup file from GOG
 
   game:
-    arch: win32
     exe: "$GAMEDIR/drive_c/GOG Games/80 Days/80 Days.exe"
     prefix: $GAMEDIR
 
