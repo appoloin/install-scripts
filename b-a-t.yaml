@@ -101,7 +101,7 @@ script:
 
           [autoexec]
           
-            mount C "$GAMEDIR/HDD" -t dir
+            mount C "$GAMEDIR/drive_c" -t dir
 
             C:
 
@@ -110,4 +110,4 @@ script:
             BAT
 
             exit'
-        file: $GAMEDIR/BAT.conf
+        file: $GAMEDIR/play.conf
