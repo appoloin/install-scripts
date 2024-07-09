@@ -24,3 +24,7 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+  system:
+    pulse_latency: true
+
