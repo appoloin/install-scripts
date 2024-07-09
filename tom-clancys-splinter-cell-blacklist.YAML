@@ -3,11 +3,11 @@ game_slug: tom-clancys-splinter-cell-blacklist
 version: Good Old Games Installer
 slug:  tom-clancys-splinter-cell-blacklist
 runner: wine
+year: 2013
 
 script:
   game:
     exe: $GAMEDIR/drive_c/Games/Splinter Cell Blacklist Complete/Blacklist_Launcher.exe
-    arch: win32
     args: -offline -offline_mode
     prefix: $GAMEDIR
 
@@ -17,20 +17,17 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
     - task:
         app: vista xact
-        arch: win32
         name: winetricks
         prefix: $GAMEDIR
 
     - task:
         executable: $setup
-        arch: win32
         name: wineexec
         prefix: $GAMEDIR
 
