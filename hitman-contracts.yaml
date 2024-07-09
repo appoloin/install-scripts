@@ -1,4 +1,4 @@
-name: Hitman 2 - Contracts
+name: Hitman - Contracts
 game_slug: hitman-contracts
 version: Good Old Games Installer
 slug: hitman-contracts
@@ -7,7 +7,7 @@ year: 2004
 
 script:
   game:
-    exe: "$GAMEDIR/GOG Games/Hitman - Contracts/HitmanContracts.exe"
+    exe: "$GAMEDIR/drive_c/GOG Games/Hitman - Contracts/HitmanContracts.exe"
     prefix: $GAMEDIR
 
   files:
