@@ -36,10 +36,6 @@ script:
         file: $CACHE/download.sh
     - chmodx: $CACHE/download.sh
 
-    - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $game $GAMEDIR
-
     - task:
         name: create_prefix
         install_mono: false
