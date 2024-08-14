@@ -1,17 +1,17 @@
-name: F1 2013
-game_slug: f1-2013
+name: WRC 2 - FIA World Rally Championship 
+game_slug: wrc-2-fia-world-rally-championship
 version: Windows Installer
-slug: f1-2013
+slug: wrc-2-fia-world-rally-championship
 runner: wine
-year: 2013
+year: 2011
 
 script:
-  files:
-    - setup: N/A:Select setup file 
-
   game:
-    exe: "$GAMEDIR/drive_c/Program Files (x86)/F1 2013/F1_2013.exe"
+    exe:  $GAMEDIR/drive_c/Program Files (x86)/BlackBeanGames/WRC2/WRC2.exe
     prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the Setup.exe
 
   installer:
     - write_file:
@@ -36,6 +36,7 @@ script:
         file: $CACHE/download.sh
     - chmodx: $CACHE/download.sh
 
+
     - task:
         name: create_prefix
         install_mono: false
@@ -43,15 +44,40 @@ script:
         prefix: $GAMEDIR
 
     - task:
+        app: wmp10 mf
+        description: Installing additional components
+        name: winetricks
+        prefix: $GAMEDIR
+
+
+    - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
 
     - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR/drive_c/Program Files (x86)/BlackBeanGames/WRC2/"
+
+    - execute:
         file: $CACHE/download.sh
-        args: 1nnyzaHXotHGRVsMUFqDjodY9GF7QYkze $CACHE/patch.7z
+        args: 1LeCl7BHWer5LAI6kW2AI0ojWrPY-Fvpv $CACHE/update.7z
 
     - execute:
         file: 7z
-        args: x $CACHE/patch.7z -o"$GAMEDIR/drive_c/Program Files (x86)/F1 2013/" -ppassword -y
+        args: x $CACHE/patch.7z -o"$GAMEDIR/drive_c/Program Files (x86)/BlackBeanGames/WRC2/" -ppassword -y
+
+    - task:
+        executable: "$GAMEDIR/drive_c/Program Files (x86)/BlackBeanGames/WRC2/wrc2patch_v1.1.exe"
+        name: wineexec
+        prefix: $GAMEDIR
+
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1k5CZlvNktENX-0TRe31vIOPNYcAZA7qr $CACHE/patch.7z
+
+    - execute:
+        file: 7z
+        args: x $CACHE/patch.7z -o"$GAMEDIR/drive_c/Program Files (x86)/BlackBeanGames/WRC2/" -ppassword -y
 

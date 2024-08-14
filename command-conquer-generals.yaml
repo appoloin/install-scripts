@@ -1,0 +1,26 @@
+name: Command and Conquer - Generals
+game_slug: command-conquer-generals
+version: MagiPack Installer
+slug: command-conquer-generals
+runner: wine
+year: 2003
+
+script:
+  files:
+    - setup: N/A:Select setup file 
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Command & Conquer - Generals/Zero Hour/generals.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

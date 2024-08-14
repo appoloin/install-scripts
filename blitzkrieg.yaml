@@ -1,0 +1,27 @@
+name: Blitzkrieg
+game_slug: blitzkrieg
+version: Magipack Installer
+slug: blitzkrieg
+runner: wine
+year: 2003
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Scratches Director's Cut/scream.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

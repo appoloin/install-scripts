@@ -1,0 +1,26 @@
+name: Backyard football
+game_slug: backyard-football
+version: Windows Installer
+slug: backyard-footballl
+runner: scummvm
+year: 2001
+
+script:
+  files:
+    - DISC1:  N/A:Select ISO
+
+  game:
+    game_id: baseball2003 
+    path: $GAMEDIR
+  
+  installer:
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+  scummvm:
+    fullscreen: true

@@ -1,0 +1,69 @@
+name: Transylvania III - Vanquish the Night
+game_slug: transylvania-iii-vanquish-the-night
+version: DOS
+slug: transylvania-iii-vanquish-the-night
+runner: dosbox
+year: 1990
+
+script:
+  game:
+    main_file: $GAMEDIR/play.conf
+
+  files:
+    - game:  N/A:Select file *.exe
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+          dst=$2
+          
+          cp -avr "$src/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $game "$GAMEDIR/"
+    
+
+
+    - write_file:
+        content: '[mouse]
+
+            mouse_capture = onstart   
+            
+            mouse_middle_release=true   
+
+            mouse_sensitivity= 15
+
+
+          [sdl]
+              
+            fullresolution=desktop
+
+            windowresolution=original
+
+            fullscreen=true
+
+            output=opengl
+
+          [render]
+
+            aspect=true
+
+            scaler=normal2x
+
+
+          [autoexec]
+          
+            mount C "$GAMEDIR/" -t dir
+
+            C:
+            
+            Novel
+
+            exit'
+        file: $GAMEDIR/play.conf

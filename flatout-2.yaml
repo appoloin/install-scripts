@@ -1,0 +1,27 @@
+name: Flatout 2
+game_slug: flatout-2
+version: Good old Games Installer
+slug: flatout-2
+runner: wine
+year: 2006
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/FlatOut 2/FlatOut2.exe"
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the Setup file
+  
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

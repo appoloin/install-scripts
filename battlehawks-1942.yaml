@@ -1,0 +1,16 @@
+name: Battlehawks 1942
+game_slug: battlehawks-1942
+version: DOS
+slug: battlehawks-1942
+runner: linux
+year: 1988
+
+script:
+  game:
+    exe: ~/Games/dreamm/dreamm
+
+  installer:   
+    - execute:
+        description: Drag CD folder in to DREAMM
+        command: dreamm
+      

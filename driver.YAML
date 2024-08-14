@@ -1,0 +1,124 @@
+name: Driver
+game_slug:  driver
+version: Magipacks Installer
+slug: driver
+runner: wine
+year: 1999
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/MagiPacks/Driver - You are the Wheelman/Game.exe
+    prefix: $GAMEDIR
+    launch_configs:
+      - exe:  "$GAMEDIR/drive_c/MagiPacks/Driver - You are the Wheelman/config.exe"
+        prefix: $GAMEDIR
+        name: Game Config
+      - exe: "$GAMEDIR/drive_c/MagiPacks/Driver - You are the Wheelman/dgVoodooCpl.exe"
+        prefix: $GAMEDIR
+        name:  DgVoodoo Config
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          fileID="$1"
+
+          output="$2"
+        
+          wget --load-cookies /tmp/cookies.txt 
+                "https://docs.google.com/uc?export=download&confirm=
+                  $(wget 
+                      --quiet 
+                      --save-cookies /tmp/cookies.txt 
+                      --keep-session-cookies 
+                      --no-check-certificate 
+                      "https://docs.google.com/uc?export=download&id=$fileID" 
+                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
+                       -O "$output" && 
+                      rm -rf /tmp/cookies.txt          
+          '
+        file: $CACHE/download.sh
+    - chmodx: $CACHE/download.sh
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: directshow
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: $CACHE/download.sh
+        args: 1MRusXFfuTzaFXEjSYyLTssfrFlaV1Z23 $CACHE/DgVoodoo_2_6.7z
+
+    - execute:
+        file: 7z
+        args: x $CACHE/DgVoodoo_2_6.7z -o"$CACHE" -ppassword -y
+
+    - copy:
+        src: $CACHE/MS/x86/DDraw.dll
+        dst: "$GAMEDIR/drive_c/MagiPacks/Driver - You are the Wheelman/"
+
+    - copy:
+        src: $CACHE/MS/x86/D3DImm.dll
+        dst: "$GAMEDIR/drive_c/MagiPacks/Driver - You are the Wheelman/"
+
+    - copy:
+        src: $CACHE/3Dfx/x86/Glide.dll
+        dst: "$GAMEDIR/drive_c/MagiPacks/Driver - You are the Wheelman/"
+
+    - copy:
+        src: $CACHE/3Dfx/x86/Glide2x.dll
+        dst: "$GAMEDIR/drive_c/MagiPacks/Driver - You are the Wheelman/"
+
+    - copy:
+        src: $CACHE/3Dfx/x86/Glide3x.dll
+        dst: "$GAMEDIR/drive_c/MagiPacks/Driver - You are the Wheelman/"
+
+    - copy:
+        src: $CACHE/dgVoodooCpl.exe
+        dst: "$GAMEDIR/drive_c/MagiPacks/Driver - You are the Wheelman/"
+
+    - write_config:
+        data:
+          DirectX:
+            Antialiasing: 8x
+            AppControlledScreenMode: false
+            DisableAltEnterToToggleScreenMode: false
+            Filtering: 16
+            Resolution: max_isf
+            VRAM: 64
+            VideoCard: internal3D
+            dgVoodooWatermark: false
+          General:
+            ScalingMode: stretched_ar
+          Glide:
+            3DfxSplashScreen: false
+            3DfxWatermark: false
+            Antialiasing: 8x
+            Resolution: max_isf
+            VideoCard: voodoo_2
+        description: Write dgVoodoo.conf file
+        file: $GAMEDIR/drive_c/MagiPacks/Driver - You are the Wheelman/dgVoodoo.conf
+        merge: false
+        
+  wine:
+    overrides:
+      ddraw: n,b
+      D3DImm: n,b
+      winmm: n,b
+      glide: n,b
+      glide2x: n,b
+      glide3x: n,b

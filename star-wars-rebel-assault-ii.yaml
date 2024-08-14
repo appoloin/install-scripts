@@ -1,0 +1,16 @@
+name: Star Wars - Rebel Assault II
+game_slug: star-wars-rebel-assault-ii
+version: DOS
+slug: star-wars-rebel-assault-ii
+runner: linux
+year: 1993
+
+script:
+  game:
+    exe: ~/Games/dreamm/dreamm
+
+  installer:   
+    - execute:
+        description: Drag CD folder in to DREAMM
+        command: dreamm
+      

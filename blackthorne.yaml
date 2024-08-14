@@ -1,0 +1,85 @@
+name:  Blackthorne
+game_slug: blackthorne
+version: DOS
+slug: blackthorne
+runner: dosbox
+year: 1994
+
+script:
+  game:
+    main_file: $GAMEDIR/play.conf
+
+  files:
+    - game:  N/A:Select file *.exe
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+          dst=$2
+          
+          cp -avr "$src/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $game "$GAMEDIR/"
+    
+
+
+    - write_file:
+        content: '[gus]
+
+            gus      = true
+
+            ultradir = C:\ULTRASND
+
+            gusbase  = 220
+            
+            gusirq   = 11
+
+            gusdma   = 1
+         
+           [mouse]
+
+            mouse_capture = onstart   
+            
+            mouse_middle_release=true   
+
+            mouse_sensitivity= 15
+
+
+          [sdl]
+              
+            fullresolution=desktop
+
+            windowresolution=original
+
+            fullscreen=true
+
+            output=opengl
+
+          [render]
+
+            aspect=true
+
+            scaler=normal2x
+
+
+          [autoexec]
+          
+            mount C "$GAMEDIR/" -t dir
+
+            imgmount D "$GAMEDIR/cd/BlackThorne.iso" -t cdrom
+
+            C:
+            
+            cd BTHORNE
+
+            run
+
+            exit'
+        file: $GAMEDIR/play.conf

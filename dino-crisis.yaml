@@ -1,0 +1,70 @@
+name: Dino Crisis
+game_slug: dino-crisis
+version: Windows Installer
+slug: dino-crisis
+runner: wine
+year: 1999
+
+script:
+  files:
+    - setup: N/A:Select ISO
+
+  game:
+    exe: "$GAMEDIR/drive_c/dino/dino.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - extract:
+        file: $setup 
+        dst:  $CACHE
+
+    #Base files
+    - copy:
+        src: $CACHE/DATA
+        dst: $GAMEDIR/drive_c/dino/Data
+
+    - copy:
+        src: $CACHE/SOUND
+        dst: $GAMEDIR/drive_c/dino/Sound
+
+    - copy:
+        src: $CACHE/MOVIE
+        dst: $GAMEDIR/drive_c/dino/Movie
+
+    #patch
+    - copy:
+        src: $CACHE/Classic REbirth Patch/Official Windows XP patch by SourceNext/DINO.exe
+        dst: $GAMEDIR/drive_c/dino
+
+    #mod
+    - copy:
+        src: $CACHE/Classic REbirth Patch/Classic Rebirth DLL/ddraw.dll
+        dst: $GAMEDIR/drive_c/dino
+
+    #updated sound / video
+    - merge:
+        src: $CACHE/Classic REbirth Patch/High Quality Audio (by lexas87)/Sound
+        dst: $GAMEDIR/drive_c/dino/Sound
+    - merge:
+        src: $CACHE/Classic REbirth Patch/High Quality Videos/Movie
+        dst: $GAMEDIR/drive_c/dino/Movie
+
+    # HD mod
+    - copy:
+        src: $CACHE/MODS/HD Mod v1.0/HD
+        dst: $GAMEDIR/drive_c/dino/HD
+
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR/drive_c/dino"
+
+  wine:
+    overrides:
+      ddraw: native

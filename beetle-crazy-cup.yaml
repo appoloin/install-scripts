@@ -1,0 +1,27 @@
+name: Beetle Crazy Cup
+game_slug: beetle-crazy-cup
+version: Magipack Installer
+slug: beetle-crazy-cup
+runner: wine
+year: 2000
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Beetle Crazy Cup/beetle.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

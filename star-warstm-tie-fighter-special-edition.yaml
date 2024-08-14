@@ -1,0 +1,16 @@
+name: STAR WARS - TIE Fighter
+game_slug: star-wars-tie-fighter-1998
+version: DOS
+slug: star-wars-tie-fighter-1998
+runner: linux
+year: 1998
+
+script:
+  game:
+    exe: ~/Games/dreamm/dreamm
+
+  installer:   
+    - execute:
+        description: Drag CD folder in to DREAMM
+        command: dreamm
+      

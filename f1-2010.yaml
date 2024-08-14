@@ -1,0 +1,34 @@
+name: F1 2010
+game_slug: f1-2010
+version: Windows Installer
+slug: f1-2010
+runner: wine
+year: 2010
+
+script:
+  files:
+    - setup: N/A:Select setup file 
+
+  game:
+    exe: "$GAMEDIR/drive_c/Games/F1 2010/f1_2010.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        command: 'rclone copy "Google-1:Patches/F12010/patch.7z" "$CACHE"'
+
+    - execute:
+        file: 7z
+        args: x $CACHE/patch.7z -o"$GAMEDIR/drive_c/Games/F1 2010/" -ppassword -y
+

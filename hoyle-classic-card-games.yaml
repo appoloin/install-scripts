@@ -1,0 +1,26 @@
+name: Hoyle Classic Card Games
+game_slug: hoyle-classic-card-games
+version: DOS/WIN311
+slug: hoyle-classic-card-games
+runner: scummvm
+year: 1993
+
+script:
+  files:
+    - DISC1:  N/A:Select Disc 1 ISO
+
+  game:
+    game_id: hoyle5  
+    path: $GAMEDIR
+  
+  installer:
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+  scummvm:
+    fullscreen: true

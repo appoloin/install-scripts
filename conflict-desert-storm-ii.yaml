@@ -1,0 +1,41 @@
+name: Conflict - Desert Storm II
+game_slug: conflict-desert-storm-ii
+version: Magipack Installer
+slug: conflict-desert-storm-ii
+runner: wine
+year: 2003
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/MagiPacks/Conflict - Desert Storm II/CDS II.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+ 
+    - command: 'rclone copy "Google-1:Systems/Software/dgVoodoo2_61.7z" "$CACHE"'
+
+    - execute:
+        file: 7z
+        args: x $CACHE/dgVoodoo2_61.7z -o"$CACHE" -ppassword -y
+
+    - copy:
+        src: $CACHE/MS/x86/D3D9.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Conflict - Global Terror/
+
+  wine:
+    overrides:
+      d3d9: native
+

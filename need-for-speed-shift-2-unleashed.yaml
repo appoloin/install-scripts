@@ -1,0 +1,32 @@
+name: Need for Speed - Shift 2 Unleashed
+game_slug: need-for-speed-shift-2-unleashed
+version: Windows Installer
+slug: need-for-speed-shift-2-unleashed
+runner: wine
+year: 2011
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Games/Need for Speed Shift 2 Unleashed/shift2u.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: xact_x64 xact physx
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

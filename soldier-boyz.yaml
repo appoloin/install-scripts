@@ -1,0 +1,26 @@
+name: Soldier Boyz
+game_slug: soldier-boyz
+version: Windows Installer
+slug: soldier-boyz
+runner: scummvm
+year: 1995
+
+script:
+  files:
+    - DISC1:  N/A:Select ISO
+
+  game:
+    game_id: soldierboyz-us 
+    path: $GAMEDIR/BOYZ
+  
+  installer:
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+  scummvm:
+    fullscreen: true

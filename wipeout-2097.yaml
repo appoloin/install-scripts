@@ -1,0 +1,60 @@
+name: Enter the Matrix
+game_slug: wipeout-2097
+version: MagiPacks Installer
+slug: wipeout-2097
+runner: wine
+year: 1996
+
+script:
+  files:
+    - setup: N/A:Select setup file 
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Wipeout 2097/Wipeout2.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - command: 'rclone copy "Google-1:Systems/Software/dgVoodoo2_61.7z" "$CACHE"'
+
+    - execute:
+        file: 7z
+        args: x $CACHE/dgVoodoo2_61.7z -o"$CACHE" -ppassword -y
+
+    - copy:
+        src: $CACHE/MS/x86/DDraw.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Wipeout 2097
+
+    - copy:
+        src: $CACHE/MS/x86/D3DImm.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Wipeout 2097
+
+    - copy:
+        src: $CACHE/MS/x86/D3D9.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Wipeout 2097
+ 
+    - copy:
+        src: $CACHE/MS/x86/D3D8.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Wipeout 2097
+
+
+    - copy:
+        src: $CACHE/dgVoodooCpl.exe
+        dst: $GAMEDIR/drive_c/MagiPacks/Wipeout 2097
+
+  wine:
+    overrides:
+      ddraw: native
+      d3d8: native
+      d3d9: native
+      D3DImm: native

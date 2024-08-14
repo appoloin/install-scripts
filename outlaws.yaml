@@ -1,0 +1,16 @@
+name: Outlaws
+game_slug: outlaws
+version: DOS
+slug: outlaws
+runner: linux
+year: 1997
+
+script:
+  game:
+    exe: ~/Games/dreamm/dreamm
+
+  installer:   
+    - execute:
+        description: Drag CD folder in to DREAMM
+        command: dreamm
+      

@@ -1,0 +1,31 @@
+name: Colin McRae Rally 04
+game_slug: colin-mcrae-rally-04
+version: Windows Installer
+slug: colin-mcrae-rally-04
+runner: wine
+year: 2003
+
+script:
+  files:
+    - setup: N/A:Select setup file 
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Colin McRae Rally 04/cmr4.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: openal xact xact_64
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

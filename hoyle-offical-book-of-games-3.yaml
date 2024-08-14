@@ -1,0 +1,26 @@
+name: Hoyle Offical Book of Games 3
+game_slug: hoyle-offical-book-of-games-3
+version: DOS/WIN311
+slug: hoyle-offical-book-of-games-3
+runner: scummvm
+year: 1993
+
+script:
+  files:
+    - DISC1:  N/A:Select Disc 1 ISO
+
+  game:
+    game_id: hoyle2  
+    path: $GAMEDIR
+  
+  installer:
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+  scummvm:
+    fullscreen: true

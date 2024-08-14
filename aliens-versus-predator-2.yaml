@@ -1,0 +1,35 @@
+name: Aliens versus Predator 2
+game_slug: aliens-versus-predator-2
+version: Windows Installer
+slug: aliens-versus-predator-2
+runner: wine
+year: 2001
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/MagiPacks/Aliens versus Predator 2/AVP2.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+ 
+  wine:
+    dgvoodoo2: true
+    overrides:
+      ddraw: native
+      d3d8: native
+      d3d9: native
+      D3DImm: native
+

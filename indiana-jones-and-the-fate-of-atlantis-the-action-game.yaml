@@ -1,0 +1,16 @@
+name: Indiana Jones and the Fate of Atlantis - The Action Game
+game_slug: indiana-jones-and-the-fate-of-atlantis-the-action-game
+version: DOS
+slug: indiana-jones-and-the-fate-of-atlantis-the-action-game
+runner: linux
+year: 1992
+
+script:
+  game:
+    exe: ~/Games/dreamm/dreamm
+
+  installer:   
+    - execute:
+        description: Drag CD folder in to DREAMM
+        command: dreamm
+      

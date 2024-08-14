@@ -1,16 +1,16 @@
-name: F1 2013
-game_slug: f1-2013
+name: Serious Sam 3
+game_slug: serious-sam-3-bfe
 version: Windows Installer
-slug: f1-2013
+slug: serious-sam-3-bfe
 runner: wine
-year: 2013
+year: 2011
 
 script:
   files:
-    - setup: N/A:Select setup file 
+    - setup: N/A:Select setup file from GOG
 
   game:
-    exe: "$GAMEDIR/drive_c/Program Files (x86)/F1 2013/F1_2013.exe"
+    exe: "$GAMEDIR/drive_c/Serious Sam 3 BFE/Bin/Sam3.exe"
     prefix: $GAMEDIR
 
   installer:
@@ -49,9 +49,9 @@ script:
 
     - execute:
         file: $CACHE/download.sh
-        args: 1nnyzaHXotHGRVsMUFqDjodY9GF7QYkze $CACHE/patch.7z
+        args: 1wh2SuvF4Ucn_0VCRgBafaFHeuxewCMfP $CACHE/patch.7z
 
     - execute:
         file: 7z
-        args: x $CACHE/patch.7z -o"$GAMEDIR/drive_c/Program Files (x86)/F1 2013/" -ppassword -y
+        args: x $CACHE/patch.7z -o"$GAMEDIR/drive_c/Serious Sam 3 BFE/Bin/" -ppassword -y
 

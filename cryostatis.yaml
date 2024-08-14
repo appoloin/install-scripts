@@ -1,0 +1,27 @@
+name: Cryostatis
+game_slug: cryostatis
+version: Good Old Games Installer
+slug: cryostatis
+runner: wine
+year: 2008
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Cryostasis/cryostasis.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

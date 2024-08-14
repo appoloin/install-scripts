@@ -1,0 +1,39 @@
+name: F1 2011
+game_slug: f1-2011
+version: Windows Installer
+slug: f1-2011
+runner: wine
+year: 2011
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/F1 2011/F1_2011.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - insert-disc:
+          description: Select game folder
+          requires: F1_2011.exe
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: openal
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - execute:
+        file: cp 
+        args: -r "$DISC/"  "$GAMEDIR/drive_c/"
+
+    - execute:
+        command: 'rclone copy "Google-1:Patches/F12011/patch.7z" "$CACHE"'
+
+    - execute:
+        file: 7z
+        args: x $CACHE/patch.7z -o"$GAMEDIR/drive_c/F1 2011/" -ppassword -y
+

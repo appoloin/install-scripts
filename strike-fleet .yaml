@@ -1,0 +1,16 @@
+name: Strike Fleet 
+game_slug: strike-fleet 
+version: DOS
+slug: strike-fleet
+runner: linux
+year: 1989
+
+script:
+  game:
+    exe: ~/Games/dreamm/dreamm
+
+  installer:   
+    - execute:
+        description: Drag CD folder in to DREAMM
+        command: dreamm
+      

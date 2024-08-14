@@ -1,0 +1,16 @@
+name: Their Finest Hour The Battle of Britain 
+game_slug: their-finest-hour-the-battle-of-britain 
+version: DOS
+slug: their-finest-hour-the-battle-of-britain
+runner: linux
+year: 1989
+
+script:
+  game:
+    exe: ~/Games/dreamm/dreamm
+
+  installer:   
+    - execute:
+        description: Drag CD folder in to DREAMM
+        command: dreamm
+      

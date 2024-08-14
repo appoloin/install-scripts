@@ -1,0 +1,26 @@
+name: Backyard Baseball
+game_slug: backyard-baseball
+version: Windows Installer
+slug: backyard-baseball
+runner: scummvm
+year: 2003
+
+script:
+  files:
+    - DISC1:  N/A:Select ISO
+
+  game:
+    game_id: baseball2003 
+    path: $GAMEDIR/Game
+  
+  installer:
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+  scummvm:
+    fullscreen: true

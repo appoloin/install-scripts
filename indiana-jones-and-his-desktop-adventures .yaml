@@ -1,0 +1,16 @@
+name: Indiana Jones and his Desktop Adventures 
+game_slug: indiana-jones-and-his-desktop-adventures 
+version: DOS
+slug: indiana-jones-and-his-desktop-adventures 
+runner: linux
+year: 1989
+
+script:
+  game:
+    exe: ~/Games/dreamm/dreamm
+
+  installer:   
+    - execute:
+        description: Drag CD folder in to DREAMM
+        command: dreamm
+      

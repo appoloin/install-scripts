@@ -1,0 +1,26 @@
+name: Driver 2 - Back on the Strets
+game_slug: driver-2-back-on-the-streets
+version: MagiPacks Installer
+slug: driver-2-back-on-the-streets
+runner: wine
+year: 2000
+
+script:
+  files:
+    - setup: N/A:Select setup file 
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Driver 2 - Back on the Streets/REDRIVER2.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

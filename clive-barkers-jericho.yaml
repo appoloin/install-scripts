@@ -1,0 +1,27 @@
+name: 80 Days
+game_slug: clive-barkers-jericho
+version: Windows Installer
+slug: clive-barkers-jericho
+runner: wine
+year: 2007
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Games/Clive Barkers Jericho/bin/Jericho.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

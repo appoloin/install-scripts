@@ -1,0 +1,16 @@
+name: Night Shift
+game_slug: night-shift
+version: DOS
+slug: night-shift
+runner: linux
+year: 1990
+
+script:
+  game:
+    exe: ~/Games/dreamm/dreamm
+
+  installer:   
+    - execute:
+        description: Drag CD folder in to DREAMM
+        command: dreamm
+      

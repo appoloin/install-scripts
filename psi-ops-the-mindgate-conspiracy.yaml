@@ -1,0 +1,26 @@
+name: Psi-Ops - The Mindgate Conspiracy
+game_slug: psi-ops-the-mindgate-conspiracy
+version: Windows Installer
+slug: psi-ops-the-mindgate-conspiracy
+runner: wine
+year: 2004
+
+script:
+  files:
+    - setup: N/A:Select setup file 
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Psi-Ops - The Mindgate Conspiracy/PsiOps.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

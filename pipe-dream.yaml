@@ -1,0 +1,16 @@
+name: Pipe Dream
+game_slug: pipe-dream
+version: DOS
+slug: pipe-dream
+runner: linux
+year: 1990
+
+script:
+  game:
+    exe: ~/Games/dreamm/dreamm
+
+  installer:   
+    - execute:
+        description: Drag CD folder in to DREAMM
+        command: dreamm
+      

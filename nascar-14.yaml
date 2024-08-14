@@ -1,0 +1,27 @@
+name: Nascar 14
+game_slug: nascar-14
+version: Windows Installer
+slug: nascar-14
+runner: wine
+year: 2014
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Nascar 14/bin/NASCAR14.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

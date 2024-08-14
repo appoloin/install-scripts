@@ -1,0 +1,16 @@
+name: Star Wars - Shadows of the Empire
+game_slug: star-wars-shadows-of-the-empire
+version: DOS
+slug: star-wars-shadows-of-the-empire
+runner: linux
+year: 1993
+
+script:
+  game:
+    exe: ~/Games/dreamm/dreamm
+
+  installer:   
+    - execute:
+        description: Drag CD folder in to DREAMM
+        command: dreamm
+      

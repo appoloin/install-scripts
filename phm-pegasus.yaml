@@ -1,0 +1,16 @@
+name: PHM Pegasus
+game_slug: phm-pegasus
+version: DOS
+slug: phm-pegasus
+runner: linux
+year: 1988
+
+script:
+  game:
+    exe: ~/Games/dreamm/dreamm
+
+  installer:   
+    - execute:
+        description: Drag CD folder in to DREAMM
+        command: dreamm
+      

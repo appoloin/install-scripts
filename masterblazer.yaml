@@ -1,0 +1,16 @@
+name: Masterblazer
+game_slug: masterblazer
+version: DOS
+slug: masterblazer
+runner: linux
+year: 1990
+
+script:
+  game:
+    exe: ~/Games/dreamm/dreamm
+
+  installer:   
+    - execute:
+        description: Drag CD folder in to DREAMM
+        command: dreamm
+      

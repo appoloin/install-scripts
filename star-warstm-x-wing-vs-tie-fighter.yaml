@@ -1,0 +1,27 @@
+name: Star Wars - X-Wing vs Tie Fighter
+game_slug: star-warstm-x-wing-vs-tie-fighter
+version: Good Old Games Installer
+slug: star-warstm-x-wing-vs-tie-fighter
+runner: wine
+year: 2015
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Star Wars - XvT/Launch Star Wars - X-Wing vs TIE Fighter.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

@@ -1,0 +1,16 @@
+name: Star Wars Chess
+game_slug: star-wars-chess
+version: DOS
+slug: star-wars-chess
+runner: linux
+year: 1993
+
+script:
+  game:
+    exe: ~/Games/dreamm/dreamm
+
+  installer:   
+    - execute:
+        description: Drag CD folder in to DREAMM
+        command: dreamm
+      

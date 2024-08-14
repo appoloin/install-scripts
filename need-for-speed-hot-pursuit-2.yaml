@@ -1,16 +1,16 @@
-name: F1 2013
-game_slug: f1-2013
-version: Windows Installer
-slug: f1-2013
+name: Need for Speed - Hot Pursuit 2
+game_slug: need-for-speed-hot-pursuit-2
+version: MagiPack Installer
+slug: need-for-speed-hot-pursuit-2
 runner: wine
-year: 2013
+year: 2002
 
 script:
   files:
     - setup: N/A:Select setup file 
 
   game:
-    exe: "$GAMEDIR/drive_c/Program Files (x86)/F1 2013/F1_2013.exe"
+    exe: "$GAMEDIR/drive_c/MagiPacks/Need for Speed - Hot Pursuit 2/nfshp2.exe"
     prefix: $GAMEDIR
 
   installer:
@@ -47,11 +47,41 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+
     - execute:
         file: $CACHE/download.sh
-        args: 1nnyzaHXotHGRVsMUFqDjodY9GF7QYkze $CACHE/patch.7z
+        args: 1MRusXFfuTzaFXEjSYyLTssfrFlaV1Z23 $CACHE/DgVoodoo_2_6.7z
 
     - execute:
         file: 7z
-        args: x $CACHE/patch.7z -o"$GAMEDIR/drive_c/Program Files (x86)/F1 2013/" -ppassword -y
+        args: x $CACHE/DgVoodoo_2_6.7z -o"$CACHE" -ppassword -y
+
+    - copy:
+        src: $CACHE/MS/x86/DDraw.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Need for Speed - Hot Pursuit 2/
+
+    - copy:
+        src: $CACHE/MS/x86/D3DImm.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Need for Speed - Hot Pursuit 2/
+
+    - copy:
+        src: $CACHE/MS/x86/D3D9.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Need for Speed - Hot Pursuit 2/
+ 
+    - copy:
+        src: $CACHE/MS/x86/D3D8.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Need for Speed - Hot Pursuit 2/
+
+
+    - copy:
+        src: $CACHE/dgVoodooCpl.exe
+        dst: $GAMEDIR/drive_c/MagiPacks/Need for Speed - Hot Pursuit 2/
+
+  wine:
+    overrides:
+      ddraw: native
+      d3d8: native
+      d3d9: native
+      D3DImm: native
+      dinput8.dll: native,b
 

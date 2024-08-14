@@ -1,0 +1,36 @@
+name: Enter the Matrix
+game_slug: enter-the-matrix
+version: MagiPacks Installer
+slug: enter-the-matrix
+runner: wine
+year: 2003
+
+script:
+  files:
+    - setup: N/A:Select setup file 
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Enter the Matrix/Matrix.exe"
+    prefix: $GAMEDIR
+    launch_configs:
+      - exe:  "$GAMEDIR/drive_c/MagiPacks/Enter the Matrix/MatrixOptions"
+        prefix: $GAMEDIR
+        arch: win32
+        name: Episode 2 - Get Tannen!
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    overrides:
+      d3d9.dll: n,b
+

@@ -1,0 +1,31 @@
+name: Need for Speed III - Hot Pursuit
+game_slug: need-for-speed-iii-hot-pursuit
+version: MagiPack Installer
+slug: need-for-speed-iii-hot-pursuit
+runner: wine
+year: 1998
+
+script:
+  files:
+    - setup: N/A:Select setup file 
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Need for Speed III - Hot Pursuit/nfs3.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    overrides:
+      dinput.dll: n,b
+

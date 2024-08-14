@@ -1,0 +1,26 @@
+name: Command and Conquer - Tiberian Sun
+game_slug: command-conquer-tiberian-sun
+version: MagiPack Installer
+slug: command-conquer-tiberian-sun
+runner: wine
+year: 1999
+
+script:
+  files:
+    - setup: N/A:Select setup file 
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Command & Conquer - Tiberian Sun/Game.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

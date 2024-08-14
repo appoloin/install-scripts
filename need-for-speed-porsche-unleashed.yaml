@@ -1,0 +1,31 @@
+name: Need for Speed Porsche Unleashed
+game_slug: need-for-speed-porsche-unleashed
+version: MagiPack Installer
+slug: need-for-speed-porsche-unleashed
+runner: wine
+year: 2000
+
+script:
+  files:
+    - setup: N/A:Select setup file 
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Need for Speed - Porsche Unleashed/nfs5.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    overrides:
+      dinput.dll: n,b
+

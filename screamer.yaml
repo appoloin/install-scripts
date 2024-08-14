@@ -1,0 +1,71 @@
+name: Screamer
+game_slug: screamer
+version: DOS
+slug: screamer
+runner: dosbox
+year: 1995
+
+script:
+  game:
+    main_file: $GAMEDIR/play.conf
+
+  files:
+    - game:  N/A:Select file *.exe
+
+  installer:
+    - write_file:
+        content: '#!/bin/bash
+
+          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+
+          dst=$2
+          
+          cp -avr "$src/."  "$dst"'
+        file: $CACHE/bulkcopy.sh
+    - chmodx: $CACHE/bulkcopy.sh
+
+    - execute:
+        file: $CACHE/bulkcopy.sh
+        args: $game "$GAMEDIR/"
+    
+
+    - write_file: 
+        content: '[mouse]
+
+
+            mouse_capture = onstart   
+            
+            mouse_middle_release=true   
+
+            mouse_sensitivity= 30
+
+
+          [sdl]
+              
+            fullresolution=desktop
+
+            windowresolution=original
+
+            fullscreen=true
+
+            output=opengl
+
+          [render]
+
+            aspect=true
+
+            scaler=normal2x
+
+
+          [autoexec]
+          
+            mount C "$GAMEDIR/" -t dir
+
+            imgmount D "$GAMEDIR/cd/Screamer.cue" -t cdrom
+
+            C:
+            
+            run
+
+            exit'
+        file: $GAMEDIR/play.conf
