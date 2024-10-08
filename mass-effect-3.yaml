@@ -30,7 +30,7 @@ script:
     #download MODS
     - execute:
         command: 'rclone copy 
-                 "Google-1:Patches/MassEffect/Mass Effect 3" 
+                 "Patches - Mega 1:MODS/MassEffect/Mass Effect 3" 
                  "$GAMEDIR/drive_c/users/$USER/Documents/MODS" 
                 '
 

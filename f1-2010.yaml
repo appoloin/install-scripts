@@ -26,7 +26,7 @@ script:
         prefix: $GAMEDIR
 
     - execute:
-        command: 'rclone copy "Google-1:Patches/F12010/patch.7z" "$CACHE"'
+        command: 'rclone copy "Patches - Google 1:Patches/F12010/patch.7z" "$CACHE"'
 
     - execute:
         file: 7z

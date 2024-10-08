@@ -31,7 +31,7 @@ script:
         args: -r "$DISC/"  "$GAMEDIR/drive_c/"
 
     - execute:
-        command: 'rclone copy "Google-1:Patches/F12011/patch.7z" "$CACHE"'
+        command: 'rclone copy "Patches - Google 1:Patches/F12011/patch.7z" "$CACHE"'
 
     - execute:
         file: 7z

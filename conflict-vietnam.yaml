@@ -25,7 +25,7 @@ script:
         name: wineexec
         prefix: $GAMEDIR
  
-    - command: 'rclone copy "Google-1:Systems/Software/dgVoodoo2_61.7z" "$CACHE"'
+    - command: 'rclone copy "Patches - Google 1:Systems/Software/dgVoodoo2_61.7z" "$CACHE"'
 
     - execute:
         file: 7z

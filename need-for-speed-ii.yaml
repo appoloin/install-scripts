@@ -55,7 +55,7 @@ script:
         dst: $GAMEDIR
 
     - execute:
-        command: 'rclone copy "Google-1:Patches/NeedForSpeedII/nfs2se-linux-x86-v1.4.0.tar.gz" "$CACHE"'
+        command: 'rclone copy "Patches - Google 1:Patches/NeedForSpeedII/nfs2se-linux-x86-v1.4.0.tar.gz" "$CACHE"'
 
     - extract:
         file: "$CACHE/nfs2se-linux-x86-v1.4.0.tar.gz" 

@@ -39,15 +39,15 @@ script:
     #download 
     - execute:
         command: 'rclone copy 
-            "Mega - 1:Patches/TES-Morrowind-Oblivion-Skyrim/Wrye Bash 312.1 - Installer-591-312-1-1704633269.exe" 
+            "Patches - Mega 1:MODS/Skyrim/Wrye Bash 312.1 - Installer-591-312-1-1704633269.exe" 
             "$CACHE" 
             
             rclone copy 
-            "Mega - 1:Patches/TES-Morrowind-Oblivion-Skyrim/loot_0.19.1-win64.zip" 
+            "Patches - Mega 1:MODS/Skyrim/loot_0.19.1-win64.zip" 
             "$CACHE" 
             
             rclone copy 
-            "Mega - 1:Patches/TES-Morrowind-Oblivion-Skyrim/Skyrim Mods" 
+            "Patches - Mega 1:MODS/Skyrim/Skyrim Mods" 
             "$CACHE/Skyrim Mods" 
             '
 
@@ -90,8 +90,8 @@ script:
         prefix: $GAMEDIR
 
     - extract:
-        file: "$CACHE/Skyrim Mods/skse64_2_02_03_gog.7z" 
-       # file: "$CACHE/Skyrim Mods/Skyrim Script Extender (SKSE64) GOG-30379-2-2-6-1707977381.7z"
+      #  file: "$CACHE/Skyrim Mods/skse64_2_02_03_gog.7z" 
+        file: "$CACHE/Skyrim Mods/Skyrim Script Extender (SKSE64) GOG-30379-2-2-6-1707977381.7z"
         dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/" 
 
     - extract:
@@ -103,8 +103,8 @@ script:
         dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data/SKSE"
 
     - extract:
-        file: "$CACHE/Skyrim Mods/PapyrusUtil GOG - Scripting Utility Functions-13048-4-4-1667962205.zip"
-      #  file: "$CACHE/Skyrim Mods/PapyrusUtil GOG - Scripting Utility Functions-13048-4-6-1708985698.zip"
+      #  file: "$CACHE/Skyrim Mods/PapyrusUtil GOG - Scripting Utility Functions-13048-4-4-1667962205.zip"
+        file: "$CACHE/Skyrim Mods/PapyrusUtil GOG - Scripting Utility Functions-13048-4-6-1708985698.zip"
         dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data"
 
     - extract:
@@ -117,14 +117,6 @@ script:
     - extract:
         file: "$CACHE/Skyrim Mods/(Part 2) Engine Fixes - skse64 Preloader and TBB Lib-17230-2020-3-1611367474.7z"
         dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/"
-
- #   - extract:
- #       file: "$CACHE/Skyrim Mods/Modififed TOML File v3-108069-6-1-1-3-1705235175.7z"
- #       dst:  "$CACHE"
- #   - merge:
- #       src: "$CACHE/skse/plugins"
- #       dst: "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data/SKSE/Plugins"
-
 
     - extract:
         file: "$CACHE/Skyrim Mods/Nemesis Unlimited Behavior Engine-60033-v0-84-beta-1639426722.7z"

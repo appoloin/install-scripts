@@ -30,10 +30,10 @@ script:
 
     - execute:
         command: 'rclone copy 
-            "Google-1:Patches/TomClancysSplinterCellPandoraTomorrow/SplinterCellPandoraTomorrow.WidescreenFix.zip" 
+            "Patches - Google 1:Patches/TomClancysSplinterCellPandoraTomorrow/SplinterCellPandoraTomorrow.WidescreenFix.zip" 
             "$CACHE"
             
-            rclone copy "Google-1:Systems/Software/dgVoodoo2_61.7z" "$CACHE"
+            rclone copy "Patches - Google 1:Systems/Software/dgVoodoo2_61.7z" "$CACHE"
             '
 
     - extract:
