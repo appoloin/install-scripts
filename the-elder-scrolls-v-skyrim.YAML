@@ -38,17 +38,22 @@ script:
 
     #download 
     - execute:
-        command: 'rclone copy 
-            "Patches - Mega 1:MODS/Skyrim/Wrye Bash 312.1 - Installer-591-312-1-1704633269.exe" 
-            "$CACHE" 
+        command: 'rclone copy  
+            "Patches - Google 1:Patches/ElderScrolls/Wrye Bash 312.1 - Installer-591-312-1-1704633269.exe" 
+            "$CACHE"  
+            --drive-acknowledge-abuse
             
-            rclone copy 
-            "Patches - Mega 1:MODS/Skyrim/loot_0.19.1-win64.zip" 
+
+            rclone copy   --drive-acknowledge-abuse
+            "Patches - Google 1:Patches/ElderScrolls/loot_0.19.1-win64.zip" 
             "$CACHE" 
+            --drive-acknowledge-abuse
             
-            rclone copy 
-            "Patches - Mega 1:MODS/Skyrim/Skyrim Mods" 
+            
+            rclone copy  --drive-acknowledge-abuse
+            "Patches - Google 1:Patches/ElderScrolls/Skyrim/BaseMods" 
             "$CACHE/Skyrim Mods" 
+            --drive-acknowledge-abuse
             '
 
     - task:
@@ -90,7 +95,6 @@ script:
         prefix: $GAMEDIR
 
     - extract:
-      #  file: "$CACHE/Skyrim Mods/skse64_2_02_03_gog.7z" 
         file: "$CACHE/Skyrim Mods/Skyrim Script Extender (SKSE64) GOG-30379-2-2-6-1707977381.7z"
         dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/" 
 
@@ -103,12 +107,11 @@ script:
         dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data/SKSE"
 
     - extract:
-      #  file: "$CACHE/Skyrim Mods/PapyrusUtil GOG - Scripting Utility Functions-13048-4-4-1667962205.zip"
         file: "$CACHE/Skyrim Mods/PapyrusUtil GOG - Scripting Utility Functions-13048-4-6-1708985698.zip"
         dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data"
 
     - extract:
-        file: "$CACHE/Skyrim Mods/(Part 1) SSE Engine Fixes for 1.6.629 and newer-17230-6-1-1-1664974106.7z"
+        file: "$CACHE/Skyrim Mods/(Part 1) SSE Engine Fixes for 1.6.1170 and newer-17230-6-2-1712813573.7z"
         dst:  "$CACHE"
     - merge:
         src: "$CACHE/skse/plugins"
