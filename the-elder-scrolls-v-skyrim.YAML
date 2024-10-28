@@ -23,9 +23,46 @@ script:
   files:
     - setup: N/A:Select installer
     - DLC1: N/A:Select Update
+    - WryeBash1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/ElderScrolls/Wrye%20Bash%20312.1%20-%20Installer-591-312-1-1704633269.7z.001
+        filename: Wrye Bash 312.1 - Installer-591-312-1-1704633269.7z.001
+    - WryeBash2:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/ElderScrolls/Wrye%20Bash%20312.1%20-%20Installer-591-312-1-1704633269.7z.002
+        filename: Wrye Bash 312.1 - Installer-591-312-1-1704633269.7z.002
+    - WryeBash3:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/ElderScrolls/Wrye%20Bash%20312.1%20-%20Installer-591-312-1-1704633269.7z.003
+        filename: Wrye Bash 312.1 - Installer-591-312-1-1704633269.7z.003
+    - Loot:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/ElderScrolls/loot_0.19.1-win64.zip
+        filename: loot_0.19.1-win64.zip
+    - Nemesis:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/ElderScrolls/Skyrim/Nemesis%20Unlimited%20Behavior%20Engine-60033-v0-84-beta-1639426722.7z
+        filename: Nemesis Unlimited Behavior Engine-60033-v0-84-beta-1639426722.7z
+    - SKSE64:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/ElderScrolls/Skyrim/Skyrim%20Script%20Extender%20(SKSE64)%20GOG-30379-2-2-6-1707977381.7z
+        filename: Skyrim Script Extender (SKSE64) GOG-30379-2-2-6-1707977381.7z
+    - SKSE64INI:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/ElderScrolls/Skyrim/SKSE64%20INI%20PRE%20DOWNLOAD%20v1.2-1651-1-2.7z
+        filename: SKSE64 INI PRE DOWNLOAD v1.2-1651-1-2.7z
+    - AllInOne:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/ElderScrolls/Skyrim/All%20in%20one%20Address%20Library%20(Anniversary%20Edition)-32444-11-1707902394.zip
+        filename: All in one Address Library (Anniversary Edition)-32444-11-1707902394.zip
+    - PapyrusUtil:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/ElderScrolls/Skyrim/PapyrusUtil%20GOG%20-%20Scripting%20Utility%20Functions-13048-4-6-1708985698.zip
+        filename: PapyrusUtil GOG - Scripting Utility Functions-13048-4-6-1708985698.zip
+    - EngFixP1:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/ElderScrolls/Skyrim/(Part%201)%20SSE%20Engine%20Fixes%20for%201.6.1170%20and%20newer-17230-6-2-1712813573.7z
+        filename: (Part 1) SSE Engine Fixes for 1.6.1170 and newer-17230-6-2-1712813573.7z
+    - EngFixP2:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/ElderScrolls/Skyrim/(Part%202)%20Engine%20Fixes%20-%20skse64%20Preloader%20and%20TBB%20Lib-17230-2020-3-1611367474.7z
+        filename: (Part 2) Engine Fixes - skse64 Preloader and TBB Lib-17230-2020-3-1611367474.7z
 
-  install_complete_text: "Installation finished!\n\n\n\nRun Wyre Bash to install mods. \ 
-        (Right Click on Mod -> Archive -> Unpack to Project, then install).\n\n\n\
+
+
+  install_complete_text: "Installation finished!\n\n\n\nRun Wyre Bash to install mods.
+        \n\n\n\
+        Run Nemesis to fix animation.
+        \n\n\n\
         Run Loot to fix load order"
 
 
@@ -35,26 +72,6 @@ script:
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
-
-    #download 
-    - execute:
-        command: 'rclone copy  
-            "Patches - Google 1:Patches/ElderScrolls/Wrye Bash 312.1 - Installer-591-312-1-1704633269.exe" 
-            "$CACHE"  
-            --drive-acknowledge-abuse
-            
-
-            rclone copy   --drive-acknowledge-abuse
-            "Patches - Google 1:Patches/ElderScrolls/loot_0.19.1-win64.zip" 
-            "$CACHE" 
-            --drive-acknowledge-abuse
-            
-            
-            rclone copy  --drive-acknowledge-abuse
-            "Patches - Google 1:Patches/ElderScrolls/Skyrim/BaseMods" 
-            "$CACHE/Skyrim Mods" 
-            --drive-acknowledge-abuse
-            '
 
     - task:
         app: xact xact_x64 corefonts tahoma vcrun2019
@@ -81,61 +98,108 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+    # Turn on Controller
     - write_config:
         file: "$GAMEDIR/drive_c/users/$USER/Documents/My Games/Skyrim Special Edition GOG/SkyrimPrefs.ini"
         section: MAIN
         key: bGamepadEnable
         value: 1
 
+    #Move Wyre Bash Parts into one folder
+    - merge:
+        src: "$WryeBash1"
+        dst: "$CACHE"
+    - merge:
+        src: "$WryeBash2"
+        dst: "$CACHE"
+    - merge:
+        src: "$WryeBash3"
+        dst: "$CACHE"
 
+    #Extract and install Wyre Bash
+    - execute:
+        description: Extracting Wyre Bash
+        file: 7z
+        args: e  '$CACHE/Wrye Bash 312.1 - Installer-591-312-1-1704633269.7z.001' -o"$CACHE/" -y
     - task:
-        executable: $CACHE/Wrye Bash 312.1 - Installer-591-312-1-1704633269.exe
+        executable: '$CACHE/Wrye Bash 312.1 - Installer-591-312-1-1704633269.exe'
         description: Installing Wyre Bash NB Install mods as project not archive
         name: wineexec
         prefix: $GAMEDIR
 
-    - extract:
-        file: "$CACHE/Skyrim Mods/Skyrim Script Extender (SKSE64) GOG-30379-2-2-6-1707977381.7z"
-        dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/" 
+    #Copying Wyre Bash installer to Game folder
+    - copy:
+        src: '$CACHE/Wrye Bash 312.1 - Installer-591-312-1-1704633269.exe'
+        dst: $GAMEDIR/drive_c/GOG Games
 
+
+    #Extracting and Setting UP Nemesis
     - extract:
-        file: "$CACHE/Skyrim Mods/SKSE64 INI PRE DOWNLOAD v1.2-1651-1-2.7z"
+        description: Extracting Nemesis
+        file: "$Nemesis"
         dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data"
-
-    - extract:
-        file: "$CACHE/Skyrim Mods/All in one Address Library (Anniversary Edition)-32444-11-1707902394.zip"
-        dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data/SKSE"
-
-    - extract:
-        file: "$CACHE/Skyrim Mods/PapyrusUtil GOG - Scripting Utility Functions-13048-4-6-1708985698.zip"
-        dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data"
-
-    - extract:
-        file: "$CACHE/Skyrim Mods/(Part 1) SSE Engine Fixes for 1.6.1170 and newer-17230-6-2-1712813573.7z"
-        dst:  "$CACHE"
-    - merge:
-        src: "$CACHE/skse/plugins"
-        dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data/SKSE/Plugins"
-
-    - extract:
-        file: "$CACHE/Skyrim Mods/(Part 2) Engine Fixes - skse64 Preloader and TBB Lib-17230-2020-3-1611367474.7z"
-        dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/"
-
-    - extract:
-        file: "$CACHE/Skyrim Mods/Nemesis Unlimited Behavior Engine-60033-v0-84-beta-1639426722.7z"
-        dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data"
-
     - write_file:
         content: 'start "Nemesis" /D "c:\GOG Games\Skyrim Anniversary Edition\Data\Nemesis_Engine" "Nemesis Unlimited Behavior Engine.exe"'
         file: $GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data/Nemesis_Engine/start.bat
 
-    - move:
-        src: $CACHE/Skyrim Mods
-        dst: $GAMEDIR/drive_c/GOG Games/Skyrim Mods
 
+    #BASE Layer MODS
+    - extract:
+        file: "$SKSE64"
+        dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/" 
+    - copy:
+        src: "$SKSE64"
+        dst: $GAMEDIR/drive_c/GOG Games/MODS
+
+
+    - extract:
+        file: "SKSE64INI"
+        dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data"
+    - copy:
+        src: "$SKSE64INI"
+        dst: $GAMEDIR/drive_c/GOG Games/MODS
+
+
+    - extract:
+        file: "$AllInOne"
+        dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data/SKSE"
+    - copy:
+        src: "$AllInOne"
+        dst: $GAMEDIR/drive_c/GOG Games/MODS
+
+
+    - extract:
+        file: "$PapyrusUtil"
+        dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data"
+    - copy:
+        src: "$PapyrusUtil"
+        dst: $GAMEDIR/drive_c/GOG Games/MODS
+
+
+    - extract:
+        file: "$EngFixP1"
+        dst:  "$CACHE"
+    - merge:
+        src: "$CACHE/skse/plugins"
+        dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data/SKSE/Plugins"
+    - copy:
+        src: "$EngFixP1"
+        dst: $GAMEDIR/drive_c/GOG Games/MODS
+
+
+    - extract:
+        file: "$EngFixP2"
+        dst:  "$GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/"
+    - copy:
+        src: "$EngFixP2"
+        dst: $GAMEDIR/drive_c/GOG Games/MODS
+
+
+    # Extracting and Installing Loot
     - execute:
+        description: Extracting Loot
         file: 7z
-        args: e  $CACHE/loot_0.19.1-win64.zip -o"$GAMEDIR/drive_c/GOG Games/" -ppassword -y
+        args: e  $Loot -o"$GAMEDIR/drive_c/GOG Games/" -ppassword -y
 
     - task:
         executable: $GAMEDIR/drive_c/GOG Games/loot_0.19.1-win64.exe
