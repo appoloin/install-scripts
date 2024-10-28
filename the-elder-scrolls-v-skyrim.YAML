@@ -141,6 +141,10 @@ script:
     - write_file:
         content: 'start "Nemesis" /D "c:\GOG Games\Skyrim Anniversary Edition\Data\Nemesis_Engine" "Nemesis Unlimited Behavior Engine.exe"'
         file: $GAMEDIR/drive_c/GOG Games/Skyrim Anniversary Edition/Data/Nemesis_Engine/start.bat
+    - copy:
+        src: "$Nemesis"
+        dst: $GAMEDIR/drive_c/GOG Games/MODS
+
 
 
     #BASE Layer MODS
