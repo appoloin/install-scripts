@@ -1,14 +1,13 @@
 name: Subnatica
 game_slug: subnautica
 version: Windows Installer
-slug:  NSTALLER
+slug:  INSTALLER
 runner: wine
 year: 2018
 
 script:
   game:
     exe: $GAMEDIR/drive_c/Games/Subnautica/Subnautica.exe
-    arch: win64
     args: -force-opengl
    #args: -force-glcore
    #args: -force-glcore45
@@ -20,7 +19,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win64
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
