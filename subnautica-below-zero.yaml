@@ -7,9 +7,8 @@ year: 2019
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/drive_c/Games/Subnautica Below Zero/SubnauticaZero.exe
-    arch: win64
-    args: -force-opengl
+    exe: $GAMEDIR/drive_c/Games/Subnautica Below Zero/SubnauticaZero.exe
+   #args: -force-opengl
    #args: -force-glcore
    #args: -force-glcore45
     prefix: $GAMEDIR
@@ -20,7 +19,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win64
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
