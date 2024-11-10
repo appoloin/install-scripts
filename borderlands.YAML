@@ -1,7 +1,7 @@
 name: Borderlands
 game_slug: borderlands
 version: Windows Installer
-slug: borderlands-goty-enhanced_INSTALLER
+slug: borderlands-goty-INSTALLER
 runner: wine
 year: 2009
 
