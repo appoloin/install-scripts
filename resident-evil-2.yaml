@@ -1,0 +1,32 @@
+name: Resident Evil 2
+game_slug: resident-evil-2
+version: Good Old Games Installer
+slug: resident-evil-2
+runner: wine
+year: 1998
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Resident Evil 2/RE2Launcher.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        args: /SILENT
+        name: wineexec
+        prefix: $GAMEDIR
+ 
+  wine:
+    overrides:
+      ddraw: native
+      dinput: native
