@@ -30,6 +30,8 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+        return_code: 9
+
     - task:
         executable: $patch
         name: wineexec

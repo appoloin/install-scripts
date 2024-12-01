@@ -1,7 +1,7 @@
 name: Subnatica Below Zero
 game_slug: subnautica-below-zero
 version: Windows Installer
-slug:  INSTALLER
+slug:  Subnatica-Below-Zero-INSTALLER
 runner: wine
 year: 2019
 

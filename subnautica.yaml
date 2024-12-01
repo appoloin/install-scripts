@@ -1,7 +1,7 @@
 name: Subnatica
 game_slug: subnautica
 version: Windows Installer
-slug:  INSTALLER
+slug:  Subnatica-INSTALLER
 runner: wine
 year: 2018
 

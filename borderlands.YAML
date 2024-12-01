@@ -21,7 +21,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: winxp vcrun2005 vcrun2008 vcrun2010 dotnet40
+        app: vcrun2005 vcrun2008 vcrun2010 dotnet40
         name: winetricks
         prefix: $GAMEDIR
 
@@ -29,3 +29,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+        return_code: 9
