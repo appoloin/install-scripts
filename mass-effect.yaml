@@ -16,30 +16,23 @@ script:
 
   files:
     - setup: N/A:Select Setup.exe
+    - BlobFix:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MassEffect/SilentPatchME.zip
+        filename: SilentPatchME.zip
+    - Controller1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MassEffect/ME1Controller-60-1-2-2.7z.001
+        filename: ME1Controller-60-1-2-2.7z.001
+    - Controller2:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MassEffect/ME1Controller-60-1-2-2.7z.002
+        filename:  ME1Controller-60-1-2-2.7z.002
+    - Controller3:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MassEffect/ME1Controller-60-1-2-2.7z.003
+        filename:  ME1Controller-60-1-2-2.7z.003
+    - Controller4:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MassEffect/ME1Controller-60-1-2-2.7z.004
+        filename:  ME1Controller-60-1-2-2.7z.004
 
   installer:    
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O ""$output"" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
         name: create_prefix
         install_mono: false
@@ -96,14 +89,10 @@ script:
         name: winekill
         prefix: $GAMEDIR
 
-    #Download and installing patch
-    - execute:
-        file: $CACHE/download.sh
-        args: 1Xg6Go8_egR7rVSS8VK7lWpzG94xYYCc9 "$CACHE/SilentPatchME.zip" 
-        description: Downloading Patch
-
+    #extract and install patch
     - extract:
-        file: "$CACHE/SilentPatchME.zip" 
+        description: Extracting Black Blob Fix
+        file: "$BlobFix" 
         dst: $CACHE
 
     - merge:
@@ -116,25 +105,35 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-    #Downloading and install controller mod
-    - execute:
-        file: $CACHE/download.sh
-        args: 1afBsUtM7bJLg9fPlqlEmEBVM1f_mQa5A "$CACHE/ME1Controller-60-1-2-2.7z" 
-        description: Downloading Controller MOD
 
+    #Move Controller MOD into one folder
+    - merge:
+        src: "$Controller1"
+        dst: "$CACHE"
+    - merge:
+        src: "$Controller2"
+        dst: "$CACHE"
+    - merge:
+        src: "$Controller3"
+        dst: "$CACHE"
+    - merge:
+        src: "$Controller4"
+        dst: "$CACHE"
+
+    #install controller mod
     - execute:
         file: 7z
-        args: x "$CACHE/ME1Controller-60-1-2-2.7z"  -o"$CACHE" -y
-
+        args: x "$CACHE/ME1Controller-60-1-2-2.7z.001"  -o"$CACHE" -y
+                        
     - execute:
         command: 'mv "$GAMEDIR/drive_c/users/$USER/Documents/BioWare/Mass Effect/Config"  
                       "$GAMEDIR/drive_c/users/$USER/Documents/BioWare/Mass Effect/Config_BAK" 
 
-                  mv "$CACHE/ME1Controller/Config" 
+                  mv "$CACHE/Config" 
                      "$GAMEDIR/drive_c/users/$USER/Documents/BioWare/Mass Effect/Config"
                   '
     - merge:
-        src: "$CACHE/ME1Controller/Mass Effect" 
+        src: "$CACHE/Mass Effect" 
         dst: "$GAMEDIR/drive_c/Program Files (x86)/Mass Effect Ultimate Edition"
              
   wine:
