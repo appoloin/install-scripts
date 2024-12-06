@@ -1,7 +1,7 @@
 name: Mass Effect 2
 game_slug: mass-effect-2
 version: Windows Installer
-slug:  Mass-Effect-installer
+slug:  Mass-Effect-2-installer
 runner: wine
 year: 2010
 
@@ -16,32 +16,23 @@ script:
 
   files:
     - setup: N/A:Select Setup.exe
+    - Controller1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MassEffect/ME2Controller-62-1-7-2.7z.001
+        filename: ME2Controller-62-1-7-2.7z.001
+    - Controller2:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MassEffect/ME2Controller-62-1-7-2.7z.002
+        filename:  ME2Controller-62-1-7-2.7z.002
+    - Controller3:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MassEffect/ME2Controller-62-1-7-2.7z.003
+        filename:  ME2Controller-62-1-7-2.7z.003
+    - Controller4:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MassEffect/ME2Controller-62-1-7-2.7z.004
+        filename:  ME2Controller-62-1-7-2.7z.004
+    - Controller5:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MassEffect/ME2Controller-62-1-7-2.7z.005
+        filename:  ME2Controller-62-1-7-2.7z.005
 
-
-#add mod
   installer:    
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O ""$output"" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
         name: create_prefix
         install_mono: false
@@ -106,15 +97,27 @@ script:
         prefix: $GAMEDIR
 
 
-    #Downloading and installing controller mod
-    - execute:
-        file: $CACHE/download.sh
-        args: 1g0WbSXDCw9s-aqCX9jFRBJKHGOAZnpGc "$CACHE/ME2Controller-62-1-7-2.7z" 
-        description: Downloading Controller MOD
+    #Move Controller MOD into one folder
+    - merge:
+        src: "$Controller1"
+        dst: "$CACHE"
+    - merge:
+        src: "$Controller2"
+        dst: "$CACHE"
+    - merge:
+        src: "$Controller3"
+        dst: "$CACHE"
+    - merge:
+        src: "$Controller4"
+        dst: "$CACHE"
+    - merge:
+        src: "$Controller5"
+        dst: "$CACHE"
 
+    #install controller mod
     - execute:
         file: 7z
-        args: x "$CACHE/ME2Controller-62-1-7-2.7z"  -o"$CACHE" -y
+        args: x "$CACHE/ME2Controller-62-1-7-2.7z.001"  -o"$CACHE/ME2Controller" -y
 
     - merge:
         src: "$CACHE/ME2Controller/" 

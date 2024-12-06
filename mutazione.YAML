@@ -1,7 +1,7 @@
 name: Mutazione
 game_slug: mutazione
-version: Installer
-slug: INSTALLER
+version: Good Old Games
+slug: mutizione
 runner: wine
 year: 2019
 
