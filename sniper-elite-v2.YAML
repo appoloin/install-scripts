@@ -31,6 +31,7 @@ script:
     - task:
         description: Installing
         executable: $game
+        args: /SILENT
         name: wineexec
         prefix: $GAMEDIR
 

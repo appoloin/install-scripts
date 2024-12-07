@@ -24,3 +24,5 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+        args: /SILENT
+
