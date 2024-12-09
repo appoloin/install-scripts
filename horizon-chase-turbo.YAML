@@ -1,7 +1,7 @@
 name: Horizon Chase Turbo
 game_slug: horizon-chase-turbo
-version: Good Old Games Installer
-slug: INSTALLER
+version: Windows Installer
+slug: horizon-chase-turbo
 runner: wine
 year: 2018
 

@@ -1,7 +1,7 @@
 name: A Short Hike
 game_slug: a-short-hike
-version: Installer
-slug: INSTALLER
+version: Good Old Games
+slug: a-short-hikke
 runner: wine
 
 script:
