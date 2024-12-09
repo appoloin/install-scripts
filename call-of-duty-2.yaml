@@ -1,75 +1,84 @@
 name: Call of Duty 2
 game_slug: call-of-duty-2
 version: Windows Installer
-slug:  installer
+slug:  call-of-duty-2
 runner: wine
 year: 2005
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/Activision/Call of Duty 2/CoD2SP_s.exe
-    arch: win32
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Activision/Call of Duty 2/CoD2SP_s.exe
     prefix: $GAMEDIR
 
 
   files:
     - setup: N/A:Select Setup
-    - patch13: 
-        url: https://drive.google.com/uc?export=download&id=1jbcpMsIlMYCAVeBy7jsZmsBf7F5D1pX3
-        filename: patch.7z
-    - crack: 
-        url: https://drive.google.com/uc?export=download&id=1DgfBEPngcXuAQfv67vrExfpgh7nqFYlw
-        filename: crack.7z
+    - patch1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/CallOfDuty/callofduty2patchv1_3.7z.001
+        filename: callofduty2patchv1_3.7z.001
+    - patch2:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/CallOfDuty/callofduty2patchv1_3.7z.002
+        filename:  callofduty2patchv1_3.7z.002
+    - patch3:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/CallOfDuty/callofduty2patchv1_3.7z.003
+        filename:  callofduty2patchv1_3.7z.003
+    - NOCD: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/CallOfDuty/CoD2SP_s.7z
+        filename: CoD2SP_s.7z
 
 
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
     - task:
-        app: winxp d3dcompiler_43 d3dx9 vcrun2008
+        app: vcrun2008
         description: Installing additional components
-        arch: win32
         name: winetricks
         prefix: $GAMEDIR
 
     - task:
         executable: $setup
         description: After the installer crashes, you'll have to end the process "cod2.exe" using a task manager
-        arch: win32
         name: wineexec
         prefix: $GAMEDIR
 
+    #Move Patch into one folder
+    - merge:
+        src: "$patch1"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch2"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch3"
+        dst: "$CACHE"
+
     - execute:
         file: 7z
-        args: e  $patch13 -o"$GAMEDIR/drive_c/tmp/" -ppassword -y
+        args: x  "$CACHE/callofduty2patchv1_3.7z.001" -o"$GAMEDIR/drive_c/tmp/" -ppassword -y
 
     - task:
         executable: "$GAMEDIR/drive_c/tmp/callofduty2patchv1_3.exe"
         description: Instaling Patch
-        arch: win32
         name: wineexec
         prefix: $GAMEDIR
 
     - rename:
-        src: $GAMEDIR/drive_c/Program Files/Activision/Call of Duty 2/CoD2SP_s.exe
-        dst: $GAMEDIR/drive_c/Program Files/Activision/Call of Duty 2/CoD2SP_s.exe.old
+        src: $GAMEDIR/drive_c/Program Files (x86)/Activision/Call of Duty 2/CoD2SP_s.exe
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Activision/Call of Duty 2/CoD2SP_s.exe.old
 
     - execute:
         file: 7z
-        args: e  $crack -o"$GAMEDIR/drive_c/tmp/" -ppassword -y
+        args: e  $NOCD -o"$GAMEDIR/drive_c/tmp/" -ppassword -y
 
     - copy:
         src: $GAMEDIR/drive_c/tmp/CoD2SP_s.exe
-        dst: "$GAMEDIR/drive_c/Program Files/Activision/Call of Duty 2"
+        dst: "$GAMEDIR/drive_c/Program Files (x86)/Activision/Call of Duty 2"
 
   wine:
     esync: false
     fsync: false
-
-  system:
-    reset_desktop: true
