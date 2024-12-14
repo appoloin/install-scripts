@@ -1,26 +1,32 @@
 name: Far Cry
 game_slug: far-cry
 version: Good Old Games Installer
-slug: installer
+slug: far-cry
 runner: wine
 year: 2004
 
 script:
   game:
     exe: "$GAMEDIR/drive_c/GOG Games/Far Cry/Bin32/FarCry.exe"
-    arch: win32
+    args: -MOD:QuickSave_beta
     prefix: $GAMEDIR
+    launch_configs:
+      - exe: "$GAMEDIR/drive_c/GOG Games/Far Cry/Bin32/FarCry.exe"
+        name: No Quick Save Mod
+        prefix: $GAMEDIR
 
   files:
     - game: N/A:Select GOG installer.
     - patch:  
-        url: https://drive.google.com/uc?export=download&id=1xdPAJXPyAbbIwP_ywKWf9pXXpkLO02q4
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/FarCry/Tent_AI_Bug_Fix_Final.zip
         filename: Tent_AI_Bug_Fix_Final.zip
-
+    - qsave:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/FarCry/far_cry_quicksave_beta_1.rar
+        filename: far_cry_quicksave_beta_1.rar
+ 
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
@@ -30,6 +36,14 @@ script:
         executable: $game
         name: wineexec
         prefix: $GAMEDIR
+        args: /SILENT
+
+    - execute:
+        command: 'mkdir -p "$GAMEDIR/drive_c/GOG Games/Far Cry/Mods"'
+
+    - extract:
+        file: $qsave
+        dst: $GAMEDIR/drive_c/GOG Games/Far Cry/Mods/
 
     - extract:
         file: $patch
