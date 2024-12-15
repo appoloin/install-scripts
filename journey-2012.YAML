@@ -1,7 +1,7 @@
 name: Journey
 game_slug: journey
-version: Installer
-slug: journey
+version: Windows Installer
+slug: journey-windows-installer
 runner: wine
 year: 2012
 
