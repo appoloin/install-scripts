@@ -1,7 +1,7 @@
 name: Singularity
 game_slug: singularity
 version: Good Old Games Installer
-slug:  installer
+slug:  singularity-gog-installer
 runner: wine
 year: 2010
 
@@ -22,7 +22,7 @@ script:
         prefix: $GAMEDIR
 
     - task: 
-        app: xact physx
+        app: xact xact_x64 physx
         name: winetricks
         prefix: $GAMEDIR
 
