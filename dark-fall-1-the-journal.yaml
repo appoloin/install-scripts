@@ -1,7 +1,7 @@
 name: Dark Fall 1 - The Journal
 game_slug: dark-fall-1-the-journal
 version: Good Old Games Installer
-slug: Dark-Fall-installer
+slug: Dark-Fall-gog-installer
 runner: wine
 year: 2002
 
@@ -32,3 +32,8 @@ script:
 
   wine:
     Desktop: true
+
+#  system:
+#      gamescope: true
+#      gamescope_game_res: 640x480
+#      gamescope_output_res: 1366x768
