@@ -1,7 +1,7 @@
 name: Mass Effect 3
 game_slug: mass-effect-3
 version: Windows Installer
-slug:  Mass-Effect-3-installer
+slug:  Mass-Effect-3-windows-installer
 runner: wine
 year: 2012
 
@@ -19,6 +19,21 @@ script:
 
   files:
     - setup: N/A:Select Setup.exe
+    - ModManager1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MassEffect/ME3Tweaks%20Mod%20Manager%20Build%208.2.4%20(Build%20133)-373-8-2-4-133-1704685494.7z.001
+        filename: ME3Tweaks Mod Manager Build 8.2.4 (Build 133)-373-8-2-4-133-1704685494.7z.001
+    - ModManager2:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MassEffect/ME3Tweaks%20Mod%20Manager%20Build%208.2.4%20(Build%20133)-373-8-2-4-133-1704685494.7z.002
+        filename:  ME3Tweaks Mod Manager Build 8.2.4 (Build 133)-373-8-2-4-133-1704685494.7z.002
+    - ModManager3:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MassEffect/ME3Tweaks%20Mod%20Manager%20Build%208.2.4%20(Build%20133)-373-8-2-4-133-1704685494.7z.003
+        filename:  ME3Tweaks Mod Manager Build 8.2.4 (Build 133)-373-8-2-4-133-1704685494.7z.003
+    - ModManager4:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MassEffect/ME3Tweaks%20Mod%20Manager%20Build%208.2.4%20(Build%20133)-373-8-2-4-133-1704685494.7z.004
+        filename: ME3Tweaks Mod Manager Build 8.2.4 (Build 133)-373-8-2-4-133-1704685494.7z.004
+    - ModManager5:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MassEffect/ME3Tweaks%20Mod%20Manager%20Build%208.2.4%20(Build%20133)-373-8-2-4-133-1704685494.7z.005
+        filename: ME3Tweaks Mod Manager Build 8.2.4 (Build 133)-373-8-2-4-133-1704685494.7z.005
 
   installer:    
     - task:
@@ -27,13 +42,6 @@ script:
         install_gecko: false
         prefix: $GAMEDIR
     
-    #download MODS
-    - execute:
-        command: 'rclone copy 
-                 "Patches - Mega 1:MODS/MassEffect/Mass Effect 3" 
-                 "$GAMEDIR/drive_c/users/$USER/Documents/MODS" 
-                '
-
     - task:
         app: dotnet6 physx vcrun2012
         description: Runnig Winetricks.
@@ -85,40 +93,38 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+        return_code: 9
 
-    - task:
-        description: 'Installing Mod Manager'
-        executable: "$GAMEDIR/drive_c/users/$USER/Documents/MODS/ME3Tweaks Mod Manager Build 8.2.4 (Build 133)-373-8-2-4-133-1704685494.exe" 
-        name: wineexec
-        prefix: $GAMEDIR
+    #Move Controller MOD into one folder
+    - merge:
+        src: "$ModManager1"
+        dst: "$CACHE"
+    - merge:
+        src: "$ModManager2"
+        dst: "$CACHE"
+    - merge:
+        src: "$ModManager3"
+        dst: "$CACHE"
+    - merge:
+        src: "$ModManager4"
+        dst: "$CACHE"
+    - merge:
+        src: "$ModManager5"
+        dst: "$CACHE"
+
+    #install mod manager
+    - execute:
+        command: 'mkdir -p "$GAMEDIR/drive_c/users/$USER/Documents/MODS/"'
 
     - execute:
         file: 7z
-        args: x "$GAMEDIR/drive_c/users/$USER/Documents/MODS/CEM Full-2-1-4-1.zip"  -o"$GAMEDIR/drive_c/users/$USER/Documents/MODS/CEM Full-2-1-4-1" -y
+        args: x "$CACHE/ME3Tweaks Mod Manager Build 8.2.4 (Build 133)-373-8-2-4-133-1704685494.7z.001"  -o"$GAMEDIR/drive_c/users/$USER/Documents/MODS/" -y
 
     - task:
         description: 'Installing Mod Manager'
-        executable: "$GAMEDIR/drive_c/users/$USER/Documents/MODS/CEM Full-2-1-4-1/CEM_Full_ver_1_4_1.exe" 
+        executable: "$GAMEDIR/drive_c/users/$USER/Documents/MODS//ME3Tweaks Mod Manager Build 8.2.4 (Build 133)-373-8-2-4-133-1704685494.exe" 
         name: wineexec
         prefix: $GAMEDIR
-
-
-    - execute:
-        file: 7z
-        args: x "$GAMEDIR/drive_c/users/$USER/Documents/MODS/CEM Goodbye-2-1-1572802363.zip"  -o"$GAMEDIR/drive_c/users/$USER/Documents/MODS/CEM Goodbye-2-1-1572802363" -y
-
-    - task:
-        description: 'Installing Mod Manager'
-        executable: "$GAMEDIR/drive_c/users/$USER/Documents/MODS/CEM Goodbye-2-1-1572802363/CEMG_ver_1.exe" 
-        name: wineexec
-        prefix: $GAMEDIR
-
-
-    - execute:
-        file: 7z
-        args: x "$GAMEDIR/drive_c/users/$USER/Documents/MODS/MEHEMv0.5 to CEM-2-1-4-1.zip"  -o"$GAMEDIR/drive_c/users/$USER/Documents/MODS/MEHEMv0.5 to CEM-2-1-4-1" -y
-
-
 
   wine:
     overrides:
