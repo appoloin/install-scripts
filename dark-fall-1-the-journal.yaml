@@ -15,8 +15,7 @@ script:
 
 
   install_complete_text: "Installation finished!\n\n\n\nIMPORTANT!\n============\nPlease\
-    \ change the wine version in the game\xB4s settings to \"System\"\
-    \ ,this game needs working virtual desktop."
+    \ change the wine version in the game\xB4s settings to \"UMU-Latest\"\ "
 
   installer:
     - task:
@@ -30,10 +29,3 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-  wine:
-    Desktop: true
-
-#  system:
-#      gamescope: true
-#      gamescope_game_res: 640x480
-#      gamescope_output_res: 1366x768
