@@ -34,15 +34,19 @@ script:
         
     - copy:
         src: $CACHE/scripts
-        dst: $GAMEDIR/drive_c/Games/Max Payne 2 The Fall of Max Payne/Scripts
+        dst: $GAMEDIR/drive_c/Games/Max Payne 2 The Fall of Max Payne/scripts
 
     - copy:
         src: $CACHE/d3d8.dll
         dst: $GAMEDIR/drive_c/Games/Max Payne 2 The Fall of Max Payne/
 
+    - write_config:
+        data:
+          GlobalSets:
+            UseD3D8to9: 1
+        file: $GAMEDIR/drive_c/Games/Max Payne 2 The Fall of Max Payne/scripts/global.ini
+
 
   wine:
     overrides:
-      d3d8.dll: n,b
-
- 
+      d3d8: n,b
