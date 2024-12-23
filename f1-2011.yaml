@@ -10,6 +10,11 @@ script:
     exe: "$GAMEDIR/drive_c/F1 2011/F1_2011.exe"
     prefix: $GAMEDIR
 
+  files:
+    - patch: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/F1/2011.7z
+        filename: 2011.zip
+
   installer:
     - insert-disc:
           description: Select game folder
@@ -31,9 +36,6 @@ script:
         args: -r "$DISC/"  "$GAMEDIR/drive_c/"
 
     - execute:
-        command: 'rclone copy "Patches - Google 1:Patches/F12011/patch.7z" "$CACHE"'
-
-    - execute:
         file: 7z
-        args: x $CACHE/patch.7z -o"$GAMEDIR/drive_c/F1 2011/" -ppassword -y
+        args: e $patch -o"$GAMEDIR/drive_c/F1 2011/" -ppassword -y
 

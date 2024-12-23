@@ -8,6 +8,9 @@ year: 2010
 script:
   files:
     - setup: N/A:Select setup file 
+    - patch: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/F1/2010.7z
+        filename: 2010.zip
 
   game:
     exe: "$GAMEDIR/drive_c/Games/F1 2010/f1_2010.exe"
@@ -26,9 +29,6 @@ script:
         prefix: $GAMEDIR
 
     - execute:
-        command: 'rclone copy "Patches - Google 1:Patches/F12010/patch.7z" "$CACHE"'
-
-    - execute:
         file: 7z
-        args: x $CACHE/patch.7z -o"$GAMEDIR/drive_c/Games/F1 2010/" -ppassword -y
+        args: e $patch -o"$GAMEDIR/drive_c/Games/F1 2010/" -ppassword -y
 
