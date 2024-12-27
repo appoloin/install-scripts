@@ -1,5 +1,5 @@
 name: Thief 2 - The Metal Age
-game_slug: thief-2
+game_slug: thief-ii-the-metal-age
 version: Good Old Games Installer
 slug: thief-2-installer
 runner: wine
@@ -8,46 +8,48 @@ year: 2000
 script:
   files:
     - setup: N/A:Select setup file from GOG
+    - openalsoft:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/openal-soft-1.23.1-bin.zip
+        filename: openal-soft-1.23.1-bin.zip
+    - newdark1:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Thief/T2Fix_1.27e.7z.001
+        filename:  T2Fix_1.27e.7z.001
+    - newdark2:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Thief/T2Fix_1.27e.7z.002
+        filename: T2Fix_1.27e.7z.002
+    - newdark3:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Thief/T2Fix_1.27e.7z.003
+        filename:  T2Fix_1.27e.7z.003
+    - newdark4:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Thief/T2Fix_1.27e.7z.004
+        filename:  T2Fix_1.27e.7z.004
+    - newdark5:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Thief/T2Fix_1.27e.7z.005
+        filename:  T2Fix_1.27e.7z.005
+    - newdark6:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Thief/T2Fix_1.27e.7z.006
+        filename: T2Fix_1.27e.7z.006
+
 
   game:
-    arch: win32
-    exe: "$GAMEDIR/drive_c/Program Files/GOG.com/Thief 2/Thief2.exe"
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/GOG.com/Thief 2/Thief2.exe"
     prefix: $GAMEDIR
+    launch_configs:
+      - args: -fm
+        exe: "$GAMEDIR/drive_c/Program Files (x86)/GOG.com/Thief 2/THIEF.EXE"
+        name: Fan Mission Manager
+      - exe: $GAMEDIR/drive_c/OpenAL/alsoft-config/alsoft-config.exe
+        name: OpenAL Configurator
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O ""$output"" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
-
     - task:
-        arch: win32
         name: create_prefix
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx9 vcrun2008 icodecs
-        arch: win32
+        app: vcrun2008
         name: winetricks
         prefix: $GAMEDIR
 
@@ -58,15 +60,29 @@ script:
         prefix: $GAMEDIR
 
     #https://www.ttlg.com/forums/showthread.php?t=134733
-    #Download new dark
-    - execute:
-        file: $CACHE/download.sh
-        args: 1O2q8TqN80oPAtn5cN3HwQcOoFJpLvdoA "$CACHE/T2Fix_1.27e.7z" 
-        description: Downloading New Dark
+    #Move MOD into one folder
+    - merge:
+        src: "$newdark1"
+        dst: "$CACHE"
+    - merge:
+        src: "$newdark2"
+        dst: "$CACHE"
+    - merge:
+        src: "$newdark3"
+        dst: "$CACHE"
+    - merge:
+        src: "$newdark4"
+        dst: "$CACHE"
+    - merge:
+        src: "$newdark5"
+        dst: "$CACHE"
+    - merge:
+        src: "$newdark6"
+        dst: "$CACHE"
 
     - execute:
         file: 7z
-        args: x  "$CACHE/T2Fix_1.27e.7z" -o"$CACHE" -ppassword -y
+        args: x  "$CACHE/T2Fix_1.27e.7z.001" -o"$CACHE" -ppassword -y
 
     - task:
         description: Installing NewDark - GOG uses "program files" the installer will complain, ignore it.
@@ -74,3 +90,28 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+    - extract:
+        src: openalsoft
+        dst: $GAMEDIR/drive_c/OpenAL
+        
+    - copy:
+        dst: $GAMEDIR/drive_c/Program Files (x86)/GOG.com/Thief 2/soft_oal.dll
+        src: $GAMEDIR/drive_c/OpenAL/bin/Win32/soft_oal.dll
+    - task:
+        description: "Once the OpenAL configurator opens make sure to change the entry\
+          \ in Playback \u2192 Stereo Mode to Headphones. Apply the changes and Close\
+          \ the configurator."
+        executable: $GAMEDIR/drive_c/OpenAL/alsoft-config/alsoft-config.exe
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        command: sed -i -e 's/\;snd_oal_device\ Generic\ Software/snd_oal_device\ OpenAL\
+          Soft/g' '$GAMEDIR/drive_c/Program Files (x86)/GOG.com/Thief 2/cam_ext.cfg'
+        description: Change audio settings to OpenAL Soft (Stereo mode)
+
+    - execute:
+        command: sed -i -e 's/\;snd_speaker_config\ 6/snd_speaker_config\ 2/g' '$GAMEDIR/drive_c/Program Files (x86)/GOG.com/Thief 2/cam_ext.cfg'
+  
+  system:
+    pulse_latency: false
