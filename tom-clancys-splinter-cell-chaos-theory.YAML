@@ -9,21 +9,19 @@ script:
   game:
     exe: $GAMEDIR/drive_c/Games/Splinter Cell Chaos Theory/System/splintercell3.exe
     prefix: $GAMEDIR
-    arch: win32
 
 
   files:
     - setup: N/A:Select installer
-    - scws: 
-        url: https://drive.google.com/uc?export=download&id=1E7jKBRTO54uvwL1eWhwVeMWR2TetH2KB
+    - widescreen: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/SplinterCell/SplinterCellChaosTheory.WidescreenFix.zip
         filename: SplinterCellChaosTheory.WidescreenFix.zip
     - controller: 
-        url: https://drive.google.com/uc?export=download&id=1prOuF16AaqKrP_tEsXRAthnUdpPSbAYT
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/SplinterCell/scfix_0_1.zip
         filename: scfix_0_1.zip
 
   installer:
     - task:
-        arch: win32
         name: create_prefix
         install_mono: false
         install_gecko: false
@@ -35,7 +33,7 @@ script:
         prefix: $GAMEDIR
 
     - extract:  
-        file: scws
+        file: $widescreen
         dst:  $CACHE 
 
     - copy:
@@ -59,7 +57,7 @@ script:
         dst: $GAMEDIR/drive_c/Games/Splinter Cell Chaos Theory/System/Scripts
 
     - extract:  
-        file: controller
+        file: $controller
         dst:  $GAMEDIR/drive_c/Games/Splinter Cell Chaos Theory/System/
 
   wine:

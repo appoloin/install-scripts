@@ -9,15 +9,19 @@ script:
   game:
     exe: $GAMEDIR/drive_c/Games/Splinter Cell Pandora Tomorrow/offline/system/SplinterCell2.exe
     prefix: $GAMEDIR
-    arch: win32
 
 
   files:
     - setup: N/A:Select installer
+    - widescreen:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/SplinterCell/SplinterCellPandoraTomorrow.WidescreenFix.zip
+        filename: SplinterCellPandoraTomorrow.WidescreenFix.zip
+    - dgvoodoo:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/dgVoodoo2_61.7z
+        filename: dgVoodoo2_61.7z
 
   installer:
     - task:
-        arch: win32
         name: create_prefix
         install_mono: false
         install_gecko: false
@@ -28,21 +32,13 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-    - execute:
-        command: 'rclone copy 
-            "Patches - Google 1:Patches/TomClancysSplinterCellPandoraTomorrow/SplinterCellPandoraTomorrow.WidescreenFix.zip" 
-            "$CACHE"
-            
-            rclone copy "Patches - Google 1:Systems/Software/dgVoodoo2_61.7z" "$CACHE"
-            '
-
     - extract:
-        file: $CACHE/SplinterCellPandoraTomorrow.WidescreenFix.zip
+        file: $widescreen
         dst: $GAMEDIR/drive_c/Games/Splinter Cell Pandora Tomorrow/offline/
 
     - execute:
         file: 7z
-        args: x $CACHE/dgVoodoo2_61.7z -o"$CACHE" -ppassword -y
+        args: x $dgvoodoo -o"$CACHE" -ppassword -y
 
     - copy:
         src: $CACHE/MS/x86/D3D8.dll
