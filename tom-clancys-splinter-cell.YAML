@@ -13,30 +13,17 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - widescreen:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/SplinterCell/SplinterCell.WidescreenFix.zip
+        filename: SplinterCell.WidescreenFix.zip
+    - dgvoodoo:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/dgVoodoo2_61.7z
+        filename: dgVoodoo2_61.7z
+    - dsound:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/SplinterCell/dsound.dll
+        filename: dsound.dll
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
         name: create_prefix
         install_mono: false
@@ -49,30 +36,20 @@ script:
         prefix: $GAMEDIR
 
     - execute:
-        file: $CACHE/download.sh
-        args: 1MRusXFfuTzaFXEjSYyLTssfrFlaV1Z23 $CACHE/DgVoodoo_2_6.7z
-
-    - execute:
         file: 7z
-        args: x $CACHE/DgVoodoo_2_6.7z -o"$CACHE" -ppassword -y
+        args: x $dgvoodoo -o"$CACHE" -ppassword -y
 
     - copy:
         src: $CACHE/MS/x86/D3D8.dll
         dst: $GAMEDIR/drive_c/GOG Games/Splinter Cell/system/
 
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 10uInQUDL7FTy5M7U9Q5ulB9yI7EFWB6o $CACHE/WidescreenFix.zip
-
     - extract:
-        file: $CACHE/WidescreenFix.zip
+        file: $widescreen
         dst: $GAMEDIR/drive_c/GOG Games/Splinter Cell/system/
-  
-    - execute:
-        file: $CACHE/download.sh
-        args: 1QW-mIANMUmYGCONnMLvLtMIlCj_oYyWp  $GAMEDIR/drive_c/GOG Games/Splinter Cell/system/dsound.dll
 
+    - copy:
+        src: $dsound
+        dst: "$GAMEDIR/drive_c/GOG Games/Splinter Cell/system/"
 
   wine:
     overrides:
