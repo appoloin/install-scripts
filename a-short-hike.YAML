@@ -2,6 +2,7 @@ name: A Short Hike
 game_slug: a-short-hike
 version: Good Old Games
 slug: a-short-hikke
+year: 2019
 runner: wine
 
 script:

@@ -1,7 +1,7 @@
 name:  Technobabylon
 game_slug: technobabylon
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: technobabylon
 runner: scummvm
 year: 2015
 
@@ -14,20 +14,6 @@ script:
     - game: N/A:Select GOG installer.
 
   installer:    
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$1
-          
-          find "$src" -maxdepth 1 -type d \( -iname scummvm -o
-                                            -iname save \) -exec rm -r {}  \;
-                                            
-          find "$src" -maxdepth 1 -type f \( -iname "*.dll" -o
-                                            -iname "*.ico" -o
-                                            -iname "*.ini" \) -exec rm {}  \;'
-        file: $CACHE/remove.sh
-    - chmodx: $CACHE/remove.sh   
-
     - extract:
         format: gog
         file: $game
@@ -35,10 +21,15 @@ script:
         dst: $GAMEDIR
         description: Extracting game files
 
+    #remove
     - execute:
-        args: $GAMEDIR
-        file: $CACHE/remove.sh
-
+        command: 'find "$GAMEDIR" -maxdepth 1 -type d \( -iname scummvm -o
+                                            -iname save \) -exec rm -r {}  \;
+                                            
+          find "$GAMEDIR" -maxdepth 1 -type f \( -iname "*.dll" -o
+                                            -iname "*.ico" -o
+                                            -iname "*.ini" \) -exec rm {}  \;
+          '
 
   scummvm:
     fullscreen: true
