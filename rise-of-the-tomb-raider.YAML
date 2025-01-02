@@ -7,7 +7,7 @@ year: 2016
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Games/Rise of the Tomb Raider 20 Year Celebration/ROTTR.exe
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Rise of the Tomb Raider 20 Year Celebration/ROTTR.exe
     prefix: $GAMEDIR
 
   files:
@@ -31,6 +31,7 @@ script:
         executable: $game
         name: wineexec
         prefix: $GAMEDIR
+        return_code: 9
 
   system:
     pulse_latency: true
