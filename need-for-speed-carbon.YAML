@@ -1,7 +1,7 @@
 name: Need for Speed - Carbon
 game_slug: need-for-speed-carbon
 version: Windows Installer
-slug: INSTALLER
+slug: need-for-speed-carbon
 runner: wine
 year: 2006
 
