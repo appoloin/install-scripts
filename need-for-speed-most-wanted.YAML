@@ -1,7 +1,7 @@
 name: Need for Speed - Most Wanted
 game_slug: need-for-speed-most-wanted
 version: Windows Installer
-slug: INSTALLER
+slug: need-for-speed-most-wanted
 runner: wine
 year: 2005
 
@@ -12,56 +12,41 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - widescreen:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/NeedForSpeed/NFSMostWanted.WidescreenFix.zip
+        filename: NFSMostWanted.WidescreenFix.zip
+    #- controller:
+       # url: https://github.com/appoloin/Patches/raw/refs/heads/master/NeedForSpeed/Release-MW-Pack.zip
+       # filename: Release-MW-Pack.zip
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
         name: create_prefix
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
     
-    - execute:
-        file: $CACHE/download.sh
-        args: 1vyJG76-1Vb7H8_o_Uh5xEvdWeYJJo9I8 $CACHE/NFSMostWanted-WidescreenFix.zip
-
     - extract:  
-        file: $CACHE/NFSMostWanted-WidescreenFix.zip
+        file: $widescreen
         dst:  $CACHE 
 
     - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-    - copy:
-        src: $CACHE/scripts
-        dst: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Most Wanted 2005/Scripts
+        return_code: 9
 
     - copy:
         src: $CACHE/dinput8.dll
         dst: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Most Wanted 2005/
+
+   # - extract:  
+   #     file: $controller
+   #     dst:  $CACHE 
+
+    - copy:
+        src: $CACHE/scripts
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Most Wanted 2005/Scripts
 
     - write_config:
         data:

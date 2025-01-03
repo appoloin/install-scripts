@@ -13,63 +13,39 @@ script:
     - DISC1: N/A:Select Disc1 ISO
     - DISC2: N/A:Select Disc2 ISO
     - DISC3: N/A:Select Disc3 ISO
+    - mt32:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/mt32-roms.7z
+        filename: mt32-roms.7z
+    - GUS:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/GUS_external_files.zip
+        filename: GUS_external_files.zip
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - execute:
         file: mkdir
         args: $GAMEDIR/drive_c $GAMEDIR/drive_d
 
-    - execute:
-        file: $CACHE/download.sh
-        args: 1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6 $CACHE/gus.zip
-
     - extract:
-        file: $CACHE/gus.zip
+        file: $GUS
         dst: $GAMEDIR/drive_c/ULTRASND
 
     - execute:
-        file: $CACHE/download.sh
-        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
-
-    - extract:
-        file: $CACHE/MT32-ROMS.7z
-        dst:  $GAMEDIR/MT32-ROMS
+        file: 7z
+        args: x $mt32 -o"$GAMEDIR" -ppassword -y
 
     - extract:
         file: $DISC1 
         dst:  "$GAMEDIR/drive_d"
     - execute:
         file: chmod
-        args: -R 775  $GAMEDIR/drive_d"
+        args: -R 775  "$GAMEDIR/drive_d"
 
     - extract:
         file: $DISC2 
         dst:  "$GAMEDIR/drive_d"
     - execute:
         file: chmod
-        args: -R 775  $GAMEDIR/drive_d"
+        args: -R 775  "$GAMEDIR/drive_d"
 
     - extract:
         file: $DISC3 
@@ -88,51 +64,10 @@ script:
             gus= true
 
             ultradir = C:\ULTRASND
-          
-          [mt32]
-
-          romdir = $GAMEDIR/MT32-ROMS
-
-          [mouse]
-
-            mouse_capture = onstart   
-            
-            mouse_middle_release=true   
-
-            mouse_sensitivity= 15
-
-          [autoexec]
-
-            mount D "$GAMEDIR/drive_d" -t cdrom
-
-            mount C "$GAMEDIR/drive_c" -t dir
-
-            D:
-
-            install
-            
-            exit'
-        file: $GAMEDIR/setup.conf
-
-    - task:
-        config_file: $GAMEDIR/setup.conf
-        name: dosexec
-        working_dir: $GAMEDIR/drive_c/
-
-    - write_file:
-        content: '[midi]
-
-            mididevice = mt32
-
-          [gus]
-
-            gus= true
-
-            ultradir = C:\ULTRASND
    
           [mt32]
 
-          romdir = $GAMEDIR/MT32-ROMS
+          romdir = $GAMEDIR/mt32-roms
 
           [mouse]
 

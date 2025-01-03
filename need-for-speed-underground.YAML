@@ -1,7 +1,7 @@
 name: Need for Speed - Underground
 game_slug: need-for-speed-underground
 version: Windows Installer
-slug: INSTALLER
+slug: need-for-speed-underground
 runner: wine
 year: 2003
 
@@ -12,42 +12,23 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - widescreen:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/NeedForSpeed/NFSUnderground.WidescreenFix.zip
+        filename: NFSUnderground.WidescreenFix.zip
+    - controller:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/NeedForSpeed/Release-UG-Pack.zip
+        filename: Release-UG-Pack.zip
+
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
         name: create_prefix
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
     
-    - execute:
-        file: $CACHE/download.sh
-        args: 1uzUU1rtcGPgw3DagNO_-sFNHEEfyTb6q $CACHE/NFSUnderground-WidescreenFix.zip
-
     - extract:  
-        file: $CACHE/NFSUnderground-WidescreenFix.zip
+        file: $widescreen
         dst:  $CACHE 
 
     - task:
@@ -59,12 +40,8 @@ script:
         src: $CACHE/dinput8.dll
         dst: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground/
 
-    - execute:
-        file: $CACHE/download.sh
-        args: 14rhMnzQcuaL5H-eJj1vNJ8S8-ZDd8Mr4 $CACHE/Release-UG-Pack.zip
-
     - extract:  
-        file: $CACHE/Release-UG-Pack.zip
+        file: $controller
         dst:  $CACHE 
 
     - copy:
@@ -81,8 +58,6 @@ script:
             ResX: $RESOLUTION_WIDTH
             ResY: $RESOLUTION_HEIGHT
         file: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Underground/Scripts/NFSUnderground.WidescreenFix.ini
-
-
 
   wine:
     overrides:
