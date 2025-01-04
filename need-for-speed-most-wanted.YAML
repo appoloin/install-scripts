@@ -15,9 +15,9 @@ script:
     - widescreen:  
         url: https://github.com/appoloin/Patches/raw/refs/heads/master/NeedForSpeed/NFSMostWanted.WidescreenFix.zip
         filename: NFSMostWanted.WidescreenFix.zip
-    #- controller:
-       # url: https://github.com/appoloin/Patches/raw/refs/heads/master/NeedForSpeed/Release-MW-Pack.zip
-       # filename: Release-MW-Pack.zip
+    - controller:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/NeedForSpeed/Release-MW-Pack.zip
+        filename: Release-MW-Pack.zip
 
   installer:
     - task:
@@ -40,12 +40,16 @@ script:
         src: $CACHE/dinput8.dll
         dst: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Most Wanted 2005/
 
-   # - extract:  
-   #     file: $controller
-   #     dst:  $CACHE 
+    - extract:  
+        file: $controller
+        dst:  $CACHE 
 
     - copy:
         src: $CACHE/scripts
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Most Wanted 2005/Scripts
+
+    - merge:
+        src: "$CACHE/Global"
         dst: $GAMEDIR/drive_c/Program Files (x86)/Need for Speed Most Wanted 2005/Scripts
 
     - write_config:
