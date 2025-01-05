@@ -9,31 +9,27 @@ script:
   files:
     - setup: N/A:Select setup file
     - patch: 
-        url: https://drive.google.com/uc?export=download&id=1AVB2yFnbU4yyYG1LHHf5OfKojIQ3G4xH
-        filename: patch.zip
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/TombRaider/TR1.zip
+        filename: TR1.zip
 
   game:
-    arch: win32
     args: -no-dwrite -no-cef-sandbox
-    exe: "$GAMEDIR/drive_c/Program Files/Eidos Interactive/Tomb Raider GOTY Edition/TombRaider.exe"
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Eidos Interactive/Tomb Raider GOTY Edition/TombRaider.exe"
     prefix: $GAMEDIR
 
   installer:
     - task:
-        arch: win32
         name: create_prefix
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
     - task:
-        arch: win32
         app: vcrun2008 d3dx9 tahoma xact
         name: winetricks
         prefix: $GAMEDIR
 
     - task:
-        arch: win32
         description: Installing Tomb Raider 
         executable: $setup
         name: wineexec
@@ -41,5 +37,5 @@ script:
 
     - execute:
         file: 7z
-        args: e  $patch -o"$GAMEDIR/drive_c/Program Files/Eidos Interactive/Tomb Raider GOTY Edition/" -ppassword -y
+        args: e  $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Eidos Interactive/Tomb Raider GOTY Edition/" -ppassword -y
 
