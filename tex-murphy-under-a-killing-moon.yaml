@@ -1,7 +1,7 @@
 name: Tex Murphy - Under a Killing Moon
 game_slug: tex-murphy-under-a-killing-moon
 version: DOS
-slug:  installer
+slug:  tex-murphy-under-a-killing-moon
 runner: dosbox
 year: 1994
 
@@ -14,30 +14,12 @@ script:
     - DISC2: N/A:Select Disc2 ISO
     - DISC3: N/A:Select Disc3 ISO
     - DISC4: N/A:Select Disc4 ISO
+    - mt32:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/mt32-roms.7z
+        filename: mt32-roms.7z
+
 
   installer:  
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - execute:
         file: mkdir
         args: $GAMEDIR/drive_c $GAMEDIR/drive_d $GAMEDIR/drive_e $GAMEDIR/drive_f $GAMEDIR/drive_g
@@ -71,58 +53,9 @@ script:
         args: -R 775  "$GAMEDIR/drive_g"
 
     - execute:
-        file: $CACHE/download.sh
-        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
+        file: 7z
+        args: x  $mt32 -o"$GAMEDIR" -ppassword -y
 
-    - extract:
-        file: $CACHE/MT32-ROMS.7z
-        dst:  $GAMEDIR/MT32-ROMS
-
-
-    - write_file:
-        content: '[midi]
-        
-            mididevice = mt32
-
-          [gus]
-
-            gus = true
-
-          [mt32]
-
-          romdir = $GAMEDIR/MT32-ROMS
-
-          [mouse]
-
-            mouse_capture = onstart   
-            
-            mouse_middle_release=true   
-
-            mouse_sensitivity= 15
-
-
-          [autoexec]
-          
-            mount C "$GAMEDIR/drive_c" -t dir
-
-            mount D "$GAMEDIR/drive_d" -label DISK1 -t cdrom
-
-            mount E "$GAMEDIR/drive_e" -label DISK2 -t cdrom
-
-            mount F "$GAMEDIR/drive_f" -label DISK3 -t cdrom
-
-            mount G "$GAMEDIR/drive_g" -label DISK4 -t cdrom
-
-            D:
-
-            install
-          
-            exit'
-        file: $GAMEDIR/setup.conf
-    - task:
-        config_file: $GAMEDIR/setup.conf
-        name: dosexec
-        working_dir: $GAMEDIR/drive_c/
   
     - write_file:
         content: '[midi]
@@ -135,7 +68,7 @@ script:
 
           [mt32]
 
-          romdir = $GAMEDIR/MT32-ROMS
+            romdir = $GAMEDIR/mt32-roms
           
           [mouse]
 
@@ -147,17 +80,19 @@ script:
 
           [cpu]
 
-            cycles = 12000
+            cpu_cycles = 25000
+            
+            cpu_cycles_protected = auto
 
           [sdl]
 
-          fullresolution=desktop
+            fullresolution=desktop
 
-          windowresolution=original
+            windowresolution=original
 
-          fullscreen=true
+            fullscreen=true
 
-          output=opengl
+            output=opengl
 
           [render]
 
@@ -225,7 +160,7 @@ script:
             goto launcher
 
 
-          :install
+           :install
 
             cls
 
