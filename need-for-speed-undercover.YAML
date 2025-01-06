@@ -12,30 +12,18 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - fix: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/NeedForSpeed/NFSUndercover.GenericFix.zip
+        filename: NFSUndercover.GenericFix.zip
+   # - controller: 
+   #     url: https://github.com/appoloin/Patches/raw/refs/heads/master/NeedForSpeed/Release-UC-Pack.zip
+   #     filename: Release-UC-Pack.zip
+    - patch: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/NeedForSpeed/NFSUCpatch.7z
+        filename: NFSUCpatch.7z
+
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
         name: create_prefix
         install_mono: false
@@ -52,27 +40,20 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-    - execute:
-        file: $CACHE/download.sh
-        args: 1Zh8bWd9DgT-ekaOVnj6R4lF6eMMAra15 $CACHE/NFS-Fix.zip
-
     - extract:  
-        file: $CACHE/NFS-Fix.zip
-        dst:  "$GAMEDIR/drive_c/Program Files (x86)/"
+        file: $fix
+        dst:  "$GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/Need For Speed - Undercover/"
 
-    - execute:
-        file: $CACHE/download.sh
-        args: 1VRWlu5PNG53GRY8wwhPM1Yvpv_d-K1U_ $CACHE/patch.7z
-
+    
     - execute:
         file: 7z
-        args: x $CACHE/patch.7z -o"$GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/Need For Speed - Undercover/" -ppassword -y
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/Need For Speed - Undercover/" -ppassword -y
 
     - write_config:
         data:
           MISC:
             ImproveGamepadSupport: 1 
-        file: $GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/Need For Speed - Undercover/scripts/NFSMostWanted.WidescreenFix.ini
+        file: $GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/Need For Speed - Undercover/scripts/NFSUndercover.GenericFix.ini
 
 
 
