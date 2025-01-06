@@ -1,13 +1,13 @@
 name: Return of the Obra Dinn
 game_slug: return-of-the-obra-dinn
 version: Good Old Games Installer
-slug: installer
+slug: return-of-the-obra-dim
 runner: wine
 year: 2018
 
 script:
   game:
-    exe: $GAMEDIR/GOG Games/Return of the Obra Dinn/ObraDinn.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Return of the Obra Dinn/ObraDinn.exe
     prefix: $GAMEDIR
 
   files:
