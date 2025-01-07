@@ -10,6 +10,14 @@ script:
       game_id: rama
       path: $GAMEDIR
 
+  files:
+    - disc1: N/A:Select Disc1 iso 
+    - disc2: N/A:Select Disc2 iso 
+    - disc3: N/A:Select Disc3 iso 
+    - mt32:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/mt32-roms.7z
+        filename: mt32-roms.7z
+
   installer:
     - write_file:
         content: '#!/bin/bash
@@ -22,74 +30,52 @@ script:
         file: $CACHE/bulkcopy-alt.sh
     - chmodx: $CACHE/bulkcopy-alt.sh
 
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
-    - insert-disc:
-        description: Please insert disc 1
-        requires: audio
+    - extract:
+        file: $disc1
+        dst: $CACHE/iso1
+        description: Extracting ISO
 
     - execute:
-        args: $DISC "$GAMEDIR"
         file: $CACHE/bulkcopy-alt.sh
+        args: $CACHE/iso1 "$GAMEDIR"
 
     - execute:
         args: -R 775  "$GAMEDIR"
         file: chmod
 
-    - insert-disc:
-        description: Please insert disc 2
-        requires: audio
+    - extract:
+        file: $disc2
+        dst: $CACHE/iso2
+        description: Extracting ISO
 
     - execute:
-        args: $DISC "$GAMEDIR"
         file: $CACHE/bulkcopy-alt.sh
+        args: $CACHE/iso2 "$GAMEDIR"
 
     - execute:
         args: -R 775  "$GAMEDIR"
         file: chmod
 
-    - insert-disc:
-        description: Please insert disc 3
-        requires: audio
+    - extract:
+        file: $disc3
+        dst: $CACHE/iso3
+        description: Extracting ISO
 
     - execute:
-        args: $DISC "$GAMEDIR"
         file: $CACHE/bulkcopy-alt.sh
+        args: $CACHE/iso3 "$GAMEDIR"
 
     - execute:
         args: -R 775  "$GAMEDIR"
         file: chmod
     
     - execute:
-        file: $CACHE/download.sh
-        args: 1e6PIw82-HLpFn27GIjhBskgnWdFijpWg $CACHE/ScummVm-Data-MT32.7z
+        file: 7z
+        args: x  $mt32 -o"$GAMEDIR" -ppassword -y
 
-    - extract:
-        file: $CACHE/ScummVm-Data-MT32.7z
-        dst:  $GAMEDIR/ScummVm-Data-MT32
 
 
   scummvm:
     fullscreen: true
-    datadir: $GAMEDIR/ScummVm-Data-MT32
+    datadir: $GAMEDIR/mt32-roms
     music-driver: mt32
