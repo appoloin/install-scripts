@@ -1,7 +1,7 @@
 name: Outcry
 game_slug: outcry
 version: Windows Installer
-slug: INSTALLER
+slug: outcry
 runner: wine
 year: 2008
 
