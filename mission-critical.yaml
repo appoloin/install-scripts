@@ -61,9 +61,17 @@ script:
         
          cpu_cycles_protected = auto
         
+         cputype = 486
+
+         cpu_throttle = on
+         
          [sblaster]
 
           sbtype = sb16
+         
+         [mixer] 
+
+          rate=22050
          
          [midi]
 
