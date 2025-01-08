@@ -1,7 +1,7 @@
 name: Space Quest 2 - Vohauls Revenge
 game_slug: space-quest-ii-vohaul-s-revenge
-version: Installer
-slug:  installer
+version: Good Old Games Installer
+slug:  spave-quest-2-installer
 runner: scummvm
 year: 1988
  
@@ -9,30 +9,15 @@ year: 1988
 script:
   files:
     - game:  N/A:Select the file Setup.exe
+    - mt32:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/mt32-roms.7z
+        filename: mt32-roms.7z
 
   game:
     game_id: sq2  
     path: $GAMEDIR
   
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$1
-          
-          find "$src" -maxdepth 1 -type d \( -iname app -o
-                                            -iname commonappdata -o
-                                            -iname *redist -o
-                                            -iname scummvm -o
-                                            -iname *support -o
-                                            -iname dosbox -o
-                                            -iname ega -o
-                                            -iname tmp \) -exec rm -r {}  \;
-                                            
-          find "$src" -maxdepth 1 -type f \( -iname "goggame*"  \) -exec rm {}  \;'
-        file: $CACHE/remove.sh
-    - chmodx: $CACHE/remove.sh
-
     - extract:
         format: gog
         file: $game
@@ -40,9 +25,27 @@ script:
         dst: $GAMEDIR
         description: Extracting game files
 
+    #remove
     - execute:
-        args: $GAMEDIR
-        file: $CACHE/remove.sh
+        command: 'find "$GAMEDIR" -maxdepth 1  -type d \( -iname app -o
+                                                          -iname commonappdata -o
+                                                          -iname *redist -o
+                                                          -iname scummvm -o
+                                                          -iname dosbox -o
+                                                          -iname *support -o
+                                                          -iname tmp \) -exec rm -r {} \;
+                                            
+          find "$GAMEDIR" -type f \( -iname "goggame*" \) -exec rm {} \;
+          '
+    
+
+
+    - execute:
+        file: 7z
+        args: x  $mt32 -o"$GAMEDIR" -ppassword -y
+
 
   scummvm:
     fullscreen: true
+    datadir: $GAMEDIR/mt32-roms
+    music-driver: mt32

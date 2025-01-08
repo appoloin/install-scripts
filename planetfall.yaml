@@ -1,7 +1,7 @@
 name: Planetfall
 game_slug: planetfall
 version: DOS
-slug:  installer
+slug:  planetfal-linstaller
 runner: scummvm
 year: 1983
 
@@ -11,24 +11,16 @@ script:
     path: $GAMEDIR
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          dst="$2"
-
-          find "$src" -type f \( -iname "planetfa.DAT"  \) -exec cp {} "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
-
     - insert-disc:
         description: Please insert Lost Treasures of Infocom I CD
         requires: PC
 
+    #copy
     - execute:
-        file: $CACHE/selectcopy.sh
-        args: $DISC "$GAMEDIR"
+        command: 'src_path=$(echo "$DISC" | sed -r "s/(.+)\/.+/\1/")
+
+          find "$src_path" -type f \( -iname "planetfa.DAT" \) -exec cp {} "$GAMEDIR" \;
+          '
 
     - execute:
         file: chmod
