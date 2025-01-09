@@ -10,17 +10,6 @@ script:
     main_file: $GAMEDIR/play.conf
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          dst=$2
-
-          find "$src" -type d \( -iname "ARTHUR"  \) -exec cp -r {} "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
-
     - insert-disc:
         description: Please insert Lost Treasures of Infocom II CD
         requires: DOS
@@ -29,9 +18,12 @@ script:
         file: mkdir
         args: $GAMEDIR/drive_c
 
+    #copy
     - execute:
-        file: $CACHE/selectcopy.sh
-        args: $DISC $GAMEDIR/drive_c
+        command: 'src_path=$(echo "$DISC" | sed -r "s/(.+)\/.+/\1/")
+
+          find "$src_path" -type d \( -iname "ARTHUR" \) -exec cp -r {} "$GAMEDIR/drive_c" \;
+          '
 
     - execute:
         file: chmod

@@ -1,7 +1,7 @@
 name: Blade Runner
 game_slug: blade-runner
-version: Installer
-slug:  installer
+version: Window Installer
+slug:  blade-runner-installer
 runner: scummvm
 year: 1997
 
