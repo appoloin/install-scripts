@@ -3,7 +3,7 @@ game_slug: suspect
 version: DOS
 slug: suspect-installer
 runner: scummvm
-yer: 1984
+year: 1984
 
 script:
   game:
