@@ -6,63 +6,34 @@ runner: scummvm
 year: 2000
 
 script:
+  files:
+    - game:  N/A:Select GOG installer.
+
   game:
     game_id: tlj  
     path: $GAMEDIR
   
   installer:
-    - write_file:
-        content: '#!/bin/bash
+    - extract:
+        format: gog
+        file: $game
+        args: --gog
+        dst: $GAMEDIR
+        description: Extracting game files
 
-            src="$1"
-
-            dst="$2"
-        
-            cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy-alt.sh
-    - chmodx: $CACHE/bulkcopy-alt.sh
-
-    - write_file:
-        content: '#!/bin/bash
-
-            src="$1"
-            
-            find "$src" -maxdepth 1 -type d \( -iname drive_c -o
-                                            -iname dosdevices \) -exec rm -r {}  \;
+    #remove
+    - execute:
+        command: 'find "$GAMEDIR" -maxdepth 1  -type d \( -iname app -o
+                                                          -iname commonappdata -o
+                                                          -iname *redist -o
+                                                          -iname scummvm -o
+                                                          -iname dosbox -o
+                                                          -iname *support -o
+                                                          -iname ega -o
+                                                          -iname tmp \) -exec rm -r {} \;
                                             
-            find "$src" -maxdepth 1 -type f \( -iname "*.reg" -o
-                                            -iname "configure.exe" \) -exec rm {}  \;'
-        file: $CACHE/remove.sh
-    - chmodx: $CACHE/remove.sh
-
-    - insert-disc:
-        description: Please insert disc
-        requires: SETUP.EXE
-
-    - task:
-        name: wine.create_prefix
-        arch: win32
-        install_mono: false
-        install_gecko: false
-        prefix: $GAMEDIR
-
-    - task:
-        name: wine.wineexec
-        executable: $DISC/SETUP.EXE
-        arch: win32
-        prefix: $GAMEDIR
-
-    - execute:
-        args: "'$GAMEDIR/drive_c/Program Files/Funcom/The Longest Journey' '$GAMEDIR'"
-        file: $CACHE/bulkcopy-alt.sh
-
-    - execute:
-        file: chmod
-        args: -R 775  $GAMEDIR
-
-    - execute:
-        file: $CACHE/remove.sh
-        args: "$GAMEDIR"
+          find "$GAMEDIR" -type f \( -iname "goggame*" \) -exec rm {} \;
+          '
 
   scummvm:
     fullscreen: true
