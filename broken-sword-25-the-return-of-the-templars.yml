@@ -1,7 +1,7 @@
 name:  Broken Sword 2.5 - The Return of the Templars
 game_slug: broken-sword-25-the-return-of-the-templars
-version: Windows_Installer
-slug: installer
+version: Windows Installer
+slug: broken-sword-25-installer
 runner: scummvm
 year: 2008
 
@@ -14,23 +14,6 @@ script:
     - game: N/A:Select GOG installer.
 
   installer: 
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$1
-          
-          find "$src" -maxdepth 1 -type d \( -iname app -o
-                                            -iname commonappdata -o
-                                            -iname *redist -o
-                                            -iname scummvm -o
-                                            -iname dosbox -o
-                                            -iname *support -o
-                                            -iname tmp \) -exec rm -r {}  \;
-                                            
-          find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
-        file: $CACHE/remove.sh
-    - chmodx: $CACHE/remove.sh
-
     - extract:
         format: gog
         file: $game
@@ -38,10 +21,19 @@ script:
         dst: $GAMEDIR
         description: Extracting game files
 
+    #remove
     - execute:
-        args: $GAMEDIR
-        file: $CACHE/remove.sh
-
+        command: 'find "$GAMEDIR" -maxdepth 1  -type d \( -iname app -o
+                                                          -iname commonappdata -o
+                                                          -iname *redist -o
+                                                          -iname scummvm -o
+                                                          -iname dosbox -o
+                                                          -iname *support -o
+                                                          -iname ega -o
+                                                          -iname tmp \) -exec rm -r {} \;
+                                            
+          find "$GAMEDIR" -type f \( -iname "goggame*" \) -exec rm {} \;
+          '
 
   scummvm:
     fullscreen: true

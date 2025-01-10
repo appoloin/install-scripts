@@ -1,6 +1,6 @@
 name: The 7th Guest 
 game_slug: the-7th-guest
-version: Installer
+version: DOS
 slug:  7th Guest-installer
 runner: scummvm
 year: 1993

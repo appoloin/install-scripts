@@ -1,6 +1,6 @@
 name: Nightlong - Union City Conspiracy
 game_slug: nightlong-union-city-conspiracy
-version: Installer
+version: DOS
 slug: nightlong-union-city-conspiracy
 runner: scummvm
 year: 1998
@@ -14,25 +14,15 @@ script:
       path: $GAMEDIR
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$1
-
-          dst=$2
-
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          find "$src_path" -type f \( -iname "DATA.NL" \) -exec cp {} "$dst" \;
-          
-          find "$src_path" -type d \( -iname DATA -o
-                                      -iname FMV \) -print  -exec cp {} -r "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
-
+    #copy
     - execute:
-        args: $game $GAMEDIR
-        file: $CACHE/selectcopy.sh
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
+
+           find "$src_path" -type f \( -iname "DATA.NL" \) -exec cp {} "$GAMEDIR" \;
+          
+           find "$src_path" -type d \( -iname DATA -o
+                                      -iname FMV \) -print  -exec cp {} -r "$GAMEDIR" \;
+          '
 
     - execute:
         args: -R 775  $GAMEDIR
