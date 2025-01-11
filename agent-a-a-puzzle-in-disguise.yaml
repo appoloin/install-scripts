@@ -1,6 +1,6 @@
 name: Agent A - A Puzzle in Disguise
 game_slug: agent-a-a-puzzle-in-disguise
-version: Installer
+version: Good Old Games Installer
 slug: agent-a-a-puzzle-in-disguise
 runner: wine
 year: 2015

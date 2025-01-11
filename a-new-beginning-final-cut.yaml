@@ -1,6 +1,6 @@
 name: A New Beginning
 game_slug: a-new-beginning-final-cut
-version: Installer
+version: Good Old Games Installer
 slug: a-new-beginning-final-cut
 runner: wine
 year: 2012

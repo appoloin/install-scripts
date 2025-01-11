@@ -1,7 +1,7 @@
 name: Alan Wake
 game_slug: alan-wake
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: alan-wake-instaler
 runner: wine
 year: 2012
 
@@ -22,7 +22,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: xact xact_64 vcrun2008
+        app: xact vcrun2008
         name: winetricks
         prefix: $GAMEDIR
 
