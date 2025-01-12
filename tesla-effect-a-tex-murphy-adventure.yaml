@@ -8,27 +8,25 @@ year: 2014
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Tesla Effect - A Tex Murphy Adventure/TeslaEffect.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select Setup
+    - game: N/A:Select Setup
 
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
     
     - task:
-        app: corefonts
-        arch: win32
+        app: arial
         name: winetricks
         prefix: $GAMEDIR
 
     - task:
-        executable: $setup
+        executable: $game
         name: wineexec
         prefix: $GAMEDIR
+        return_code: 9

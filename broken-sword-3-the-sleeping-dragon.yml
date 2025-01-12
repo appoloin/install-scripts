@@ -1,14 +1,13 @@
 name: Broken Sword 3 - The Sleeping Dragon
 game_slug: broken-sword-3-the-sleeping-dragon
 version: Windows Installer
-slug: Broken Sword 3-installer
+slug: Broken-Sword-3-installer
 runner: wine
 year: 2003
  
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/THQ/Broken Sword - The Sleeping Dragon/bs3pc.exe
-    arch: win32
+    exe: $GAMEDIR/drive_c/Program Files (x86)/THQ/Broken Sword - The Sleeping Dragon/bs3pc.exe
     prefix: $GAMEDIR
 
   files:
@@ -17,7 +16,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR

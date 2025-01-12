@@ -11,7 +11,7 @@ script:
     prefix: $GAMEDIR
 
   files:
-    - setup: N/A:Select installer
+    - game: N/A:Select installer
 
   installer:
     - task:
@@ -21,7 +21,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        executable: $setup
+        executable: $game
         name: wineexec
         prefix: $GAMEDIR
 
