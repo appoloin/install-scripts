@@ -1,7 +1,7 @@
-name: Assassin's Creed IV
+name: Assassin's Creed IV - Black Flag
 game_slug: assassins-creed-iv-black-flag
 version: Windows Installer
-slug: INSTALLER
+slug: assassins-creed-iv-INSTALLER
 runner: wine
 year: 2013
 
@@ -22,7 +22,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx10 d3dcompiler_43 corefonts tahoma vcrun2008 vcrun2010 dotnet40
+        app: d3dx10 d3dcompiler_43 tahoma vcrun2008 vcrun2010 dotnet40
         description: Installing Visual C++ librairies (2008 & 2010)
         name: winetricks
         prefix: $GAMEDIR
@@ -31,5 +31,6 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+        return_code: 9
 
 

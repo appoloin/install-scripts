@@ -1,7 +1,7 @@
 name: Assassin's Creed Brotherhood
 game_slug: assassins-creed-brotherhood
 version: Windows Installer
-slug: INSTALLER
+slug: assassins-creed-brotherhood-INSTALLER
 runner: wine
 year: 2010
 
@@ -21,7 +21,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: win7 d3dcompiler_43 d3dx9 vcrun2008
+        app: win7 d3dcompiler_43 vcrun2008
         description: Installing additional components
         name: winetricks
         prefix: $GAMEDIR

@@ -1,7 +1,7 @@
 name: Finding Paradise
 game_slug: finding-paradise
 version: Good Old Games Installer
-slug: installer
+slug: finding-paradise-installer
 runner: wine
 year: 2017
 
@@ -10,24 +10,16 @@ script:
     - setup: N/A:Select setup file from GOG
 
   game:
-    arch: win32
     exe: "$GAMEDIR/drive_c/GOG Games/Finding Paradise/Finding Paradise.exe"
     prefix: $GAMEDIR
 
   installer:
     - task:
-        arch: win32
         name: create_prefix
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
   
-    - task:
-        app: corefonts
-        description: Installing corefonts.
-        name: winetricks
-        prefix: $GAMEDIR
-
     - task:
         description: Installing Finding Paradise
         executable: $setup

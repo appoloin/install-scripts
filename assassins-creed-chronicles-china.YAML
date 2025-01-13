@@ -1,7 +1,7 @@
 name: Assassin's Creed Chronicles Chine
 game_slug: assassins-creed-chronicles-china--1
 version: Windows Installer
-slug: INSTALLER
+slug: assassins-creed-china-INSTALLER
 runner: wine
 year: 2015
 
@@ -22,7 +22,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx10 d3dcompiler_43 corefonts tahoma arial vcrun2008 vcrun2010 win7 dotnet40
+        app: d3dx10 d3dcompiler_43 tahoma arial vcrun2008 vcrun2010 win7 dotnet40
         description: Installing librairies
         name: winetricks
         prefix: $GAMEDIR

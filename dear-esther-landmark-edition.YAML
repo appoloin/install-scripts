@@ -1,6 +1,6 @@
 name: Dear Esther
 game_slug: dear-esther-landmark-edition
-version: Installer
+version: Good Old Games Installer
 slug: dear-esther-landmark-edition
 runner: wine
 year: 2016

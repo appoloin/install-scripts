@@ -21,7 +21,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: corefonts tahoma d3dx9 d3dcompiler_43 vcrun2008 vcrun2010
+        app: tahoma d3dcompiler_43 vcrun2008 vcrun2010
         description: Installing DirectX dlls
         name: winetricks
         prefix: $GAMEDIR
@@ -34,3 +34,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+        return_code: 9
