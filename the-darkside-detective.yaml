@@ -1,7 +1,7 @@
 name: The Darkside Detective
 game_slug: the-darkside-detective
 version: Good Old Games Installer
-slug: INSTALLER
+slug: darkside-detective-INSTALLER
 runner: wine
 year: 2017
 

@@ -1,7 +1,7 @@
 name: Runaway A Road Adventure
 game_slug: runaway-a-road-adventure
 version: Good Old Games Installer
-slug:  installer
+slug:  runaway-a-road-adventure-installer
 runner: wine
 year: 2003
 
@@ -24,12 +24,7 @@ script:
         executable: $game
         name: wineexec
         prefix: $GAMEDIR
-
-    - write_config:
-        data:
-          DirectX:
-            dgVoodooWatermark: false
-        file: "$GAMEDIR/drive_c/GOG Games/Runaway - A Road Adventure/dgVoodoo.conf"
+        return_code: 9
 
   wine:      
     dgvoodoo2: true

@@ -1,7 +1,7 @@
 name: The Darkside Detective - A Fumble in the Dark
 game_slug:  the-darkside-detective-a-fumble-in-the-dark
 version: Good Old Games Installer
-slug: NSTALLER
+slug: darkside-detective-fumble-NSTALLER
 runner: wine
 year: 2021
 

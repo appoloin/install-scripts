@@ -11,10 +11,16 @@ script:
     prefix: $GAMEDIR
 
   files:
-    - patch:  
-        url: https://drive.google.com/uc?export=download&id=1IrVgv7x8BzsIqXO7AEQYe42YLxTvDpvj
-        filename: patch.7z
     - setup: N/A:Select installer
+    - patch1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/Crysis3Parch.7z.001
+        filename: Crysis3Parch.7z.001
+    - patch2:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/Crysis3Parch.7z.002
+        filename: Crysis3Parch.7z.002
+    - patch3:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/Crysis3Parch.7z.003
+        filename: Crysis3Parch.7z.003
 
   installer:
     - task:
@@ -24,7 +30,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: vcrun2012 d3dx11_43 xact xact_64
+        app: vcrun2012 d3dx11_43 xact xact_x64
         name: winetricks
         prefix: $GAMEDIR
 
@@ -32,8 +38,19 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+        return_code: 9
+
+    - merge:
+        src: "$patch1"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch2"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch3"
+        dst: "$CACHE"
 
     - execute:
         file: 7z
-        args: e $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Crysis 3/Bin32/" -ppassword -y
+        args: e "$CACHE/Crysis3Parch.7z.001" -o"$GAMEDIR/drive_c/Program Files (x86)/Crysis 3/Bin32/" -ppassword -y
 

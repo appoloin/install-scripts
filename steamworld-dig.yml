@@ -1,6 +1,6 @@
 name: Steamworld Dig
 game_slug:  steamworld-dig
-version: Installer
+version: Good Old Games Installer
 slug: steamworld-dig
 runner: wine
 year: 2013

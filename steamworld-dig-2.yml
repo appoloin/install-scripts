@@ -1,6 +1,6 @@
 name: Steamworld Dig 2
 game_slug:  steamworld-dig-2
-version: Installer
+version: Good Old Games Installer
 slug: steamworld-dig-2
 runner: wine
 year: 2017

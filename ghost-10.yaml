@@ -26,9 +26,11 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+
     - task:
         executable: $DLC1
         name: wineexec
         prefix: $GAMEDIR
+        args: /SILENT 
 
 
