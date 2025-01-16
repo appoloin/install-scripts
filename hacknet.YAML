@@ -1,7 +1,7 @@
 name: Hacknet
 game_slug:  hacknet
 version: Good Old Games Installer
-slug: WINE_TEMP_INSTALLER
+slug: hacknet-INSTALLER
 runner: wine
 year: 2015
 
@@ -22,7 +22,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx9 dotnet40 xna40
+        app: dotnet40 xna40
         name: winetricks
         prefix: $GAMEDIR
 

@@ -1,7 +1,7 @@
 name: Carrion
 game_slug: carrion
 version: Good Old Games Installer
-slug:  installer
+slug:  carrion-installer
 runner: wine
 year: 2020
 

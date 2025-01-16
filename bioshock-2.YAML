@@ -1,7 +1,7 @@
 name: Bioshock 2
 game_slug: bioshock-2
 version: Windows Installer
-slug: INSTALLER
+slug: bioshock-2-INSTALLER
 runner: wine
 year: 2010
 
@@ -12,9 +12,9 @@ script:
 
   files:
     - game: N/A:Select installer.
-    - patch: 
-        url: https://drive.google.com/uc?export=download&id=1XmeNWjNRjjMGCjaPnKxqEHueHAAHtzQf
-        filename: patch.7z
+    - patch1: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/Bioshock2-Patch.7z
+        filename: Bioshock-Patch.7z
 
 
   installer:
@@ -40,5 +40,5 @@ script:
 
     - execute:
         file: 7z
-        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/2K Games/BioShock 2/" -ppassword -y
+        args: x $patch1 -o"$GAMEDIR/drive_c/Program Files (x86)/2K Games/BioShock 2/" -ppassword -y
 

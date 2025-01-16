@@ -7,26 +7,24 @@ year: 2010
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/Call of Duty Black Ops/BlackOps.exe
-    arch: win32
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Call of Duty Black Ops/BlackOps.exe
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
     - patch:  
-        url: https://drive.google.com/uc?export=download&id=1JeGZyt8vbFSlDKLj1hA4KZ9n43MY1iPP
-        filename: patch.7z
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/CallOfDuty/CallOfDutyBlackOps.7z
+        filename: CallOfDutyBlackOps.7z
 
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
     - task:
-        app: winxp vcrun2008 vcrun2010 d3dcompiler_43 d3dx9 xact
+        app: winxp vcrun2008 vcrun2010 d3dcompiler_43 xact
         name: winetricks
         prefix: $GAMEDIR
 
@@ -37,7 +35,7 @@ script:
 
     - execute:
         file: 7z
-        args: e $patch -o"drive_c/Program Files/Call of Duty Black Ops/" -ppassword -y
+        args: e $patch -o"drive_c/Program Files (x86)/Call of Duty Black Ops/" -ppassword -y
 
 
   wine:

@@ -7,8 +7,7 @@ year: 2008
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/Call of Duty World at War/CoDWaW.exe
-    arch: win32
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Call of Duty World at War/CoDWaW.exe
     prefix: $GAMEDIR
 
   files:
@@ -17,22 +16,20 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
     - task:
         app: winxp xact
-        arch: win32
         name: winetricks
         prefix: $GAMEDIR
 
     - task:
         executable: $setup
-        arch: win32
         name: wineexec
         prefix: $GAMEDIR
+        return_code: 9
 
   wine:
     esync: false

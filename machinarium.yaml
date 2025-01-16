@@ -1,7 +1,7 @@
 name: Machinarium
 game_slug: machinarium
-version: Installer
-slug:  installer
+version: Good Old Games Installer
+slug:  machinarium-installer
 runner: wine
 year: 2009
 

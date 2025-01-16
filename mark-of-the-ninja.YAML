@@ -1,7 +1,7 @@
 name: Mark of the Ninja
 game_slug:  mark-of-the-ninja
 version: Good Old Games Installer
-slug:  INSTALLER
+slug:  mark-of-the-ninja-INSTALLER
 runner: wine
 year: 2012
 

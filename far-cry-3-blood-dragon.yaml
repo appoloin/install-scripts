@@ -1,21 +1,20 @@
 name: Far Cry 3 Blood Dragon
 game_slug: far-cry-3-blood-dragon
 version: Windows Installer
-slug: installer
+slug: farcry-3-blood-dragon-installer
 runner: wine
 year: 2013
 
 script:
   game:
-    exe: "$GAMEDIR/drive_c/Program Files/Ubisoft/Far Cry 3 Blood Dragon/bin/fc3_blooddragon_d3d11.exe"
-    arch: win32
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Ubisoft/Far Cry 3 Blood Dragon/bin/fc3_blooddragon_d3d11.exe"
     prefix: $GAMEDIR
 
   files:
     - game: N/A:Select installer.
     - patch: 
-        url: https://drive.google.com/uc?export=download&id=1Em_ESfJKWtAFw9Co6DGbLt3r5XcO4rT0
-        filename: patch.7z
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/FarCry/Farcry3BloodDragon-Patch.7z
+        filename: Farcry3BloodDragon-Patch.7z
 
   installer:
     - task:
@@ -37,8 +36,5 @@ script:
 
     - execute:
         file: 7z
-        args: e $patch -o"$GAMEDIR/drive_c/Program Files/Ubisoft/Far Cry 3 Blood Dragon/bin/" -ppassword -y
+        args: e $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Ubisoft/Far Cry 3 Blood Dragon/bin/" -ppassword -y
 
-
-  wine:
-    Desktop: true

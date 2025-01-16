@@ -1,7 +1,7 @@
 name: Bioshock infinite
 game_slug: bioshock-infinite
-version: Installer
-slug: INSTALLER
+version: Windows Installer
+slug: bioshock-inifinite-INSTALLER
 runner: wine
 year: 2013
 
@@ -12,8 +12,8 @@ script:
 
   files:
     - game: N/A:Select installer.
-    - patch: 
-        url: https://drive.google.com/uc?export=download&id=16t7uH3YpEZylWjv3RGr8Oynnkb3OF4C0
+    - patch1: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/BioshockInfinite-Patch.7z
         filename: patch.7z
 
 
@@ -26,7 +26,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: vista d3dx10 xact_x64 xact
+        app: d3dx10 xact_x64 xact
         name: winetricks
         prefix: $GAMEDIR
 
@@ -35,11 +35,12 @@ script:
         executable: $game
         name: wineexec
         prefix: $GAMEDIR
+        return_code: 9
 
     - execute:
         file: 7z
-        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/2K Games/BioShock Infinite/Binaries/Win32/" -ppassword -y
+        args: x $patch1 -o"$GAMEDIR/drive_c/Program Files (x86)/2K Games/BioShock Infinite/Binaries/Win32/" -ppassword -y
 
   system:
     env:
-        PULSE_LATENCY_MSEC: '90'
+        PULSE_LATENCY_MSEC: 150

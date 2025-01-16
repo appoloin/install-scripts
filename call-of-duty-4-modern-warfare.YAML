@@ -7,8 +7,7 @@ year: 2007
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/Call of Duty 4 Modern Warfare/iw3sp.exe
-    arch: win32
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Call of Duty 4 Modern Warfare/iw3sp.exe
     prefix: $GAMEDIR
 
   files:
@@ -17,13 +16,12 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
     - task:
-        app: winxp d3dx9 vcrun2008
+        app: winxp vcrun2008
         name: winetricks
         prefix: $GAMEDIR
 

@@ -1,6 +1,6 @@
 name: Lifeless Planet
 game_slug: lifeless-planet
-version: Installer
+version: Good Old Games Installer
 slug: lifeless-planet-installer
 runner: wine
 year: 2015
@@ -22,7 +22,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx9 d3dcompiler_43
+        app: d3dcompiler_43
         description: 'winetricks: WinXP, Direct X; D3DCompiler'
         name: winetricks
         prefix: $GAMEDIR

@@ -1,7 +1,7 @@
 name: Spec Ops - The Line
 game_slug: spec-ops-the-line
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: spec-ops-INSTALLER
 runner: wine
 year: 2012
 

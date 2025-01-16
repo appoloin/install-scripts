@@ -1,7 +1,7 @@
 name: Botanicula
 game_slug: botanicula
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: botanicula-INSTALLER
 runner: wine
 year: 2012
 
@@ -21,7 +21,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: vista xact_x64 xact
+        app: xact_x64 xact
         name: winetricks
         prefix: $GAMEDIR
 
