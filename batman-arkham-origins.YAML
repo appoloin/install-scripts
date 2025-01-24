@@ -1,7 +1,7 @@
 name: Batman Arkham Origins
 game_slug: batman-arkham-origins
-version: Installer
-slug: INSTALLER
+version: Good old Games Installer
+slug: batman-origins-INSTALLER
 runner: wine
 year: 2013
 
@@ -34,8 +34,10 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+        return_code: 9
 
     - task:
         executable: $DLC
         name: wineexec
         prefix: $GAMEDIR
+        return_code: 9

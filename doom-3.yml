@@ -1,7 +1,7 @@
 name:  Doom 3
 game_slug:  doom-3
 version: Good Old Games Installer
-slug:  installer
+slug:  doom-3-installer
 runner: linux
 year: 2004
 
@@ -39,6 +39,10 @@ script:
 
     - execute:
         command: 'rm -Rf "$HOME/.var/app/io.github.RobertBeckebans.RBDoom3BFG-GL/data/rbdoom3bfg/base";
+
+                  mkdir "$HOME/.var/app/io.github.RobertBeckebans.RBDoom3BFG-GL/";
+
+                  mkdir "$HOME/.var/app/io.github.RobertBeckebans.RBDoom3BFG-GL/data/";
 
                   mkdir "$HOME/.var/app/io.github.RobertBeckebans.RBDoom3BFG-GL/data/rbdoom3bfg";
 

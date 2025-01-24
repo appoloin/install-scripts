@@ -1,45 +1,24 @@
 name: Halo Combat Evolved
 game_slug: halo-combat-evolved
 version: Windows Installer
-slug:  installer
+slug:  halo-installer
 runner: wine
 year: 2001
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/Microsoft Games/Halo/halo.exe
-    arch: win32
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Microsoft Games/Halo/halo.exe
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select Setup
-        
+    - patch: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/halopc-patch-1.0.10.7z
+        filename: halopc-patch-1.0.10.7z
+     
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
@@ -52,21 +31,16 @@ script:
 
     - task:
         executable: $setup
-        arch: win32
         name: wineexec
         prefix: $GAMEDIR
         return_code: 256
 
-    - execute:
-        file: $CACHE/download.sh
-        args: 1vWcnoqZZhLwHIRru3fk8M4RjBnyj1tcW $CACHE/patch.7z
 
     - extract:
-        file: $CACHE/patch.7z
+        file: $patch
         dst: $GAMEDIR/drive_c
 
     - task:
         executable: $GAMEDIR/drive_c/halopc-patch-1.0.10.exe
         name: wineexec
         prefix: $GAMEDIR
-        arch: win32

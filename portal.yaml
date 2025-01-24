@@ -7,8 +7,7 @@ year: 2007
 
 script:
   game: 
-    exe: $GAMEDIR/drive_c/Program Files/Portal/Portal.exe
-    arch: win32
+    exe: $GAMEDIR/drive_c/Games/Portal/steamclient_loader.exe
     prefix: $GAMEDIR
 
   files:
@@ -17,14 +16,12 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
     - task:
-        app: mfc42 d3dx9 d3dcompiler_43
-        arch: win32
+        app: mfc42 d3dcompiler_43
         name: winetricks
         prefix: $GAMEDIR
 

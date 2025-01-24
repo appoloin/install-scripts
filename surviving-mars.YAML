@@ -1,7 +1,7 @@
 name: Surviving Mars
 game_slug: surviving-mars
 version: Good Old Games Installer
-slug: INSTALLER
+slug: surviving-mars-INSTALLER
 runner: wine
 year: 2018
 
@@ -12,7 +12,8 @@ script:
 
   files:
     - setup: N/A:Select Surviving Mars installer
-    - DLC: N/A:Select Upgrade Package
+    - DLC10: N/A:Select Upgrade Package
+    - DLC: N/A:Select DLC Below and Above installer
     - DLC1: N/A:Select DLC Stellaris Dome Set installer
     - DLC2: N/A:Select DLC Space Race installer
     - DLC3: N/A:Select DLC Mysteries Resupply installer
@@ -22,7 +23,6 @@ script:
     - DLC7: N/A:Select DLC Project Laika installer
     - DLC8: N/A:Select DLC Mars Lifestyle Radio installer
     - DLC9: N/A:Select DLC In Domes Building installer
-    - DLC10: N/A:Select DLC Below and Above installer
 
 
   installer:
@@ -54,42 +54,36 @@ script:
         executable: $DLC1
         description: 'Installing Stellaris Dome Set '
         name: wineexec
-        args: /SILENT
         prefix: $GAMEDIR
 
     - task:
         executable: $DLC2
         description: 'Installing Space Race '
         name: wineexec
-        args: /SILENT
         prefix: $GAMEDIR
 
     - task:
         executable: $DLC3
         description: 'Installing Mysteries Resupply '
         name: wineexec
-        args: /SILENT
         prefix: $GAMEDIR
 
     - task:
         executable: $DLC4
         description: 'Installing Marsvision Song Contest '
         name: wineexec
-        args: /SILENT
         prefix: $GAMEDIR
 
     - task:
         executable: $DLC5
         description: 'Installing Colony Design Set '
         name: wineexec
-        args: /SILENT
         prefix: $GAMEDIR
 
     - task:
         executable: $DLC6
         description: 'Installing Green Planet '
         name: wineexec
-        args: /SILENT
         prefix: $GAMEDIR
 
     - task:
@@ -110,14 +104,12 @@ script:
         executable: $DLC9
         description: 'Installing In Domes Building '
         name: wineexec
-        args: /SILENT
         prefix: $GAMEDIR
 
     - task:
         executable: $DLC10
         description: 'Installing Below and Above '
         name: wineexec
-        args: /SILENT
         prefix: $GAMEDIR
 
   wine:

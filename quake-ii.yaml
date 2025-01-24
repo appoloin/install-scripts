@@ -9,7 +9,7 @@ script:
   files:
     - game: N/A:Select Setup.exe
     - quakepatch:        
-        url: https://drive.google.com/uc?export=download&id=1Pdce0uxCJB8NpevxDh6UmgOLz3tj3b4s
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/q2-3.20-x86-full-ctf.7z
         filename: q2-3.20-x86-full-ctf.7z 
 
   game:
@@ -52,5 +52,13 @@ script:
 
                   mkdir "$HOME/.var/app/org.yamagi.YamagiQ2/";
 
-                  ln -s -f -n "$GAMEDIR" "$HOME/.var/app/org.yamagi.YamagiQ2/.yq2" 
+                  mkdir "$HOME/.var/app/org.yamagi.YamagiQ2/.yq2";
+
+                  ln -s -f -n "$GAMEDIR/baseq2" "$HOME/.var/app/org.yamagi.YamagiQ2/.yq2/baseq2";
+
+                  ln -s -f -n "$GAMEDIR/xatrix" "$HOME/.var/app/org.yamagi.YamagiQ2/.yq2/xatrix";
+
+                  ln -s -f -n "$GAMEDIR/music" "$HOME/.var/app/org.yamagi.YamagiQ2/.yq2/music";
+
+                  ln -s -f -n "$GAMEDIR/rogue" "$HOME/.var/app/org.yamagi.YamagiQ2/.yq2/rogue"
                   '

@@ -1,7 +1,7 @@
 name: Overboard!
 game_slug: overboard
 version: Good Old Games Installer
-slug: installer
+slug: overboard-installer
 runner: wine
 year: 2021
 

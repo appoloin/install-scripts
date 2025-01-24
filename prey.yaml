@@ -1,26 +1,31 @@
 name: Prey
 game_slug: prey
 version: Windows Installer
-slug:  installer
+slug:  prey-installer
 runner: wine
 year: 2006
 
 script:
   game:
-    arch: win32
-    exe: $GAMEDIR/drive_c/Program Files/Prey/PREY.exe
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Prey/PREY.exe
     prefix: $GAMEDIR
     args: +set r_ignorehwgamma 1 +set r_mode -1 +set r_customheight 768 +set r_customwidth 1366 +set cg_fov 95 +set cg_drawfps 0 +set r_customaspect 1.7 +set com_introplayed 1 +set r_vsync 0 +set com_maxfps 60 +set r_smp 1
 
   files:
     - setup: N/A:Select Setup.exe
-    - patch: 
-        url: https://drive.google.com/uc?export=download&id=1sall5QX_npTxtmZLts9VtJgWw0HuRnNV
-        filename: patch.7z
+    - patch1: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/SetupPreyPt1.4.7z.001
+        filename: SetupPreyPt1.4.7z.001
+    - patch2: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/SetupPreyPt1.4.7z.002
+        filename: SetupPreyPt1.4.7z.002
+    - patch3: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/SetupPreyPt1.4.7z.003
+        filename: SetupPreyPt1.4.7z.003
+
 
   installer:    
     - task:
-        arch: win32
         name: create_prefix
         install_mono: false
         install_gecko: false
@@ -31,9 +36,20 @@ script:
         name: wineexec
         prefix: $GAMEDIR  
 
+    #Move Patch into one folder
+    - merge:
+        src: "$patch1"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch2"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch3"
+        dst: "$CACHE"
+
     - execute:
         file: 7z
-        args: e $patch -o"$GAMEDIR/drive_c/tmp/" -ppassword -y
+        args: e "$CACHE/SetupPreyPt1.4.7z.001" -o"$GAMEDIR/drive_c/tmp/" -ppassword -y
 
     - task:
         executable: "$GAMEDIR/drive_c/tmp/SetupPreyPt1.4.exe" 

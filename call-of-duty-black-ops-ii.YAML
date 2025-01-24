@@ -13,7 +13,7 @@ script:
   files:
     - setup: N/A:Select installer
     - patch: 
-        url: https://drive.google.com/uc?export=download&id=1dQo5ycxY2NI0NLd69znvqHxiHGmx5WRK
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/CallOfDuty/CallofDutyBlackOpsIIPatch.zip
         filename: patch.zip
 
   installer:
@@ -34,6 +34,7 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+        return_code: 9
 
     - execute:
         file: 7z

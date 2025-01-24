@@ -1,7 +1,7 @@
 name: Out There Omega
 game_slug:  out-there-omega
 version: Good Old Games Installer
-slug: INSTALLER
+slug: out-there-omega-INSTALLER
 runner: wine
 year: 2015
 

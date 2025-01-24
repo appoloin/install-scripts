@@ -7,13 +7,12 @@ year: 2010
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/Electronic Arts/Medal of Honor/Binaries/moh.exe
-    arch: win32
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/Medal of Honor/Binaries/moh.exe
     prefix: $GAMEDIR
 
   files:
     - patch: 
-        url: https://drive.google.com/uc?export=download&id=1omDKGSA9PMVFKkwRBKEwE6bqOHVmqzTg
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/MedalOfHonourPatch.7z
         filename: patch.7z
 
 
@@ -24,7 +23,6 @@ script:
 
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
@@ -40,4 +38,4 @@ script:
 
     - copy:
         src: "$GAMEDIR/drive_c/tmp/patch/"
-        dst: "$GAMEDIR/drive_c/Program Files/Electronic Arts/Medal of Honor/"
+        dst: "$GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/Medal of Honor/"

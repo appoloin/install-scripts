@@ -1,7 +1,7 @@
 name: LEGO Star Wars
 game_slug: lego-star-wars-the-complete-saga
-version: Installer
-slug: INSTALLER
+version: Good Old Gams Installer
+slug: lego-starwars-INSTALLER
 runner: wine
 year: 2007
 
@@ -21,8 +21,8 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx9 d3dcompiler_47 xact
-        description: Installing D3DX9, d3dcompiler_47, xact
+        app: d3dcompiler_47 xact
+        description: Installing d3dcompiler_47, xact
         name: winetricks
         prefix: $GAMEDIR
 

@@ -1,7 +1,7 @@
 name: The Shivah
 game_slug: the-shivah
 version: Good Old Games Installer
-slug: INSTALLER
+slug: shivah-INSTALLER
 runner: scummvm
 year: 2006
 
@@ -14,23 +14,6 @@ script:
     - game: N/A:Select GOG installer.
 
   installer:    
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$1
-          
-          find "$src" -maxdepth 1 -type d \( -iname app -o
-                                            -iname commonappdata -o
-                                            -iname *redist -o
-                                            -iname scummvm -o
-                                            -iname dosbox -o
-                                            -iname *support -o
-                                            -iname tmp \) -exec rm -r {}  \;
-                                            
-          find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
-        file: $CACHE/remove.sh
-    - chmodx: $CACHE/remove.sh
-
     - extract:
         format: gog
         file: $game
@@ -39,8 +22,16 @@ script:
         description: Extracting game files
 
     - execute:
-        args: $GAMEDIR
-        file: $CACHE/remove.sh
+        command: 'find "$GAMEDIR" -maxdepth 1  -type d \( -iname app -o
+                                                          -iname commonappdata -o
+                                                          -iname *redist -o
+                                                          -iname scummvm -o
+                                                          -iname dosbox -o
+                                                          -iname *support -o
+                                                          -iname tmp \) -exec rm -r {} \;
+                                            
+          find "$GAMEDIR" -type f \( -iname "goggame*" \) -exec rm {} \;
+          '
 
 
   scummvm:

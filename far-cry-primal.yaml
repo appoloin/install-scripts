@@ -1,7 +1,7 @@
 name: Far Cry Primal
 game_slug: far-cry-primal
 version: Windows Installer
-slug: installer
+slug: farcry-primal-installer
 runner: wine
 year: 2016
 
@@ -22,7 +22,7 @@ script:
         prefix: $GAMEDIR
     
     - task:
-        app: winxp vcrun2015 vcrun2010 xact_x64 xact dotnet35
+        app: vcrun2015 vcrun2010 xact_x64 xact dotnet35
         name: winetricks
         prefix: $GAMEDIR 
 
@@ -31,6 +31,4 @@ script:
         executable: $game
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
+        return_code: 9

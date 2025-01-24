@@ -1,6 +1,6 @@
 name: Prototype 2
 game_slug: prototype-2
-version: Installer
+version: Window Installer
 slug: prototype-2
 runner: wine
 year: 2012
@@ -13,7 +13,7 @@ script:
   files:
     - setup: N/A:Select installer
     - patch: 
-        url: https://drive.google.com/uc?export=download&id=1E_0-ZiLFkzE30C5Xq1kqRtKQYGnY2d7C
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/Prototype-2-Patch.7z
         filename: patch.7z
 
   installer:

@@ -1,7 +1,7 @@
 name: Sniper Elite 3
 game_slug: sniper-elite-3
 version: Good Old Games Installer-nstaller
-slug: INSTALLER
+slug: snpier-elite-3-INSTALLER
 runner: wine
 year: 2014
 
@@ -21,7 +21,6 @@ script:
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
-        arch: win64
 
     - task:
         app: d3dx10 xact xact_x64
@@ -33,7 +32,9 @@ script:
         executable: $game
         name: wineexec
         prefix: $GAMEDIR
+        return_code: 9
+
 
   system:
     env:
-        PULSE_LATENCY_MSEC: '90'
+      PULSE_LATENCY_MSEC: '90'

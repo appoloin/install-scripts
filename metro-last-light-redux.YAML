@@ -1,7 +1,7 @@
 name: Metro Last Light Redux
 game_slug: metro-last-light-redux
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: meter-last-light-INSTALLER
 runner: wine
 year: 2013
 

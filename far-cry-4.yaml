@@ -1,7 +1,7 @@
 name: Far Cry 4
 game_slug: far-cry-4
 version: Windows Installer
-slug: installer
+slug: far-cry-4-installer
 runner: wine
 year: 2014
 
@@ -13,7 +13,7 @@ script:
   files:
     - game: N/A:Select installer.
     - patch: 
-        url: https://drive.google.com/uc?export=download&id=1yi2y-HY5mObUHooUQsL31rdzqDKr6DAH
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/FarCry/FarCry4Patch.zip
         filename: patch.zip
 
   installer:
@@ -24,7 +24,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx10 vcrun2010 vcrun2015 xact_x64 dotnet35 d3dcompiler_43 winxp
+        app: d3dx10 vcrun2010 vcrun2015 xact_x64 dotnet35 d3dcompiler_43 
         name: winetricks
         prefix: $GAMEDIR
         
@@ -33,6 +33,7 @@ script:
         executable: $game
         name: wineexec
         prefix: $GAMEDIR
+        return_code: 9
 
     - execute:
         file: 7z

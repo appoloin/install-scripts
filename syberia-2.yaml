@@ -1,6 +1,6 @@
 name: Syberia 2
 game_slug: syberia-2
-version: Installer
+version: Good Old Games Installer
 slug: syberia-2-installer
 runner: wine
 year: 2004

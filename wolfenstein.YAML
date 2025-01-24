@@ -1,6 +1,6 @@
 name: Wolfenstein
 game_slug: wolfenstein
-version: Installer
+version: Windows Installer
 slug: wolfenstein_INSTALLER
 runner: wine
 year: 2009
@@ -13,7 +13,7 @@ script:
   files:
     - setup: N/A:Select installer
     - patch: 
-        url: https://drive.google.com/uc?export=download&id=1sGYJ75WjqkOICcdXMOdSNWx2J8ZYznVW
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/Wolf2_exe.7z
         filename: patch.7z
 
   installer:

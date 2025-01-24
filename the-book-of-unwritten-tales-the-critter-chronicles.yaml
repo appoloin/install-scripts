@@ -12,6 +12,7 @@ script:
 
   files:
     - setup: N/A:Select Setup
+    - patch: N/A:Select Patch
 
   installer:
     - task:
@@ -22,5 +23,10 @@ script:
 
     - task:
         executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $patch
         name: wineexec
         prefix: $GAMEDIR

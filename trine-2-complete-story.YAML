@@ -1,7 +1,7 @@
 name: Trine 2
 game_slug: trine-2-complete-story
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: trine-2-INSTALLER
 runner: wine
 year: 2011
 

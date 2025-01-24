@@ -13,14 +13,11 @@ script:
   files:
     - setup: N/A:Select the EXE downloaded from GOG
     - wds:  
-        url: https://drive.google.com/uc?export=download&id=1Wn-zgpheQKmyo1AXZflvEelheqYu68-o
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/bge_widescreen.zip
         filename: bge_widescreen.zip
     - audio: 
-        url: https://drive.google.com/uc?export=download&id=1QW-mIANMUmYGCONnMLvLtMIlCj_oYyWp
-        filename: dsound.dll
-    - gpp:
-        url: https://drive.google.com/uc?export=download&id=1jPhjBCF_LiKalpjNi9uLiL3YcyrF89as
-        filename: bge_controller.7z
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/bge_dsound.7z
+        filename: bge_dsound.7z
 
 
   installer:
@@ -48,13 +45,9 @@ script:
         type: REG_SZ
         value: native,builtin
 
-    - copy:
+    - extract:
         src: $audio
         dst: $GAMEDIR/drive_c/GOG Games/Beyond Good and Evil/
-
-    - extract:
-        src: $gpp
-        dst: $GAMEDIR/drive_c/GOG Games/Beyond Good and Evil/gamepad profiles/
 
     - task:
         key: dsound
@@ -95,5 +88,9 @@ script:
 
   system:
     single_cpu: true
+
+  wine:
+    overrides:
+      dsound: native
 
 

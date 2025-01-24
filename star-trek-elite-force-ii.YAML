@@ -1,7 +1,7 @@
 name: Star Trek - Elite Force II
 game_slug: star-trek-elite-force-ii
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: elite-force-2-INSTALLER
 runner: wine
 year: 2003
 
@@ -9,12 +9,11 @@ script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Star Trek Elite Force II/EF2.exe
     prefix: $GAMEDIR
-    args: +set r_ignorehwgamma 1 +set r_mode -1 +set r_customheight 768 +set r_customwidth 1366 +set cg_fov 95 +set cg_drawfps 0 +set r_customaspect 1.7 +set com_introplayed 1 +set r_vsync 0 +set com_maxfps 60 +set r_smp 0
 
   files:
     - setup: N/A:Select installer
     - patch: 
-        url: https://drive.google.com/uc?export=download&id=1M_E5wj_AKZPTn4lBVnq2FxiAgkpC6wpw
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/Star_Trek_Elite_Force_II.7z
         filename: SkipIntroMovies.zip
 
 

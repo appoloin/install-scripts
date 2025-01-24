@@ -1,7 +1,7 @@
 name: Trine
 game_slug: trine-enchanted-edition
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: trine-INSTALLER
 runner: wine
 year: 2009
 

@@ -1,7 +1,7 @@
 name: LEGO Batman - The Videogame
 game_slug: lego-batman-the-videogame
 version: Good Old Games Installer
-slug: INSTALLER
+slug: lego-batman-INSTALLER
 runner: wine
 year: 2008
 
@@ -22,8 +22,8 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx9 ole32
-        description: Installing D3DX9, ole32
+        app:  ole32
+        description: Installing ole32
         name: winetricks
         prefix: $GAMEDIR
 

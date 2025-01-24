@@ -13,7 +13,7 @@ script:
   files:
     - setup: N/A:Select installer
     - patch: 
-        url: https://drive.google.com/uc?export=download&id=1dtWSpyQ_wEgW0xtMAKlaNaXgFbbqC74h
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/Prototype_All_Res.zip
         filename: Prototype_All_Res.zip
 
   installer:

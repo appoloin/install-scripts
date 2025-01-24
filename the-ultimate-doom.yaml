@@ -48,6 +48,10 @@ script:
     - execute:
         command: 'rm -Rf "$HOME/.var/app/org.zdoom.GZDoom/.config/gzdoom/DOOM.WAD";
 
+                  mkdir -p "$HOME/.var/app/org.zdoom.GZDoom/
+                  
+                  mkdir -p "$HOME/.var/app/org.zdoom.GZDoom/.config/
+                  
                   mkdir -p "$HOME/.var/app/org.zdoom.GZDoom/.config/gzdoom/";
 
                   ln -s -f -n "$GAMEDIR/DOOM.WAD" "$HOME/.var/app/org.zdoom.GZDoom/.config/gzdoom/" 

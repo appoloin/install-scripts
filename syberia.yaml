@@ -1,6 +1,6 @@
 name: Syberia
 game_slug: syberia
-version: Installer
+version: Good Old Games Installer
 slug: syberia-installer
 runner: wine
 year: 2002
@@ -13,7 +13,7 @@ script:
   files:
     - setup: N/A:Select Setup
     - patch: 
-        url: https://drive.google.com/uc?export=download&id=176XvF49-SsTapj_mFfVW6DkngQKzky6W
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/SyberiaPatch.7z
         filename: patch.7z
 
 
@@ -28,6 +28,8 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+        return_code: 9
+
 
     - execute:
         file: 7z

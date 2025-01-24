@@ -40,25 +40,20 @@ script:
     - task:
         executable: $DLC1
         name: wineexec
-        args: /SILENT 
         prefix: $GAMEDIR
     - task:
         executable: $DLC2
         name: wineexec
-        args: /SILENT 
         prefix: $GAMEDIR
     - task:
         executable: $DLC3
         name: wineexec
-        args: /SILENT 
         prefix: $GAMEDIR
     - task:
         executable: $DLC4
         name: wineexec
-        args: /SILENT 
         prefix: $GAMEDIR
     - task:
         executable: $DLC5
         name: wineexec
-        args: /SILENT 
         prefix: $GAMEDIR

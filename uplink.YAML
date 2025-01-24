@@ -1,7 +1,7 @@
 name: Uplink
 game_slug: uplink
 version: Good Old Games Installer
-slug: INSTALLER
+slug: uplink-INSTALLER
 runner: wine
 year: 2001
 
@@ -13,7 +13,7 @@ script:
   files:
     - setup: N/A:Select installer
     - patch: 
-        url: https://drive.google.com/uc?export=download&id=13Pfl9_F0GfllLigaMPyttWlt_hDslbxF
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/uplinkos.7z
         filename: uplinkos.7z
 
 

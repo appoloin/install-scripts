@@ -7,7 +7,7 @@ year: 2011
 
 script:
   game: 
-    exe: $GAMEDIR/drive_c/Program Files/Crytek/Crysis 2 - Maximum Edition/bin32/Crysis2.exe
+    exe: $GAMEDIR/drive_c/Games/Crysis 2/bin32/Crysis2.exe
     arch: win32
     prefix: $GAMEDIR
 
@@ -17,14 +17,12 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx9 corefonts tahoma vcrun2008 vcrun2012
-        arch: win32
+        app: corefonts tahoma vcrun2008 vcrun2012
         name: winetricks
         prefix: $GAMEDIR
 

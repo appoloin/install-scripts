@@ -1,7 +1,7 @@
 name: Just Cause 2
 game_slug: just-cause-2
 version: Good Old Games Installer
-slug: INSTALLER
+slug: just-cause-2-INSTALLER
 runner: wine
 year: 2010
 
@@ -14,7 +14,7 @@ script:
   files:
     - setup: N/A:Select installer
     - patch: 
-        url: https://drive.google.com/uc?export=download&id=1o6hUN8DaXGTI1u-WBV_HPhXN0LUUUYFl
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/JustCause2-Patch.7z
         filename: patch.7z
 
   installer:
@@ -25,7 +25,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: vcrun2005 d3dx10 d3dcompiler_43 d3dcompiler_47
+        app: vcrun2005 d3dx10 d3dcompiler_47
         description: Installing librairies
         name: winetricks
         prefix: $GAMEDIR

@@ -1,81 +1,153 @@
 name: Far Cry 3 
 game_slug: far-cry-3
 version: Windows Installer
-slug: installer
+slug: farcry-3-installer
 runner: wine
 year: 2012
 
 script:
   game:
-    exe: "$GAMEDIR/drive_c/Program Files/Ubisoft/FarCry 3/bin/farcry3_d3d11.exe"
-    arch: win32
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Ubisoft/FarCry 3/bin/farcry3_d3d11.exe"
     prefix: $GAMEDIR
 
   files:
     - game: N/A:Select installer.
+    - patch1:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/FarCry/farcry3_1.05.7z.001
+        filename: farcry3_1.05.7z.001
+    - patch2:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/FarCry/farcry3_1.05.7z.002
+        filename: farcry3_1.05.7z.002
+    - patch3:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/FarCry/farcry3_1.05.7z.003
+        filename: farcry3_1.05.7z.003
+    - patch4:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/FarCry/farcry3_1.05.7z.004
+        filename: farcry3_1.05.7z.004
+    - patch5:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/FarCry/farcry3_1.05.7z.005
+        filename: farcry3_1.05.7z.005
+    - patch6:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/FarCry/farcry3_1.05.7z.006
+        filename: farcry3_1.05.7z.006
+    - patch7:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/FarCry/farcry3_1.05.7z.007
+        filename: farcry3_1.05.7z.007
+    - patch8:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/FarCry/farcry3_1.05.7z.008
+        filename: farcry3_1.05.7z.008
+    - patch9:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/FarCry/farcry3_1.05.7z.009
+        filename: farcry3_1.05.7z.009
+    - patch10:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/FarCry/farcry3_1.05.7z.010
+        filename: farcry3_1.05.7z.010
+    - patch11:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/FarCry/farcry3_1.05.7z.011
+        filename: farcry3_1.05.7z.011
+    - patch12:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/FarCry/farcry3_1.05.7z.012
+        filename: farcry3_1.05.7z.012
+    - patch13:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/FarCry/farcry3_1.05.7z.013
+        filename: farcry3_1.05.7z.013
+    - patch14:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/FarCry/farcry3_1.05.7z.014
+        filename: farcry3_1.05.7z.014
+    - patch15:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/FarCry/farcry3_1.05.7z.015
+        filename: farcry3_1.05.7z.015
+    - patch16:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/FarCry/farcry3_1.05.7z.016
+        filename: farcry3_1.05.7z.016
+    - patch17:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/FarCry/farcry3_1.05.7z.017
+        filename: farcry3_1.05.7z.017
     - fix: 
-        url: https://drive.google.com/uc?export=download&id=1lKjC-E5i7foHBUldO9S_okg8Icje6XP7
-        filename: fix.7z
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/FarCry/FarCry3Patch.7z
+        filename: FarCry3Patch.7z
 
   installer:
     - task:
-        arch: win32
         name: create_prefix
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
     - task:
-        arch: win32
         app: d3dx10 d3dcompiler_43 vcrun2010 vcrun2015 dotnet35 xact
         name: winetricks
         prefix: $GAMEDIR
 
     - task:
-        arch: win32
         description: Installing
         executable: $game
         name: wineexec
         prefix: $GAMEDIR
 
-    #This is need for a file over 100MB
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1lom31OC1O6ALj4TFm6Ge2XJO1_okN4f8 $CACHE/patch.7z
+    #Move Patch into one folder
+    - merge:
+        src: "$patch1"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch2"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch3"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch4"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch5"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch6"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch7"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch8"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch9"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch10"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch11"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch12"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch13"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch14"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch15"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch16"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch17"
+        dst: "$CACHE"
 
     - execute:
         file: 7z
-        args: e "$CACHE/patch.7z" -o"$GAMEDIR/drive_c/Program Files/Ubisoft/FarCry 3/" -ppassword -y
+        args: e "$CACHE/farcry3_1.05.7z.001" -o"$GAMEDIR/drive_c/Program Files (x86)/Ubisoft/FarCry 3/" -ppassword -y
 
     - task:
-        arch: win32
         description: Installing
-        executable: "$GAMEDIR/drive_c/Program Files/Ubisoft/FarCry 3/farcry3_1.05.exe"
+        executable: "$GAMEDIR/drive_c/Program Files (x86)/Ubisoft/FarCry 3/farcry3_1.05.exe"
         name: wineexec
         prefix: $GAMEDIR
 
     - execute:
         file: 7z
-        args: e $fix -o"$GAMEDIR/drive_c/Program Files/Ubisoft/FarCry 3/bin" -ppassword -y
+        args: e $fix -o"$GAMEDIR/drive_c/Program Files (x86)/Ubisoft/FarCry 3/bin" -ppassword -y

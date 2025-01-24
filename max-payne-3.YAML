@@ -1,7 +1,7 @@
 name: Max Payne 3
 game_slug: max-payne-3
 version: Good Old Games Installer
-slug: INSTALLER
+slug: max-payne-3INSTALLER
 runner: wine
 year: 2012
 
@@ -30,3 +30,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+        return_code: 9

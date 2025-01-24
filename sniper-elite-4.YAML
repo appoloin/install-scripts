@@ -1,7 +1,7 @@
 name: Sniper Elite 4
 game_slug: sniper-elite-4
 version: Windows Installer
-slug: INSTALLER
+slug: sniper-elite-4-INSTALLER
 runner: wine
 year: 2017
 
@@ -32,6 +32,7 @@ script:
         executable: $game
         name: wineexec
         prefix: $GAMEDIR
+        return_code: 9
 
   system:
     env:

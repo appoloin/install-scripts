@@ -1,6 +1,6 @@
 name: Desperdos 3
 game_slug: desperados-iii
-version: Installer
+version: Good old Games Installer
 slug: desperados-iii
 runner: wine
 year: 2020

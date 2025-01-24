@@ -1,7 +1,7 @@
 name: Star Trek Voyager - Elite Force
 game_slug: star-trek-voyager-elite-force
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: star-trek-voyage-elite-INSTALLER
 runner: wine
 year: 2000
 
@@ -9,7 +9,6 @@ script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Star Trek Elite Force/stvoy.exe
     prefix: $GAMEDIR
-    args: +set r_ignorehwgamma 1 +set r_mode -1 +set r_customheight 768 +set r_customwidth 1366 +set cg_fov 95 +set cg_drawfps 0 +set r_customaspect 1.7 +set com_introplayed 1 +set r_vsync 0 +set com_maxfps 60 +set r_smp 1
 
 
   files:

@@ -1,7 +1,7 @@
 name: Dead Space 2
 game_slug: dead-space-2
 version: Windows Installer
-slug: INSTALLER
+slug: dead-space-INSTALLER
 runner: wine
 year: 2011
 
@@ -27,6 +27,7 @@ script:
         executable: $game
         name: wineexec
         prefix: $GAMEDIR
+        return_code: 9
 
 
 

@@ -1,7 +1,7 @@
 name: Call of Juarez - Gunslinger
 game_slug: call-of-juarez-gunslinger
 version: Good Old Games Installer
-slug: install
+slug: call-of-juarez-gunslinger-install
 runner: wine
 year: 2013
 

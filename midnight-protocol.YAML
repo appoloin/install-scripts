@@ -1,6 +1,6 @@
 name: Midnight Protocol
 game_slug:  midnight-protocol
-version: Installer
+version: Good old Games Installer
 slug: midnight-protocol
 runner: wine
 year: 2021

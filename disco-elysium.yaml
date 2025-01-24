@@ -1,7 +1,7 @@
 name: Disco Elysium
 game_slug: disco-elysium
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: disco-elysium-installer
 runner: wine
 year: 2019
 

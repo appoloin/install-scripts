@@ -1,7 +1,7 @@
 name: Horizon Chase 2
 game_slug: horizon-chase-2
 version: Good Old Games Installer
-slug: INSTALLER
+slug: horizon-chase-2-INSTALLER
 runner: wine
 year: 2023
 

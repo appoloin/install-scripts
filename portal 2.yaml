@@ -13,8 +13,8 @@ script:
   files:
     - setup: N/A:Select installer
     - patch: 
-        url: https://drive.google.com/uc?export=download&id=16hhkFr7ewz51Uz9PmSBbJnHp7Q9rvfbV
-        filename: patch.7z
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/Portal%202%20update%2024.02.2022%20-%2017.01.2023.7z
+        filename: Portal-Update.7z
 
   installer:
     - task:
@@ -32,6 +32,7 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+        return_code: 9
 
     - execute:
         file: 7z

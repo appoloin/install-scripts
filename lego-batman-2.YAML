@@ -1,7 +1,7 @@
 name: LEGO Batman 2 - DC Super Heroes
 game_slug: lego-batman-2-dc-super-heroes
 version: Windows Installer
-slug: INSTALLER
+slug: lego-batman-2-INSTALLER
 runner: wine
 year: 2012
 
@@ -13,8 +13,8 @@ script:
   files:
     - setup: N/A:Select installer
     - patch: 
-        url: https://drive.google.com/uc?export=download&id=10l13xeogFS3OmhXoLVY7BiN7yhBql9V2
-        filename: patch.7z
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/LegoBatman2-Patch.7z
+        filename: LegoBatman2-Patch.7z
 
 
   installer:
@@ -25,7 +25,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx9 ole32 xact
+        app: ole32 xact
         description: Installing D3DX9, ole32, xact
         name: winetricks
         prefix: $GAMEDIR

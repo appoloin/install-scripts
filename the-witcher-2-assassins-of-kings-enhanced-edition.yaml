@@ -11,8 +11,14 @@ script:
 
   game:
     exe: "$GAMEDIR/drive_c/GOG Games/The Witcher 2 Enhanced Edition/bin/witcher2.exe"
-    #exe: "$GAMEDIR/drive_c/GOG Games/The Witcher 2 Enhanced Edition/Launcher.exe"
     prefix: $GAMEDIR
+    launch_configs:
+      - exe: "$GAMEDIR/drive_c/GOG Games/The Witcher 2 Enhanced Edition/bin/Configurator.exe"
+        name: Configure
+        prefix: $GAMEDIR
+      - exe: "$GAMEDIR/drive_c/GOG Games/The Witcher 2 Enhanced Edition/Launcher.exe"
+        name: Launcher
+        prefix: $GAMEDIR
 
   installer:
     - task:

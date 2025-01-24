@@ -7,7 +7,7 @@ year: 2013
 
 script:
   game:
-    exe: $GAMEDIR/c_drive/GOG Games/Goodbye Deponia/deponia3.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Goodbye Deponia/deponia3.exe
     prefix: $GAMEDIR
 
   files:

@@ -1,7 +1,7 @@
 name: LEGO Batman 3 - Beyond Gotham
 game_slug: lego-batman-3-beyond-gotham
 version: Good Old Games Installer
-slug: INSTALLER
+slug: lego-batman-3-INSTALLER
 runner: wine
 year: 2014
 
@@ -23,7 +23,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx9 xact ole32 
+        app:  xact ole32 
         description: Installing D3DX9, ole32, xact
         name: winetricks
         prefix: $GAMEDIR

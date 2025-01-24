@@ -7,7 +7,7 @@ year: 2007
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/The Witcher Enhanced Edition/launcher.exe
+    exe: $GAMEDIR/drive_c/GOG Games/The Witcher Enhanced Edition Director's Cut/launcher.exe
     prefix: $GAMEDIR
 
   files:

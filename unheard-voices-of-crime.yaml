@@ -1,7 +1,7 @@
 name: Unheard Voices of Crime
 game_slug: unheard-voices-of-crime
-version: Installer
-slug: installer
+version: Good Old Games Installer
+slug: unheard-voices-of-crime-installer
 runner: wine
 year: 2023
 

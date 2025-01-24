@@ -1,14 +1,13 @@
 name: F.E.A.R. 2 - Project Orgin
 game_slug:  fear-2-project-origin
 version: Good Old Games Installer
-slug: INSTALLER
+slug: fear-2-INSTALLER
 runner: wine
 year: 2009 
 
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/FEAR 2/FEAR2.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -17,7 +16,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR

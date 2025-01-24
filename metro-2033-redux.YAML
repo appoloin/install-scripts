@@ -1,7 +1,7 @@
 name: Metro 2033 Redux
 game_slug: metro-2033-redux
 version: Good Old Games Installer
-slug: INSTALLER
+slug: meter-2033-INSTALLER
 runner: wine
 year: 2014
 
