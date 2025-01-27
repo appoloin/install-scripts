@@ -7,7 +7,7 @@ year: 2012
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Games/Dishonored GOTY/Binaries/Win32/Dishonored.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Dishonored/Binaries/Win32/Dishonored.exe
     prefix: $GAMEDIR
 
   files:
