@@ -7,14 +7,11 @@ year: 2017
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/Serial Cleaner/Cleaner.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Serial Cleaner/Cleaner.exe
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
-    - patch:  
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/Serial%20Cleaner.7z
-        filename: Serial%20Cleaner.7z
 
 
   installer:
@@ -28,8 +25,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-    - execute:
-        file: 7z
-        args: x $patch -o$GAMEDIR/drive_c/Program Files/Serial Cleaner/ -ppassword -y
-        
