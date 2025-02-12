@@ -1,0 +1,29 @@
+name: Lego Lord of the Rings
+game_slug: lego-lord-of-the-rings
+version: Good Old Games Installer
+slug: lego-lord-of-the-rings
+runner: wine
+year: 2012
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/LEGO Lord of the Rings/Launch LEGO® The Lord of the Rings™.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  system:
+    pulse_latency: true

@@ -1,0 +1,49 @@
+name: Lego The Hobbit
+game_slug: lego-the-hobbit
+version: Good Old Games Installer
+slug: lego-the-hobbit
+runner: wine
+year: 2014
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+    - DLC1: N/A:Select DLC1 installer
+    - DLC2: N/A:Select DLC2 installer
+    - DLC3: N/A:Select DLC3 installer
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/LEGO - The Hobbit/LEGOHobbit.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+        
+    - task:
+        executable: $DLC1
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC2
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC3
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+
+
+  system:
+    pulse_latency: true
