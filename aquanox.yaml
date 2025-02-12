@@ -8,9 +8,11 @@ year: 2001
 script:
   files:
     - setup: N/A:Select setup file from GOG
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/SilentPatchAqua.zip
+        filename: SilentPatchAqua.zip
 
   game:
-    arch: win32
     exe: "$GAMEDIR/drive_c/GOG Games/AquaNox/Aqua.exe"
     prefix: $GAMEDIR
 
@@ -25,4 +27,18 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+    #extract and install patch
+    - extract:
+        description: Extracting Black Blob Fix
+        file: "$patch" 
+        dst: $CACHE
+
+    - merge:
+        src: "$CACHE/Binaries"
+        dst: "$GAMEDIR/drive_c/Program Files (x86)/Mass Effect Ultimate Edition/Binaries"
+
+  wine:
+    overrides:
+      dinput8 : n,b
 

@@ -7,7 +7,7 @@ year: 2000
 
 script:
   game:
-    exe: "$GAMEDIR/drive_c/Program Files (x86)/Capcom/Dino2/Dino2.exe"
+    exe: "$GAMEDIR/drive_c/GOG Games/Dino Crisis 2/Dino2.exe"
     prefix: $GAMEDIR
 
   files:
@@ -22,6 +22,17 @@ script:
         prefix: $GAMEDIR
 
     - task:
+        app: directshow
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+  wine:
+    overrides:
+      ddraw: native, builtin
+      dinput: native, builtin
+
