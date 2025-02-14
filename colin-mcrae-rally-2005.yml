@@ -7,8 +7,8 @@ year: 2004
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/GOG.com/Colin McRae Rally 2005/cmr5.exe
-    arch: win32
+    exe: $GAMEDIR/drive_c/Program Files (x86)/GOG.com/Colin McRae Rally 2005/cmr5.exe
+    args: WIDESCREENDISPLAY
     prefix: $GAMEDIR
 
   files:
@@ -17,9 +17,13 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: directplay directshow lavfilters wmp9 wmp11 xact allcodecs
+        name: winetricks
         prefix: $GAMEDIR
 
     - task:

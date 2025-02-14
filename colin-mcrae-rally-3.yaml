@@ -21,7 +21,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: openal directshow lavfilters wmp11 xact
+        app: openal directshow lavfilters wmp9 wmp11 xact
         name: winetricks
         prefix: $GAMEDIR
 
