@@ -10,7 +10,6 @@ script:
     - setup: N/A:Select setup file from GOG
 
   game:
-    arch: win32
     exe: "$GAMEDIR/drive_c/GOG Games/S.T.A.L.K.E.R. Clear Sky/bin/xrEngine.exe"
     prefix: $GAMEDIR
     working_dir: "$GAMEDIR/drive_c/GOG Games/S.T.A.L.K.E.R. Clear Sky"
@@ -18,7 +17,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
