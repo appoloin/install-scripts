@@ -1,0 +1,45 @@
+name: The Thing
+game_slug: the-thing
+version: Windows Installer
+slug: the-thing
+runner: wine
+year: 2002
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/The Thing/bin/TheThing.exe"
+    prefix: $GAMEDIR
+    launch_configs:
+      - exe: "$GAMEDIR/drive_c/MagiPacks/The Thing/bin//dgVoodooCpl.exe"
+        prefix: $GAMEDIR
+        name:  DgVoodoo Config
+
+  files:
+    - setup: N/A:Select the Setup file
+  
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: directshow icodecs 
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  system:
+    pulse_latency: true
+
+  wine:
+    overrides:
+      ddraw: n,b
+      D3DImm: n,b
+      d3d8: n,b
+      dinput8: n,b

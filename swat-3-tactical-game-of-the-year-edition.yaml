@@ -1,0 +1,55 @@
+name: Swat 3
+game_slug: swat-3-tactical-game-of-the-year-edition
+version: Windows Installer
+slug: swat-3-tactical-game-of-the-year-edition
+runner: wine
+year: 2007
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/SWAT 3 - Close Quarters Battle/swat.exe"
+    prefix: $GAMEDIR
+    launch_configs:
+      - exe: "$GAMEDIR/drive_c/MagiPacks/SWAT 3 - Close Quarters Battle/dgVoodooCpl.exe"
+        prefix: $GAMEDIR
+        name:  DgVoodoo Config
+
+  files:
+    - setup: N/A:Select the Setup file
+  
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: directplay directshow icodecs xvid
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+
+    - write_config:
+        data:
+          DirectX:
+            dgVoodooWatermark: false
+          General:
+            OutputAPI: bestavailable
+        description: Write dgVoodoo.conf file
+        file: $GAMEDIR/drive_c/MagiPacks/SWAT 3 - Close Quarters Battle/dgVoodoo.conf
+        merge: false
+
+  system:
+    pulse_latency: true
+
+  wine:
+    overrides:
+      ddraw: n,b
+      D3DImm: n,b
+      d3d8: n,b
