@@ -7,7 +7,7 @@ year: 1991
 
 script:
   files:
-    - game: N/A:Select the file YOLK.EXE 
+    - game: N/A:Select the file FOLK.EXE 
 
   game:
     main_file: $GAMEDIR/play.conf
@@ -30,7 +30,7 @@ script:
 
           cd dizzy
           
-          YOLK.EXE
+          FOLK.EXE
           
           exit'
         file: $GAMEDIR/play.conf

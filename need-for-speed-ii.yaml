@@ -3,7 +3,7 @@ game_slug: need-for-speed-ii
 version: Windows CD-ROM
 slug: need-for-speed-ii
 runner: linux
-year: 1998
+year: 1997
 
 script:
   game:

@@ -10,13 +10,11 @@ script:
     - setup: N/A:Select setup file from GOG
 
   game:
-    arch: win32
     exe: $GAMEDIR/drive_c/GOG Games/S.T.A.L.K.E.R. Call of Pripyat/Stalker-COP.exe
     prefix: $GAMEDIR
 
   installer:
     - task:
-        arch: win32
         name: create_prefix
         install_mono: false
         install_gecko: false

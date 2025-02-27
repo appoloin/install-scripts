@@ -1,7 +1,7 @@
 name: Fantastic Dizzy
 game_slug: fantastic-dizzy
 version: DOS
-slug: installer
+slug: fantastic-dizzy
 runner: dosbox
 year: 1991
 
@@ -17,20 +17,13 @@ script:
         file: mkdir
         args: $GAMEDIR/drive_c $GAMEDIR/drive_c/dizzy
 
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          dst=$2
-          
-          cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
-
+    #copy everything
     - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $game $GAMEDIR/drive_c/dizzy
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
+
+          cp -avr "$src_path/."  "$GAMEDIR/drive_c/dizzy"
+
+          '
 
     - write_file:
         content: '[autoexec]
@@ -40,6 +33,8 @@ script:
           C:
 
           cd dizzy
+          
+          autotype -w 3 -p 3 f1 f2
           
           PCDIZZY.EXE
           
