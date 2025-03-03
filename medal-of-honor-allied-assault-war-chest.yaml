@@ -1,0 +1,46 @@
+name: Medal of Honor - Allied Assult War Chest
+game_slug: medal-of-honor-allied-assault-war-chest
+version: Good Old Games Installer
+slug: medal-of-honor-allied-assault-war-chest
+runner: linux
+year: 2002
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Medal of Honor - Allied Assault War Chest/launch_openmohaa_base.x86_64
+    args: +set fs_homepath $GAMEDIR\drive_c\GOG GAMES\   +set r_mode -1 +set r_customheight 768 +set r_customwidth 1366
+    launch_configs:
+      - exe: "$GAMEDIR/drive_c/GOG Games/Medal of Honor - Allied Assault War Chest/launch_openmohaa_spearhead.x86_64"
+        name:  Spearhead
+        args: +set fs_homepath $GAMEDIR\drive_c\GOG GAMES\   +set r_mode -1 +set r_customheight 768 +set r_customwidth 1366
+      - exe: "$GAMEDIR/drive_c/GOG Games/Medal of Honor - Allied Assault War Chest/launch_openmohaa_breakthrough.x86_64"
+        name:  Breakthrough
+        args: +set fs_homepath $GAMEDIR\drive_c\GOG GAMES\  +set r_mode -1 +set r_customheight 768 +set r_customwidth 1366
+
+  files:
+    - setup: N/A:Select installer
+    - engine:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/openmohaa-v0.81.1-linux-amd64.zip
+        filename: openmohaa-v0.81.1-linux-amd64.zip
+
+  installer:
+    - task:
+        name: wine.create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wine.wineexec
+        prefix: $GAMEDIR
+
+    - extract:
+        file: "$engine" 
+        dst: $GAMEDIR/drive_c/GOG Games/Medal of Honor - Allied Assault War Chest/
+
+    - chmodx:  $GAMEDIR/drive_c/GOG Games/Medal of Honor - Allied Assault War Chest/launch_openmohaa_base.x86_64    
+    - chmodx:  $GAMEDIR/drive_c/GOG Games/Medal of Honor - Allied Assault War Chest/launch_openmohaa_spearhead.x86_64
+    - chmodx:  $GAMEDIR/drive_c/GOG Games/Medal of Honor - Allied Assault War Chest/launch_openmohaa_breakthrough.x86_64
+    - chmodx:  $GAMEDIR/drive_c/GOG Games/Medal of Honor - Allied Assault War Chest/omohaaded.x86_64   
+    - chmodx:  $GAMEDIR/drive_c/GOG Games/Medal of Honor - Allied Assault War Chest/openmohaa.x86_64 

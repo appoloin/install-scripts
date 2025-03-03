@@ -1,0 +1,37 @@
+name:  Formula 1 99
+game_slug: formula-1-99
+version: Windows Installer
+slug: formula-1-99
+runner: wine
+year: 1999
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Formula 1 '99/F199.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: icodecs
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    overrides:
+      ddraw: n,b
+      D3DImm: n,b
+      d3d8: n,b

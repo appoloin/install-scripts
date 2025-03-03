@@ -1,0 +1,31 @@
+name:  Formula 1 97
+game_slug: formula-1-97
+version: Good Old Games Installer
+slug: formula-1-97
+runner: wine
+year: 1997
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Formula 1 - Championship Edition/f197d3d.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    overrides:
+      ddraw: n,b
+      D3DImm: n,b
