@@ -8,7 +8,6 @@ year: 2013
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Baldur's Gate - Enhanced Edition/Baldur.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -18,7 +17,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         prefix: $GAMEDIR
 

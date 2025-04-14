@@ -34,7 +34,6 @@ script:
   wine:
     overrides:
       nvapi,nvapi64: disabled
-
     dxvk_nvapi: false
     
   system:

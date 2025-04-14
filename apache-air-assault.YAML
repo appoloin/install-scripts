@@ -1,0 +1,27 @@
+name: Apache Air Assault
+game_slug: apache-air-assault
+version: Windows Installer
+slug: apache-air-assault
+runner: wine
+year: 2010
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Apache Air Assault/apache.exe
+    prefix: $GAMEDIR
+
+  installer:
+    - insert-disc:
+          description: Select game folder
+          requires: apache.exe
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - execute:
+        file: cp 
+        args: -r "$DISC/"  "$GAMEDIR/drive_c/"
+

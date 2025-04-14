@@ -10,7 +10,7 @@ script:
     - setup: N/A:Select setup file from GOG
 
   game:
-    exe: "$GAMEDIR/drive_c/GOG Games/Scratches Director's Cut/scream.exe"
+    exe: "$GAMEDIR/drive_c/MagiPacks/Blitzkrieg Anthology/game.exe"
     prefix: $GAMEDIR
 
   installer:

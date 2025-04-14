@@ -8,7 +8,6 @@ year: 2020
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Alwa's Legacy/AlwasLegacy.exe
-    arch: win64
     prefix: $GAMEDIR
 
   files:
@@ -17,7 +16,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win64
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR

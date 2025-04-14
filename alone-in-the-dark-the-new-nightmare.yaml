@@ -1,9 +1,10 @@
-name: Alone in the dark 4
+name: Alone in the Dark 4
 game_slug: alone-in-the-dark-the-new-nightmare
 version: Good Old Games Installer
 slug: alone-in-the-dark-the-new-nightmare
 runner: wine
- 
+year: 2001
+
 script:
   game:
     exe: $GAMEDIR/drive_c/Program Files (x86)/GOG.com/Alone in the Dark - The New Nightmare/alone4.exe
@@ -24,3 +25,6 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+    - task:
+        app: ddr=gdi
+        name: winetricks

@@ -28,6 +28,7 @@ script:
 
     - task:
         executable: $patch
+        args: /SILENT
         name: wineexec
         prefix: $GAMEDIR
 

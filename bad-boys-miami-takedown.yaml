@@ -12,41 +12,11 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/Bad_Boy_II.7z
+        filename: Bad_Boy_II.7z
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
-    - write_file:
-        content: '#!/bin/bash
-
-         src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-         dst=$2
-
-         find "$src" -type d \( -name "VIDEOS"  \) -exec cp {} "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
-
     - task:
         name: create_prefix
         install_mono: false
@@ -58,17 +28,18 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-    - execute:
-        args: $setup $GAMEDIR/drive_c/Program Files (x86)/Empire Interactive/Bad Boys 2
-        file: $CACHE/selectcopy.sh
 
     - execute:
-        file: $CACHE/download.sh
-        args: 1flLwi1w1UVlNW0dZUS0BrOQHimkDI6wc $CACHE/patch.7z
+        command: 'src_path=$(echo "$setup" | sed -r "s/(.+)\/.+/\1/")
+
+          dest="$GAMEDIR/drive_c/Program Files \(x86\)/Empire Interactive/Bad Boys 2"
+
+          find "$src_path" -type d \( -name "VIDEO"  \) -exec cp {} "$dest" \;
+          '
 
     - execute:
         file: 7z
-        args: x $CACHE/patch.7z -o$GAMEDIR/drive_c/tmp -ppassword -y
+        args: x $patch -o$GAMEDIR/drive_c/tmp -ppassword -y
 
     - rename:
         src: $GAMEDIR/drive_c/Program Files (x86)/Empire Interactive/Bad Boys 2/BBpc.exe
@@ -77,8 +48,8 @@ script:
         src: $GAMEDIR/drive_c/Program Files (x86)/Empire Interactive/Bad Boys 2/Launcher.exe
         dst: $GAMEDIR/drive_c/Program Files (x86)/Empire Interactive/Bad Boys 2/Launcher.exe.old
 
-    - write_file:
-        content: '#!/bin/bash
+    - execute:
+        command: '#!/bin/bash
 
             height=$RESOLUTION_HEIGHT
 
@@ -86,13 +57,7 @@ script:
 
             path="/home/andrew/Games/bad-boys-miami-takedown/drive_c/tmp/Bad_Boy_II/"$width"x"$height 
 
-            cp -avr $path"/BBpc.exe" "$GAMEDIR/drive_c/Program Files (x86)/Empire Interactive/Bad Boys 2"
+            cp -avr $path"/BBpc.exe" "$GAMEDIR/drive_c/Program Files (x86)/Empire Interactive/Bad Boys 2";
             
             cp -avr  $path"/Launcher.exe" "$GAMEDIR/drive_c/Program Files (x86)/Empire Interactive/Bad Boys 2"
-            '    
-        file: $CACHE/copy.sh
-    - chmodx: $CACHE/copy.sh
-
-    - execute:
-        file: $CACHE/copy.sh
-        args: $RESOLUTION_HEIGHT  $RESOLUTION_WIDTH
+          '
