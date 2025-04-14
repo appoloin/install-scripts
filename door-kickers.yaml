@@ -10,7 +10,7 @@ script:
     - setup: N/A:Select setup file from GOG
 
   game:
-    exe: "$GAMEDIR/drive_c/GOG Games/doorkickers/doorkickers.exe"
+    exe: "$GAMEDIR/drive_c/GOG Games/Door Kickers/DoorKickers.exe"
     prefix: $GAMEDIR
 
   installer:

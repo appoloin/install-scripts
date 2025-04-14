@@ -7,7 +7,7 @@ year: 1999
 
 script:
   game: 
-    exe: $GAMEDIR/drive_c/GOG Games/Dungeon Keeper 2//DKII-DX.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Dungeon Keeper 2/DKII-DX.exe
     prefix: $GAMEDIR
 
   files:

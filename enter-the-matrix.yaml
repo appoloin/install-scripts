@@ -13,10 +13,9 @@ script:
     exe: "$GAMEDIR/drive_c/MagiPacks/Enter the Matrix/Matrix.exe"
     prefix: $GAMEDIR
     launch_configs:
-      - exe:  "$GAMEDIR/drive_c/MagiPacks/Enter the Matrix/MatrixOptions"
+      - exe:  "$GAMEDIR/drive_c/MagiPacks/Enter the Matrix/MatrixOptions.exe"
         prefix: $GAMEDIR
-        arch: win32
-        name: Episode 2 - Get Tannen!
+        name: Options
 
   installer:
     - task:

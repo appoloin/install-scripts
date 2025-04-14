@@ -12,6 +12,8 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - patch: N/A:Select Legends of Aranna patch
+    - patch2: N/A:Select Hotfix patch
 
   installer:
     - task:
@@ -27,6 +29,23 @@ script:
 
     - task:
         executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch2 -o"$GAMEDIR/drive_c/GOG Games/Dungeon Siege/" -y
+
+    - execute:
+        file: 7z
+        args: x $patch -o$CACHE -y
+
+    - merge:
+        src: "$CACHE/I-Legends of Aranna/Legends of Aranna Killah Fix"
+        dst: $GAMEDIR/drive_c/GOG Games/Dungeon Siege/
+
+    - task:
+        executable: $GAMEDIR/drive_c/GOG Games/Dungeon Siege/Reg Patch DS1.bat
         name: wineexec
         prefix: $GAMEDIR
 

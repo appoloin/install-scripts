@@ -24,9 +24,19 @@ script:
     - write_file:
         content: '[sdl]
 
-          mouse_capture=onclick   
+            mouse_capture=onclick   
             
             mouse_middle_release=true 
+
+          [cpu]
+
+            cpu_cycles = 25000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
 
           [autoexec]
           
