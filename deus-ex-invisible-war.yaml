@@ -7,11 +7,19 @@ year: 2003
 
 script:
   game:
-    exe: drive_c/GOG Games/Deus Ex GOTY/System/DeusEx.exe
+    exe:  $GAMEDIR/drive_c/drive_c/MagiPacks/Deus Ex - Invisible War/System/dx2.exe
     prefix: $GAMEDIR
+    launch_configs:
+      - exe: "$GAMEDIR/drive_c/drive_c/MagiPacks/Deus Ex - Invisible War/System/dgVoodooCpl.exe"
+        prefix: $GAMEDIR
+        name:  DgVoodoo Config
+
 
   files:
     - setup: N/A:Select the Setup file
+    - dgVoodoo:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/dgVoodoo2_61.7z
+        filename: dgVoodoo2_61.7z
 
 
   installer:
@@ -22,11 +30,26 @@ script:
         prefix: $GAMEDIR
 
     - task:
+        app: dsound 
+        description: 'winetricks'
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
 
+    - execute:
+        file: 7z
+        args: x $dgVoodoo -o"$CACHE" -ppassword -y
 
-  system:
-    single_cpu: true
+    - copy:
+        src: $CACHE/MS/x86/D3D8.dll
+        dst: $GAMEDIR/drive_c/drive_c/MagiPacks/Deus Ex - Invisible War/System/
+
+
+  wine:
+    overrides:
+      d3d8: native
 

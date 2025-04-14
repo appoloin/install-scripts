@@ -25,17 +25,13 @@ script:
         name: wineexec
         prefix: $GAMEDIR
  
-    - command: 'rclone copy "Patches - Google 1:Systems/Software/dgVoodoo2_61.7z" "$CACHE"'
-
-    - execute:
-        file: 7z
-        args: x $CACHE/dgVoodoo2_61.7z -o"$CACHE" -ppassword -y
-
-    - copy:
-        src: $CACHE/MS/x86/D3D9.dll
-        dst: $GAMEDIR/drive_c/MagiPacks/Conflict - Desert Storm
-
   wine:
+    dgvoodoo2: true
     overrides:
       d3d9: native
+      d3d8: native
 
+  system:
+    env:
+      DXVK_FRAME_RATE: '60'
+      DXVK_HUD: null

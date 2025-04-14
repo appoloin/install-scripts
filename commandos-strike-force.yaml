@@ -12,30 +12,14 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - patch1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/CommandoStrikeForce_XPC_exe.7z
+        filename: CommandoStrikeForce_XPC_exe.7z
+    - patch2:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/CommandoStrikeForce_Patch_v1.2s.7z
+        filename: CommandoStrikeForce_Patch_v1.2s.7z
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
         name: create_prefix
         install_mono: false
@@ -47,14 +31,9 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1iDXv8dq4_bxN0m-sdOjUBXR7E4XfODEg $CACHE/patch.7z
-
     - execute:
         file: 7z
-        args: e $CACHE/patch.7z -o$GAMEDIR/drive_c/tmp -ppassword -y
+        args: e $patch2 -o$GAMEDIR/drive_c/tmp -ppassword -y
 
     - task:
         executable: "$GAMEDIR/drive_c/tmp/csf_patch_v1.2s.exe"
@@ -65,14 +44,9 @@ script:
         src: "$GAMEDIR/drive_c/Program Files (x86)/Eidos/Pyro Studios/Commandos Strike Force/CommXPC.exe"
         dst: "$GAMEDIR/drive_c/Program Files (x86)/Eidos/Pyro Studios/Commandos Strike Force/CommXPC.exe.old"
 
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1Bx1q5alcpOX88ryRV4Mmz3SqHHniroGt $CACHE/fix.7z
-
     - execute:
         file: 7z
-        args: e $CACHE/fix.7z -o$CACHE -ppassword -y
+        args: e $patch1 -o$CACHE -ppassword -y
 
     - copy:
         src: $CACHE/CommXPC.exe

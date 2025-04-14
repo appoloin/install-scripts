@@ -1,13 +1,14 @@
 name: Contract J.A.C.K.
 game_slug: contract-jack
-version: Windows Installer
+version: Magipack Installer
 slug: contract-jack
 runner: wine
 year: 2003
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Games/Contract Jack/ContractJack.exe
+    exe: $GAMEDIR/drive_c/Program Files (x86)/MagiPacks/Contract JACK/Lithtech.exe
+    args: -rez Engine.REZ -rez GameDLL.rez -rez Game.rez -rez Sound.rez 
     prefix: $GAMEDIR
 
   files:
@@ -21,8 +22,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: winxp
-        description: Setting Windows version to XP
+        app: directmusic dsound vcrun6 winxp
         name: winetricks
         prefix: $GAMEDIR
 

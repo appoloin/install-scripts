@@ -1,7 +1,7 @@
-name: Conflict - Vietnam
-game_slug: conflict-vietnam
+name: Conflict - Global Terror
+game_slug: conflict-global-terror
 version: Magipack Installer
-slug: conflict-vietnam
+slug: conflict-global-terror
 runner: wine
 year: 2005
 
@@ -9,9 +9,16 @@ script:
   game:
     exe: $GAMEDIR/drive_c/MagiPacks/Conflict - Global Terror/ConflictGlobal.exe
     prefix: $GAMEDIR
+    launch_configs:
+      - exe: "$GAMEDIR/drive_c/MagiPacks/Conflict - Global Terror/dgVoodooCpl.exe"
+        prefix: $GAMEDIR
+        name:  DgVoodoo Config
 
   files:
     - setup: N/A:Select installer
+    - dgvoodoo:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/dgVoodoo2_61.7z
+        filename: dgVoodoo2_61.7z
 
   installer:
     - task:
@@ -25,15 +32,14 @@ script:
         name: wineexec
         prefix: $GAMEDIR
  
-    - command: 'rclone copy "Patches - Google 1:Systems/Software/dgVoodoo2_61.7z" "$CACHE"'
-
     - execute:
         file: 7z
-        args: x $CACHE/dgVoodoo2_61.7z -o"$CACHE" -ppassword -y
+        args: x $dgvoodoo -o"$CACHE" -ppassword -y
 
     - copy:
         src: $CACHE/MS/x86/D3D9.dll
         dst: $GAMEDIR/drive_c/MagiPacks/Conflict - Global Terror/
+
 
   wine:
     overrides:

@@ -8,7 +8,6 @@ year: 2011
 script:
   game: 
     exe: $GAMEDIR/drive_c/Games/Crysis 2/bin32/Crysis2.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:

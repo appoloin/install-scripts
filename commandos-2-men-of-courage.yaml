@@ -21,6 +21,12 @@ script:
         prefix: $GAMEDIR
 
     - task:
+        app: icodecs wmp9 amstream quartz dsound
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+

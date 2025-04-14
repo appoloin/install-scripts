@@ -1,7 +1,7 @@
 name: Cryostatis
 game_slug: cryostatis
 version: Good Old Games Installer
-slug: cryostatis
+slug: cryostasis
 runner: wine
 year: 2008
 

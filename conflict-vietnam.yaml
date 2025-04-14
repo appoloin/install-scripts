@@ -12,6 +12,9 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - dgVoodoo:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/dgVoodoo2_61.7z
+        filename: dgVoodoo2_61.7z
 
   installer:
     - task:
@@ -25,15 +28,20 @@ script:
         name: wineexec
         prefix: $GAMEDIR
  
-    - command: 'rclone copy "Patches - Google 1:Systems/Software/dgVoodoo2_61.7z" "$CACHE"'
-
     - execute:
         file: 7z
-        args: x $CACHE/dgVoodoo2_61.7z -o"$CACHE" -ppassword -y
+        args: x $dgVoodoo -o"$CACHE" -ppassword -y
 
     - copy:
         src: $CACHE/MS/x86/D3D9.dll
         dst: $GAMEDIR/drive_c/MagiPacks/Conflict - Vietnam/
+
+    - write_config:
+        data:
+            DirectX:
+                dgVoodooWatermark: false
+                Resolution: desktop
+        file: "$GAMEDIR/drive_c/MagiPacks/Conflict - Vietnam/dgVoodoo.conf"
 
   wine:
     overrides:
