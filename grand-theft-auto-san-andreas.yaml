@@ -7,51 +7,36 @@ year: 2005
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas/gta_sa.exe
-    arch: win32
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Grand Theft Auto San Andreas/gta_sa.exe
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select setup.exe
+    - loader:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/GrandtheftAuto/silents_asi_loader_13.zip
+        filename: silents_asi_loader_13.zip
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/GrandtheftAuto/SilentPatchSA.zip
+        filename: SilentPatchSA.zip
+    - nocd:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/GrandtheftAuto/gta_sa_v1_exe.7z
+        filename: gta_sa_v1_exe.7z
+
 
 
   install_complete_text: "Installation finished!\n\n\n\nIMPORTANT!\n============\nPlease\
-    \ change the wine version in the game\xB4s settings to \"System\"\
-    \ ,this game needs working virtual desktop."
+    \ change the wine version in the game\xB4s settings to \"UMU-Latest\"\ "
+
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
     - task:
         executable: $setup
-        arch: win32
         name: wineexec
         prefix: $GAMEDIR
 
@@ -60,53 +45,39 @@ script:
         prefix: $GAMEDIR
 
 
-    - execute:
-        file: $CACHE/download.sh
-        args: 1Z3DGvvo5SP-1vheYleyBqUZvV5W1tXBv $CACHE/silents_asi_loader_13.zip
     - extract:  
-        file: $CACHE/silents_asi_loader_13.zip
+        file: $loader
         dst:  $CACHE 
     - rename:
-        src: $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas/vorbisFile.dll
-        dst: $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas/vorbisFile-dll.old    
+        src: $GAMEDIR/drive_c/Program Files (x86)/Grand Theft Auto San Andreas/vorbisFile.dll
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Grand Theft Auto San Andreas/vorbisFile-dll.old    
     - copy:
         src: $CACHE/scripts
-        dst: $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas/scripts
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Grand Theft Auto San Andreas/scripts
     - copy:
         src: $CACHE/vorbisFile.dll
-        dst: $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Grand Theft Auto San Andreas
     - copy:
         src: $CACHE/vorbisHooked.dll
-        dst: $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas/
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Grand Theft Auto San Andreas/
 
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1rxUSxrosSz5zrdIqDTDrdooR_YgZe76a $CACHE/SilentPatchSA.zip
     - extract:  
-        file: $CACHE/SilentPatchSA.zip
+        file: $patch
         dst:  $CACHE 
     - copy:
         src: $CACHE/SilentPatchSA.asi
-        dst: $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas/scripts/
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Grand Theft Auto San Andreas/scripts/
     - copy:
         src: $CACHE/SilentPatchSA.ini
-        dst: $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas/scripts/
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Grand Theft Auto San Andreas/scripts/
 
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 149_rmVfmzO_99_SwU1hzH1_FgxfpQ_Rc $CACHE/gta_sa_v1_exe.7z
     - execute:
         file: 7z
-        args: e $CACHE/gta_sa_v1_exe.7z -o$CACHE  -ppassword -y
+        args: e $nocd -o$CACHE  -ppassword -y
     - rename:
-        src: $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas/gta_sa.exe
-        dst: $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas/gta_sa.exe.old
+        src: $GAMEDIR/drive_c/Program Files (x86)/Grand Theft Auto San Andreas/gta_sa.exe
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Grand Theft Auto San Andreas/gta_sa.exe.old
     - copy:
         src: $CACHE/gta_sa.exe
-        dst:  $GAMEDIR/drive_c/Program Files/Grand Theft Auto San Andreas/
-
-  wine:
-    Desktop: true
+        dst:  $GAMEDIR/drive_c/Program Files (x86)/Grand Theft Auto San Andreas/
 

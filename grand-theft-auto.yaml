@@ -1,163 +1,34 @@
 name: Grand Theft Auto
 game_slug: grand-theft-auto
-version: DOS Installer
+version: Windows Installer
 slug: grand-theft-auto
-runner: dosbox
+runner: wine
 year: 1997
 
 script:
   game:
-    main_file: $GAMEDIR/play.conf
+    exe: $GAMEDIR/drive_c/game/GTA - Launcher.exe
+    prefix: $GAMEDIR
 
   files:
-    - game:  N/A:Select file GTA CUE file
-    - game2:  N/A:Select file GTA London CUE file
+    - game:  N/A:Select file GTA Launcher
 
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          dst=$2
-          
-          cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
-
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+ 
     - execute:
         file: mkdir
-        args: $GAMEDIR/drive_c $GAMEDIR/drive_c/dos  $GAMEDIR/drive_d
+        args: $GAMEDIR/drive_c/game 
 
+    #copy everything
     - execute:
-        file: $CACHE/download.sh
-        args: 15tBs_hEQsWU1SP5BUvHoLdgaoEiTAqG1 $CACHE/xcopy.7z
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
 
-    - execute:
-        file: 7z
-        args: x  $CACHE/xcopy.7z  -o"$GAMEDIR/drive_c/dos" -ppassword -y
+          cp -avr "$src_path/."  "$GAMEDIR/drive_c/game"
 
-    - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $game "$GAMEDIR/drive_d"
-
-    - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $game2 "$GAMEDIR/drive_d"
-
-    - write_file:
-        content: '[mouse]
-
-            mouse_capture = onstart   
-            
-            mouse_middle_release=true   
-
-            mouse_sensitivity= 15
-          
-          [autoexec]
-                      
-            mount C "$GAMEDIR/drive_c" -t dir
-
-            imgmount D -t iso -fs iso "$GAMEDIR/drive_d/GTA.cue"
-
-            imgmount E -t iso -fs iso "$GAMEDIR/drive_d/GTALONDON.cue"
-
-            SET PATH=%PATH%;C:\dos;C:\;
-
-            SET COPYCMD=/Y
-
-            C:
-
-            cls 
-
-            ECHO OFF
-
-            goto launcher
-
-            :launcher
-
-            cls 
-
-            ECHO  -------------------------------------------  
-            
-            ECHO             Grand Theft Auto
-            
-            ECHO  -------------------------------------------  
-            
-            ECHO   1) Play Game        
-                        
-            ECHO   2) Install
-
-            ECHO  -------------------------------------------  
-                      
-            ECHO   3) Exit Program                             
-            
-            ECHO  -------------------------------------------  
-
-
-            choice /c123 /s Which program do you want to run? [1-3]: /n 
-            
-            if errorlevel 3 goto exit
-            
-            if errorlevel 2 goto install
-            
-            if errorlevel 1 goto game
-
-
-            :game
-
-            cls
-
-            C:
-
-            CD GTA
-
-            GTA            
-
-            goto exit
-
-
-
-            :install
-
-            cls
-
-            D:
-
-            install
-
-            E:
-
-            london           
-
-            goto launcher
-
-
-
-            :exit
-            
-            exit'
-        file: $GAMEDIR/play.conf
+          '    

@@ -1,14 +1,13 @@
 name: Dungeon Siege III
 game_slug: dungeon-siege-iii
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: dungeon-siege-iii
 runner: wine
 year: 2011
 
 script:
   game:
     exe: "$GAMEDIR/drive_c/GOG Games/Dungeon Siege III/Dungeon Siege III.exe"
-    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -19,14 +18,8 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
-        prefix: $GAMEDIR
-
-    - task:
-        app: win7
-        name: winetricks
         prefix: $GAMEDIR
 
     - task:

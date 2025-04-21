@@ -7,7 +7,7 @@ year: 2007
 
 script:
   game:
-    exe: "$GAMEDIR/drive_c/MagiPacks/Manhunt/manhunt.exe"
+    exe: $GAMEDIR/drive_c/Program Files (x86)/MagiPacks/The Lost Crown - A Ghost Hunting Adventure/TheLostCrown.exe
     prefix: $GAMEDIR
 
   files:

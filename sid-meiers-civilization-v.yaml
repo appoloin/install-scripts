@@ -8,35 +8,15 @@ year: 2010
 script:
   files:
     - setup: N/A:Select setup files
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/Civ5Patch.7z
+        filename: Civ5Patch.7z
 
   game:
-    arch: win32
-    exe: "$GAMEDIR/drive_c/Program Files/2K Games/Sid Meier's Civilization V/CivilizationV.exe"
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/2K Games/Sid Meier's Civilization V/CivilizationV.exe"
     prefix: $GAMEDIR
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
         name: create_prefix
         install_mono: false
@@ -49,10 +29,6 @@ script:
         prefix: $GAMEDIR
 
     - execute:
-        file: $CACHE/download.sh
-        args: 1nCT48NwfuLqdUmy0aGDrA5tOFsTqrHJ2 $CACHE/patch.7z
-
-    - execute:
         file: 7z
-        args: x $CACHE/patch.7z -o"$GAMEDIR/drive_c/Program Files/2K Games/Sid Meier's Civilization V/" -ppassword -y
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/2K Games/Sid Meier's Civilization V/" -ppassword -y
 

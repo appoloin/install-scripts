@@ -11,7 +11,6 @@ script:
     - DLC1: N/A:Select DLC1 installer
 
   game:
-    arch: win32
     exe: "$GAMEDIR/drive_c/GOG Games/Tropico 4/Tropico4.exe"
     prefix: $GAMEDIR
 
@@ -30,5 +29,4 @@ script:
     - task:
         executable: $DLC1
         name: wineexec
-        args: /SILENT 
         prefix: $GAMEDIR

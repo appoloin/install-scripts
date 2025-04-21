@@ -1,7 +1,7 @@
 name: Sid Meiers - Civilization III
-game_slug: sid-meiers-civilization-iii
+game_slug: sid-meiers-civilization-iii-complete
 version: Good Old Games Installer
-slug: sid-meiers-civilization-iii
+slug: sid-meiers-civilization-iii-complete
 runner: wine
 year: 2001
 
@@ -10,7 +10,6 @@ script:
     - setup: N/A:Select setup files
 
   game:
-    arch: win32
     exe: "$GAMEDIR/drive_c/GOG Games/Civilization III Complete/Civ3Launcher.exe"
     prefix: $GAMEDIR
 

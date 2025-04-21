@@ -3,10 +3,11 @@ game_slug: ankh-2-heart-of-osiris
 version: Good Old Games Installer
 slug: install
 runner: wine
+year: 2006
 
 script:
   game:
-    exe: "$GAMEDIR/c_drive/GOG Games/Ankh 2 Heart of Osiris/bin/release/Ankh-OsirisHeart.exe"
+    exe: "$GAMEDIR/drive_c/GOG Games/Ankh 2 Heart of Osiris/Launch Ankh 2 - Heart of Osiris.lnke"
     prefix: $GAMEDIR
 
   files:

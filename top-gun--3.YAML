@@ -3,32 +3,19 @@ game_slug: top-gun--3
 version: Windows Installer
 slug: top-gun--3
 runner: wine
-yer: 2010
+year: 2010
 
 script:
   game:
     exe: $GAMEDIR/drive_c/game/binary/TopGun.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
     - game: N/A:Select file in top folder
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-         src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-         dst=$2
-        
-         cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
-
     - task:
         name: create_prefix
-        arch: win32
         install_mono: true
         install_gecko: false
         prefix: $GAMEDIR
@@ -43,7 +30,11 @@ script:
         file: mkdir
         args: $GAMEDIR/drive_c/game 
 
+    #copy everything
     - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $game $GAMEDIR/drive_c/game
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
+
+          cp -avr "$src_path/."  "$GAMEDIR/drive_c/game"
+
+          '    
 

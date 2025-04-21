@@ -13,7 +13,7 @@ script:
   files:
     - game: N/A:Select installer.
     - patch1: 
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/Bioshock2-Patch.7z
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Bioshock/Bioshock2-Patch.7z
         filename: Bioshock-Patch.7z
 
 

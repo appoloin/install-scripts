@@ -7,7 +7,6 @@ year: 1997
 
 script:
   game:
-    arch: win32
     exe: $GAMEDIR/drive_d/VOODOO95.EXE
     prefix: $GAMEDIR
 

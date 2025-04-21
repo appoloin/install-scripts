@@ -1,4 +1,4 @@
-name: Enter the Matrix
+name: Wipeout 2097
 game_slug: wipeout-2097
 version: MagiPacks Installer
 slug: wipeout-2097
@@ -8,6 +8,9 @@ year: 1996
 script:
   files:
     - setup: N/A:Select setup file 
+    - dgvoodoo:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/dgVoodoo2_61.7z
+        filename: dgVoodoo2_61.7z
 
   game:
     exe: "$GAMEDIR/drive_c/MagiPacks/Wipeout 2097/Wipeout2.exe"
@@ -25,11 +28,9 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-    - command: 'rclone copy "Patches - Google 1:Systems/Software/dgVoodoo2_61.7z" "$CACHE"'
-
     - execute:
         file: 7z
-        args: x $CACHE/dgVoodoo2_61.7z -o"$CACHE" -ppassword -y
+        args: x $dgvoodoo -o"$CACHE" -ppassword -y
 
     - copy:
         src: $CACHE/MS/x86/DDraw.dll
@@ -46,7 +47,6 @@ script:
     - copy:
         src: $CACHE/MS/x86/D3D8.dll
         dst: $GAMEDIR/drive_c/MagiPacks/Wipeout 2097
-
 
     - copy:
         src: $CACHE/dgVoodooCpl.exe

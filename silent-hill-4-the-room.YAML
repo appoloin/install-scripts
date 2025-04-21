@@ -21,7 +21,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: directshow wmp10
+        app: directshow wmp9 wmp11
         name: winetricks
         prefix: $GAMEDIR
 

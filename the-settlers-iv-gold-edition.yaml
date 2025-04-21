@@ -3,13 +3,13 @@ game_slug: the-settlers-iv-gold-edition
 version: Good Old Games Installer
 slug: the-settlers-iv-gold-edition
 runner: wine
+year: 2001
 
 script:
   files:
     - setup: N/A:Select setup file from GOG
 
   game:
-    arch: win32
     exe:  "$GAMEDIR/drive_c/GOG Games/Settlers 4 Gold/S4.exe"
     prefix: $GAMEDIR
 

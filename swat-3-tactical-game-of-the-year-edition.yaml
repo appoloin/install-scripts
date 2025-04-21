@@ -3,7 +3,7 @@ game_slug: swat-3-tactical-game-of-the-year-edition
 version: Windows Installer
 slug: swat-3-tactical-game-of-the-year-edition
 runner: wine
-year: 2007
+year: 1999
 
 script:
   game:

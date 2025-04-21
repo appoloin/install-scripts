@@ -1,20 +1,25 @@
 name: Wing Commander - Prophecy
-game_slug: wing-commander-5-prophecy-gold-edition
+game_slug: wing-commander-privateer
 version: Good Old Games Installer
-slug: wing-commander-5-prophecy-gold-edition
+slug: wing-commander-privateer
 runner: wine
 year: 1997
 
 script:
   files:
     - setup: N/A:Select setup file from GOG
-    - wcpep: http://download.wcnews.com/files/wcp/wcpep_release.zip
-    - opengl: http://download.wcnews.com/files/wcp/OpenGL-WCP_setup.exe
-    - fpsutil: http://download.wcnews.com/files/wcp/wcp_fps_utility.zip
+    - wcpep:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/WingCommander/wcpep_release.zip
+        filename: wcpep_release.zip
+    - opengl:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/WingCommander/OpenGL-WCP_setup.exe
+        filename: OpenGL-WCP_setup.exe
+    - fpsutil:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/WingCommander/wcp_fps_utility.zip
+        filename: wcp_fps_utility.zip
 
   game:
-    arch: win32
-    exe: "$GAMEDIR/drive_c/GOG Games/Zeus and Poseidon/Zeus.exe"
+    exe: "$GAMEDIR/drive_c/GOG Games/Wing Commander Prophecy/prophecy.exe"
     prefix: $GAMEDIR
 
   installer:
@@ -50,7 +55,6 @@ script:
         description: Install arial for OpenGL patch
         name: winetricks
     - task:
-        arch: win32
         description: Installing OpenGL patch
         executable: opengl
         name: wineexec
@@ -60,7 +64,6 @@ script:
         dst: $GAMEDIR/drive_c/GOG Games/Wing Commander Prophecy/
         file: fpsutil
     - task:
-        arch: win32
         description: Launch Prophecy FPS utility
         executable: $GAMEDIR/drive_c/GOG Games/Wing Commander Prophecy/WCP FPS Utility.exe
         name: wineexec

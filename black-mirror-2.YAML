@@ -1,7 +1,7 @@
 name: Black Mirror 2
-game_slug:  black-mirror-2
+game_slug:  black-mirror-ii
 version: Good Old Games Installer
-slug: black-mirror-2
+slug: black-mirror-ii
 runner: wine
 year: 2009
 

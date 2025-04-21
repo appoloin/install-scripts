@@ -13,10 +13,10 @@ script:
   files:
     - setup: N/A:Select Setup
     - patch:  
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/motoe_patch1.7z
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/AgathaChriste/motoe_patch1.7z
         filename: motoe_patch1.7z
     - nocd:  
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/motoe-NoCD.7z.001
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/AgathaChriste/motoe-NoCD.7z.001
         filename: motoe-NoCD.7z.001
 
   installer:

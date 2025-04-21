@@ -8,10 +8,16 @@ year: 2000
 script:
   game:
     prefix: $GAMEDIR
-    exe: $GAMEDIR/drive_c/GOG Games/Sid Meier's Alpha Centauri/axstart.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Sid Meier's Alpha Centauri/terran.exe
+    name: Sid Meier's Alpha Centauri
+    launch_configs:
+      - exe:  "$GAMEDIR/drive_c/GOG Games/Sid Meier's Alpha Centauri/axstart.exe"
+        name: Alien Crossfire
+        prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select the Setup file
+    
   installer:
     - task:
         name: create_prefix

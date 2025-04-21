@@ -7,7 +7,7 @@ year: 2010
 
 script:
   game:
-    exe: "$GAMEDIR/drive_c/Program Files (x86)/Fable III/Fable3.exe"
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Fable III/Fable3Launcher.exe"
     prefix: $GAMEDIR
 
   files:
@@ -20,6 +20,12 @@ script:
         install_gecko: false
         prefix: $GAMEDIR
 
+    - task:
+        app: xact xact_x64
+        description: Running Winetricks
+        name: winetricks
+        prefix: $GAMEDIR  
+ 
     - task:
         executable: $setup
         name: wineexec

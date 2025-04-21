@@ -8,25 +8,20 @@ year: 2009
 script:
   game:
     exe: "$GAMEDIR/drive_c/GOG/Launch of the Screaming Narwhal/MonkeyIsland101.exe"
-    arch: win32
     prefix: $GAMEDIR
     name: Chapter 1 - Launch of the Screaming Narwhal
     launch_configs:
       - exe: "$GAMEDIR/drive_c/GOG/The Siege of Spinner Cay/MonkeyIsland102.exe"
         prefix: $GAMEDIR
-        arch: win32
         name:  Chapter 2 - The Siege of Spinner Cay
       - exe: "$GAMEDIR/drive_c/GOG/Lair of the Leviathan/MonkeyIsland103.exe"
         prefix: $GAMEDIR
-        arch: win32
         name:  Chapter 3 - Lair of the Leviathan
       - exe: "$GAMEDIR/drive_c/GOG/The Trial and Execution of Guybrush Threepwood/MonkeyIsland104.exe"
         prefix: $GAMEDIR
-        arch: win32
         name:  Chapter 4 - The Trial and Execution of Guybrush Threepwood
       - exe: "$GAMEDIR/drive_c/GOG/Rise of the Pirate God/MonkeyIsland105.exe"
         prefix: $GAMEDIR
-        arch: win32
         name:  Chapter 5 - Rise of the Pirate God
 
   files:
@@ -34,7 +29,6 @@ script:
 
   installer:
     - task:
-        arch: win32
         name: create_prefix
         install_mono: false
         install_gecko: false

@@ -12,31 +12,14 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/DarkSouls/DarkSoulsPatch.7z
+        filename: DSFix%202.4-19-2-4.zip
+    - fix:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/DarkSouls/DSFix%202.4-19-2-4.zip
+        filename: DSFix%202.4-19-2-4.zip
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
-
     - task:
         name: create_prefix
         install_mono: false
@@ -52,32 +35,24 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1Ew5MXUcxzzo7NsFlyTHWtSeTu64OWVIF $CACHE/patch.7z
     
     - execute:
         file: 7z
-        args: x $CACHE/patch.7z -ppassword -o"$GAMEDIR/drive_c/Program Files (x86)/BANDAI NAMCO Games/DARK SOULS - Prepare To Die Edition/DATA/" -y
+        args: x $patch -ppassword -o"$GAMEDIR/drive_c/Program Files (x86)/BANDAI NAMCO Games/DARK SOULS - Prepare To Die Edition/DATA/" -y
    
     - execute:
-        file: $CACHE/download.sh
-        args: 1gS2DUJAhjIAl2QBQkk_eYFRVZ4F2837Y $CACHE/fix.7z
-
-    - execute:
         file: 7z
-        args: x $CACHE/fix.7z -o"$GAMEDIR/drive_c/Program Files (x86)/BANDAI NAMCO Games/DARK SOULS - Prepare To Die Edition/DATA/" -y
+        args: x $fix -o"$GAMEDIR/drive_c/Program Files (x86)/BANDAI NAMCO Games/DARK SOULS - Prepare To Die Edition/DATA/" -y
 
 
     - write_file:
         content: '#!/bin/bash
 
-            height="$1"
+            height=$RESOLUTION_HEIGHT
 
-            width="$2"
+            width=$RESOLUTION_WIDTH 
 
-            path="$3"
+            path="$GAMEDIR/drive_c/Program Files (x86)/BANDAI NAMCO Games/DARK SOULS - Prepare To Die Edition/DATA/DSfix.ini"
 
             sed -i "s/^renderWidth.*$/renderWidth $width/g" "$path"
 
@@ -87,9 +62,7 @@ script:
             '
         file: $CACHE/update.sh
     - chmodx: $CACHE/update.sh
-
     - execute:
-        args: $RESOLUTION_HEIGHT $RESOLUTION_WIDTH "$GAMEDIR/drive_c/Program Files (x86)/BANDAI NAMCO Games/DARK SOULS - Prepare To Die Edition/DATA/DSfix.ini"
         file: $CACHE/update.sh
 
 

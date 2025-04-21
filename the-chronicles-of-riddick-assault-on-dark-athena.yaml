@@ -7,7 +7,7 @@ year: 2009
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/The Chronicles of Riddick - Assault on Dark Athena/System/Win32_x86/DarkAthena.exe
+    exe: $GAMEDIR/drive_c/MagiPacks/The Chronicles of Riddick - Assault on Dark Athena/System/Win32_x86/DarkAthena.exe
     prefix: $GAMEDIR
 
   files:

@@ -7,7 +7,7 @@ year: 2009
 
 script:
   game:
-    exe: "$GAMEDIR/c_drive/GOG Games/Ankh 3 Battle of the Gods/bin/release/Ankh-BOG.exe"
+    exe: "$GAMEDIR/drive_c/GOG Games/Ankh 3 Battle of the Gods/bin/release/Ankh-BOG.exe"
     prefix: $GAMEDIR
 
   files:

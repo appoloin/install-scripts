@@ -10,7 +10,7 @@ script:
     exe: "$GAMEDIR/drive_c/MagiPacks/The Thing/bin/TheThing.exe"
     prefix: $GAMEDIR
     launch_configs:
-      - exe: "$GAMEDIR/drive_c/MagiPacks/The Thing/bin//dgVoodooCpl.exe"
+      - exe: "$GAMEDIR/drive_c/MagiPacks/The Thing/bin/dgVoodooCpl.exe"
         prefix: $GAMEDIR
         name:  DgVoodoo Config
 

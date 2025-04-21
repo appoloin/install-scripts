@@ -3,6 +3,7 @@ game_slug: turok-2-seeds-of-evil
 version: Good Old Games Installer
 slug: turok-2-seeds-of-evil
 runner: wine
+year: 2017
 
 script:
   game:

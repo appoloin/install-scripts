@@ -3,7 +3,7 @@ game_slug: tron-20
 version: Good Old Games Installer
 slug: tron-20
 runner: wine
-yea: 2003
+year: 2003
 
 script:
   files:

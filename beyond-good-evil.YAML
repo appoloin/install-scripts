@@ -13,10 +13,10 @@ script:
   files:
     - setup: N/A:Select the EXE downloaded from GOG
     - wds:  
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/bge_widescreen.zip
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/BeyondGoodandEvil/bge_widescreen.zip
         filename: bge_widescreen.zip
     - audio: 
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/bge_dsound.7z
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/BeyondGoodandEvil/bge_dsound.7z
         filename: bge_dsound.7z
 
 

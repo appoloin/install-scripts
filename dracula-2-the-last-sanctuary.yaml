@@ -10,10 +10,8 @@ script:
     exe: "$GAMEDIR/drive_c/GOG/Dracula 2 - The Last Sanctuary/Dracula2.exe"
     prefix: $GAMEDIR
 
-
   install_complete_text: "Installation finished!\n\n\n\nIMPORTANT!\n============\nPlease\
-    \ change the wine version in the game\xB4s settings to \"System\"\
-    \ ,this game needs working virtual desktop."
+    \ change the wine version in the game\xB4s settings to \"UMU-Latest\"\ "
 
   files:
     - game: N/A:Select GOG installer.
@@ -39,6 +37,3 @@ script:
     - merge:
         src: "$CACHE/Dracula 2 - The Last Sanctuary"
         dst: "$GAMEDIR/drive_c/GOG/Dracula 2 - The Last Sanctuary"
-
-  wine:
-    Desktop: true

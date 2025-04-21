@@ -26,6 +26,7 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+
   wine:
-    esync: false
-    fsync: false
+    overrides:
+      ddraw: n,b

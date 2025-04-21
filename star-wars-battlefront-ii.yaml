@@ -10,14 +10,12 @@ script:
       - installer: N/A:Select the game's setup file
 
     game:
-      arch: win32
       exe:  "$GAMEDIR/drive_c/GOG Games/Star Wars - Battlefront 2/GameData/BattlefrontII.exe"
       prefix: $GAMEDIR
 
     installer:
       - task:
           name: create_prefix
-          arch: win32
           install_mono: false
           install_gecko: false
           prefix: $GAMEDIR

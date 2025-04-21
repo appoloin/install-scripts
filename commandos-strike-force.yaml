@@ -13,10 +13,10 @@ script:
   files:
     - setup: N/A:Select installer
     - patch1:  
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/CommandoStrikeForce_XPC_exe.7z
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Commandos/CommandoStrikeForce_XPC_exe.7z
         filename: CommandoStrikeForce_XPC_exe.7z
     - patch2:  
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/CommandoStrikeForce_Patch_v1.2s.7z
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Commandos/CommandoStrikeForce_Patch_v1.2s.7z
         filename: CommandoStrikeForce_Patch_v1.2s.7z
 
   installer:

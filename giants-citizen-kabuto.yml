@@ -12,30 +12,17 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - patch1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/GiantsCitizenKabuto/GPatch1_5_0_0.7z.001
+        filename: GPatch1_5_0_0.7z.001
+    - patch2:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/GiantsCitizenKabuto/GPatch1_5_0_0.7z.002
+        filename: GPatch1_5_0_0.7z.002
+    - patch3:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/GiantsCitizenKabuto/GPatch1_5_0_0.7z.003
+        filename: GPatch1_5_0_0.7z.003
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
         name: create_prefix
         install_mono: false
@@ -47,13 +34,20 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-    - execute:
-        file: $CACHE/download.sh
-        args: 1Qv5h67bYY724Tg06pEOAbWxguU0gXX2Z $CACHE/GPatch1_5_0_0.7z
+    #Move Patch into one folder
+    - merge:
+        src: "$patch1"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch2"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch3"
+        dst: "$CACHE"
 
     - execute:
         file: 7z
-        args: x $CACHE/GPatch1_5_0_0.7z -o$CACHE -ppassword -y
+        args: x $CACHE/GPatch1_5_0_0.7z.001 -o$CACHE -ppassword -y
 
     - task:
         executable: $CACHE/GPatch1_5_0_0.exe 

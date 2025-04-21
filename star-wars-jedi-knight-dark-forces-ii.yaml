@@ -7,11 +7,14 @@ year: 1997
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Star Wars Jedi Knight - Dark Forces 2/JK.EXE
+    exe: $GAMEDIR/drive_c/GOG Games/Star Wars Jedi Knight - Dark Forces 2/openjkdf2-64.exe
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
+    - engine:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/openjkdf2-64v0.9.6.zip
+        filename: openjkdf2-64v0.9.6.zip
 
   installer:
     - task:
@@ -24,4 +27,8 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+    - extract:
+        file: $engine
+        dst:  $GAMEDIR/drive_c/GOG Games/Star Wars Jedi Knight - Dark Forces 2/
 

@@ -12,6 +12,7 @@ script:
 
   files:
     - setup: N/A:Select the Setup file
+    
   installer:
     - task:
         name: create_prefix

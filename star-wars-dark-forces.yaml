@@ -8,6 +8,9 @@ year: 1995
 script:
   files:
     - setup: N/A:Select GOG installer.
+    - engine:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/TheForceEngine-v1.15.000.zip
+        filename: TheForceEngine-v1.15.000.zip
 
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Dark/TheForceEngine.exe
@@ -15,28 +18,6 @@ script:
 
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
         name: create_prefix
         install_mono: false
@@ -48,10 +29,7 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-    - execute:
-        file: $CACHE/download.sh
-        args: 1fGHF1XgGm4A_c3VczpqQPuqoL63VTccW $CACHE/TheForceEngine-v1.09.540.zip
     - extract:
-        file: $CACHE/TheForceEngine-v1.09.540.zip
+        file: $engine
         dst:  $GAMEDIR/drive_c/GOG Games/Dark
 

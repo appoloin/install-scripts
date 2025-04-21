@@ -3,6 +3,7 @@ game_slug:  fate
 version: Good Old Games Installer
 slug: fate
 runner: wine
+year: 2005
 
 script:
   game:

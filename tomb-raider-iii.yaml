@@ -1,7 +1,7 @@
 name: Tomb Raider III
-game_slug: tomb-raider-iii
+game_slug: tomb-raider-iii-adventures-of-lara-croft
 version: Good Old Games Installer
-slug: tomb-raider-ii
+slug: tomb-raider-iii
 runner: wine
 year: 1998
 
@@ -12,30 +12,11 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - engine:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/TombRaider/tomb3.zip
+        filename: tomb3.zip
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
         name: create_prefix
         install_mono: false
@@ -48,12 +29,8 @@ script:
         prefix: $GAMEDIR
 
     - execute:
-        file: $CACHE/download.sh
-        args: 1Yjk4BZWGPYGakjwRHqPqU2Vjds_Vddhp $CACHE/tomb3.zip
-
-    - execute:
         file: 7z
-        args: x  $CACHE/tomb3.zip -o"$GAMEDIR/drive_c/GOG Games/Tomb Raider 3/"  -y
+        args: x  $engine -o"$GAMEDIR/drive_c/GOG Games/Tomb Raider 3/"  -y
 
 
   wine:

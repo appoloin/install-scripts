@@ -6,59 +6,32 @@ runner: wine
 year: 2011
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/Electronic Arts/Alice Madness Returns - The Complete Collection/Game/Alice2/Binaries/Win32/AliceMadnessReturns.exe
-    arch: win32
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/Alice Madness Returns - The Complete Collection/Game/Alice2/Binaries/Win32/AliceMadnessReturns.exe
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select the installer
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/AliceMadnessReturnsPatch.7z
+        filename: AliceMadnessReturnsPatch.7z
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
-        arch: win32
         name: create_prefix
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
     - task: 
-        arch: win32
         app: dotnet35
         name: winetricks
         prefix: $GAMEDIR
 
     - task:
-        arch: win32
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
 
     - execute:
-        file: $CACHE/download.sh
-        args: 1zQW9nYC4GfTmkaFJ953YB-ZPmADp9HST $CACHE/patch.7z
-
-    - execute:
         file: 7z
-        args: x $CACHE/patch.7z -o"$GAMEDIR/drive_c/Program Files/Electronic Arts/Alice Madness Returns - The Complete Collection/"  -y -ppassword
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/Alice Madness Returns - The Complete Collection/"  -y -ppassword

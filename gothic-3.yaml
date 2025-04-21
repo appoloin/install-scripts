@@ -1,47 +1,26 @@
 name: Gothic 3
-game_slug: rc-3
-version: Windows Installer
+game_slug: gothic-3
+version: Good Old Games Installer
 slug:  gothic-3
 runner: wine
 year: 2006
 
 script:
   game: 
-    exe: "$GAMEDIR/drive_c/Program Files/Nordic Games/Gothic 3 Forsaken Gods - Enhanced Edition/Gothic III Forsaken Gods.exe"
-    arch: win32
+    exe: "$GAMEDIR/drive_c/GOG Games/Gothic 3/Gothic3.exe"
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
+    - patch1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Gothic/Gothic_3_Parallel_Universe_Patch_v1.0.5.exe
+        filename: Gothic_3_Parallel_Universe_Patch_v1.0.5.exe
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
         name: create_prefix
         install_mono: false
         install_gecko: false
-        arch: win32
         prefix: $GAMEDIR
 
     - task:
@@ -49,19 +28,7 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-    - execute:
-        file: $CACHE/download.sh
-        args: 1EiVeTCD-MbNYWD3icNqEkUZpTYRWO7Am $CACHE/patch.zip
-
-    - execute:
-        file: 7z
-        args: e  $CACHE/patch.zip -o"$GAMEDIR/drive_c/Program Files/Nordic Games/Gothic 3 Forsaken Gods - Enhanced Edition/" -ppassword -y
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1XDym4R48ONkdibDzwNJoqbpb6AuK_brv $CACHE/Gothic_3_Parallel_Universe_Patch_v1.0.5.exe
-
     - task:
-        executable: $CACHE/Gothic_3_Parallel_Universe_Patch_v1.0.5.exe
+        executable: $patch1
         name: wineexec
         prefix: $GAMEDIR

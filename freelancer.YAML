@@ -1,12 +1,13 @@
 name: Freelancer
 game_slug: freelancer
-version: Installer
+version: Magipack Installer
 slug: freelancer
 runner: wine
+year: 2003
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/Microsoft Games/Freelancer/EXE/Freelancer.exe
+    exe: $GAMEDIR/drive_c/MagiPacks/Freelancer/EXE/freelancer.exe
     prefix: $GAMEDIR
 
   files:
@@ -23,8 +24,5 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
 
 

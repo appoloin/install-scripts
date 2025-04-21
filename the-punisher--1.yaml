@@ -25,3 +25,8 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+  wine:
+    overrides:
+      d3d8: n,b
+      d3d9: n,b
+      dinput8: n,b

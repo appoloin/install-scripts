@@ -20,7 +20,6 @@ script:
         install_gecko: false
         prefix: $GAMEDIR
 
-
     - task:
         executable: $setup
         name: wineexec

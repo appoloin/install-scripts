@@ -10,7 +10,7 @@ script:
     - setup: N/A:Select setup file from GOG
 
   game:
-    exe: "$GAMEDIR/drive_c/The Void/bin/win32/Game.exe"
+    exe: "$GAMEDIR/drive_c/GOG Games/The Void/bin/win32/Game.exe"
     prefix: $GAMEDIR
 
   installer:

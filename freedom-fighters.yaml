@@ -25,3 +25,12 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+  wine:
+    dgvoodoo2: true
+    overrides:
+      d3d9: n,b
+      d3d8: n,b
+
+
+  system:
+    single_cpu: true

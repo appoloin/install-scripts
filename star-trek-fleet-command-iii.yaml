@@ -24,3 +24,9 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+  wine:
+    dxvk: false  
+    overrides:
+      ddraw: native
+      d3d8: native

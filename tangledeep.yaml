@@ -8,7 +8,6 @@ year: 2018
 script:
   game: 
     exe: $GAMEDIR/drive_c/GOG Games/Tangledeep/Tangledeep.exe
-    arch: win32
     prefix: $GAMEDIR
 
   files:
@@ -21,7 +20,6 @@ script:
         name: create_prefix
         install_mono: false
         install_gecko: false
-        arch: win32
         prefix: $GAMEDIR
 
     - task:

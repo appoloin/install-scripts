@@ -12,30 +12,38 @@ script:
 
   files:
     - setup: N/A:Select installer
+    - engine1:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/TombRaider/TR2Main_v0.9.0.7z.001_FILES.zip.001
+        filename: TR2Main_v0.9.0.7z.001
+    - engine2:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/TombRaider/TR2Main_v0.9.0.7z.001_FILES.zip.002
+        filename: TR2Main_v0.9.0.7z.002
+    - engine3:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/TombRaider/TR2Main_v0.9.0.7z.001_FILES.zip.003
+        filename: TR2Main_v0.9.0.7z.003
+    - engine4:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/TombRaider/TR2Main_v0.9.0.7z.001_FILES.zip.004
+        filename: TR2Main_v0.9.0.7z.004
+    - engine5:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/TombRaider/TR2Main_v0.9.0.7z.001_FILES.zip.005
+        filename: TR2Main_v0.9.0.7z.005
+    - engine6:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/TombRaider/TR2Main_v0.9.0.7z.001_FILES.zip.006
+        filename: TR2Main_v0.9.0.7z.006
+    - engine7:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/TombRaider/TR2Main_v0.9.0.7z.001_FILES.zip.007
+        filename: TR2Main_v0.9.0.7z.007
+    - engine8:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/TombRaider/TR2Main_v0.9.0.7z.001_FILES.zip.008
+        filename: TR2Main_v0.9.0.7z.008
+    - engine9:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/TombRaider/TR2Main_v0.9.0.7z.001_FILES.zip.009
+        filename: TR2Main_v0.9.0.7z.009
+    - engine10:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/TombRaider/TR2Main_v0.9.0.7z.001_FILES.zip.010
+        filename: TR2Main_v0.9.0.7z.010
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
         name: create_prefix
         install_mono: false
@@ -47,18 +55,39 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-    - execute:
-        file: $CACHE/download.sh
-        args: 1cSrmR7_JE89Lik9tzAfYeGE15_aSxJQT $CACHE/TR2Main_v0.9.0.7z.001
-    - execute:
-        file: $CACHE/download.sh
-        args: 1_YfKyQq5ZXXv0yt2Iqa68u_F-HaCZDCy $CACHE/TR2Main_v0.9.0.7z.002
-    - execute:
-        file: $CACHE/download.sh
-        args: 1abrELz6SLz8B5sKUF8pb-n0w-5FyUbSz $CACHE/TR2Main_v0.9.0.7z.003
-    - execute:
-        file: $CACHE/download.sh
-        args: 1x9OYKGCF60o8TciiUzyt5w9Op1cK4RUe $CACHE/TR2Main_v0.9.0.7z.004
+
+    #Move Patch into one folder
+    - merge:
+        src: "$engine1"
+        dst: "$CACHE"
+    - merge:
+        src: "$engine2"
+        dst: "$CACHE"
+    - merge:
+        src: "$engine3"
+        dst: "$CACHE"
+    - merge:
+        src: "$engine4"
+        dst: "$CACHE"
+    - merge:
+        src: "$engine5"
+        dst: "$CACHE"
+    - merge:
+        src: "$engine6"
+        dst: "$CACHE"
+    - merge:
+        src: "$engine7"
+        dst: "$CACHE"
+    - merge:
+        src: "$engine8"
+        dst: "$CACHE"
+    - merge:
+        src: "$engine9"
+        dst: "$CACHE"
+    - merge:
+        src: "$engine10"
+        dst: "$CACHE"
+
 
     - execute:
         file: 7z

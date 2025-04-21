@@ -10,30 +10,12 @@ script:
     exe: "$GAMEDIR/drive_c/Program Files (x86)/Rockstar Games/Grand Theft Auto Vice City/reVC.exe"
     prefix: $GAMEDIR
 
+  files:
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/GrandtheftAuto/reVC-win-amd64-librw_d3d9-oal-1_0.zip
+        filename: reVC-win-amd64-librw_d3d9-oal-1_0.zip
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
         name: create_prefix
         install_mono: false
@@ -53,11 +35,7 @@ script:
         executable: $DISC/setup.exe
         name: wineexec
         prefix: $GAMEDIR
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1xy8kft9fDTbqnBt-kmmPW_LppO3ivIfj $CACHE/patch.7z
         
     - execute:
         file: 7z
-        args: x $CACHE/patch.7z -o"$GAMEDIR/drive_c/Program Files (x86)/Rockstar Games/Grand Theft Auto Vice City" -ppassword -y
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Rockstar Games/Grand Theft Auto Vice City" -ppassword -y
