@@ -7,7 +7,7 @@ year: 2003
 
 script:
   game:
-    exe: "$GAMEDIR/drive_c/MagiPacks/Midnight Club 2/mc2.exe"
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/MagiPacks/Midnight Club 2/mc2.exe"
     prefix: $GAMEDIR
 
   files:
@@ -25,3 +25,10 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+  wine:
+    overrides:
+      dinput8 : n,b
+      xinput1_3: n,b
+
+  system:
+    single_cpu: true

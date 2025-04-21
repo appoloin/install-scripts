@@ -8,25 +8,20 @@ year: 2010
 script:
   game:
     exe: "$GAMEDIR/drive_c/GOG/Episode 301 - The Penal Zone/SamMax301.exe"
-    arch: win32
     prefix: $GAMEDIR
     name: Episode 301 - The Penal Zone
     launch_configs:
       - exe: "$GAMEDIR/drive_c/GOG/Episode 302 - The Tomb of Sammun-Mak/SamMax302.exe"
         prefix: $GAMEDIR
-        arch: win32
         name: Episode 302 - The Tomb of Sammun-Mak
       - exe: "$GAMEDIR/drive_c/GOG/Episode 303 - They Stole Max's Brain!/SamMax303.exe"
         prefix: $GAMEDIR
-        arch: win32
         name: Episode 303 - They Stole Max's Brain!
       - exe: "$GAMEDIR/drive_c/GOG/Episode 304 - Beyond the Alley of the Dolls/SamMax304.exe"
         prefix: $GAMEDIR
-        arch: win32
         name: Episode 304 - Beyond the Alley of the Dolls
       - exe: "$GAMEDIR/drive_c/GOG/Episode 305 - The City That Dares Not Sleep/SamMax305.exe"
         prefix: $GAMEDIR
-        arch: win32
         name: Episode 305 - The City That Dares Not Sleep
 
   files:
@@ -35,7 +30,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR

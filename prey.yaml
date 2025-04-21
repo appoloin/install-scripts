@@ -14,13 +14,13 @@ script:
   files:
     - setup: N/A:Select Setup.exe
     - patch1: 
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/SetupPreyPt1.4.7z.001
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Prey/SetupPreyPt1.4.7z.001
         filename: SetupPreyPt1.4.7z.001
     - patch2: 
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/SetupPreyPt1.4.7z.002
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Prey/SetupPreyPt1.4.7z.002
         filename: SetupPreyPt1.4.7z.002
     - patch3: 
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/SetupPreyPt1.4.7z.003
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Prey/SetupPreyPt1.4.7z.003
         filename: SetupPreyPt1.4.7z.003
 
 

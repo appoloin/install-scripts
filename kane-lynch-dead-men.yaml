@@ -12,31 +12,11 @@ script:
 
   files:
     - setup: N/A:Select the GOG installer
+    - xlive: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/Xliveless.7z
+        filename: Xliveless.7z
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
-
     - task:
         name: create_prefix
         install_mono: false
@@ -49,12 +29,12 @@ script:
         prefix: $GAMEDIR
 
     - execute:
-        file: $CACHE/download.sh
-        args: 1n4URxWzPk-9faFRZvZxeW-SO2d10z7U0 $CACHE/nolive.7z
-
-    - execute:
         file: 7z
-        args: x "$CACHE/nolive.7z" -o"$GAMEDIR/drive_c/GOG Games/Kane and Lynch Dead Men/" -ppassword -y
+        args: x $xlive -o$CACHE -ppassword -y
+
+    - merge:
+        src: "$CACHE/xlive"
+        dst: "$GAMEDIR/drive_c/GOG Games/Kane and Lynch Dead Men/"
 
   wine:
     esync: false

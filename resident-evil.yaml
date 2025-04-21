@@ -12,6 +12,9 @@ script:
 
   files:
     - setup: N/A:Select GOG installer
+    - dll: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/mciavi32.zip
+        filename: mciavi32.zip
 
   installer:
     - task:
@@ -21,12 +24,23 @@ script:
         prefix: $GAMEDIR
 
     - task:
+        app:  quartz lavfilters
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
         executable: $setup
         args: /SILENT
         name: wineexec
         prefix: $GAMEDIR
  
+    - extract:
+        file: "$dll" 
+        dst: "$GAMEDIR/drive_c/GOG Games/Resident Evil/"
+
+
   wine:
     overrides:
       ddraw: native
       dinput: native
+      mciavi32: native

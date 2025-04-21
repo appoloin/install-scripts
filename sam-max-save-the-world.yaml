@@ -8,29 +8,23 @@ year: 2009
 script:
   game:
     exe: "$GAMEDIR/drive_c/GOG/Episode 101 - Culture Shock/SamMax101.exe"
-    arch: win32
     prefix: $GAMEDIR
     name: Episode 101 - Culture Shock
     launch_configs:
       - exe: "$GAMEDIR/drive_c/GOG/Episode 102 - Situation Comedy/SamMax102.exe"
         prefix: $GAMEDIR
-        arch: win32
         name:  Episode 102 - Situation Comedy
       - exe: "$GAMEDIR/drive_c/GOG/Episode 103 - The Mole, The Mob, and the Meatball/SamMax103.exe"
         prefix: $GAMEDIR
-        arch: win32
         name:  Episode 103 - The Mole the Mob and the Meatball
       - exe: "$GAMEDIR/drive_c/GOG/Episode 104 - Abe Lincoln Must Die!/SamMax104.exe"
         prefix: $GAMEDIR
-        arch: win32
         name:  Episode 104 - Abe Lincoln Mist Die
       - exe: "$GAMEDIR/drive_c/GOG/Episode 105 - Reality 2.0/SamMax105.exe"
         prefix: $GAMEDIR
-        arch: win32
         name:  Episode 105 - Reality 2.0
       - exe: "$GAMEDIR/drive_c/GOG/Episode 106 - Bright Side of the Moon/SamMax106.exe"
         prefix: $GAMEDIR
-        arch: win32
         name: Episode 106 - Bright Side of the Moon
 
   files:
@@ -39,7 +33,6 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR

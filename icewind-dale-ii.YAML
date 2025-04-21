@@ -3,14 +3,19 @@ game_slug: icewind-dale-ii
 version: Good Old  Games Installer
 slug: icewind-dale-ii
 runner: wine
+year: 2002
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Icewind Dale II/IWD2.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Icewind Dale II/gemrb.exe
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
+    - engine:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/gemrb-win32-d297710.7z.001
+        filename: gemrb-win32-d297710.7z.001
+
 
   installer:
     - task:
@@ -23,3 +28,8 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+    - extract:
+        file: $engine
+        dst:  $GAMEDIR/drive_c/GOG Games/Icewind Dale II/
+

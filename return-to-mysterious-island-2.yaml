@@ -26,5 +26,8 @@ script:
         prefix: $GAMEDIR
  
   wine:
-    dxvk: false
-    
+    dgvoodoo2: true
+    overrides:
+      ddraw: native
+      d3d8: native
+      d3d9: native

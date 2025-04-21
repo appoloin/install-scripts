@@ -10,7 +10,6 @@ script:
     - setup: N/A:Select setup files
 
   game:
-    arch: win32
     exe: "$GAMEDIR/drive_c/GOG Games/Infernal Machine/Jones3D.exe"
     prefix: $GAMEDIR
 

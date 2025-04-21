@@ -7,8 +7,7 @@ year: 1998
 
 script:
   game:
-    exe: "$GAMEDIR/drive_c/GOG Games/Lula - The Sexy Empire/WET.EXE"
-    arch: win32
+    exe: "$GAMEDIR/drive_c/MagiPacks/Lula - The Sexy Empire/WET.EXE"
     prefix: $GAMEDIR
 
   files:
@@ -17,15 +16,8 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
-        prefix: $GAMEDIR
-
-    - task:
-        arch: win32
-        app: winxp icodecs quartz
-        name: winetricks
         prefix: $GAMEDIR
 
     - task:
@@ -33,3 +25,6 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+  wine:
+    overrides:
+      ddraw: native

@@ -8,34 +8,19 @@ year: 2002
 script:
   files:
     - setup: N/A:Select setup file 
+    - dgvoodoo:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/dgVoodoo2_61.7z
+        filename: dgVoodoo2_61.7z
 
   game:
     exe: "$GAMEDIR/drive_c/MagiPacks/Need for Speed - Hot Pursuit 2/nfshp2.exe"
     prefix: $GAMEDIR
+    launch_configs:
+      - exe: "$GAMEDIR/drive_c/MagiPacks/Need for Speed - Hot Pursuit 2/dgVoodooCpl.exe"
+        prefix: $GAMEDIR
+        name:  DgVoodoo Config
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
         name: create_prefix
         install_mono: false
@@ -49,12 +34,8 @@ script:
 
 
     - execute:
-        file: $CACHE/download.sh
-        args: 1MRusXFfuTzaFXEjSYyLTssfrFlaV1Z23 $CACHE/DgVoodoo_2_6.7z
-
-    - execute:
         file: 7z
-        args: x $CACHE/DgVoodoo_2_6.7z -o"$CACHE" -ppassword -y
+        args: x $dgvoodoo -o"$CACHE" -ppassword -y
 
     - copy:
         src: $CACHE/MS/x86/DDraw.dll
@@ -72,16 +53,15 @@ script:
         src: $CACHE/MS/x86/D3D8.dll
         dst: $GAMEDIR/drive_c/MagiPacks/Need for Speed - Hot Pursuit 2/
 
-
     - copy:
         src: $CACHE/dgVoodooCpl.exe
         dst: $GAMEDIR/drive_c/MagiPacks/Need for Speed - Hot Pursuit 2/
 
   wine:
     overrides:
-      ddraw: native
-      d3d8: native
-      d3d9: native
-      D3DImm: native
+      ddraw: native,b
+      d3d8: native,b
+      d3d9: native,b
+      D3DImm: native,b
       dinput8.dll: native,b
 

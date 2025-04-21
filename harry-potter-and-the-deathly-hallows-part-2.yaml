@@ -7,39 +7,20 @@ year: 2011
 
 script:
   game:
-    arch: win32
-    exe: $GAMEDIR/drive_c/Program Files/Electronic Arts/Harry Potter and the Deathly Hallows(TM) - Part 2/pc/hp8.exe
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/Harry Potter and the Deathly Hallows(TM) - Part 2/pc/hp8.exe
     prefix: $GAMEDIR
 
+  files:
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/HarryPotter/HPatDHP2patch.7z
+        filename: HPatDHP2patch.7z
+
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - insert-disc:
         description: Select game folder
         requires: AutoRun.exe
 
     - task:
-        arch: win32
         name: create_prefix
         install_mono: false
         install_gecko: false
@@ -51,9 +32,5 @@ script:
         prefix: $GAMEDIR
 
     - execute:
-        file: $CACHE/download.sh
-        args: 1OTPz2P_wG6PIv6fUdtMa5pwVOywtuWTk $CACHE/patch.7z
-
-    - execute:
         file: 7z
-        args: e $CACHE/patch.7z -o"$GAMEDIR/drive_c/Program Files/Electronic Arts/Harry Potter and the Deathly Hallows(TM) - Part 2/pc/" -ppassword -y
+        args: e $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/Harry Potter and the Deathly Hallows(TM) - Part 2/pc/" -ppassword -y

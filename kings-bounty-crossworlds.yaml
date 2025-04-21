@@ -1,18 +1,18 @@
-name: Invisible inc
-game_slug:  invisible-inc
+name: King's Bounty - Crossworlds
+game_slug:  kings-bounty-crossworlds
 version: Good Old Games Installer
-slug: invisible-inc_INSTALLER
+slug: kings-bounty-crossworlds
 runner: wine
-year: 2015
+year: 2010
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Invisible Inc/invisibleinc.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Kings Bounty Crossworlds/Launch King's Bounty - Crossworlds GOTY.lnk
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
-    - dlc: N/A:Select patch
+    - DLC: N/A:Select DLC installer
 
   installer:
     - task:
@@ -25,11 +25,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-    - task:
-        executable: $dlc
-        name: wineexec
-        args: /SILENT
-        prefix: $GAMEDIR
-
 

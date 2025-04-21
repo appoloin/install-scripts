@@ -3,6 +3,7 @@ game_slug: prodeus
 version: Good Old Games Installer
 slug: prodeus
 runner: wine
+year: 2022
 
 script:
   game:

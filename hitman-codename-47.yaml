@@ -7,11 +7,14 @@ year: 2000
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files (x86)/GOG.com/Hitman Codename 47/hitman.exe
+    exe: $GAMEDIR/drive_c/Program Files (x86)/GOG.com/Hitman Codename 47/_Hitman Codename 47.exe
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select the GOG installer
+    - fix:
+        url: https://github.com/appoloin/Patches/blob/master/OtherGames/Hitman-Codename47_WidescreenLauncher_v1.5.1.7z
+        filename: Hitman-Codename47_WidescreenLauncher_v1.5.1.7z
 
   installer:
     - task:
@@ -31,3 +34,10 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+    - extract:
+        file: $fix
+        dst: $GAMEDIR/drive_c/Program Files (x86)/GOG.com/Hitman Codename 47/
+
+  wine:
+    overrides:
+      ddraw: native

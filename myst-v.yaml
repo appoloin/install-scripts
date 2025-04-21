@@ -7,8 +7,7 @@ year: 2005
 
 script:
   game:
-    exe: "$GAMEDIR/drive_c/Program Files/GOG.com/Myst V End Of Ages/eoa.exe"
-    arch: win32
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/GOG.com/Myst V End Of Ages/eoa.exe"
     prefix: $GAMEDIR
 
   files:
@@ -17,14 +16,12 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
     
     - task:
         app: dsound directmusic corefonts tahoma
-        arch: win32
         name: winetricks
         prefix: $GAMEDIR
 

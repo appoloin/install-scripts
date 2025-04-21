@@ -7,38 +7,24 @@ year: 2006
 
 script:
   game:
-    arch: win32
     exe: "$GAMEDIR/drive_c/Program Files/The Adventure Company/Keepsake/Keepsake.exe"
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select Setup.exe
+    - patch1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Keepsake/keepsake-patch-1.6.7z.001
+        filename: keepsake-patch-1.6.7z.001
+    - patch2:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Keepsake/keepsake-patch-1.6.7z.002
+        filename: keepsake-patch-1.6.7z.002
+    - patch3:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Keepsake/keepsake-patch-1.6.7z.003
+        filename: keepsake-patch-1.6.7z.003
+
 
   installer:   
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
- 
     - task:
-        arch: win32
         name: create_prefix
         install_mono: false
         install_gecko: false
@@ -49,17 +35,23 @@ script:
         name: wineexec
         prefix: $GAMEDIR  
 
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1IghnI-0x0rP6gzJFzsDFWPeJH7XsKMGk $CACHE/patch.7z
+    #Move Patch into one folder
+    - merge:
+        src: "$patch1"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch2"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch3"
+        dst: "$CACHE"
 
     - execute:
         file: 7z
-        args: e $CACHE/patch.7z -o"$GAMEDIR/drive_c/tmp/" -ppassword -y
+        args: e $CACHE/keepsake-patch-1.6.7z.001 -o$CACHE -ppassword -y
 
     - task:
-        executable: "$GAMEDIR/drive_c/tmp/keepsake-patch-1.6.exe" 
+        executable: "$CACHE/keepsake-patch-1.6.exe" 
         name: wineexec
         prefix: $GAMEDIR  
         

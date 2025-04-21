@@ -20,7 +20,7 @@ script:
   files:
     - setup: N/A:Select installer
     - engine:  
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/openmohaa-v0.81.1-linux-amd64.zip
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MedalOfHonor/openmohaa-v0.81.1-linux-amd64.zip
         filename: openmohaa-v0.81.1-linux-amd64.zip
 
   installer:

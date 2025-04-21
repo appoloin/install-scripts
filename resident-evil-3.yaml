@@ -7,7 +7,7 @@ year: 1999
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Resident Evil 2/RE2Launcher.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Resident Evil 3/RE3Launcher.exe
     prefix: $GAMEDIR
 
   files:
@@ -22,7 +22,10 @@ script:
 
     - task:
         executable: $setup
-        args: /SILENT
         name: wineexec
         prefix: $GAMEDIR
  
+  wine:
+    overrides:
+      ddraw: native
+      dinput: native

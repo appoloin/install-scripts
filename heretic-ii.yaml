@@ -1,59 +1,45 @@
-name: Heretic-ii
+name: Heretic II
 game_slug: heretic-ii
-version: Windows Installer
+version: MagiPacks Installer
 slug: heretic-ii
 runner: wine
+year: 1998
 
 script:
   game:
-    args: c:\\heretic2.bat
-    exe: $GAMEDIR/drive_c/windows/syswow64/wineconsole.exe
+    exe: $GAMEDIR/drive_c/MagiPacks/DXWND/dxwnd.exe 
+    args: /r:0
     prefix: $GAMEDIR
+    launch_configs:
+      - exe:  "$GAMEDIR/drive_c/MagiPacks/DXWND/dxwnd.exe"
+        prefix: $GAMEDIR
+        name: DWND Config
+
+  files:
+    - setup: N/A:Select installer
+    - DXWND: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/DXWND_v2_06_01_build.7z
+        filename: DXWND_v2_06_01_build.7z
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
-        description: Preparing Heretic II Windows CD wineprefix...
-        install_gecko: false
-        install_mono: false
         name: create_prefix
+        install_mono: false
+        install_gecko: false
         prefix: $GAMEDIR
 
-    - insert-disc:
-        requires: Setup/Heretic.ico
-
-    - extract:
-        src: $DISC/Setup/zip/h2.zip
-        dst: $GAMEDIR/drive_c/Program Files (x86)/Heretic II
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
 
     - execute:
-        file: $CACHE/download.sh
-        args: 1aFnFpmxU8T6IAP4kNCT2xgXU1NybxTey $CACHE/DXwND.rar
+        file: mkdir
+        args: $GAMEDIR/drive_c/MagiPacks/DXWND
 
-    - extract:
-        file: $CACHE/DXwND.rar
-        dst: $GAMEDIR/drive_c/dxwnd
+    - execute:
+        file: 7z
+        args: x $DXWND -o"$GAMEDIR/drive_c/MagiPacks/DXWND" -ppassword -y
 
     - write_config:
         data:
@@ -84,12 +70,12 @@ script:
             initresw0: 800
             initts0: 0
             lang0: 0
-            launchpath0: C:\Program Files (x86)\Heretic II\heretic2.exe +set vid_ref glx +set vid_mode 3 +set vid_fullscreen 1
+            launchpath0: C:\MagiPacks\Heretic 2\heretic2.exe +set vid_ref glx +set vid_mode 3 +set vid_fullscreen 1
             maxddinterface0: 7
             maxfps0: 0
             maxres0: -1
             monitorid0: -1
-            path0: C:\Program Files (x86)\Heretic II\heretic2.exe
+            path0: C:\MagiPacks\Heretic 2\heretic2.exe
             posx0: 50
             posy0: 50
             renderer0: 3
@@ -97,142 +83,15 @@ script:
             sizx0: 800
             sizy0: 600
             slowratio0: 2
-            startfolder0: C:\Program Files (x86)\Heretic II
+            startfolder0: C:\MagiPacks\Heretic 2
             swapeffect0: 0
             tflag0: 0
             title0: Heretic II
             ver0: 0
             winver0: 0
-        file: $GAMEDIR/drive_c/dxwnd/dxwnd.ini
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1fQvbg35j_7eOI9enFqKezIEjJRgwpXlP $CACHE/dm-maps.tar.xz
-
-    - extract:
-        src: $CACHE/dm-maps.tar.xz
-        dst: $GAMEDIR/drive_c/tmp/
-
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1nim8Y_XEvFM7pH5p9xY9lH5NmKJZvuq6 $CACHE/patch107w.7z
-
-    - extract:
-        src: $CACHE/patch107w.7z
-        dst: $GAMEDIR/drive_c/tmp/
-
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1nJiNy4kx5JVomISygBKr7AlRV_T8oKVr $CACHE/scripts.7z
-
-    - extract:
-        src: $scripts
-        dst: $GAMEDIR/drive_c/tmp/
-    - chmodx: $GAMEDIR/drive_c/tmp/changecase.sh
-    - execute:
-        file: $GAMEDIR/drive_c/tmp/changecase.sh
-        args: '"drive_c/Program Files (x86)/Heretic II" "0"'
-
-    - merge:
-        src: $GAMEDIR/drive_c/tmp
-        dst: $GAMEDIR/drive_c/Program Files (x86)/Heretic II
-    - chmodx: $GAMEDIR/drive_c/tmp/h2defconf.sh
-    - execute:
-        file:  $GAMEDIR/drive_c/tmp/h2defconf.sh
-
-    - input_menu:
-        description: 'Please choose which language you would like to install this game:'
-        id: LANG
-        options:
-          - keep: I prefer to use default install language
-          - french: French
-          - german: German
-          - italian: Italian
-          - spanish: Spanish
-        preselect: keep
-
-    - chmodx: $GAMEDIR/drive_c/tmp/h2local.sh
-    - execute:
-        file: $GAMEDIR/drive_c/tmp/h2local.sh
-        args: $INPUT_LANG
-
-    - chmodx: $GAMEDIR/drive_c/tmp/h2ws.sh
-    - execute:
-        file: $GAMEDIR/drive_c/tmp/h2ws.sh
-        args: $RESOLUTION_WIDTH $RESOLUTION_HEIGHT
-
-    - chmodx: $GAMEDIR/drive_c/tmp/audiotools.sh
-    - execute:
-        file: $GAMEDIR/drive_c/tmp/audiotools.sh
-        args: HERETIC "$GAMEDIR/drive_c/Program Files (x86)/Heretic II/music" 2 flac
-    
-    - move:
-        src: $GAMEDIR/drive_c/tmp/heretic2.bat
-        dst: $GAMEDIR/drive_c
-    
-    - move:
-        src: $GAMEDIR/drive_c/tmp/faq.html
-        dst: $GAMEDIR/drive_c/Program Files (x86)/Heretic II
-    
-    - merge:
-        src: $GAMEDIR/drive_c/tmp/h2_gamepad_readme.html
-        dst: $GAMEDIR/drive_c/Program Files (x86)/Heretic II/gamepad profiles
-    
-    - copy:
-        src: $GAMEDIR/drive_c/tmp/h2_x360.gamecontroller.amgp
-        dst: $GAMEDIR/drive_c/Program Files (x86)/Heretic II/gamepad profiles
-    
-    - copy:
-        src: $GAMEDIR/drive_c/tmp/h2_steam.sccprofile
-        dst: $GAMEDIR/drive_c/Program Files (x86)/Heretic II/gamepad profiles
-    
-    - task:
-        key: csmt
-        name: set_regedit
-        path: HKEY_CURRENT_USER\Software\Wine\Direct3D\
-        prefix: $GAMEDIR
-        type: REG_DWORD
-        value: '00000000'
-    
-    - move:
-        src: $GAMEDIR/drive_c/tmp/heretic2.bmp
-        dst: $GAMEDIR/drive_c/
-    
-    - task:
-        key: wallpaper
-        name: set_regedit
-        path: HKEY_CURRENT_USER\Control Panel\Desktop\
-        prefix: $GAMEDIR
-        type: REG_SZ
-        value: c:\\heretic2.bmp
-    
-    - task:
-        key: background
-        name: set_regedit
-        path: HKEY_CURRENT_USER\Control Panel\Colors\
-        prefix: $GAMEDIR
-        type: REG_SZ
-        value: 0 0 0
-    
-    - task:
-        key: ActiveTitle
-        name: set_regedit
-        path: HKEY_CURRENT_USER\Control Panel\Colors\
-        prefix: $GAMEDIR
-        type: REG_SZ
-        value: 0 0 0
-    
-    - task:
-        key: GradientActiveTitle
-        name: set_regedit
-        path: HKEY_CURRENT_USER\Control Panel\Colors\
-        prefix: $GAMEDIR
-        type: REG_SZ
-        value: 204 153 255
-
-    - execute:
-        file: rm 
-        args: -r $GAMEDIR/drive_c/tmp
+          window:
+            expert: 1
+            exportpath: C:\dxwnd\exports
+            showhelp: false
+        file: $GAMEDIR/drive_c/MagiPacks/DXWND/dxwnd.ini
 

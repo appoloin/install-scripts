@@ -13,7 +13,7 @@ script:
   files:
     - setup: N/A:Select installer
     - patch: 
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/Prototype-2-Patch.7z
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Prototype/Prototype-2-Patch.7z
         filename: patch.7z
 
   installer:

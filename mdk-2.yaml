@@ -1,7 +1,7 @@
 name: MDK 2
-game_slug: mdk-2
+game_slug: mdk2
 version: Good Old Games Installer
-slug: mdk-2
+slug: mdk2
 runner: wine
 year: 2000
 

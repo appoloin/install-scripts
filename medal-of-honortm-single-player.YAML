@@ -12,7 +12,7 @@ script:
 
   files:
     - patch: 
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/MedalOfHonourPatch.7z
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MedalOfHonor/MedalOfHonourPatch.7z
         filename: patch.7z
 
 

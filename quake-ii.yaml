@@ -9,7 +9,7 @@ script:
   files:
     - game: N/A:Select Setup.exe
     - quakepatch:        
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/q2-3.20-x86-full-ctf.7z
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Quake/q2-3.20-x86-full-ctf.7z
         filename: q2-3.20-x86-full-ctf.7z 
 
   game:

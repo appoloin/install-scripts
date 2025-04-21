@@ -10,7 +10,6 @@ script:
     - setup: N/A:Select setup file from GOG
 
   game:
-    arch: win32
     exe: "$GAMEDIR/drive_c/GOG Games/NecroVisioN/Bin/NecroVisioN.exe"
     prefix: $GAMEDIR
 

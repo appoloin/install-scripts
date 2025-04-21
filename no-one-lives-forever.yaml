@@ -1,12 +1,13 @@
-name: No One Lives Forever 2 - A Spy in Harms Way
+name: No One Lives Forever
 game_slug: no-one-lives-forever
 version: Windows Installer
 slug: no-one-lives-forever
 runner: wine
+year: 2000
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Game/NOLF2.exe
+    exe: $GAMEDIR/drive_c/Program Files (x86)/MagiPacks/No One Lives Forever/NOLF.exe
     prefix: $GAMEDIR
 
   files:
@@ -19,18 +20,16 @@ script:
         install_gecko: false
         prefix: $GAMEDIR
 
-    - extract:
-        dst:  $GAMEDIR/drive_c/Game
-        file: $setup
-
     - task:
-        app: directmusic dsound vcrun6 winxp
-        arch: win32
+        app: directmusic dsound vcrun6
         name: winetricks
         prefix: $GAMEDIR
 
     - task:
-        executable: "$GAMEDIR/drive_c/Game/NOLF2.bat"
-        arch: win32
+        executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+  wine:
+    overrides:
+      dsound: b

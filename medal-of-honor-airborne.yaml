@@ -1,0 +1,37 @@
+name: Medal of Honor - Airborne
+game_slug: medal-of-honor-airborne
+version: Windows Installer
+slug: medal-of-honor-airborne
+runner: wine
+year: 2007
+
+script:
+  game:
+    exe:  $GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/Medal of Honor Airborne/UnrealEngine3/Binaries/MOHA.exe
+    prefix: $GAMEDIR
+  
+  files:
+    - setup: N/A:Select the Setup.exe
+    - patch: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MedalOfHonor/MedalOfHonorAirbournePatch.7z
+        filename: patch.7z
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch -o$CACHE/patch -ppassword -y
+
+    - merge:
+        src: "$CACHE/patch/"
+        dst: "$GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/Medal of Honor Airborne/UnrealEngine3/Binaries/"

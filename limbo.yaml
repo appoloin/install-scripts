@@ -1,5 +1,5 @@
 name: Limbo
-game_slug: limob
+game_slug: limbo
 version: Good Old Games Installer
 slug: limbo
 runner: wine

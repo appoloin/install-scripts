@@ -3,6 +3,7 @@ game_slug: penumbra-black-plague
 version: Good Old Games Installer
 slug:  penumbra-black-plague
 runner: wine
+year: 2008
 
 script:
   game: 

@@ -1,13 +1,13 @@
 name: Jade Empire
 game_slug: jade-empire-special-edition
-version: Good Old Games Installer
+version: Windows Installer
 slug: jade-empire-special-edition
 runner: wine
 year: 2005
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Jade Empire/JadeEmpire.exe
+    exe: $GAMEDIR/drive_c/Games/Jade Empire Special Edition/JadeEmpire.exe
     prefix: $GAMEDIR
 
   files:

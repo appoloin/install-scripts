@@ -1,6 +1,6 @@
 name: Journey to the Savage Planet
 game_slug: journey-to-the-savage-planet
-version: Good Old Games Installer
+version: Windows Installer
 slug: journey-to-the-savage-planet
 runner: wine
 year: 2020

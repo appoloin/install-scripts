@@ -10,40 +10,40 @@ script:
   files:
     - game: N/A:Select GOG installer.
     - Id1Music1:        
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/id1.7z.001
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Quake/id1.7z.001
         filename: id1.7z.001
     - Id1Music2:        
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/id1.7z.002
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Quake/id1.7z.002
         filename: id1.7z.002
     - Id1Music3:        
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/id1.7z.003
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Quake/id1.7z.003
         filename: id1.7z.003
     - Id1Music4:        
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/id1.7z.004
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Quake/id1.7z.004
         filename: id1.7z.004
     - Id1Music5:        
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/id1.7z.005
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Quake/id1.7z.005
         filename: id1.7z.005
     - Id1Music6:        
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/id1.7z.006
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Quake/id1.7z.006
         filename: id1.7z.006
     - RogueMusic1:        
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/rogue.7z.001
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Quake/rogue.7z.001
         filename: rogue.7z.001
     - RogueMusic2:        
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/rogue.7z.002
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Quake/rogue.7z.002
         filename: rogue.7z.002
     - RogueMusic3:        
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/rogue.7z.003
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Quake/rogue.7z.003
         filename: rogue.7z.003
     - HipMusic1:        
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/hipnotic.7z.001
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Quake/hipnotic.7z.001
         filename: hipnotic.7z.001
     - HipMusic2:        
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/hipnotic.7z.002
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Quake/hipnotic.7z.002
         filename: hipnotic.7z.002
     - HipMusic3:        
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/hipnotic.7z.003
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Quake/hipnotic.7z.003
         filename: hipnotic.7z.003
 
 

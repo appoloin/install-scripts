@@ -29,10 +29,12 @@ script:
 
     - task:
         executable: $patch
+        args: /SILENT 
         name: wineexec
         prefix: $GAMEDIR
 
     - task:
         executable: $dlc
+        args: /SILENT 
         name: wineexec
         prefix: $GAMEDIR

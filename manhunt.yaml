@@ -27,7 +27,5 @@ script:
 
   wine:
     overrides:
-      dinput8: n,b
       ddraw: n,b
-      dinput: n.b
       d3d9: n,b
