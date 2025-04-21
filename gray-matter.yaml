@@ -1,17 +1,16 @@
-name: Timeshift
-game_slug: timeshift
+name: Gray Matter
+game_slug: gray-matter
 version: Good Old Games Installer
-slug: timeshift
+slug: gray-matter
 runner: wine
-year: 2007
+year: 2010
 
 script:
   files:
-    - setup: N/A:Select setup file from GOG
+    - setup: N/A:Select setup file 
 
   game:
-    arch: win32
-    exe:  "$GAMEDIR/drive_c/GOG Games/TimeShift/bin/TimeShift.exe"
+    exe: "$GAMEDIR/drive_c/GOG Games/Gray Matter/Game.exe"
     prefix: $GAMEDIR
 
   installer:
@@ -20,6 +19,7 @@ script:
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
+
 
     - task:
         executable: $setup
