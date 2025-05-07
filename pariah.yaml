@@ -1,0 +1,37 @@
+name:  Pariah
+game_slug: pariah
+version: MagiPacks Installer
+slug: pariah
+runner: wine
+year: 2005
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/MagiPacks/Oni Anniversary Edition/AE/Oni.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    overrides:
+      d3d9: n,b
+      d3d8: n,b
+      ddraw: n,b
+      d3dimm: n,b
+
+  system:
+    single_cpu: true
+

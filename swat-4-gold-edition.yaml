@@ -1,0 +1,30 @@
+name: Swat 4
+game_slug: swat-4-gold-edition
+version: Windows Installer
+slug: swat-4-gold-edition
+runner: wine
+year: 2005
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/SWAT 4/SEF/Extras/LaunchSEF.exe"
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the Setup file
+  
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+        
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  system:
+    pulse_latency: true

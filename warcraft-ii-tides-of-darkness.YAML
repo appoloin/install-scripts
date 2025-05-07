@@ -1,0 +1,26 @@
+name: Warcraft II - Tides of Darkness
+game_slug: warcraft-ii-tides-of-darkness
+version: Good Old Games Installer
+slug: warcraft-ii-tides-of-darkness
+runner: wine
+year: 1999
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Warcraft II BNE/Launch Warcraft II.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

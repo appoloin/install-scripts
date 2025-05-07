@@ -1,0 +1,42 @@
+name: Sega Rally Championship
+game_slug: sega-rally-championship
+version: MagiPacks Installer
+slug: sega-rally-championship
+runner: wine
+year: 1994
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Sega Rally Championship/RALLY.EXE"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - rename:
+        src: $GAMEDIR/drive_c/MagiPacks/Sega Rally Championship/ddraw.dll
+        dst:  $GAMEDIR/drive_c/MagiPacks/Sega Rally Championship/ddraw.dll.old
+    - rename:
+        src: $GAMEDIR/drive_c/MagiPacks/Sega Rally Championship/d3dimm.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Sega Rally Championship/d3dimm.dll.old
+        
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      ddraw: native
+      D3DImm: native
+
+

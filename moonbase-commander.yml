@@ -1,0 +1,26 @@
+name:  Moonbase Commander
+game_slug: moonbase-commander
+version: Good Old Games Installer
+slug: moonbase-commnader-installer
+runner: scummvm
+year: 1999
+
+script:
+  game:
+    game_id: moonbase  
+    path: $GAMEDIR/app
+  
+  files:
+    - game:  N/A:Select file autorun
+
+
+  installer: 
+    - extract:
+        format: gog
+        file: $game
+        args: --gog 
+        dst: $GAMEDIR
+        description: Extracting game files
+
+  scummvm:
+    fullscreen: true

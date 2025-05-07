@@ -1,0 +1,27 @@
+name: Richard BBurns Rally
+game_slug: richard-burns-rally
+version: Windows Installer
+slug: richard-burns-rally
+runner: wine
+year: 2004
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Richard Burns Rally/RichardBurnsRally.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

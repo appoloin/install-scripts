@@ -1,0 +1,31 @@
+name: Code Fear
+game_slug: cold-fear
+version: MagiPacks Installer
+slug:  cold-fear
+runner: wine
+year: 2005
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/cold-fear/ColdFear_Retail.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    overrides:
+      dinput8.dll: n,b
+

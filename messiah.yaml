@@ -1,0 +1,47 @@
+name:  Messiah
+game_slug: messiah
+version: MagiPacks Installer
+slug: messiah
+runner: wine
+year: 2000
+
+script:
+  files:
+    - setup: N/A:Select setup file
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/fixed_winmm_win10.zip
+        filename: fixed_winmm_win10.zip
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Messiah/MessiahGlide3x.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - rename:
+        src: $GAMEDIR/drive_c/MagiPacks/Messiah/glide3x.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Messiah/glide3x.dll.old
+
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/MagiPacks/Messiah/" -ppassword -y
+
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      d3dimm: n,b
+      ddraw: n,b
+      dxgi: n,b
+      winmm: n,b
+      glide3x: n,b 

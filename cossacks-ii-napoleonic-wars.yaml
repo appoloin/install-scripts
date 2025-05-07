@@ -1,0 +1,40 @@
+name: Cossacks II - Napoleonic Wars
+game_slug: cossacks-ii-napoleonic-wars
+version: MagiPacks Installer
+slug: cossacks-ii-napoleonic-wars
+runner: wine
+year: 2005
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Cossacks II - Napoleonic Wars/startengine.exe"
+    prefix: $GAMEDIR
+
+  install_complete_text: "Installation finished!\n\n\n\nIMPORTANT!\n============\nPlease\
+    \ change the wine version in the game\xB4s settings to Version 7"
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    dxvk: false
+    overrides:
+      d3d8: n,b
+      d3dengine: n,b
+
+system:
+  env:
+    WINE_FORCE_LARGE_ADDRESS_AWARE: '0'

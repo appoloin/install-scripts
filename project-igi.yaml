@@ -1,0 +1,26 @@
+name: Project I - I'm Going In
+game_slug: project-igi
+version: Magipak Installer
+slug: project-igi
+runner: wine
+year: 2000
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/MagiPacks/Project IGI/
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

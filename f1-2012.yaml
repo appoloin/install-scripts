@@ -1,0 +1,31 @@
+name: F1 2012
+game_slug: f1-2012
+version: Windows Installer
+slug: f1-2012
+runner: wine
+year: 2012
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/F1 2012/f1_2012.exe"
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select setup file 
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: openal
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

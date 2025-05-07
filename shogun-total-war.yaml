@@ -1,0 +1,26 @@
+name: Shogun - Total War
+game_slug: shogun-total-war
+version: Magipak Installer
+slug: shogun-total-war
+runner: wine
+year: 2000
+
+script:
+  game:
+    prefix: $GAMEDIR
+    exe: $GAMEDIR/drive_c/MagiPacks/Shogun - Total War/ShogunM.exe
+
+  files:
+    - setup: N/A:Select the Setup file
+    
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

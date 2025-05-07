@@ -1,0 +1,39 @@
+name: Microsoft Flight Simulator 2004
+game_slug: microsoft-flight-simulator-2004-a-century-of-flight
+version: Magipak Installer
+slug:  microsoft-flight-simulator-2004-a-century-of-flight
+runner: wine
+year: 2004
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files (x86)/MagiPacks/Microsoft Flight Simulator 2004/FS9.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: true
+        prefix: $GAMEDIR
+
+    - task:
+        app: directplay directshow wmp9 wmp11 verdana mf icodecs
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      ddraw: native
+      d3d8: native
+      d3d9: native
+      D3DImm: native

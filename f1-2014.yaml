@@ -1,0 +1,39 @@
+name: F1 2014
+game_slug: f1-2014
+version: Windows Installer
+slug: f1-2014
+runner: wine
+year: 2014
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/F1 2014/F1_2014.exe"
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select setup file 
+    - patch: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/F1/F12014.7z
+        filename: 2014.zip
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: openal
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: e $patch -o"$GAMEDIR/drive_c/Program Files (x86)/F1 2014/" -ppassword -y
+

@@ -1,0 +1,38 @@
+name: Helllpoint
+game_slug:  rallisport-challenge
+version: MagiPacks Installer
+slug: rallisport-challenge
+runner: wine
+year: 2002
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files (x86)/MagiPacks/RalliSport Challenge/RalliSport.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - rename:
+        src: $GAMEDIR/drive_c/Program Files (x86)/MagiPacks/RalliSport Challenge/Sound/Music
+        dst: $GAMEDIR/drive_c/Program Files (x86)/MagiPacks/RalliSport Challenge/Sound/Music-1
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      ddraw: native
+      d3d8: native
+      d3d9: native
+      D3DImm: native

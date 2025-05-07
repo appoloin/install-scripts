@@ -1,0 +1,28 @@
+name: Sega Rally 2 Championship
+game_slug: sega-rally-2-championship
+version: MagiPacks Installer
+slug: sega-rally-2-championship
+runner: wine
+year: 1999
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Sega Rally Championship 2/DxWnd/dxwnd.exe"
+    args: /c:"Sega Rally Championship 2.dxw" /r:0
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

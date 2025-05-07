@@ -1,0 +1,26 @@
+name:  F1 Challenge 99-02
+game_slug: f1-challenge-99-02
+version: Windows Installer
+slug: f1-challenge-99-02
+runner: wine
+year: 1999
+
+script:
+  files:
+    - game: N/A:Select file
+
+  game:
+    exe: "$GAMEDIR/drive_c/game/"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - extract:
+        file: $game
+        dst:  "$GAMEDIR/drive_c/game/"
+

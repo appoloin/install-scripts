@@ -1,0 +1,41 @@
+name:  Kill.Switch
+game_slug: kill-dot-switch
+version: MagiPacks Installer
+slug: kill-dot-switch
+runner: wine
+year: 2004
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Kill Switch/KILLSWITCH.EXE"
+    launch_configs:
+      - exe:  "$GAMEDIR/drive_c/MagiPacks/Kill Switch/killswitchsetup.exe"
+        name: Game Settings
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - rename:
+        src: $GAMEDIR/drive_c/MagiPacks/Magic & Mayhem/d3d9.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Magic & Mayhem/d3d9.dll.old
+        
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      d3d9: n,b
+
+

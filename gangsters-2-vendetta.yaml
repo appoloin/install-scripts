@@ -1,0 +1,28 @@
+name:  Ganesters 2 - Vendetta 
+game_slug: gangsters-2-vendetta
+version: MagiPacks Installer
+slug: gangsters-2-vendetta
+runner: wine
+year: 2001
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/MagiPacks/Gangsters 2 - Vendetta/dxwnd.exe"
+    args: /c:"Gangsters 2.dxw" /r:0
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

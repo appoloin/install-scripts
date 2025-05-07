@@ -1,0 +1,32 @@
+name:  Oni
+game_slug: oni
+version: MagiPacks Installer
+slug: oni
+runner: wine
+year: 2001
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/MagiPacks/Oni Anniversary Edition/AE/Oni.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        app: msacm32
+        name: winetricks
+        prefix: $GAMEDIR
+

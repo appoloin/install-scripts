@@ -1,0 +1,43 @@
+name:  Rugby 08
+game_slug: rugby-08
+version: MagiPacks Installer
+slug: rugby-08
+runner: wine
+year: 2007
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Rugby 08/Rugby08.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - rename:
+        src: $GAMEDIR/drive_c/MagiPacks/Rugby 08/d3d9.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Rugby 08/d3d9.dll.old
+    - rename:
+        src: $GAMEDIR/drive_c/MagiPacks/Rugby 08/d3d8.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Rugby 08/d3d8.dll.old
+        
+       
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      d3d9: n,b
+      d3d8: n,b
+
+

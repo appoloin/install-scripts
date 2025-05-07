@@ -1,0 +1,38 @@
+name: Magic and Mayhem - Art of Magic
+game_slug: art-of-magic-magic-and-mayhem
+version: MagiPacks Installer
+slug: art-of-magic-magic-and-mayhem
+runner: wine
+year: 1999
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Magic & Mayhem 2 - The Art of Magic/Magic And Mayhem 2.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - rename:
+        src: $GAMEDIR/drive_c/MagiPacks/Magic & Mayhem/d3d8.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Magic & Mayhem/d3d8.dll.old
+        
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      d3d8: n,b
+      dsound: n,b
+

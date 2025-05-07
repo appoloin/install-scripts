@@ -1,0 +1,30 @@
+name: Test Drive - Unlimited 2
+game_slug: test-drive-unlimited-2
+version: Magipak Installer
+slug: test-drive-unlimited-2
+runner: wine
+year: 2011
+
+script:
+  game:
+    exe:  $GAMEDIR/drive_c/Program Files (x86)/Test Drive Unlimited/TestDriveUnlimited.exe
+    prefix: $GAMEDIR
+  files:
+    - setup: N/A:Select the Setup.exe
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: vcrun2008 dinput8 dotnet40 xact directplay
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
