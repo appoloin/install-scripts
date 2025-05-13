@@ -1,0 +1,40 @@
+name:  Blair Witch - Volume 1  Rustin Parr
+game_slug: blair-witch-volume-2-the-legend-of-coffin-rock
+version: MagiPacks Installer
+slug: blair-witch-volume-2-the-legend-of-coffin-rock
+runner: wine
+year: 2000
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Blair Witch Volume 2 - The Legend of Coffin/blairwitch2.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: directplay icodecs
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - rename:
+        src: $GAMEDIR/drive_c/MagiPacks/Blair Witch Volume 2 - The Legend of Coffin/ddraw.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Blair Witch Volume 2 - The Legend of Coffin/ddraw.dll.old
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      ddraw: n,b

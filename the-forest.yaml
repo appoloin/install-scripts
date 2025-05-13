@@ -1,0 +1,26 @@
+name:  The Forest
+game_slug: the-forest
+version: Windows Installer
+slug: the-forest
+runner: wine
+year: 2018
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Games/The Forest/TheForest.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

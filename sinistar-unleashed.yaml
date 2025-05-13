@@ -1,0 +1,35 @@
+name: Sinistar - Unleashed
+game_slug: sinistar-unleashed
+version: Magipak Installer
+slug: sinistar-unleashed
+runner: wine
+year: 1999
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/MagiPacks/Sinistar - Unleashed/Sinistar.exe
+    launch_configs:
+      - exe: "$GAMEDIR/drive_c/MagiPacks/MagiPacks/Sinistar - Unleashed/VDSelect/VideoSelect.exe"
+        name:  DgVoodoo Config
+    prefix: $GAMEDIR
+
+
+  files:
+    - setup: N/A:Select the Setup file
+  
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    overrides:
+      ddraw: n,b

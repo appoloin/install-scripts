@@ -1,0 +1,27 @@
+name: Tom Clancy's - Rainbow Six Vegas
+game_slug: tom-clancys-rainbow-six-vegas
+version: MagiPacks Installer
+slug: tom-clancys-rainbow-six-vegas
+runner: wine
+year: 2006
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Tom Clancy's Rainbow Six - Vegas/Binaries/R6Vegas_Launcher.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

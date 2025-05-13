@@ -1,0 +1,39 @@
+name: Will Rock
+game_slug: will-rock
+version: MagiPacks Installer
+slug: will-rock
+runner: wine
+year: 2003
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Will Rock/bin/willrock.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: shockwave
+        name: winetricks
+        prefix: $GAMEDIR
+
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    overrides:
+      d3d8: n,b
+      d3dimm: n,b
+      ddraw: n,b
+      d3d9: n,b

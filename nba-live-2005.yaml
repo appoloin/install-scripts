@@ -1,0 +1,35 @@
+name: NBA Live 2005
+game_slug: nba-live-2005
+version: MagiPacks Installer
+slug: nba-live-2005
+runner: wine
+year: 2004
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/NBA Live 2005/nba2005.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - rename:
+        src: $GAMEDIR/drive_c/MagiPacks/NBA Live 2005/D3D9.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/NBA Live 2005/D3D9.dll.old
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      D3d9: native

@@ -1,0 +1,28 @@
+name:  Beyond Divinity
+game_slug: beyond-divinity
+version: MagiPacks Installer
+slug: beyond-divinity
+runner: wine
+year: 2004
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Beyond Divinity/DxWnd/dxwnd.exe"
+    args: /c:"Beyond Divinity.dxw" /r:0
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

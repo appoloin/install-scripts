@@ -1,0 +1,27 @@
+name: TOCA Race Driver 3
+game_slug: toca-race-driver-3
+version: MagiPacks Installer
+slug: toca-race-driver-3
+runner: wine
+year: 2006
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/TOCA Race Driver 3/rd3.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

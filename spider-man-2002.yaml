@@ -1,0 +1,35 @@
+name:  Spider-man - The Movie
+game_slug: spider-man-2002
+version: MagiPacks Installer
+slug: spider-man-2002
+runner: wine
+year: 2002
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Spider-Man - The Movie/DxWnd/dxwnd.exe"
+    args:  /c:"Spider-Man - The Movie.dxw" /r:0
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    overrides:
+      ddraw: n,b
+      d3d8: n,b
+      d3d9: n,b
+      D3DImm: n,b
+

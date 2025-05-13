@@ -1,0 +1,43 @@
+name: Tom Clancys H.A.W.X. 2
+game_slug: tom-clancy-s-h-a-w-x-2
+version: Windows Installer
+slug: tom-clancy-s-h-a-w-x-2
+runner: wine
+year: 2010
+
+script:
+  files:
+    - setup: N/A:Select setup file
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/H%20A%20W%20X%202-Patch.7z.001
+        filename: HAWX2Patch.7z.001
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Ubisoft/Tom Clancy's H.A.W.X. 2/HAWX2.exe"
+    prefix: $GAMEDIR
+
+  install_complete_text: "Installation finished!\n\n\n\nIMPORTANT!\n============\nPlease\
+    \ disable network by using firejail --net=none --noprofile in the command prefix"
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: winxp qaurtz
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Ubisoft/Tom Clancy's H.A.W.X. 2/" -ppassword -y
+

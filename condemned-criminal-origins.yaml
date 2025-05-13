@@ -1,0 +1,34 @@
+name: Condemned Criminal Origins
+game_slug: condemned-criminal-origins
+version: Windows Installer
+slug: condemned-criminal-origins
+runner: wine
+year: 2005
+
+script:
+  files:
+    - setup: N/A:Select setup file
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/CondemnedCrimialPatch.rar
+        filename: CondemnedCrimialPatch.rar
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/SEGA/Condemned - Criminal Origins/condemned.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/SEGA/Condemned - Criminal Origins/" -ppassword -y
+

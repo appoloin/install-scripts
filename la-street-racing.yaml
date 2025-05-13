@@ -1,0 +1,28 @@
+name: LA Street Racing
+game_slug: la-street-racing
+version: MagiPacks Installer
+slug: la-street-racing
+runner: wine
+year: 2006
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/L.A. Street Racing/LASR.exe"
+    args:  -opengl
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

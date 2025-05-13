@@ -1,0 +1,40 @@
+name: V-Rally 3
+game_slug: v-rally-3
+version: MagiPacks Installer
+slug: v-rally-3
+runner: wine
+year: 2003
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/MagiPacks/V-Rally 3/Vrally3.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: quartz 
+        name: winetricks
+        prefix: $GAMEDIR
+
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+
+  wine:
+    overrides:
+      d3d9: n,b
+      d3d8: n,b
+      ddraw: n,b
+      d3dimm: n,b

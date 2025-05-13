@@ -1,0 +1,27 @@
+name: LA Rush
+game_slug: l-a-rush
+version: MagiPacks Installer
+slug: l-a-rush
+runner: wine
+year: 2005
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/MagiPacks/LA Rush/LARush.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

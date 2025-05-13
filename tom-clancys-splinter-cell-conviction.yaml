@@ -1,0 +1,43 @@
+name: Tom Clancys Splinter Cell Conviction
+game_slug: tom-clancys-splinter-cell-conviction
+version: Windows Installer
+slug: tom-clancys-splinter-cell-conviction
+runner: wine
+year: 2010
+
+script:
+  files:
+    - setup: N/A:Select setup file
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/SplinterCell/SplinterCellConviction.FusionMod.zip
+        filename: SplinterCellConviction.FusionMod.zip
+
+  game:
+    exe: "$GAMEDIR/drive_c/Games/Splinter Cell Conviction Complete/src/system/Conviction_game.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: winxp qaurtz
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - rename:
+        src: $GAMEDIR/drive_c/Games/Splinter Cell Conviction Complete/src/system/systemdetection.dll
+        dst: $GAMEDIR/drive_c/Games/Splinter Cell Conviction Complete/src/system/systemdetection.dll.old
+
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/PGames/Splinter Cell Conviction Complete/" -ppassword -y
+

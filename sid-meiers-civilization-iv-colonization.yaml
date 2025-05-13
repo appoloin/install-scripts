@@ -1,0 +1,26 @@
+name: Civilization IV - Colonizartion
+game_slug: sid-meiers-civilization-iv-colonization
+version: MagiPacks Installer
+slug: sid-meiers-civilization-iv-colonization
+runner: wine
+year: 2008
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Civilization IV - Colonization/Colonization.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

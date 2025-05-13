@@ -1,0 +1,27 @@
+name: Tom Clancy's - Rainbow Six 2- Vegas 2
+game_slug: tom-clancys-rainbow-six-vegas-2
+version: MagiPacks Installer
+slug: tom-clancys-rainbow-six-vegas-2
+runner: wine
+year: 2008
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Tom Clancy's Rainbow Six 2 Rogue Spear - Black Thorn/BlackThorn.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

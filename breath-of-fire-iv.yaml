@@ -1,0 +1,39 @@
+name:  Breath of Fire IV
+game_slug: breath-of-fire-iv
+version: Good Old Games Installer
+slug: breath-of-fire-iv
+runner: wine
+year: 2000
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Breath of Fire IV/Launch Breath of Fire IV.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: quartz icodecs
+        name: winetricks
+        prefix: $GAMEDIR
+
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    overrides:
+      ddraw: n,b
+      dinput: n,b
+
+

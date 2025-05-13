@@ -1,0 +1,34 @@
+name:  Tomb Raider The Angel of Darkness
+game_slug: tomb-raider-the-angel-of-darkness
+version: Good Old Games Installer
+slug: tomb-raider-the-angel-of-darkness
+runner: wine
+year: 2003
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Tomb Raider 6/Launch Tomb Raider - The Angel of Darkness.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: quartz icodecs
+        name: winetricks
+        prefix: $GAMEDIR
+
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+        

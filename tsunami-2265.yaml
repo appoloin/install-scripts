@@ -1,0 +1,40 @@
+name: Tsunami 2265
+game_slug: tsunami-2265
+version: MagiPacks Installer
+slug: tsunami-2265
+runner: wine
+year: 2002
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/1st Century After Tsunami 2265/tsunami.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - rename:
+        src: $GAMEDIR/drive_c/MagiPacks/1st Century After Tsunami 2265/DDraw.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/1st Century After Tsunami 2265/DDraw.dll.old
+    - rename:
+        src: $GAMEDIR/drive_c/MagiPacks/1st Century After Tsunami 2265/D3DImm.dll.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/1st Century After Tsunami 2265/D3DImm.dll.dll.old
+
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      ddraw: native
+      D3DImm: native

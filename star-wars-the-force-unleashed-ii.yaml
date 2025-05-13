@@ -1,0 +1,26 @@
+name: Star Wars The Force Unleashed II
+game_slug: star-wars-the-force-unleashed-ii
+version: Good Old Games Installer
+slug: star-wars-the-force-unleashed-ii
+runner: wine
+year: 2010
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/STAR WARS The Force Unleashed 2/Launch Star Wars™ - The Force Unleashed™ II.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

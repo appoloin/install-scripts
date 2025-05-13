@@ -1,0 +1,45 @@
+name:  Deadly Dozen
+game_slug: deadly-dozen
+version: Good Old Games Installer
+slug: deadly-dozen
+runner: wine
+year: 2001
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Deadly Dozen/Launch Deadly Dozen.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: quartz icodecs
+        name: winetricks
+        prefix: $GAMEDIR
+
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - rename:
+        src: $GAMEDIR/drive_c/GOG Games/Deadly Dozen/ddraw.dll
+        dst: $GAMEDIR/drive_c/GOG Games/Deadly Dozen/ddraw.dll.old
+        
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      ddraw: n,b
+      d3dimm: n,b
+
+

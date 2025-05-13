@@ -1,0 +1,36 @@
+name: Interstate 76 Nitro Pack
+game_slug: interstate-76-nitro-pack
+version: MagiPacks Installer
+slug: interstate-76-nitro-pack
+runner: wine
+year: 1998
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Interstate 76 - Nitro Riders/nitro.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    overrides:
+      d3d9: n,b
+      d3d8: n,b
+      d3dimm: n,b
+      ddraw: n,b
+      Glide: n,b
+      Glide2x: n,b
+      Glide3x: n,b

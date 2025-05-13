@@ -1,0 +1,47 @@
+name: Tex Murphy - Overseer
+game_slug: tex-murphy-overseer
+version: MagiPacks Installer
+slug: tex-murphy-overseer
+runner: wine
+year: 1998
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/WRC3/WRC3.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: lavfilters ffdshow
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        name: set_regedit
+        path: HKEY_CURRENT_USER\Software\GNU\ffdshow
+        key: blacklist
+        type: REG_SZ
+        prefix: $GAMEDIR
+        value: OVERSEER.EXE
+
+    - task:
+        name: set_regedit
+        path: HKEY_CURRENT_USER\Software\GNU\ffdshow_audio
+        key: blacklist
+        type: REG_SZ
+        prefix: $GAMEDIR
+        value: OVERSEER.EXE
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

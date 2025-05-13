@@ -1,0 +1,27 @@
+name:  James Bond 007 Nightfire
+game_slug: james-bond-007-nightfire
+version: MagiPacks Installer
+slug: james-bond-007-nightfire
+runner: wine
+year: 2002
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/James Bond 007 - Nightfire/Bond.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

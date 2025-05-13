@@ -1,0 +1,31 @@
+name: Madden NFL 2004
+game_slug: madden-nfl-2004
+version: MagiPacks Installer
+slug: madden-nfl-2004
+runner: wine
+year: 2003
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/MagiPacks/Madden NFL 2004/mainapp.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      D3d9: native

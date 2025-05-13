@@ -1,0 +1,27 @@
+name: UEFA Euro 2008
+game_slug: uefa-euro-2008
+version: MagiPacks Installer
+slug: uefa-euro-2008
+runner: wine
+year: 2008
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/UEFA Euro 2008/EURO08.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

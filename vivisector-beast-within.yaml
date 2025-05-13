@@ -1,0 +1,37 @@
+name: Vivisector Beast Within
+game_slug: vivisector-beast-within
+version: MagiPacks Installer
+slug: vivisector-beast-within
+runner: wine
+year: 2005
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Vivisector - Beast Within/Vivisector.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - rename:
+        src: $GAMEDIR/drive_c/MagiPacks/Vivisector - Beast Within/D3D9.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Vivisector - Beast Within/D3D9.dll.old
+
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      d3d9: n,b
+      d3d8: n,b

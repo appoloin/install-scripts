@@ -1,0 +1,33 @@
+name: scarface the world is yours
+game_slug: scarface-the-world-is-yours
+version: Magipak Installer
+slug: scarface-the-world-is-yours
+runner: wine
+year: 2006
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/MagiPacks/Scarface - The World is Yours/Scarface.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the Setup file
+  
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    dxvk: false
+    overrides:
+      d3d9: n,b
+      dinput8: n,b
+    

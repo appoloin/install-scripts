@@ -1,0 +1,32 @@
+name:  Prince of Persia - The Forgotten Sands
+game_slug: prince-of-persia-the-forgotten-sands
+version: Windows Installer
+slug: prince-of-persia-the-forgotten-sands
+runner: wine
+year: 2010
+
+script:
+  files:
+    - game: N/A:Select file
+
+  game:
+    exe: "$GAMEDIR/drive_c/game/PoP The Forgotten Sands/Prince of Persia.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+
+    - task:
+        app:  xact
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - extract:
+        file: $game
+        dst:  "$GAMEDIR/drive_c/game/"
+

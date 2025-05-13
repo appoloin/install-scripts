@@ -1,0 +1,26 @@
+name: Star Trek Hidden Evil
+game_slug: star-trek-hidden-evil
+version: Good Old Games Installer
+slug: star-trek-hidden-evil
+runner: wine
+year: 1999
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Star Trek Hidden Evil/Launch Star Trek™ - Hidden Evil.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

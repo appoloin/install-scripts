@@ -1,0 +1,50 @@
+name: cursed Mountain
+game_slug: gears-of-war
+version: MagiPacks Installer
+slug: gears-of-war
+runner: wine
+year: 2006
+
+script:
+  files:
+    - setup: N/A:Select setup file
+    - xlive: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/XLiveLessNess-v1.5.1.1-Release.zip
+        filename: XLiveLessNess-v1.5.1.1-Release
+    - patch: 
+        url: https://raw.githubusercontent.com/appoloin/Patches/refs/heads/master/OtherGames/GearsOfWar-default.htm
+        filename: default.htm
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Gears of War/Binaries/Startup.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: arial physx xact_x64
+        description: Installing required System DLLs
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $xlive -o$CACHE -ppassword -y
+
+    - merge:
+        src: "$CACHE/XLiveLessNess-v1.5.1.1-Release"
+        dst: "$GAMEDIR/drive_c/MagiPacks/Gears of War/Binaries/"
+
+    - merge:
+        src: "$patch"
+        dst: "$GAMEDIR/drive_c/users/$USER/AppData/Roaming/Microsoft Games/Gears of War/CurrentSite/"

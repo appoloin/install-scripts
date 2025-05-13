@@ -1,0 +1,32 @@
+name: Lost Planet 2
+game_slug: lost-planet-2
+version: MagiPacks Installer
+slug: lost-planet-2
+runner: wine
+year: 2010
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Lost Planet 2/Launcher.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: wmp11
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

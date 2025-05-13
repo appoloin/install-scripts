@@ -1,0 +1,36 @@
+name: Evil Dead - Hail to the King
+game_slug: evil-dead-hail-to-the-king
+version: MagiPacks Installer
+slug: evil-dead-hail-to-the-king
+runner: wine
+year: 2000
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/MagiPacks/Evil Dead - Hail to the King/EvilDead.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    overrides:
+      ddraw: n,b
+      d3d8: n,b
+      d3dimm: n,b
+
+  system:
+    single_cpu: true
+

@@ -1,0 +1,45 @@
+name: Lotus Challenge
+game_slug: lotus-challenge
+version: MagiPacks Installer
+slug: lotus-challenge
+runner: wine
+year: 2001
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Lotus Challenge/lotus.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: quartz
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - rename:
+        src: $GAMEDIR/drive_c/MagiPacks/Lotus Challenge/d3d8.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Lotus Challenge/d3d8.dll.old
+    - rename:
+        src: $GAMEDIR/drive_c/MagiPacks/Lotus Challenge/D3D9.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Lotus Challenge/D3D9.dll.old
+
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      d3d9: n,b
+      d3d8: n,b

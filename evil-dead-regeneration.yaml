@@ -1,0 +1,50 @@
+name: Evil Dead Regeneration
+game_slug: evil-dead-regeneration
+version: Windows Installer
+slug: evil-dead-regeneration
+runner: wine
+year: 2005
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/THQ/Evil Dead Regeneration/Launcher.exe"
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/EvilDead/Evil-Dead-Regeneration_Patch_Win_EN_Patch-v101.7z
+        filename: EvilDeadPatch.7z
+    - nocd:  
+        url: hhttps://github.com/appoloin/Patches/raw/refs/heads/master/EvilDead/EvilDeadNodvd.7z
+        filename: EvilDeadNoCd.7z
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: icodex quartz
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch -ppassword -o"$CACHE" -y
+
+    - task:
+        executable: $CACHE/Evil-Dead-Regeneration_Patch_Win_EN_Patch-v101.exe
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $nocd -ppassword -o"$GAMEDIR/drive_c/Program Files (x86)/THQ/Evil Dead Regeneration/" -y

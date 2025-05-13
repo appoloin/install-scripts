@@ -1,0 +1,27 @@
+name: Shade Wrath of Angels
+game_slug: shade-wrath-of-angels
+version: MagiPacks Installer
+slug: shade-wrath-of-angels
+runner: wine
+year: 2004
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Shade - Wrath of Angels/shade.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

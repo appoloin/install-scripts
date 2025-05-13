@@ -1,0 +1,32 @@
+name: Mortal Kombat 4
+game_slug: mortal-kombat-4
+version: MagiPacks Installer
+slug: imortal-kombat-4
+runner: wine
+year: 1997
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Mortal Kombat 4/MK4.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    overrides:
+      d3d8: n,b
+      d3dimm: n,b
+      ddraw: n,b

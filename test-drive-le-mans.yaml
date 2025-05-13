@@ -1,0 +1,38 @@
+name: Test Drive - Le Mans
+game_slug: test-drive-le-mans
+version: MagiPacks Installer
+slug: test-drive-le-mans
+runner: wine
+year: 2000
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Test Drive - Le Mans/Bin/lemans.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        app: directshow icodecs
+        name: winetricks
+        prefix: $GAMEDIR
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      ddraw: native
+      d3d8: native
+      D3DImm: native

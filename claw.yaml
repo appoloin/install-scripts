@@ -1,0 +1,32 @@
+name: Claw
+game_slug: claw
+version: MagiPacks Installer
+slug: claw
+runner: wine
+year: 1997
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Captain Claw/CLAW.EXE"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    overrides:
+      ddraw: native
+      D3DImm: native
+      d3d9: native

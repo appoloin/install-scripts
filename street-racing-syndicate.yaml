@@ -1,0 +1,33 @@
+name: Street Racing Syndicate
+game_slug: street-racing-syndicate
+version: MagiPacks Installer
+slug: street-racing-syndicate
+runner: wine
+year: 2004
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/MagiPacks/Street Racing Syndicate/Bin/SRS.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    overrides:
+      ddraw: native
+      d3d8: native
+      d3d9: native
+      D3DImm: native

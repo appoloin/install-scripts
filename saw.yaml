@@ -1,0 +1,26 @@
+name:  Saw
+game_slug: saw
+version: Windows Installer
+slug: saw
+runner: wine
+year: 2009
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Games/Saw The Video Game/Binaries/LumaGameLauncher_x86.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

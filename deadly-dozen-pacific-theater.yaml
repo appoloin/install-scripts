@@ -1,0 +1,31 @@
+name:  Deadly Dozen Pacific Theater
+game_slug: deadly-dozen-pacific-theater
+version: Good Old Games Installer
+slug: deadly-dozen-pacific-theater
+runner: wine
+year: 2002
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Deadly Dozen Pacific Theater/Launch Deadly Dozen Pacific Theater.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: quartz icodecs
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

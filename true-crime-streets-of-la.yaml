@@ -1,0 +1,36 @@
+name: True Crime - LA
+game_slug: true-crime-streets-of-la
+version: MagiPacks Installer
+slug: true-crime-streets-of-la
+runner: wine
+year: 2003
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/True Crime - New York City/tcnyc.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: wmp9 
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    overrides:
+      dinput8: n,b
+

@@ -1,0 +1,32 @@
+name: Wacky Race
+game_slug: wacky-races--2
+version: MagiPacks Installer
+slug: wacky-races--2
+runner: wine
+year: 2000
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/MagiPacks/Wacky Races/Wpc.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    overrides:
+      d3d8: n,b
+      d3dimm: n,b
+      ddraw: n,b

@@ -1,0 +1,33 @@
+name: Soldier of Fortune II - Double Helix
+game_slug: soldier-of-fortune-ii-double-helix
+version: Magipak Installer
+slug: soldier-of-fortune-ii-double-helix
+runner: wine
+year: 2003
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/MagiPacks/Soldier of Fortune II - Double Helix/mohaa.exe
+    prefix: $GAMEDIR
+
+
+  files:
+    - setup: N/A:Select the Setup file
+  
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  system:
+    env:
+      MESA_EXTENSION_MAX_YEAR: 2008
+      __GL_ExtensionStringVersion: 17700
+  

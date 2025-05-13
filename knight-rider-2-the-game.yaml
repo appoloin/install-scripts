@@ -1,0 +1,39 @@
+name: Knight Rider 2 - The Game
+game_slug: knight-rider-2-the-game
+version: MagiPacks Installer
+slug: knight-rider-2-the-game
+runner: wine
+year: 2002
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Knight Rider - The Game 2/KR2.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: quartz
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      ddraw: n,b
+      D3Dimm: n,b
+      d3d8: n,b

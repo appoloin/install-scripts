@@ -1,0 +1,38 @@
+name: WRC 2 FIA World Rally Championshipge
+game_slug: wrc-2-fia-world-rally-championship
+version: Windows Installer
+slug: wrc-2-fia-world-rally-championship
+runner: wine
+year: 2011
+
+script:
+  files:
+    - setup: N/A:Select setup file
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/WRC2.7z
+        filename: WRC2.7z
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/BlackBeanGames/WRC2/WRC2.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: chmod      
+        args: -R 775  $GAMEDIR
+        
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/BlackBeanGames/WRC2/" -ppassword -y
+

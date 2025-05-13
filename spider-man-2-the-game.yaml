@@ -1,0 +1,29 @@
+name: Spider Man 2 - The Game
+game_slug: spider-man-2-the-game
+version: MagiPacks Installer
+slug: spider-man-2-the-game
+runner: wine
+year: 2004
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Spider-Man 2 - The Game/System/Webhead.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  system:
+    single_cpu: true

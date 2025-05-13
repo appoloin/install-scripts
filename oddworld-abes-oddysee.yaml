@@ -1,0 +1,34 @@
+name:  oddworld Abes Oddysee
+game_slug: oddworld-abes-oddysee
+version: MagiPacks Installer
+slug: oddworld-abes-oddysee
+runner: wine
+year: 1997
+
+script:
+  files:
+    - setup: N/A:Select setup file
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/Windows64-Debug-relive-binaries.zip
+        filename: engine.7z
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/MagiPacks/Oddworld - Abe's Oddysee/relive.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/MagiPacks/Oddworld - Abe's Oddysee/" -ppassword -y
+

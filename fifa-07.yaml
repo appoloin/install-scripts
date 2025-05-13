@@ -1,0 +1,40 @@
+name: FIFA 07
+game_slug: fifa-07
+version: MagiPacks Installer
+slug: fifa-07
+runner: wine
+year: 2006
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/FIFA 07/fifa07.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - rename:
+        src: $GAMEDIR/drive_c/MagiPacks/FIFA 07/d3d8.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/FIFA 07/d3d8.dll.old
+    - rename:
+        src: $GAMEDIR/drive_c/MagiPacks/FIFA 07/D3D9.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/FIFA 07/D3D9.dll.old
+
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      d3d9: n,b
+      d3d8: n,b

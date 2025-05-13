@@ -1,0 +1,27 @@
+name: Starsky and Hutch
+game_slug: starsky-hutch
+version: MagiPacks Installer
+slug: starsky-hutch
+runner: wine
+year: 2003
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Starsky & Hutch/Starsky.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

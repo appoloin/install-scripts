@@ -1,0 +1,51 @@
+name: Hellforces
+game_slug: hellforces
+version: Windows Installer
+slug: hellforces
+runner: wine
+year: 2005
+
+script:
+  files:
+    - setup: N/A:Select setup file
+    - patch1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Infernal/infernal-nocd.7z.001
+        filename: infernal-nocd.7z.001
+    - patch2:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Infernal/infernal-nocd.7z.002
+        filename:  infernal-nocd.7z.002
+    - patch3:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Infernal/infernal-nocd.7z.003
+        filename:  infernal-nocd.7z.003
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Playlogic/Infernal/game/game.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    #Move Patch into one folder
+    - merge:
+        src: "$patch1"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch2"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch3"
+        dst: "$CACHE"
+
+    - execute:
+        file: 7z
+        args: x "$CACHE/infernal-nocd.7z.001" -o"$GAMEDIR/drive_c/Program Files (x86)/Playlogic/Infernal/game/" -ppassword -y
+

@@ -1,0 +1,27 @@
+name: Heavy Metal - FAKK 2
+game_slug: heavy-metal-fakk-2
+version: MagiPacks Installer
+slug: heavy-metal-fakk-2
+runner: wine
+year: 2000
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Heavy Metal - FAKK 2/quake3.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

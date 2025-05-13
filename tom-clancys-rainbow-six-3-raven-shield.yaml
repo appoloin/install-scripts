@@ -1,0 +1,38 @@
+name: Tom Clancy's - Rainbow Six 3 - Raven Shield
+game_slug: tom-clancys-rainbow-six-3-raven-shield
+version: MagiPacks Installer
+slug: tom-clancys-rainbow-six-3-raven-shield
+runner: wine
+year: 2003
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Tom Clancy's Rainbow Six 3 - Raven Shield/system/RavenShield.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+
+  wine:
+    overrides:
+      ddraw: native
+      d3d8: native
+      D3DImm: native
+      d3d9: native
+
+  system:
+    single_cpu: true
+

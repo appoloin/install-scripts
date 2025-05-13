@@ -1,0 +1,42 @@
+name:  Cricket 2000
+game_slug: cricket-2000
+version: MagiPacks Installer
+slug: cricket-2000
+runner: wine
+year: 2000
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Cricket 2000/c2k.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - rename:
+        src: $GAMEDIR/drive_c/MagiPacks/Cricket 2000/ddraw.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Cricket 2000/ddraw.dll.old
+    - rename:
+        src: $GAMEDIR/drive_c/MagiPacks/Cricket 2000/d3dimm.dll
+        dst:  $GAMEDIR/drive_c/MagiPacks/Cricket 2000/d3dimm.dll.old
+        
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      ddraw: n,b
+      d3dimm: n,b
+
+

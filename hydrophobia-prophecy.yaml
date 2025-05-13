@@ -1,0 +1,39 @@
+name: Hydrophobia Prophecy
+game_slug: hydrophobia-prophecy
+version: Windows Installer
+slug: hydrophobia-prophecy
+runner: wine
+year: 2010
+
+script:
+  files:
+    - setup: N/A:Select setup file
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/Hydrophobia%20Prophecy.7z
+        filename: Hydrophobia%20Prophecy.7z
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Dark Energy Digital Ltd/Hydrophobia Prophecy/HydroPC.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: xact 
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Dark Energy Digital Ltd/Hydrophobia Prophecy/" -ppassword -y
+

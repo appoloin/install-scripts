@@ -1,0 +1,32 @@
+name: The House of the Dead 2
+game_slug: the-house-of-the-dead-2
+version: MagiPacks Installer
+slug: the-house-of-the-dead-2
+runner: wine
+year: 2001
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/MagiPacks/The House of The Dead 2/Hod2.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    overrides:
+      ddraw: native
+      d3d8: native
+      D3DImm: native

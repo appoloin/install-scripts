@@ -1,0 +1,28 @@
+name:  Flying Tigers Shadows Over China
+game_slug: flying-tigers-shadows-over-china
+version: Windows Installer
+slug: flying-tigers-shadows-over-china
+runner: wine
+year: 2017
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Games/Flying Tigers Shadows Over China/FLYING TIGERS.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+        

@@ -1,0 +1,32 @@
+name: Velvet Assassin
+game_slug: velvet-assassin
+version: MagiPacks Installer
+slug: velvet-assassin
+runner: wine
+year: 2009
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files/Velvet Assassin/Launcher.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: "$GAMEDIR/drive_c/Program Files/Velvet Assassin/redist/PhysX_9.09.0121_SystemSoftware.exe"
+        name: wineexec
+        prefix: $GAMEDIR
+

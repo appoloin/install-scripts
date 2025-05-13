@@ -1,0 +1,40 @@
+name:  Crimson-skies
+game_slug: crimson-skies
+version: MagiPacks Installer
+slug: crimson-skies
+runner: wine
+year: 2000
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Crimson Skies/crimson.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: quartz 
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      ddraw: n,b
+      d3dimm: n,b
+      d3d8: n,b
+
+

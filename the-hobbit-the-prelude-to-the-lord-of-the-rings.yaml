@@ -1,0 +1,27 @@
+name: The Hibbit
+game_slug: the-hobbit-the-prelude-to-the-lord-of-the-rings
+version: MagiPacks Installer
+slug: the-hobbit-the-prelude-to-the-lord-of-the-rings
+runner: wine
+year: 2003
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/The Hobbit/Meridian.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

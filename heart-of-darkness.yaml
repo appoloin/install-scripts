@@ -1,0 +1,27 @@
+name:  Heart of Darkness
+game_slug: heart-of-darkness
+version: MagiPacks Installer
+slug: heart-of-darkness
+runner: wine
+year: 1998
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c//MagiPacks/Heart of Darkness/hode.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

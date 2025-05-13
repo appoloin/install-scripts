@@ -1,0 +1,39 @@
+name: Project Snowblind
+game_slug: project-snowblind
+version: Windows Installer
+slug:  Adams-Veuture-installer
+runner: wine
+year: 2005
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Project Snowblind/Snowblind.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the Setup.exe
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/ProjectSnowblind.7z
+        filename: ProjectSnowblind.7z
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task: 
+        app: icodecs quartz
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Project Snowblind/" -ppassword -y
+

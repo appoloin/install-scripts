@@ -1,0 +1,35 @@
+name: Peter Jacksons - King Kong
+game_slug: peter-jackson-s-king-kong-the-official-game-of-the-movie
+version: MagiPacks Installer
+slug: peter-jackson-s-king-kong-the-official-game-of-the-movie
+runner: wine
+year: 2005
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Peter Jackson's King Kong/GE/CheckApplication.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - rename:
+        src: $GAMEDIR/drive_c/MagiPacks/Peter Jackson's King Kong/GE/d3d9.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Peter Jackson's King Kong/GE/d3d9.dll.old
+
+  wine:
+    overrides:
+      dinput8 : n,b
+

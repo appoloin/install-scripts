@@ -1,0 +1,32 @@
+name: Carmageddon 2 - Carpocalypse Now
+game_slug: carmageddon-tdr-2000
+version: MagiPacks Installer
+slug: carmageddon-tdr-2000
+runner: wine
+year: 2000
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Carmageddon 2 - Carpocalypse Now/CARMA2_HW0.EXE"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    overrides:
+      ddraw: native
+      D3DImm: native
+      d3d8: native

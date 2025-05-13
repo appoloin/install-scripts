@@ -1,0 +1,40 @@
+name: Three Kingdoms - Fate of the Dragon
+game_slug: tom-clancys-rainbow-six
+version: MagiPacks Installer
+slug: tom-clancys-rainbow-six
+runner: wine
+year: 1998
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Three Kingdoms - Fate of the Dragon/sanguo.exe"
+    arch: win32
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32  #needded game wont run above win98
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        arch: win32
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        app: win98
+        name: winetricks
+        prefix: $GAMEDIR
+  wine:
+    overrides:
+      ddraw: native
+      d3d8: native
+      D3DImm: native
+      winmm: native

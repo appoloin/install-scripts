@@ -1,0 +1,31 @@
+name: WRC 4 FIA World Rally Championshipge
+game_slug: wrc-4-fia-world-rally-championship
+version: Windows Installer
+slug: wrc-4-fia-world-rally-championship
+runner: wine
+year: 2013
+
+script:
+  files:
+    - setup: N/A:Select setup file 
+
+  game:
+    exe: "$GAMEDIR/drive_c/Games/WRC 4 FIA World Rally Championship/WRC4.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: xact directshow lavfilters wmp9 wmp11
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

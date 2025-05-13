@@ -1,0 +1,27 @@
+name: Payday the Heist
+game_slug: payday-the-heist
+version: MagiPacks Installer
+slug: payday-the-heist
+runner: wine
+year: 2011
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/MagiPacks/Payday - The Heist/payday_win32_release.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

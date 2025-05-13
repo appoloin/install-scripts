@@ -1,0 +1,34 @@
+name: Rage
+game_slug: rage
+version: Windows Installer
+slug: rage
+runner: wine
+year: 2011
+
+script:
+  files:
+    - setup: N/A:Select setup file
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/RAGE.7z
+        filename: RAGE.7z
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/id Software/RAGE/Rage64.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/id Software/RAGE/" -ppassword -y
+

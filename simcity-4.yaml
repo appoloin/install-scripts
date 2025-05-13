@@ -1,0 +1,28 @@
+name: SimCitty 4
+game_slug: simcity-4
+version: Magipak Installer
+slug: simcity-4
+runner: wine
+year: 2003
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/MagiPacks/SimCity 4/SC4Launcher.exe
+    prefix: $GAMEDIR
+    args: noupdate quick
+
+  files:
+    - setup: N/A:Select the Setup file
+  
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

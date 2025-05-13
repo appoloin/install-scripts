@@ -1,0 +1,34 @@
+name: Myth III - The Wolf Age
+game_slug: myth-iii-the-wolf-age
+version: MagiPacks Installer
+slug: myth-iii-the-wolf-age
+runner: wine
+year: 2001
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Myth III - The Wolf Age/Myth3.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      d3d8: n,b
+      d3dimm: n,b
+      ddraw: n,b
+      d3d9: n,b

@@ -1,0 +1,34 @@
+name: Eragon
+game_slug: eragon
+version: MagiPacks Installer
+slug: aeragon
+runner: wine
+year: 2006
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Eragon/Eragon.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: dsound 
+        description: 'winetricks'
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+        
+

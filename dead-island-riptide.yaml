@@ -1,0 +1,38 @@
+name: Dead Island Riptide
+game_slug: dead-island-riptide
+version: Windows Installer
+slug: dead-island-riptide
+runner: wine
+year: 2013
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Techland/Dead Island Riptide/DeadIslandGame_x86_rwdi.exe"
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/DeadIsland/DeadIslandRiptidePatch.7z
+        filename: DeadIslandRiptidepatch.7z
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: quartz icodex wmp11 xact xact_x64
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch -ppassword -o"$GAMEDIR/drive_c/Program Files (x86)/Techland/Dead Island Riptide/" -y

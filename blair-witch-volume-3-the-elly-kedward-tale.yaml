@@ -1,0 +1,40 @@
+name:  Blair Witch - Volume 3  The Elly Kedward Tale
+game_slug: blair-witch-volume-3-the-elly-kedward-tale
+version: MagiPacks Installer
+slug: blair-witch-volume-3-the-elly-kedward-tale
+runner: wine
+year: 2000
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Blair Witch Volume 3 - The Elly Kedward Tale/bw3.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: directplay icodecs
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - rename:
+        src: $GAMEDIR/drive_c/MagiPacks/Blair Witch Volume 3 - The Elly Kedward Tale/ddraw.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Blair Witch Volume 3 - The Elly Kedward Tale/ddraw.dll.old
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      ddraw: n,b

@@ -1,0 +1,34 @@
+name: x-blades
+game_slug: x-blades
+version: Windows Installer
+slug: x-blades
+runner: wine
+year: 2009
+
+script:
+  files:
+    - setup: N/A:Select setup file
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/X-Blades.7z
+        filename: X-Blades.7z
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Games Farm/Air Conflicts - Vietnam/ACV.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/XBlades" -ppassword -y
+

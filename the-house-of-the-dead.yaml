@@ -1,0 +1,40 @@
+name: The House of the Dead
+game_slug: the-house-of-the-dead
+version: MagiPacks Installer
+slug: the-house-of-the-dead
+runner: wine
+year: 1996
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/The House of The Dead/THOTD.EXE"
+    args: THOTD.exe -cd_nocheck -d3d
+    arch: win32
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        arch: win32  #needded game wont run above win98
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        arch: win32
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        app: win98
+        name: winetricks
+        prefix: $GAMEDIR
+  wine:
+    overrides:
+      ddraw: native
+      d3d8: native
+      D3DImm: native

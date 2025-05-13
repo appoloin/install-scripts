@@ -1,0 +1,31 @@
+name: WRC 3 FIA World Rally Championship
+game_slug: wrc-3-fia-world-rally-championship
+version: MagiPacks Installer
+slug: wrc-3-fia-world-rally-championship
+runner: wine
+year: 2012
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/WRC3/WRC3.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: dotnet40
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

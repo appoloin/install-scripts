@@ -1,0 +1,38 @@
+name: WRC FIA World Rally Championship
+game_slug: wrc-fia-world-rally-championship
+version: MagiPacks Installer
+slug: wrc-fia-world-rally-championship
+runner: wine
+year: 2010
+
+script:
+  files:
+    - setup: N/A:Select setup file
+    - patch:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/WRC-Patch.7z
+        filename: WRC-Patch.7z
+
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/BlackBeanGames/WRC2010/Launcher.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: chmod      
+        args: -R 775  $GAMEDIR
+      
+    - execute:
+        file: 7z
+        args: x $patch -o$GAMEDIR/drive_c/Program Files (x86)/BlackBeanGames/WRC2010/ -ppassword -y

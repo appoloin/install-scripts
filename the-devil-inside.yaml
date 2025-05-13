@@ -1,0 +1,29 @@
+name: Tsunami 2265
+game_slug: the-devil-inside
+version: MagiPacks Installer
+slug: the-devil-inside
+runner: wine
+year: 2000
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/The Devil Inside/Devil.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  system:
+    single_cpu: true

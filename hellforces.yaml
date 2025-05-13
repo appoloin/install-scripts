@@ -1,0 +1,39 @@
+name: Hellforces
+game_slug: hellforces
+version: Windows Installer
+slug: hellforces
+runner: wine
+year: 2005
+
+script:
+  files:
+    - setup: N/A:Select setup file
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/hellforces.7z
+        filename:  Hellforces.7z
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/GMX Media/Hellforces/hell.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: wmp9 wmp11
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/GMX Media/Hellforces/" -ppassword -y
+

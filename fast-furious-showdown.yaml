@@ -1,0 +1,33 @@
+name: Fast and Furious Showdown
+game_slug: fast-furious-showdown
+version: Windows Installer
+slug: fast-furious-showdown
+runner: wine
+year: 2013
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Fast And Furious Showdown/Fast and Furious Showdown.exe"
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the installer
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/Fast%20and%20Furious%20Showdown.7z
+        filename: FastAndFurios.7z
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch -ppassword -o"$GAMEDIR/drive_c/Program Files (x86)/Fast And Furious Showdown/" -y

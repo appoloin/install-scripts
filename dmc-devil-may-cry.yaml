@@ -1,0 +1,40 @@
+name: DMC Devil May Cry
+game_slug: dmc-devil-may-cry
+version: Windows Installer
+slug: dmc-devil-may-cry
+runner: wine
+year: 2013
+
+script:
+  files:
+    - setup: N/A:Select setup file
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/DmC%20Devil%20May%20Cry.7z
+        filename: DCM-Patch.7z
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Capcom/DmC - Devil May Cry/Binaries/Win32/DMC-DevilMayCry.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: dotnet40 
+        description: Installing DotNet40
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Capcom/DmC - Devil May Cry/Binaries/Win32/" -ppassword -y
+

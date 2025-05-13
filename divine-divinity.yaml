@@ -1,0 +1,37 @@
+name: Divine Divinity
+game_slug: divine-divinity
+version: MagiPacks Installer
+slug: divine-divinity
+runner: wine
+year: 2002
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Divine Divinity/div.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      d3d9: n,b
+      d3d8: n,b
+      d3dimm: n,b
+      ddraw: n,b
+      Glide: n,b
+      Glide2x: n,b
+      Glide3x: n,b
