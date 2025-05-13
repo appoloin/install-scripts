@@ -1,7 +1,7 @@
 name: Ultima II - The Revenge of the Enchantress
 game_slug: ultima-ii-the-revenge-of-the-enchantress
 version: Good Old Games Installer
-slug: Installer
+slug: ultim-ii
 runner: dosbox
 year: 1982
 
@@ -13,23 +13,6 @@ script:
     main_file: $GAMEDIR/play.conf
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$1
-          
-          find "$src" -maxdepth 1 -type d \( -iname app -o
-                                            -iname commonappdata -o
-                                            -iname *redist -o
-                                            -iname scummvm -o
-                                            -iname dosbox -o
-                                            -iname *support -o
-                                            -iname tmp \) -exec rm -r {}  \;
-                                            
-          find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
-        file: $CACHE/remove.sh
-    - chmodx: $CACHE/remove.sh
-
     - extract:
         format: gog
         file: $game
@@ -41,9 +24,18 @@ script:
         src: "$GAMEDIR/__support/save"
         dst: "$GAMEDIR"
 
+    #remove
     - execute:
-        file: $CACHE/remove.sh
-        args: $GAMEDIR
+        command: 'find "$GAMEDIR" -maxdepth 1  -type d \( -iname app -o
+                                                          -iname commonappdata -o
+                                                          -iname *redist -o
+                                                          -iname scummvm -o
+                                                          -iname dosbox -o
+                                                          -iname *support -o
+                                                          -iname tmp \) -exec rm -r {} \;
+                                            
+          find "$GAMEDIR" -type f \( -iname "goggame*" \) -exec rm {} \;
+          '
 
     - write_file:
         content: '[mouse]
@@ -54,17 +46,15 @@ script:
 
             mouse_sensitivity= 15
 
-          [cpu]
+           [cpu]
 
-            core=simple
+            cpu_cycles = 500
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 386
 
-            cputype=386_slow
-
-            cycles=300
-
-            cycleup=100
-
-            cycledown=100
+            cpu_throttle = on
 
           [sdl]
 

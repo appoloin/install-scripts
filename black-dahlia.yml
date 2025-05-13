@@ -2,17 +2,20 @@
 #FIX - mouse cursor ghosting
 name: Black Dahlia
 game_slug: black-dahlia
-version: Installer
-slug:  installer
+version: Windows Installer
+slug:  black-dahlia
 runner: wine
 
 script:
   game:
     exe: $GAMEDIR/drive_c/
-    arch: win32
     prefix: $GAMEDIR
 
- # files:
+  files:
+    - DXWND: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/DXWND_v2_06_01_build.7z
+        filename: DXWND_v2_06_01_build.7z
+
   #https://drive.google.com/open?id=1f6idTOlBjFkBHipXzkox3LRmFhEJqrKu
  #   - patch: https://drive.google.com/uc?export=download&id=1f6idTOlBjFkBHipXzkox3LRmFhEJqrKu
   #https://drive.google.com/open?id=1111u9ChPwUjPa9TgwfhIUEl5h2l29Ydr
@@ -121,8 +124,12 @@ script:
         file: chmod
         args: -R 775  "$GAMEDIR/drive_c/black"
 
+    - execute:
+        file: 7z
+        args: x $DXWND -o"$GAMEDIR/drive_c/black/DXWND" -ppassword -y
+
+
   wine:
-    Desktop: true
     dgvoodoo2: true
 
   system:

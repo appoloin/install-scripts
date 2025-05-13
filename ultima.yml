@@ -1,7 +1,7 @@
 name: Ultima
 game_slug: ultima
-version: Installer
-slug: GOG_Installer
+version: Good Old Games Installer
+slug: ultima
 runner: dosbox
 year: 1981
 
@@ -13,23 +13,6 @@ script:
     main_file: $GAMEDIR/play.conf
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$1
-          
-          find "$src" -maxdepth 1 -type d \( -iname app -o
-                                            -iname commonappdata -o
-                                            -iname *redist -o
-                                            -iname scummvm -o
-                                            -iname dosbox -o
-                                            -iname *support -o
-                                            -iname tmp \) -exec rm -r {}  \;
-                                            
-          find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
-        file: $CACHE/remove.sh
-    - chmodx: $CACHE/remove.sh
-
     - extract:
         format: gog
         file: $game
@@ -37,9 +20,18 @@ script:
         dst: $GAMEDIR
         description: Extracting game files
 
+    #remove
     - execute:
-        file: $CACHE/remove.sh
-        args: $GAMEDIR
+        command: 'find "$GAMEDIR" -maxdepth 1  -type d \( -iname app -o
+                                                          -iname commonappdata -o
+                                                          -iname *redist -o
+                                                          -iname scummvm -o
+                                                          -iname dosbox -o
+                                                          -iname *support -o
+                                                          -iname tmp \) -exec rm -r {} \;
+                                            
+          find "$GAMEDIR" -type f \( -iname "goggame*" \) -exec rm {} \;
+          '
 
     - write_file:
         content: '[mouse]
@@ -50,17 +42,15 @@ script:
 
             mouse_sensitivity= 15
 
-            [cpu]
+           [cpu]
 
-              core=simple
+            cpu_cycles = 1000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 386
 
-              cputype=386_slow
-
-              cycles=500
-
-              cycleup=100
-
-              cycledown=100
+            cpu_throttle = on
 
           [sdl]
 
