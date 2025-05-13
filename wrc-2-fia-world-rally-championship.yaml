@@ -24,6 +24,11 @@ script:
         prefix: $GAMEDIR
 
     - task:
+        app: xact 
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR

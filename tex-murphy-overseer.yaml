@@ -45,3 +45,11 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      d3d9: n,b
+      d3d8: n,b
+      ddraw: n,b
+      d3dimm: n,b
