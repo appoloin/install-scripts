@@ -1,0 +1,42 @@
+name: Age of Wonders - Shadow Magic
+game_slug: age-of-wonders-shadow-magic
+version: MagiPacks Installer
+slug: age-of-wonders-shadow-magic
+runner: wine
+year: 2003
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Age of Wonders - Shadow Magic/AoWSM.exe"
+    launch_configs:
+      - exe:  "$GAMEDIR/drive_c/MagiPacks/Age of Wonders - Shadow Magic/AoW2Setup.exe"
+        name: Settings
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: directplay icodecs
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      ddraw: native
+      d3d8: native
+      d3d9: native
+      D3DImm: native

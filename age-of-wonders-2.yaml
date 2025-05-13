@@ -1,0 +1,42 @@
+name: Age of Wonders 2
+game_slug: age-of-wonders-2
+version: MagiPacks Installer
+slug: age-of-wonders-2
+runner: wine
+year: 1999
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Age of Wonders II - The Wizard's Throne/AoW2.exe"
+    launch_configs:
+      - exe:  "$GAMEDIR/drive_c/MagiPacks/Age of Wonders II - The Wizard's Throne/aow2Setup.exe"
+        name: Settings
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: directplay icodecs
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    dgvoodoo2: true
+    overrides:
+      ddraw: native
+      d3d8: native
+      d3d9: native
+      D3DImm: native

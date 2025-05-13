@@ -1,0 +1,27 @@
+name: Agatha Christe - And Then There Where None
+game_slug: agatha-christie-and-then-there-were-none
+version: Windows Installer
+slug: agatha-christie-and-then-there-were-none
+runner: wine
+year: 2005
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/The Adventure Company/And Then There Were None/ac.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

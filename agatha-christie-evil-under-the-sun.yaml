@@ -1,0 +1,36 @@
+name: Agatha Christe - Evil Under the Sun
+game_slug: agatha-christie-evil-under-the-sun
+version: Windows Installer
+slug: agatha-christie-evil-under-the-sun
+runner: wine
+year: 2006
+
+script:
+  files:
+    - setup: N/A:Select setup file
+    - patch: N/A:Select Patach file
+        
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/The Adventure Company/And Then There Were None/ac.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $patch
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    dxvk: false
+    
