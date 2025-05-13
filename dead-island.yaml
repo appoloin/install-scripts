@@ -13,7 +13,7 @@ script:
   files:
     - setup: N/A:Select the GOG installer
     - patch:  
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/DeadIslandpatch.7z
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/DeadIsland/DeadIslandpatch.7z
         filename: DeadIslandpatch.7z
 
   installer:

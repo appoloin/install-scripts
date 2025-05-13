@@ -8,7 +8,6 @@ year: 2009
 script:
   game:
     exe: "$GAMEDIR/drive_c/GOG/Dracula 3 - The Path of the Dragon/dracula3.exe"
-    arch: win32
     prefix: $GAMEDIR
 
   install_complete_text: "Installation finished!\n\n\n\nIMPORTANT!\n============\nPlease\

@@ -3,6 +3,7 @@ game_slug: syberia-3
 version: Good Old Games Installer
 slug: syberia-2-installer
 runner: wine
+year: 2017
 
 script:
   game:
