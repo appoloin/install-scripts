@@ -48,8 +48,15 @@ script:
 
     - write_file:
         content: '[cpu]
-  
-            cycles=fixed 8000
+
+            cpu_cycles = 3000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 386
+
+            cpu_throttle = on
+
 
           [midi]
 

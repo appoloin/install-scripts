@@ -10,56 +10,19 @@ script:
     - game: N/A:Select file track01.cue.
   game:
     main_file: $GAMEDIR/play.conf
+
   installer:
     - execute:
         file: mkdir
         args: $GAMEDIR/drive_c $GAMEDIR/drive_d
 
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          dst=$2
-          
-          cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
-
+    #copy everything
     - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $game $GAMEDIR/drive_d
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
 
-    - write_file:
-        content: '[gus]
+          cp -avr "$src_path/."  "$GAMEDIR/drive_d"
 
-          gus = true
-
-          [mouse]
-
-            mouse_capture = onstart   
-            
-            mouse_middle_release=true   
-
-            mouse_sensitivity= 15
-
-          [autoexec]
-
-          mount C "$GAMEDIR/drive_c" -t dir
-
-          imgmount D "$GAMEDIR/drive_d/track01.cue" -t cdrom
-        
-          D:
-
-          install
-
-          exit'
-        file: $GAMEDIR/setup.conf
-
-    - task:
-        config_file: $GAMEDIR/alien-setup.conf
-        name: dosexec
-        working_dir: $GAMEDIR/drive_c
+          '    
 
 
     - write_file:
@@ -67,6 +30,17 @@ script:
 
             gus = true
             
+          [cpu]
+
+            cpu_cycles = 50000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
+
+
             [mouse]
 
             mouse_capture = onstart   

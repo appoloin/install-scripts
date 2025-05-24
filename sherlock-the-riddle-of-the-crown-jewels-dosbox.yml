@@ -31,7 +31,17 @@ script:
         args: -R 775  "$GAMEDIR"
 
     - write_file:
-        content: '[autoexec]
+        content: '[cpu]
+
+            cpu_cycles = 1000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 386
+
+            cpu_throttle = on
+
+         [autoexec]
 
           mount C "$GAMEDIR/drive_c" -t dir
 

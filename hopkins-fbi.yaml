@@ -16,16 +16,13 @@ script:
 
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
+    - extract:
+        file: $DISC1 
+        dst:  $CACHE/DISC1
 
-            src=$1
-
-            dst=$2
-
-            src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-            
-            find "$src_path" -type d \( -iname ANIM -o
+    #copy select
+    - execute:
+        command: 'find "$CACHE/DISC1" -type d \( -iname ANIM -o
                                         -iname ANM  -o
                                         -iname BUFFER  -o
                                         -name MUSIC  -o
@@ -37,17 +34,8 @@ script:
                                         -name TSVGA  -o
                                         -name VOICE  -o
                                         -name LINK  -o
-                                        -iname BASE \) -print  -exec cp {} -r "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
+                                        -iname BASE \) -print  -exec cp {} -r "$GAMEDIR" \;'
 
-    - extract:
-        file: $DISC1 
-        dst:  $CACHE/DISC1
-
-    - execute:
-        file: $CACHE/selectcopy.sh
-        args: $CACHE/DISC1 $GAMEDIR
 
     - execute:
         file: chmod

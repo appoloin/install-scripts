@@ -7,36 +7,15 @@ year: 2003
 
 script:
   game: 
-    exe: $GAMEDIR/openjk_sp.x86_64
-    args: +set fs_homepath . +set r_customheight 768 +set r_customwidth 1366 +set r_mode -2 +set r_fullscreen 1 +set r_noborder 1 +set r_centerWindow 1 +set s_kHz 44 +set cg_fovAspectAdjust 1 +set g_subtitles 1 +set se_language English
-
+    exe: openjk_sp.x86_64
 
   files:
     - setup: N/A:Select installer
+    - engine:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/openjkdf2-64v0.9.6.zip
+        filename: openjkdf2-64v0.9.6.zip
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - extract:
         format: gog
         file: $setup
@@ -47,12 +26,7 @@ script:
     - merge:
         src: $CACHE/app/GameData
         dst: $GAMEDIR
-        
 
-    - execute:
-        file: $CACHE/download.sh
-        args: 1wFccihDW2UJ-uXTySQE5ltrgcniUDEHn $CACHE/OpenJk.7z
-
-    - execute:
-        file: 7z
-        args: x  $CACHE/OpenJk.7z -o"$GAMEDIR" -y
+    - extract:
+        file: $engine
+        dst: $GAMEDIR

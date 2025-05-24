@@ -16,41 +16,17 @@ script:
     - DISC4: N/A:Select Disc4 ISO
     - DISC5: N/A:Select Disc5 ISO
     - DISC6: N/A:Select Disc6 ISO
+    - gus:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/GUS_external_files.zip
+        filename: gus.zip
 
-  installer:  
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-  
+  installer:   
     - execute:
         file: mkdir
         args: $GAMEDIR/drive_c $GAMEDIR/drive_d $GAMEDIR/drive_e $GAMEDIR/drive_f $GAMEDIR/drive_g $GAMEDIR/drive_h $GAMEDIR/drive_i
 
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6 $CACHE/gus.zip
-
     - extract:
-        file: $CACHE/gus.zip
+        file: $gus
         dst: $GAMEDIR/drive_c/ULTRASND
 
     - extract:
@@ -96,42 +72,6 @@ script:
         file: chmod
         args: -R 775  "$GAMEDIR/drive_i"
 
-
-    - write_file:
-        content: '[mouse]
-
-            mouse_capture = onstart   
-            
-            mouse_middle_release=true   
-
-            mouse_sensitivity= 15
-
-          [autoexec]
-          
-            mount C "$GAMEDIR/drive_c" -t dir
-
-            mount D "$GAMEDIR/drive_d" -label PANDORA1 -t cdrom
-
-            mount E "$GAMEDIR/drive_e" -label PANDORA2 -t cdrom
-
-            mount F "$GAMEDIR/drive_f" -label PANDORA3 -t cdrom
-
-            mount G "$GAMEDIR/drive_g" -label PANDORA4 -t cdrom
-
-            mount H "$GAMEDIR/drive_h" -label PANDORA5 -t cdrom
-
-            mount I "$GAMEDIR/drive_i" -label PANDORA5 -t cdrom
-
-            D:
-
-            install
-          
-            exit'
-        file: $GAMEDIR/setup.conf
-    - task:
-        config_file: $GAMEDIR/setup.conf
-        name: dosexec
-        working_dir: $GAMEDIR/drive_c/
     
     - write_file:
         content: '[midi]
@@ -152,9 +92,16 @@ script:
 
             mouse_sensitivity= 15
 
-         [cpu]
+          [cpu]
 
-           cycles = 12000
+            cpu_cycles = 50000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
+
 
           [sdl]
 

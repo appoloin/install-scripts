@@ -10,36 +10,10 @@ script:
     - game: N/A:Select GOG installer
   
   game:
-    exe: Bin/SeriousSam
-    working_dir: $GAMEDIR 
+    exe: /usr/bin/flatpak
+    args: run  io.itch.tx00100xt.SeriousSamClassic --command=serioussam
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1RG2ahdAW0pPy_Al29XJwRKOwao1bUMDk $CACHE/SeriousSamClassicVk-1.10.4.tar.xz
-
     - extract:
         format: gog
         file: $game
@@ -47,10 +21,26 @@ script:
         dst: $GAMEDIR
         description: Extracting game files
 
-    - extract:
-        file: $CACHE/SeriousSamClassicVk-1.10.4.tar.xz
-        dst: $CACHE
+    - execute:
+        file: /usr/bin/flatpak
+        args: install flathub -y --noninteractive io.itch.tx00100xt.SeriousSamClassic
+        description: Installing with flatpak
+        disable_runtime: true
 
-    - merge:
-        src: $CACHE/SamTFE
-        dst: $GAMEDIR
+    - execute:
+        file: /usr/bin/flatpak
+        args: override io.itch.tx00100xt.SeriousSamClassic --user --filesystem=$GAMEDIR
+        description: Added GAMEDIR to flatpak permissions
+        disable_runtime: true
+
+    - execute:
+        command: 'rm -Rf "$HOME/.var/app/io.itch.tx00100xt.SeriousSamClassic/data/Serious-Engine/serioussam";
+
+                  mkdir -p "$HOME/.var/app/io.itch.tx00100xt.SeriousSamClassic/";
+
+                  mkdir -p "$HOME/.var/app/io.itch.tx00100xt.SeriousSamClassic/data/";
+
+                  mkdir -p "$HOME/.var/app/io.itch.tx00100xt.SeriousSamClassic/data/Serious-Engine/";
+
+                  ln -s -f -n "$GAMEDIR" "$HOME/.var/app/io.itch.tx00100xt.SeriousSamClassic/data/Serious-Engine/serioussam"
+                  '

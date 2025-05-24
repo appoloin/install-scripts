@@ -9,17 +9,23 @@ year: 1996
 script:
   files:
     - game: N/A:Select GOG installer.
-    - eduke32: https://github.com/legluondunet/MyLittleLutrisScripts/raw/master/Duke%20Nukem%203D/eduke32.tar.xz
-
 
   game:
-    exe: $GAMEDIR/eduke32
+    exe: /usr/bin/flatpak
+    args: run com.eduke32.EDuke32 -game_dir $GAMEDIR
 
   installer:    
-    - extract:
-        dst: $GAMEDIR
-        format: txz
-        file: $eduke32
+    - execute:
+        file: /usr/bin/flatpak
+        args: install flathub -y --noninteractive com.eduke32.EDuke32
+        description: Installing with flatpak
+        disable_runtime: true
+
+    - execute:
+        file: /usr/bin/flatpak
+        args: override com.eduke32.EDuke32 --user --filesystem=$GAMEDIR
+        description: Added GAMEDIR to flatpak permissions
+        disable_runtime: true
 
     - extract:
         format: gog
@@ -28,18 +34,3 @@ script:
         dst: $GAMEDIR
         description: Extracting game files
 
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          dst=$2
-
-          find "$src" -type f \( -iname "DUKE3D.GRP"  \) -exec cp {} "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
-
-    - execute:
-        args: $CACHE $GAMEDIR/dn3d/gog
-        file: $CACHE/selectcopy.sh
-   

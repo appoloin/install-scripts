@@ -10,7 +10,7 @@ script:
     - DISC1:  N/A:Select Disc 1 ISO
 
   game:
-    game_id: hoyle2  
+    game_id: hoyle5 
     path: $GAMEDIR
   
   installer:

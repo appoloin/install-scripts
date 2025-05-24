@@ -14,24 +14,16 @@ script:
     path: $GAMEDIR
   
   installer:
-    - write_file:
-        content: '#!/bin/bash
+    #copy select
+    - execute:
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
 
-          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          dst=$2
-
-          find "$src" -type f \( -iname "*.MOR" -o 
+                  find "$src_path/."  -type f \( -iname "*.MOR" -o 
                                       -iname "BRUIT*" -o
                                       -iname "MORT.*" -o
                                       -iname "MORTP2" -o
-                                      -iname "TXX.*" \) -exec cp {} "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
+                                      -iname "TXX.*" \) -exec cp {} "$GAMEDIR" \;'
 
-    - execute:
-        file: $CACHE/selectcopy.sh
-        args: $game $GAMEDIR
 
     - execute:
         file: chmod

@@ -95,6 +95,18 @@ script:
 
             mouse_sensitivity= 15
 
+          [cpu]
+
+            cpu_cycles = 50000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
+
+
+
           [sdl]
 
             fullresolution=desktop

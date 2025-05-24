@@ -70,6 +70,17 @@ script:
 
             romdir = $GAMEDIR/mt32-roms
           
+          [cpu]
+
+            cpu_cycles = 25000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
+
+
           [mouse]
 
             mouse_capture = onstart   
@@ -78,11 +89,6 @@ script:
 
             mouse_sensitivity= 15
 
-          [cpu]
-
-            cpu_cycles = 25000
-            
-            cpu_cycles_protected = auto
 
           [sdl]
 

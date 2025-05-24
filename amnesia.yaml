@@ -17,20 +17,14 @@ script:
         file: mkdir
         args: $GAMEDIR/drive_c  $GAMEDIR/drive_c/amnesia
 
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          dst=$2
-          
-          cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
-
+    #copy everything
     - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $game $GAMEDIR/drive_c/amnesia
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
+
+          cp -avr "$src_path/."  "$GAMEDIR/drive_c/amnesia"
+
+          '    
+
 
     - write_file:
         content: '[mouse]
@@ -41,15 +35,26 @@ script:
 
             mouse_sensitivity= 15
 
+           [cpu]
+
+            cpu_cycles = 1000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 386
+
+            cpu_throttle = on
+
+
           [autoexec]
+
+            mount A "$GAMEDIR/drive_c/amnesia" -t floppy -label "Amnesia Disk 1"
 
             mount C "$GAMEDIR/drive_c" -t dir
 
             cls 
 
-            c: 
-
-            cd amnesia
+            A: 
 
             amnesia.com
 

@@ -13,17 +13,6 @@ script:
     main_file: $GAMEDIR/play.conf
   
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$1
-
-          dst=$2
-
-          find "$src" -maxdepth 1  -type f \( -iname "game.*"  \) -exec cp {} "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
-
     - extract:
         format: gog
         file: $game
@@ -39,16 +28,21 @@ script:
         file: mkdir
         args: $GAMEDIR/BIING!/GAMES  $GAMEDIR/drive_d
 
+    #copy select
     - execute:
-        file: $CACHE/selectcopy.sh
-        args: $CACHE  $GAMEDIR/drive_d
+        command: 'find "$CACHE" -maxdepth 1  -type f \( -iname "game.*" \) -exec cp {} "$GAMEDIR/drive_d" \;'
 
     - write_file:
         content: '[cpu]
 
-          core=auto
+            cpu_cycles = 50000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
 
-          cputype=386_prefetch
+            cpu_throttle = on
+
           
           [mouse]
 

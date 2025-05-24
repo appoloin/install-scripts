@@ -14,25 +14,13 @@ script:
     path: $GAMEDIR
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-            src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-            dst=$2
-
-            find "$src" -type f \( -iname "HPP.*" \) -exec cp {} "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
-
     - extract:
         file: $DISC1 
-        dst:  $CAHCE/DISC1
+        dst:  $CACHE/DISC1
 
-
+     #copy select
     - execute:
-        args: $CAHCE/DISC1 $GAMEDIR
-        file: $CACHE/selectcopy.sh
+        command: 'find "$CACHE/DISC1" -type f \( -iname "HPP.*" \) -exec cp {} $GAMEDIR \;'
 
     - execute:
         file: chmod

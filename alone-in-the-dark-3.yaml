@@ -1,144 +1,158 @@
 name: Alone in the Dark 3
 game_slug: alone-in-the-dark-3
 version: Good Old Games Installer
-slug: installer
+slug: alone-in-the-dark-3
 runner: dosbox
 year: 1994
 
 script:
-    files:
-      - game:  N/A:Select GOG installer
+  files:
+    - game:  N/A:Select GOG installer
+    - mt32:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/mt32-roms.7z
+        filename: mt32-roms.7z
 
-    game:
-      main_file: $GAMEDIR/play.conf
+  game:
+    main_file: $GAMEDIR/play.conf
 
-    installer:
-      - write_file:
-          content: '#!/bin/bash
+  installer:
+    - extract:
+        format: gog
+        file: $game
+        args: --gog --include "app"
+        dst: $GAMEDIR
+        description: Extracting game files
 
-            src=$1
+    #remove
+    - execute:
+        command: 'find "$GAMEDIR" -maxdepth 1  -type d \( -iname app -o
+                                                          -iname commonappdata -o
+                                                          -iname *redist -o
+                                                          -iname scummvm -o
+                                                          -iname dosbox -o
+                                                          -iname *support -o
+                                                          -iname tmp \) -exec rm -r {} \;
+                                            
+          find "$GAMEDIR" -type f \( -iname "goggame*" \) -exec rm {} \;
+          '
+
+    - execute:
+        file: 7z
+        args: x  $mt32 -o"$GAMEDIR" -ppassword -y
+
+
+    - write_file:
+        content: '[cpu]
+
+          cpu_cycles = 25000
+          
+          cpu_cycles_protected = auto
+          
+          cputype = 486
+
+          cpu_throttle = on
+
+          [midi]
+
+          mididevice = mt32
+
+          [mt32]
+
+          romdir = $GAMEDIR/mt32-roms
+
+          [mouse]
+
+          mouse_capture = onstart   
+          
+          mouse_middle_release=true   
+
+          mouse_sensitivity= 15
+
+          [sdl]
+              
+            fullresolution=desktop
+
+            windowresolution=original
+
+            fullscreen=true
+
+            output=opengl
+
+          [render]
+
+            aspect=true
+
+            scaler=normal2x
+
+
+            [autoexec]
             
-            find "$src" -maxdepth 1 -type d \( -iname app -o
-                                              -iname commonappdata -o
-                                              -iname *redist -o
-                                              -iname scummvm -o
-                                              -iname dosbox -o
-                                              -iname *support -o
-                                              -iname tmp \) -exec rm -r {}  \;
-                                              
-            find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
-          file: $CACHE/remove.sh
-      - chmodx: $CACHE/remove.sh
+            mount C "$GAMEDIR" -t dir
 
-      - extract:
-          format: gog
-          file: $game
-          args: --gog --include "app"
-          dst: $GAMEDIR
-          description: Extracting game files
+            imgmount D "$GAMEDIR/GAME.INS" -t iso -fs iso
 
-      - execute:
-          file: $CACHE/remove.sh
-          args: $GAMEDIR
+            cls 
 
-      - write_file:
-          content: '[midi]
+            ECHO OFF
 
-            mididevice = mt32
+            goto launcher
 
-            [mouse]
+            :launcher
 
-            mouse_capture = onstart   
+            cls 
+
+            ECHO  -------------------------------------------  
             
-            mouse_middle_release=true   
-
-            mouse_sensitivity= 15
-
-            [sdl]
-                
-              fullresolution=desktop
-
-              windowresolution=original
-
-              fullscreen=true
-
-              output=opengl
-
-            [render]
-
-              aspect=true
-
-              scaler=normal2x
-
-
-              [autoexec]
-              
-              mount C "$GAMEDIR" -t dir
-
-              imgmount D "$GAMEDIR/GAME.INS" -t iso -fs iso
-
-              cls 
-
-              ECHO OFF
-
-              goto launcher
-
-              :launcher
-
-              cls 
-
-              ECHO  -------------------------------------------  
-              
-              ECHO             Alone in the Dark
-              
-              ECHO  -------------------------------------------  
-              
-              ECHO   1) Play        
-              
-              ECHO   2) Setup    
-              
-              ECHO  -------------------------------------------  
-              
-              ECHO   3) Exit Program                             
-              
-              ECHO  -------------------------------------------  
-
-              choice /c123 /s Which program do you want to run? [1-3]: /n 
-              
-              if errorlevel 3 goto exit
-
-              if errorlevel 2 goto setup
-              
-              if errorlevel 1 goto game
-
-
-              :game
-
-              cls
-
-              c:
-
-              cd INDARK3
-
-              AITD3
-              
-              goto exit
-
-
-              :setup
-
-              cls
-
-              c:
-
-              cd INDARK3
-
-              install.exe
-              
-              goto launcher
-
+            ECHO             Alone in the Dark
             
-              :exit
-              
-              exit'
-          file: $GAMEDIR/play.conf
+            ECHO  -------------------------------------------  
+            
+            ECHO   1) Play        
+            
+            ECHO   2) Setup    
+            
+            ECHO  -------------------------------------------  
+            
+            ECHO   3) Exit Program                             
+            
+            ECHO  -------------------------------------------  
+
+            choice /c123 /s Which program do you want to run? [1-3]: /n 
+            
+            if errorlevel 3 goto exit
+
+            if errorlevel 2 goto setup
+            
+            if errorlevel 1 goto game
+
+
+            :game
+
+            cls
+
+            c:
+
+            cd INDARK3
+
+            AITD3
+            
+            goto exit
+
+
+            :setup
+
+            cls
+
+            c:
+
+            cd INDARK3
+
+            install.exe
+            
+            goto launcher
+
+          
+            :exit
+            
+            exit'
+        file: $GAMEDIR/play.conf

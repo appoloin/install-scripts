@@ -17,20 +17,13 @@ script:
         file: mkdir
         args: $GAMEDIR/drive_c $GAMEDIR/drive_d 
 
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          dst=$2
-          
-          cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
-
+      #copy everything
     - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $game $GAMEDIR/drive_d
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
+
+            cp -avr "$src_path/."  "$GAMEDIR/drive_d"
+
+            '    
 
     - execute:
         file: chmod
@@ -40,6 +33,16 @@ script:
           content: '[midi]
 
             mididevice = mt32
+
+           [cpu]
+
+            cpu_cycles = 25000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
 
            [mouse]
 

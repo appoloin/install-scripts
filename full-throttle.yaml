@@ -15,26 +15,15 @@ script:
     path: $GAMEDIR
   
   installer:
-    - write_file:
-        content: '#!/bin/bash
+    - execute:
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
 
-          src="$1"
-
-          dst="$2"
-
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          find "$src_path" -type f \( -iname "ft.la*" -o 
-                                      -iname "monster.sou" \) -print  -exec cp {} "$dst" \;
+                   find "$src_path" -type f \( -iname "ft.la*" -o 
+                                      -iname "monster.sou" \) -print  -exec cp {} "$GAMEDIR" \;
 
           find "$src_path" -type d \( -iname video -o
-                                      -iname data \) -print  -exec cp {} -r "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
+                                      -iname data \) -print  -exec cp {} -r "$GAMEDIR" \;'
 
-    - execute:
-        file: $CACHE/selectcopy.sh
-        args: $game $GAMEDIR
 
     - execute:  
         file: chmod

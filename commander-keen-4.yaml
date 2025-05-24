@@ -2,7 +2,7 @@ name: Commander Keen 4 - Secrets of the Oracle
 game_slug: commander-keen-4-secret-of-the-oracle
 version: DOS
 slug: commander-keen-4-secret-of-the-oracle
-runner: linux
+runner: dosbox
 year: 1991
 
 script:
@@ -10,41 +10,50 @@ script:
     - game: N/A:Select the file Keen4.exe
 
   game:
-    exe: /usr/bin/flatpak
-    args: run io.sourceforge.clonekeenplus
-
+    main_file: $GAMEDIR/play.conf
 
   installer:
+    - execute:
+        args: $GAMEDIR/drive_c $GAMEDIR/drive_c/keen4
+        file: mkdir
+
+    #copy everything
+    - execute:
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
+
+          cp -avr "$src_path/."  "$GAMEDIR/drive_c/keen4"
+
+          '    
+
     - write_file:
-        content: '#!/bin/bash
+        content: '[mouse]
 
-          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+            mouse_capture = onstart   
+            
+            mouse_middle_release=true   
 
-          dst=$2
+            mouse_sensitivity= 15
           
-          cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
+          [cpu]
 
-    - execute:
-        file: /usr/bin/flatpak
-        args: install flathub -y --noninteractive io.sourceforge.clonekeenplus
-        description: Installing with flatpak
-        disable_runtime: true
+            cpu_cycles = 25000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
 
-    - execute:
-        file: /usr/bin/flatpak
-        args: override io.sourceforge.clonekeenplus --user --filesystem=$GAMEDIR
-        description: Added GAMEDIR to flatpak permissions
-        disable_runtime: true
+            cpu_throttle = on
 
+            
+          [autoexec]
 
-    - execute:
-        args: $game $GAMEDIR
-        file: $CACHE/bulkcopy.sh
+            mount C "$GAMEDIR/drive_c" -t dir
 
-    - execute:
-        command: 'rm -Rf "$HOME/.var/app/io.sourceforge.clonekeenplus/config/CommanderGenius/games/commander-keen-4";
+            C:
 
-                  ln -s -f -n "$GAMEDIR" "$HOME/.var/app/io.sourceforge.clonekeenplus/config/CommanderGenius/games/commander-keen-4"
-                  '
+            cd keen4
+            
+            keen4E.EXE
+            
+            exit'
+        file: $GAMEDIR/play.conf

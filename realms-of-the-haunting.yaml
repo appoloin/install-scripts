@@ -13,30 +13,26 @@ script:
     main_file: $GAMEDIR/play.conf
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$1
-          
-          find "$src" -maxdepth 1 -type d \( -iname scummvm -o
-                                              -iname save -o
-                                              -iname dosbox \) -exec rm -r {}  \;
-                                              
-          find "$src" -maxdepth 1 -type f \( -iname "*.dll" -o
-                                            -iname "*.ico" -o
-                                            -iname "*.ini" -o
-                                            -iname "gog*" \) -exec rm {}  \;
-          '
-        file: $CACHE/remove.sh
-    - chmodx: $CACHE/remove.sh
-
     - extract:
         format: gog
         file: $game
         args: --gog --include "app" 
         dst: $GAMEDIR
         description: Extracting game files
-         
+
+    #remove
+    - execute:
+        command: 'find "$GAMEDIR" -maxdepth 1  -type d \( -iname app -o
+                                                          -iname commonappdata -o
+                                                          -iname *redist -o
+                                                          -iname scummvm -o
+                                                          -iname dosbox -o
+                                                          -iname *support -o
+                                                          -iname tmp \) -exec rm -r {} \;
+                                            
+          find "$GAMEDIR" -type f \( -iname "goggame*" \) -exec rm {} \;
+          '
+ 
     - write_file:
         content: '[mouse]
 
@@ -45,6 +41,16 @@ script:
             mouse_middle_release=true   
 
             mouse_sensitivity= 15
+
+           [cpu]
+
+            cpu_cycles = 50000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
 
             [autoexec]
 
@@ -89,9 +95,9 @@ script:
 
             C:
             
-            cd roth
+            cd riva
 
-            roth @roth.res  
+            riva
 
             goto exit
 
@@ -102,18 +108,24 @@ script:
 
             C:
 
-            cd roth
-            
-            INSTALL.EXE
+            sound.bat
 
             goto launcher
 
 
+
+            :install
+            
+            cls
+
+            d:
+
+            install 
+
+            goto launcher
+
+        
             :exit
 
             exit'
         file: $GAMEDIR/play.conf
-
-    - execute:
-        args: $GAMEDIR
-        file: $CACHE/remove.sh

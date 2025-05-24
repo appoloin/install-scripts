@@ -9,33 +9,14 @@ script:
   files:
     - DISC1: N/A:Select CD1 ISO
     - DISC2: N/A:Select CD2 ISO
+    - gus:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/GUS_external_files.zip
+        filename: gus.zip
 
   game:
     main_file: $GAMEDIR/play.conf
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - execute:
         file: mkdir
         args: $GAMEDIR/drive_d $GAMEDIR/drive_c
@@ -48,15 +29,9 @@ script:
         file: cp 
         args: $DISC2 $GAMEDIR/drive_d/CD2.ISO
 
-    - execute:
-        file: $CACHE/download.sh
-        args: 1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6 $CACHE/GUS.zip
-
     - extract:
-        file: $CACHE/GUS.zip
+        file: $gus
         dst: $GAMEDIR/drive_c/ULTRASND
-
-
 
     - write_file:
         content: '[midi]
@@ -66,6 +41,16 @@ script:
           [mt32]
 
           romdir = $GAMEDIR/MT32-ROMS
+
+          [cpu]
+
+            cpu_cycles = 25000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
 
           [mouse]
 

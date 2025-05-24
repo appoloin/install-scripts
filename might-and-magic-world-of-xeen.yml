@@ -6,66 +6,91 @@ runner: scummvm
 year: 1994
 
 script:
-    files:
+  files:
     - game: N/A:Select GOG installer.
+    - dos: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/dosbox-staging-linux-x86_64-v0.82.0.tar.xz
+        filename: dosbox.tar.xz
+    - xcopy:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/XCOPY.EXE
+        filename: xcopy.exe
 
-    game:
-        game_id: worldofxeen
-        path: $GAMEDIR
+  game:
+    game_id: worldofxeen
+    path: $GAMEDIR
 
-    installer:
-      - write_file:
-          content: '#!/bin/bash
+  installer:
+    - extract:
+        format: gog
+        file: $game
+        args: --gog 
+        dst: $CACHE
+        description: Extracting game files
 
-            src=$1
+    - move:
+        src: $xcopy
+        dst: $GAMEDIR
 
-            dst=$2
-
-            find "$src"  -type f \( -iname "*.pdf" -o 
+    #copy select
+    - execute:
+        command: 'find "$CACHE" -maxdepth 1  -type f \(  -iname "*.pdf" -o 
                                               -iname "BOSS.MM$" -o 
                                               -iname "XEEN.*" -o
                                               -iname "*.EXE" -o
-                                              -iname "*.CC" \) -exec cp {} "$dst" \;'
-          file: $CACHE/selectcopy.sh
-      - chmodx: $CACHE/selectcopy.sh
+                                              -iname "game1.*" -o
+                                              -iname "*.CC"  \) -exec cp {} "$GAMEDIR" \;'
 
-      - write_file:
-          content: '#!/bin/bash
+    - extract:
+        file: $dos
+        dst: $CACHE
+        description: Extracting DOSbox
 
-            src=$1
+    - write_file:
+        content: '[autoexec]
 
-            dst=$2
+          mount C "$GAMEDIR" -t dir
 
-            echo $dst
+          imgmount D "$GAMEDIR/GAME1.GOG" -t iso
 
-            find "$src" -maxdepth 1 -type f -iname "*.ogg" -print0 | 
+          ver set 6 22
 
-                while IFS="" read -r -d "" FILENAME; 
+          D:
 
-                    do
-                        name="${FILENAME##*/}"
-        
-                        mv "$FILENAME" "$dst""/""${name/xeen/Track}";
+          CD GAME
 
-                done
-            '
-          file: $CACHE/copyrename.sh
-      - chmodx: $CACHE/copyrename.sh    
+          C:\xcopy.exe /E *.CC C:\
+          
+          exit'
+        file: $CACHE/MM45.conf
 
-      - extract:
-          format: gog
-          file: $game
-          args: --gog
-          dst: $CACHE
-          description: Extracting game files
-       
-      - execute:
-          file: $CACHE/selectcopy.sh
-          args: $CACHE $GAMEDIR
+    - write_file:  #empty file
+        content: ''
+        file: '$CACHE/dosbox-staging.conf'
 
-      - execute:
-          file: $CACHE/copyrename.sh
-          args: $CACHE/MUSIC $GAMEDIR
+    - execute:
+        command: 'cd $CACHE;
 
-    scummvm:
-        fullscreen: true
+                  touch $CACHE/dosbox-staging.conf;
+
+                  $CACHE/dosbox -conf $CACHE/MM45.conf
+                  '
+
+    - execute:
+        command: 'find "$CACHE/MUSIC" -maxdepth 1 -type f -iname "*.ogg" -print0 | 
+
+              while IFS="" read -r -d "" FILENAME; 
+
+                  do
+                      name="${FILENAME##*/}"
+      
+                      mv "$FILENAME" ""$GAMEDIR"""/""${name/xeen/Track}";
+
+              done
+          '
+
+    - execute:
+        file: /bin/rm
+        args: -r $GAMEDIR/xcopy.exe
+
+  scummvm:
+    fullscreen: true

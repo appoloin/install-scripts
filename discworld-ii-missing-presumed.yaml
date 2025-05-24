@@ -112,6 +112,10 @@ script:
         args: $DISC $GAMEDIR
         file: $CACHE/findrename.sh
 
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
     - insert-disc:
         description: Please insert disc 2
         requires: DW2

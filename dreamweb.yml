@@ -11,23 +11,17 @@ script:
     path: $GAMEDIR
 
   files:
-    - DISC: N/A:Select DREAMWEB.EXE
+    - game: N/A:Select DREAMWEB.EXE
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          dst=$2
-          
-          cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
-
+    #copy everything
     - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $DISC "$GAMEDIR"
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
+
+          cp -avr "$src_path/."  "$GAMEDIR/"
+
+          '    
+
 
     - execute:
         file: chmod

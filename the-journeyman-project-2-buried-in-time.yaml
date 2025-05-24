@@ -14,20 +14,7 @@ script:
     - game: N/A:Select the GOG installer
 
 
-  installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$1
-          
-          find "$src" -maxdepth 1 -type d \( -iname data1 -o
-                                            -iname data2 -o
-                                            -iname data3 \) -exec rm -r {}  \;
-                                            
-          find "$src" -maxdepth 1 -type f \( -iname "*.ico" \) -exec rm {}  \;'
-        file: $CACHE/remove.sh
-    - chmodx: $CACHE/remove.sh   
-  
+  installer: 
     - extract:
         format: gog
         file: $game
@@ -49,9 +36,13 @@ script:
         file: cp 
         args: -r $GAMEDIR/data3/BITDATA $GAMEDIR
 
+    #remove
     - execute:
-        file: $CACHE/remove.sh
-        args: $GAMEDIR
+        command: 'find "$GAMEDIR" -maxdepth 1 -type d \( -iname data1 -o
+                                                        -iname data2 -o
+                                                        -iname data3 \) -exec rm -r {}  \;
+                                            
+          find "$GAMEDIR" -maxdepth 1 -type f \( -iname "*.ico" \) -exec rm {}  \;'
 
   scummvm:
     fullscreen: true

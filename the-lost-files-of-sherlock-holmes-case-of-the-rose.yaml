@@ -14,16 +14,11 @@ script:
     path: $GAMEDIR
   
   installer:
-    - write_file:
-        content: '#!/bin/bash
+    #copy select
+    - execute:
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
 
-          src=$1
-
-          dst=$2
-
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          find "$src_path" -type f \( -iname "chess.pth" -o 
+                  find "$src_path" -type f \( -iname "chess.pth" -o 
                                       -iname "journal.lbv" -o 
                                       -iname "sample.*" -o
                                       -iname "*.dig" -o 
@@ -33,13 +28,13 @@ script:
                                       -iname "*.rrm" -o
                                       -iname "*.snd" -o
                                       -iname "*.txt" -o
-                                      -iname "*.vgs"  \) -exec cp {} "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
+                                      -iname "*.vgs"  \) -exec cp {} "$GAMEDIR" \;'
+
 
     - execute:
-        file: $CACHE/selectcopy.sh
-        args: $game $GAMEDIR
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
 
   scummvm:
     fullscreen: true

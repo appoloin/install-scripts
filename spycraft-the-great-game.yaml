@@ -7,66 +7,45 @@ year: 1996
 
 script:
   files:
-    - DISC1: N/A:Select Disc 1 iso
-    - DISC2: N/A:Select Disc 2 iso
-    - DISC3: N/A:Select Disc 3 iso
+    - game: N/A:Select install 
+    - mt32:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/mt32-roms.7z
+        filename: mt32-roms.7z
+    - gus:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/GUS_external_files.zip
+        filename: gus.zip
 
   game:
     main_file: $GAMEDIR/play.conf
   
   installer:
-    - write_file:
-        content: '#!/bin/bash
+    - extract:
+        format: gog
+        file: $game
+        args: --gog --include app
+        dst: $GAMEDIR
+        description: Extracting game files
 
-          fileID="$1"
+    - extract:
+        file: $gus
+        dst: $GAMEDIR/ULTRASND
 
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
+    - execute:
+        file: 7z
+        args: x  $mt32 -o"$GAMEDIR" -ppassword -y
+
+    #remove
+    - execute:
+        command: 'find "$GAMEDIR" -maxdepth 1  -type d \( -iname app -o
+                                                          -iname commonappdata -o
+                                                          -iname *redist -o
+                                                          -iname scummvm -o
+                                                          -iname dosbox -o
+                                                          -iname *support -o
+                                                          -iname tmp \) -exec rm -r {} \;
+                                            
+          find "$GAMEDIR" -type f \( -iname "goggame*" \) -exec rm {} \;
           '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
-    - execute:
-        file: mkdir
-        args: $GAMEDIR/drive_c $GAMEDIR/drive_d 
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6 $CACHE/GUS.zip
-
-    - extract:
-        file: $CACHE/GUS.zip
-        dst: $GAMEDIR/drive_c/ULTRASND
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
-
-    - extract:
-        file: $CACHE/MT32-ROMS.7z
-        dst:  $GAMEDIR/MT32-ROMS
-
-    - execute:
-        file: cp 
-        args: $DISC1 $GAMEDIR/drive_d/CD1.iso
-    - execute:
-        file: cp 
-        args: $DISC2 $GAMEDIR/drive_d/CD2.iso
-    - execute:
-        file: cp 
-        args: $DISC3 $GAMEDIR/drive_d/CD3.iso
-
 
 
     - write_file:
@@ -82,11 +61,17 @@ script:
 
           [mt32]
 
-            romdir = $GAMEDIR/MT32-ROMS
+            romdir = $GAMEDIR/mt32-roms
 
-         [cpu]
+          [cpu]
 
-            cycles = 25000
+            cpu_cycles = 50000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
       
          [mouse]
 
@@ -99,59 +84,9 @@ script:
           
           [autoexec]
 
-            imgmount D "$GAMEDIR/drive_d/CD1.iso"  "$GAMEDIR/drive_d/CD2.iso"  "$GAMEDIR/drive_d/CD3.iso" -t cdrom
+            mount D  $GAMEDIR/DATA/" -t cdrom
 
-            mount C "$GAMEDIR/drive_c" -t dir -freesize 1024
-
-            d:
-
-            cd dos
-
-            install
-
-            exit'
-        file: $GAMEDIR/setup.conf
-
-    - task:
-        config_file: $GAMEDIR/setup.conf
-        name: dosexec
-        working_dir: $GAMEDIR/drive_c
-
-
-
-    - write_file:
-        content: '[midi]
-
-          mididevice = mt32
-
-          [gus]
-
-            gus= true
-
-            ultradir = C:\ULTRASND
-
-          [mt32]
-
-            romdir = $GAMEDIR/MT32-ROMS
-
-         [cpu]
-
-            cycles = 25000
-      
-         [mouse]
-
-            mouse_capture = onstart   
-            
-            mouse_middle_release=true   
-
-            mouse_sensitivity= 10
-
-          
-          [autoexec]
-
-            imgmount D "$GAMEDIR/drive_d/CD1.iso"  "$GAMEDIR/drive_d/CD2.iso"  "$GAMEDIR/drive_d/CD3.iso" -t cdrom
-
-            mount C "$GAMEDIR/drive_c" -t dir -freesize 1024
+            mount C "$GAMEDIR/" -t dir -freesize 1024
              
             c:
 
@@ -175,19 +110,15 @@ script:
             
             ECHO   2) Setup                                
            
-            ECHO   3) Install
-
             ECHO  -------------------------------------------  
             
-            ECHO   4) exit program                             
+            ECHO   3) exit program                             
             
             ECHO  -------------------------------------------  
 
-            choice /c1234 /s Which program do you want to run? [1-4]: /n 
+            choice /c123 /s Which program do you want to run? [1-3]: /n 
             
-            if errorlevel 4 goto exit
-
-            if errorlevel 3 goto install
+            if errorlevel 3 goto exit
 
             if errorlevel 2 goto setup
             
@@ -200,8 +131,6 @@ script:
 
             c:
 
-            cd spycraft
-
             spydos
 
             goto exit
@@ -213,25 +142,9 @@ script:
 
             C:
 
-            cd spycraft
-            
             setsound
 
             goto launcher
-
-
-          :install
-
-            cls
-
-            D:
-
-            cd dos
-
-            install
-
-            goto launcher
-
 
             :exit
                       

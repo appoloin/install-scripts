@@ -1,6 +1,6 @@
 name:  Sam & Max Hit the Road
 game_slug: sam-max-hit-the-road
-version: Installer
+version: DOS
 slug:  sam_&_max-installer
 runner: scummvm
 year: 1993

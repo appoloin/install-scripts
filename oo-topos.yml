@@ -15,20 +15,13 @@ script:
     - DISC:  N/A:Select the file Novel.exe
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          dst=$2
-          
-          cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
-
+    #copy everything
     - execute:
-        args: $DISC "$GAMEDIR"
-        file: $CACHE/bulkcopy.sh
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
+
+          cp -avr "$src_path/."  "$GAMEDIR"
+
+          '    
 
     - execute:
         args: -R 775  "$GAMEDIR"

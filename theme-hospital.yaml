@@ -1,9 +1,8 @@
 name: Theme Hospital
 game_slug: theme-hospital
-version: Installer
+version: Good Old Games Installer
 slug: theme-hospital-installer
-runner: dosbox
-
+runner: linux
 
 
 script:
@@ -11,25 +10,22 @@ script:
     - game: N/A:Select the file SETUP.EXE
 
   game:
-    main_file: $GAMEDIR/theme-hospital.conf
+    exe: /usr/bin/flatpak
+    args: run com.corsixth.corsixth
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
+    - execute:
+        file: /usr/bin/flatpak
+        args: install flathub -y --noninteractive com.corsixth.corsixth
+        description: Installing with flatpak
+        disable_runtime: true
 
-          src=$1
-          
-          find "$src" -maxdepth 1 -type d \( -iname app -o
-                                            -iname commonappdata -o
-                                            -iname *redist -o
-                                            -iname scummvm -o
-                                            -iname dosbox -o
-                                            -iname *support -o
-                                            -iname tmp \) -exec rm -r {}  \;
-                                            
-          find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
-        file: $CACHE/remove.sh
-    - chmodx: $CACHE/remove.sh
+    - execute:
+        file: /usr/bin/flatpak
+        args: override com.corsixth.corsixth --user --filesystem=$GAMEDIR
+        description: Added GAMEDIR to flatpak permissions
+        disable_runtime: true
+
 
     - extract:
         format: gog
@@ -38,47 +34,16 @@ script:
         dst: $GAMEDIR
         description: Extracting game files
     
+    #remove
     - execute:
-        args: $GAMEDIR
-        file: $CACHE/remove.sh
+        command: 'find "$GAMEDIR" -maxdepth 1  -type d \( -iname app -o
+                                                          -iname commonappdata -o
+                                                          -iname *redist -o
+                                                          -iname scummvm -o
+                                                          -iname dosbox -o
+                                                          -iname *support -o
+                                                          -iname tmp \) -exec rm -r {} \;
+                                            
+          find "$GAMEDIR" -type f \( -iname "goggame*" \) -exec rm {} \;
+          '
  
-    - write_file:
-        content: '[mouse]
-
-            mouse_capture = onstart   
-            
-            mouse_middle_release=true   
-
-            mouse_sensitivity= 15
-
-          [sdl]
-
-            fullscreen=true
-
-            fulldouble=true
-
-            fullresolution=desktop
-
-            windowresolution=desktop
-
-            output=opengl
-
-          [autoexec]
-
-            mount C "$GAMEDIR" -t dir
-
-            mount D "$GAMEDIR" -t dir
-
-            cls 
-
-            ECHO OFF
-
-            C:
-
-            cd HOSPITAL
-            
-            HOSPITAL.EXE
-            
-            exit'
-
-        file: $GAMEDIR/theme-hospital.conf

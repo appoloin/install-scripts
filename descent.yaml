@@ -8,34 +8,30 @@ year: 1994
 script:
   files:
     - game: N/A:Select GOG installer.
+    - addons1: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Descent/d1x-rebirth%20addons.7z.001_FILES.7z.001
+        filename: addons.7z.001
+    - addons2: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Descent/d1x-rebirth%20addons.7z.001_FILES.7z.002
+        filename: addons.7z.002
+    - addons3: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Descent/d1x-rebirth%20addons.7z.001_FILES.7z.003
+        filename: addons.7z.003
+    - addons4: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Descent/d1x-rebirth%20addons.7z.001_FILES.7z.004
+        filename: addons.7z.004
+    - addons5: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Descent/d1x-rebirth%20addons.7z.001_FILES.7z.005
+        filename: addons.7z.005
+    - addons6: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Descent/d1x-rebirth%20addons.7z.001_FILES.7z.006
+        filename: addons.7z.006
 
   game:
-    args: -hogdir .
-    exe: $GAMEDIR/d1x-rebirth
+    exe: /usr/bin/flatpak
+    args: run io.github.dxx_rebirth.dxx-rebirth
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - extract:
         format: gog
         file: $game
@@ -48,26 +44,38 @@ script:
         dst: $GAMEDIR
 
     - execute:
-        file: $CACHE/download.sh
-        args: 1ILoqENazzGE9Wa7AEGo6LUFZqMYToP-G $CACHE/dxx-rebirth-273570-8.tar.xz
-        #https://github.com/luxtorpeda-dev/packages/releases/download/dxx-rebirth-8/dxx-rebirth-273570-8.tar.xz
-
-    - extract:
-        file: $CACHE/dxx-rebirth-273570-8.tar.xz
-        dst: $GAMEDIR
+        file: /usr/bin/flatpak
+        args: install flathub -y --noninteractive io.github.dxx_rebirth.dxx-rebirth
+        description: Installing with flatpak
+        disable_runtime: true
 
     - execute:
-        file: $CACHE/download.sh
-        args: 1khFhdG3N_i890IT3us4QorvI3uB9ZTBn $CACHE/addons.7z.001
-    - execute:
-        file: $CACHE/download.sh
-        args: 1_RmgNEXMN3SGlBKgZv9Khllx7ElX6wZk $CACHE/addons.7z.002
-    - execute:
-        file: $CACHE/download.sh
-        args: 1zEz0nFYEVvUfaJFm_ROF2vsWMFMfHMzi $CACHE/addons.7z.003
-    - execute:
-        file: $CACHE/download.sh
-        args: 1kUsmLU8MJTXMlU2TQqJD2pvd7xcApYw6 $CACHE/addons.7z.004
+        file: /usr/bin/flatpak
+        args: override io.github.dxx_rebirth.dxx-rebirth --user --filesystem=$GAMEDIR
+        description: Added GAMEDIR to flatpak permissions
+        disable_runtime: true
+
+
+    #Move Patch into one folder
+    - merge:
+        src: "$addons1"
+        dst: "$CACHE"
+    - merge:
+        src: "$addons2"
+        dst: "$CACHE"
+    - merge:
+        src: "$addons3"
+        dst: "$CACHE"
+    - merge:
+        src: "$addons4"
+        dst: "$CACHE"
+    - merge:
+        src: "$addons5"
+        dst: "$CACHE"
+    - merge:
+        src: "$addons6"
+        dst: "$CACHE"
+
 
     - execute:
         file: 7z
@@ -79,3 +87,18 @@ script:
     - merge:
         src: $CACHE/d1xr-sc55-music.dxa
         dst: $GAMEDIR
+
+
+
+    - execute:
+        command: 'rm -Rf "$HOME/.var/app/io.github.dxx_rebirth.dxx-rebirth/data/.d1x-rebirth/data/";
+
+                  mkdir "$HOME/.var/app/io.github.dxx_rebirth.dxx-rebirth/";
+
+                  mkdir "$HOME/.var/app/io.github.dxx_rebirth.dxx-rebirth/data/.d1x-rebirth";
+
+                  ln -s -f -n "$GAMEDIR" "$HOME/.var/app/io.github.dxx_rebirth.dxx-rebirth/data/.d1x-rebirth/";
+
+                  mv  "$HOME/.var/app/io.github.dxx_rebirth.dxx-rebirth/data/.d1x-rebirth/descent" "$HOME/.var/app/io.github.dxx_rebirth.dxx-rebirth/data/.d1x-rebirth/data"
+                  '
+

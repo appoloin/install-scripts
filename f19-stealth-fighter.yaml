@@ -1,7 +1,7 @@
 name: F19 Stealth Fighter
-game_slug: f19-stealth-fighter
+game_slug: f-19-stealth-fighter
 version: Good Old Games Installer
-slug: f19-stealth-fighter
+slug: f-19-stealth-fighter
 runner: dosbox
 year: 1988
 
@@ -45,6 +45,17 @@ script:
             mouse_middle_release=true   
 
           mouse_sensitivity= 15
+
+           [cpu]
+
+            cpu_cycles = 3000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 386
+
+            cpu_throttle = on
+
 
              [autoexec]
             

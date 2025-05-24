@@ -8,40 +8,29 @@ year: 1996
 script:
   files:
     - DISC1: N/A:Select Disc iso
+    - win1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/Win311Bottle.7z.001
+        filename: Win311Bottle.7z.001
+    - win2:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/Win311Bottle.7z.002
+        filename: Win311Bottle.7z.002
+
 
   game:
     main_file: $GAMEDIR/play.conf
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 12xs1EbZLNzgiICr6AJZboLHCCLYXyD4X $CACHE/win311.7z
+    #Move Patch into one folder
+    - merge:
+        src: "$win1"
+        dst: "$CACHE"
+    - merge:
+        src: "$win2"
+        dst: "$CACHE"
 
     - execute:
         file: 7z
-        args: x  $CACHE/win311.7z -o"$GAMEDIR" -ppassword -y
+        args: x  $CACHE/Win311Bottle.7z.001 -o"$GAMEDIR" -ppassword -y
 
     - execute:
         file: cp 
@@ -55,53 +44,20 @@ script:
           [mouse]
 
             mouse_capture = onstart  
+
+            mouse_middle_release=true  
+
+            mouse_sensitivity= 15
+        
+          [cpu]
+
+            cpu_cycles = 50000
             
-            mouse_middle_release=true  
+            cpu_cycles_protected = auto
+            
+            cputype = 486
 
-            mouse_sensitivity= 15
-        
-          [cpu]
-
-            cputype = pentium_slow
-          
-          [autoexec]
-
-            mount C "$GAMEDIR/HDD" -t dir
-
-            imgmount D "$GAMEDIR/CDD/CD1.iso" -t cdrom
-
-            SET PATH=%PATH%;C:\WINDOWS;C:\;
-
-            SET TEMP=C:\WINDOWS\TEMP
-
-            C:
-
-            win runexit D:\setup
-              
-            exit'
-        file: $GAMEDIR/setup.conf
-
-    - task:
-        config_file: $GAMEDIR/setup.conf
-        name: dosexec
-        working_dir: $GAMEDIR/HDD
-
-    - write_file:
-        content: '[sblaster]
-
-            irq=5
-
-          [mouse]
-
-            mouse_capture = onstart  
-
-            mouse_middle_release=true  
-
-            mouse_sensitivity= 15
-        
-          [cpu]
-
-            cputype = pentium_slow
+            cpu_throttle = on
           
           [autoexec]
 

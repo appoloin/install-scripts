@@ -8,22 +8,21 @@ year: 1992
 script:
   files:
     - game:  N/A:Select the file Setup.exe
+    - mt32:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/mt32-roms.7z
+        filename: mt32-roms.7z
+
 
   game:
     game_id: elvira2
     path: $GAMEDIR
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
+    #copy select
+    - execute:
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
 
-          src=$1
-
-          dst=$2
-
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          find "$src_path" -type f \( -iname "*.MUS" 
+                           find "$src_path" -type f \( -iname "*.MUS" 
                                       -o -iname "*.SND" 
                                       -o -iname "*.VGA"
                                       -o -iname "GAMEPC"
@@ -35,45 +34,18 @@ script:
                                       -o -iname "STRIPPED.TXT"                                   
                                       -o -iname "TABLES*"
                                       -o -iname "TBLLIST" 
-                                      -o -iname "TEXT*" \) -exec cp {} "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
-
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
+                                      -o -iname "TEXT*" \) -exec cp {} "$GAMEDIR" \;'
 
     - execute:
-        file: $CACHE/selectcopy.sh
-        args: $game $GAMEDIR
+        file: chmod
+        args: -R 775  "$GAMEDIR"
 
     - execute:
-        file: $CACHE/download.sh
-        args: 1e6PIw82-HLpFn27GIjhBskgnWdFijpWg $CACHE/ScummVm-Data-MT32.7z
+        file: 7z
+        args: x  $mt32 -o"$GAMEDIR" -ppassword -y
 
-    - extract:
-        file: $CACHE/ScummVm-Data-MT32.7z
-        dst:  $GAMEDIR/ScummVm-Data-MT32
 
   scummvm:
     fullscreen: true
-    datadir: $GAMEDIR/ScummVm-Data-MT32
+    datadir: $GAMEDIR/mt32-roms
     music-driver: mt32

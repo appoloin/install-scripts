@@ -1,38 +1,31 @@
 name: Town with No Name
 game_slug: town-with-no-name
 version: DOS
-slug: installer
+slug: town-with-no-name
 runner: dosbox
 year: 1992
 
 script:
   files:
-    - $DISC1: N/A:Select CUE file.
+    - $game1: N/A:Select CUE file.
+    - $game2: N/A:Select BIN file.
 
   game:
     main_file: $GAMEDIR/play.conf
   
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          dst=$2
-          
-          cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
-
     - execute:
         file: mkdir
         args: $GAMEDIR/drive_c  $GAMEDIR/drive_d
 
-    - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $DISC1 $GAMEDIR/drive_d/
+    - copy:
+        src: $game1
+        dst: $GAMEDIR/drive_d
 
-     
+    - copy:
+        src: $game2
+        dst: $GAMEDIR/drive_d
+
     - write_file:
         content: '[mouse]
 
@@ -42,6 +35,16 @@ script:
           
             mouse_sensitivity= 15
           
+            [cpu]
+
+            cpu_cycles = 25000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
+
           [autoexec]
 
             mount C "$GAMEDIR/drive_c" -t dir

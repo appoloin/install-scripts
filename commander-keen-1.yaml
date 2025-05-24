@@ -15,17 +15,6 @@ script:
 
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          dst=$2
-          
-          cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
-
     - execute:
         file: /usr/bin/flatpak
         args: install flathub -y --noninteractive io.sourceforge.clonekeenplus
@@ -38,13 +27,26 @@ script:
         description: Added GAMEDIR to flatpak permissions
         disable_runtime: true
 
-
+    #copy everything
     - execute:
-        args: $game $GAMEDIR
-        file: $CACHE/bulkcopy.sh
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
+
+          cp -avr "$src_path/."  "$GAMEDIR"
+
+          '    
 
     - execute:
         command: 'rm -Rf "$HOME/.var/app/io.sourceforge.clonekeenplus/config/CommanderGenius/games/commander-keen-1";
+
+                  mkdir "$HOME/.var/app/io.sourceforge.clonekeenplus/";
+
+                  mkdir "$HOME/.var/app/io.sourceforge.clonekeenplus/config/";
+
+                  mkdir "$HOME/.var/app/io.sourceforge.clonekeenplus/config/CommanderGenius/";
+
+                  mkdir "$HOME/.var/app/io.sourceforge.clonekeenplus/config/CommanderGenius/games/";
+
+                  mkdir "$HOME/.var/app/io.sourceforge.clonekeenplus/config/CommanderGenius/games/commander-keen-1";
 
                   ln -s -f -n "$GAMEDIR" "$HOME/.var/app/io.sourceforge.clonekeenplus/config/CommanderGenius/games/commander-keen-1"
                   '

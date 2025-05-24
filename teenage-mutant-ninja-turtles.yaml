@@ -17,20 +17,13 @@ script:
         file: mkdir
         args: $GAMEDIR/drive_c $GAMEDIR/drive_a 
 
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          dst=$2
-        
-          cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
-
+    #copy everything
     - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $game $GAMEDIR/drive_a
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
+
+          cp -avr "$src_path/."  "$GAMEDIR/drive_a"
+
+          '    
 
     - execute:
         file: chmod
@@ -41,43 +34,18 @@ script:
         content: '[midi]
 
          mididevice = mt32
-        
-          [mouse]
 
-            mouse_capture = onstart   
+          [cpu]
+
+            cpu_cycles = 25000
             
-            mouse_middle_release=true   
-
-            mouse_sensitivity= 15
-        
-          [autoexec]
-
-            mount A "$GAMEDIR/drive_a" -t floppy 
-
-            mount C "$GAMEDIR/drive_c" -t dir
-
-            A:
-
-            autotype -w 0.5 -p 0.3 enter down enter down down down enter enter enter
+            cpu_cycles_protected = auto
             
-            install
-            
-          exit'
-        file: $GAMEDIR/setup.conf
+            cputype = 486
 
-    - task:
-        config_file: $GAMEDIR/setup.conf
-        name: dosexec
-        working_dir: $GAMEDIR/drive_c
+            cpu_throttle = on
 
 
-
-
-    - write_file:
-        content: '[midi]
-
-         mididevice = mt32
-        
           [mouse]
 
             mouse_capture = onstart   

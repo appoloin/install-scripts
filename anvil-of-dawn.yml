@@ -8,54 +8,14 @@ year: 1995
 script:
   files:
     - game: N/A:Select GOG installer
+    - gus:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/GUS_external_files.zip
+        filename: gus.zip
 
   game:
     main_file: $GAMEDIR/anvil.conf
   
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$1
-
-          dst=$2
-
-          find "$src" -maxdepth 1  -type f \( -iname "*.dat" -o 
-                                              -iname "*.exe" -o 
-                                              -iname "*.bat" -o
-                                              -iname "*.BNK" -o
-                                              -iname "*.COM" -o 
-                                              -iname "*.386" -o
-                                              -iname "*.CFG" -o 
-                                              -iname "PATCH*" -o
-                                              -iname "README.*" -o
-                                              -iname "*.INI" -o
-                                              -iname "TEST.*"  \) -exec cp {} "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
-
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - extract:
         format: gog
         file: $game
@@ -63,13 +23,9 @@ script:
         dst: $CACHE
         description: Extracting game files
 
-    - execute:
-        file: $CACHE/download.sh
-        args: 1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6 $CACHE/GUS.zip
-
     - extract:
-        file: $CACHE/GUS.zip
-        dst: $GAMEDIR/ULTRASND
+        file: $gus
+        dst: $GAMEDIR/drive_c/ULTRASND
 
     - execute:
         args: $GAMEDIR/anvil
@@ -83,9 +39,21 @@ script:
         src: $CACHE/DATA
         dst: $GAMEDIR/anvil/DATA
 
+    #remove
     - execute:
-        args: $CACHE $GAMEDIR/anvil
-        file: $CACHE/selectcopy.sh
+        command: 'find "$CACHE" -maxdepth 1  -type f \( -iname "*.dat" -o 
+                                              -iname "*.exe" -o 
+                                              -iname "*.bat" -o
+                                              -iname "*.BNK" -o
+                                              -iname "*.COM" -o 
+                                              -iname "*.386" -o
+                                              -iname "*.CFG" -o 
+                                              -iname "PATCH*" -o
+                                              -iname "README.*" -o
+                                              -iname "*.INI" -o
+                                              -iname "TEST.*"  \) -exec cp {} "$GAMEDIR/anvil" \;
+          '
+
 
     - write_file:
         content: '[gus]
@@ -94,6 +62,7 @@ script:
 
           ultradir = C:\ULTRASND
           
+
           [mouse]
 
            mouse_sensitivity= 30
@@ -104,11 +73,13 @@ script:
      
           [cpu]
 
-          core=dynamic
+            cpu_cycles = 50000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
 
-          cputype=dynamic
-
-          cycles=35000
+            cpu_throttle = on
           
           [sdl]
 

@@ -14,20 +14,6 @@ script:
     path: $GAMEDIR
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$1
-          
-          dst=$2
-
-          find "$src" -maxdepth 1 -type f \( -iname "*.pdf" -o
-                                            -iname "SWORDS.*" -o 
-                                            -iname "SWRD.*" -o
-                                            -iname "XEEN.*" \) -exec cp {} "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
-
     - extract:
         format: gog
         file: $game
@@ -36,8 +22,11 @@ script:
         description: Extracting game files
 
     - execute:
-        args: $CACHE $GAMEDIR 
-        file: $CACHE/selectcopy.sh
+        command: 'find "$CACHE" -type f \(  -iname "*.pdf" -o
+                                            -iname "SWORDS.*" -o 
+                                            -iname "SWRD.*" -o
+                                            -iname "XEEN.*" \) -exec cp {} "$GAMEDIR" \;'
+
 
   scummvm:
     fullscreen: true

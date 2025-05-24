@@ -13,24 +13,18 @@ script:
     main_file: $GAMEDIR/play.conf
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          dst=$2
-          
-          cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
-
     - execute:
         args: $GAMEDIR/drive_c $GAMEDIR/drive_d 
         file: mkdir
 
+
+    #copy everything
     - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $game $GAMEDIR/drive_d
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
+
+          cp -avr "$src_path/."  "$GAMEDIR/drive_d"
+
+          '    
 
     - execute:
         file: chmod
@@ -41,13 +35,17 @@ script:
 
            mididevice = mt32
 
+
           [cpu]
 
-          core=auto
-          
-          cputype=auto
-          
-          cycles=9000
+            cpu_cycles = 25000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
+
           
           [mouse]
 
@@ -59,7 +57,7 @@ script:
 
           [autoexec]
 
-            imgmount D "$GAMEDIR/drive_d/Sleep.cue"
+            imgmount D "$GAMEDIR/drive_d/Sleep.cue" -t cdrom
 
             mount C "$GAMEDIR/drive_c" -t dir
          

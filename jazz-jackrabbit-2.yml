@@ -36,6 +36,13 @@ script:
     - execute:
         command: 'rm -Rf "$HOME/.var/app/tk.deat.Jazz2Resurrection/data/Jazz² Resurrection/Source";
 
+
+                  mkdir "$HOME/.var/app/tk.deat.Jazz2Resurrection/";
+
+                  mkdir "$HOME/.var/app/tk.deat.Jazz2Resurrection/data/";
+
+                  mkdir "$HOME/.var/app/tk.deat.Jazz2Resurrection/data/Jazz² Resurrection/";
+
                   ln -s -f -n "$GAMEDIR" "$HOME/.var/app/tk.deat.Jazz2Resurrection/data/Jazz² Resurrection/Source"
                   '
 

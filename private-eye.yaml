@@ -14,14 +14,9 @@ script:
     path: $GAMEDIR
   
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$1
-
-          dst=$2
-
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+     #copy select
+    - execute:
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
 
           find "$src_path" -maxdepth 1 -type d \( -iname "GLOBAL" -o 
                                       -iname "INFACE" -o 
@@ -40,33 +35,17 @@ script:
                                       -iname "SG" -o
                                       -iname "TS" -o
                                       -iname "VN" -o
-                                      -iname "SUPPORT" \) -exec cp -r {} "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
-
-    - execute:
-        file: $CACHE/selectcopy.sh
-        args: $game $GAMEDIR
+                                      -iname "SUPPORT" \) -exec cp -r {} "$GAMEDIR" \;'
 
     - execute:
         file: chmod
         args: -R 775  "$GAMEDIR"
 
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$1
-                                              
-          find "$src" -type f \( -iname "BPMC_WEB.z" -o
+    - execute:
+        command: 'find "$GAMEDIR" -type f \( -iname "BPMC_WEB.z" -o
                                 -iname "SUPPORT.z" -o
                                 -iname "WIN32S.Z" -o
                                 -iname "WING.Z" \) -exec rm {} \;'
-        file: $CACHE/remove.sh
-    - chmodx: $CACHE/remove.sh
-
-    - execute:
-        args: $GAMEDIR
-        file: $CACHE/remove.sh
 
 
   scummvm:

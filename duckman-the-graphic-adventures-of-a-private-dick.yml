@@ -14,34 +14,24 @@ script:
     path: $GAMEDIR
   
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          dst=$2
-          
-          find "$src" -type f \( -iname DUCKMAN.GAM \) -print  -exec cp {} -r "$dst" \;
-
-          find "$src" -type d \( -iname MUSIC -o
-                                 -iname SFX -o
-                                 -iname VIDEO -o
-                                 -iname VOICE \) -print  -exec cp {} -r "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
-
     - extract:
         file: $DISC1 
         dst:  $CACHE
 
+     #copy select
+    - execute:
+        command: 'find "$CACHE" -type f \( -iname DUCKMAN.GAM \) -print  -exec cp {} -r "$GAMEDIR" \;
+
+          find "$CACHE" -type d \( -iname MUSIC -o
+                                 -iname SFX -o
+                                 -iname VIDEO -o
+                                 -iname VOICE \) -print  -exec cp {} -r "$GAMEDIR" \;'
+
+
+
     - execute:
         file: chmod
         args: -R 775  "$GAMEDIR"
-
-    - execute:
-        file: $CACHE/selectcopy.sh
-        args: $CACHE $GAMEDIR
       
-
   scummvm:
     fullscreen: true

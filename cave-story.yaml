@@ -1,9 +1,10 @@
 name: Cave Story
 game_slug: cave-story
-version: Installer
+version: Good Old Games Installer
 slug: cave-story
 runner: wine
- 
+year: 2011
+
 script:
   game:
     exe: $GAMEDIR/drive_c/GOG Games/Cave Story +/CaveStory+.exe
@@ -23,7 +24,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-

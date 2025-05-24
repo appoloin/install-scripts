@@ -1,9 +1,9 @@
-name: Harvester
-game_slug: harvester
+name: Warcraft - Orcs Vs Humans
+game_slug: warcraft-orcs-humans
 version: Good Old Games Installer
-slug: harvester
-runner: dosbox
-year: 1996
+slug: warcraft-orcs-humans
+runner: wine
+year: 1994
 
 script:
   game:
@@ -63,7 +63,7 @@ script:
 
           [gus]
 
-            gus      = true
+            gus      = false
 
             ultradir = C:\ULTRASND
 
@@ -115,7 +115,7 @@ script:
 
           ECHO  -------------------------------------------  
           
-          ECHO                Harvester
+          ECHO        Warcraft Orcs vs Humans
           
           ECHO  -------------------------------------------  
           
@@ -144,7 +144,7 @@ script:
 
           c:
 
-          harvest.exe
+          war.exe
 
           goto exit
 
@@ -155,7 +155,7 @@ script:
 
           c:
 
-          setsound.bat
+          setup
           
           goto launcher
 
@@ -164,8 +164,4 @@ script:
           
           exit'
         file: $GAMEDIR/play.conf    
-
-
-
-
 

@@ -38,6 +38,16 @@ script:
 
             mouse_sensitivity= 15
 
+          [cpu]
+
+            cpu_cycles = 3000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 386
+
+            cpu_throttle = on
+
 
           [autoexec]
 

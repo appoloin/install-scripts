@@ -10,7 +10,7 @@ script:
     - DISC1:  N/A:Select ISO
 
   game:
-    game_id: baseball2003 
+    game_id: football
     path: $GAMEDIR
   
   installer:

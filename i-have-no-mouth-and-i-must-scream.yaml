@@ -8,28 +8,16 @@ year: 1995
 
 script:
   files:
-    - game: N/A:Select the intall.exe file
+    - DISC1:  N/A:Select ISO
 
   game:
     game_id: ihnm
     path: $GAMEDIR
   
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          dst=$2
-          
-          find "$src" -type f \( -iname "*.res" -o 
-                                      -iname "patch.re_" \) -exec cp {} "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
-
-    - execute:
-        file: $CACHE/selectcopy.sh
-        args: $game $GAMEDIR
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR
 
     - execute:
         file: chmod

@@ -10,34 +10,14 @@ script:
     - DISC1: N/A:Select Disc 1 iso
     - DISC2: N/A:Select Disc 2 iso
     - DISC3: N/A:Select Disc 3 iso
-
+    - xcopy:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/XCOPY.EXE
+        filename: xcopy.exe
 
   game:
     main_file: $GAMEDIR/play.conf
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - execute:
         file: mkdir
         args: $GAMEDIR/drive_c  $GAMEDIR/drive_c/DOWN  $GAMEDIR/drive_c/DOWN/FONT 
@@ -46,15 +26,9 @@ script:
         file: mkdir
         args: $GAMEDIR/drive_c/DOWN/CHANGECD $GAMEDIR/drive_c/DOWN/ITOON $GAMEDIR/drive_d
 
-    - execute:
-        file: $CACHE/download.sh
-        args: 1V0jo7DXyHAwU3mp3ZCWVv0RciHXpAEEj $CACHE/xcopy.7z
-
-    - execute:
-        file: 7z
-        args: x $CACHE/xcopy.7z -o"$GAMEDIR/drive_c" -ppassword -y
-
-
+    - move:
+        src: $xcopy
+        dst: $GAMEDIR/drive_c"
 
     - execute:
         file: cp 
@@ -66,52 +40,6 @@ script:
         file: cp 
         args: $DISC3 $GAMEDIR/drive_d/CD3.iso
 
-    - write_file:
-        content: '[gus]
-
-          gus      = true
-
-          [sdl]
-
-            mouse_capture=onclick   
-            
-            mouse_middle_release=true 
-          
-            mouse_sensitivity= 15
-
-          [autoexec]
-
-            ver set 6 22
-
-            imgmount D "$GAMEDIR/drive_d/CD1.iso"   "$GAMEDIR/drive_d/CD2.iso"   "$GAMEDIR/drive_d/CD3.iso"  -t cdrom
-
-            mount C "$GAMEDIR/drive_c" -t dir
-
-            C:\
-
-            xcopy.exe D:\ITOON c:\down\itoon
-          
-            xcopy.exe D:\CHANGECD c:\down\changecd
-
-            xcopy.exe D:\FONT c:\down\font
-
-            xcopy.exe D:\DID.EXE c:\down\
-            
-            xcopy.exe D:\DOS4GW.EXE c:\down\
-          
-            xcopy.exe D:\HMIDET.386 c:\down\
-
-            xcopy.exe D:\HMIDRV.386 c:\down\
-
-            xcopy.exe  D:\PLAYDID.BAT c:\down\
-
-            exit'
-        file: $GAMEDIR/setup.conf
-
-    - task:
-        config_file: $GAMEDIR/setup.conf
-        name: dosexec
-        working_dir: $GAMEDIR/drive_c
 
     - write_file:
         content: '[gus]
@@ -125,6 +53,16 @@ script:
             mouse_middle_release=true 
 
            mouse_sensitivity= 15
+
+          [cpu]
+
+            cpu_cycles = 50000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
 
 
           [autoexec]

@@ -10,30 +10,19 @@ script:
       - game:  N/A:Select the file *.stk
 
     game:
-        game_id: ween
-        path: $GAMEDIR
+      game_id: ween
+      path: $GAMEDIR
 
     installer:
-    - write_file:
-        content: '#!/bin/bash
+       #copy select
+      - execute:
+          command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
 
-            src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+                  find "$src_path" -type f \( -iname "*.stk" \) -exec cp {} "$GAMEDIR" \;'
 
-            dst=$2
-
-            src_path=
-
-            find "$src" -type f \( -iname "*.stk" \) -exec cp {} "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
-
-    - execute:
-        file: $CACHE/selectcopy.sh
-        args: $game $GAMEDIR
-
-    - execute:
-        file: chmod
-        args: -R 775  "$GAMEDIR"
+      - execute:
+          file: chmod
+          args: -R 775  "$GAMEDIR"
 
 scummvm:
     fullscreen: true

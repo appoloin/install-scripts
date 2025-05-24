@@ -1,7 +1,7 @@
 name: Sherlock Holmes - Another Bow
-game_slug: sherlock-holmes-another-bow
+game_slug: sherlock-holmes-in-another-bow
 version: DOS
-slug:   installer
+slug: sherlock-holmes-in-another-bow
 runner: dosbox
 year: 1985
 
@@ -17,20 +17,14 @@ script:
         file: mkdir
         args: $GAMEDIR/drive_c  $GAMEDIR/drive_c/bow
 
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          dst=$2
-          
-          cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
-
+    #copy everything
     - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $game $GAMEDIR/drive_c/bow
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
+
+          cp -avr "$src_path/."  "$GAMEDIR/drive_c/bow"
+
+          '    
+
 
     - write_file:
         content: '[mouse]
@@ -40,6 +34,16 @@ script:
             mouse_middle_release=true   
 
             mouse_sensitivity= 15
+
+           [cpu]
+
+            cpu_cycles = 1000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 386
+
+            cpu_throttle = on
 
           [autoexec]
 

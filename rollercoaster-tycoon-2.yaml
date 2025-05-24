@@ -1,30 +1,33 @@
 name: Rollercoaster Tycoon 2
 game_slug: rollercoaster-tycoon-2
-version: Installer
+version: Good Old Games Installer
 slug: rollercoaster-tycoon-2
-runner: wine
+runner: linux
 
 script:
   game: 
-    exe: $GAMEDIR/drive_c/Program Files (x86)/GOGcom/RollerCoaster Tycoon/rc2.exe
-    prefix: $GAMEDIR
+    exe: /usr/bin/flatpak
+    args: run io.openrct2.OpenRCT2
 
   files:
-    - setup: N/A:Select installer
+    - game: N/A:Select installer
 
   installer:
-    - task:
-        name: create_prefix
-        install_mono: false
-        install_gecko: false
-        prefix: $GAMEDIR
+    - execute:
+        file: /usr/bin/flatpak
+        args: install flathub -y --noninteractive io.openrct2.OpenRCT2
+        description: Installing with flatpak
+        disable_runtime: true
 
-    - task:
-        executable: $setup
-        name: wineexec
-        prefix: $GAMEDIR
+    - execute:
+        file: /usr/bin/flatpak
+        args: override io.openrct2.OpenRCT2 --user --filesystem=$GAMEDIR
+        description: Added GAMEDIR to flatpak permissions
+        disable_runtime: true
 
-  wine:
-    Desktop: true
-
-
+    - extract:
+        format: gog
+        file: $game
+        args: --gog 
+        dst: $GAMEDIR
+        description: Extracting game files

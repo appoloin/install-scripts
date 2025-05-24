@@ -1,7 +1,7 @@
-name: Jane Advanced Strike Fighters
-game_slug: janes-advanced-strike-fighters
+name: Jungle Strike
+game_slug: jungle-strike
 version: DOS
-slug: janes-advanced-strike-fighters
+slug: jungle-strike
 runner: dosbox
 year: 1996
 

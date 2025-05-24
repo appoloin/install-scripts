@@ -1,16 +1,16 @@
-name: Medal of Honor - Warfighter
-game_slug: medal-of-honor-warfighter
-version: Windows Installer
-slug: medal-of-honor-warfighter
+name: Alone in the Dark 5
+game_slug: alone-in-the-dark
+version: MagiPacks Installer
+slug: alone-in-the-dark
 runner: wine
-year: 2011
+year: 2008
 
 script:
   files:
     - setup: N/A:Select setup file
 
   game:
-    exe: "$GAMEDIR/drive_c/Games/Medal of Honor Warfighter/MOHW.exe"
+    exe: "$GAMEDIR/drive_c/MagiPacks/Alone in the Dark 5/Alone.exe"
     prefix: $GAMEDIR
 
   installer:
@@ -24,4 +24,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-

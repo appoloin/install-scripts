@@ -8,50 +8,14 @@ year: 1993
 script:
   files:
     - game:  N/A:Select GOG installer
+    - mt32:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/mt32-roms.7z
+        filename: mt32-roms.7z
 
   game:
     main_file: $GAMEDIR/play.conf
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$1
-          
-          find "$src" -maxdepth 1 -type d \( -iname app -o
-                                            -iname commonappdata -o
-                                            -iname *redist -o
-                                            -iname scummvm -o
-                                            -iname dosbox -o
-                                            -iname *support -o
-                                            -iname tmp \) -exec rm -r {}  \;
-                                            
-          find "$src" -maxdepth 1 -type f \( -iname "goggame*" \) -exec rm {}  \;'
-        file: $CACHE/remove.sh
-    - chmodx: $CACHE/remove.sh
-
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
- 
     - extract:
         format: gog
         file: $game
@@ -63,27 +27,43 @@ script:
         src: $GAMEDIR/INDARK2/INDARK2.CFG
         dst: $GAMEDIR/INDARK2/INDARK2.CFG.OLD
             
+    #remove
     - execute:
-        args: $GAMEDIR
-        file: $CACHE/remove.sh
-
+        command: 'find "$GAMEDIR" -maxdepth 1  -type d \( -iname app -o
+                                                          -iname commonappdata -o
+                                                          -iname *redist -o
+                                                          -iname scummvm -o
+                                                          -iname dosbox -o
+                                                          -iname *support -o
+                                                          -iname tmp \) -exec rm -r {} \;
+                                            
+          find "$GAMEDIR" -type f \( -iname "goggame*" \) -exec rm {} \;
+          '
+          
     - execute:
-        file: $CACHE/download.sh
-        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
-
-    - extract:
-        file: $CACHE/MT32-ROMS.7z
-        dst:  $GAMEDIR/MT32-ROMS
+        file: 7z
+        args: x  $mt32 -o"$GAMEDIR" -ppassword -y
 
 
-    - write_file:
-        content: '[midi]
+    - write_file: 
+        content: '[cpu]
 
-          mididevice = mt32
+            cpu_cycles = 25000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
+
+          [midi]
+
+           mididevice = mt32
 
           [mt32]
 
-          romdir = $GAMEDIR/MT32-ROMS
+            romdir = $GAMEDIR/mt32-roms
+
 
           [mouse]
 

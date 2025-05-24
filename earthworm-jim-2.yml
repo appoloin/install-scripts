@@ -13,22 +13,6 @@ script:
     main_file: $GAMEDIR/play.conf
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$1
-
-          dst=$2
-
-          find "$src"  -maxdepth 1  -type f \(  -iname "EWJ2.DAT" -o
-                                                -iname "EWJ2.ICO" -o
-                                                -iname "EWJ2.ID" -o
-                                                -iname "*.EXE" -o 
-                                                -iname "sound.*" -o
-                                                -iname "WORMO.HLP" \) -exec cp {} "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
-
     - extract:
         format: gog
         file: $game
@@ -40,9 +24,15 @@ script:
         file: mkdir
         args: $GAMEDIR/EWJ $GAMEDIR/drie_d    
     
+    #copy select
     - execute:
-        file: $CACHE/selectcopy.sh
-        args: $CACHE/app $GAMEDIR/EWJ
+        command: ' find "$CACHE/app"  -maxdepth 1  -type f \(  -iname "EWJ2.DAT" -o
+                                                -iname "EWJ2.ICO" -o
+                                                -iname "EWJ2.ID" -o
+                                                -iname "*.EXE" -o 
+                                                -iname "sound.*" -o
+                                                -iname "WORMO.HLP" \) -exec cp {} "$GAMEDIR/EWJ" \;'
+
 
     - copy:
         src: $CACHE/app/EWJ2.inst
@@ -65,6 +55,17 @@ script:
 
               mouse_sensitivity= 15
     
+          [cpu]
+
+            cpu_cycles = 50000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
+
+
           [sdl]
 
             fullresolution=desktop

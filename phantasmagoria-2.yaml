@@ -1,6 +1,6 @@
 name:  Phantasmagoria 2
 game_slug:  phantasmagoria-2
-version: Installer
+version: DOS
 slug:   phantasmagoria-2-installer
 runner: scummvm
 
@@ -11,34 +11,21 @@ script:
     path: $GAMEDIR
 
   files:
-    - DISC1: N/A:Please select resmap.001
-    - DISC2: N/A:Please select resmap.002
-    - DISC3: N/A:Please select resmap.003
-    - DISC4: N/A:Please select resmap.004
-    - DISC5: N/A:Please select resmap.005
+    - DISC1: N/A:Please select ISO1
+    - DISC2: N/A:Please select ISO2 
+    - DISC3: N/A:Please select ISO3 
+    - DISC4: N/A:Please select ISO4 
+    - DISC5: N/A:Please select ISO5 
 
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          src=$1
-
-          dst=$2
-          
-          src_path=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          cp -avr "$src_path/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
-        
-    - execute:
-        args: $DISC1 $GAMEDIR
-        file: $CACHE/bulkcopy.sh
+    - extract:
+        file: $DISC1 
+        dst:  $GAMEDIR
 
     - execute:
-        args: -R 775  "$GAMEDIR"
         file: chmod
+        args: -R 775  "$GAMEDIR"
 
     - execute:
         args: $GAMEDIR/RESOURCE.AUD  $GAMEDIR/RESAUD.001
@@ -48,66 +35,73 @@ script:
         args: $GAMEDIR/RESOURCE.SFX  $GAMEDIR/RESSFX.001
         file: mv
 
-    - execute:
-        args: $DISC2 $GAMEDIR
-        file: $CACHE/bulkcopy.sh
+    - extract:
+        file: $DISC2 
+        dst:  $GAMEDIR
 
     - execute:
-        args: -R 775  "$GAMEDIR"
         file: chmod
-
-    - execute:
-        args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.002
-        file: mv
-
-    - execute:
-        args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.002
-        file: mv
-
-    - execute:
-        args: $DISC3 $GAMEDIR
-        file: $CACHE/bulkcopy.sh
-
-    - execute:
         args: -R 775  "$GAMEDIR"
+
+
+    - execute:
+        args: $GAMEDIR/RESOURCE.AUD  $GAMEDIR/RESAUD.002
+        file: mv
+
+    - execute:
+        args: $GAMEDIR/RESOURCE.SFX  $GAMEDIR/RESSFX.002
+        file: mv
+
+    - extract:
+        file: $DISC3
+        dst:  $GAMEDIR
+
+    - execute:
         file: chmod
-
-    - execute:
-        args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.003
-        file: mv
-
-    - execute:
-        args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.003
-        file: mv
-
-    - execute:
-        args: $DISC4 $GAMEDIR
-        file: $CACHE/bulkcopy.sh
-
-    - execute:
         args: -R 775  "$GAMEDIR"
+
+
+    - execute:
+        args: $GAMEDIR/RESOURCE.AUD  $GAMEDIR/RESAUD.003
+        file: mv
+
+    - execute:
+        args: $GAMEDIR/RESOURCE.SFX  $GAMEDIR/RESSFX.003
+        file: mv
+
+    - extract:
+        file: $DISC4
+        dst:  $GAMEDIR
+
+    - execute:
         file: chmod
-
-    - execute:
-        args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.004
-        file: mv
-
-    - execute:
-        args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.004
-        file: mv
-
-    - execute:
-        args: $DISC5 $GAMEDIR
-        file: $CACHE/bulkcopy.sh
-
-    - execute:
         args: -R 775  "$GAMEDIR"
+
+
+    - execute:
+        args: $GAMEDIR/RESOURCE.AUD  $GAMEDIR/RESAUD.004
+        file: mv
+
+    - execute:
+        args: $GAMEDIR/RESOURCE.SFX  $GAMEDIR/RESSFX.004
+        file: mv
+
+    - extract:
+        file: $DISC5
+        dst:  $GAMEDIR
+
+    - execute:
         file: chmod
+        args: -R 775  "$GAMEDIR"
+
 
     - execute:
-        args: $GAMEDIR/resource.aud  $GAMEDIR/RESAUD.005
+        args: $GAMEDIR/RESOURCE.AUD  $GAMEDIR/RESAUD.005
         file: mv
 
     - execute:
-        args: $GAMEDIR/resource.sfx  $GAMEDIR/RESSFX.005
+        args: $GAMEDIR/RESOURCE.SFX  $GAMEDIR/RESSFX.005
         file: mv
+
+  scummvm:
+    fullscreen: true

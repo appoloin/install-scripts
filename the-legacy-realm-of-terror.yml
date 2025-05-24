@@ -1,7 +1,7 @@
 name: The Legacy Realm of Terror
 game_slug: the-legacy-realm-of-terror
 version: Good Old Games Installer
-slug: INSTALLER
+slug: the-legacy-realm-of-terror
 runner: dosbox
 year: 1993
 
@@ -13,21 +13,31 @@ script:
     main_file: $GAMEDIR/play.conf
   
   installer:
-    - write_file:
-        content: '#!/bin/bash
+    - extract:
+        format: gog
+        file: $game
+        args: --gog 
+        dst: $CACHE
+        description: Extracting game files
 
-            src=$1
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/terror
 
-            dst=$2
-                    
-            find "$src" -maxdepth 1  -type d \( -iname "animatio" -o 
+    - copy:
+        dst: $GAMEDIR
+        src: $CACHE/MANUAL.PDF
+
+    #copy select
+    - execute:
+        command: 'find "$CACHE" -maxdepth 1  -type d \( -iname "animatio" -o 
                                                 -iname "*configs" -o 
                                                 -iname "eng" -o                                       
                                                 -iname "ger" -o  
                                                 -iname "text" -o  
-                                                -iname "fra"  \) -exec cp {} -r "$dst" \;
+                                                -iname "fra"  \) -exec cp {} -r "$GAMEDIR/terror" \;
 
-            find "$src" -maxdepth 1  -type f \( -iname "*.bin" -o 
+            find "$CACHE" -maxdepth 1  -type f \( -iname "*.bin" -o 
                                                 -iname "*.cat" -o 
                                                 -iname "*.rsc" -o 
                                                 -iname "*.rdf" -o  
@@ -44,28 +54,8 @@ script:
                                                 -iname "README*" -o
                                                 -iname "*.com" -o
                                                 -iname "outro.*" -o                                     
-                                                -iname "*.exe"  \) -exec cp {} "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh
-
-    - extract:
-        format: gog
-        file: $game
-        args: --gog 
-        dst: $CACHE
-        description: Extracting game files
-
-    - execute:
-        file: mkdir
-        args: $GAMEDIR/terror
-
-    - copy:
-        dst: $GAMEDIR
-        src: $CACHE/MANUAL.PDF
-
-    - execute:
-        file: $CACHE/selectcopy.sh
-        args: $CACHE $GAMEDIR/terror
+                                                -iname "*.exe"  \) -exec cp {}  "$GAMEDIR/terror" \;
+              '
 
     - write_file:
         content: '[sdl]
@@ -77,6 +67,16 @@ script:
           fullscreen=true
 
           output=opengl
+
+          [cpu]
+
+            cpu_cycles = 25000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
 
           [mouse]
 

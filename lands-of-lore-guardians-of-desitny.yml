@@ -8,23 +8,37 @@ year: 1997
 script:
   files:
     - game: N/A:Select GOG installer.
+    - mt32:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/mt32-roms.7z
+        filename: mt32-roms.7z
 
   game:
       main_file: $GAMEDIR/play.conf
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
+    - extract:
+        format: gog
+        file: $game
+        args: --gog --include "app/Lands of Lore 2" 
+        dst: $GAMEDIR
+        description: Extracting game files
 
-          src=$1
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/lore
 
-          dst=$2
+    - copy:
+        src: $CACHE/Lands of Lore 2/manual.pdf
+        dst: $GAMEDIR
 
-          find "$src" -maxdepth 1 -type d \( -iname "DAT" -o 
+
+    #copy select
+    - execute:
+        command: 'find "$CACHE/Lands of Lore 2" -maxdepth 1 -type d \( -iname "DAT" -o 
                                             -iname "SAVEGAME" -o 
-                                            -iname "WOMS" \) -exec cp -r {} "$dst" \;
+                                            -iname "WOMS" \) -exec cp -r {} "$GAMEDIR/lore" \;
 
-          find "$src" -maxdepth 1 -type f \( -iname "*.dll" -o 
+          find "$CACHE/Lands of Lore 2" -maxdepth 1 -type f \( -iname "*.dll" -o 
                                             -iname "*.mix" -o 
                                             -iname "*.LS*" -o
                                             -iname "*.TRR" -o
@@ -35,68 +49,25 @@ script:
                                             -iname "*.DAT" -o
                                             -iname "*.SHP" -o
                                             -iname "*.INI" -o
-                                            -iname "*.HMI" \) -exec cp {} "$dst" \;'
-        file: $CACHE/selectcopy.sh
-    - chmodx: $CACHE/selectcopy.sh 
+                                            -iname "*.HMI" \) -exec cp {} "$GAMEDIR/lore" \;'
 
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
-    - extract:
-        format: gog
-        file: $game
-        args: --gog --include "app/Lands of Lore 2" 
-        dst: $CACHE
-        description: Extracting game files
 
     - execute:
-        file: mkdir
-        args: $GAMEDIR/lore
-
-    - execute:
-        file: $CACHE/selectcopy.sh
-        args: "'$CACHE/Lands of Lore 2'  '$GAMEDIR/lore'"
-
-    - copy:
-        src: $CACHE/Lands of Lore 2/manual.pdf
-        dst: $GAMEDIR
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
-
-    - extract:
-        file: $CACHE/MT32-ROMS.7z
-        dst:  $GAMEDIR/MT32-ROMS
+        file: 7z
+        args: x  $mt32 -o"$GAMEDIR" -ppassword -y
 
 
     - write_file:
-        content: '[midi]
+        content: '[cpu]
 
-          mididevice = mt32
+            cpu_cycles = 50000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
 
-          [mt32]
+            cpu_throttle = on
 
-            romdir = $GAMEDIR/MT32-ROMS
 
          [sdl]
                     
