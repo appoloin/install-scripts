@@ -3,7 +3,7 @@ game_slug:  spider-man-the-sinister-six
 version: Windows Installer
 slug: spider-man-the-sinister-six
 runner: scummvm
-
+year: 1996
 
 script:
   files:

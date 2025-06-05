@@ -3,7 +3,7 @@ game_slug: loom
 version: FM Towns
 slug: loom
 runner: scummvm
-
+year: 1990
 
 
 script:

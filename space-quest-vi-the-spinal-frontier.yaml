@@ -3,7 +3,7 @@ game_slug: space-quest-6-the-spinal-frontier
 version: Good Old Games Installer
 slug:  space-quest-6-the-spinal-frontier
 runner: scummvm
-
+year: 1996
 
 script:
   files:

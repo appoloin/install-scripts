@@ -3,7 +3,7 @@ game_slug: the-pawn
 version: Installer
 slug: the-pawn
 runner: scummvm
-
+year: 1989
 
 script:
   files:

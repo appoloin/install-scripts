@@ -8,34 +8,18 @@ year: 1995
 script:
   files:
     - DISC1: N/A:Select ISO
+    - mt32:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/mt32-roms.7z
+        filename: mt32-roms.7z
+    - gus:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/GUS_external_files.zip
+        filename: gus.zip
+
 
   game:
     main_file: $GAMEDIR/play.conf
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
-
     - execute:
         file: mkdir
         args: $GAMEDIR/drive_c $GAMEDIR/drive_d 
@@ -44,50 +28,14 @@ script:
         file: cp 
         args: $DISC1 $GAMEDIR/drive_d/CD1.iso
 
-    - execute:
-        file: $CACHE/download.sh
-        args: 1uzZQeWwDi8KMWpVZA96cJrHMeyKqYbG6 $CACHE/GUS.zip
-
     - extract:
-        file: $CACHE/GUS.zip
+        file: $gus
         dst: $GAMEDIR/drive_c/ULTRASND
 
     - execute:
-        file: $CACHE/download.sh
-        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
-
-    - extract:
-        file: $CACHE/MT32-ROMS.7z
-        dst:  $GAMEDIR/MT32-ROMS
-
-
-    - write_file:
-        content: '[mouse]
-
-            mouse_capture = onstart  
-            
-            mouse_middle_release=true  
-
-            mouse_sensitivity= 15
-
-        
-         [autoexec]
-
-          mount C "$GAMEDIR/drive_c" -t dir
-
-          imgmount D "$GAMEDIR/drive_d/CD1.iso" -t cdrom
-
-          d:
-       
-          install
-          
-          exit'
-        file: $GAMEDIR/setup.conf
-
-    - task:
-        config_file: $GAMEDIR/Chronomaster-setup.conf
-        name: dosexec
-        working_dir: $GAMEDIR/drive_c
+        file: 7z
+        args: x  $mt32 -o"$GAMEDIR" -ppassword -y
+    
 
     - write_file:
         content: '[gus]
@@ -102,8 +50,18 @@ script:
     
           [mt32]
 
-            romdir = $GAMEDIR/MT32-ROMS
+            romdir = $GAMEDIR/mt32-roms
          
+          [cpu]
+
+            cpu_cycles = 50000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
+
          [mouse]
 
             mouse_capture = onstart  

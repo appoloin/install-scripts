@@ -1,0 +1,178 @@
+name: Noir - A Shadowy Thriller
+game_slug: noir-a-shadowy-thriller
+version: DOS
+slug: noir-a-shadowy-thriller
+runner: dosbox
+year: 1996
+
+
+script:
+  files:
+    - DISC1: N/A:Select the ISO1
+    - DISC2: N/A:Select the ISO2
+    - win1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/Win311Bottle.7z.001
+        filename: Win311Bottle.7z.001
+    - win2:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/Win311Bottle.7z.002
+        filename: Win311Bottle.7z.002
+
+  game:
+    main_file: $GAMEDIR/play.conf
+
+  installer:
+    #Move Patch into one folder
+    - merge:
+        src: "$win1"
+        dst: "$CACHE"
+    - merge:
+        src: "$win2"
+        dst: "$CACHE"
+
+    - execute:
+        file: 7z
+        args: x  $CACHE/Win311Bottle.7z.001 -o"$GAMEDIR" -ppassword -y
+
+
+    - execute:
+        file: cp 
+        args: $DISC1 $GAMEDIR/CDD/CD1.iso
+    - execute:
+        file: cp 
+        args: $DISC2 $GAMEDIR/CDD/CD2.iso
+
+    - write_file:
+        content: '[sblaster]
+
+            irq=5
+
+         [mouse]
+
+            mouse_capture = onstart  
+            
+            mouse_middle_release=true  
+
+            mouse_sensitivity= 15
+
+          [cpu]
+
+            cpu_cycles = 50000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
+
+
+          [autoexec]
+
+            mount C "$GAMEDIR/HDD" -t dir
+
+            mount D "$GAMEDIR/CDD/CD1.iso" -t iso
+
+            mount E "$GAMEDIR/CDD/CD2.iso" -t iso
+
+            SET PATH=%PATH%;C:\WINDOWS;C:\runexit
+
+            SET TEMP=C:\WINDOWS\TEMP
+
+          ECHO OFF
+
+          goto launcher
+
+          :launcher
+
+          cls 
+
+          ECHO  -------------------------------------------  
+          
+          ECHO      Noir A Shadow Thriller
+          
+          ECHO  -------------------------------------------  
+          
+          ECHO   1) Play    
+          
+          ECHO   2) Setup                                
+          
+          ECHO  -------------------------------------------  
+          
+          ECHO   3) Exit                              
+          
+          ECHO  -------------------------------------------  
+
+          choice /c123 /s Which program do you want to run? [1-3]: /n 
+          
+          if errorlevel 3 goto exit
+                    
+          if errorlevel 2 goto setup
+          
+          if errorlevel 1 goto game
+
+
+          :game
+
+          cls
+
+          win    
+          
+          goto launcher
+
+
+          :setup
+
+          cls
+
+          ECHO  -------------------------------------------  
+
+          ECHO                   SETUP
+
+          ECHO  -------------------------------------------  
+
+          ECHO   1) Install Game    
+
+          ECHO   2) System
+
+          ECHO  -------------------------------------------  
+
+          ECHO   3) Main Menu                                
+
+          ECHO  -------------------------------------------  
+
+          choice /c123 /s Which program do you want to run? [1-3]: /n 
+
+
+          if errorlevel 3 goto launcher
+
+          if errorlevel 2 goto system
+
+          if errorlevel 1 goto GameInstall
+
+
+
+          :GameInstall
+
+          cls
+
+          C:
+
+          win D:\install
+
+          goto setup
+
+
+          :system
+
+          CLS 
+
+          C:
+
+          call System.bat
+
+          goto setup
+
+
+          :exit
+          
+          exit'
+        file: $GAMEDIR/play.conf

@@ -1,0 +1,34 @@
+name: The Legend of the Prophet and the Assassin
+game_slug: the-legend-of-the-prophet-and-the-assassin
+version: Good Old Games Installer
+slug: the-legend-of-the-prophet-and-the-assassin
+runner: wine
+year: 2000
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files (x86)/GOG.com/Beyond Atlantis/Game.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: quartz icodecs
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  system:
+    single_cpu: true

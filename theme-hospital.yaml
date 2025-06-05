@@ -3,7 +3,7 @@ game_slug: theme-hospital
 version: Good Old Games Installer
 slug: theme-hospital-installer
 runner: linux
-
+year: 1997
 
 script:
   files:

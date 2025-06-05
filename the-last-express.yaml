@@ -1,0 +1,66 @@
+name: The Last Express
+game_slug: the-last-express 
+version: Good Old Games Installer
+slug:  the-last-express 
+runner: dosbox
+year: 1997
+
+script:
+  game: 
+    main_file: $GAMEDIR/play.conf
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - extract:
+        format: gog
+        file: $setup
+        args: --gog 
+        dst: $GAMEDIR
+        description: Extracting game files
+        
+    - write_file:
+        content: '[sdl]
+
+          fullresolution=desktop
+
+          windowresolution=original
+
+          fullscreen=true
+
+          output=opengl
+
+
+          [cpu]
+
+            cpu_cycles = 50000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
+
+
+         [render]
+
+           aspect=true
+
+           scaler=normal2x
+
+
+         [autoexec]
+        
+          mount C "$GAMEDIR/" -t dir
+
+          mount D "$GAMEDIR/data" -t cdrom
+
+          c:
+
+          express.exe
+
+          exit'
+        file: $GAMEDIR/play.conf
+
+

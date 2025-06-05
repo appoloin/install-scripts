@@ -2,7 +2,7 @@ name: Castle Master
 game_slug: castle-master
 version: DOS
 slug:   castle-master
-runner: dosbox
+runner: scummvm
 year: 1990
 
 script:
@@ -10,49 +10,22 @@ script:
     - game: N/A:Select EXE.
 
   game:
-    main_file: $GAMEDIR/play.conf
+    game_id: castlemaster
+    path: $GAMEDIR
 
   installer:
+      #copy select
     - execute:
-        file: mkdir
-        args: $GAMEDIR/drive_c  $GAMEDIR/drive_c/castle
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
 
-    - write_file:
-        content: '#!/bin/bash
+                  find "$src_path/."  -type f \( -iname "*.exe" -o 
+                                                 -iname "CM*" \) -exec cp {} "$GAMEDIR" \;'
 
-          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          dst=$2
-          
-          cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $game $GAMEDIR/drive_c/castle
+        file: chmod
+        args: -R 775  "$GAMEDIR"
 
-    - write_file:
-        content: '[mouse]
 
-            mouse_capture = onstart   
-            
-            mouse_middle_release=true   
-
-            mouse_sensitivity= 15
-
-          [autoexec]
-
-            mount C "$GAMEDIR/drive_c" -t dir
-
-            cls 
-
-            c: 
-
-            cd castle
-
-            castle.exe
-
-            exit'
-        file: $GAMEDIR/play.conf
-
+  scummvm:
+    fullscreen: true

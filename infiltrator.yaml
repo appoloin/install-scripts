@@ -1,5 +1,5 @@
 name: Infiltrator
-game_slug: Infiltrator
+game_slug: infiltrator
 version: DOS
 slug: Infiltrator
 runner: dosbox

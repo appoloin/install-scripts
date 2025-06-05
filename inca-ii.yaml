@@ -13,58 +13,17 @@ script:
       main_file: $GAMEDIR/play.conf
 
     installer:
-      - write_file:
-          content: '#!/bin/bash
-
-            src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-            dst=$2
-            
-            cp -avr "$src/."  "$dst"'
-          file: $CACHE/bulkcopy.sh
-      - chmodx: $CACHE/bulkcopy.sh
-
       - execute:
           file: mkdir
           args: $GAMEDIR/drive_d $GAMEDIR/drive_c
 
+      #copy everything
       - execute:
-          file: $CACHE/bulkcopy.sh
-          args: $DISC1 $GAMEDIR/drive_d
+          command: 'src_path=$(echo "$DISC1" | sed -r "s/(.+)\/.+/\1/")
 
+            cp -avr "$src_path/."  "$GAMEDIR/drive_d"
 
-      - write_file:
-          content: '[midi]
-
-            mididevice = mt32
-
-           [mouse]
-
-            mouse_capture = onstart   
-            
-            mouse_middle_release=true   
-
-            mouse_sensitivity= 15
-          
-            [autoexec]
-
-              mount C "$GAMEDIR/drive_c" -t dir
-
-              imgmount d "$GAMEDIR/drive_d/track01.cue" -t iso
-
-              D:
-
-              install
-              
-              exit'
-          file: $GAMEDIR/setup.conf
-
-      - task:
-          config_file: $GAMEDIR/setup.conf
-          name: dosexec
-          working_dir: $GAMEDIR/drive_c
-
-
+            '    
 
       - write_file:
           content: '[midi]
@@ -78,6 +37,19 @@ script:
             mouse_middle_release=true   
 
             mouse_sensitivity= 15
+
+
+           [cpu]
+
+            cpu_cycles = 25000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
+
+
 
 
             [autoexec]

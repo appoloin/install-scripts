@@ -3,6 +3,7 @@ game_slug: rollercoaster-tycoon-2
 version: Good Old Games Installer
 slug: rollercoaster-tycoon-2
 runner: linux
+year: 1999
 
 script:
   game: 

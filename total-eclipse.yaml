@@ -1,8 +1,8 @@
 name: Total Eclipse
 game_slug: total-eclipse
 version: DOS
-slug:   total-eclipse
-runner: dosbox
+slug:  total-eclipse
+runner: scummvm
 year: 1988
 
 script:
@@ -10,49 +10,23 @@ script:
     - game: N/A:Select EXE.
 
   game:
-    main_file: $GAMEDIR/play.conf
+    game_id: totaleclipse 
+    path: $GAMEDIR
 
   installer:
+      #copy select
     - execute:
-        file: mkdir
-        args: $GAMEDIR/drive_c  $GAMEDIR/drive_c/total
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
 
-    - write_file:
-        content: '#!/bin/bash
+                  find "$src_path/."  -type f \( -iname "*.exe" -o 
+                                                 -iname "tote*" -o 
+                                                 -iname "scn1*" \) -exec cp {} "$GAMEDIR" \;'
 
-          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
-
-          dst=$2
-          
-          cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
 
     - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $game $GAMEDIR/drive_c/total
+        file: chmod
+        args: -R 775  "$GAMEDIR"
 
-    - write_file:
-        content: '[mouse]
 
-            mouse_capture = onstart   
-            
-            mouse_middle_release=true   
-
-            mouse_sensitivity= 15
-
-          [autoexec]
-
-            mount C "$GAMEDIR/drive_c" -t dir
-
-            cls 
-
-            c: 
-
-            cd total
-
-            total.exe
-
-            exit'
-        file: $GAMEDIR/play.conf
-
+  scummvm:
+    fullscreen: true

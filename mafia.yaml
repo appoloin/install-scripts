@@ -12,30 +12,26 @@ script:
 
   files:
     - setup: N/A:Select the GOG installer
+    - widescreen:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Mafia/Mafia.WidescreenFix.zip
+        filename: Mafia.WidescreenFix.zip
+    - sound1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Mafia/SOUNDS.7z.001
+        filename: SOUNDS.7z.001
+    - sound2:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Mafia/SOUNDS.7z.002
+        filename: SOUNDS.7z.002
+    - sound3:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Mafia/SOUNDS.7z.003
+        filename: SOUNDS.7z.003
+    - sound4:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Mafia/SOUNDS.7z.004
+        filename: SOUNDS.7z.004
+    - sound5:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Mafia/SOUNDS.7z.005
+        filename: SOUNDS.7z.005
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - task:
         name: create_prefix
         install_mono: false
@@ -47,24 +43,28 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-    - execute:
-        file: $CACHE/download.sh
-        args: 18aC2HtbDmb79qWTqGDclf-aw9DlrVaYK $CACHE/patch.zip
-
     - extract:
-        file: $CACHE/patch.zip
+        file: $widescreen
         dst: $GAMEDIR/drive_c/GOG Games/Mafia/
 
+    #Move Patch into one folder
+    - merge:
+        src: "$sound1"
+        dst: "$CACHE"
+    - merge:
+        src: "$sound2"
+        dst: "$CACHE"
+    - merge:
+        src: "$sound3"
+        dst: "$CACHE"
+    - merge:
+        src: "$sound4"
+        dst: "$CACHE"
+    - merge:
+        src: "$sound5"
+        dst: "$CACHE"
 
-    - execute:
-        file: $CACHE/download.sh
-        args: 10Uhr0miQEvl3tq9Li6nMMFfIEHTe6qem $CACHE/SOUNDS.7z.001
-    - execute:
-        file: $CACHE/download.sh
-        args: 1S5vLsiw04Xluh8xlWijoVsf_2r-LRG_d $CACHE/SOUNDS.7z.002
-    - execute:
-        file: $CACHE/download.sh
-        args: 1WlycusUW6ZUCpkcVkRnfVFTacWSEAQzU $CACHE/SOUNDS.7z.003
+
     - execute:
         file: 7z
         args: x $CACHE/SOUNDS.7z.001 -o"$CACHE" -ppassword -y

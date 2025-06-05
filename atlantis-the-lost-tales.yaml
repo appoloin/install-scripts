@@ -1,0 +1,63 @@
+name: Atlantis - The Lost Tales
+game_slug: atlantis-the-lost-tales
+version: Windows Installer
+slug: atlantis-the-lost-tales
+runner: wine
+year: 1997
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files (x86)/GOG.com/Atlantis - The Lost Tales/Atlantis.exe
+    launch_configs:
+      - exe: "$GAMEDIR/drive_c/Program Files (x86)/GOG.com/Atlantis - The Lost Tales/dgVoodooCpl.exe"
+        name:  DgVoodoo Config
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+    - dgVoodoo:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/dgVoodoo2_79_3.zip
+        filename: dgVoodoo2_79_3.zip
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $dgVoodoo -o"$CACHE" -ppassword -y
+
+    - copy:
+        src: $CACHE/MS/x86/DDraw.dll
+        dst: $GAMEDIR/drive_c/Program Files (x86)/GOG.com/Atlantis - The Lost Tales/
+
+    - copy:
+        src: $CACHE/dgVoodoo.conf
+        dst: $GAMEDIR/drive_c/Program Files (x86)/GOG.com/Atlantis - The Lost Tales/
+
+    - copy:
+        src: $CACHE/dgVoodooCpl.exe
+        dst: $GAMEDIR/drive_c/Program Files (x86)/GOG.com/Atlantis - The Lost Tales/
+
+
+    - write_config:
+        data:
+            DirectX:
+                dgVoodooWatermark: false
+                Resolution: desktop
+            GeneralExt:
+                FPSLimit: 25
+        file: "$GAMEDIR/drive_c/Program Files (x86)/GOG.com/Atlantis - The Lost Tales/dgVoodoo.conf"
+
+  wine:
+    overrides:
+      ddraw: native
+

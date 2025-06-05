@@ -1,7 +1,7 @@
 name: Remember Me
 game_slug: remember-me
 version: Windows Installer
-slug: INSTALLER
+slug: remember-me
 runner: wine
 year: 2013
 
@@ -29,8 +29,3 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
-

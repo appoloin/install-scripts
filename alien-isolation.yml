@@ -1,7 +1,7 @@
 name: Alien - Isolation
 game_slug: alien-isolation
 version: Good Old Games Installer
-slug:  installer
+slug:   alien-isolation
 runner: wine
 year: 2014
 

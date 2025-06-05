@@ -1,0 +1,36 @@
+#TODO not working
+name: Amber- Journeys Beyond
+game_slug: amber-journeys-beyond
+version: Windows Installer
+slug: Amber-Journeys-Beyond-installer
+runner: wine
+year: 1996 
+
+script:
+  files:
+    - installer:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/amber_install_20080831test3.msi
+        filename: amber_install_20080831test3.msi
+
+  game:
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Hue Forest Entertainment/Amber/AMBER_JB.EXE
+    prefix: $GAMEDIR
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: quicktime72
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $installer
+        name: wineexec
+        prefix: $GAMEDIR
+

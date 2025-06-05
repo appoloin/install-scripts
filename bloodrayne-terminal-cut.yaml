@@ -1,6 +1,6 @@
 name: Bloodrayne - Terminal Cut
 game_slug: bloodrayne-terminal-cut
-version: Installer
+version: Good Old Games Installer
 slug: bloodrayne-terminal-cut
 runner: wine
 year: 2002

@@ -35,8 +35,7 @@ script:
     #remove
     - execute:
        command: 'find "$GAMEDIR" -maxdepth 1  -type d \( -iname app -o
-  
-                                                          -iname commonappdata -o
+                                                         -iname commonappdata -o
                                                           -iname *redist -o
                                                           -iname scummvm -o
                                                           -iname dosbox -o

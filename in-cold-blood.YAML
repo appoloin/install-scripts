@@ -1,12 +1,13 @@
 name: In Cold Blood
 game_slug: in-cold-blood
-version: Installer
-slug: INSTALLER
+version: Good Old Games Installer
+slug: in-cold-blood
 runner: wine
+year: 2001
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/In Cold Blood/engine/linc/engine.exe
+    exe: $GAMEDIR/drive_c/GOG Games/In Cold Blood/Launch In Cold Blood.lnk
     prefix: $GAMEDIR
 
   files:
@@ -23,8 +24,4 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
-
-  wine:
-    Desktop: true
-
 

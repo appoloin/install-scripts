@@ -28,7 +28,7 @@ script:
 
     - move:
         src: $xcopy
-        dst: $GAMEDIR/drive_c"
+        dst: "$GAMEDIR/drive_c"
 
     - execute:
         file: cp 

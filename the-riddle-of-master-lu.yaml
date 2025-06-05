@@ -1,0 +1,167 @@
+name: The Riddle of Master Lu
+game_slug:  the-riddle-of-master-lu
+version: DOS
+slug: the-riddle-of-master-lu
+runner: dosbox
+year: 1995
+
+script:
+  files:
+    - DISC1: N/A:Select the ISO
+    - gus:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/GUS_external_files.zip
+        filename: gus.zip
+
+  game:
+    main_file: $GAMEDIR/play.conf
+
+  installer:
+    - execute:
+        args: $GAMEDIR/drive_d $GAMEDIR/drive_c
+        file: mkdir
+
+    - execute:
+        file: cp 
+        args: $DISC1 $GAMEDIR/drive_d/CD1.iso
+
+    - extract:
+        file: $gus
+        dst: $GAMEDIR/drive_c/ULTRASND
+    
+    - execute:
+        args: -R 775  "$GAMEDIR"
+        file: /bin/chmod
+
+
+    
+    - write_file:
+        content: '[sdl]
+
+          fullresolution=desktop
+
+          windowresolution=original
+
+          fullscreen=true
+
+          output=opengl
+
+         [render]
+
+           aspect=true
+
+           scaler=normal2x
+
+
+          [cpu]
+
+            cpu_cycles = 25000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
+
+
+          [mouse]
+
+            mouse_capture = onstart   
+            
+            mouse_middle_release=true   
+
+            mouse_sensitivity= 15
+
+         [gus]
+
+          gus      = true
+
+          ultradir = C:\ULTRASND
+        
+         [autoexec]
+        
+          mount C "$GAMEDIR/drive_c" -t dir
+
+          imgmount D "$GAMEDIR/drive_d/CD1.iso" -t iso
+
+          cls 
+
+          ECHO OFF
+
+          goto launcher
+
+          :launcher
+
+          cls 
+
+          ECHO  -----------------------------------------------------  
+          
+          ECHO   Ripleys Believe It or Not! The Riddle of Master Lu  
+          
+          ECHO  -----------------------------------------------------  
+          
+          ECHO   1) Play Game        
+          
+          ECHO   2) Setup                         
+          
+          ECHO   3) Install
+
+          ECHO  -----------------------------------------------------  
+          
+          ECHO   4) Exit Program                             
+          
+          ECHO  -----------------------------------------------------  
+
+          choice /c1234 /s Which program do you want to run? [1-4]: /n 
+          
+          if errorlevel 4 goto exit
+          
+          if errorlevel 3 goto install
+
+          if errorlevel 2 goto setup
+          
+          if errorlevel 1 goto game
+
+
+          :game
+
+          cls
+
+          C:
+
+          cd riddle
+
+          masterlu
+
+          goto exit
+
+
+          :setup
+
+          cls
+
+          C:
+
+          cd riddle
+
+          setup.exe
+
+          goto launcher
+
+
+
+          :install
+
+          cls
+
+          D:
+
+          install.bat
+
+          goto launcher
+
+
+
+          :exit
+
+          exit'
+        file: $GAMEDIR/play.conf

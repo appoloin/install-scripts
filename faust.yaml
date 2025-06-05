@@ -1,0 +1,54 @@
+name: Faust - The Seven Games of the Soul
+game_slug: faust
+version: Widows Installer
+slug: faust
+runner: wine
+year: 1999
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files (x86)/GOG.com/Beyond Atlantis/Game.exe
+    prefix: $GAMEDIR
+
+  files:
+    - DISC1: N/A:Select disc 1 iso
+    - DISC2: N/A:Select disc 2 iso
+    - DISC3: N/A:Select disc 3 iso
+    - DISC4: N/A:Select disc 4 iso
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: quartz icodecs
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - extract:
+        file: $DISC1 
+        dst:  $CACHE
+
+    - task:
+        executable: $CACHE/Setup.exe
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - extract:
+        file: $DISC2
+        dst: "$GAMEDIR/drive_c/Program Files/7/"
+
+    - extract:
+        file: $DISC3
+        dst: "$GAMEDIR/drive_c/Program Files/7/"
+
+    - extract:
+        file: $DISC4
+        dst: "$GAMEDIR/drive_c/Program Files/7/"
+
+
+  system:
+    single_cpu: true

@@ -3,6 +3,7 @@ game_slug: gobliiins
 version: Good Old Games Installer
 slug:  gobliiins
 runner: scummvm
+year: 1991
 
 script:
   files:

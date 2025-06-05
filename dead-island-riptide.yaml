@@ -24,7 +24,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: quartz icodex wmp11 xact xact_x64
+        app: quartz icodecs wmp11 xact xact_x64
         name: winetricks
         prefix: $GAMEDIR
 

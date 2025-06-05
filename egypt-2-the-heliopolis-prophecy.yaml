@@ -1,12 +1,13 @@
-name:  Altantis 2
-game_slug: Altantis 2
-version: Installer
-slug: Altantis 2-installer
+name: Egypt 2 - The Heliopolis Prophecy
+game_slug: egypt-2-the-heliopolis-prophecy
+version: Good Old Games Installer
+slug: egypt-2-the-heliopolis-prophecy
 runner: wine
+year: 2000
 
+script:
   game:
-    exe: $GAMEDIR/drive_c/
-    arch: win32
+    exe: $GAMEDIR/drive_c/Program Files (x86)/GOG.com/Beyond Atlantis/Game.exe
     prefix: $GAMEDIR
 
   files:
@@ -15,14 +16,12 @@ runner: wine
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
     - task:
-        app: corefonts
-        arch: win32
+        app: quartz icodecs
         name: winetricks
         prefix: $GAMEDIR
 
@@ -31,13 +30,5 @@ runner: wine
         name: wineexec
         prefix: $GAMEDIR
 
-
-  wine:
-    Desktop: true
-    WineDesktop: 800x600
-
   system:
-    resolution: 800x600
-    reset_desktop: true
-
-
+    single_cpu: true

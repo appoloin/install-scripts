@@ -3,7 +3,7 @@ game_slug:  phantasmagoria-2
 version: DOS
 slug:   phantasmagoria-2-installer
 runner: scummvm
-
+year: 1996
 
 script:
   game:

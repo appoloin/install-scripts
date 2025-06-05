@@ -26,11 +26,11 @@ script:
         prefix: $GAMEDIR
 
     - rename:
-        src: $GAMEDIR/drive_c/MagiPacks/Sega Rally Championship/ddraw.dll
-        dst:  $GAMEDIR/drive_c/MagiPacks/Sega Rally Championship/ddraw.dll.old
+        src: $GAMEDIR/drive_c/MagiPacks/Sega Rally Championship/DDraw.dll
+        dst:  $GAMEDIR/drive_c/MagiPacks/Sega Rally Championship/DDraw.dll.old
     - rename:
-        src: $GAMEDIR/drive_c/MagiPacks/Sega Rally Championship/d3dimm.dll
-        dst: $GAMEDIR/drive_c/MagiPacks/Sega Rally Championship/d3dimm.dll.old
+        src: $GAMEDIR/drive_c/MagiPacks/Sega Rally Championship/D3DImm.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Sega Rally Championship/D3DImm.dll.old
         
 
   wine:

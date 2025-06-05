@@ -3,7 +3,7 @@ game_slug: mortville-manor
 version: DOS
 slug: instaler
 runner: scummvm
-
+year: 1987
 
 
 script:
