@@ -2,114 +2,40 @@ name: Star Wars - X-Wing
 game_slug: star-wars-x-wing
 version: DOS
 slug: star-wars-x-wing
-runner: dosbox
+runner: linux
 year: 1993
 
 script:
-  game:
-    main_file: $GAMEDIR/play.conf
-
   files:
     - game:  N/A:Select file *.exe
+    - dreamm:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/dreamm-3.0.3-linux-x64.tgz
+        filename: dreamm-3.0.3-linux-x64.tgz
+    - mt32:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/mt32-roms.7z
+        filename: mt32-roms.7z
 
-  installer:
-    - write_file:
-        content: '#!/bin/bash
 
-          src=$(echo "$1" | sed -r "s/(.+)\/.+/\1/")
+  game:
+    exe: $GAMEDIR/dreamm
 
-          dst=$2
-          
-          cp -avr "$src/."  "$dst"'
-        file: $CACHE/bulkcopy.sh
-    - chmodx: $CACHE/bulkcopy.sh
-
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O "$output" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
-    - execute:
-        file: mkdir
-        args: $GAMEDIR/drive_c 
-
-    - execute:
-        file: $CACHE/bulkcopy.sh
-        args: $game "$GAMEDIR/drive_c"
-    
-    - execute:
-        file: $CACHE/download.sh
-        args: 1qWHyCWCPbSPFSsJBTTjP4APA-a_v0EsK $CACHE/MT32-ROMS.7z
-
+  installer:   
     - extract:
-        file: $CACHE/MT32-ROMS.7z
-        dst:  $GAMEDIR/MT32-ROMS
+        file: $dreamm
+        dst: $GAMEDIR
 
+    - execute:
+        file: 7z
+        args: x  $mt32 -o"$GAMEDIR/sounddata" -ppassword -y
 
-    - write_file:
-        content: '[midi]
+    #copy everything
+    - execute:
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
 
-            mididevice = mt32
+          cp -avr "$src_path/."  "$GAMEDIR"
 
-          [mt32]
+          '    
 
-            romdir = $GAMEDIR/MT32-ROMS
-
-
-          [mouse]
-
-            mouse_capture = onstart   
-            
-            mouse_middle_release=true   
-
-            mouse_sensitivity= 15
-
-
-          [sdl]
-              
-            fullresolution=desktop
-
-            windowresolution=original
-
-            fullscreen=true
-
-            output=opengl
-
-          [render]
-
-            aspect=true
-
-            scaler=normal2x
-
-
-          [autoexec]
-          
-            mount C "$GAMEDIR/drive_c" -t dir
-
-            imgmount D "$GAMEDIR/drive_c/cd/SWXWCD.cue" -t cdrom
-
-            C:
-
-            cd XWINGCD 
-
-            run
-
-            exit'
-        file: $GAMEDIR/play.conf
+    - write_file:  #empty file
+        content: ' '
+        file: $GAMEDIR/config.json

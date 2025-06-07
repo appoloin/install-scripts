@@ -6,11 +6,28 @@ runner: linux
 year: 1990
 
 script:
+  files:
+    - game1:  N/A:Select Disc 1 file *.ima
+    - game2:  N/A:Select Disc 2 file *.ima
+    - dreamm:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/dreamm-3.0.3-linux-x64.tgz
+        filename: dreamm-3.0.3-linux-x64.tgz
+
   game:
-    exe: ~/Games/dreamm/dreamm
+    exe: $GAMEDIR/dreamm
 
   installer:   
+    - extract:
+        file: $dreamm
+        dst: $GAMEDIR
+
     - execute:
-        description: Drag CD folder in to DREAMM
-        command: dreamm
-      
+        file: 7z
+        args: x  $game1 -o"$GAMEDIR" -y
+    - execute:
+        file: 7z
+        args: x  $game2 -o"$GAMEDIR" -y
+
+    - write_file:  #empty file
+        content: ' '
+        file: $GAMEDIR/config.json

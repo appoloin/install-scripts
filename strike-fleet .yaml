@@ -6,11 +6,24 @@ runner: linux
 year: 1989
 
 script:
+  files:
+    - game:  N/A:Select file *.ima
+    - dreamm:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/dreamm-3.0.3-linux-x64.tgz
+        filename: dreamm-3.0.3-linux-x64.tgz
+
   game:
-    exe: ~/Games/dreamm/dreamm
+    exe: $GAMEDIR/dreamm
 
   installer:   
+    - extract:
+        file: $dreamm
+        dst: $GAMEDIR
+
     - execute:
-        description: Drag CD folder in to DREAMM
-        command: dreamm
-      
+        file: 7z
+        args: x  $game -o"$GAMEDIR" -y
+
+    - write_file:  #empty file
+        content: ' '
+        file: $GAMEDIR/config.json

@@ -5,12 +5,21 @@ slug: outlaws
 runner: linux
 year: 1997
 
+
 script:
+  files:
+    - dreamm:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/dreamm-3.0.3-linux-x64.tgz
+        filename: dreamm-3.0.3-linux-x64.tgz
+
   game:
-    exe: ~/Games/dreamm/dreamm
+    exe: $GAMEDIR/dreamm
 
   installer:   
-    - execute:
-        description: Drag CD folder in to DREAMM
-        command: dreamm
-      
+    - extract:
+        file: $dreamm
+        dst: $GAMEDIR
+
+    - write_file:  #empty file
+        content: ' '
+        file: $GAMEDIR/config.json

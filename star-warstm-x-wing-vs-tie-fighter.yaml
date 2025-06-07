@@ -3,7 +3,7 @@ game_slug: star-warstm-x-wing-vs-tie-fighter
 version: Good Old Games Installer
 slug: star-warstm-x-wing-vs-tie-fighter
 runner: wine
-year: 2015
+year: 1997
 
 script:
   files:
