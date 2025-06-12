@@ -22,7 +22,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: vista xact
+        app: vista xact xact_x64
         name: winetricks
         prefix: $GAMEDIR
 
@@ -30,6 +30,10 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+    - rename:
+        src: $GAMEDIR/drive_c/Games/Splinter Cell Blacklist Complete/src/SYSTEM/systemdetection.dll
+        dst: $GAMEDIR/drive_c/Games/Splinter Cell Blacklist Complete/src/SYSTEM/systemdetection.dll.old
 
   system:
     pulse_latency: true

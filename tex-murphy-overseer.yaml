@@ -10,7 +10,7 @@ script:
     - setup: N/A:Select setup file
 
   game:
-    exe: "$GAMEDIR/drive_c/Program Files (x86)/WRC3/WRC3.exe"
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/"
     prefix: $GAMEDIR
 
   installer:

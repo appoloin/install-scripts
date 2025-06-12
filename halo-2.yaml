@@ -7,8 +7,7 @@ year: 2004
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Games/Halo 2/halo2.exe
-    arch: win32
+    exe: $GAMEDIR/drive_c/MagiPacks/Halo 2/halo2.exe
     prefix: $GAMEDIR
 
   files:
@@ -17,20 +16,17 @@ script:
   installer:
     - task:
         name: create_prefix
-        arch: win32
         install_mono: false
         install_gecko: false
         prefix: $GAMEDIR
 
     - task:
-        arch: win32
-        app: mfc42 wmp9 wmp10 mf
+        app: wmp9
         description: Installing additional components
         name: winetricks
         prefix: $GAMEDIR
 
     - task:
-        arch: win32
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR

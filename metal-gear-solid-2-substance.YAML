@@ -7,35 +7,14 @@ year: 2002
 
 script:
   game:
-    exe: "$GAMEDIR/drive_c/GOG Games/Metal Gear Solid 2 Substance/bin/mgs2_sse.exe"
+    exe: "$GAMEDIR/drive_c/GOG Games/Metal Gear Solid 2 Substance/bin/MGS2SSetup.exe"
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
-    - patch1:  
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MetalGearSolid/MS2.7z
-        filename: MS2.7z
-    - patch2:  
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MetalGearSolid/d8vk-v1.0.tar.gz
-        filename: d8vk-v1.0.tar.gz
-    - patch3:  
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MetalGearSolid/IndirectSound_0_20.zip
-        filename: IndirectSound_0_20.zip
-    - patch4:  
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MetalGearSolid/Xidi-v4.2.0.zip
-        filename: Xidi-v4.2.0.zip
-    - patch5:  
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MetalGearSolid/Ultimate-ASI-Loader.zip
-        filename: Ultimate-ASI-Loader.zip
-    - patch6:  
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MetalGearSolid/mgs2_widescreen.7z
-        filename: mgs2_widescreen.7z
-    - patch7:  
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MetalGearSolid/quartz.zip
-        filename: quartz.zip
-    - patch8:  
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MetalGearSolid/mgs2exe-AMD_UN.7z
-        filename: mgs2exe-AMD_UN.7z
+    - mgsvfix:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MetalGearSolid/MGS.V.s.Fix.v1.8.1.zip
+        filename: MGS.V.s.Fix.v1.8.1.zip
 
 
   installer:
@@ -46,7 +25,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: xact directmusic dsdmo 
+        app: win7 quartz xact directmusic dsdmo icodecs i3codecx
         description: Install components with Winetricks
         name: winetricks
 
@@ -55,109 +34,9 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-
-    #remove
-    - execute:
-        command: 'find "$GAMEDIR/drive_c/GOG Games/Metal Gear Solid 2 Substance" -maxdepth 1
-                                               -type d \( -iname app -o
-                                                          -iname commonappdata -o
-                                                          -iname *redist -o
-                                                          -iname scummvm -o
-                                                          -iname dosbox -o
-                                                          -iname *support -o
-                                                         -iname tmp -o 
-                                                          -iname savedata \) -exec rm -r {} \;
-                                            
-             find "$GAMEDIR/drive_c/GOG Games/Metal Gear Solid 2 Substance" 
-                                       -type f \( -iname "d3d8.dll" -o 
-                                                  -iname "dinput8.dll" -o 
-                                                  -iname "dixi.ini" -o 
-                                                  -iname "dxcfg.exe" -o 
-                                                  -iname "dxcfg.ini" -o 
-                                                  -iname "MGS2SSET.ini" -o 
-                                                  -iname "gog*"  -o
-                                                  -iname "unins000*" \) -exec rm {} \;
-          '
-
-    - execute:
-        file: 7z
-        args: x "$patch1" -o"$GAMEDIR/drive_c/GOG Games/Metal Gear Solid 2 Substance"  -y -ppassword
-
     - extract:
-        file: "$patch2"
-        dst:  "$GAMEDIR/drive_c/GOG Games/Metal Gear Solid 2 Substance/bin"
-
-    - extract:
-        file: "$patch3"
+        file: "$mgsvfix"
         dst:  "$GAMEDIR/drive_c/GOG Games/Metal Gear Solid 2 Substance/bin" 
-
-    - extract:
-        file: "$patch4"
-        dst:  "$CACHE/Xidi-v4.2.0"
-
-    - copy:
-        src: $CACHE/Xidi-v4.2.0/Win32/dinput8.dll
-        dst: "$GAMEDIR/drive_c/GOG Games/Metal Gear Solid 2 Substance/bin" 
-
-    - extract:
-        file: "$patch5"
-        dst:  "$CACHE/Ultimate-ASI-Loader/"
-
-    - rename:
-        src: "$CACHE/Ultimate-ASI-Loader/dinput8.dll"
-        dst: "$CACHE/Ultimate-ASI-Loader/version.dll"
-
-    - copy:
-        src: "$CACHE/Ultimate-ASI-Loader/version.dll"
-        dst: "$GAMEDIR/drive_c/GOG Games/Metal Gear Solid 2 Substance/bin" 
-
-    - extract:
-        file: "$patch6"
-        dst:  "$GAMEDIR/drive_c/GOG Games/Metal Gear Solid 2 Substance/bin/scripts"
-
-    - rename:
-        src: "$GAMEDIR/drive_c/GOG Games/Metal Gear Solid 2 Substance/bin/scripts/mgs2w.dll"
-        dst: "$GAMEDIR/drive_c/GOG Games/Metal Gear Solid 2 Substance/bin/scripts/mgs2w.asi"
-
-    - execute:
-        file: rm 
-        args: -r "$GAMEDIR/drive_c/GOG Games/Metal Gear Solid 2 Substance/bin/scripts/d3d8.dll"
-
-
-    - write_config:
-        data:
-          MAIN:
-            Width: $RESOLUTION_WIDTH
-            Height: $RESOLUTION_HEIGHT 
-        file: "$GAMEDIR/drive_c/GOG Games/Metal Gear Solid 2 Substance/bin/scripts/mgs2w.ini"
-
-    - extract:
-        file: "$patch7"
-        dst:  "$CACHE"
-    - copy:
-        src: "$CACHE/quartz.dll"
-        dst: "$GAMEDIR/drive_c/windows/system32/" 
-
-    - task:
-        executable: "$GAMEDIR/drive_c/GOG Games/Metal Gear Solid 2 Substance/bin/MGS2SConfig.exe"
-        name: wineexec
-        prefix: $GAMEDIR
-
-    - rename:
-        src: "$GAMEDIR/drive_c/GOG Games/Metal Gear Solid 2 Substance/bin/mgs2.exe"
-        dst: "$GAMEDIR/drive_c/GOG Games/Metal Gear Solid 2 Substance/bin/mgs2.exe.old"
-
-    - execute:
-        file: 7z
-        args: x "$patch8" -o"$GAMEDIR/drive_c/GOG Games/Metal Gear Solid 2 Substance/bin"  -y -ppassword
-
 
   system:
       pulse_latency: true
-
-  wine:
-    overrides:
-      d3d8: native,b
-      dinput8: native,b
-      dsound: native,b
-     
