@@ -33,7 +33,4 @@ script:
 
   wine:
     overrides:
-      d3d8: n,b
-      d3dimm: n,b
       ddraw: n,b
-      d3d9: n,b

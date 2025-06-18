@@ -21,6 +21,12 @@ script:
         prefix: $GAMEDIR
 
     - task:
+        app: wmp9
+        description: Installing additional components
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR

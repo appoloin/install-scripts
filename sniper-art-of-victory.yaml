@@ -13,7 +13,7 @@ script:
   files:
     - setup: N/A:Select the Setup.exe
     - patch:  
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/SnpierArtOfVicotry.rar
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/SniperArtOfVictory.7z
         filename: Patch.7z
 
   installer:
@@ -30,5 +30,5 @@ script:
 
     - execute:
         file: 7z
-        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/City Interactive/Sniper - Art of Victory EN/" -ppassword -y
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/City Interactive/Sniper - Art of Victory EN/" -y
 

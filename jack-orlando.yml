@@ -1,5 +1,5 @@
 name: Jack Orlando
-game_slug: Jack-Orlando
+game_slug: jack-orlando
 version: Good Old Games Installer
 slug:  Jack-Orlando-installer
 runner: wine

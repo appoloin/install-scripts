@@ -1,0 +1,31 @@
+name: Need for Speed - Shift
+game_slug: need-for-speed-shift
+version: Windows Installer
+slug: need-for-speed-shift
+runner: wine
+year: 2009
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Call of Duty Modern Warfare 2/iw4sp.exe
+    prefix: $GAMEDIR
+
+  installer:
+    - insert-disc:
+          description: Select game folder
+          requires: SHIFT.exe
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: xact_x64 xact physx
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - execute:
+        file: cp 
+        args: -r "$DISC/"  "$GAMEDIR/drive_c/"

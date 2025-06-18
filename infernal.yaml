@@ -1,9 +1,9 @@
-name: Hellforces
-game_slug: hellforces
+name: Infernal
+game_slug: Infernal
 version: Windows Installer
-slug: hellforces
+slug: infernal
 runner: wine
-year: 2005
+year: 2007
 
 script:
   files:
