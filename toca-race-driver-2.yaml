@@ -10,7 +10,7 @@ script:
     - setup: N/A:Select setup file
 
   game:
-    exe: "$GAMEDIR/drive_c/MagiPacks/TOCA Race Driver/RaceDriver.exe"
+    exe: "$GAMEDIR/drive_c/MagiPacks/TOCA Race Driver 2/RD2.exe"
     prefix: $GAMEDIR
 
   installer:

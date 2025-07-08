@@ -23,7 +23,7 @@ script:
 
     - execute:
         file: /usr/bin/flatpak
-        args: install flathub -y --noninteractive io.itch.tx00100xt.SeriousSamClassic
+        args: install flathub -y --user --noninteractive io.itch.tx00100xt.SeriousSamClassic
         description: Installing with flatpak
         disable_runtime: true
 

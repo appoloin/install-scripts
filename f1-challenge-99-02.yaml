@@ -10,7 +10,7 @@ script:
     - game: N/A:Select file
 
   game:
-    exe: "$GAMEDIR/drive_c/game/"
+    exe: "$GAMEDIR/drive_c/game//F1 Challenge Online.exe"
     prefix: $GAMEDIR
 
   installer:

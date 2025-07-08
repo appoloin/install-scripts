@@ -7,11 +7,17 @@ year: 2000
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/MagiPacks/Project IGI/
+    exe: $GAMEDIR/drive_c/MagiPacks/Project IGI/IGI.exe
+    launch_configs:
+      - exe: "$GAMEDIR/drive_c/MagiPacks/Project IGI/dgVoodooCpl.exe"
+        name:  DgVoodoo Config
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select the installer
+    - dgVoodoo:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/dgVoodoo2_79_3.zip
+        filename: dgVoodoo2_79_3.zip
 
   installer:
     - task:
@@ -24,3 +30,40 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $dgVoodoo -o"$CACHE" -ppassword -y
+
+    - copy:
+        src: $GAMEDIR/drive_c/MagiPacks/Project IGI/DDraw.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Project IGI/DDraw.dll.old
+
+    - copy:
+        src: $CACHE/MS/x86/DDraw.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Project IGI/
+
+    - copy:
+        src: $GAMEDIR/drive_c/MagiPacks/Project IGI/D3Dimm.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Project IGI/D3Dimm.dll.old
+
+    - copy:
+        src: $CACHE/MS/x86/D3Dimm.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Project IGI/
+
+    - copy:
+        src: $CACHE/dgVoodoo.conf
+        dst: $GAMEDIR/drive_c/MagiPacks/Project IGI/
+
+    - copy:
+        src: $GAMEDIR/drive_c/MagiPacks/Project IGI/dgVoodooCpl.exe
+        dst: $GAMEDIR/drive_c/MagiPacks/Project IGI/dgVoodooCpl.exe.old
+
+    - copy:
+        src: $CACHE/dgVoodooCpl.exe
+        dst: $GAMEDIR/drive_c/MagiPacks/Project IGI/
+        
+  wine:
+    overrides:
+      ddraw: native
+      D3DImm: native

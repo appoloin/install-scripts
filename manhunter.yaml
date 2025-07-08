@@ -7,7 +7,7 @@ year: 2013
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files (x86)/Project Snowblind/Snowblind.exe
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Manhunter/MH.exe
     prefix: $GAMEDIR
 
   files:

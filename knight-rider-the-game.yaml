@@ -32,7 +32,7 @@ script:
 
 
   wine:
-    dgvoodoo2: true
+    #dgvoodoo2: true
     overrides:
       ddraw: n,b
       D3Dimm: n,b

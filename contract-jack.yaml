@@ -22,7 +22,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: directmusic dsound vcrun6 winxp
+        app: vcrun6 winxp
         name: winetricks
         prefix: $GAMEDIR
 
