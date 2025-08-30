@@ -1,0 +1,34 @@
+name:  Banished
+game_slug: banished
+version: Good Old Games Installer
+slug: banished
+runner: wine
+year: 2014
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Banished/Launch Banished.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+
+    - task:
+        app: xact xact_x64
+        description: Running Winetricks
+        name: winetricks
+        prefix: $GAMEDIR  
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
