@@ -8,6 +8,9 @@ year: 2004
 script:
   files:
     - setup: N/A:Select setup file 
+    - dgVoodoo:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/dgVoodoo2_79_3.zip
+        filename: dgVoodoo2_79_3.zip
 
   game:
     exe: "$GAMEDIR/drive_c/MagiPacks/Psi-Ops - The Mindgate Conspiracy/PsiOps.exe"
@@ -24,6 +27,22 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $dgVoodoo -o"$CACHE" -ppassword -y
+
+    - copy:
+        src: $GAMEDIR/drive_c/MagiPacks/Psi-Ops - The Mindgate Conspiracy/D3D9.dll
+        dst: $GAMEDIR/drive_c/MagiPacks/Psi-Ops - The Mindgate Conspiracy/D3D9.dll.old
+
+    - copy:
+        src: $GAMEDIR/drive_c/MagiPacks/Psi-Ops - The Mindgate Conspiracy/dgVoodooCpl.exe
+        dst: $GAMEDIR/drive_c/MagiPacks/Psi-Ops - The Mindgate Conspiracy/dgVoodooCpl.exe.old
+
+    - copy:
+        src: $CACHE/dgVoodooCpl.exe
+        dst: $GAMEDIR/drive_c/MagiPacks/Psi-Ops - The Mindgate Conspiracy/
 
   wine:
     overrides:

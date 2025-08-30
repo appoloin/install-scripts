@@ -23,7 +23,10 @@ script:
     - DLC7: N/A:Select DLC Project Laika installer
     - DLC8: N/A:Select DLC Mars Lifestyle Radio installer
     - DLC9: N/A:Select DLC In Domes Building installer
-
+    - DLC12: N/A:Select DLC Martian Express installer
+    - DLC13: N/A:Select DLC The Future Contemporary installer
+    - DLC14: N/A:Select DLC Revelation Radio installer
+    - DLC11: N/A:Select DLC Digital Deluxe installer
 
   installer:
     - task:
@@ -107,10 +110,36 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        executable: $DLC10
-        description: 'Installing Below and Above '
+        executable: $DLC12
+        description: 'Installing  Martian Express'
         name: wineexec
         prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC13
+        description: 'Installing The Future Contemporary'
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC14
+        description: 'Installing Revelation Radio'
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC11
+        description: 'Installing Digital Deluxe'
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC10
+        description: 'Installing Upgrade Packages'
+        name: wineexec
+        prefix: $GAMEDIR
+
+
 
   wine:
     fsync: false

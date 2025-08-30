@@ -10,7 +10,7 @@ script:
     - setup: N/A:Select setup file
 
   game:
-    exe: "$GAMEDIR/drive_c/MagiPacks/L.A. Street Racing/LASR.exe"
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/MagiPacks/Street Racing Syndicate/Bin/SRS.exe"
     args:  -opengl
     prefix: $GAMEDIR
 
