@@ -10,11 +10,11 @@ script:
     exe: $GAMEDIR/drive_c/Call of Duty Modern Warfare 2/iw4sp.exe
     prefix: $GAMEDIR
 
-  installer:
-    - insert-disc:
-          description: Select game folder
-          requires: SHIFT.exe
+  files:
+    - setup: N/A:Select setup file
 
+
+  installer:
     - task:
         name: create_prefix
         install_mono: false
@@ -22,10 +22,12 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: xact_x64 xact physx
+        app: xact #physx
         name: winetricks
         prefix: $GAMEDIR
 
-    - execute:
-        file: cp 
-        args: -r "$DISC/"  "$GAMEDIR/drive_c/"
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

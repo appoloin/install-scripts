@@ -4,6 +4,7 @@ version: Windows Installer
 slug: alice-madness-returns
 runner: wine
 year: 2011
+
 script:
   game:
     exe: $GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/Alice Madness Returns - The Complete Collection/Game/Alice2/Binaries/Win32/AliceMadnessReturns.exe
@@ -12,9 +13,13 @@ script:
   files:
     - setup: N/A:Select the installer
     - patch:  
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/AliceMadnessReturnsPatch.7z
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Alice/AliceMadnessReturnsPatch.7z
         filename: AliceMadnessReturnsPatch.7z
+    - fix:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Alice/VorpalFix.zip
+        filename: VorpalFix.zip
 
+    
   installer:
     - task:
         name: create_prefix
@@ -35,3 +40,11 @@ script:
     - execute:
         file: 7z
         args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/Alice Madness Returns - The Complete Collection/"  -y -ppassword
+
+    - execute:
+        file: 7z
+        args: x $fix -o"$GAMEDIR/drive_c/Program Files (x86)/Electronic Arts/Alice Madness Returns - The Complete Collection/Game/Alice1/bin"  -y 
+
+  wine:
+    overrides:
+      winmm: n,b

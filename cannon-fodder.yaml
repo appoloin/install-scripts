@@ -50,7 +50,7 @@ script:
             
             mouse_middle_release=true   
 
-            mouse_sensitivity= 50
+            mouse_sensitivity= 30
 
 
           [sdl]

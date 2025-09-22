@@ -20,6 +20,10 @@ script:
         install_gecko: false
         prefix: $GAMEDIR
 
+    - task:
+        app: openal 
+        name: winetricks
+        prefix: $GAMEDIR
 
     - task:
         executable: $setup

@@ -12,21 +12,8 @@ script:
 
   files:
     - setup: N/A:Select Surviving Mars installer
-    - DLC10: N/A:Select Upgrade Package
-    - DLC: N/A:Select DLC Below and Above installer
-    - DLC1: N/A:Select DLC Stellaris Dome Set installer
-    - DLC2: N/A:Select DLC Space Race installer
-    - DLC3: N/A:Select DLC Mysteries Resupply installer
-    - DLC4: N/A:Select DLC Marsvision Song Contest installer
-    - DLC5: N/A:Select DLC Colony Design Set installer
-    - DLC6: N/A:Select DLC Green Planet installer
-    - DLC7: N/A:Select DLC Project Laika installer
-    - DLC8: N/A:Select DLC Mars Lifestyle Radio installer
-    - DLC9: N/A:Select DLC In Domes Building installer
-    - DLC12: N/A:Select DLC Martian Express installer
-    - DLC13: N/A:Select DLC The Future Contemporary installer
-    - DLC14: N/A:Select DLC Revelation Radio installer
-    - DLC11: N/A:Select DLC Digital Deluxe installer
+    - DLC2: N/A:Select Patch
+    - DLC1: N/A:Select DLC
 
   installer:
     - task:
@@ -47,94 +34,47 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-    - task:
-        executable: $DLC
-        description: 'Installing Upgrade'
-        name: wineexec
-        prefix: $GAMEDIR
+    # Link $DLC1 folder to Prefix DLC folder
+    - execute:
+        command: 'src_path=$(echo "$DLC1" | sed -r "s/(.+)\/.+/\1/");
+
+
+                  ln -s -f -n "$src_path" "$GAMEDIR/drive_c/DLC"
+                  '
+
+    # DLC Mass Installer
+    - write_file: 
+        content: '@echo off
+
+          REM Set the directory where the .exe files are located
+                   
+          C: 
+          
+          set FullPath="c:\dlc"
+
+          echo %FullPath%
+
+          REM Change to the specified directory
+
+          cd /d %FullPath%
+
+          REM Loop through each .exe file in the directory and run it with the /SILENT flag
+
+          for %%f in (*.exe) do (
+                
+            start /wait "" "%%f" /SILENT
+
+           )
+         '
+        file: $GAMEDIR/dlc_install.cmd
 
     - task:
-        executable: $DLC1
-        description: 'Installing Stellaris Dome Set '
+        executable: $GAMEDIR/dlc_install.cmd
         name: wineexec
         prefix: $GAMEDIR
 
     - task:
         executable: $DLC2
-        description: 'Installing Space Race '
-        name: wineexec
-        prefix: $GAMEDIR
-
-    - task:
-        executable: $DLC3
-        description: 'Installing Mysteries Resupply '
-        name: wineexec
-        prefix: $GAMEDIR
-
-    - task:
-        executable: $DLC4
-        description: 'Installing Marsvision Song Contest '
-        name: wineexec
-        prefix: $GAMEDIR
-
-    - task:
-        executable: $DLC5
-        description: 'Installing Colony Design Set '
-        name: wineexec
-        prefix: $GAMEDIR
-
-    - task:
-        executable: $DLC6
-        description: 'Installing Green Planet '
-        name: wineexec
-        prefix: $GAMEDIR
-
-    - task:
-        executable: $DLC7
-        description: 'Installing Project Laika '
-        name: wineexec
-        args: /SILENT
-        prefix: $GAMEDIR
-
-    - task:
-        executable: $DLC8
-        description: 'Installing Mars Lifestyle Radio '
-        name: wineexec
-        args: /SILENT
-        prefix: $GAMEDIR
-
-    - task:
-        executable: $DLC9
-        description: 'Installing In Domes Building '
-        name: wineexec
-        prefix: $GAMEDIR
-
-    - task:
-        executable: $DLC12
-        description: 'Installing  Martian Express'
-        name: wineexec
-        prefix: $GAMEDIR
-
-    - task:
-        executable: $DLC13
-        description: 'Installing The Future Contemporary'
-        name: wineexec
-        prefix: $GAMEDIR
-
-    - task:
-        executable: $DLC14
-        description: 'Installing Revelation Radio'
-        name: wineexec
-        prefix: $GAMEDIR
-
-    - task:
-        executable: $DLC11
-        description: 'Installing Digital Deluxe'
-        name: wineexec
-        prefix: $GAMEDIR
-
-    - task:
-        executable: $DLC10
         description: 'Installing Upgrade Packages'
         name: wineexec
         prefix: $GAMEDIR

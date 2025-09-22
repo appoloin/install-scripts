@@ -20,8 +20,8 @@ script:
   files:
     - setup: N/A:Select installer
     - dgvoodoo:
-        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/dgVoodoo2_61.7z
-        filename: dgVoodoo2_61.7z
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/dgVoodoo2_79_3.zip
+        filename: dgVoodoo2_79_3.zip
 
   installer:
     - task:
@@ -69,25 +69,12 @@ script:
         src: $CACHE/dgVoodooCpl.exe
         dst: "$GAMEDIR/drive_c/MagiPacks/Driver - You are the Wheelman/"
 
+
     - write_config:
         data:
           DirectX:
-            Antialiasing: 8x
-            AppControlledScreenMode: false
-            DisableAltEnterToToggleScreenMode: false
-            Filtering: 16
-            Resolution: max_isf
-            VRAM: 64
-            VideoCard: internal3D
             dgVoodooWatermark: false
-          General:
-            ScalingMode: stretched_ar
-          Glide:
-            3DfxSplashScreen: false
-            3DfxWatermark: false
-            Antialiasing: 8x
-            Resolution: max_isf
-            VideoCard: voodoo_2
+            Resolution: desktop
         description: Write dgVoodoo.conf file
         file: $GAMEDIR/drive_c/MagiPacks/Driver - You are the Wheelman/dgVoodoo.conf
         merge: false
