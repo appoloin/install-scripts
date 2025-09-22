@@ -1,0 +1,35 @@
+name: Worms W.M.D.
+game_slug: worms-wmd
+version: Good Old Games Installer
+slug: worms-wmd
+runner: wine
+year: 2016
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+    - DLC: N/A:Select DLC
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Worms W.M.D/Launch Worms W.M.D.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+        args: /SILENT 
+
+    - task:
+        executable: $DLC
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR

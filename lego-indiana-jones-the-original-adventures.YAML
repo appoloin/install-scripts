@@ -1,0 +1,36 @@
+name: LEGO Indian Jones
+game_slug: lego-indiana-jones-the-original-adventures
+version: Good Old Gams Installer
+slug: lego-starwars-INSTALLER
+runner: wine
+year: 2007
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/LEGO Indiana Jones - The Original Adventures/Launch LEGO® Indiana Jones™ - The Original Adventures.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: d3dcompiler_47 xact
+        description: Installing d3dcompiler_47, xact
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    esync: false
+    fsync: false

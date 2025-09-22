@@ -1,0 +1,27 @@
+name: Helldorado
+game_slug: helldorado
+version: Good Old Games
+slug: helldorado
+runner: wine
+year: 2007
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Helldorado/Launch Helldorado.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

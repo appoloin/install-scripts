@@ -1,0 +1,36 @@
+name: LEGO Indian Jones 2
+game_slug: lego-indiana-jones-2-the-adventure-continues
+version: Good Old Gams Installer
+slug: lego-indiana-jones-2-the-adventure-continues
+runner: wine
+year: 2010
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/LEGO Indiana Jones 2 - The Adventure Continues/Launch LEGO® Indiana Jones™ 2 - The Adventure Continues.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: d3dcompiler_47 xact
+        description: Installing d3dcompiler_47, xact
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  wine:
+    esync: false
+    fsync: false

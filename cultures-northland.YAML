@@ -1,0 +1,27 @@
+name: Cultures - Northland
+game_slug: cultures-northland
+version: Good Old Games
+slug: cultures-northland
+runner: wine
+year: 2003
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Northland/Launch Northland.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

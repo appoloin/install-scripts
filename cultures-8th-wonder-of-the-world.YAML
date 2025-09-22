@@ -1,0 +1,27 @@
+name: Cultures - 8th Wonder of the World
+game_slug: cultures-8th-wonder-of-the-world
+version: Good Old Games
+slug: cultures-8th-wonder-of-the-world
+runner: wine
+year: 2003
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/8th Wonder of the World/Launch 8th Wonder of the World.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

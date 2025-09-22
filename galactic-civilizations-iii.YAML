@@ -1,0 +1,66 @@
+name: Galactic Vivilizations III
+game_slug: galactic-civilizations-iii
+version: Good Old Games Installer
+slug: galactic-civilizations-iii
+runner: wine
+year: 2017
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Galactic Civilizations III/Launch Galactic Civilizations III.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+    - DLC1: N/A:Select a DLC installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    # Link $DLC1 folder to Prefix DLC folder
+    - execute:
+        command: 'src_path=$(echo "$DLC1" | sed -r "s/(.+)\/.+/\1/");
+
+
+                  ln -s -f -n "$src_path" "$GAMEDIR/drive_c/DLC"
+                  '
+
+    # DLC Mass Installer
+    - write_file: 
+        content: '@echo off
+
+          REM Set the directory where the .exe files are located
+                   
+          C: 
+          
+          set FullPath="c:\dlc"
+
+          echo %FullPath%
+
+          REM Change to the specified directory
+
+          cd /d %FullPath%
+
+          REM Loop through each .exe file in the directory and run it with the /SILENT flag
+
+          for %%f in (*.exe) do (
+                
+            start /wait "" "%%f" /SILENT
+
+           )
+         '
+        file: $GAMEDIR/dlc_install.cmd
+
+    - task:
+        executable: $GAMEDIR/dlc_install.cmd
+        name: wineexec
+        prefix: $GAMEDIR

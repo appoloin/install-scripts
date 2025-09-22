@@ -1,0 +1,26 @@
+name: WRC 4 FIA World Rally Championship
+game_slug: beyond-sunset
+version: Good Old Games Installer
+slug: beyond-sunset
+runner: wine
+year: 2022
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Beyond Sunset/Launch Beyond Sunset.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

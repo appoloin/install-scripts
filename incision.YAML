@@ -1,0 +1,27 @@
+name: Incision
+game_slug: incision
+version: Good Old Games
+slug: incision
+runner: wine
+year: 2025
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/INCISION/Launch INCISION.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

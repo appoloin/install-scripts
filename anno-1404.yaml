@@ -1,0 +1,27 @@
+name: Anno 1404
+game_slug: anno-1404
+version: Good Old Games Installer
+slug: anno-1404
+runner: wine
+year: 2009
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Anno 1404 Gold Edition/Launch Anno 1404.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

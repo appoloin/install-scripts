@@ -1,0 +1,27 @@
+name: Empire - Total Wwar
+game_slug: empire-total-war-gold-edition
+version: Windowa Installer
+slug:  empire-total-war-gold-edition
+runner: wine
+year: 2012
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/Total War EMPIRE Definitive Edition/Empire.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - insert-disc:
+          description: Select game folder
+          requires: Empire.exe
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - execute:
+        file: cp 
+        args: -r "$DISC/"  "$GAMEDIR/drive_c/"
+

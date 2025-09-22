@@ -1,0 +1,29 @@
+name: Worms Ultimate Mayhem
+game_slug: worms-ultimate-mayhem
+version: Good Old Games Installer
+slug: worms-ultimate-mayhem
+runner: wine
+year: 2011
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Worms Ultimate Mayhem/Launch Worms Ultimate Mayhem.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+        args: /SILENT 
+

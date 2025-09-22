@@ -1,0 +1,48 @@
+name: Hand of Fate 2
+game_slug: hand-of-fate-2
+version: Good Old Games Installer
+slug: drehand-of-fate-2dge
+runner: wine
+year: 2015
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Hand of Fate 2/Launch Hand of Fate 2.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+    - DLC1: N/A:Select DLC1 installer
+    - DLC2: N/A:Select DLC2 installer
+    - DLC3: N/A:Select DLC3 installer
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+        args: /SILENT 
+
+    - task:
+        executable: $DLC1
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC2
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC3
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+

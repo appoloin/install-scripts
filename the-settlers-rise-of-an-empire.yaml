@@ -1,0 +1,27 @@
+name: The Settlers Rise of an Empire
+game_slug: the-settlers-rise-of-an-empire
+version: Good Old Games Installer
+slug: the-settlers-rise-of-an-empire
+runner: wine
+year: 2007
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/The Settlers 6/Launch The Settlers - Rise of an Empire.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

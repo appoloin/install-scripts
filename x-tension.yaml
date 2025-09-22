@@ -1,0 +1,33 @@
+name:  X - Tension
+game_slug: x-tension
+version: Good Old Games Installer
+slug: x-tension
+runner: wine
+year: 2010
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/X - Tension/Launch X - Tension.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app:  qasf amstream quartz wmp11 l3codecx wmp9
+        name: winetricks
+        prefix: $GAMEDIR
+
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

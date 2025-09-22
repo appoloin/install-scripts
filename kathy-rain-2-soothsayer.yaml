@@ -1,0 +1,27 @@
+name: Kathy Rain 2 - Soothsayer
+game_slug: kathy-rain-2-soothsayer
+version: Good Old Games Installer
+slug: kathy-rain-2-soothsayer
+runner: wine
+year: 2025
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Kathy Rain 2/Launch Kathy Rain 2 - Soothsayer.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

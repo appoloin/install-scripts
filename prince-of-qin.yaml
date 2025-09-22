@@ -1,0 +1,27 @@
+name: Prince of Qin
+game_slug: prince-of-qin
+version: Good Old Games Installer
+slug: prince-of-qin
+runner: wine
+year: 2002
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Prince of Qin/Launch Prince of Qin.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

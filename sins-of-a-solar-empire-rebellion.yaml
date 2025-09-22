@@ -1,0 +1,38 @@
+name: Sins of a Solar Empire - REbellion
+game_slug: sins-of-a-solar-empire-rebellion
+version: Good Old Games Installer
+slug: sins-of-a-solar-empire-rebellion
+runner: wine
+year: 2012
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+    - DLC1: N/A:Select DLC1 installer
+    - DLC2: N/A:Select DLC2 installer
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Sins of a Solar Empire - Rebellion/Launch Sins of a Solar Empire® - Rebellion Ultimate Edition.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+        args: /SILENT 
+
+    - task:
+        executable: $DLC1
+        name: wineexec
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC2
+        name: wineexec
+        prefix: $GAMEDIR

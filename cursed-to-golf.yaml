@@ -1,0 +1,27 @@
+name: Cursed to Golf
+game_slug: cursed-to-golf
+version: Good Old Games Installer
+slug: cursed-to-golf
+runner: wine
+year: 2022
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Cursed to Golf/Launch Cursed to Golf.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the Setup file
+  
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

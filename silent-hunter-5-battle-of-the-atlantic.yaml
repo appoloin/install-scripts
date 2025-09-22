@@ -1,0 +1,26 @@
+name: Silent Hunter 5 - Battle of the Atlantic
+game_slug: silent-hunter-5-battle-of-the-atlantic
+version: Good Old Games Installer
+slug: silent-hunter-5-battle-of-the-atlantic
+runner: wine
+year: 2010
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Silent Hunter 5/sh5.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

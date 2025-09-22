@@ -1,0 +1,26 @@
+name: Sacred 2 Gold
+game_slug: sacred-2-gold
+version: Good Old Games Installer
+slug: sacred-2-gold
+runner: wine
+year: 2012
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Sacred 2 Gold/Launch Sacred 2 Gold.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

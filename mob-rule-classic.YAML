@@ -1,0 +1,26 @@
+name: Mob Rule
+game_slug: mob-rule-classic
+version: Good Old Games
+slug: mob-rule-classic
+runner: wine
+year: 1999
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Mob Rule/Launch Mob Rule.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

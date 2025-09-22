@@ -1,0 +1,26 @@
+name: Robin Hood the Legend of Sherwood
+game_slug: robin-hood-the-legend-of-sherwood
+version: Good Old Games Installer
+slug: robin-hood-the-legend-of-sherwood
+runner: wine
+year: 2002
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Robin Hood - The Legend of Sherwood/Launch Robin Hood - The Legend of Sherwood.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

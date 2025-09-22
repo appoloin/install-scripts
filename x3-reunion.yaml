@@ -1,0 +1,34 @@
+name:  X3 - Reunion
+game_slug: x3-reunion
+version: Good Old Games Installer
+slug: x3-reunion
+runner: wine
+year: 2005
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/X3 - Reunion/Launch X3 - Reunion.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app:  qasf amstream quartz wmp11
+        name: winetricks
+        prefix: $GAMEDIR
+
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+        args: /SILENT 
+

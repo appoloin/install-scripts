@@ -1,0 +1,27 @@
+name: Anno 1701
+game_slug: anno-1701
+version: Good Old Games Installer
+slug: anno-1701
+runner: wine
+year: 2006
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Anno 1701 AD/Launch Anno 1701 AD.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

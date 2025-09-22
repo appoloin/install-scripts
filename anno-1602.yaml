@@ -1,0 +1,35 @@
+name: Anno 1602
+game_slug: anno-1602-ad
+version: Good Old Games Installer
+slug: anno-1602-ad
+runner: wine
+year: 1998
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Anno 1602/Launch Anno 1602 - Creation of a New World.lnk"
+    prefix: $GAMEDIR
+
+  install_complete_text: "Installation finished!\n\n\n\nIMPORTANT!\n============\nPlease\
+    \ change the wine version in the game\xB4s settings to \"UMU-Latest\"\ "
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: directmusic
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

@@ -1,0 +1,39 @@
+name: The Planet Crafter
+game_slug: the-planet-crafter
+version: Good Old Games Installer
+slug: the-planet-crafter
+runner: wine
+year: 2022
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/The Planet Crafter/Launch The Planet Crafter.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+    - DLC1: N/A:Select DLC1 installer
+ 
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: quartz icodecs corefonts
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC1
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
