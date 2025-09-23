@@ -14,6 +14,9 @@ script:
     - setup: N/A:Select Surviving Mars installer
     - DLC2: N/A:Select Patch
     - DLC1: N/A:Select DLC
+    - mods:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/SurvivingMarsMods.zip.001
+        filename: SurvivingMarsMods.zip.001
 
   installer:
     - task:
@@ -79,7 +82,9 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
-
+    - execute:
+        file: 7z
+        args: x $mods -o"$GAMEDIR/drive_c/users/$USER/AppData/Roaming/Surviving Mars" -ppassword -y
 
   wine:
     fsync: false
