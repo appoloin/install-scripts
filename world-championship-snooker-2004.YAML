@@ -1,0 +1,111 @@
+name: World Championship Snooker 2004
+game_slug: world-championship-snooker-2004
+version: Windows Installer
+slug: world-championship-snooker-2004
+runner: wine
+year: 2004
+
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Codemasters/World Championship Snooker 2004/wcs2004.exe
+    launch_configs:
+      - exe: $GAMEDIR/drive_c/Program Files (x86)/Codemasters/World Championship Snooker 2004/dgVoodooCpl.exe
+        name:  DgVoodoo Config
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+    - patch:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Snooker/World_Championship_Snooker_2004%20Patch%201.1.7z
+        filename: World_Championship_Snooker_2004 Patch 1.1.7z
+    - nocd:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Snooker/World_Championship_Snooker_2004%201.1%20NoCD.zip.001
+        filename: World_Championship_Snooker_2004 1.1 NoCD.zip.001
+    - dgVoodoo:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/dgVoodoo2_79_3.zip
+        filename: dgVoodoo2_79_3.zip
+    - klite:
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/K-Lite_Codec_Pack_1920_Basic.exe
+        filename: K-Lite_Codec_Pack_1920_Basic.exe
+
+  install_complete_text: "Installation finished!\n\n\n\nIMPORTANT!\n============\nPlease\
+    \ change the wine version in the game\xB4s settings to \"UMU-Latest\"\ "
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: quartz qcap wmp11 
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $klite
+        args: /verysilent
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - extract:  
+        file: $patch
+        dst:  $CACHE 
+
+    - task:
+        executable: $CACHE/SETUP.EXE
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: e $nocd -o"$GAMEDIR/drive_c/Program Files (x86)/Codemasters/World Championship Snooker 2004" -ppassword -y
+
+
+    - execute:
+        file: 7z
+        args: x $dgVoodoo -o"$CACHE" -ppassword -y
+
+    - copy:
+        src: $CACHE/MS/x86/DDraw.dll
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Codemasters/World Championship Snooker 2004
+
+    - copy:
+        src: $CACHE/MS/x86/D3D8.dll
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Codemasters/World Championship Snooker 2004
+
+    - copy:
+        src: $CACHE/MS/x86/D3D9.dll
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Codemasters/World Championship Snooker 2004
+
+    - copy:
+        src: $CACHE/MS/x86/D3DImm.dll
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Codemasters/World Championship Snooker 2004
+
+    - copy:
+        src: $CACHE/dgVoodooCpl.exe
+        dst: $GAMEDIR/drive_c/Program Files (x86)/Codemasters/World Championship Snooker 2004
+
+    - write_config:
+        data:
+            DirectX:
+                dgVoodooWatermark: false
+                Resolution: desktop
+            GeneralExt:
+                FPSLimit: 60
+        file: "$GAMEDIR/drive_c/Program Files (x86)/Codemasters/World Championship Snooker 2004/dgVoodoo.conf"
+
+  wine:
+    overrides:
+      ddraw: n,b
+      d3d8: n,b
+      d3d9: n,b
+      d3dimm: n,b
