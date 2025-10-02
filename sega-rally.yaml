@@ -10,7 +10,10 @@ script:
     - setup: N/A:Select setup file
 
   game:
-    exe: "$GAMEDIR/drive_c/MagiPacks/Sega Rally/SEGARallyLauncher.exe"
+    exe: "$GAMEDIR/drive_c/MagiPacks/Sega Rally/SEGA Rally_SSE1.exe"
+    launch_configs:
+      - exe: "$GAMEDIR/drive_c/MagiPacks/Sega Rally/SEGARallyLauncher.exe"
+        name: Configuration
     prefix: $GAMEDIR
 
   installer:
@@ -21,7 +24,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: wmp9
+        app: wmp9 dinput8
         description: Installing additional components
         name: winetricks
         prefix: $GAMEDIR
