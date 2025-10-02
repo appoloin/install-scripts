@@ -1,0 +1,49 @@
+name: Project Cars
+game_slug: project-cars-game-of-the-year-edition
+version: Windows Installer
+slug: project-cars-game-of-the-year-edition
+runner: wine
+year: 2016
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files/Project CARS/pCARS64.exe
+    prefix: $GAMEDIR
+
+  files:
+    - game:  N/A:Select file exe
+    - patch1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/ProjectCars/ProjectCars.7z.001
+        filename: ProjectCars.7z.001
+    - patch2:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/ProjectCars/ProjectCars.7z.002
+        filename: ProjectCars.7z.002
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: true
+        install_gecko: false
+        prefix: $GAMEDIR
+ 
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - merge:
+        src: "$patch1"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch2"
+        dst: "$CACHE"
+    - merge:
+        src: "$patch3"
+        dst: "$CACHE"
+
+    - execute:
+        file: 7z
+        args: e "$CACHE/ProjectCars.7z.001" -o"$GAMEDIR/drive_c/drive_c/Program Files/Project CARS/" -ppassword -y
+
+

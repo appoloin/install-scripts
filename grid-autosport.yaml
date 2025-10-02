@@ -1,0 +1,43 @@
+name: Grid Autosport
+game_slug: grid-autosport
+version: Windows Installer
+slug: grid-autosport
+runner: wine
+year: 2014
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Program Files/GRID Autosport/GRIDAutosport.exe
+    prefix: $GAMEDIR
+
+  files:
+    - game:  N/A:Select file exe
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/Grid-Autosport.7z
+        filename:  Grid-Autosport.7z
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: true
+        install_gecko: false
+        prefix: $GAMEDIR
+ 
+    - task:
+        app: xact xact_x64
+        description: Running Winetricks
+        name: winetricks
+        prefix: $GAMEDIR  
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files/GRID Autosport/" -ppassword -y
+
+wine:
+  dxvk_nvapi: false
