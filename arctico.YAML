@@ -1,5 +1,5 @@
 name: Arctico
-game_slug: Arctico
+game_slug: arctico
 version: Good Old Games Installer
 slug: arctico
 runner: wine
