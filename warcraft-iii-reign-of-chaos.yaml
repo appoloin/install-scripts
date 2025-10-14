@@ -1,0 +1,39 @@
+name: Warcraft III - Reign of Chaos
+game_slug: warcraft-iii-reign-of-chaos
+version: Good Old Games Installer
+slug: warcraft-iii-reign-of-chaos
+runner: wine
+year: 2002
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/MagiPacks/Warcraft III - Complete Edition/Warcraft III.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: baekmuk arial
+        description: 'Installing Fonts'
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        app: lavfilters
+        description: 'Installing Codecs'
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

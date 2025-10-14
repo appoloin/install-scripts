@@ -1,0 +1,62 @@
+name: Gender Wars
+game_slug: gender-wars
+version: DOS
+slug: gender-wars
+runner: dosbox
+year: 1996
+
+script:
+  game:
+    main_file: $GAMEDIR/play.conf
+
+  files:
+    - game:  N/A:Select file run.bat
+
+  installer:
+    #copy everything
+    - execute:
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
+
+          cp -avr "$src_path/."  "$GAMEDIR"
+
+          '    
+
+    - write_file:
+        content: '[mouse]
+
+            mouse_capture = onstart   
+            
+            mouse_middle_release=true   
+
+            mouse_sensitivity= 15
+
+
+          [sdl]
+              
+            fullscreen=true
+
+            output=opengl
+            
+          [cpu]
+
+            cpu_cycles = 50000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
+
+
+          [autoexec]
+          
+            mount C "$GAMEDIR/" -t dir
+
+            imgmount D "$GAMEDIR/cd/gender.cue" -t cdrom
+
+            C:          
+
+            GW
+            
+            exit'
+        file: $GAMEDIR/play.conf
