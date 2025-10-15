@@ -1,0 +1,27 @@
+name: Castle of heart Retold
+game_slug: castle-of-heart-retold
+version: Good Old Games Installer
+slug: castle-of-heart-retold
+runner: wine
+year: 2025
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Castle of Heart Retold/Launch Castle of Heart - Retold.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
