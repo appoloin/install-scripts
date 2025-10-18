@@ -49,17 +49,15 @@ script:
 
             fullscreen=true
 
-            output=opengl
-
           [render]
 
-            glshader=crt-easymode-flat
+            glshader=sharp
 
           [autoexec]
           
             mount C "$GAMEDIR/" -t dir
 
-            imgmount D "$GAMEDIR/cd/Archimedean Dynasty.cue" -t cdrom
+            imgmount D "$GAMEDIR/CD/Archimedean Dynasty.cue" -t cdrom
 
             C:
             
