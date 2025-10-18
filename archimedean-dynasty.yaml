@@ -28,7 +28,7 @@ script:
             
             mouse_middle_release=true   
 
-            mouse_sensitivity= 50
+            mouse_sensitivity= 150
 
            [cpu]
 
@@ -53,10 +53,7 @@ script:
 
           [render]
 
-            aspect=true
-
-            scaler=normal2x
-
+            glshader=crt-easymode-flat
 
           [autoexec]
           
