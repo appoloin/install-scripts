@@ -64,9 +64,7 @@ script:
 
           [render]
 
-            aspect=true
-
-            scaler=normal2x
+            glshader=sharp
 
 
           [autoexec]
