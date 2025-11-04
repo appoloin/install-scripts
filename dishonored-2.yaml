@@ -1,0 +1,26 @@
+name: Dishonored 2
+game_slug: dishonored-2
+version: Good Old Games Installer
+slug:  dishonored-installer
+runner: wine
+year: 2016
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Dishonored 2/Launch Dishonored 2.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: true
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

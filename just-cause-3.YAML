@@ -1,0 +1,38 @@
+name: Just Cause 3
+game_slug: just-cause-3
+version: Windows Installer
+slug: just-cause-3
+runner: wine
+year: 2015
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/drive_c/Just Cause 3/JustCause3.exe
+    prefix: $GAMEDIR
+    args: /borderless /windowed
+
+  files:
+    - patch: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/JustCause3.7z.001
+        filename: patch.7z
+
+  installer:
+    - insert-disc:
+          description: Select game folder
+          requires: JustCause3.exe
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - execute:
+        file: cp 
+        args: -r "$DISC/"  "$GAMEDIR/drive_c/"
+
+
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/Just Cause 3/" -ppassword -y
+

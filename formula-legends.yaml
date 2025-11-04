@@ -1,0 +1,38 @@
+name: Formula Legends
+game_slug: formula-legends
+version: Windows Installer
+slug: formula-legends
+runner: wine
+year: 2025
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Formula Legends/Launch Formula Legends.lnk"
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the Setup file
+    - DLC1: N/A:Select DLC1 installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: vcrun2022
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC1
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR

@@ -1,0 +1,39 @@
+name:  Shado Gambit - The Cursed Crew
+game_slug: shadow-gambit-the-cursed-crew
+version: Good Old Games
+slug: shadow-gambit-the-cursed-crew
+runner: wine
+year: 2023
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Shadow Gambit The Cursed Crew/Launch Shadow Gambit - The Cursed Crew.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+    - DLC1: N/A:Select DLC1 installer
+    - DLC2: N/A:Select DLC2 installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC1
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC2
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
