@@ -2,13 +2,14 @@ name: Plundered hearts
 game_slug:  plundered-hearts
 version: DOS
 slug: plundered-hearts-installer
-runner: scummvm
+runner: flatpak
 year: 1987
 
 script:
   game:
-    game_id: plunderedhearts
-    path: $GAMEDIR
+    appid: io.github.garglk.Gargoyle
+    args: $GAMEDIR/PLUNDERE.DAT
+    working_dir: $GAMEDIR
 
   installer:
     - insert-disc:
@@ -22,10 +23,6 @@ script:
           find "$src_path" -type f \( -iname "PLUNDERE.DAT" \) -exec cp {} "$GAMEDIR" \;
           '
 
-
     - execute:
         file: chmod
         args: -R 775  "$GAMEDIR"
-
-  scummvm:
-    fullscreen: false

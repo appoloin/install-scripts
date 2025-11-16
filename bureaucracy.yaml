@@ -2,14 +2,16 @@ name: Bureacracy
 game_slug: bureaucracy
 version: DOS
 slug:  bureaucracy-installer
-runner: scummvm
+runner: flatpak
 year: 1987
 
 script:
  
   game:
-    game_id: bureaucracy  
-    path: $GAMEDIR
+    appid: io.github.garglk.Gargoyle
+    args: $GAMEDIR/BUREAUCR.DAT
+    working_dir: $GAMEDIR
+
 
   installer:
     - insert-disc:

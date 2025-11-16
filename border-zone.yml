@@ -2,13 +2,14 @@ name: Border Zone
 game_slug:  border-zone
 version: DOS
 slug:  border-zone-installer
-runner: scummvm
+runner: flatpak
 year: 1987
 
 script:
   game:
-    game_id: borderzone
-    path: $GAMEDIR
+    appid: io.github.garglk.Gargoyle
+    args: $GAMEDIR/BORDERZO.DAT
+    working_dir: $GAMEDIR
 
   installer:
     - insert-disc:
@@ -26,5 +27,3 @@ script:
         file: chmod        
         args: -R 775  "$GAMEDIR"
 
-  scummvm:
-    fullscreen: false

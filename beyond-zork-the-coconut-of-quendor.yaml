@@ -2,14 +2,16 @@ name: Beyond Zork
 game_slug: beyond-zork-the-coconut-of-quendor
 version: DOS
 slug:  beyond-zork-installer
-runner: scummvm
+runner: flatpak
 year: 1987
 
 script:
  
   game:
-    game_id: beyondzork  
-    path: $GAMEDIR
+    appid: io.github.garglk.Gargoyle
+    args: $GAMEDIR/BEYONDZO.DAT
+    working_dir: $GAMEDIR
+
 
   installer:
     - insert-disc:
@@ -27,5 +29,3 @@ script:
         file: chmod
         args: -R 775  "$GAMEDIR"
        
-  scummvm:
-    fullscreen: false

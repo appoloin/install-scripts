@@ -2,13 +2,15 @@ name: Seastalker
 game_slug: seastalker
 version: DOS
 slug: seastalker-installer
-runner: scummvm
+runner: flatpak
 year: 1984
 
 script:
   game:
-    game_id: seastalker
-    path: $GAMEDIR
+    appid: io.github.garglk.Gargoyle
+    args: $GAMEDIR/SEASTALK.DAT
+    working_dir: $GAMEDIR
+
 
   installer:
     - insert-disc:
@@ -26,5 +28,3 @@ script:
         file: chmod
         args: -R 775  "$GAMEDIR"
 
-  scummvm:
-    fullscreen: false

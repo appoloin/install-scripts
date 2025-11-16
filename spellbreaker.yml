@@ -2,13 +2,15 @@ name: Spellbreaker
 game_slug: spellbreaker
 version: DOS
 slug: spellbreaker-installer
-runner: scummvm
+runner: flatpak
 year: 1985
 
 script:
   game:
-    game_id: spellbreaker
-    path: $GAMEDIR
+    appid: io.github.garglk.Gargoyle
+    args: $GAMEDIR/SPELLBRE.DAT
+    working_dir: $GAMEDIR
+
 
   installer:
     - insert-disc:
@@ -25,6 +27,3 @@ script:
     - execute:
         file: chmod
         args: -R 775  "$GAMEDIR"
-
-  scummvm:
-    fullscreen: false

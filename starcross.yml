@@ -2,13 +2,15 @@ name: Starcross
 game_slug: starcross
 version: DOS
 slug: stracross-installer
-runner: scummvm
+runner: flatpak
 year: 1982
 
 script:
   game:
-    game_id: starcross
-    path: $GAMEDIR
+    appid: io.github.garglk.Gargoyle
+    args: $GAMEDIR/STARCROS.DAT
+    working_dir: $GAMEDIR
+
 
   installer:
     - insert-disc:
@@ -26,5 +28,3 @@ script:
         file: chmod
         args: -R 775  "$GAMEDIR"
 
-  scummvm:
-    fullscreen: false

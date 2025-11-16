@@ -2,13 +2,14 @@ name: Enchanter
 game_slug: enchanter
 version: DOS
 slug: enchanter-installer
-runner: scummvm
+runner: flatpak
 year: 1983
 
 script:
   game:
-    game_id: enchanter
-    path: $GAMEDIR
+    appid: io.github.garglk.Gargoyle
+    args: $GAMEDIR/ENCHANTE.DAT
+    working_dir: $GAMEDIR
 
   installer:
     - insert-disc:
@@ -26,5 +27,3 @@ script:
         file: chmod
         args: -R 775  "$GAMEDIR"
 
-  scummvm:
-    fullscreen: false

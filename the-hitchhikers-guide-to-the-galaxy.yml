@@ -2,13 +2,14 @@ name: The Hitchhikers Guide to the Galaxy
 game_slug: the-hitchhikers-guide-to-the-galaxy
 version: DOS
 slug: hhgttg-installer
-runner: scummvm
+runner: flatpak
 year: 1986
 
 script:
   game:
-    game_id: hhgttg
-    path: $GAMEDIR
+    appid: io.github.garglk.Gargoyle
+    args: $GAMEDIR/HITCHHIK.DAT
+    working_dir: $GAMEDIR
 
   installer:
     - insert-disc:
@@ -25,6 +26,3 @@ script:
     - execute:
         file: chmod
         args: -R 775  "$GAMEDIR"
-
-  scummvm:
-    fullscreen: false

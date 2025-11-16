@@ -2,13 +2,14 @@ name: The Witness
 game_slug: the-witness--1
 version: DOS
 slug: the-witness-installer
-runner: scummvm
+runner: flatpak
 year: 1983
 
 script:
   game:
-    game_id: thewitness
-    path: $GAMEDIR
+    appid: io.github.garglk.Gargoyle
+    args: $GAMEDIR/WITNESS.DAT
+    working_dir: $GAMEDIR
 
   installer:
     - insert-disc:
@@ -26,5 +27,3 @@ script:
         file: chmod
         args: -R 775  "$GAMEDIR"
 
-  scummvm:
-    fullscreen: false

@@ -2,13 +2,14 @@ name: Planetfall
 game_slug: planetfall
 version: DOS
 slug:  planetfal-linstaller
-runner: scummvm
+runner: flatpak
 year: 1983
 
 script:
   game:
-    game_id: planetfall  
-    path: $GAMEDIR
+    appid: io.github.garglk.Gargoyle
+    args: $GAMEDIR/PLANETFA.DAT
+    working_dir: $GAMEDIR
 
   installer:
     - insert-disc:

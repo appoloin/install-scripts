@@ -2,14 +2,16 @@ name: Stationfall
 game_slug: stationfall
 version:  DOS
 slug:  stationfall-installer
-runner: scummvm
+runner: flatpak
 year: 1987
 
 script:
  
   game:
-    game_id: stationfall  
-    path: $GAMEDIR
+    appid: io.github.garglk.Gargoyle
+    args: $GAMEDIR/STATIONF.DAT
+    working_dir: $GAMEDIR
+
 
   installer:
     - insert-disc:

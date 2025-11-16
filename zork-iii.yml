@@ -2,13 +2,14 @@ name: Zork III
 game_slug: zork-iii
 version: DOS
 slug: zork-iii
-runner: scummvm
+runner: flatpak
 year: 1983
 
 script:
   game:
-    game_id: zork3
-    path: $GAMEDIR
+    appid: io.github.garglk.Gargoyle
+    args: $GAMEDIR/ZOKR3.DAT
+    working_dir: $GAMEDIR
 
   installer:
     - insert-disc:
@@ -26,5 +27,3 @@ script:
         file: chmod
         args: -R 775  "$GAMEDIR"
 
-  scummvm:
-    fullscreen: false

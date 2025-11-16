@@ -2,14 +2,15 @@ name: Deadline
 game_slug: deadline
 version: DOS
 slug: deadline-installer
-runner: scummvm
+runner: flatpak
 year: 1982
 
 script:
   
   game:
-    game_id: deadline
-    path: $GAMEDIR
+    appid: io.github.garglk.Gargoyle
+    args: $GAMEDIR/DEADLINE.DAT
+    working_dir: $GAMEDIR
 
   installer:
     - insert-disc:
@@ -27,5 +28,3 @@ script:
         file: chmod
         args: -R 775  "$GAMEDIR"
 
-  scummvm:
-    fullscreen: false

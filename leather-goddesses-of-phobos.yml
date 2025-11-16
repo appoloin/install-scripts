@@ -2,13 +2,15 @@ name: Leather Goddess of phobos
 game_slug:  leather-goddesses-of-phobos
 version:  DOS
 slug:  leather-goddess-of-phobos-installer
-runner: scummvm
+runner: flatpak
 year: 1986
 
 script:
   game:
-    game_id: lgop
-    path: $GAMEDIR
+    appid: io.github.garglk.Gargoyle
+    args: $GAMEDIR/LEATHER.DAT
+    working_dir: $GAMEDIR
+
 
   installer:
     - insert-disc:

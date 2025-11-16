@@ -2,13 +2,15 @@ name: Sorcerer
 game_slug: sorcerer
 version: DOS
 slug: sorcerer-installer
-runner: scummvm
+runner: flatpak
 year: 1984
 
 script:
   game:
-    game_id: sorcerer
-    path: $GAMEDIR
+    appid: io.github.garglk.Gargoyle
+    args: $GAMEDIR/SORCERER.DAT
+    working_dir: $GAMEDIR
+
 
   installer:
     - insert-disc:
@@ -25,6 +27,3 @@ script:
     - execute:
         file: chmod
         args: -R 775  "$GAMEDIR"
-
-  scummvm:
-    fullscreen: false

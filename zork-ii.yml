@@ -2,13 +2,14 @@ name: Zork II
 game_slug: zork-ii
 version: DOS
 slug: zork-ii
-runner: scummvm
+runner: flatpak
 year: 1981
 
 script:
   game:
-    game_id: zork2
-    path: $GAMEDIR
+    appid: io.github.garglk.Gargoyle
+    args: $GAMEDIR/ZORK2.DAT
+    working_dir: $GAMEDIR
 
   installer:
     - insert-disc:
@@ -27,5 +28,3 @@ script:
         file: chmod
         args: -R 775  "$GAMEDIR"
 
-  scummvm:
-    fullscreen: false
