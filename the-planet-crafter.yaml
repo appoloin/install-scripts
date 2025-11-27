@@ -13,6 +13,7 @@ script:
   files:
     - setup: N/A:Select the GOG installer
     - DLC1: N/A:Select DLC1 installer
+    - DLC2: N/A:Select DLC2 installer
  
 
   installer:
@@ -34,6 +35,12 @@ script:
 
     - task:
         executable: $DLC1
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC2
         name: wineexec
         args: /SILENT 
         prefix: $GAMEDIR
