@@ -1,0 +1,28 @@
+name: Control
+game_slug: control
+version: Good Old Games Installer
+slug: control
+runner: wine
+year: 2019
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Control/Control.exe
+    prefix: $GAMEDIR
+    args: -dx11
+    
+  files:
+    - setup: N/A:Select installer
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
