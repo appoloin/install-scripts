@@ -2,16 +2,17 @@ name: Beyond Zork
 game_slug: beyond-zork-the-coconut-of-quendor
 version: DOS
 slug:  beyond-zork-installer
-runner: flatpak
+runner: dosbox
 year: 1987
 
 script:
- 
   game:
-    appid: io.github.garglk.Gargoyle
-    args: $GAMEDIR/BEYONDZO.DAT
-    working_dir: $GAMEDIR
+    main_file: $GAMEDIR/play.conf
 
+  files:
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/frotz255.zip
+        filename: frotz255.zip
 
   installer:
     - insert-disc:
@@ -29,3 +30,36 @@ script:
         file: chmod
         args: -R 775  "$GAMEDIR"
        
+    - write_file:
+        content: '[mouse]
+
+            mouse_capture = onstart   
+            
+            mouse_middle_release=true   
+
+            mouse_sensitivity= 150
+
+           [cpu]
+
+            cpu_cycles = 50000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
+
+          [render]
+
+            glshader=sharp
+
+          [autoexec]
+          
+            mount C "$GAMEDIR/" -t dir
+
+            C:
+
+            frotz BEYONDZO.DAT
+
+            exit'
+        file: $GAMEDIR/play.conf
