@@ -1,30 +1,34 @@
-name: Fahrenheit 451
-game_slug: fahrenheit-451
+name: Atomix
+game_slug: atomix
 version: DOS
-slug:   fahrenheit-451
+slug: atomix
 runner: dosbox
-year: 1984
+year: 1990
 
 script:
   files:
-    - game: N/A:Select F451.EXE
+    - game: N/A:Select file Install.exe.
 
   game:
     main_file: $GAMEDIR/play.conf
 
   installer:
     - execute:
+        args: $GAMEDIR/drive_c $GAMEDIR/drive_c/atomix
         file: mkdir
-        args: $GAMEDIR/drive_c $GAMEDIR/drive_c/fahren $GAMEDIR/drive_a  
 
 
     #copy everything
     - execute:
         command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
 
-          cp -avr "$src_path/."  "$GAMEDIR/drive_c/fahren"
+          cp -avr "$src_path/."  "$GAMEDIR/drive_c/atomix"
 
           '    
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
 
     - write_file:
         content: '[cpu]
@@ -37,7 +41,7 @@ script:
 
             cpu_throttle = on
 
-        
+          
           [mouse]
 
             mouse_capture = onstart   
@@ -48,18 +52,14 @@ script:
 
           [autoexec]
 
-            mount A "$GAMEDIR/drive_a" -t floppy
-            
+
             mount C "$GAMEDIR/drive_c" -t dir
-
-            cls 
-
+         
             c: 
 
-            cd fahren 
+            cd atomix
 
-            F451.EXE
+            game
 
             exit'
         file: $GAMEDIR/play.conf
-
