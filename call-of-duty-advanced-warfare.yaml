@@ -1,0 +1,33 @@
+name: Call of Duty -  Advanced Warfare
+game_slug: call-of-duty-advanced-warfare
+version: Windows Installer
+slug: call-of-duty-advanced-warfare
+runner: wine
+year: 2014
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Activision/Call of Duty - Advanced Warfare/s1_sp64_ship.exe"
+    prefix: $GAMEDIR
+
+  files:
+    - game: N/A:Select installer.
+    - patch: 
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/CallOfDuty/CallOfDutyAdancedWarefarePatch.tar.gz
+        filename: patch.zip
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $game
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: e $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Activision/Call of Duty - Advanced Warfare/" -ppassword -y

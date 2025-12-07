@@ -1,0 +1,27 @@
+name: Sekiro - Shadows Die Twice
+game_slug: sekiro-shadows-die-twice
+version: Windows Installer
+slug: sekiro-shadows-die-twice
+runner: wine
+year: 2019
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/Games/Sekiro Shadows Die Twice GOTY Edition/sekiro.exe"
+    prefix: $GAMEDIR
+
+  files:
+    - game: N/A:Select installer.
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $game
+        name: wineexec
+        prefix: $GAMEDIR
+
