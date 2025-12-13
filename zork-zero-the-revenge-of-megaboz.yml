@@ -36,7 +36,7 @@ script:
             
             mouse_middle_release=true   
 
-            mouse_sensitivity= 15
+            mouse_sensitivity= 60
 
           [cpu]
 
