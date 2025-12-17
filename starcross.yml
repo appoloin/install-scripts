@@ -28,3 +28,18 @@ script:
         file: chmod
         args: -R 775  "$GAMEDIR"
 
+    #trizbort launcher 
+    - write_file:
+        content: '#!/bin/bash
+        
+         flatpak-spawn --host env LUTRIS_SKIP_INIT=1 flatpak run net.lutris.Lutris lutris:rungame/trizbort
+
+         '
+        file: $GAMEDIR/trizbort.sh
+
+    - execute:
+        file: chmod
+        args: +x  "$GAMEDIR/trizbort.sh"
+
+  system:
+    prelaunch_command: $GAMEDIR/trizbort.sh

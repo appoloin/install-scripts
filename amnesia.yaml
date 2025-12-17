@@ -46,6 +46,11 @@ script:
             cpu_throttle = on
 
 
+           [render]
+
+            glshader=sharp
+
+
           [autoexec]
 
             mount A "$GAMEDIR/drive_c/amnesia" -t floppy -label "Amnesia Disk 1"
@@ -61,3 +66,23 @@ script:
             exit'
         file: $GAMEDIR/play.conf
 
+    #trizbort launcher 
+    - write_file:
+        content: '#!/bin/bash
+        
+         flatpak-spawn --host env LUTRIS_SKIP_INIT=1 flatpak run net.lutris.Lutris lutris:rungame/trizbort
+
+         '
+        file: $GAMEDIR/trizbort.sh
+
+    - execute:
+        file: chmod
+        args: +x  "$GAMEDIR/trizbort.sh"
+
+  system:
+    prelaunch_command: $GAMEDIR/trizbort.sh
+
+
+  dosbox:
+    fullscreen: false
+    exit: true
