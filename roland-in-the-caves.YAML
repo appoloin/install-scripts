@@ -1,0 +1,29 @@
+name: Roland in the Caves
+game_slug: roland-in-the-caves
+version: Amstrad
+slug: roland-in-the-caves
+runner: mame
+year: 1988
+
+script:
+  game:
+    main_file: $GAMEDIR/rolandcv.zip
+    args:  -natural 
+    machine: cpc6128
+    device: flop1
+    autoboot_command: 'run"disc'
+    autoboot_delay: 3
+
+  files:
+    - game: N/A:Select rolandcv.zip.
+
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+  mame:
+    fullscreen: true
+    uimodekey: "Right Alt"
+    rompath: /home/$USER/Games/BIOS/cpc
