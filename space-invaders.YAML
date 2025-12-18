@@ -1,0 +1,42 @@
+name: Space Invaders
+game_slug: space-invaders
+version: ROM
+slug: space-invaders
+runner: mame
+year: 1978
+
+script:
+  game:
+    main_file: $GAMEDIR/invaders.zip
+    args: -artpath "$GAMEDIR/bazel"
+
+  files:
+    - game: N/A:Select invaders.zip.
+    - bazel1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Art/Space-Invaders/invaders.7z.001
+        filename: invaders.7z.001
+    - bazel2:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Art/Space-Invaders/invaders.7z.002
+        filename: invaders.7z.002
+
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    #Move Patch into one folder
+    - merge:
+        src: "$bazel1"
+        dst: "$CACHE"
+    - merge:
+        src: "$bazel2"
+        dst: "$CACHE"
+
+    - execute:
+        file: 7z
+        args: x  $CACHE/invaders.7z.001 -o"$GAMEDIR/bazel" -ppassword -y
+
+  mame:
+    fullscreen: true
+    uimodekey: "Right Alt"

@@ -1,0 +1,35 @@
+name: Pac-Man
+game_slug: pac-man
+version: ROM
+slug: pac-man
+runner: mame
+year: 1980
+
+script:
+  game:
+    main_file: $GAMEDIR/pacman.zip
+    args: -artpath "$GAMEDIR/bazel"
+
+  files:
+    - game: N/A:Select pacman.zip.
+    - bazel1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Art/pacman.zip
+        filename: pacman.zip
+
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/bazel
+
+    - move:
+        src: $bazel1
+        dst: "$GAMEDIR/bazel"
+
+  mame:
+    fullscreen: true
+    uimodekey: "Right Alt"
