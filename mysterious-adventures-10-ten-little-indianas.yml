@@ -1,0 +1,44 @@
+name: Mysterious Adventures 10 - Ten Little Indianas 
+game_slug: mysterious-adventures-10-ten-little-indianas
+version: C46
+slug: mysterious-adventures-10-ten-little-indianas
+runner: flatpak
+year: 1981
+
+script:
+  game:
+    appid: io.github.garglk.Gargoyle
+    args: "'$GAMEDIR/Mysterious 10 - Ten Little Indians.dat'"
+    working_dir: $GAMEDIR
+
+  installer:
+    - insert-disc:
+        description: Please insert DISC
+        requires: Mysterious 10 - Ten Little Indians.dat
+
+    #copy
+    - execute:
+        command: 'src_path=$(echo "$DISC" | sed -r "s/(.+)\/.+/\1/")
+
+          find "$src_path" -type f \( -iname "*.DAT" \) -exec cp {} "$GAMEDIR" \;
+          '
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+    #trizbort launcher 
+    - write_file:
+        content: '#!/bin/bash
+        
+         flatpak-spawn --host env LUTRIS_SKIP_INIT=1 flatpak run net.lutris.Lutris lutris:rungame/trizbort
+
+         '
+        file: $GAMEDIR/trizbort.sh
+
+    - execute:
+        file: chmod
+        args: +x  "$GAMEDIR/trizbort.sh"
+
+  system:
+    prelaunch_command: $GAMEDIR/trizbort.sh

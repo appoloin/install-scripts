@@ -1,0 +1,44 @@
+name: Mysterious Adventures 3 - Arrow of Death Part 2
+game_slug: mysterious-adventures-3-arrow-of-death-part2
+version: C46
+slug: mysterious-adventures-3-arrow-of-death-part2
+runner: flatpak
+year: 1982
+
+script:
+  game:
+    appid: io.github.garglk.Gargoyle
+    args: "'$GAMEDIR/Mysterious 04 - Arrow of Death Pt. 2.dat'"
+    working_dir: $GAMEDIR
+
+  installer:
+    - insert-disc:
+        description: Please insert DISC
+        requires: Mysterious 04 - Arrow of Death Pt. 2.dat
+
+    #copy
+    - execute:
+        command: 'src_path=$(echo "$DISC" | sed -r "s/(.+)\/.+/\1/")
+
+          find "$src_path" -type f \( -iname "*.DAT" \) -exec cp {} "$GAMEDIR" \;
+          '
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+    #trizbort launcher 
+    - write_file:
+        content: '#!/bin/bash
+        
+         flatpak-spawn --host env LUTRIS_SKIP_INIT=1 flatpak run net.lutris.Lutris lutris:rungame/trizbort
+
+         '
+        file: $GAMEDIR/trizbort.sh
+
+    - execute:
+        file: chmod
+        args: +x  "$GAMEDIR/trizbort.sh"
+
+  system:
+    prelaunch_command: $GAMEDIR/trizbort.sh

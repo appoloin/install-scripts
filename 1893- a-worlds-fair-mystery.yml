@@ -1,0 +1,44 @@
+name: 1893 - A World's Fair Mystery
+game_slug: 1893-a-worlds-fair-mystery
+version: DOS
+slug: 1893-a-worlds-fair-mystery
+runner: flatpak
+year: 2002
+
+script:
+  game:
+    appid: io.github.garglk.Gargoyle
+    args: $GAMEDIR/1893.gam
+    working_dir: $GAMEDIR
+
+  installer:
+    - insert-disc:
+        description: Please insert Lost Treasures of Infocom II CD
+        requires: 1893.gam
+
+    #copy
+    - execute:
+        command: 'src_path=$(echo "$DISC" | sed -r "s/(.+)\/.+/\1/")
+
+          find "$src_path" -type f \( -iname "1893.gam" \) -exec cp {} "$GAMEDIR" \;
+          '
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR"
+
+    #trizbort launcher 
+    - write_file:
+        content: '#!/bin/bash
+        
+         flatpak-spawn --host env LUTRIS_SKIP_INIT=1 flatpak run net.lutris.Lutris lutris:rungame/trizbort
+
+         '
+        file: $GAMEDIR/trizbort.sh
+
+    - execute:
+        file: chmod
+        args: +x  "$GAMEDIR/trizbort.sh"
+
+  system:
+    prelaunch_command: $GAMEDIR/trizbort.sh
