@@ -1,0 +1,37 @@
+name:  The Scoop
+game_slug: the-scoop
+version: Spectrum
+slug:  the-scoop
+runner: flatpak
+year: 1985
+
+script:
+  game:
+    appid: net.sourceforge.fuse_emulator.Fuse
+    args: "'$GAMEDIR/Scoop.tzx'"
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select Scoop.tzx
+
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    #trizbort launcher 
+    - write_file:
+        content: '#!/bin/bash
+        
+         flatpak-spawn --host env LUTRIS_SKIP_INIT=1 flatpak run net.lutris.Lutris lutris:rungame/trizbort
+
+         '
+        file: $GAMEDIR/trizbort.sh
+
+    - execute:
+        file: chmod
+        args: +x  "$GAMEDIR/trizbort.sh"
+
+  system:
+    prelaunch_command: $GAMEDIR/trizbort.sh
