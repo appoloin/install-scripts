@@ -1,0 +1,41 @@
+name:  Operation Berlin
+game_slug: operation-berlin
+version: Spectrum
+slug: operation-berlin
+runner: flatpak
+year: 1983
+
+script:
+  game:
+    appid: net.sourceforge.fuse_emulator.Fuse
+    args: "'$GAMEDIR/sidea.tzx'"
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select sidea.tzx
+    - game2: N/A:Select sidev.tzx
+
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+    - copy:
+        src: $game2
+        dst: $GAMEDIR
+
+    #trizbort launcher 
+    - write_file:
+        content: '#!/bin/bash
+        
+         flatpak-spawn --host env LUTRIS_SKIP_INIT=1 flatpak run net.lutris.Lutris lutris:rungame/trizbort
+
+         '
+        file: $GAMEDIR/trizbort.sh
+
+    - execute:
+        file: chmod
+        args: +x  "$GAMEDIR/trizbort.sh"
+
+  system:
+    prelaunch_command: $GAMEDIR/trizbort.sh
