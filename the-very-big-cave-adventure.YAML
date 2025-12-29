@@ -1,0 +1,46 @@
+name: The Very Big Cave Adventure
+game_slug: the-very-big-cave-adventure
+version: Amstrad
+slug: the-very-big-cave-adventure
+runner: mame
+year: 1986
+
+script:
+  game:
+    main_file: $GAMEDIR/verybigc.zip
+    args:  -natural 
+    machine: cpc6128
+    device: flop1
+    autoboot_command: 'run"cave'
+    autoboot_delay: 3
+
+  files:
+    - game: N/A:Select verybigc.zip.
+
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    #trizbort launcher 
+    - write_file:
+        content: '#!/bin/bash
+        
+         flatpak-spawn --host env LUTRIS_SKIP_INIT=1 flatpak run net.lutris.Lutris lutris:rungame/trizbort
+
+         '
+        file: $GAMEDIR/trizbort.sh
+
+    - execute:
+        file: chmod
+        args: +x  "$GAMEDIR/trizbort.sh"
+
+  system:
+    prelaunch_command: $GAMEDIR/trizbort.sh
+
+  mame:
+    fullscreen: false
+    uimodekey: "Right Alt"
+    rompath: /home/$USER/Games/BIOS/cpc
+

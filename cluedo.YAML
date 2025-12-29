@@ -1,21 +1,21 @@
-name: Roland in the Caves
-game_slug: roland-in-the-caves
+name: Cluedo
+game_slug: cluedo
 version: Amstrad
-slug: roland-in-the-caves
+slug:  cluedo
 runner: mame
-year: 1988
+year: 1986
 
 script:
   game:
-    main_file: $GAMEDIR/rolandcv.zip
+    main_file: $GAMEDIR/cluedo.zip
     args:  -nonatural 
     machine: cpc6128
     device: flop1
-    autoboot_command: 'run"disc'
+    autoboot_command: 'run"cludo'
     autoboot_delay: 3
 
   files:
-    - game: N/A:Select rolandcv.zip.
+    - game: N/A:Select cluedo.zip.
 
 
   installer:

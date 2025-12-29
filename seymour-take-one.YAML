@@ -1,21 +1,21 @@
-name: Roland in the Caves
-game_slug: roland-in-the-caves
+name: Seymour Take One
+game_slug: seymour-take-one
 version: Amstrad
-slug: roland-in-the-caves
+slug: seymour-take-one
 runner: mame
-year: 1988
+year: 1984
 
 script:
   game:
-    main_file: $GAMEDIR/rolandcv.zip
+    main_file: $GAMEDIR/seymour - take one (uk) (1991) (pd).dsk
     args:  -nonatural 
     machine: cpc6128
     device: flop1
-    autoboot_command: 'run"disc'
+    autoboot_command: 'run"seymour'
     autoboot_delay: 3
 
   files:
-    - game: N/A:Select rolandcv.zip.
+    - game: N/A:Select seymour - take one (uk) (1991) (pd).dsk
 
 
   installer:

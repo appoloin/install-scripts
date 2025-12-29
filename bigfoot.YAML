@@ -1,21 +1,21 @@
-name: Roland in the Caves
-game_slug: roland-in-the-caves
+name: Bigfoot 
+game_slug: bigfoot
 version: Amstrad
-slug: roland-in-the-caves
+slug:  bigfoot
 runner: mame
 year: 1988
 
 script:
   game:
-    main_file: $GAMEDIR/rolandcv.zip
+    main_file: $GAMEDIR/bigfoot.zip/bigfoota/big foot (uk) (1988).dsk
     args:  -nonatural 
     machine: cpc6128
     device: flop1
-    autoboot_command: 'run"disc'
+    autoboot_command: 'run"bigfoot'
     autoboot_delay: 3
 
   files:
-    - game: N/A:Select rolandcv.zip.
+    - game: N/A:Select bigfoot.zip.
 
 
   installer:

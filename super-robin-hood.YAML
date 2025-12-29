@@ -1,21 +1,21 @@
-name: Roland in the Caves
-game_slug: roland-in-the-caves
+name: Super Robin Hood
+game_slug: super-robin-hood
 version: Amstrad
-slug: roland-in-the-caves
+slug: super-robin-hood
 runner: mame
-year: 1988
+year: 1986
 
 script:
   game:
-    main_file: $GAMEDIR/rolandcv.zip
+    main_file: $GAMEDIR/superrob.zip
     args:  -nonatural 
     machine: cpc6128
     device: flop1
-    autoboot_command: 'run"disc'
+    autoboot_command: 'run"robin'
     autoboot_delay: 3
 
   files:
-    - game: N/A:Select rolandcv.zip.
+    - game: N/A:Select superrob.zip.
 
 
   installer:

@@ -1,21 +1,21 @@
-name: Roland in the Caves
-game_slug: roland-in-the-caves
+name: The Rocky Horror Show
+game_slug: the-rocky-horror-show
 version: Amstrad
-slug: roland-in-the-caves
+slug:  the-rocky-horror-show
 runner: mame
-year: 1988
+year: 1985
 
 script:
   game:
-    main_file: $GAMEDIR/rolandcv.zip
+    main_file: $GAMEDIR/rockyhor.zip
     args:  -nonatural 
     machine: cpc6128
     device: flop1
-    autoboot_command: 'run"disc'
+    autoboot_command: 'run"rocky'
     autoboot_delay: 3
 
   files:
-    - game: N/A:Select rolandcv.zip.
+    - game: N/A:Select rockyhor.zip.
 
 
   installer:

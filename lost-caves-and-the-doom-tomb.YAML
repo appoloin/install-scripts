@@ -1,27 +1,28 @@
-name: Roland in the Caves
-game_slug: roland-in-the-caves
+name: Lost Caves and the Doom Tomb
+game_slug:  lost-caves-and-the-doom-tomb
 version: Amstrad
-slug: roland-in-the-caves
+slug: lost-caves-and-the-doom-tomb
 runner: mame
-year: 1988
+year: 1985
 
 script:
   game:
-    main_file: $GAMEDIR/rolandcv.zip
+    main_file: $GAMEDIR/lostcave.zip
     args:  -nonatural 
     machine: cpc6128
     device: flop1
-    autoboot_command: 'run"disc'
+    autoboot_command: 'run"lost'
     autoboot_delay: 3
 
   files:
-    - game: N/A:Select rolandcv.zip.
+    - game: N/A:Select lostcave.zip.
 
 
   installer:
     - copy:
         src: $game
         dst: $GAMEDIR
+
 
   mame:
     fullscreen: true

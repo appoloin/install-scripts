@@ -1,21 +1,21 @@
-name: Roland in the Caves
-game_slug: roland-in-the-caves
+name: Chuckie Egg
+game_slug: chuckie-egg
 version: Amstrad
-slug: roland-in-the-caves
+slug: chuckie-egg
 runner: mame
-year: 1988
+year: 1985
 
 script:
   game:
-    main_file: $GAMEDIR/rolandcv.zip
+    main_file: $GAMEDIR/chuckie.zip
     args:  -nonatural 
     machine: cpc6128
     device: flop1
-    autoboot_command: 'run"disc'
+    autoboot_command: 'run"chuckie'
     autoboot_delay: 3
 
   files:
-    - game: N/A:Select rolandcv.zip.
+    - game: N/A:Select chuckie.zip
 
 
   installer:

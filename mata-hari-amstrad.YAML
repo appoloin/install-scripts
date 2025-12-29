@@ -1,21 +1,21 @@
-name: Roland in the Caves
-game_slug: roland-in-the-caves
+name: Mata Hari
+game_slug: mata-hari
 version: Amstrad
-slug: roland-in-the-caves
+slug: mata-hari
 runner: mame
-year: 1988
+year: 1989
 
 script:
   game:
-    main_file: $GAMEDIR/rolandcv.zip
-    args:  -nonatural 
+    main_file: $GAMEDIR/matahari.zip
+    args:  -natural 
     machine: cpc6128
     device: flop1
-    autoboot_command: 'run"disc'
+    autoboot_command: 'run"matahari'
     autoboot_delay: 3
 
   files:
-    - game: N/A:Select rolandcv.zip.
+    - game: N/A:Select matahari.zip.
 
 
   installer:
@@ -24,6 +24,7 @@ script:
         dst: $GAMEDIR
 
   mame:
-    fullscreen: true
+    fullscreen: false
     uimodekey: "Right Alt"
     rompath: /home/$USER/Games/BIOS/cpc
+

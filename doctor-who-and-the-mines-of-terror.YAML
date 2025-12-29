@@ -1,21 +1,21 @@
-name: Roland in the Caves
-game_slug: roland-in-the-caves
+name: Doctor Who and the Mines of Terror
+game_slug: doctor-who-and-the-mines-of-terror
 version: Amstrad
-slug: roland-in-the-caves
+slug: doctor-who-and-the-mines-of-terror
 runner: mame
-year: 1988
+year: 1986
 
 script:
   game:
-    main_file: $GAMEDIR/rolandcv.zip
+    main_file: "$GAMEDIR/drwhoand.zip"
     args:  -nonatural 
     machine: cpc6128
     device: flop1
-    autoboot_command: 'run"disc'
+    autoboot_command: 'run"who'
     autoboot_delay: 3
 
   files:
-    - game: N/A:Select rolandcv.zip.
+    - game: N/A:Select drwhoand.zip.
 
 
   installer:

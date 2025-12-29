@@ -1,21 +1,21 @@
-name: Roland in the Caves
-game_slug: roland-in-the-caves
+name: Blade Runner
+game_slug: blade-runner-1
 version: Amstrad
-slug: roland-in-the-caves
+slug: blade-runner-1
 runner: mame
-year: 1988
+year: 1985
 
 script:
   game:
-    main_file: $GAMEDIR/rolandcv.zip
+    main_file: $GAMEDIR/bladerun.zip
     args:  -nonatural 
     machine: cpc6128
     device: flop1
-    autoboot_command: 'run"disc'
+    autoboot_command: 'run"blade'
     autoboot_delay: 3
 
   files:
-    - game: N/A:Select rolandcv.zip.
+    - game: N/A:Select bladerun.zip
 
 
   installer:

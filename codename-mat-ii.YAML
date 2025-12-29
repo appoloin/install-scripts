@@ -1,21 +1,21 @@
-name: Roland in the Caves
-game_slug: roland-in-the-caves
+name: Codename Mat II
+game_slug: codename-mat-ii
 version: Amstrad
-slug: roland-in-the-caves
+slug: codename-mat-ii
 runner: mame
-year: 1988
+year: 1985
 
 script:
   game:
-    main_file: $GAMEDIR/rolandcv.zip
+    main_file: $GAMEDIR/codemat2.zip
     args:  -nonatural 
     machine: cpc6128
     device: flop1
-    autoboot_command: 'run"disc'
+    autoboot_command: 'run"mat2'
     autoboot_delay: 3
 
   files:
-    - game: N/A:Select rolandcv.zip.
+    - game: N/A:Select codemat2.zip.
 
 
   installer:

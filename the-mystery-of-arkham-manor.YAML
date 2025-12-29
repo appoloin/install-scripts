@@ -1,0 +1,46 @@
+name: The Mystery of Arkham Manor
+game_slug: the-mystery-of-arkham-manor
+version: Amstrad
+slug: the-mystery-of-arkham-manor
+runner: mame
+year: 1987
+
+script:
+  game:
+    main_file: $GAMEDIR/mysteryo.zip
+    args:  -natural 
+    machine: cpc6128
+    device: flop1
+    autoboot_command: 'run"manor'
+    autoboot_delay: 3
+
+  files:
+    - game: N/A:Select mysteryo.zip.
+
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    #trizbort launcher 
+    - write_file:
+        content: '#!/bin/bash
+        
+         flatpak-spawn --host env LUTRIS_SKIP_INIT=1 flatpak run net.lutris.Lutris lutris:rungame/trizbort
+
+         '
+        file: $GAMEDIR/trizbort.sh
+
+    - execute:
+        file: chmod
+        args: +x  "$GAMEDIR/trizbort.sh"
+
+  system:
+    prelaunch_command: $GAMEDIR/trizbort.sh
+
+  mame:
+    fullscreen: false
+    uimodekey: "Right Alt"
+    rompath: /home/$USER/Games/BIOS/cpc
+

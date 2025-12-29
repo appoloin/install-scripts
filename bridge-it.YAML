@@ -1,21 +1,21 @@
-name: Roland in the Caves
-game_slug: roland-in-the-caves
+name: Bridge-It
+game_slug: bridge-it
 version: Amstrad
-slug: roland-in-the-caves
+slug: bridge-it
 runner: mame
-year: 1988
+year: 1984
 
 script:
   game:
-    main_file: $GAMEDIR/rolandcv.zip
+    main_file: $GAMEDIR/bridgeit.zip
     args:  -nonatural 
     machine: cpc6128
     device: flop1
-    autoboot_command: 'run"disc'
+    autoboot_command: 'run"bridge'
     autoboot_delay: 3
 
   files:
-    - game: N/A:Select rolandcv.zip.
+    - game: N/A:Select bridgeit.zip.
 
 
   installer:

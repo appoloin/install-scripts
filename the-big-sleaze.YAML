@@ -1,0 +1,46 @@
+name: The Big Sleaze
+game_slug: the-big-sleaze
+version: Amstrad
+slug:  the-big-sleaze
+runner: mame
+year: 1987
+
+script:
+  game:
+    main_file: $GAMEDIR/bigsleaz.zip
+    args:  -natural 
+    machine: cpc6128
+    device: flop1
+    autoboot_command: 'run"sleaze'
+    autoboot_delay: 3
+
+  files:
+    - game: N/A:Select bigsleaz.zip.
+
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    #trizbort launcher 
+    - write_file:
+        content: '#!/bin/bash
+        
+         flatpak-spawn --host env LUTRIS_SKIP_INIT=1 flatpak run net.lutris.Lutris lutris:rungame/trizbort
+
+         '
+        file: $GAMEDIR/trizbort.sh
+
+    - execute:
+        file: chmod
+        args: +x  "$GAMEDIR/trizbort.sh"
+
+  system:
+    prelaunch_command: $GAMEDIR/trizbort.sh
+
+  mame:
+    fullscreen: false
+    uimodekey: "Right Alt"
+    rompath: /home/$USER/Games/BIOS/cpc
+

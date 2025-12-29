@@ -8,7 +8,7 @@ year: 1988
 script:
   game:
     main_file: $GAMEDIR/harriera.zip
-    args:  -natural 
+    args:  -nonatural 
     machine: cpc6128
     device: flop1
     autoboot_command: 'run"disc'

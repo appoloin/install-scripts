@@ -1,21 +1,21 @@
-name: Roland in the Caves
-game_slug: roland-in-the-caves
+name: Run The Gauntlet
+game_slug: run-the-gauntlet
 version: Amstrad
-slug: roland-in-the-caves
+slug: run-the-gauntlet
 runner: mame
-year: 1988
+year: 1986
 
 script:
   game:
-    main_file: $GAMEDIR/rolandcv.zip
+    main_file: $GAMEDIR/runthega.zip/runthega01/run the gauntlet (uk) (1988).dsk
     args:  -nonatural 
     machine: cpc6128
     device: flop1
-    autoboot_command: 'run"disc'
+    autoboot_command: 'run"gauntlet'
     autoboot_delay: 3
 
   files:
-    - game: N/A:Select rolandcv.zip.
+    - game: N/A:Select runthega.zip.
 
 
   installer:

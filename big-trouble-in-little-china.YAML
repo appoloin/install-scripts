@@ -1,13 +1,13 @@
-name: Roland in the Caves
-game_slug: roland-in-the-caves
+name: Big Trouble in Little China
+game_slug: big-trouble-in-little-china
 version: Amstrad
-slug: roland-in-the-caves
+slug: big-trouble-in-little-china
 runner: mame
-year: 1988
+year: 1987
 
 script:
   game:
-    main_file: $GAMEDIR/rolandcv.zip
+    main_file: $GAMEDIR/bigtroub.zip
     args:  -nonatural 
     machine: cpc6128
     device: flop1
@@ -15,7 +15,7 @@ script:
     autoboot_delay: 3
 
   files:
-    - game: N/A:Select rolandcv.zip.
+    - game: N/A:Select bigtroub.zip.
 
 
   installer:

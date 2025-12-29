@@ -1,13 +1,13 @@
-name: Roland in the Caves
-game_slug: roland-in-the-caves
+name: James Bond - 007 - The Living Daylights
+game_slug: james-bond-007-the-living-daylights
 version: Amstrad
-slug: roland-in-the-caves
+slug:   james-bond-007-the-living-daylights
 runner: mame
-year: 1988
+year: 1987
 
 script:
   game:
-    main_file: $GAMEDIR/rolandcv.zip
+    main_file: $GAMEDIR/007tld.zip
     args:  -nonatural 
     machine: cpc6128
     device: flop1
@@ -15,7 +15,7 @@ script:
     autoboot_delay: 3
 
   files:
-    - game: N/A:Select rolandcv.zip.
+    - game: N/A:Select 007tld.zip.
 
 
   installer:

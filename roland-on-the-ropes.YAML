@@ -1,13 +1,13 @@
-name: Roland in the Caves
-game_slug: roland-in-the-caves
+name: Roland on the Ropes
+game_slug: roland-on-the-ropes
 version: Amstrad
-slug: roland-in-the-caves
+slug: roland-on-the-ropes
 runner: mame
-year: 1988
+year: 1984
 
 script:
   game:
-    main_file: $GAMEDIR/rolandcv.zip
+    main_file: $GAMEDIR/rolandon.zip
     args:  -nonatural 
     machine: cpc6128
     device: flop1
@@ -15,7 +15,7 @@ script:
     autoboot_delay: 3
 
   files:
-    - game: N/A:Select rolandcv.zip.
+    - game: N/A:Select rolandon.zip
 
 
   installer:

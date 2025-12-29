@@ -1,21 +1,21 @@
-name: Roland in the Caves
-game_slug: roland-in-the-caves
+name: Dan Dare II - Mekon's Revenge 
+game_slug: dan-dare-ii-mekons-revenge 
 version: Amstrad
-slug: roland-in-the-caves
+slug:  dan-dare-ii-mekons-revenge 
 runner: mame
 year: 1988
 
 script:
   game:
-    main_file: $GAMEDIR/rolandcv.zip
+    main_file: $GAMEDIR/dandare2.zip
     args:  -nonatural 
     machine: cpc6128
     device: flop1
-    autoboot_command: 'run"disc'
+    autoboot_command: 'run"dandare2'
     autoboot_delay: 3
 
   files:
-    - game: N/A:Select rolandcv.zip.
+    - game: N/A:Select dandare2.zip.
 
 
   installer:

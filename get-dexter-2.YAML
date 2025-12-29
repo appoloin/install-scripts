@@ -1,21 +1,21 @@
-name: Roland in the Caves
-game_slug: roland-in-the-caves
+name: Get Dexter 2
+game_slug: get-dexter-2
 version: Amstrad
-slug: roland-in-the-caves
+slug: get-dexter-2
 runner: mame
 year: 1988
 
 script:
   game:
-    main_file: $GAMEDIR/rolandcv.zip
+    main_file: $GAMEDIR/getdext2.zip/getdext2a/get dexter 2 (uk) (1988).dsk
     args:  -nonatural 
     machine: cpc6128
     device: flop1
-    autoboot_command: 'run"disc'
+    autoboot_command: 'run"ere'
     autoboot_delay: 3
 
   files:
-    - game: N/A:Select rolandcv.zip.
+    - game: N/A:Select getdext2.zip.
 
 
   installer:
