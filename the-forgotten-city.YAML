@@ -1,0 +1,27 @@
+name: The Forgotten City
+game_slug: the-forgotten-city
+version: Good Old Games Installer
+slug: the-forgotten-city
+runner: wine
+year: 2021
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/The Forgotten City/Launch The Forgotten City.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - game: N/A:Select GOG installer.
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        description: Installing
+        executable: $game
+        name: wineexec
+        prefix: $GAMEDIR

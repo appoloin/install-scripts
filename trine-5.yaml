@@ -1,0 +1,28 @@
+name: Trine 5
+game_slug: trine-5-a-clockwork-conspiracy
+version: Windows Installer
+slug: trine-5-a-clockwork-conspiracy
+runner: wine
+year: 2023
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Trine 5/Launch Trine 5.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
