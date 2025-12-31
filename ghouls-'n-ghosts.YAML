@@ -1,0 +1,21 @@
+name: Ghouls 'n Ghosts
+game_slug: ghouls-n-ghosts
+version: Genesis
+slug: ghouls-n-ghosts
+runner: mame
+year: 1989
+
+script:
+  game:
+    main_file: $GAMEDIR/Ghouls-N-Ghosts_Genesis_EN.zip
+    machine: genesis
+    device: cart
+
+  files:
+    - game: N/A:Ghouls-N-Ghosts_Genesis_EN.zip
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+

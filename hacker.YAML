@@ -1,0 +1,40 @@
+name:  Hacker
+game_slug: hacker
+version: Amiga
+slug: hacker
+runner: flatpak
+year: 1985
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select Hacker_v1.0_0906.zip
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A500+
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/Hacker_v1.0_0906.zip
+        
+          x_whdload_args = Hacker.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+

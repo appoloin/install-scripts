@@ -1,0 +1,21 @@
+name: Gargoyles
+game_slug: gargoyles
+version: Genesis
+slug: gargoyles
+runner: mame
+year: 1995
+
+script:
+  game:
+    main_file: $GAMEDIR/Gargoyles_Genesis_EN.zip
+    machine: genesis
+    device: cart
+
+  files:
+    - game: N/A:Gargoyles_Genesis_EN.zip
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+

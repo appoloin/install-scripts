@@ -1,0 +1,50 @@
+name: Fire & Ice
+game_slug: fire-and-ice-the-daring-adventures-of-cool-coyote
+version: Amiga
+slug: fire-and-ice-the-daring-adventures-of-cool-coyote
+runner: flatpak
+year: 1992
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select adf 1
+    - game2: N/A:Select adf 2
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+    - copy:
+        src: $game2
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          floppy_drive_0 =$GAMEDIR/Fire & Ice - The Daring Adventures of Cool Coyote (1992)(Renegade)[cr FSN][t +1 FSN](Disk 1 of 2).adf
+
+          floppy_drive_1 = $GAMEDIR/Fire & Ice - The Daring Adventures of Cool Coyote (1992)(Renegade)[cr FSN][t +1 FSN](Disk 2 of 2).adf
+
+          floppy_image_0 =$GAMEDIR/Fire & Ice - The Daring Adventures of Cool Coyote (1992)(Renegade)[cr FSN][t +1 FSN](Disk 1 of 2).adf
+
+          floppy_image_1 = $GAMEDIR/Fire & Ice - The Daring Adventures of Cool Coyote (1992)(Renegade)[cr FSN][t +1 FSN](Disk 2 of 2).adf
+          
+          floppy_drive_speed = 800
+
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+

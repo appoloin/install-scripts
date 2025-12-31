@@ -1,0 +1,39 @@
+name: Gods
+game_slug: gods
+version: Amiga
+slug: gods
+runner: flatpak
+year: 1991
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select Gods_v3.2_0666.lha
+    
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/Gods_v3.2_0666.lha
+        
+          x_whdload_args = Gods.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
