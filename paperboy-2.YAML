@@ -1,0 +1,21 @@
+name: Paperboy 2
+game_slug: paperboy-2
+version: Genesis
+slug: paperboy-2
+runner: mame
+year: 1992
+
+script:
+  game:
+    main_file: $GAMEDIR/PaperBoy-2_Genesis_EN.zip
+    machine: genesis
+    device: cart
+
+  files:
+    - game: N/A:PaperBoy-2_Genesis_EN.zip
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+

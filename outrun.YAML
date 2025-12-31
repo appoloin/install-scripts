@@ -1,0 +1,21 @@
+name: OutRun
+game_slug: outrun
+version: Genesis
+slug: outrun
+runner: mame
+year: 1989
+
+script:
+  game:
+    main_file: $GAMEDIR/toutrun.zip
+    machine: genesis
+    device: cart
+
+  files:
+    - game: N/A:toutrun.zip
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+

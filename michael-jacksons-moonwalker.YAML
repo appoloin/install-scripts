@@ -1,0 +1,34 @@
+name: Michael Jackson's Moonwalker
+game_slug: michael-jacksons-moonwalker
+version: ROM
+slug: michael-jacksons-moonwalker
+runner: mame
+year: 1990
+
+script:
+  game:
+    main_file: $GAMEDIR/mwalk.zip
+    args: -artpath "$GAMEDIR/bazel"
+
+  files:
+    - game: N/A:Select cischeat.zip.
+    - bazel1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Art/mwalk.zip
+        filename: mwalk.zip
+ 
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/bazel
+
+    - move:
+        src: $bazel1
+        dst: "$GAMEDIR/bazel"
+
+  mame:
+    fullscreen: true
+    uimodekey: "Right Alt"
