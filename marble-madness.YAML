@@ -1,0 +1,40 @@
+name: Marble Madness
+game_slug: marble-madness
+version: Amiga
+slug: marble-madness
+runner: flatpak
+year: 1986
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select MarbleMadness_v2.2_0013.lha
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/MarbleMadness_v2.2_0013.lha
+        
+          x_whdload_args = MarbleMadness.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+

@@ -1,0 +1,53 @@
+name:  Metal Hellsinger
+game_slug: metal-hellsinger
+version: Good Old Games
+slug: metal-hellsinger
+runner: wine
+year: 2022
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Metal Hellsinger/Launch Metal - Hellsinger.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+    - DLC1: N/A:Select DLC1 installer
+    - DLC2: N/A:Select DLC2 installer
+    - DLC3: N/A:Select DLC3 installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: vcrun2022
+        description: 'winetricks: Vcrun2015'
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC1
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC2
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC3
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR

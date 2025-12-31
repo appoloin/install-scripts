@@ -1,0 +1,40 @@
+name:  Magic Boy
+game_slug: magic-boy
+version: Amiga
+slug: magic-boy
+runner: flatpak
+year: 1993
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select MagicBoy_v1.1_2525.lha
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/MagicBoy_v1.1_2525.lha
+        
+          x_whdload_args = MagicBoy.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+

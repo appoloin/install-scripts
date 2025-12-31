@@ -1,0 +1,21 @@
+name: Mary Shelley's Frankenstein
+game_slug: mary-shelleys-frankenstein
+version: Genesis
+slug: mary-shelleys-frankenstein
+runner: mame
+year: 1994
+
+script:
+  game:
+    main_file: $GAMEDIR/Mary-Shelleys-Frankenstein_Genesis_EN.zip
+    machine: genesis
+    device: cart
+
+  files:
+    - game: N/A:Mary-Shelleys-Frankenstein_Genesis_EN.zip
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+

@@ -1,0 +1,39 @@
+name: Magic Pockets
+game_slug: magic-pockets
+version: Amiga
+slug: magic-pockets
+runner: flatpak
+year: 1991
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select MagicPockets_v3.0_0917.lha
+    
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/MagicPockets_v3.0_0917.lha
+        
+          x_whdload_args = MagicPockets.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+

@@ -1,0 +1,40 @@
+name: Last Ninja
+game_slug: the-last-ninja
+version: Amiga
+slug: the-last-ninja
+runner: flatpak
+year: 1990
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select NinjaRemix_v1.3.lha
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/NinjaRemix_v1.3.lha
+        
+          x_whdload_args =  NinjaRemix.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+
