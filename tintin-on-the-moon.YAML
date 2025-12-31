@@ -1,0 +1,40 @@
+name:  Tintin on the Moon
+game_slug: tintin-on-the-moon
+version: Amiga
+slug: tintin-on-the-moon
+runner: flatpak
+year: 1989
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select TintinOnTheMoon_v1.3a_Files_1778.lha
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A500
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/TintinOnTheMoon_v1.3a_Files_1778.lha
+        
+          x_whdload_args = TintinOnTheMoonFiles.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+

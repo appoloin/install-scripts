@@ -1,0 +1,40 @@
+name: The Chaos Engine 2
+game_slug: the-chaos-engine-2
+version: Amiga
+slug: the-chaos-engine-2
+runner: flatpak
+year: 1995
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select ChaosEngine2_v2.6_AGA_0173.lha
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/ChaosEngine2_v2.6_AGA_0173.lha
+        
+          x_whdload_args = ChaosEngine2.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+

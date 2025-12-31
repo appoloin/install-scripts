@@ -1,0 +1,40 @@
+name:   Defender of the Crown
+game_slug: defender-of-the-crown
+version: Amiga
+slug: defender-of-the-crown
+runner: flatpak
+year: 1986
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select DefenderOfTheCrown_v3.1_0317.lha
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/DefenderOfTheCrown_v3.1_0317.lha
+        
+          x_whdload_args = DefenderOfTheCrown.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+

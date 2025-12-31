@@ -1,0 +1,40 @@
+name: The Karate Kid Part II
+game_slug: the-karate-kid-part-ii
+version: Amiga
+slug: the-karate-kid-part-ii
+runner: flatpak
+year: 1986
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select KarateKid2_v1.2.lha
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/KarateKid2_v1.2.lha
+        
+          x_whdload_args = KarateKid2.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+

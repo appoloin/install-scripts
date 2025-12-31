@@ -1,0 +1,39 @@
+name: Populous 2 - Trials of the Olympian Gods
+game_slug: populous-ii-trials-of-the-olympian-gods
+version: Amiga
+slug: populous-ii-trials-of-the-olympian-gods
+runner: flatpak
+year: 1991
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select Populous2&ChallengeGames_v2.0_0079.lha
+    
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/Populous2&ChallengeGames_v2.0_0079.lha
+        
+          x_whdload_args = Populous2&ChallengeGames.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+

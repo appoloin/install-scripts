@@ -1,0 +1,39 @@
+name: The Simpsons - Bart vs. the Space Mutants
+game_slug: the-simpsons-bart-vs-the-space-mutants
+version: Amiga
+slug: the-simpsons-bart-vs-the-space-mutants
+runner: flatpak
+year: 1991
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select BartVsTheSpaceMutants_v1.1_1Disk_0884.lha
+    
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/BartVsTheSpaceMutants_v1.1_1Disk_0884.lha
+        
+          x_whdload_args = BartVsSpaceMutants1Disk.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+

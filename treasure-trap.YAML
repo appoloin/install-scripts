@@ -1,0 +1,42 @@
+name: Treasure Trap
+game_slug: treasure-trap
+version: Amiga
+slug: treasure-trap
+runner: flatpak
+year: 1989
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select TreasureTrap_v1.01_1731.lha
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A600
+
+          cpu = 68010
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/TreasureTrap_v1.01_1731.lha
+        
+          x_whdload_args = TreasureTrap.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+

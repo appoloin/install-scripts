@@ -1,0 +1,42 @@
+name: Antheads - It Came from the Desert II
+game_slug: antheads-it-came-from-the-desert-ii
+version: Amiga
+slug: antheads-it-came-from-the-desert-ii
+runner: flatpak
+year: 1990
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select ItCameFromTheDesert2_v2.0.lha
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A600
+
+          cpu = 68010
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/ItCameFromTheDesert2_v2.0.lha
+        
+          x_whdload_args = ItCameFromTheDesert2.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+

@@ -1,0 +1,42 @@
+name: 9 Lives
+game_slug: 9-lives
+version: Amiga
+slug: 9-lives
+runner: flatpak
+year: 1989
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select 9Lives_v1.0.lha
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A600
+
+          cpu = 68010
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/9Lives_v1.0.lha
+        
+          x_whdload_args = 9Lives.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+

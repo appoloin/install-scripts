@@ -1,0 +1,40 @@
+name: Valhalla - Before The War
+game_slug: valhalla-before-the-war
+version: Amiga
+slug: valhalla-before-the-war
+runner: flatpak
+year: 1995
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select ValhallaBeforeTheWar_v1.2_0756.lha756.lha
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/ValhallaBeforeTheWar_v1.2_0756.lha
+        
+          x_whdload_args = ValhallaBeforeTheWar.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+
