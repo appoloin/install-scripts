@@ -1,0 +1,40 @@
+name: Hong Kong Phooey - No.1 Super Guy
+game_slug: hong-kong-phooey
+version: Amiga
+slug: hong-kong-phooey
+runner: flatpak
+year: 1990
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select HongKongPhooey_v1.1_1559.lha
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/HongKongPhooey_v1.1_1559.lha
+        
+          x_whdload_args =  HongKongPhooey.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+

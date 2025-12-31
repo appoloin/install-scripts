@@ -1,0 +1,40 @@
+name: James Bond - 007 - The Spy Who Loved Me
+game_slug: james-bond-007-the-spy-who-loved-me
+version: Amiga
+slug: james-bond-007-the-spy-who-loved-me
+runner: flatpak
+year: 1990
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select SpyWhoLovedMe_v1.0_2186.lha
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/SpyWhoLovedMe_v1.0_2186.lha
+        
+          x_whdload_args = SpyWhoLovedMe.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+

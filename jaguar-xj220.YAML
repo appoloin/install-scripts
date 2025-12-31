@@ -1,0 +1,40 @@
+name: Jaguar XJ220
+game_slug: jaguar-xj220
+version: Amiga
+slug: jaguar-xj220
+runner: flatpak
+year: 1992
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select JaguarXJ220_v1.7_Files_1200.lha
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/JaguarXJ220_v1.7_Files_1200.lha
+        
+          x_whdload_args =  JaguarXJ220Files.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+

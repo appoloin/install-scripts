@@ -1,0 +1,40 @@
+name: James Bond - 007 - Live and Let Die
+game_slug: james-bond-007-live-and-let-die
+version: Amiga
+slug: james-bond-007-live-and-let-die
+runner: flatpak
+year: 1988
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Selec LiveAndLetDie_v1.1_2187.lha
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/LiveAndLetDie_v1.1_2187.lha
+        
+          x_whdload_args = LiveAndLetDie.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+

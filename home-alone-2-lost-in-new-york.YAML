@@ -1,0 +1,21 @@
+name: Home Alone 2 - Lost in New York
+game_slug: home-alone-2-lost-in-new-york
+version: Genesis
+slug: home-alone-2-lost-in-new-york
+runner: mame
+year: 1993
+
+script:
+  game:
+    main_file: $GAMEDIR/Home-Alone-2-Lost-in-New-York_Genesis_EN.zip
+    machine: genesis
+    device: cart
+
+  files:
+    - game: N/A:Home-Alone-2-Lost-in-New-York_Genesis_EN.zip
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+

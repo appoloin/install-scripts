@@ -1,0 +1,40 @@
+name: Jetsons - The Computer Game
+game_slug: jetsons-the-computer-game
+version: Amiga
+slug: jetsons-the-computer-game
+runner: flatpak
+year: 1988
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:JetsonsTheComputerGame_v1.0_2270.lha
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/JetsonsTheComputerGame_v1.0_2270.lha
+        
+          x_whdload_args = JetsonsTheComputerGame.Slave PRELOAD BUTTONWAIT
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+
