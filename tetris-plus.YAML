@@ -1,0 +1,34 @@
+name: Tetris Plus
+game_slug:  tetris-plus
+version: ROM
+slug: tetris-plus
+runner: mame
+year: 1995
+
+script:
+  game:
+    main_file: $GAMEDIR/tetrisp.zip
+    args: -artpath "$GAMEDIR/bazel"
+
+  files:
+    - game: N/A:Select tetrisp.zip.
+    - bazel1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Art/tetrisp.zip
+        filename: tetrisp.zip
+ 
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/bazel
+
+    - move:
+        src: $bazel1
+        dst: "$GAMEDIR/bazel"
+
+  mame:
+    fullscreen: true
+    uimodekey: "Right Alt"

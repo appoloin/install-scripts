@@ -1,0 +1,38 @@
+name: 1944 - The Loop Master
+game_slug: 1944-the-loop-master
+version: ROM
+slug: 1944-the-loop-master
+runner: mame
+year: 2000
+
+script:
+  game:
+    main_file: $GAMEDIR/1944.zip
+    args: -artpath "$GAMEDIR/bazel"
+
+  files:
+    - game: N/A:Select 1944.zip.
+    - game2: N/A:Select qsound_hle.zip.
+    - bazel1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Art/1944.zip
+        filename: 1944.zip
+ 
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+    - copy:
+        src: $game2
+        dst: $GAMEDIR
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/bazel
+
+    - move:
+        src: $bazel1
+        dst: "$GAMEDIR/bazel"
+
+  mame:
+    fullscreen: true
+    uimodekey: "Right Alt"

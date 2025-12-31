@@ -1,0 +1,23 @@
+name: 1945k III
+game_slug: 1945k-iii
+version: ROM
+slug: 1945k-iii
+runner: mame
+year: 2000
+
+script:
+  game:
+    main_file: $GAMEDIR/1945kiii.zip
+    args: -artpath "$GAMEDIR/bazel"
+
+  files:
+    - game: N/A:Select 1945kiii.zip.
+ 
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+  mame:
+    fullscreen: true
+    uimodekey: "Right Alt"

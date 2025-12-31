@@ -1,0 +1,39 @@
+name: The Punisher
+game_slug: the-punisher
+version: ROM
+slug: the-punisher
+runner: mame
+year: 1994
+
+script:
+  game:
+    main_file: $GAMEDIR/punisher.zip
+    args: -artpath "$GAMEDIR/bazel"
+
+  files:
+    - game: N/A:Select punisher.zip.
+    - game2: N/A:Select qsound_hle.zip.
+
+    - bazel1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Art/punisher.zip
+        filename: punisher.zip
+ 
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+    - copy:
+        src: $game2
+        dst: $GAMEDIR
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/bazel
+
+    - move:
+        src: $bazel1
+        dst: "$GAMEDIR/bazel"
+
+  mame:
+    fullscreen: true
+    uimodekey: "Right Alt"

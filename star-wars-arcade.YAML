@@ -1,0 +1,38 @@
+name: Star Wars Arcade
+game_slug: star-wars-arcade
+version: ROM
+slug: star-wars-arcade
+runner: mame
+year: 1993
+
+script:
+  game:
+    main_file: $GAMEDIR/swa.zip
+    args: -artpath "$GAMEDIR/bazel"
+
+  files:
+    - game: N/A:Select swa.zip.
+    - game2: N/A:Select model1io.zip.
+    - bazel1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Art/swa.zip
+        filename: swa.zip
+ 
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+    - copy:
+        src: $game2
+        dst: $GAMEDIR
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/bazel
+
+    - move:
+        src: $bazel1
+        dst: "$GAMEDIR/bazel"
+
+  mame:
+    fullscreen: true
+    uimodekey: "Right Alt"
