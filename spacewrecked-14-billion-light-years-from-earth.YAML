@@ -1,0 +1,57 @@
+name: Spacewrecked - 14 Billion Light Years From Earth
+game_slug: spacewrecked-14-billion-light-years-from-earth
+version: Amiga
+slug: spacewrecked-14-billion-light-years-from-earth
+runner: flatpak
+year: 1991
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select adf 1
+    - game2: N/A:Select adf 2
+    - game3: N/A:Select adf 3
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+    - copy:
+        src: $game2
+        dst: $GAMEDIR
+    - copy:
+        src: $game3
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          floppy_drive_0 = $GAMEDIR/Space Wrecked (1991)(Gremlin)[cr OCL](Disk 1 of 3).adf
+        
+          floppy_drive_1 = $GAMEDIR/Space Wrecked (1991)(Gremlin)[cr OCL](Disk 2 of 3).adf
+
+          floppy_drive_2 = $GAMEDIR/Space Wrecked (1991)(Gremlin)[cr OCL](Disk 3 of 3).adf
+
+          floppy_image_0 = $GAMEDIR/Space Wrecked (1991)(Gremlin)[cr OCL](Disk 1 of 3).adf
+
+          floppy_image_1 = $GAMEDIR/Space Wrecked (1991)(Gremlin)[cr OCL](Disk 2 of 3).adf
+
+          floppy_image_2 = $GAMEDIR/Space Wrecked (1991)(Gremlin)[cr OCL](Disk 3 of 3).adf
+
+          floppy_drive_volume_empty = 0
+
+          floppy_drive_speed = 800
+          
+         '
+        file: $GAMEDIR/config.fs-uae
+
+

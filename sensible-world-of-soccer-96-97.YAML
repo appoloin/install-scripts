@@ -1,0 +1,40 @@
+name: Sensible World Of Soccer '96/'97
+game_slug: sensible-world-of-soccer-9697
+version: Amiga
+slug: sensible-world-of-soccer-9697
+runner: flatpak
+year: 1995
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:SelectSensibleWorldOfSoccerWorldCup98_v1.7.lha
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/SensibleWorldOfSoccerWorldCup98_v1.7.lha
+        
+          x_whdload_args = SensibleWorldOfSoccerWC98.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+

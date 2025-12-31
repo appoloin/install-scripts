@@ -1,0 +1,21 @@
+name: Rambo III
+game_slug: rambo-iii
+version: Genesis
+slug: rambo-iii
+runner: mame
+year: 1989
+
+script:
+  game:
+    main_file: $GAMEDIR/Rambo-III_Genesis_EN.zip
+    machine: genesis
+    device: cart
+
+  files:
+    - game: N/A:Rambo-III_Genesis_EN.zip
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+

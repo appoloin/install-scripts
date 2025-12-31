@@ -1,0 +1,40 @@
+name: Ruff 'n' Tumble
+game_slug: ruff-n-tumble
+version: Amiga
+slug: ruff-n-tumble
+runner: flatpak
+year: 1994
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select RuffNTumble_v2.3_0199.lha
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/RuffNTumble_v2.3_0199.lha
+        
+          x_whdload_args = RuffNTumble.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+

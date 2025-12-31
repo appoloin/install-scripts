@@ -1,0 +1,40 @@
+name: Yo! Joe!
+game_slug: yo-joe
+version: Amiga
+slug: yo-joe
+runner: flatpak
+year: 1993
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select YoJoe_v1.0_0750.lha
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR\YoJoe_v1.0_0750.lha
+        
+          x_whdload_args = YoJoe.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+

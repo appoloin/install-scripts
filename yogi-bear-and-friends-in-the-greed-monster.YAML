@@ -1,0 +1,40 @@
+name: Yogi Bear & friends in the greed monster
+game_slug: yogi-bear-and-friends-in-the-greed-monster
+version: Amiga
+slug: yogi-bear-and-friends-in-the-greed-monster
+runner: flatpak
+year: 1990
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select YogiBear&Friends_v1.0.lha
+    
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/YogiBear&Friends_v1.0.lha
+        
+          x_whdload_args = YogiBear&Friends.slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+
