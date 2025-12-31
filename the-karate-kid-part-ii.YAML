@@ -4,7 +4,7 @@ version: Amiga
 slug: the-karate-kid-part-ii
 runner: flatpak
 year: 1986
-
+ 
 script:
   game:
     appid: net.fsuae.FS-UAE

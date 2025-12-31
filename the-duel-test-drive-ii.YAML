@@ -4,7 +4,7 @@ version: Amiga
 slug:  the-duel-test-drive-ii
 runner: flatpak
 year: 1987
-
+ 
 script:
   game:
     appid: net.fsuae.FS-UAE

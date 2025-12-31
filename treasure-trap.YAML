@@ -4,7 +4,7 @@ version: Amiga
 slug: treasure-trap
 runner: flatpak
 year: 1989
-
+ 
 script:
   game:
     appid: net.fsuae.FS-UAE

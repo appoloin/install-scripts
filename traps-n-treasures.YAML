@@ -4,7 +4,7 @@ version: Amiga
 slug: traps-n-treasures
 runner: flatpak
 year: 1993
-
+ 
 script:
   game:
     appid: net.fsuae.FS-UAE

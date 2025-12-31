@@ -4,7 +4,7 @@ version: Amiga
 slug: thundercats
 runner: flatpak
 year: 1988
-
+ 
 script:
   game:
     appid: net.fsuae.FS-UAE

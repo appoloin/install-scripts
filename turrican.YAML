@@ -11,7 +11,7 @@ script:
     fcommand: fs-uae-launcher
     args: --fullscreen=1 $GAMEDIR/config.fs-uae
     working_dir: $GAMEDIR
-
+ 
   files:
     - game: N/A:Select Turrican_v2.0_0092.lha
     

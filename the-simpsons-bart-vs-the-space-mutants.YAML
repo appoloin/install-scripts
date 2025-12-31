@@ -4,7 +4,7 @@ version: Amiga
 slug: the-simpsons-bart-vs-the-space-mutants
 runner: flatpak
 year: 1991
-
+ 
 script:
   game:
     appid: net.fsuae.FS-UAE

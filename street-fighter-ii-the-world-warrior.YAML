@@ -28,7 +28,7 @@ script:
     - move:
         src: $bazel1
         dst: "$GAMEDIR/bazel"
-
+ 
   mame:
     fullscreen: true
     uimodekey: "Right Alt"

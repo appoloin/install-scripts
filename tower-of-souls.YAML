@@ -4,7 +4,7 @@ version: Amiga
 slug: tower-of-souls
 runner: flatpak
 year: 1995
-
+ 
 script:
   game:
     appid: net.fsuae.FS-UAE

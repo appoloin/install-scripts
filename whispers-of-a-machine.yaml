@@ -33,6 +33,6 @@ script:
           find "$GAMEDIR" -type f \( -iname "goggame*" \) -exec rm {} \;
           '
 
-
+ 
   scummvm:
     fullscreen: true
