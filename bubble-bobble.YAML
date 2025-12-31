@@ -1,0 +1,35 @@
+name: Bubble Bobble
+game_slug: bubble-bobble
+version: ROM
+slug: bubble-bobble
+runner: mame
+year: 1989
+
+script:
+  game:
+    main_file: $GAMEDIR/bublbobl.zip
+    args: -artpath "$GAMEDIR/bazel"
+
+  files:
+    - game: N/A:Select bublbobl.zip.
+    - bazel1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Art/bublbobl.zip
+        filename: bublbobl.zip
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/bazel
+
+    - move:
+        src: $bazel1
+        dst: "$GAMEDIR/bazel"
+
+
+  mame:
+    fullscreen: true
+    uimodekey: "Right Alt"

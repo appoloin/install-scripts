@@ -1,0 +1,21 @@
+name: 3 Ninjas Kick Back
+game_slug: 3-ninjas-kick-back
+version: Genesis
+slug: 3-ninjas-kick-back
+runner: mame
+year: 1994
+
+script:
+  game:
+    main_file: $GAMEDIR/3-Ninjas-Kick-Back_Genesis_EN.zip
+    machine: genesis
+    device: cart
+
+  files:
+    - game: N/A:3-Ninjas-Kick-Back_Genesis_EN.zip
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+

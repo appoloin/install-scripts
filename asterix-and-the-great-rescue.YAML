@@ -1,0 +1,21 @@
+name: Asterix and the Great Rescue
+game_slug: asterix-and-the-great-rescue
+version: Genesis
+slug: asterix-and-the-great-rescue
+runner: mame
+year: 1994
+
+script:
+  game:
+    main_file: $GAMEDIR/Asterix-and-the-Great-Rescue_Genesis_EN.zip
+    machine: megadriv
+    device: cart
+
+  files:
+    - game: N/A:Asterix-and-the-Great-Rescue_Genesis_EN.zip
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+

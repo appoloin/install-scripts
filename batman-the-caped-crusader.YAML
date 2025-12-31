@@ -1,0 +1,40 @@
+name: Batman - The Caped Crusader
+game_slug: batman-the-caped-crusader
+version: Amiga
+slug:  batman-the-caped-crusader
+runner: flatpak
+year: 1988
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:BatmanCapedCrusader_v1.2_0050.lha
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/BatmanCapedCrusader_v1.2_0050.lha
+        
+          x_whdload_args = BatmanCapedCrusader.Slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+

@@ -1,0 +1,24 @@
+name: Bay Route
+game_slug: bay-route
+version: ROM
+slug: bay-route
+runner: mame
+year: 1989
+
+script:
+  game:
+    main_file: $GAMEDIR/bayroute.zip
+ 
+  files:
+    - game: N/A:Select bayroute.zip.
+ 
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+ 
+
+  mame:
+    fullscreen: true
+    uimodekey: "Right Alt"

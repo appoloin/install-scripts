@@ -1,0 +1,29 @@
+name: Airwolf
+game_slug: airwolf
+version: Amstrad
+slug: airwolf
+runner: mame
+year: 1985
+
+script:
+  game:
+    main_file: $GAMEDIR/airwolf.zip
+    args:  -nonatural 
+    machine: cpc6128
+    device: flop1
+    autoboot_command: 'run"airwolf'
+    autoboot_delay: 3
+
+  files:
+    - game: N/A:Select airwolf.zip
+
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+  mame:
+    fullscreen: true
+    uimodekey: "Right Alt"
+    rompath: /home/$USER/Games/BIOS/cpc
