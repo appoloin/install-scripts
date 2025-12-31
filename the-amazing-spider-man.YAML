@@ -4,7 +4,7 @@ version: Amiga
 slug: the-amazing-spider-man
 runner: flatpak
 year: 1990
-
+ 
 script:
   game:
     appid: net.fsuae.FS-UAE
