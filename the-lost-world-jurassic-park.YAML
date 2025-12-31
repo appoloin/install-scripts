@@ -1,0 +1,21 @@
+name: The Lost World - Jurassic Park
+game_slug: the-lost-world-jurassic-park
+version: Genesis
+slug: the-lost-world-jurassic-park
+runner: mame
+year: 1997
+
+script:
+  game:
+    main_file: $GAMEDIR/The-Lost-World-Jurassic-Park_Genesis_EN.zip
+    machine: genesis
+    device: cart
+
+  files:
+    - game: N/A:The-Lost-World-Jurassic-Park_Genesis_EN.zip
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+

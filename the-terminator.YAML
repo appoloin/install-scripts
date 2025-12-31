@@ -1,0 +1,21 @@
+name: The Terminator
+game_slug: the-terminator
+version: Genesis
+slug: the-terminator
+runner: mame
+year: 1991
+
+script:
+  game:
+    main_file: $GAMEDIR/The-Terminator_Genesis_EN.zip
+    machine: genesis
+    device: cart
+
+  files:
+    - game: N/A:The-Terminator_Genesis_EN.zip
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+

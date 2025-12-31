@@ -1,0 +1,21 @@
+name: Universal Soldier
+game_slug: universal-soldier
+version: Genesis
+slug: universal-soldier
+runner: mame
+year: 1992
+
+script:
+  game:
+    main_file: $GAMEDIR/Universal-Soldier_Genesis_EN.zip
+    machine: genesis
+    device: cart
+
+  files:
+    - game: N/A:Universal-Soldier_Genesis_EN.zip
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+

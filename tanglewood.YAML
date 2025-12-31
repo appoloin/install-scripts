@@ -1,0 +1,21 @@
+name: Tanglewood
+game_slug: tanglewood
+version: Genesis
+slug: tanglewood
+runner: mame
+year: 2018
+
+script:
+  game:
+    main_file: $GAMEDIR/TANGLEWD_MD_1_0.BIN
+    machine: genesis
+    device: cart
+
+  files:
+    - game: N/A:TANGLEWD_MD_1_0.BIN
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+

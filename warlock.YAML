@@ -1,0 +1,21 @@
+name: Warlock
+game_slug: warlock
+version: Genesis
+slug: warlock
+runner: mame
+year: 1995
+
+script:
+  game:
+    main_file: $GAMEDIR/Warlock_Genesis_EN.zip
+    machine: genesis
+    device: cart
+
+  files:
+    - game: N/A:Warlock_Genesis_EN.zip
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+

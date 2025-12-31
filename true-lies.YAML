@@ -1,0 +1,21 @@
+name: True Lies
+game_slug: true-lies
+version: Genesis
+slug: true-lies
+runner: mame
+year: 1994
+
+script:
+  game:
+    main_file: $GAMEDIR/True-Lies_Genesis_EN.zip
+    machine: genesis
+    device: cart
+
+  files:
+    - game: N/A:True-Lies_Genesis_EN.zip
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+

@@ -1,0 +1,21 @@
+name: Terminator 2 - Judgment Day
+game_slug: terminator-2-judgment-day
+version: Genesis
+slug: terminator-2-judgment-day
+runner: mame
+year: 1991
+
+script:
+  game:
+    main_file: $GAMEDIR/T2-Terminator-2---Judgment-Day_Genesis_EN.zip
+    machine: genesis
+    device: cart
+
+  files:
+    - game: N/A:T2-Terminator-2---Judgment-Day_Genesis_EN.zip
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
