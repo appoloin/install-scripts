@@ -1,0 +1,39 @@
+name: Elevator Action
+game_slug: elevator-action
+version: ROM
+slug: elevator-action
+runner: mame
+year: 1983
+
+script:
+  game:
+    main_file: $GAMEDIR/elevator.zip
+    args: -artpath "$GAMEDIR/bazel"
+
+  files:
+    - game: N/A:Select dkong3.zip.
+    - bazel1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Art/elevator.zip
+        filename: elevator.zip
+
+
+  installer:
+     #copy select
+    - execute:
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
+
+                  find "$src_path" -type f \( -iname "elevator.zip" -o 
+                                              -iname "m68705p5.zip" \) -exec cp {} "$GAMEDIR" \;'
+
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/bazel
+
+    - move:
+        src: $bazel1
+        dst: "$GAMEDIR/bazel"
+
+  mame:
+    fullscreen: true
+    uimodekey: "Right Alt"

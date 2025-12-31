@@ -1,0 +1,21 @@
+name: Cliffhanger
+game_slug: cliffhanger
+version: Genesis
+slug: cliffhanger
+runner: mame
+year: 1993
+
+script:
+  game:
+    main_file: $GAMEDIR/Cliffhanger_Genesis_EN.zip
+    machine: genesis
+    device: cart
+
+  files:
+    - game: N/A:Cliffhanger_Genesis_EN.zip
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+

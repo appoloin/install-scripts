@@ -1,0 +1,42 @@
+name: Deathbringer
+game_slug: deathbringer
+version: Amiga
+slug: deathbringer
+runner: flatpak
+year: 1989
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:DeathBringer_v1.0_Spotlight_0316.zip
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A600
+
+          cpu = 68010
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/DeathBringer_v1.0_Spotlight_0316.zip
+        
+          x_whdload_args = DeathbringerSpotlight.Slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+

@@ -1,0 +1,22 @@
+name: Dragon Breed
+game_slug: dragon-breed
+version: ROM
+slug: dragon-breed
+runner: mame
+year: 1989
+
+script:
+  game:
+    main_file: $GAMEDIR/dbreed.zip
+
+  files:
+    - game: N/A:Select dbreed.zip.
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+  mame:
+    fullscreen: true
+    uimodekey: "Right Alt"

@@ -1,0 +1,27 @@
+name:  Metal Hellsinger
+game_slug: dying-light
+version: Good Old Games
+slug: dying-light
+runner: wine
+year: 2015
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Games/Dying Light/DyingLightGame.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+ 
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
