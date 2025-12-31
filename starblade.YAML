@@ -1,0 +1,31 @@
+name: StarBlade
+game_slug: starblade
+version: ROM
+slug: starblade
+runner: mame
+year: 1991
+
+script:
+  game:
+    main_file: $GAMEDIR/starblad.zip
+
+  files:
+    - game: N/A:Select starblad.zip.
+    - game2: N/A:Select namcoc67.zip.
+    - game3: N/A:Select namcoc68.zip.
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+    - copy:
+        src: $game2
+        dst: $GAMEDIR
+    - copy:
+        src: $game3
+        dst: $GAMEDIR
+
+ 
+  mame:
+    fullscreen: true
+    uimodekey: "Right Alt"

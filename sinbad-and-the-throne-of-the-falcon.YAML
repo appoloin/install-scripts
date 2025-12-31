@@ -1,0 +1,40 @@
+name:  Sinbad and the Throne of the Falcon
+game_slug: sinbad-and-the-throne-of-the-falcon
+version: Amiga
+slug:  sinbad-and-the-throne-of-the-falcon
+runner: flatpak
+year: 1987
+
+script:
+  game:
+    appid: net.fsuae.FS-UAE
+    fcommand: fs-uae-launcher
+    args: --fullscreen=1 $GAMEDIR/config.fs-uae
+    working_dir: $GAMEDIR
+
+  files:
+    - game: N/A:Select Sinbad_v1.3_0083.lha
+
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+    - write_file:
+        content: '[fs-uae]
+
+          amiga_model = A1200
+
+          fast_memory = 8192
+
+          hard_drive_0 = $GAMEDIR/Sinbad_v1.3_0083.lha
+        
+          x_whdload_args = Sinbad.Slave PRELOAD
+          
+          floppy_drive_volume_empty = 0
+
+         '
+        file: $GAMEDIR/config.fs-uae
+
+
+

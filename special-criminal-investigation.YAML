@@ -1,0 +1,22 @@
+name: Special Criminal Investigation
+game_slug:  special-criminal-investigation
+version: ROM
+slug: special-criminal-investigation
+runner: mame
+year: 1988
+
+script:
+  game:
+    main_file: $GAMEDIR/sci.zip
+
+  files:
+    - game: N/A:Select 1942.zip.
+ 
+  installer:
+    - copy:
+        src: $game
+        dst: $GAMEDIR
+
+  mame:
+    fullscreen: true
+    uimodekey: "Right Alt"
