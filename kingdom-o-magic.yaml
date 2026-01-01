@@ -1,9 +1,9 @@
-name: Bureau13
-game_slug: bureau13
+name: Kingdom O' Magic
+game_slug: kingdom-o-magic
 version: DOS
-slug: bureau13
+slug: kingdom-o-magic
 runner: dosbox
-year: 1995
+year: 1996
 
 script:
   game:
@@ -29,7 +29,11 @@ script:
     - execute:
         file: chmod
         args: -R 775  "$GAMEDIR"
-       
+
+    - execute:
+        file: 7z
+        args: x  $mt32 -o"$GAMEDIR" -ppassword -y
+
     - write_file: 
         content: '[mouse]
 
@@ -49,6 +53,7 @@ script:
           [mt32]
 
             romdir = $GAMEDIR/mt32-roms
+          
 
           [cpu]
 
@@ -68,15 +73,13 @@ script:
           
             mount C "$GAMEDIR/" -t dir
 
-            imgmount D "$GAMEDIR/cd/B13.CUE" -t cdrom
+            imgmount D -t cdrom  "$GAMEDIR/cd/KOM_THIDNEY.iso" "$GAMEDIR/cd/KOM_SHAHRON.iso" 
 
             @echo off
             
             C:
 
-            cd b13 
-
-            call run.bat
+            KOM.BAT
 
             exit'
         file: $GAMEDIR/play.conf

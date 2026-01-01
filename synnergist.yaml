@@ -1,9 +1,9 @@
-name: Bureau13
-game_slug: bureau13
+name: Synnergist
+game_slug: synnergist
 version: DOS
-slug: bureau13
+slug: synnergist
 runner: dosbox
-year: 1995
+year: 1996
 
 script:
   game:
@@ -16,11 +16,15 @@ script:
         filename: mt32-roms.7z
 
   installer:
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/SYNNER
+
     #copy everything
     - execute:
         command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
 
-          cp -avr "$src_path/."  "$GAMEDIR"
+          cp -avr "$src_path/."  "$GAMEDIR/SYNNER"
 
           find "$GAMEDIR" -type f \( -iname "dosbox.conf" \) -exec rm {} \;
           
@@ -29,7 +33,11 @@ script:
     - execute:
         file: chmod
         args: -R 775  "$GAMEDIR"
-       
+
+    - execute:
+        file: 7z
+        args: x  $mt32 -o"$GAMEDIR" -ppassword -y
+
     - write_file: 
         content: '[mouse]
 
@@ -49,6 +57,7 @@ script:
           [mt32]
 
             romdir = $GAMEDIR/mt32-roms
+          
 
           [cpu]
 
@@ -68,15 +77,13 @@ script:
           
             mount C "$GAMEDIR/" -t dir
 
-            imgmount D "$GAMEDIR/cd/B13.CUE" -t cdrom
-
-            @echo off
+            imgmount D -t cdrom  "$GAMEDIR/cd/SYNNER/Synnergist.img"
             
             C:
 
-            cd b13 
+            cd SYNNER
 
-            call run.bat
+            run.BAT
 
             exit'
         file: $GAMEDIR/play.conf

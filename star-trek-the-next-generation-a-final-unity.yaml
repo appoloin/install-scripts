@@ -1,7 +1,7 @@
-name: Bureau13
-game_slug: bureau13
+name: Star Trek - The Next Generation - A Final Unity
+game_slug: star-trek-the-next-generation-a-final-unity
 version: DOS
-slug: bureau13
+slug: star-trek-the-next-generation-a-final-unity
 runner: dosbox
 year: 1995
 
@@ -14,6 +14,7 @@ script:
     - mt32:  
         url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/mt32-roms.7z
         filename: mt32-roms.7z
+
 
   installer:
     #copy everything
@@ -37,8 +38,7 @@ script:
             
             mouse_middle_release=true   
 
-            mouse_sensitivity= 100
-
+            mouse_sensitivity= 100          
 
           [gus]
 
@@ -68,13 +68,13 @@ script:
           
             mount C "$GAMEDIR/" -t dir
 
-            imgmount D "$GAMEDIR/cd/B13.CUE" -t cdrom
+            imgmount D -t cdrom "$GAMEDIR/cd/Star Trek The Next Generation - A Final Unity.cue"
+            
+            imgmount e -t cdrom "$GAMEDIR/cd/stdemo.cue"
 
             @echo off
             
             C:
-
-            cd b13 
 
             call run.bat
 

@@ -1,0 +1,86 @@
+name: The Residents' Bad Day on the Midway
+game_slug: the-residents-bad-day-on-the-midway
+version: DOS/Win311
+slug: the-residents-bad-day-on-the-midway
+runner: dosbox
+year: 1995
+
+script:
+  files:
+    - game: N/A:Select dosbox.conf file
+
+  game:
+    main_file: $GAMEDIR/play.conf
+
+  installer:
+    #copy everything
+    - execute:
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
+
+          cp -avr "$src_path/."  "$GAMEDIR"
+
+          find "$GAMEDIR" -type f \( -iname "dosbox.conf" \) -exec rm {} \;
+          
+          '    
+
+    - write_file:
+        content: '[mouse]
+
+            mouse_capture = onstart  
+
+            mouse_middle_release=true  
+
+            mouse_sensitivity= 50
+        
+           [cpu]
+
+            cpu_cycles = 50000
+            
+            cpu_cycles_protected = auto
+            
+            cputype = 486
+
+            cpu_throttle = on
+
+          
+          [render]
+
+            glshader=sharp
+
+
+          [autoexec]
+
+            mount C "$GAMEDIR/" -t dir -freesize 5000
+
+            imgmount D -t cdrom "$GAMEDIR/cd/cd.cue"
+
+            c:\windows\smartdrv.exe
+            
+            SET PATH=%PATH%;C:\WINDOWS;C:\;
+
+            SET TEMP=C:\WINDOWS\TEMP
+            
+            SET SOUND=C:\SB16
+
+            SET BLASTER=A220 I7 D1 H5 P330 T6
+
+            SET MIDI=SYNTH:1 MAP:E
+
+            C:\SB16\DIAGNOSE /S
+            
+            C:\SB16\MIXERSET /P /Q
+            
+            C:\WINDOWS\SMARTDRV.EXE
+            
+            ECHO OFF
+
+            c: 
+            
+            win  
+          
+          exit'
+        file: $GAMEDIR/play.conf
+
+  dosbox:
+    fullscreen: true
+    exit: true

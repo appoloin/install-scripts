@@ -1,7 +1,7 @@
-name: Bureau13
-game_slug: bureau13
+name: The Orion Conspiracy
+game_slug: the-orion-conspiracy
 version: DOS
-slug: bureau13
+slug: the-orion-conspiracy
 runner: dosbox
 year: 1995
 
@@ -30,6 +30,11 @@ script:
         file: chmod
         args: -R 775  "$GAMEDIR"
        
+    - execute:
+        file: 7z
+        args: x  $mt32 -o"$GAMEDIR" -ppassword -y
+
+
     - write_file: 
         content: '[mouse]
 
@@ -38,7 +43,6 @@ script:
             mouse_middle_release=true   
 
             mouse_sensitivity= 100
-
 
           [gus]
 
@@ -49,6 +53,7 @@ script:
           [mt32]
 
             romdir = $GAMEDIR/mt32-roms
+
 
           [cpu]
 
@@ -68,13 +73,13 @@ script:
           
             mount C "$GAMEDIR/" -t dir
 
-            imgmount D "$GAMEDIR/cd/B13.CUE" -t cdrom
+            imgmount D "$GAMEDIR/cd/TheOrionConspiracy.iso" -t cdrom
 
             @echo off
             
             C:
 
-            cd b13 
+            cd ORION 
 
             call run.bat
 
