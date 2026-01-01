@@ -3,7 +3,7 @@ game_slug: ghost-in-the-sheet
 version: Windows Installer
 slug:  ghost-in-the-sheet
 runner: wine
-
+year: 2007
 
 script:
   game:
