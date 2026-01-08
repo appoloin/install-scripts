@@ -1,0 +1,33 @@
+name:  Gold and Glory - The Road to El Dorado
+game_slug: gold-and-glore-the-road-to-el-dorado
+version: Windows RIP
+slug: gold-and-glore-the-road-to-el-dorado
+runner: wine
+year: 2000
+
+script:
+  files:
+    - setup: N/A:Select run.bat file
+
+  game:
+    exe:  "$GAMEDIR/drive_c/game/run.bat"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_c/game
+
+    #copy everything
+    - execute:
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
+
+          cp -avr "$src_path/."  "$GAMEDIR/drive_c/game"
+
+          '    

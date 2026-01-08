@@ -41,23 +41,6 @@ script:
             cpu_throttle = on
 
 
-          
-          [sdl]
-              
-            fullresolution=desktop
-
-            windowresolution=original
-
-            fullscreen=true
-
-            output=opengl
-
-          [render]
-
-            aspect=true
-
-            scaler=normal2x
-
           [autoexec]
 
             mount C "$GAMEDIR/" -t dir

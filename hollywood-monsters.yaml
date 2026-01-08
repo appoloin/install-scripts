@@ -1,0 +1,38 @@
+name: Hollywood Monsters
+game_slug: hollywood-monsters
+version: Windows Installer
+slug: hollywood-monsters
+runner: wine
+year: 1997
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/Hollywood%20Monsters%20-%20English%20patch.7z
+        filename:  Hollywood Monsters - English patch.7z
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Hollywood Monsters/MONSTERS.EXE"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Hollywood Monsters/" -ppassword -y
+
+
+
+  system:
+    single_cpu: true

@@ -1,7 +1,7 @@
-name: Egypt 1156 B.C. - Tomb of the Pharaoh
-game_slug: egypt-1156-b-dot-c-tomb-of-the-pharaoh
-version: Win95
-slug: egypt-1156-b-dot-c-tomb-of-the-pharaoh
+name: Ceremony of Innocence
+game_slug: ceremony-of-innocence
+version: Win9x
+slug: ceremony-of-innocence
 runner: linux
 year: 1997
 
@@ -19,11 +19,11 @@ script:
         filename: W98_SE_DBP_2Go.7z
 
   game:
-    args: "'$GAMEDIR/CD/Egypt1156B.iso'"
+    args: $GAMEDIR/CD/COI.iso
     exe: $GAMEDIR/DOSBoxPure_x86_64
     working_dir: $GAMEDIR
 
-  install_complete_text: "Installation of Win95 has finished!\n\n\n\nIMPORTANT!\n============\nTo Install game run installer in Win95. \ 
+  install_complete_text: "Installation of Win95 has finished!\n\n\n\nIMPORTANT!\n============\nTo Install game run installer in Win98. \ 
      \n\n Ctrl+F11 Grabs Mouse \n\n Crtl+F12 Disc Swap \
      \n\n\n Always Shut Down Window 95 using menu."
 
@@ -37,7 +37,7 @@ script:
     - execute:
         command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
 
-                  find "$src_path" -type f \( -iname "*.iso" \) -exec cp {} "$GAMEDIR/CD" \;'
+                  find "$src_path" -type f \( -iname "*.ISO" \) -exec cp {} "$GAMEDIR/CD" \;'
 
     - extract:
         file: dbpu_file

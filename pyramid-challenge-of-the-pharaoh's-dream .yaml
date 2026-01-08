@@ -1,9 +1,9 @@
-name: Pyramid - Challenge of the Pharaoh's Dream 
+name: The Mystery at Grevholm 
 game_slug: pyramid-challenge-of-the-pharaohs-dream 
 version: DOS/Win311
 slug: pyramid-challenge-of-the-pharaohs-dream 
 runner: dosbox
-year: 1996
+year: 1997
 
 script:
   files:
@@ -40,28 +40,12 @@ script:
 
             cpu_throttle = on
 
-          
-          [sdl]
-              
-            fullresolution=desktop
-
-            windowresolution=original
-
-            fullscreen=true
-
-            output=opengl
-
-          [render]
-
-            aspect=true
-
-            scaler=normal2x
 
           [autoexec]
 
             mount C "$GAMEDIR/" -t dir
 
-            imgmount D -t iso -fs iso "$GAMEDIR/cd/cd1.cue"  "$GAMEDIR/cd/cd2.cue" 
+            imgmount D -t iso -fs iso "$GAMEDIR/cd/Mystery_at_Greveholm.img"
 
             SET PATH=%PATH%;C:\WINDOWS;C:\;
 

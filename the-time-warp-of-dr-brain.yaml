@@ -1,7 +1,7 @@
-name: Uninvited
-game_slug: uninvited
+name: The Time Warp of Dr. Brain
+game_slug: the-time-warp-of-dr-brain
 version: DOS/Win311
-slug: uninvited
+slug: the-time-warp-of-dr-brain
 runner: dosbox
 year: 1996
 
@@ -32,7 +32,7 @@ script:
         
           [cpu]
 
-            cpu_cycles = 25000
+            cpu_cycles = 50000
             
             cpu_cycles_protected = auto
             
@@ -40,12 +40,12 @@ script:
 
             cpu_throttle = on
 
-          
+
           [autoexec]
 
             mount C "$GAMEDIR/" -t dir
 
-            mount D -t cdrom "$GAMEDIR/cd"
+            imgmount D -t iso -fs iso "$GAMEDIR/cd/DB4_1022.cue" 
 
             SET PATH=%PATH%;C:\WINDOWS;C:\;
 

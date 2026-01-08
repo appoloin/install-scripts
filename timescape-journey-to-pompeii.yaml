@@ -1,14 +1,13 @@
-name: Egypt 2 - The Heliopolis Prophecy
-game_slug: egypt-2-the-heliopolis-prophecy
+name: TimeScape - Journey to Pompeii
+game_slug: timescape-journey-to-pompeii
 version: Windows Installer
-slug: egypt-2-the-heliopolis-prophecy
+slug: timescape-journey-to-pompeii
 runner: wine
 year: 2000
 
-
 script:
   game:
-    exe: $GAMEDIR/drive_c/Program Files/Cryo/Egypt 2/Eg2.exe
+    exe: $GAMEDIR/drive_c/Program Files/Legend/LEGEND.EXE
     prefix: $GAMEDIR
 
   installer:
@@ -31,3 +30,12 @@ script:
         executable: $DISC/setup.exe
         name: wineexec
         prefix: $GAMEDIR
+
+    - insert-disc:
+        description: Please insert Disc 2
+        requires: data
+
+    - merge:
+        src: $DISC/data
+        dst: $GAMEDIR/drive_c/Program Files/Pompei/data
+

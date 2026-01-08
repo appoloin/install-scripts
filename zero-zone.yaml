@@ -1,9 +1,9 @@
-name: Egypt 1156 B.C. - Tomb of the Pharaoh
-game_slug: egypt-1156-b-dot-c-tomb-of-the-pharaoh
-version: Win95
-slug: egypt-1156-b-dot-c-tomb-of-the-pharaoh
+name: Zero Zone
+game_slug: zero-zone
+version: Win9x
+slug: zero-zone
 runner: linux
-year: 1997
+year: 1998
 
 script:
   files:
@@ -19,7 +19,7 @@ script:
         filename: W98_SE_DBP_2Go.7z
 
   game:
-    args: "'$GAMEDIR/CD/Egypt1156B.iso'"
+    args: "'$GAMEDIR/CD/ZEROZONE.cue'"
     exe: $GAMEDIR/DOSBoxPure_x86_64
     working_dir: $GAMEDIR
 
@@ -37,7 +37,7 @@ script:
     - execute:
         command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
 
-                  find "$src_path" -type f \( -iname "*.iso" \) -exec cp {} "$GAMEDIR/CD" \;'
+                  find "$src_path" -type f \( -iname "ZEROZONE.*" \) -exec cp {} "$GAMEDIR/CD" \;'
 
     - extract:
         file: dbpu_file

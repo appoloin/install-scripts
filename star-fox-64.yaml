@@ -1,0 +1,27 @@
+name: Star Fox 64
+game_slug: star-fox-64
+version:  Nintendo
+slug: star-fox-64
+runner: linux
+year: 1997
+
+script:
+  game:
+    exe: $GAMEDIR/Starfox64Recompiled
+  
+  files:
+  - engine: https://github.com/sonicdcer/Starfox64Recomp/releases/download/1.0.3/Starfox64Recompiled-v1.0.3-Linux-X64-Release.zip
+
+  installer:
+    - extract:
+        dst: $CACHE
+        file: engine
+
+    - extract:
+        dst: $GAMEDIR
+        file: $CACHE/Starfox64Recompiled.tar.gz
+        format: tgz
+    - chmodx: $GAMEDIR/Starfox64Recompiled
+
+    - execute:
+        command: cd "$GAMEDIR" ; touch portable.txt ;

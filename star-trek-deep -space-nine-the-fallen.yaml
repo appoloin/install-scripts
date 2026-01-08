@@ -1,0 +1,34 @@
+name: Star Trek - Deep Space Nine - The Fallen
+game_slug: star-trek-deep -space-nine-the-fallen
+version: Rip
+slug: star-trek-deep -space-nine-the-fallen
+runner: wine
+year: 2000
+
+
+script:
+  files:
+    - game: N/A:Select first file, all file in folder will be copied
+
+  game:
+    exe: "$GAMEDIR/drive_c/games/system/DS9.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_c/games/
+
+    #copy everything
+    - execute:
+        command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
+
+          cp -avr "$src_path/."  "$GAMEDIR/drive_c/games/"
+
+          '    

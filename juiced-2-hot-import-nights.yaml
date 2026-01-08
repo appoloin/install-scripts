@@ -1,0 +1,33 @@
+name: Juiced 2 -  Hot Import Nights
+game_slug: juiced-2-hot-import-nights
+version: MagiPack Installer
+slug: juiced-2-hot-import-nights
+runner: wine
+year: 2007
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Juiced 2 - Hot Import Nights/j2Launcher.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: dxdiag dmusic dsound comctl32 gdiplus gfw msacm32 msasn1 msvcirt msxml3 vcrun6
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+

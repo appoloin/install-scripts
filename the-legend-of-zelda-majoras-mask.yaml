@@ -1,0 +1,24 @@
+name: The Legend of Zelda -  Majora's Mask
+game_slug: the-legend-of-zelda-majoras-mask
+version:  Nintendo
+slug: the-legend-of-zelda-majoras-mask
+runner: linux
+year: 2000
+
+script:
+  files:
+  - 2s2h: https://github.com/HarbourMasters/2ship2harkinian/releases/download/3.0.1/2Ship-Mion-Bravo-Linux.zip
+  - rom: N/A:Select Compatible Zelda MM ROM
+
+  game:
+    exe: $GAMEDIR/2ship.appimage
+
+  installer:
+    - extract:
+        dst: $GAMEDIR
+        file: 2s2h
+
+    - merge:
+        dst: $GAMEDIR
+        src: rom
+    - chmodx: $GAMEDIR/2ship.appimage

@@ -1,17 +1,19 @@
 name: The Legend of the Prophet and the Assassin
 game_slug: the-legend-of-the-prophet-and-the-assassin
-version: Good Old Games Installer
+version: Windows Installer
 slug: the-legend-of-the-prophet-and-the-assassin
-runner: wine
+runner: wine 
 year: 2000
 
 script:
-  game:
-    exe: $GAMEDIR/drive_c/Program Files (x86)/GOG.com/Beyond Atlantis/Game.exe
-    prefix: $GAMEDIR
-
   files:
-    - setup: N/A:Select the GOG installer
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/LegendProphetAssassin.7z
+        filename: LegendProphetAssassin.7z
+
+  game:
+    exe: $GAMEDIR/drive_c/Program Files/Legend/LEGEND.EXE
+    prefix: $GAMEDIR
 
   installer:
     - task:
@@ -25,10 +27,30 @@ script:
         name: winetricks
         prefix: $GAMEDIR
 
+    - insert-disc:
+        description: Please insert Disc 1
+        requires: Setup.exe
+
     - task:
-        executable: $setup
+        executable: $DISC/setup.exe
         name: wineexec
         prefix: $GAMEDIR
 
-  system:
-    single_cpu: true
+    - insert-disc:
+        description: Please insert Disc 2
+        requires: data
+
+    - merge:
+        src: $DISC/data
+        dst: $GAMEDIR/drive_c/Program Files/Legend/data
+
+    #remove
+    - execute:
+        command: 'find "$GAMEDIR/drive_c/Program Files/Legend/" -type f \( -iname "LEGEND.EXE" -o 
+                                                                           -iname "LEGEND16.EXE" \) -exec rm {} \;
+          '    
+
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files/Legend/" -ppassword -y
+

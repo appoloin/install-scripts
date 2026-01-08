@@ -1,0 +1,44 @@
+name: Crime Stories - From the Files of Martin Mystere
+game_slug: crime-stories-from-the-files-of-martin-mystere
+version: Collection Chamber Installer
+slug: crime-stories-from-the-files-of-martin-mystere
+runner: wine
+year: 2006
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/MartinMyst%C3%A8re.7z
+        filename:  MartinMyst%C3%A8re.7z
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/GMX Media/MM/MartinMystère.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: ffdshow
+        name: winetricks
+        prefix: $GAMEDIR
+
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/GMX Media/MM/" -ppassword -y
+
+
+
+  system:
+    single_cpu: true

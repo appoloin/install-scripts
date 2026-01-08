@@ -1,9 +1,9 @@
-name: Egypt 1156 B.C. - Tomb of the Pharaoh
-game_slug: egypt-1156-b-dot-c-tomb-of-the-pharaoh
-version: Win95
-slug: egypt-1156-b-dot-c-tomb-of-the-pharaoh
+name: Ring - The Legend of the Nibelungen
+game_slug: ring-the-legend-of-the-nibelungen
+version: Win9x
+slug: ring-the-legend-of-the-nibelungen
 runner: linux
-year: 1997
+year: 1999
 
 script:
   files:
@@ -19,7 +19,7 @@ script:
         filename: W98_SE_DBP_2Go.7z
 
   game:
-    args: "'$GAMEDIR/CD/Egypt1156B.iso'"
+    args: "'$GAMEDIR/CD/CD1.iso'"
     exe: $GAMEDIR/DOSBoxPure_x86_64
     working_dir: $GAMEDIR
 

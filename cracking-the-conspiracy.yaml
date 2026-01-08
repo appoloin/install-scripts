@@ -1,9 +1,9 @@
-name: Egypt 1156 B.C. - Tomb of the Pharaoh
-game_slug: egypt-1156-b-dot-c-tomb-of-the-pharaoh
-version: Win95
-slug: egypt-1156-b-dot-c-tomb-of-the-pharaoh
+name: Cracking the Conspiracy
+game_slug: cracking-the-conspiracy
+version: Win9x
+slug: cracking-the-conspiracy
 runner: linux
-year: 1997
+year: 1999
 
 script:
   files:
@@ -15,11 +15,11 @@ script:
         url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/DOSBox-pure.pure.zip
         filename: DOSBox-pure.pure.zip
     - os_img:
-        url:  https://lutris.nyc3.cdn.digitaloceanspaces.com/games/Windows_98/W98_SE_DBP_2Go.7z
-        filename: W98_SE_DBP_2Go.7z
+        url: https://lutris.nyc3.cdn.digitaloceanspaces.com/games/Windows_95/WIN95_OSR25_DBP_2Go.7z
+        filename: WIN95_OSR25_DBP_2Go.7z
 
   game:
-    args: "'$GAMEDIR/CD/Egypt1156B.iso'"
+    args: "'$GAMEDIR/cd/CTC_V11.cue'"
     exe: $GAMEDIR/DOSBoxPure_x86_64
     working_dir: $GAMEDIR
 
@@ -31,13 +31,15 @@ script:
   installer:
     - execute:
         file: mkdir
-        args: $GAMEDIR/CD
+        args: $GAMEDIR/cd
 
      #copy select
     - execute:
         command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
 
-                  find "$src_path" -type f \( -iname "*.iso" \) -exec cp {} "$GAMEDIR/CD" \;'
+                  find "$src_path" -type f \( -iname "*.ISO" -o 
+                                              -iname "*.cue" -o
+                                              -iname "*.bin" \) -exec cp {} "$GAMEDIR/cd" \;'
 
     - extract:
         file: dbpu_file

@@ -1,9 +1,9 @@
-name: Egypt 1156 B.C. - Tomb of the Pharaoh
-game_slug: egypt-1156-b-dot-c-tomb-of-the-pharaoh
-version: Win95
-slug: egypt-1156-b-dot-c-tomb-of-the-pharaoh
+name: The Crystal Key
+game_slug: the-crystal-key
+version: Win9x
+slug: the-crystal-key
 runner: linux
-year: 1997
+year: 1999
 
 script:
   files:
@@ -19,7 +19,7 @@ script:
         filename: W98_SE_DBP_2Go.7z
 
   game:
-    args: "'$GAMEDIR/CD/Egypt1156B.iso'"
+    args: "'$GAMEDIR/cd/Crystal Key CD 1.cue'"
     exe: $GAMEDIR/DOSBoxPure_x86_64
     working_dir: $GAMEDIR
 
@@ -31,13 +31,16 @@ script:
   installer:
     - execute:
         file: mkdir
-        args: $GAMEDIR/CD
+        args: $GAMEDIR/cd
 
      #copy select
     - execute:
         command: 'src_path=$(echo "$game" | sed -r "s/(.+)\/.+/\1/")
 
-                  find "$src_path" -type f \( -iname "*.iso" \) -exec cp {} "$GAMEDIR/CD" \;'
+                  find "$src_path" -type f \( -iname "*.ISO" -o 
+                                              -iname "*.cue" -o 
+                                              -iname "*.img" -o 
+                                              -iname "*.bin" \) -exec cp {} "$GAMEDIR/cd" \;'
 
     - extract:
         file: dbpu_file

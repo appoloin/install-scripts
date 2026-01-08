@@ -1,0 +1,32 @@
+name: Nocturne
+game_slug: nocturne
+version: MagiPack Installer
+slug: nocturne
+runner: wine
+year: 1999
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/MagiPacks/Nocturne/nocturne.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: icodecs
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

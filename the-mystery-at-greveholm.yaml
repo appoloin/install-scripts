@@ -1,9 +1,9 @@
-name: Uninvited
-game_slug: uninvited
+name: The Mystery at Grevholm 
+game_slug: the-mystery-at-greveholm
 version: DOS/Win311
-slug: uninvited
+slug: the-mystery-at-greveholm
 runner: dosbox
-year: 1996
+year: 1997
 
 script:
   files:
@@ -30,9 +30,9 @@ script:
 
             mouse_sensitivity= 100
         
-          [cpu]
+           [cpu]
 
-            cpu_cycles = 25000
+            cpu_cycles = 50000
             
             cpu_cycles_protected = auto
             
@@ -41,11 +41,27 @@ script:
             cpu_throttle = on
 
           
+          [sdl]
+              
+            fullresolution=desktop
+
+            windowresolution=original
+
+            fullscreen=true
+
+            output=opengl
+
+          [render]
+
+            aspect=true
+
+            scaler=normal2x
+
           [autoexec]
 
             mount C "$GAMEDIR/" -t dir
 
-            mount D -t cdrom "$GAMEDIR/cd"
+            imgmount D -t iso -fs iso "$GAMEDIR/cd/Mystery_at_Greveholm.img" 
 
             SET PATH=%PATH%;C:\WINDOWS;C:\;
 

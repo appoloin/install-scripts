@@ -1,0 +1,23 @@
+name: Disney's Hades Challenge
+game_slug: disneys-hades-challenge
+version: Windows
+slug:  disneys-hades-challenge
+runner: scummvm
+year: 1998
+
+script:
+  files:
+    - game:  N/A:Select the ISO
+
+  game:
+      game_id: hadesch
+      path: $GAMEDIR
+
+  installer:   
+    - extract:
+        file: $game
+        dst: $GAMEDIR
+
+
+  scummvm:
+    fullscreen: true

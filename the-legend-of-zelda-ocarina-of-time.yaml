@@ -1,0 +1,24 @@
+name: The Legend of Zelda - Ocarina of Time
+game_slug: the-legend-of-zelda-ocarina-of-time
+version:  Nintendo
+slug: the-legend-of-zelda-ocarina-of-time
+runner: linux
+year: 2001
+
+script:
+  files:
+  - 2s2h:  https://github.com/HarbourMasters/Shipwright/releases/download/9.1.1/SoH-Copper-Bravo-Linux.zip
+  - rom: N/A:Select Compatible OOT ROM
+
+  game:
+    exe:  $GAMEDIR/soh.appimage
+
+  installer:
+    - extract:
+        dst: $GAMEDIR
+        file: 2s2h
+
+    - merge:
+        dst: $GAMEDIR
+        src: rom
+    - chmodx:  $GAMEDIR/soh.appimage
