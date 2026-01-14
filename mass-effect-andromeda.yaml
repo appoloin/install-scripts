@@ -1,0 +1,46 @@
+name: Mass Effect - Andromeda
+game_slug: mass-effect-andromeda
+version: Windows Installer
+slug: mass-effect-andromeda
+runner: wine
+year: 2017
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MassEffect/MassEffect-Andromda-dinput8.dll-578-0-1.zip
+        filename: MassEffect-Andromda-dinput8.dll-578-0-1.zip
+
+
+  game:
+    exe: "$GAMEDIR/drive_c/Games/Mass Effect Andromeda/MassEffectAndromeda.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: xact xact_x64
+        description: Running Winetricks
+        name: winetricks
+        prefix: $GAMEDIR  
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/Games/Mass Effect Andromeda/" -ppassword -y
+
+
+  wine:
+    overrides:
+      dinput8 : n,b
+

@@ -1,0 +1,27 @@
+name: Dispatch
+game_slug: dispatch--3
+version: Windows Installer
+slug: dispatch--3
+runner: wine
+year: 2025
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/Games/Dispatch/Dispatch.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
