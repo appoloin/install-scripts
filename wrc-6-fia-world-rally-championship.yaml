@@ -3,7 +3,7 @@ game_slug: wrc-6-fia-world-rally-championship
 version: Windows Installer
 slug: wrc-6-fia-world-rally-championship
 runner: wine
-year: 2015
+year: 2016
 
 script:
   files:
