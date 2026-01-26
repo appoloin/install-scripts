@@ -11,11 +11,25 @@ script:
     - patch:  
         url: https://github.com/appoloin/Patches/raw/refs/heads/master/MassEffect/MassEffect-Andromda-dinput8.dll-578-0-1.zip
         filename: MassEffect-Andromda-dinput8.dll-578-0-1.zip
+    - modman1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MassEffect/FrostyModManager-1190-1-0-6-3-z-1768327771.7z.001
+        filename: FrostyModManager-1190-1-0-6-3-z-1768327771.7z.001
+    - modman2:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MassEffect/FrostyModManager-1190-1-0-6-3-z-1768327771.7z.001
+        filename: FrostyModManager-1190-1-0-6-3-z-1768327771.7z.002
+    - mod1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MassEffect/MEA%20Fixpack-541-1-05d-1638317844.zip
+        filename: MEA%20Fixpack-541-1-05d-1638317844.zip
+    - mod2:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/MassEffect/Better%20Lab%20Technicians%20-%20less%20(by%20Kjaro)-705-1-0.zip
+        filename: Better%20Lab%20Technicians%20-%20less%20(by%20Kjaro)-705-1-0.zip
+
 
 
   game:
     exe: "$GAMEDIR/drive_c/Games/Mass Effect Andromeda/MassEffectAndromeda.exe"
     prefix: $GAMEDIR
+    args: -dataPath ModData/Default
 
   installer:
     - task:
@@ -34,6 +48,29 @@ script:
         executable: $setup
         name: wineexec
         prefix: $GAMEDIR
+
+    #Move Patch into one folder
+    - merge:
+        src: "$modman1"
+        dst: "$CACHE"
+    - merge:
+        src: "$modman2"
+        dst: "$CACHE"
+
+    - execute:
+        file: 7z
+        args: e "$CACHE/FrostyModManager-1190-1-0-6-3-z-1768327771.7z.001" -o"$GAMEDIR/drive_c/Games/Mass Effect Andromeda/" -ppassword -y
+
+    - execute:
+        file: mkdir
+        args: $GAMEDIR/drive_c/Games/mods
+    - move:
+        src: $mod1
+        dst: $GAMEDIR/drive_c/Games/mods
+    - move:
+        src: $mod2
+        dst: $GAMEDIR/drive_c/Games/mods
+
 
     - execute:
         file: 7z
