@@ -1,7 +1,7 @@
 name: Lord Avalot d'Argent
-game_slug: lord-avalot-d'argent
+game_slug: lord-avalot-dargent
 version: DOS Installer
-slug:   lord-avalot-d'argent
+slug:  lord-avalot-dargent
 runner: dosbox
 year: 1994
 
