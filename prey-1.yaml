@@ -1,0 +1,32 @@
+name: Prey
+game_slug: prey
+version: Good Old Games Installer
+slug: prey
+runner: wine
+year: 2017
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+    - DLC1: N/A:Select DLC installer
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Prey/Launch Prey.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC1
+        name: wineexec
+        prefix: $GAMEDIR
