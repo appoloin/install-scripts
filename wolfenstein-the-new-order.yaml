@@ -1,0 +1,26 @@
+name: Wolfenstein - The New Order
+game_slug: wolfenstein-the-new-order
+version: Good Old Games Installer
+slug: wolfenstein-the-new-order
+runner: wine
+year: 2014
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Wolfenstein The New Order/Launch Wolfenstein - The New Order.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
