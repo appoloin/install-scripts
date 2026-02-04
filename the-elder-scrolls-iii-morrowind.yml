@@ -1,8 +1,8 @@
 name:  The Elder Scrolls III - Morrowind
 game_slug:  the-elder-scrolls-iii-morrowind
 version: Good Old Games Installer
-slug:  installer
-runner: linux
+slug: Morroowind-Installer
+runner: flatpak
 year: 2002
 
 script:
@@ -10,41 +10,19 @@ script:
     - game: N/A:Select GOG installer
 
   game:
-    exe: /usr/bin/flatpak
-    args: run org.openmw.OpenMW
+    appid: org.openmw.OpenMW
+    working_dir: $GAMEDIR
 
   installer:
-    - write_file:
-        content: '#!/bin/bash
-
-          fileID="$1"
-
-          output="$2"
-        
-          wget --load-cookies /tmp/cookies.txt 
-                "https://docs.google.com/uc?export=download&confirm=
-                  $(wget 
-                      --quiet 
-                      --save-cookies /tmp/cookies.txt 
-                      --keep-session-cookies 
-                      --no-check-certificate 
-                      "https://docs.google.com/uc?export=download&id=$fileID" 
-                       -O- | sed -rn "s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p")&id=$fileID" 
-                       -O ""$output"" && 
-                      rm -rf /tmp/cookies.txt          
-          '
-        file: $CACHE/download.sh
-    - chmodx: $CACHE/download.sh
-
     - execute:
-        file: /usr/bin/flatpak
-        args: install flathub -y --noninteractive org.openmw.OpenMW
+        file: flatpak-spawn 
+        args: --host flatpak install --or-update --system flathub org.openmw.OpenMW -y --noninteractive 
         description: Installing with flatpak
         disable_runtime: true
 
     - execute:
-        file: /usr/bin/flatpak
-        args: override org.openmw.OpenMW --user --filesystem=$GAMEDIR
+        file: flatpak-spawn
+        args: --host flatpak override org.openmw.OpenMW --user --filesystem=$GAMEDIR
         description: Added GAMEDIR to flatpak permissions
         disable_runtime: true
 
@@ -59,215 +37,3 @@ script:
         file: mkdir
         args: $GAMEDIR/Mods
 
-    - execute:
-        file: $CACHE/download.sh
-        args: 1DbNYNtlocCav70Zdg6wkp4Il4jndS0Km "$CACHE/Arukinns Better Banners Signs and Signposts English-41658-1-1.7z"
-        description: Downloading Mods
-
-    - execute:
-        file: 7z
-        args: x  "$CACHE/Arukinns Better Banners Signs and Signposts English-41658-1-1.7z" -o"$GAMEDIR/Mods/Arukinns Better Banners Signs and Signposts English-41658-1-1" -y
-        description: Extracting Mod to $GAMEDIR/Mods
-
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 108EX1twkXrVK4mlNjI3wNKTriJMrOD3Q "$CACHE/Atmospheric Delights-47472-1-2-1611139930.zip"
-        description: Downloading Mods
-
-    - execute:
-        file: 7z
-        args: x  "$CACHE/Atmospheric Delights-47472-1-2-1611139930.zip" -o"$GAMEDIR/Mods/Atmospheric Delights-47472-1-2-1611139930" -y
-        description: Extracting Mod to $GAMEDIR/Mods
-
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1A14scWJDZRol0w3-kqQ1zsepB4Sgs0aq "$CACHE/Better Bodies (Manual)-3880-2-2.7z"
-        description: Downloading Mods
-
-    - execute:
-        file: 7z
-        args: x  "$CACHE/Better Bodies (Manual)-3880-2-2.7z" -o"$GAMEDIR/Mods/Better Bodies (Manual)-3880-2-2" -y
-        description: Extracting Mod to $GAMEDIR/Mods
-
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1kQoMwmr0qVgh7aV4xaWK1Cy9EBMumnWj "$CACHE/Better Clothes Complete-47549-Complete-1644253814.7z"
-        description: Downloading Mods
-
-    - execute:
-        file: 7z
-        args: x  "$CACHE/Better Clothes Complete-47549-Complete-1644253814.7z" -o"$GAMEDIR/Mods/Better Clothes Complete-47549-Complete-1644253814" -y
-        description: Extracting Mod to $GAMEDIR/Mods
-
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 12LLSv-TaK5qdiWO3OJKuh9fcpT4wK2-z "$CACHE/Better Morrowind Armor ENG-42509-0-5-2RC.7z"
-        description: Downloading Mods
-
-    - execute:
-        file: 7z
-        args: x  "$CACHE/Better Morrowind Armor ENG-42509-0-5-2RC.7z" -o"$GAMEDIR/Mods/Better Morrowind Armor ENG-42509-0-5-2RC" -y
-        description: Extracting Mod to $GAMEDIR/Mods
-
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1T8hnid8ADiRSSvGKmEbBllwRLkQI1qnJ "$CACHE/Better Morrowind Armor Fixes-47920-1-4-1596703757.7z"
-        description: Downloading Mods
-
-    - execute:
-        file: 7z
-        args: x  "$CACHE/Better Morrowind Armor Fixes-47920-1-4-1596703757.7z" -o"$GAMEDIR/Mods/Better Morrowind Armor Fixes-47920-1-4-1596703757" -y
-        description: Extracting Mod to $GAMEDIR/Mods
-
-
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1KrVFnkZ-3f2NeekljiV1bsr_CWINsxuO "$CACHE/Better Morrowind Armor - Orcish Cuirass Fix-53587-1-0-1696245852.7z"
-        description: Downloading Mods
-
-    - execute:
-        file: 7z
-        args: x  "$CACHE/Better Morrowind Armor - Orcish Cuirass Fix-53587-1-0-1696245852.7z" -o"$GAMEDIR/Mods/Better Morrowind Armor - Orcish Cuirass Fix-53587-1-0-1696245852" -y
-        description: Extracting Mod to $GAMEDIR/Mods
-
-
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1jk3HYZnC7RNC4HTjljARyNHoer-edgHW "$CACHE/Expansion Delay-47588-1-3-1612481103.zip"
-        description: Downloading Mods
-
-    - execute:
-        file: 7z
-        args: x  "$CACHE/Expansion Delay-47588-1-3-1612481103.zip" -o"$GAMEDIR/Mods/Expansion Delay-47588-1-3-1612481103" -y
-        description: Extracting Mod to $GAMEDIR/Mods
-
-
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1l4hN3DV3Zy0nDwmhzcrwTSZCO3fMkVne "$CACHE/MacKom's Humanoid Heads-47481-1-0-1578416414.7z"
-        description: Downloading Mods
-
-    - execute:
-        file: 7z
-        args: x  "$CACHE/MacKom's Humanoid Heads-47481-1-0-1578416414.7z" -o"$GAMEDIR/Mods/MacKom's Humanoid Heads-47481-1-0-1578416414" -y
-        description: Extracting Mod to $GAMEDIR/Mods
-
-
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 10r_BDAZs4hWGL1pN_fA5tFKi1mxUOkm1 "$CACHE/Morrowind Optimization Patch-45384-1-17-0-1675865257.7z"
-        description: Downloading Mods
-
-    - execute:
-        file: 7z
-        args: x  "$CACHE/Morrowind Optimization Patch-45384-1-17-0-1675865257.7z" -o"$GAMEDIR/Mods/Morrowind Optimization Patch-45384-1-17-0-1675865257" -y
-        description: Extracting Mod to $GAMEDIR/Mods
-
-
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1OiqJorytHOSUQ_O6eNkceNCt6v5PA07a "$CACHE/Mortal's Mask-52512-1-1-1679843000.7z"
-        description: Downloading Mods
-
-    - execute:
-        file: 7z
-        args: x  "$CACHE/Mortal's Mask-52512-1-1-1679843000.7z" -o"$GAMEDIR/Mods/Mortal's Mask-52512-1-1-1679843000" -y
-        description: Extracting Mod to $GAMEDIR/Mods
-
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1L1FYCuh1VeTuYcQc3hdqEPmVgwQDXBRf "$CACHE/New Hairs for MacKom Races Redone-47398-1-0-1576700331.7z"
-        description: Downloading Mods
-
-    - execute:
-        file: 7z
-        args: x  "$CACHE/New Hairs for MacKom Races Redone-47398-1-0-1576700331.7z" -o"$GAMEDIR/Mods/New Hairs for MacKom Races Redone-47398-1-0-1576700331" -y
-        description: Extracting Mod to $GAMEDIR/Mods
-
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1CwqhNONNAhy6576R9wFUT0NCoxlFDTVn "$CACHE/Patch for Purists-45096-4-0-2-1593803721.7z"
-        description: Downloading Mods
-
-    - execute:
-        file: 7z
-        args: x  "$CACHE/Patch for Purists-45096-4-0-2-1593803721.7z" -o"$GAMEDIR/Mods/Patch for Purists-45096-4-0-2-1593803721" -y
-        description: Extracting Mod to $GAMEDIR/Mods
-
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1Ew4I3Eg4SWXfPAGGP-XNvs8VfCFxC9Jq "$CACHE/Pickpocket Fix by TheOneAndOnly-53766-1-01-1701116824.7z"
-        description: Downloading Mods
-
-    - execute:
-        file: 7z
-        args: x  "$CACHE/Pickpocket Fix by TheOneAndOnly-53766-1-01-1701116824.7z" -o"$GAMEDIR/Mods/Pickpocket Fix by TheOneAndOnly-53766-1-01-1701116824" -y
-        description: Extracting Mod to $GAMEDIR/Mods
-
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1GcVIxL1frhpCtD20RXPgfjrFyIORtrGp "$CACHE/Pursuit - OpenMW-50271-0-16-1690871241.7z"
-        description: Downloading Mods
-
-    - execute:
-        file: 7z
-        args: x  "$CACHE/Pursuit - OpenMW-50271-0-16-1690871241.7z" -o"$GAMEDIR/Mods/Pursuit - OpenMW-50271-0-16-1690871241" -y
-        description: Extracting Mod to $GAMEDIR/Mods
-
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1MYTTiO5m5dpeLLfLEUADr24EJ28HjMEi "$CACHE/Seven Graces Shrines Enhanced-46417-1-0-1551446456.7z"
-        description: Downloading Mods
-
-    - execute:
-        file: 7z
-        args: x  "$CACHE/Seven Graces Shrines Enhanced-46417-1-0-1551446456.7z" -o"$GAMEDIR/Mods/Seven Graces Shrines Enhanced-46417-1-0-1551446456" -y
-        description: Extracting Mod to $GAMEDIR/Mods
-
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1UpU9LE288VBw79FMtSmfErEkXDcuSuPL "$CACHE/Slof's Pillow Book-46162-1-0-1542714481.7z"
-        description: Downloading Mods
-
-    - execute:
-        file: 7z
-        args: x  "$CACHE/Slof's Pillow Book-46162-1-0-1542714481.7z" -o"$GAMEDIR/Mods/Slof's Pillow Book-46162-1-0-1542714481" -y
-        description: Extracting Mod to $GAMEDIR/Mods
-
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 1wENZIs36MaQvdT8j09QwGEYcJ75JxCUl "$CACHE/ST Signposts-46804-1-0-1558737981.7z"
-        description: Downloading Mods
-
-    - execute:
-        file: 7z
-        args: x  "$CACHE/ST Signposts-46804-1-0-1558737981.7z" -o"$GAMEDIR/Mods/ST Signposts-46804-1-0-1558737981" -y
-        description: Extracting Mod to $GAMEDIR/Mods
-
-
-    - execute:
-        file: $CACHE/download.sh
-        args: 17n-WWSgWXcrB1k-3XK79bzqotwi2hTQv "$CACHE/wages and bonds-46394-1-01-1551250402.7z"
-        description: Downloading Mods
-
-    - execute:
-        file: 7z
-        args: x  "$CACHE/wages and bonds-46394-1-01-1551250402.7z" -o"$GAMEDIR/Mods/wages and bonds-46394-1-01-1551250402" -y
-        description: Extracting Mod to $GAMEDIR/Mods
