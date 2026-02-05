@@ -2,27 +2,28 @@ name: Blood - One Unit Whole Blood
 game_slug: blood-one-unit-whole-blood
 version: Good Old Games Installer
 slug: blood-one-unit-whole-blood
-runner: linux
+runner: flatpak
 year: 1998
 
 script:
   game:
-    exe: /usr/bin/flatpak
-    args: run org.zdoom.Raze -config $GAMEDIR/raze.ini -savedir $GAMEDIR/saves
+    appid: org.zdoom.Raze
+    working_dir: $GAMEDIR
+    args: -config $GAMEDIR/raze.ini -savedir $GAMEDIR/saves
 
   files:
     - game: N/A:Select GOG installer.
 
   installer:
     - execute:
-        file: /usr/bin/flatpak
-        args: install flathub -y --noninteractive org.zdoom.Raze
+        file: flatpak-spawn
+        args: --host flatpak install flathub -y --noninteractive org.zdoom.Raze
         description: Installing with flatpak
         disable_runtime: true
 
     - execute:
-        file: /usr/bin/flatpak
-        args: override org.zdoom.Raze --user --filesystem=$GAMEDIR
+        file: flatpak-spawn
+        args: --host flatpak override org.zdoom.Raze --user --filesystem=$GAMEDIR
         description: Added GAMEDIR to flatpak permissions
         disable_runtime: true
 

@@ -2,27 +2,26 @@ name: Rollercoaster Tycoon 2
 game_slug: rollercoaster-tycoon-2
 version: Good Old Games Installer
 slug: rollercoaster-tycoon-2
-runner: linux
+runner: flatpak
 year: 1999
 
 script:
   game: 
-    exe: /usr/bin/flatpak
-    args: run io.openrct2.OpenRCT2
+    appid: io.openrct2.OpenRCT2
 
   files:
     - game: N/A:Select installer
 
   installer:
     - execute:
-        file: /usr/bin/flatpak
-        args: install flathub -y --noninteractive io.openrct2.OpenRCT2
+        file: flatpak-spawn 
+        args: --host flatpak install flathub -y --noninteractive io.openrct2.OpenRCT2
         description: Installing with flatpak
         disable_runtime: true
 
     - execute:
-        file: /usr/bin/flatpak
-        args: override io.openrct2.OpenRCT2 --user --filesystem=$GAMEDIR
+        file: flatpak-spawn 
+        args: --host flatpak override io.openrct2.OpenRCT2 --user --filesystem=$GAMEDIR
         description: Added GAMEDIR to flatpak permissions
         disable_runtime: true
 

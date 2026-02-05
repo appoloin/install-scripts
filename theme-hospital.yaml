@@ -2,7 +2,7 @@ name: Theme Hospital
 game_slug: theme-hospital
 version: Good Old Games Installer
 slug: theme-hospital-installer
-runner: linux
+runner: flatpak
 year: 1997
 
 script:
@@ -10,19 +10,18 @@ script:
     - game: N/A:Select the file SETUP.EXE
 
   game:
-    exe: /usr/bin/flatpak
-    args: run com.corsixth.corsixth
+    appid: com.corsixth.corsixth
 
   installer:
     - execute:
-        file: /usr/bin/flatpak
-        args: install flathub -y --noninteractive com.corsixth.corsixth
+        file: flatpak-spawn 
+        args: --host flatpak install flathub -y --noninteractive com.corsixth.corsixth
         description: Installing with flatpak
         disable_runtime: true
 
     - execute:
-        file: /usr/bin/flatpak
-        args: override com.corsixth.corsixth --user --filesystem=$GAMEDIR
+        file: flatpak-spawn 
+        args: --host flatpak override com.corsixth.corsixth --user --filesystem=$GAMEDIR
         description: Added GAMEDIR to flatpak permissions
         disable_runtime: true
 

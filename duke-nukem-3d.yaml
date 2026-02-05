@@ -2,7 +2,7 @@ name: Duke Nukem - 3D
 game_slug: duke-nukem-3d
 version: Good Old Games Installer
 slug: duke-nukem-3d
-runner: linux
+runner: flatpak
 year: 1996
 
 
@@ -11,19 +11,19 @@ script:
     - game: N/A:Select GOG installer.
 
   game:
-    exe: /usr/bin/flatpak
-    args: run com.eduke32.EDuke32 -game_dir $GAMEDIR
+    appid:  com.eduke32.EDuke32
+    args: -game_dir $GAMEDIR
 
   installer:    
     - execute:
-        file: /usr/bin/flatpak
-        args: install flathub -y --noninteractive com.eduke32.EDuke32
+        appid: org.openmw.OpenMW
+        args:  --host flatpak  install flathub -y --noninteractive com.eduke32.EDuke32
         description: Installing with flatpak
         disable_runtime: true
 
     - execute:
-        file: /usr/bin/flatpak
-        args: override com.eduke32.EDuke32 --user --filesystem=$GAMEDIR
+        appid: org.openmw.OpenMW
+        args:  --host flatpak  override com.eduke32.EDuke32 --user --filesystem=$GAMEDIR
         description: Added GAMEDIR to flatpak permissions
         disable_runtime: true
 

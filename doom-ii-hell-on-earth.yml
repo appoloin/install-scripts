@@ -2,7 +2,7 @@ name:  Doom II - Hell on Earth
 game_slug:  doom-ii-hell-on-earth
 version: Good Old Games Installer
 slug:  doom-ii-hell-on-earth-installer
-runner: linux
+runner: flatpak
 year: 2018
 
 script:
@@ -10,19 +10,19 @@ script:
     - game: N/A:Select GOG installer
 
   game:
-    exe: /usr/bin/flatpak
-    args: run org.zdoom.GZDoom -config $GAMEDIR/gzdoom.ini -file DOOM2.WAD -savedir $GAMEDIR/saves
+    appid: org.openmw.OpenMW
+    args: -config $GAMEDIR/gzdoom.ini -file DOOM2.WAD -savedir $GAMEDIR/saves
 
   installer:
     - execute:
-        file: /usr/bin/flatpak
-        args: install flathub -y --noninteractive org.zdoom.GZDoom
+        file: flatpak-spawn 
+        args: --host flatpak install flathub -y --noninteractive org.zdoom.GZDoom
         description: Installing with flatpak
         disable_runtime: true
 
     - execute:
-        file: /usr/bin/flatpak
-        args: override org.zdoom.GZDoom --user --filesystem=$GAMEDIR
+        file: flatpak-spawn 
+        args: --host flatpak override org.zdoom.GZDoom --user --filesystem=$GAMEDIR
         description: Added GAMEDIR to flatpak permissions
         disable_runtime: true
 

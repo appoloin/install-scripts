@@ -2,7 +2,7 @@ name: Strife
 game_slug: strife
 version: Windows Installer
 slug: strife
-runner: linux
+runner: flatpak
 year: 1996
 
 script:
@@ -10,20 +10,20 @@ script:
     - game: N/A:Select ISO 
 
   game:
-    exe: /usr/bin/flatpak
-    args: run org.zdoom.GZDoom -config $GAMEDIR/gzdoom.ini -file strife1.wad -savedir $GAMEDIR/saves
+    appid: org.openmw.OpenMW
+    args:  -config $GAMEDIR/gzdoom.ini -file strife1.wad -savedir $GAMEDIR/saves
 
 
   installer:
     - execute:
-        file: /usr/bin/flatpak
-        args: install flathub -y --noninteractive org.zdoom.GZDoom
+        file: flatpak-spawn 
+        args: --host flatpak install flathub -y --noninteractive org.zdoom.GZDoom
         description: Installing with flatpak
         disable_runtime: true
 
     - execute:
-        file: /usr/bin/flatpak
-        args: override org.zdoom.GZDoom --user --filesystem=$GAMEDIR
+        file: flatpak-spawn 
+        args: --host flatpak override org.zdoom.GZDoom --user --filesystem=$GAMEDIR
         description: Added GAMEDIR to flatpak permissions
         disable_runtime: true
 

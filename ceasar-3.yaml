@@ -2,7 +2,7 @@ name: Ceasar 3
 game_slug: caesar-iii
 version: Good Old Games Installer
 slug: caesar-iii
-runner: linux
+runner: flatpak
 year: 1998
 
 script:
@@ -10,20 +10,19 @@ script:
     - setup: N/A:Select setup file from GOG
 
   game:
-    exe: /usr/bin/flatpak
-    args: run com.github.bvschaik.julius
-
+    appid: com.github.bvschaik.julius
+    working_dir: $GAMEDIR
 
   installer:
     - execute:
-        file: /usr/bin/flatpak
-        args: install flathub -y --noninteractive com.github.bvschaik.julius
+        file: flatpak-spawn 
+        args: --host flatpak install flathub -y --noninteractive com.github.bvschaik.julius
         description: Installing with flatpak
         disable_runtime: true
 
     - execute:
-        file: /usr/bin/flatpak
-        args: override com.github.bvschaik.julius --user --filesystem=$GAMEDIR
+        file: flatpak-spawn 
+        args: --host flatpak override com.github.bvschaik.julius --user --filesystem=$GAMEDIR
         description: Added GAMEDIR to flatpak permissions
         disable_runtime: true
 
