@@ -2,7 +2,7 @@ name: Hexen - Deathkings of the Dark Citadel
 game_slug: hexen-deathkings-of-the-dark-citadel
 version: Good Old Games Installer
 slug: hexen-deathkings-of-the-dark-citadel
-runner: linux
+runner: flatpak
 year: 1996
 
 script:
@@ -22,19 +22,19 @@ script:
         filename: HEXEN64.wad.7z.004
 
   game:
-    exe: /usr/bin/flatpak
-    args: run org.zdoom.GZDoom -file HEXEN.WAD -savedir $GAMEDIR/saves
+    appid: org.zdoom.GZDoom
+    args: -file HEXEN.WAD -savedir $GAMEDIR/saves
 
   installer:
     - execute:
-        file: /usr/bin/flatpak
-        args: install flathub -y --noninteractive org.zdoom.GZDoom
+        file: flatpak-spawn 
+        args:  --host flatpak install --or-update --system -y  --noninteractive org.zdoom.GZDoom
         description: Installing with flatpak
         disable_runtime: true
 
     - execute:
-        file: /usr/bin/flatpak
-        args: override org.zdoom.GZDoom --user --filesystem=$GAMEDIR
+        file: flatpak-spawn 
+        args:  --host flatpak override org.zdoom.GZDoom --user --filesystem=$GAMEDIR
         description: Added GAMEDIR to flatpak permissions
         disable_runtime: true
 
@@ -80,8 +80,11 @@ script:
         src: $CACHE/HEXEN.WAD 
         dst: $GAMEDIR
 
-    - execute:
-        command: 'rm -Rf "$HOME/.var/app/org.zdoom.GZDoom/.config/gzdoom/HEXEN.WAD";
+    #file/folder linker
+    - write_file:
+        content: '#!/bin/bash
+                  
+                  rm -Rf "$HOME/.var/app/org.zdoom.GZDoom/.config/gzdoom/HEXEN.WAD";
 
                   rm -Rf "$HOME/.var/app/org.zdoom.GZDoom/.config/gzdoom/HEXDD.WAD";
                   
@@ -94,4 +97,15 @@ script:
                   ln -s -f -n "$GAMEDIR/HEXEN64.wad" "$HOME/.var/app/org.zdoom.GZDoom/.config/gzdoom/";
 
                   ln -s -f -n "$GAMEDIR/HEXDD.WAD" "$HOME/.var/app/org.zdoom.GZDoom/.config/gzdoom/" 
-                  '
+         '
+        file: $GAMEDIR/file-folder-linker.sh
+    - execute:
+        file: chmod
+        args: +x  "$GAMEDIR/file-folder-linker.sh"
+
+    - execute:
+        file: flatpak-spawn 
+        args:  --host flatpak run --command="$GAMEDIR/file-folder-linker.sh" org.zdoom.GZDoom
+        description: Run bash script in clonkeenplus bottle
+        disable_runtime: true
+

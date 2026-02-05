@@ -2,7 +2,7 @@ name: Jazz Jackrabbit 2
 game_slug: jazz-jackrabbit-2
 version: Good Old Games Installer
 slug: jazz-jackrabbit-2
-runner: linux
+runner: flatpak
 year: 1994
 
 script:
@@ -10,19 +10,18 @@ script:
     - game: N/A:Select GOG installer.
 
   game:
-    exe: /usr/bin/flatpak
-    args: run tk.deat.Jazz2Resurrection
+    appid: tk.deat.Jazz2Resurrection
 
   installer:
     - execute:
-        file: /usr/bin/flatpak
-        args: install flathub -y --noninteractive tk.deat.Jazz2Resurrection
+        file: flatpak-spawn 
+        args: --host flatpak install --or-update --system -y --noninteractive tk.deat.Jazz2Resurrection
         description: Installing with flatpak
         disable_runtime: true
 
     - execute:
-        file: /usr/bin/flatpak
-        args: override tk.deat.Jazz2Resurrection --user --filesystem=$GAMEDIR
+        file: flatpak-spawn 
+        args:  --host flatpak override tk.deat.Jazz2Resurrection --user --filesystem=$GAMEDIR
         description: Added GAMEDIR to flatpak permissions
         disable_runtime: true
 
@@ -33,8 +32,11 @@ script:
         dst:  $GAMEDIR
         description: Extracting game files
 
-    - execute:
-        command: 'rm -Rf "$HOME/.var/app/tk.deat.Jazz2Resurrection/data/Jazz² Resurrection/Source";
+    #file/folder linker
+    - write_file:
+        content: '#!/bin/bash
+                  
+                 rm -Rf "$HOME/.var/app/tk.deat.Jazz2Resurrection/data/Jazz² Resurrection/Source";
 
 
                   mkdir "$HOME/.var/app/tk.deat.Jazz2Resurrection/";
@@ -44,5 +46,15 @@ script:
                   mkdir "$HOME/.var/app/tk.deat.Jazz2Resurrection/data/Jazz² Resurrection/";
 
                   ln -s -f -n "$GAMEDIR" "$HOME/.var/app/tk.deat.Jazz2Resurrection/data/Jazz² Resurrection/Source"
-                  '
+         '
+        file: $GAMEDIR/file-folder-linker.sh
+    - execute:
+        file: chmod
+        args: +x  "$GAMEDIR/file-folder-linker.sh"
+
+    - execute:
+        file: flatpak-spawn 
+        args:  --host flatpak run --command="$GAMEDIR/file-folder-linker.sh" tk.deat.Jazz2Resurrection
+        description: Run bash script in clonkeenplus bottle
+        disable_runtime: true
 
