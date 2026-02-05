@@ -16,7 +16,7 @@ script:
   installer:
     - execute:
         file: flatpak-spawn 
-        args: --host flatpak install flathub -y --noninteractive com.github.bvschaik.julius
+        args: --host flatpak install --or-update --system flathub -y --noninteractive com.github.bvschaik.julius
         description: Installing with flatpak
         disable_runtime: true
 
