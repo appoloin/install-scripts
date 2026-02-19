@@ -1,0 +1,31 @@
+name: Assassin's Creed - Syndicate
+game_slug: assassins-creed-syndicate
+version: Windows Installer
+slug: assassins-creed-syndicate
+runner: wine
+year: 2015Good Old Games
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Games/Assassins Creed Unity/ACU.exe"
+    prefix: $GAMEDIR
+
+  install_complete_text: "Installation finished!\n\n\n\nIMPORTANT!\n============\nPlease\
+    \ change the DXVK-NVAPI version to 0.5.0 in the game\xB4s settings to \"UMU-Latest\"\ "
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

@@ -1,0 +1,26 @@
+name: Wolfenstein - The Old Blood
+game_slug: wolfenstein-the-old-blood
+version: Good Old Games Installer
+slug:  wolfenstein-the-old-blood
+runner: wine
+year: 2015
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Wolfenstein The Old Blood/Launch Wolfenstein - The Old Blood.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
