@@ -1,0 +1,37 @@
+name:  Space Engineers
+game_slug: space-engineers
+version: Good Old Games Installer
+slug: space-engineers
+runner: wine
+year: 2013
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+    - DLC1: N/A:Select Update installer
+
+  game:
+    exe: "$GAMEDIR/drive_c/Games/Space Engineers/Bin64/SpaceEngineers.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: dotnet40 dotnet48
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC1
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR

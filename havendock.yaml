@@ -1,0 +1,32 @@
+name: Havendock
+game_slug: havendock
+version: Windows Games Installer
+slug: havendock
+runner: wine
+year: 2025
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Havendock/Launch Havendock.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+    - DLC1: N/A:Select DLC1 installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+  
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC1
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR

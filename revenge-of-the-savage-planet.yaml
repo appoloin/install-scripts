@@ -1,0 +1,26 @@
+name: Revenge of the Savage Planet
+game_slug: revenge-of-the-savage-planet
+version: Windows Games Installer
+slug: revenge-of-the-savage-planet
+runner: wine
+year: 2025
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Revenge of the Savage Planet/Launch Revenge of the Savage Planet.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+  
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
