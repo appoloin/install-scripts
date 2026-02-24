@@ -21,7 +21,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: tahoma d3dcompiler_43 vcrun2008 vcrun2010
+        app: tahoma vcrun2008 vcrun2010
         description: Installing DirectX dlls
         name: winetricks
         prefix: $GAMEDIR

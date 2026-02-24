@@ -22,7 +22,7 @@ script:
         prefix: $GAMEDIR
 
     - task:
-        app: d3dx10 d3dcompiler_43 tahoma arial vcrun2008 vcrun2010 win7 dotnet40
+        app: tahoma arial vcrun2008 vcrun2010 win7 dotnet40
         description: Installing librairies
         name: winetricks
         prefix: $GAMEDIR
