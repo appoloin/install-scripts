@@ -1,0 +1,32 @@
+name: Bridge Constructor
+game_slug: bridge-constructor
+version: Windows Games Installer
+slug: bridge-constructor
+runner: wine
+year: 2013
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Bridge Constructor/Launch Bridge Constructor.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the game installer
+    - patch:  N/A:Select the DLC installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+  
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $patch
+        name: wineexec
+        prefix: $GAMEDIR

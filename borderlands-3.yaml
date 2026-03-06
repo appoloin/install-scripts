@@ -1,0 +1,33 @@
+name: Borderlands 3
+game_slug: borderlands-3
+version: Windows Games Installer
+slug: borderlands-3
+runner: wine
+year: 2019
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Games/Borderlands 3/OakGame/Binaries/Win64/Borderlands3.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the game installer
+    - patch:  N/A:Select the patch installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+  
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    
+    - task:
+        executable: $patch
+        name: wineexec
+        prefix: $GAMEDIR

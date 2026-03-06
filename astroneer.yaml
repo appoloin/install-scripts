@@ -1,0 +1,38 @@
+name: Astroneer
+game_slug: astroneer
+version: Windows Games Installer
+slug: astroneer
+runner: wine
+year: 2016
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Games/Astroneer/Astro.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the game installer
+    - patch:  N/A:Select the patch installer
+    - patch2:  N/A:Select the patch 2 installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+  
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $patch
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $patch2
+        name: wineexec
+        prefix: $GAMEDIR
