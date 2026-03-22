@@ -1,0 +1,31 @@
+name: F1 2016
+game_slug: f1-2016
+version: Windows Installer
+slug: f1-2016
+runner: wine
+year: 2016
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/F1 2016/stp-f12016.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - insert-disc:
+          description: Select game folder
+          requires: F1_2016.exe
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: openal
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - execute:
+        file: cp 
+        args: -r "$DISC/"  "$GAMEDIR/drive_c/"

@@ -1,0 +1,27 @@
+name: Uncharted Legacy of Thieves
+game_slug: uncharted-legacy-of-thieves-collection
+version: Good Old Games Installer
+slug: uncharted-legacy-of-thieves-collection
+runner: wine
+year: 2022
+
+script:
+  files:
+    - setup: N/A:Select setup file 
+
+  game:
+    exe: "$GAMEDIR/drive_c/Games/Uncharted 4 Legacy of Thieves Collection/u4-l.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+    
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

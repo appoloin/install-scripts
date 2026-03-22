@@ -1,0 +1,27 @@
+name: Defense Grid - The Awakening
+game_slug: defense-grid-the-awakening
+version: Good Old Games Installer
+slug: defense-grid-the-awakening
+runner: wine
+year: 2008
+
+script:
+  files:
+    - setup: N/A:Select setup file 
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Aspyr/DefenseGridTheAwakening/DefenseGridTheAwakening.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+    
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

@@ -1,0 +1,50 @@
+name: Wolfenstein - II - The New Colossus
+game_slug: wolfenstein-ii-the-new-colossus
+version: Good Old Games Installer
+slug: wolfenstein-ii-the-new-colossus
+runner: wine
+year: 2017
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+    - DLC1: N/A:Select DLC1 file from GOG
+    - DLC2: N/A:Select DLC2 file from GOG
+    - DLC3: N/A:Select DLC3 file from GOG
+    - DLC4: N/A:Select DLC4 file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Wolfenstein II The New Colossus/Launch Wolfenstein II - The New Colossus.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC1
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC2
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC3
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC4
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR

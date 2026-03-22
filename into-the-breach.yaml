@@ -1,0 +1,26 @@
+name: Into The Breach
+game_slug: into-the-breach
+version: Windows Games Installer
+slug: into-the-breach
+runner: wine
+year: 2018
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Into the Breach/Launch Into the Breach.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the game installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+  
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

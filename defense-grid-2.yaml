@@ -1,0 +1,35 @@
+name: Defense Grid 2
+game_slug: defense-grid-2
+version: Good Old Games Installer
+slug: defense-grid-2
+runner: wine
+year: 2014
+
+script:
+  files:
+    - setup: N/A:Select setup file 
+    - patch:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/OtherGames/defense-grid-2.7z
+        filename: defense-grid-2.7z
+
+
+  game:
+    exe: "$GAMEDIR/drive_c/Program Files (x86)/Defense Grid 2/DefenseGrid2_Release.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+    
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - execute:
+        file: 7z
+        args: x $patch -o"$GAMEDIR/drive_c/Program Files (x86)/Defense Grid 2/" -ppassword -y
+
