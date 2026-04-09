@@ -1,0 +1,27 @@
+name: Nuclear Throne
+game_slug: nuclear-throne
+version: Good Old Games Installer
+slug: nuclear-throne
+runner: wine
+year: 2015
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Nuclear Throne/Launch Nuclear Throne.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

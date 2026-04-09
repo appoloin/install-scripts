@@ -1,0 +1,27 @@
+name:  Dying Light 2 - Stay Human
+game_slug: dying-light-2-stay-human
+version: Good Old Games
+slug: dying-light-2-stay-human
+runner: wine
+year: 2020
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Games/Dying Light/DyingLightGame.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+ 
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

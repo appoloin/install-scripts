@@ -1,0 +1,26 @@
+name: Bridge Constructor Studio
+game_slug: bridge-constructor-studio
+version: Windows Games Installer
+slug: bridge-constructor-studio
+runner: wine
+year: 2024
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Bridge Constructor Studio/Launch Bridge Constructor Studio.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the game installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+  
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

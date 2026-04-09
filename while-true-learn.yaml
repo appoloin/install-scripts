@@ -1,0 +1,27 @@
+name: while True - learn()
+game_slug: while-true-learn
+version: Windows Installer
+slug: while-true-learn
+runner: wine
+year: 2015
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/while True learn()/Launch while True - learn().lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

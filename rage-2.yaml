@@ -1,0 +1,27 @@
+name: Rage 2
+game_slug: rage-2
+version: Windows Installer
+slug: rage-2
+runner: wine
+year: 2019
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Games/RAGE 2 TerrorMania/RAGE2.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

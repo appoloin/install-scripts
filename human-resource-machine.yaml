@@ -1,0 +1,27 @@
+name: Human Resource Machine
+game_slug: human-resource-machine
+version: Good Old Games Installer
+slug: human-resource-machine
+runner: wine
+year: 2014
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Human Resource Machine/Launch Human Resource Machine.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

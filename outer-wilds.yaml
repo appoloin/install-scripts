@@ -1,0 +1,30 @@
+name: Outer Wilds
+game_slug: outer-wilds
+version: Windows Installer
+slug: outer-wilds
+runner: wine
+year: 2019
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Games/Star Wars Squadrons/starwarssquadrons_launcher.exe
+    prefix: $GAMEDIR
+
+  files:
+    - game: N/A:Select Install.exe
+
+
+  installer:
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+
+    - task:
+        executable: $game
+        name: wineexec
+        prefix: $GAMEDIR
+    

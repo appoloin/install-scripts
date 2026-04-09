@@ -1,0 +1,26 @@
+name: Bridge Constructor Walking Dead
+game_slug: bridge-constructor-the-walking-dead
+version: Windows Games Installer
+slug: bridge-constructor-the-walking-dead
+runner: wine
+year: 2020
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Bridge Constructor The Walking Dead/Launch Bridge Constructor - The Walking Dead.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the game installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+  
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
