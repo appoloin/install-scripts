@@ -13,15 +13,6 @@ script:
   files:
     - setup: N/A:Select installer
     - DLC1: N/A:Select DLC1 installer
-    - DLC2: N/A:Select DLC2 installer
-    - DLC3: N/A:Select DLC3 installer
-    - DLC4: N/A:Select DLC4 installer
-    - DLC5: N/A:Select DLC5 installer
-    - DLC6: N/A:Select DLC6 installer
-    - DLC7: N/A:Select DLC7 installer
-    - DLC8: N/A:Select DLC8 installer
-    - DLC9: N/A:Select DLC9 installer
-    - DLC10: N/A:Select DLC10 installer
 
   installer:
     - task:
@@ -35,53 +26,42 @@ script:
         name: wineexec
         prefix: $GAMEDIR
 
+
+    # Link $DLC1 folder to Prefix DLC folder
+    - execute:
+        command: 'src_path=$(echo "$DLC1" | sed -r "s/(.+)\/.+/\1/");
+
+
+                  ln -s -f -n "$src_path" "$GAMEDIR/drive_c/DLC"
+                  '
+
+    # DLC Mass Installer
+    - write_file: 
+        content: '@echo off
+
+          REM Set the directory where the .exe files are located
+                   
+          C: 
+          
+          set FullPath="c:\dlc"
+
+          echo %FullPath%
+
+          REM Change to the specified directory
+
+          cd /d %FullPath%
+
+          REM Loop through each .exe file in the directory and run it with the /SILENT flag
+
+          for %%f in (*.exe) do (
+                
+            start /wait "" "%%f" /SILENT
+
+           )
+         '
+        file: $GAMEDIR/dlc_install.cmd
+
     - task:
-        executable: $DLC1
+        executable: $GAMEDIR/dlc_install.cmd
         name: wineexec
-        args: /SILENT 
-        prefix: $GAMEDIR
-    - task:
-        executable: $DLC2
-        name: wineexec
-        args: /SILENT 
-        prefix: $GAMEDIR
-    - task:
-        executable: $DLC3
-        name: wineexec
-        args: /SILENT 
-        prefix: $GAMEDIR
-    - task:
-        executable: $DLC4
-        name: wineexec
-        args: /SILENT 
-        prefix: $GAMEDIR
-    - task:
-        executable: $DLC5
-        name: wineexec
-        args: /SILENT 
-        prefix: $GAMEDIR
-    - task:
-        executable: $DLC6
-        name: wineexec
-        args: /SILENT 
-        prefix: $GAMEDIR
-    - task:
-        executable: $DLC7
-        name: wineexec
-        args: /SILENT 
-        prefix: $GAMEDIR
-    - task:
-        executable: $DLC8
-        name: wineexec
-        args: /SILENT 
-        prefix: $GAMEDIR
-    - task:
-        executable: $DLC9
-        name: wineexec
-        args: /SILENT 
-        prefix: $GAMEDIR
-    - task:
-        executable: $DLC10
-        name: wineexec
-        args: /SILENT 
         prefix: $GAMEDIR

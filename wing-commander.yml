@@ -11,7 +11,7 @@ script:
     - mt32:  
         url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/mt32-roms.7z
         filename: mt32-roms.7z
-
+        #todo https://www.wcnews.com/chatzone/threads/w-c-a-t-wc1-dos-overhaul-mod-beta-v0-8-r4-released.32327/
   game:
     main_file: $GAMEDIR/play.conf
   
