@@ -1,0 +1,26 @@
+name: Absolute Drift
+game_slug: absolute-drift
+version: Good Old Games Installer
+slug: absolute-drift
+runner: wine
+year: 2015
+ 
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Absolute Drift/Launch Absolute Drift.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
