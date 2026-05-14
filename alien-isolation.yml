@@ -12,6 +12,7 @@ script:
 
   files:
     - game: N/A:Select Setup.exe
+    - DLC1: N/A:Select DLC1 installer
 
 
   installer:
