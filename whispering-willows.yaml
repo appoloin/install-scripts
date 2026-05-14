@@ -1,0 +1,26 @@
+name: Whispering Willows
+game_slug: whispering-willows
+version: Good Old Games Installer
+slug: whispering-willows
+runner: wine
+year: 2014
+ 
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Whispering Willows/Launch Whispering Willows.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

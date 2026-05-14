@@ -1,0 +1,28 @@
+name: Viewfinder
+game_slug: viewfinder
+version: Good Old Games Installer
+slug: viewfinder
+runner: wine
+year: 2023
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Viewfinder/Launch Viewfinder.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

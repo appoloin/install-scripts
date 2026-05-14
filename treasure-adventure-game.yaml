@@ -1,0 +1,30 @@
+name: Treasure Adventure Game
+game_slug: treasure-adventure-game
+version: Good Old Games Installer
+slug: treasure-adventure-game
+runner: wine
+year: 2011
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Treasure Adventure Game/Launch Treasure Adventure Game.lnk"
+    launch_configs:
+      - exe: "$GAMEDIR/drive_c/GOG Games/Treasure Adventure Game/setup.exe"
+        name:  Settings
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

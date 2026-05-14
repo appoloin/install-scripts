@@ -1,0 +1,33 @@
+name: Through the Ages
+game_slug: through-the-ages
+version: Good Old Games Installer
+slug: through-the-ages
+runner: wine
+year: 2018
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Through the Ages/Launch Through the Ages.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select GOG installer
+    - DLC1: N/A:Select DLC1 installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+ 
+    - task:
+        executable: $DLC1
+        name: wineexec
+        args: /SILENT 
+        prefix: $GAMEDIR

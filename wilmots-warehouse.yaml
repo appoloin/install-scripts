@@ -1,0 +1,26 @@
+name: Wilmots Warehouse
+game_slug: wilmots-warehouse
+version: Good Old Games Installer
+slug: wilmots-warehouse
+runner: wine
+year: 2019
+ 
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Wilmot's Warehouse/Launch Wilmot's Warehouse.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

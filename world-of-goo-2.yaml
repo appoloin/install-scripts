@@ -1,0 +1,27 @@
+name: world of Goo 2
+game_slug: world-of-goo-2
+version: Good Old Games Installer
+slug: world-of-goo-2
+runner: wine
+year: 2024
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/WorldOfGoo2/Launch World of Goo 2.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

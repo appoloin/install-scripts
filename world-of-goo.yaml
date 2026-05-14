@@ -1,0 +1,27 @@
+name: World of Goo
+game_slug: world-of-goo
+version: Good Old Games Installer
+slug: world-of-goo
+runner: wine
+year: 2008
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/WorldOfGoo/Launch World of Goo.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+ 
