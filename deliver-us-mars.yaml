@@ -1,0 +1,27 @@
+name: Deliver Us Mars
+game_slug: deliver-us-mars
+version: Good Old Games Installer
+slug: deliver-us-mars
+runner: wine
+year: 2023
+ 
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Games/Deliver Us Mars/DeliverUsMars.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

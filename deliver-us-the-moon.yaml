@@ -1,0 +1,27 @@
+name: Deliver Us the Moon
+game_slug: deliver-us-the-moon
+version: Good Old Games Installer
+slug: deliver-us-the-moon
+runner: wine
+year: 2019
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Deliver Us The Moon/Launch Deliver Us The Moon.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+ 

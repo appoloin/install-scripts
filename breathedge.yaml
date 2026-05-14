@@ -1,0 +1,27 @@
+name: Breathedge
+game_slug: breathedge
+version: Windows Games Installer
+slug: breathedge
+runner: wine
+year: 2018
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Breathedge/Launch Breathedge.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

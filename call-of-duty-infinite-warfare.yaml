@@ -1,0 +1,32 @@
+name: Call of Duty -  Infinite Warefare
+game_slug: call-of-duty-infinite-warfare
+version: Windows Installer
+slug: call-of-duty-infinite-warfare
+runner: wine
+year: 2016
+
+script:
+  game:
+    exe: "$GAMEDIR/drive_c/Games/Call of Duty Infinite Warfare/SteamClientLoader64.exe"
+    prefix: $GAMEDIR
+
+  files:
+    - game: N/A:Select installer.
+    - patch: N/A:Select the Patch installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $game
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $patch
+        name: wineexec
+        prefix: $GAMEDIR
