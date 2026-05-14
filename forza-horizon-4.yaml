@@ -1,0 +1,66 @@
+name: Forza Horizon 4
+game_slug: forza-horizon-4
+version: Good Old Games Installer
+slug: forza-horizon-4
+runner: wine
+year: 2018
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/Games/Forza Horizon 4/ForzaHorizon4.exe"
+    prefix: $GAMEDIR
+
+  install_complete_text: "Installation finished!\n\n\n\nIMPORTANT!\n============\nPlease\
+    \ run file forza_horizon_4_lan_adapter.sh in GAMEDIR "
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - rename:
+        src: $GAMEDIR/drive_c/Games/Forza Horizon 4/TargetHardwareProfiler.dll
+        dst: $GAMEDIR/drive_c/Games/Forza Horizon 4/TargetHardwareProfiler.dll.old
+
+    - write_file:
+        content: ' #!/bin/bash
+
+                  # Create dummy network adapter if it doesnt already exist
+                   
+                  if ! ip link show dummy0 &>/dev/null; then
+
+                  ip link add name dummy0 type dummy
+
+                  fi
+
+                  ip link set dummy0 up
+                '
+        file: $GAMEDIR/forza_horizon_4_lan_adapter.sh
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR/forza_horizon_4_lan_adapter.sh"
+
+
+    - write_file:
+        content: ' #!/bin/bash
+
+                 ip link delete dummy0
+                '
+        file: $GAMEDIR/forza_horizon_4_lan_adapter_remove.sh
+
+    - execute:
+        file: chmod
+        args: -R 775  "$GAMEDIR/forza_horizon_4_lan_adapter_remove.sh"
+

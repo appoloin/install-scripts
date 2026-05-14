@@ -1,0 +1,92 @@
+name: Hitman World of Assassination
+game_slug: hitman-world-of-assassination
+version: Good Old Games Installer
+slug: hitman-world-of-assassination
+runner: wine
+year: 2022
+ 
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Games/Hitman 3/HitmanRun.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+    - patch: N/A:Select the GOG installer
+    - peacock1:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Hitman/Peacock-v8.7.0.7z.001
+        filename: Peacock-v8.7.0.7z.001
+    - peacock2:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Hitman/Peacock-v8.7.0.7z.002
+        filename: Peacock-v8.7.0.7z.002
+    - peacock3:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Hitman/Peacock-v8.7.0.7z.003
+        filename: Peacock-v8.7.0.7z.003
+    - peacock4:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Hitman/Peacock-v8.7.0.7z.004
+        filename: Peacock-v8.7.0.7z.004
+    - peacock5:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Hitman/Peacock-v8.7.0.7z.005
+        filename: Peacock-v8.7.0.7z.005
+    - peacock6:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Hitman/Peacock-v8.7.0.7z.006
+        filename: Peacock-v8.7.0.7z.006
+    - peacock6:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/System/Win311Bottle.7z.001
+        filename: Peacock-v8.7.0.7z.007
+    - launcher:  
+        url: https://github.com/appoloin/Patches/raw/refs/heads/master/Hitman/Hitman-Peacock-SteamDeck-2.1a.zip
+        filename: Hitman-Peacock-SteamDeck-2.1a.zip
+
+
+  install_complete_text: "Installation finished!\n\n\n\nIMPORTANT!\n============\nPlease\
+    \ change the Peacock Server setting to \"localhost:6969\"\ "
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $patch
+        name: wineexec
+        prefix: $GAMEDIR
+
+
+    #Move Patch into one folder
+    - merge:
+        src: "$peacock1"
+        dst: "$CACHE"
+    - merge:
+        src: "$peacock2"
+        dst: "$CACHE"
+    - merge:
+        src: "$peacock3"
+        dst: "$CACHE"
+    - merge:
+        src: "$peacock4"
+        dst: "$CACHE"
+    - merge:
+        src: "$peacock5"
+        dst: "$CACHE"
+    - merge:
+        src: "$peacock6"
+        dst: "$CACHE"
+    - merge:
+        src: "$peacock7"
+        dst: "$CACHE"
+    - execute:
+        file: 7z
+        args: x  $CACHE/Peacock-v8.7.0.7z.001 -o"$$GAMEDIR/drive_c/Games/Hitman 3/" -ppassword -y
+
+    - execute:
+        file: 7z
+        args: x  $launcher -o"$$GAMEDIR/drive_c/Games/Hitman 3/" -ppassword -y
+

@@ -1,0 +1,27 @@
+name: In Sound Mind
+game_slug: in-sound-mind
+version: Good Old Games Installer
+slug: in-sound-mind
+runner: wine
+year: 2021
+ 
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/In Sound Mind/Launch In Sound Mind.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

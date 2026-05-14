@@ -1,0 +1,26 @@
+name: Mirrors Edge
+game_slug: mirrors-edge
+version: Good Old Games Installer
+slug: mirrors-edge
+runner: wine
+year: 2009
+ 
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Mirror's Edge/Launch Mirror's Edge.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

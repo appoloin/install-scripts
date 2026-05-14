@@ -1,0 +1,27 @@
+name: Figment 2 - Creed Valley
+game_slug: figment-2-creed-valley
+version: Good Old Games Installer
+slug: figment-2-creed-valley
+runner: wine
+year: 2022
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+
+  game:
+    exe: "$GAMEDIR/drive_c/GOG Games/Figment 2 Creed Valley/Launch Figment 2 - Creed Valley.lnk"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+

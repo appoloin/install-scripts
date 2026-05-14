@@ -1,0 +1,26 @@
+name: Ghostwire - Tokyo
+game_slug: ghostwire-tokyo
+version: Good Old Games Installer
+slug: ghostwire-tokyo
+runner: wine
+year: 2022
+ 
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Games/Ghostwire Tokyo/GWT.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

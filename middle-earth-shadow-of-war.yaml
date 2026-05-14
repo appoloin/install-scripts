@@ -1,0 +1,40 @@
+name: Middle Earth - Shadow of War
+game_slug: middle-earth-shadow-of-war
+version: Good Old Games Installer
+slug: middle-earth-shadow-of-war
+runner: wine
+year: 2017
+ 
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Shadow of War/Launch Middle-earth™ - Shadow of War™.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+    - DLC1: N/A:Select DLC1 installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: mfc140
+        description: Installing additional components
+        name: winetricks
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+        args: /SILENT 
+

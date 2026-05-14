@@ -1,0 +1,38 @@
+name: High on Life
+game_slug: high-on-life
+version: Windows Games Installer
+slug: high-on-life
+runner: wine
+year: 2022
+
+script:
+  files:
+    - setup: N/A:Select setup file from GOG
+    - DLC1: N/A:Select patch installer
+    - DLC2: N/A:Select patch 2 installer
+
+  game:
+    exe: "$GAMEDIR/drive_c/Games/High On Life/Oregon/Binaries/Win64/Oregon-Win64-Shipping.exe"
+    args: -dx11
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC1
+        name: wineexec
+        prefix: $GAMEDIR
+    - task:
+        executable: $DLC2
+        name: wineexec
+        prefix: $GAMEDIR

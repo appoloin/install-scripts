@@ -1,0 +1,27 @@
+name: Ghost of a Tale
+game_slug: ghost-of-a-tale
+version: Good Old Games Installer
+slug: ghost-of-a-tale
+runner: wine
+year: 2018
+ 
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/Ghost of a Tale/Launch Ghost of a Tale.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
