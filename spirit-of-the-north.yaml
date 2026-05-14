@@ -1,0 +1,26 @@
+name: Spirit of the North
+game_slug: spirit-of-the-north
+version: Good Old Games Installer
+slug: spirit-of-the-north
+runner: wine
+year: 2020
+ 
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Games/Spirit of the North Enhanced Edition/Infused/Binaries/Win64/Infused-Win64-Shipping.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

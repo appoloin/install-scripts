@@ -1,0 +1,32 @@
+name: Redacted
+game_slug: redacted
+version: Windows Installer
+slug: redacted
+runner: wine
+year: 2024
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/REDACTED/Redacted.exe
+    prefix: $GAMEDIR
+
+  installer:
+    - insert-disc:
+          description: Select game folder
+          requires: Redacted.exe
+
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: dotnet40 xna40
+        name: winetricks
+        prefix: $GAMEDIR
+
+
+    - execute:
+        file: cp 
+        args: -r "$DISC/"  "$GAMEDIR/drive_c/"

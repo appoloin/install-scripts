@@ -1,0 +1,31 @@
+name: Submerged - Hidden Depths
+game_slug: submerged-hidden-depths
+version: Good Old Games Installer
+slug: submerged-hidden-depths
+runner: wine
+year: 2020
+ 
+script:
+  game:
+    exe: $GAMEDIR/drive_c/Games/Submerged Hidden Depths/Submerged.exe
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select the GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        app: dotnet48
+        description: Install components with Winetricks
+        name: winetricks
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR

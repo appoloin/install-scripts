@@ -1,0 +1,27 @@
+name: The Bridge
+game_slug: the-bridge
+version: Good Old Games Installer
+slug: the-bridge
+runner: wine
+year: 2013
+
+script:
+  game:
+    exe: $GAMEDIR/drive_c/GOG Games/The Bridge/Launch The Bridge.lnk
+    prefix: $GAMEDIR
+
+  files:
+    - setup: N/A:Select GOG installer
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+ 
