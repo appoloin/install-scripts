@@ -1,7 +1,7 @@
 name: Airwolf
-game_slug: airwolf
+game_slug: airwolf-1
 version: Amstrad
-slug: airwolf
+slug: airwolf-1
 runner: mame
 year: 1985
 

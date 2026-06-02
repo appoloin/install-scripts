@@ -3,7 +3,7 @@ game_slug: assassins-creed-syndicate
 version: Windows Installer
 slug: assassins-creed-syndicate
 runner: wine
-year: 2015Good Old Games
+year: 2015
 
 script:
   files:
