@@ -1,0 +1,35 @@
+name: Assassin's Creed - Origins
+game_slug: assassins-creed-origins
+version: Windows Installer
+slug: assassins-creed-origins
+runner: wine
+year: 2017
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Games/Assassins Creed Origins/ACOrigins.exe"
+    prefix: $GAMEDIR
+
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+  system:
+      prelaunch_command: $GAMEDIR/cleanup.sh
+ #     env:
+ #       MANGOHUD_CONFIG: no_display,fps_limit=30
+ #       mangohud: true
+      # DXVK_FRAME_RATE: 31
+

@@ -1,0 +1,57 @@
+name: Assassin's Creed - Odyssey
+game_slug: assassins-creed-odyssey
+version: Windows Installer
+slug: assassins-creed-odyssey
+runner: wine
+year: 2018
+
+script:
+  files:
+    - setup: N/A:Select setup file
+
+  game:
+    exe: "$GAMEDIR/drive_c/Games/Assassins Creed Odyssey/ACOdyssey.exe"
+    prefix: $GAMEDIR
+
+  installer:
+    - task:
+        name: create_prefix
+        install_mono: false
+        install_gecko: false
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    #clean up save folder 
+    - write_file:
+        content: '#!/bin/bash
+        
+           file="$GAMEDIR/drive_c/users/$USER/AppData/Roaming/uplay_emu/Appoloin/5059/storage_files/1.save"
+
+           if [ -r "$file" ] && [ -w "$file" ]; then
+           
+           rm  "$file"
+           
+           touch "$file"
+
+           chmod a-w "$file"
+
+           fi
+
+         '
+        file: $GAMEDIR/cleanup.sh
+
+    - execute:
+        file: chmod
+        args: +x  "$GAMEDIR/cleanup.sh"
+
+
+
+ # system:
+ #     env:
+ #       MANGOHUD_CONFIG: no_display,fps_limit=30
+ #       mangohud: true
+        # DXVK_FRAME_RATE: 31
