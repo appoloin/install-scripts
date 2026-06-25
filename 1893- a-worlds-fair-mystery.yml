@@ -2,18 +2,16 @@ name: 1893 - A World's Fair Mystery
 game_slug: 1893-a-worlds-fair-mystery
 version: DOS
 slug: 1893-a-worlds-fair-mystery
-runner: flatpak
+runner: gargoyle
 year: 2002
 
 script:
   game:
-    appid: io.github.garglk.Gargoyle
-    args: $GAMEDIR/1893.gam
-    working_dir: $GAMEDIR
+    story: $GAMEDIR/1893.gam
 
   installer:
     - insert-disc:
-        description: Please insert Lost Treasures of Infocom II CD
+        description: Please select story file
         requires: 1893.gam
 
     #copy
