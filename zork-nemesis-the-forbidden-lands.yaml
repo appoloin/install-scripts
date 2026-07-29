@@ -24,7 +24,7 @@ script:
                                             -iname *redist -o
                                             -iname scummvm -o
                                             -iname *support -o
-                                            -iname dosbox -o
+                                            -iname dosbox* -o
                                             -iname ega -o
                                             -iname tmp \) -exec rm -r {}  \;
                                             
@@ -45,7 +45,7 @@ script:
                                                           -iname commonappdata -o
                                                           -iname *redist -o
                                                           -iname scummvm -o
-                                                          -iname dosbox -o
+                                                          -iname dosbox* -o
                                                           -iname *support -o
                                                           -iname ega -o
                                                           -iname tmp \) -exec rm -r {} \;
