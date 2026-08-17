@@ -7,11 +7,12 @@ year: 2019
 
 script:
   game:
-    exe: $GAMEDIR/drive_c/GOG Games/Ion Fury/fury_nodrm.exe
+    exe: $GAMEDIR/drive_c/GOG Games/Ion Fury/
     prefix: $GAMEDIR
 
   files:
     - setup: N/A:Select installer
+    - DLC1: N/A:Select a DLC installer
 
   installer:
     - task:
@@ -22,6 +23,11 @@ script:
 
     - task:
         executable: $setup
+        name: wineexec
+        prefix: $GAMEDIR
+
+    - task:
+        executable: $DLC1
         name: wineexec
         prefix: $GAMEDIR
 
